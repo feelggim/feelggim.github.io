@@ -856,11 +856,15 @@
     var btn = document.getElementById('return-btn');
     if(!btn) return;
     btn.addEventListener('click', function(){
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        try { window.close(); } catch(e) {}
-      }
+      // 앱(크랙/제타)이 커스텀탭으로 이 페이지를 띄운 경우, window.close()를 호출하면
+      // 브라우저 탭이 아니라 커스텀탭 자체가 닫히면서 앱으로 바로 복귀함(폰 뒤로가기와 동일한 동작).
+      // 이게 막히는 일반 브라우저 탭 환경에서는 그대로 history.back()으로 보정.
+      try { window.close(); } catch(e) {}
+      setTimeout(function(){
+        if (window.history.length > 1) {
+          window.history.back();
+        }
+      }, 60);
     });
   })();
 

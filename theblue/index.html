@@ -709,19 +709,33 @@
   /* ---------- GLITCH / SIGNAL DECAY LAYER ---------- */
   .glitch-overlay{
     position:fixed;inset:0;z-index:35;pointer-events:none;
-    background-image:repeating-linear-gradient(0deg, rgba(220,235,255,.035) 0px, rgba(220,235,255,.035) 1px, transparent 1px, transparent 3px);
+    background-image:repeating-linear-gradient(0deg, rgba(220,235,255,.06) 0px, rgba(220,235,255,.06) 1px, transparent 1px, transparent 3px);
     mix-blend-mode:overlay;
-    opacity:.4;
-    animation:scan-drift 9s linear infinite;
+    opacity:.55;
+    animation:scan-drift 6s linear infinite;
+    transition:opacity .06s ease;
   }
+  .glitch-overlay.is-bursting{opacity:.95}
   .glitch-overlay::before{
     content:'';position:absolute;inset:0;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
     mix-blend-mode:overlay;
-    opacity:.1;
+    opacity:.22;
   }
+  .glitch-overlay.is-bursting::before{opacity:.6}
   @keyframes scan-drift{0%{background-position:0 0}100%{background-position:0 240px}}
-  body.glitch-flash .glitch-overlay{opacity:.85;background-color:rgba(127,178,255,.05)}
+  body.glitch-flash .glitch-overlay{opacity:.95;background-color:rgba(127,178,255,.08)}
+  body.glitch-flash{animation:screen-jolt .22s steps(3,end)}
+  @keyframes screen-jolt{
+    0%{transform:translate(0,0)}
+    16%{transform:translate(-7px,3px)}
+    32%{transform:translate(6px,-4px)}
+    48%{transform:translate(-5px,2px)}
+    64%{transform:translate(4px,-2px)}
+    80%{transform:translate(-2px,1px)}
+    100%{transform:translate(0,0)}
+  }
+  @media (prefers-reduced-motion:reduce){body.glitch-flash{animation:none}}
   @media (prefers-reduced-motion:reduce){.glitch-overlay{animation:none}}
 
   /* text corruption / chromatic split — applied briefly by JS */
@@ -757,6 +771,7 @@
     animation:toast-life 3.8s ease forwards;
   }
   .signal-toast.warn{color:#c98c92;border-color:var(--warn)}
+  .signal-toast.code{border-style:dashed;font-size:.64rem}
   @keyframes toast-life{
     0%{opacity:0;transform:translateY(6px)}
     10%{opacity:.92;transform:translateY(0)}
@@ -778,6 +793,58 @@
   @media (prefers-reduced-motion:reduce){
     .fame-ticker__track{animation:none}
     .fame-ticker__track span:nth-child(n+6){display:none}
+  }
+
+  /* ---------- FLOATING CORRUPTED BLOCKS ---------- */
+  .glitch-block-layer{position:fixed;inset:0;z-index:37;pointer-events:none;overflow:hidden}
+  .glitch-block{
+    position:absolute;mix-blend-mode:difference;opacity:.55;
+    animation:block-pop .22s steps(2,end) forwards;
+  }
+  .glitch-block.alt{mix-blend-mode:exclusion;opacity:.4}
+  @keyframes block-pop{
+    0%{opacity:0;transform:scale(.6)}
+    30%{opacity:.6}
+    100%{opacity:0;transform:scale(1.02)}
+  }
+
+  /* ---------- ERROR-CODE CHIPS ---------- */
+  .error-chip{
+    position:absolute;
+    font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.02em;
+    color:var(--warn);background:rgba(5,9,18,.85);border:1px solid var(--warn);
+    padding:.25em .55em;white-space:nowrap;opacity:0;
+    animation:toast-life 1.8s ease forwards;
+  }
+
+  /* ---------- POSSESSION FLASH (강한 집착 문구, 화면 전체 점유) ---------- */
+  .possession-flash{
+    position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+    pointer-events:none;opacity:0;background:rgba(3,4,10,.62);
+    transition:opacity .1s ease;
+  }
+  .possession-flash.is-active{opacity:1}
+  .possession-flash__text{
+    position:relative;
+    font-family:'Hahmlet','Noto Serif KR',serif;font-weight:600;
+    font-size:clamp(1.8rem,7vw,4.2rem);line-height:1.15;
+    color:var(--foam);text-align:center;padding:0 1.2rem;max-width:90vw;
+    text-shadow:0 0 46px rgba(127,178,255,.55);
+  }
+  .possession-flash__text::before,
+  .possession-flash__text::after{
+    content:attr(data-text);position:absolute;inset:0;pointer-events:none;
+  }
+  .possession-flash__text::before{color:var(--signal);transform:translate(-5px,0);clip-path:inset(0 0 50% 0);opacity:.85}
+  .possession-flash__text::after{color:var(--warn);transform:translate(5px,0);clip-path:inset(50% 0 0 0);opacity:.85}
+  @media (prefers-reduced-motion:reduce){
+    .possession-flash{display:none}
+  }
+
+  /* ---------- TEXT DECODE / CORRUPTION (문장이 오역되었다 원문으로 돌아옴) ---------- */
+  .is-corrupting{
+    color:var(--signal)!important;
+    text-shadow:0 0 6px rgba(127,178,255,.55);
   }
 </style>
 <button type="button" class="return-btn" id="return-btn" aria-label="다시, 나나세에게 — 크랙 앱으로 돌아가기">
@@ -813,6 +880,12 @@
     });
   })();
 </script>
+
+<div class="glitch-block-layer" id="glitch-block-layer" aria-hidden="true"></div>
+<div class="possession-flash" id="possession-flash" aria-hidden="true">
+  <div class="possession-flash__text" id="possession-flash-text"></div>
+</div>
+
 <div class="hero">
   <div class="hero__img"><img src="images/img_212a6a3dfe.jpg" alt="마린 나나세, 어둠 속에서 마이크를 쥔 채 노래하는 모습"></div>
   <div class="hero__scrim"></div>
@@ -1420,13 +1493,21 @@
     {t:'진짜 얼굴 — 로드 실패'},
     {t:'좋아해 → 좋아해 → 좋아해'},
     {t:'SIGNAL LOST — RESYNCING'},
-    {t:'스트리밍 187개국 동시 1위'}
+    {t:'스트리밍 187개국 동시 1위'},
+    {t:'0xA3F2 :: SYNC_FAIL', code:true},
+    {t:'ERR::MEMORY_LEAK(LOVE)', code:true},
+    {t:'STACK OVERFLOW — 사랑해', code:true},
+    {t:'NULL_REFERENCE: 이름', code:true},
+    {t:'0xDEAD :: 대답 없음', code:true, w:true},
+    {t:'RETRY(∞)', code:true},
+    {t:'CORRUPT_FRAME 0x77', code:true},
+    {t:'래그 감지 — 재접속 중', code:true}
   ];
 
   function spawnToast(){
     var pick = LOGS[Math.floor(Math.random()*LOGS.length)];
     var el = document.createElement('div');
-    el.className = 'signal-toast' + (pick.w ? ' warn' : '');
+    el.className = 'signal-toast' + (pick.w ? ' warn' : '') + (pick.code ? ' code' : '');
     el.textContent = pick.t;
     var vw = window.innerWidth, vh = window.innerHeight;
     el.style.left = Math.max(8, Math.random()*(vw-220)) + 'px';
@@ -1436,7 +1517,7 @@
   }
 
   function scheduleToast(){
-    var delay = 7000 + Math.random()*9000;
+    var delay = 2600 + Math.random()*4200;
     setTimeout(function(){ spawnToast(); scheduleToast(); }, delay);
   }
   scheduleToast();
@@ -1457,20 +1538,128 @@
   }
 
   function scheduleGlitch(){
-    var delay = 5000 + Math.random()*7000;
+    var delay = 1800 + Math.random()*2600;
     setTimeout(function(){ triggerGlitch(); scheduleGlitch(); }, delay);
   }
   scheduleGlitch();
 
   function scheduleFlash(){
-    var delay = 14000 + Math.random()*16000;
+    var delay = 4500 + Math.random()*6000;
     setTimeout(function(){
       document.body.classList.add('glitch-flash');
-      setTimeout(function(){ document.body.classList.remove('glitch-flash'); }, 180);
+      overlay.classList.add('is-bursting');
+      spawnBlockBurst(3 + Math.floor(Math.random()*4));
+      setTimeout(function(){
+        document.body.classList.remove('glitch-flash');
+        overlay.classList.remove('is-bursting');
+      }, 220);
       scheduleFlash();
     }, delay);
   }
   scheduleFlash();
+
+  // ---- 화면 위로 떠다니는 손상된 사각 블록 (참고 이미지 스타일) ----
+  var blockLayer = document.getElementById('glitch-block-layer');
+  var BLOCK_COLORS = ['var(--signal)','var(--warn)','var(--foam)','var(--line)','var(--ash)'];
+  function spawnBlockBurst(n){
+    if(!blockLayer) return;
+    n = n || (6 + Math.floor(Math.random()*7));
+    for(var i=0;i<n;i++){
+      (function(){
+        var b = document.createElement('div');
+        b.className = 'glitch-block' + (Math.random() < .5 ? ' alt' : '');
+        var w = 24 + Math.random()*260, h = 10 + Math.random()*160;
+        b.style.width = w + 'px';
+        b.style.height = h + 'px';
+        b.style.left = Math.random()*window.innerWidth + 'px';
+        b.style.top = Math.random()*window.innerHeight + 'px';
+        b.style.background = BLOCK_COLORS[Math.floor(Math.random()*BLOCK_COLORS.length)];
+        blockLayer.appendChild(b);
+        setTimeout(function(){ b.remove(); }, 260 + Math.random()*260);
+      })();
+    }
+  }
+  function scheduleBlocks(){
+    var delay = 2200 + Math.random()*3200;
+    setTimeout(function(){ spawnBlockBurst(2 + Math.floor(Math.random()*3)); scheduleBlocks(); }, delay);
+  }
+  scheduleBlocks();
+
+  // ---- 가끔 화면을 통째로 점유하는 집착 문구 ----
+  var POSSESSION_LINES = [
+    '좋아해, 좋아해, 좋아해',
+    '넌 내꺼야',
+    '내꺼. 내 짝. 내꺼.',
+    '나와 같이 가줘',
+    '바다로 가자, 나랑 함께',
+    '내 이름을 말해봐',
+    '어디 가',
+    '가지 마'
+  ];
+  var possessFlash = document.getElementById('possession-flash');
+  var possessText = document.getElementById('possession-flash-text');
+  function triggerPossession(){
+    if(!possessFlash || !possessText) return;
+    var line = POSSESSION_LINES[Math.floor(Math.random()*POSSESSION_LINES.length)];
+    possessText.textContent = line;
+    possessText.setAttribute('data-text', line);
+    possessFlash.classList.add('is-active');
+    document.body.classList.add('glitch-flash');
+    overlay.classList.add('is-bursting');
+    spawnBlockBurst(8 + Math.floor(Math.random()*6));
+    setTimeout(function(){
+      possessFlash.classList.remove('is-active');
+      document.body.classList.remove('glitch-flash');
+      overlay.classList.remove('is-bursting');
+    }, 640);
+  }
+  function schedulePossession(){
+    var delay = 16000 + Math.random()*14000;
+    setTimeout(function(){ triggerPossession(); schedulePossession(); }, delay);
+  }
+  schedulePossession();
+
+  // ---- 문장이 잠깐 오역/깨졌다가 원문으로 돌아오는 효과 ----
+  var CORRUPT_CHARS = '░▒▓█▌▐┤╣║╗╝╜╛┐▲▼◆✕✦ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣ0123456789ABCDEF'.split('');
+  function corruptChar(){ return CORRUPT_CHARS[Math.floor(Math.random()*CORRUPT_CHARS.length)]; }
+  function scrambleText(original, ratio){
+    return original.split('').map(function(ch){
+      if(ch === ' ' || ch === '\n' || ch === '\t') return ch;
+      return Math.random() < ratio ? corruptChar() : ch;
+    }).join('');
+  }
+
+  var corruptPool = Array.prototype.slice.call(
+    document.querySelectorAll('.bio p, .chapter__text p, .closer p, .release__cap p, .band__cap p, .placard__desc, .t-line p, .signal__aside')
+  ).filter(function(el){ return el.children.length === 0 && el.textContent.trim().length > 1; });
+
+  var corrupting = false;
+  function corruptOne(){
+    if(corrupting || !corruptPool.length) return;
+    var el = corruptPool[Math.floor(Math.random()*corruptPool.length)];
+    var original = el.textContent;
+    corrupting = true;
+    el.classList.add('is-corrupting');
+    var frames = 3 + Math.floor(Math.random()*3);
+    var ratio = .3 + Math.random()*.35;
+    var i = 0;
+    var iv = setInterval(function(){
+      if(i >= frames){
+        clearInterval(iv);
+        el.textContent = original;
+        el.classList.remove('is-corrupting');
+        corrupting = false;
+        return;
+      }
+      el.textContent = scrambleText(original, ratio);
+      i++;
+    }, 65 + Math.random()*35);
+  }
+  function scheduleCorrupt(){
+    var delay = 3200 + Math.random()*3600;
+    setTimeout(function(){ corruptOne(); scheduleCorrupt(); }, delay);
+  }
+  scheduleCorrupt();
 })();
 </script>
 </body></html>

@@ -705,6 +705,80 @@
   .return-btn:active{transform:scale(.96)}
   .return-btn svg{width:1rem;height:1rem;display:block;flex:none;color:var(--signal)}
   @media (prefers-reduced-motion:reduce){.return-btn{transition:none}.return-btn:active{transform:none}}
+
+  /* ---------- GLITCH / SIGNAL DECAY LAYER ---------- */
+  .glitch-overlay{
+    position:fixed;inset:0;z-index:35;pointer-events:none;
+    background-image:repeating-linear-gradient(0deg, rgba(220,235,255,.035) 0px, rgba(220,235,255,.035) 1px, transparent 1px, transparent 3px);
+    mix-blend-mode:overlay;
+    opacity:.4;
+    animation:scan-drift 9s linear infinite;
+  }
+  .glitch-overlay::before{
+    content:'';position:absolute;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+    opacity:.1;
+  }
+  @keyframes scan-drift{0%{background-position:0 0}100%{background-position:0 240px}}
+  body.glitch-flash .glitch-overlay{opacity:.85;background-color:rgba(127,178,255,.05)}
+  @media (prefers-reduced-motion:reduce){.glitch-overlay{animation:none}}
+
+  /* text corruption / chromatic split — applied briefly by JS */
+  .glitch-text{position:relative;display:inline-block}
+  .glitch-text.is-glitching{animation:glitch-jitter .28s steps(2,end) 0s 3}
+  .glitch-text.is-glitching::before,
+  .glitch-text.is-glitching::after{
+    content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;
+    overflow:hidden;background:transparent;pointer-events:none;
+  }
+  .glitch-text.is-glitching::before{color:var(--signal);transform:translate(-2px,0);clip-path:inset(0 0 55% 0);opacity:.75}
+  .glitch-text.is-glitching::after{color:var(--warn);transform:translate(2px,0);clip-path:inset(45% 0 0 0);opacity:.75}
+  @keyframes glitch-jitter{
+    0%{transform:translate(0,0)}
+    25%{transform:translate(-1px,1px)}
+    50%{transform:translate(1px,-1px)}
+    75%{transform:translate(-1px,-1px)}
+    100%{transform:translate(0,0)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .glitch-text.is-glitching{animation:none}
+    .glitch-text.is-glitching::before,.glitch-text.is-glitching::after{display:none}
+  }
+
+  /* system-log style toast — 오역 / 집착 / 세계적 인기 소재 */
+  .signal-toast-layer{position:fixed;inset:0;z-index:36;pointer-events:none;overflow:hidden}
+  .signal-toast{
+    position:absolute;max-width:min(78vw,320px);
+    font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.03em;
+    color:var(--signal);background:rgba(5,9,18,.74);border:1px solid var(--line);
+    padding:.4em .75em;border-radius:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    opacity:0;transform:translateY(6px);
+    animation:toast-life 3.8s ease forwards;
+  }
+  .signal-toast.warn{color:#c98c92;border-color:var(--warn)}
+  @keyframes toast-life{
+    0%{opacity:0;transform:translateY(6px)}
+    10%{opacity:.92;transform:translateY(0)}
+    82%{opacity:.92}
+    100%{opacity:0;transform:translateY(-6px)}
+  }
+  @media (prefers-reduced-motion:reduce){.signal-toast{animation:none;opacity:.92}}
+
+  /* world-famous-singer ticker band */
+  .fame-ticker{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--void)}
+  .fame-ticker__track{display:inline-flex;width:max-content;padding:.7em 0;animation:ticker-scroll 38s linear infinite}
+  .fame-ticker__track span{
+    display:inline-block;margin-right:3em;
+    font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.06em;color:var(--ash);
+    font-variant-numeric:tabular-nums;
+  }
+  .fame-ticker__track span b{color:var(--signal);font-weight:400}
+  @keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){
+    .fame-ticker__track{animation:none}
+    .fame-ticker__track span:nth-child(n+6){display:none}
+  }
 </style>
 <button type="button" class="return-btn" id="return-btn" aria-label="다시, 나나세에게 — 크랙 앱으로 돌아가기">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
@@ -756,6 +830,22 @@
         <p class="hook">바다에서 날 건진 건, 세상에서 제일 유명한 가수였다.</p>
       </div>
     </div>
+  </div>
+</div>
+
+
+<div class="fame-ticker" aria-hidden="true">
+  <div class="fame-ticker__track">
+    <span><b>WORLDWIDE #1</b> · 154 COUNTRIES</span>
+    <span>번역 오류: 그리움 → 소유</span>
+    <span>스트리밍 <b>8,412,003,000+</b>회</span>
+    <span>오역됨: 홀림 → 스타성</span>
+    <span>진짜 얼굴 — 로드 실패</span>
+    <span><b>WORLDWIDE #1</b> · 154 COUNTRIES</span>
+    <span>번역 오류: 그리움 → 소유</span>
+    <span>스트리밍 <b>8,412,003,000+</b>회</span>
+    <span>오역됨: 홀림 → 스타성</span>
+    <span>진짜 얼굴 — 로드 실패</span>
   </div>
 </div>
 
@@ -1300,4 +1390,87 @@
 })();
 </script>
 
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var overlay = document.createElement('div');
+  overlay.className = 'glitch-overlay';
+  overlay.setAttribute('aria-hidden','true');
+  document.body.appendChild(overlay);
+
+  var toastLayer = document.createElement('div');
+  toastLayer.className = 'signal-toast-layer';
+  toastLayer.setAttribute('aria-hidden','true');
+  document.body.appendChild(toastLayer);
+
+  if(reduce) return;
+
+  var LOGS = [
+    {t:'번역 오류: 그리움 → 소유', w:true},
+    {t:'재생목록 갱신 — MERMAID (재생 8,412,003회)'},
+    {t:'WORLDWIDE #1 · 154 COUNTRIES'},
+    {t:'물 감지 범위 확장 중'},
+    {t:'오역됨: 홀림 → 스타성'},
+    {t:'오역됨: 바다행 → 취미'},
+    {t:'심박 동기화 99.9%'},
+    {t:'이름을 불렀는데, 대답이 없다', w:true},
+    {t:'경고: 짝 이탈 반경 초과', w:true},
+    {t:'진짜 얼굴 — 로드 실패'},
+    {t:'좋아해 → 좋아해 → 좋아해'},
+    {t:'SIGNAL LOST — RESYNCING'},
+    {t:'스트리밍 187개국 동시 1위'}
+  ];
+
+  function spawnToast(){
+    var pick = LOGS[Math.floor(Math.random()*LOGS.length)];
+    var el = document.createElement('div');
+    el.className = 'signal-toast' + (pick.w ? ' warn' : '');
+    el.textContent = pick.t;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    el.style.left = Math.max(8, Math.random()*(vw-220)) + 'px';
+    el.style.top = Math.max(70, Math.random()*(vh-90)) + 'px';
+    toastLayer.appendChild(el);
+    setTimeout(function(){ el.remove(); }, 3900);
+  }
+
+  function scheduleToast(){
+    var delay = 7000 + Math.random()*9000;
+    setTimeout(function(){ spawnToast(); scheduleToast(); }, delay);
+  }
+  scheduleToast();
+
+  var glitchTargets = Array.prototype.slice.call(
+    document.querySelectorAll('.eyebrow, .hero .hook, .mood-head h2, .closer p')
+  );
+  glitchTargets.forEach(function(target){
+    target.classList.add('glitch-text');
+    target.setAttribute('data-text', target.textContent);
+  });
+
+  function triggerGlitch(){
+    if(!glitchTargets.length) return;
+    var target = glitchTargets[Math.floor(Math.random()*glitchTargets.length)];
+    target.classList.add('is-glitching');
+    setTimeout(function(){ target.classList.remove('is-glitching'); }, 420);
+  }
+
+  function scheduleGlitch(){
+    var delay = 5000 + Math.random()*7000;
+    setTimeout(function(){ triggerGlitch(); scheduleGlitch(); }, delay);
+  }
+  scheduleGlitch();
+
+  function scheduleFlash(){
+    var delay = 14000 + Math.random()*16000;
+    setTimeout(function(){
+      document.body.classList.add('glitch-flash');
+      setTimeout(function(){ document.body.classList.remove('glitch-flash'); }, 180);
+      scheduleFlash();
+    }, delay);
+  }
+  scheduleFlash();
+})();
+</script>
 </body></html>

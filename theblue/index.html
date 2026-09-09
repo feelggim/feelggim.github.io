@@ -855,16 +855,16 @@
   (function(){
     var btn = document.getElementById('return-btn');
     if(!btn) return;
+    var STORY_LINK = 'https://share.crack.wrtn.ai/qzy97gd';
     btn.addEventListener('click', function(){
-      // 앱(크랙/제타)이 커스텀탭으로 이 페이지를 띄운 경우, window.close()를 호출하면
-      // 브라우저 탭이 아니라 커스텀탭 자체가 닫히면서 앱으로 바로 복귀함(폰 뒤로가기와 동일한 동작).
-      // 이게 막히는 일반 브라우저 탭 환경에서는 그대로 history.back()으로 보정.
+      // 앱이 커스텀탭/웹뷰로 이 페이지를 띄운 경우엔 window.close()가 탭을 닫고
+      // 앱으로 바로 복귀시켜줌. 그게 막히는(일반 브라우저 탭) 환경에서는
+      // 엉뚱한 이전 기록으로 가는 대신, 나나세 스토리 공유 링크로 직접 이동시킴.
+      try { window.open('', '_self'); } catch(e) {}
       try { window.close(); } catch(e) {}
       setTimeout(function(){
-        if (window.history.length > 1) {
-          window.history.back();
-        }
-      }, 60);
+        window.location.href = STORY_LINK;
+      }, 150);
     });
   })();
 

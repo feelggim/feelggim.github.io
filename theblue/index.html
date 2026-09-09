@@ -847,27 +847,11 @@
     text-shadow:0 0 6px rgba(127,178,255,.55);
   }
 </style>
-<button type="button" class="return-btn" id="return-btn" aria-label="다시, 나나세에게 — 크랙 앱으로 돌아가기">
+<a href="https://share.crack.wrtn.ai/qzy97gd" class="return-btn" id="return-btn" aria-label="다시, 나나세에게 — 스토리로 돌아가기">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
   <span>다시, 나나세에게</span>
-</button>
+</a>
 <script>
-  (function(){
-    var btn = document.getElementById('return-btn');
-    if(!btn) return;
-    var STORY_LINK = 'https://share.crack.wrtn.ai/qzy97gd';
-    btn.addEventListener('click', function(){
-      // 앱이 커스텀탭/웹뷰로 이 페이지를 띄운 경우엔 window.close()가 탭을 닫고
-      // 앱으로 바로 복귀시켜줌. 그게 막히는(일반 브라우저 탭) 환경에서는
-      // 엉뚱한 이전 기록으로 가는 대신, 나나세 스토리 공유 링크로 직접 이동시킴.
-      try { window.open('', '_self'); } catch(e) {}
-      try { window.close(); } catch(e) {}
-      setTimeout(function(){
-        window.location.href = STORY_LINK;
-      }, 150);
-    });
-  })();
-
   // ---- 우클릭 / 드래그 / 일부 저장·개발자도구 단축키 차단 (완전한 캡처 방지는 아님) ----
   (function(){
     document.addEventListener('contextmenu', function(e){ e.preventDefault(); });

@@ -437,19 +437,27 @@
     line-height:1.5;
   }
 </style>
-<button class="back-btn" id="backBtn" type="button" onclick="handleBack()">
+<button class="back-btn" id="backBtn" type="button" aria-label="이전으로 돌아가기">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
   돌아가기
 </button>
 <div class="back-hint" id="backHint" hidden>자동으로 닫히지 않으면<br>이 탭을 직접 닫아줘</div>
 <script>
-  function handleBack(){
-    window.close();
-    setTimeout(function(){
-      var hint = document.getElementById('backHint');
-      if(hint) hint.hidden = false;
-    }, 350);
-  }
+  (function(){
+    var btn = document.getElementById('backBtn');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      if (window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+      try { window.close(); } catch(e) {}
+      setTimeout(function(){
+        var hint = document.getElementById('backHint');
+        if(hint) hint.hidden = false;
+      }, 350);
+    });
+  })();
 </script>
 
 <div class="hero">

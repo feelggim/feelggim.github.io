@@ -1,0 +1,1424 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>천사는 인간을 사랑하지 않는다</title>
+<meta name="description" content="한 번 죽인 인간을 되살려 스무 해를 키운 존재가, 돌려보내야 할 기한 앞에서 처음으로 신을 어긴 이야기. 크랙 1:1 롤플레잉 「천사는 인간을 사랑하지 않는다」 소개.">
+<meta name="theme-color" content="#0A0B11">
+<meta property="og:type" content="website">
+<meta property="og:title" content="천사는 인간을 사랑하지 않는다">
+<meta property="og:description" content="현관문은 한 번도 잠긴 적이 없다. 그런데도 당신은 매일 돌아왔다.">
+<meta property="og:image" content="https://feelggim.github.io/naer/img/hero.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🕯</text></svg>">
+<style>
+  html{background:#0A0B11}
+  body{margin:0;padding:0;background:#0A0B11;color:#E4E6EE}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@300;400&display=swap">
+
+<style>
+:root{
+  /* 대리석 — 위쪽 지면 */
+  --marble:#191C24;
+  --marble-2:#14161E;
+  --stone:#4A505F;
+  /* 검은 대리석 바닥 — 아래쪽 지면 */
+  --floor:#13151D;
+  --void:#0A0B11;
+  /* 스테인드글라스 */
+  --violet:#8B6FD4;
+  --indigo:#4F66BC;
+  --cyan:#6FB4C9;
+  --mint:#7FC9A8;
+  --moon:#DCD9EC;
+  --sconce:#C9A15A;
+
+  --fg:#E4E6EE;
+  --fg-dim:#8D94A6;
+  --rule:rgba(228,230,238,.14);
+  --accent:#A8B6EE;
+
+  --display:"Cormorant Garamond","Nanum Myeongjo",serif;
+  --kr:"Nanum Myeongjo",serif;
+  --body:"Gowun Batang","Nanum Myeongjo",serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+
+  --gut:clamp(20px,5vw,64px);
+  --col:min(68ch,100%);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--marble);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:clamp(15px,.55vw + 13.5px,17px);
+  line-height:1.95;
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ── 스테인드글라스 산란 ──────────────── */
+.glass{
+  position:fixed;inset:0;pointer-events:none;z-index:1;
+  transition:opacity .9s ease;overflow:hidden;
+}
+.glass--mul{mix-blend-mode:multiply;opacity:.52}
+.glass--scr{mix-blend-mode:screen;opacity:0}
+body.is-deep .glass--mul{opacity:0}
+body.is-deep .glass--scr{opacity:.66}
+/* 빛기둥 */
+.glass .beam{
+  position:absolute;top:-30vh;width:16vw;height:170vh;
+  transform-origin:top center;filter:blur(26px);opacity:.8;
+}
+.beam--a{left:2vw;rotate:14deg;background:linear-gradient(180deg,rgba(111,180,201,.55),rgba(111,180,201,0) 72%)}
+.beam--b{left:26vw;rotate:9deg;width:10vw;background:linear-gradient(180deg,rgba(220,217,236,.6),rgba(220,217,236,0) 66%)}
+.beam--c{right:22vw;rotate:-11deg;width:13vw;background:linear-gradient(180deg,rgba(139,111,212,.5),rgba(139,111,212,0) 70%)}
+.beam--d{right:-2vw;rotate:-16deg;width:18vw;background:linear-gradient(180deg,rgba(79,102,188,.45),rgba(79,102,188,0) 74%)}
+/* 바닥 웅덩이 */
+.glass .pool{position:absolute;border-radius:50%;filter:blur(64px)}
+.pool--1{width:34vw;height:22vw;left:4vw;top:58vh;background:radial-gradient(ellipse,rgba(139,111,212,.55),transparent 68%)}
+.pool--2{width:26vw;height:16vw;left:38vw;top:34vh;background:radial-gradient(ellipse,rgba(111,180,201,.5),transparent 68%)}
+.pool--3{width:30vw;height:19vw;right:2vw;top:72vh;background:radial-gradient(ellipse,rgba(79,102,188,.5),transparent 68%)}
+.pool--4{width:18vw;height:12vw;right:30vw;top:14vh;background:radial-gradient(ellipse,rgba(127,201,168,.45),transparent 68%)}
+/* 작고 선명한 산란 — 유리를 통과한 조각 */
+.glass .shard{position:absolute;border-radius:50%;filter:blur(16px)}
+.shard--1{width:6vw;height:3.4vw;left:14vw;top:78vh;background:rgba(139,111,212,.7)}
+.shard--2{width:4.4vw;height:2.6vw;left:52vw;top:62vh;background:rgba(127,201,168,.6)}
+.shard--3{width:5.2vw;height:3vw;right:14vw;top:44vh;background:rgba(111,180,201,.65)}
+.shard--4{width:3.4vw;height:2vw;left:33vw;top:88vh;background:rgba(220,217,236,.7)}
+
+
+
+
+/* ── 저택 · 페이지 전체의 바닥 ─────────── */
+.hallbg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:var(--void);
+}
+.hallbg__img{
+  position:absolute;inset:-2%;
+  background:url("img/hallbg.jpg") center top / cover no-repeat;
+  filter:brightness(.88) saturate(1.06) contrast(1.02);
+  transform:scale(1.02);
+  transition:filter 1.4s ease,opacity 1.4s ease;
+}
+.hallbg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(140% 86% at 50% 4%,rgba(10,11,17,0) 0%,rgba(10,11,17,.14) 62%,rgba(10,11,17,.46) 100%),
+    linear-gradient(180deg,rgba(10,11,17,0) 0%,rgba(10,11,17,.14) 54%,rgba(10,11,17,.44) 100%);
+}
+body.is-deep .hallbg__img{filter:brightness(.6) saturate(.98) contrast(1.06)}
+@media (max-width:760px){.hallbg__img{filter:brightness(.7) saturate(1)}}
+
+/* ── 천계 · 위에서 내리쬐는 빛 ─────────── */
+.heaven{
+  position:fixed;left:0;right:0;top:0;height:100vh;
+  pointer-events:none;z-index:1;overflow:hidden;
+  mix-blend-mode:screen;opacity:.72;
+  transition:opacity 1.2s ease;
+}
+body.is-deep .heaven{opacity:1}
+.heaven__glow{
+  position:absolute;left:50%;top:-46vh;translate:-50% 0;
+  width:124vw;height:74vh;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 60%,
+    rgba(255,255,255,.44) 0%,
+    rgba(248,250,255,.24) 24%,
+    rgba(236,241,255,.14) 44%,
+    rgba(226,233,255,.05) 64%,
+    transparent 80%);
+  filter:blur(28px);
+  animation:heavenBreath 13s ease-in-out infinite;
+}
+.heaven__seam{
+  position:absolute;left:50%;top:-2vh;translate:-50% 0;
+  width:64vw;height:16vh;
+  background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0) 84%);
+  filter:blur(22px);
+}
+.hbeam{
+  position:absolute;left:50%;top:-16vh;
+  width:7vw;height:150vh;
+  transform-origin:50% 0;
+  background:linear-gradient(180deg,
+    rgba(255,255,255,.56) 0%,
+    rgba(250,252,255,.26) 24%,
+    rgba(242,246,255,.09) 56%,
+    rgba(238,243,255,0) 84%);
+  filter:blur(11px);
+  animation:heavenSway 17s ease-in-out infinite;
+}
+.hbeam--1{translate:-50% 0;rotate:-27deg;width:5vw;opacity:.7;animation-duration:19s}
+.hbeam--2{translate:-50% 0;rotate:-15deg;width:9vw;opacity:.92;animation-duration:15s;animation-delay:-4s}
+.hbeam--3{translate:-50% 0;rotate:-5deg;width:6vw;opacity:.8;animation-duration:21s;animation-delay:-9s}
+.hbeam--4{translate:-50% 0;rotate:6deg;width:11vw;opacity:1;animation-duration:16s;animation-delay:-2s}
+.hbeam--5{translate:-50% 0;rotate:17deg;width:7vw;opacity:.78;animation-duration:23s;animation-delay:-11s}
+.hbeam--6{translate:-50% 0;rotate:29deg;width:5vw;opacity:.62;animation-duration:18s;animation-delay:-6s}
+@keyframes heavenBreath{0%,100%{opacity:.82;transform:scale(1)}50%{opacity:1;transform:scale(1.045)}}
+@keyframes heavenSway{0%,100%{opacity:var(--o,.85);transform:scaleX(1)}50%{opacity:calc(var(--o,.85) * .62);transform:scaleX(1.13)}}
+/* 낙하하는 빛 잔여 */
+.motes{position:fixed;inset:0;pointer-events:none;z-index:1;mix-blend-mode:screen;opacity:.95}
+@media (prefers-reduced-motion:reduce){
+  .heaven__glow,.hbeam{animation:none}
+  .motes{display:none}
+}
+
+
+/* ── bands ───────────────────────────── */
+.band{
+  position:relative;
+  padding-inline:var(--gut);
+  padding-block:clamp(72px,11vw,150px);
+  background:rgba(18,20,28,.40);
+}
+.band > *{position:relative;z-index:2}
+.band--p2{background:rgba(14,16,23,.42)}
+.band--sink{
+  background:linear-gradient(180deg,rgba(14,16,23,.40) 0%,rgba(13,15,21,.48) 42%,rgba(11,13,19,.58) 78%,rgba(10,11,17,.62) 100%);
+}
+.band--dark{
+  background:rgba(12,14,20,.52);
+  --fg:#E4E6EE;
+  --fg-dim:#8A90A1;
+  --rule:rgba(228,230,238,.17);
+  --accent:#9FB0EA;
+  color:var(--fg);
+}
+.band--deep{background:rgba(9,10,16,.6)}
+.wrap{max-width:1160px;margin-inline:auto}
+.col{max-width:var(--col)}
+
+/* ── type ────────────────────────────── */
+h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:400;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--fg-dim);
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:clamp(22px,3vw,38px);
+}
+.eyebrow{text-shadow:0 1px 12px rgba(6,7,11,.9)}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+h2{
+  font-family:var(--kr);font-size:clamp(26px,3.4vw,42px);text-shadow:0 2px 20px rgba(6,7,11,.9);
+  line-height:1.35;letter-spacing:-.02em;margin-bottom:.7em;
+}
+h2 .lat{
+  display:block;font-family:var(--display);font-style:italic;
+  font-size:.44em;letter-spacing:.04em;color:var(--fg-dim);margin-top:.5em;
+}
+p{margin:0 0 1.35em;text-shadow:0 1px 14px rgba(6,7,11,.85)}
+p:last-child{margin-bottom:0}
+.lede{font-family:var(--kr);font-size:clamp(18px,1.5vw,23px);line-height:1.85;letter-spacing:-.015em}
+.dim{color:var(--fg-dim)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ── hero ────────────────────────────── */
+.hero{
+  position:relative;min-height:clamp(520px,82vh,860px);
+  display:grid;align-items:end;padding:0;background:transparent;overflow:hidden;
+}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 16%}
+.hero__veil{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(9,10,15,.52) 0%,rgba(9,10,15,.18) 26%,rgba(12,14,20,.42) 54%,rgba(20,22,30,.9) 86%,var(--marble) 100%);
+}
+.hero__inner{position:relative;z-index:3;padding:0 var(--gut) clamp(46px,7vw,84px);max-width:1160px;margin-inline:auto;width:100%}
+.hero__kick{font-family:var(--mono);font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:#CBD1DF;text-shadow:0 1px 18px rgba(6,7,11,.9);margin-bottom:20px}
+.hero h1{
+  font-family:var(--kr);font-weight:800;
+  font-size:clamp(34px,6.6vw,78px);line-height:1.18;letter-spacing:-.045em;
+  color:#F2F3F8;text-shadow:0 2px 40px rgba(6,7,11,.96),0 0 90px rgba(6,7,11,.8);
+}
+.hero__lat{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(13px,1.5vw,19px);letter-spacing:.2em;color:#AEB4C6;margin-top:14px}
+.hero__line{
+  margin-top:clamp(22px,3vw,34px);font-family:var(--kr);
+  font-size:clamp(14px,1.3vw,18px);line-height:1.8;color:#D4D7E2;
+  max-width:34ch;border-left:1px solid var(--violet);padding-left:16px;
+}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:26px}
+.tags span{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  padding:5px 11px;border:1px solid rgba(228,230,238,.2);
+  color:#C3C8D6;border-radius:999px;background:rgba(228,230,238,.07);
+}
+
+/* ── figure / split ──────────────────── */
+.split{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:center}
+.split--flip{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
+.frame{position:relative;background:#11131A}
+.frame img{width:100%;height:auto}
+.frame::after{
+  content:"";position:absolute;inset:0;
+  border:1px solid rgba(139,111,212,.42);
+  outline:1px solid rgba(228,230,238,.08);outline-offset:7px;pointer-events:none;
+}
+.band--dark .frame{background:#0F1118}
+.band--dark .frame::after{border-color:rgba(159,176,234,.34);outline-color:rgba(228,230,238,.08)}
+.cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--fg-dim);margin-top:11px}
+
+/* ── quote plate ─────────────────────── */
+.plate{margin-top:clamp(30px,4vw,48px);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:clamp(22px,3vw,34px) 0}
+.plate .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.plate p{font-family:var(--kr);font-size:clamp(16px,1.35vw,20px);line-height:1.8}
+
+/* ── 기한 · 케이크 ───────────────────── */
+.deadline{position:relative;margin:clamp(44px,6.5vw,86px) calc(-1 * var(--gut)) 0;background:#0A0B11}
+.deadline__img{position:relative}
+.deadline__img img{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
+.deadline__img::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(103deg,rgba(7,8,13,.9) 0%,rgba(7,8,13,.7) 30%,rgba(7,8,13,.16) 58%,transparent 76%);
+}
+.deadline__txt{
+  position:absolute;left:var(--gut);bottom:clamp(28px,4.4vw,62px);z-index:3;
+  max-width:min(44ch,50%);
+}
+.deadline__k{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--sconce);margin-bottom:16px}
+.deadline__txt p{margin:0;color:#C9CCD9;font-size:clamp(13px,1.1vw,15.5px);line-height:1.95}
+.deadline__txt .hit{
+  font-family:var(--kr);color:#F4F5FA;letter-spacing:-.028em;
+  font-size:clamp(16px,1.75vw,25px);line-height:1.66;margin-top:.85em;
+}
+.deadline__note{
+  position:absolute;right:var(--gut);bottom:clamp(28px,4.4vw,62px);z-index:3;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;line-height:1.9;
+  color:rgba(238,239,246,.66);text-align:right;text-shadow:0 1px 16px rgba(6,6,10,.95);
+}
+@media (max-width:860px){
+  .deadline__img::after{background:linear-gradient(180deg,transparent 42%,rgba(7,8,13,.7) 78%,#0A0B11 100%)}
+  .deadline__txt{position:static;max-width:none;padding:clamp(20px,4vw,30px) var(--gut) clamp(26px,5vw,36px)}
+  .deadline__note{position:static;text-align:left;padding:0 var(--gut) clamp(24px,5vw,34px)}
+}
+
+/* ── metric row ──────────────────────── */
+.metrics{display:flex;flex-wrap:wrap;gap:0;margin-top:clamp(30px,4vw,48px);border-top:1px solid var(--rule)}
+.metrics div{flex:1 1 150px;padding:18px 20px 18px 0;border-bottom:1px solid var(--rule)}
+.metrics dt{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-dim);margin-bottom:7px}
+.metrics dd{margin:0;font-family:var(--kr);font-size:clamp(15px,1.2vw,18px);letter-spacing:-.01em}
+
+/* ── full-bleed plate ────────────────── */
+.bleed{margin:0 calc(-1 * var(--gut));position:relative}
+.bleed img{width:100%;height:auto;display:block}
+.bleed--tall img{aspect-ratio:16/7;object-fit:cover}
+.bleed__cap{
+  position:absolute;left:var(--gut);right:var(--gut);bottom:0;
+  padding-bottom:clamp(16px,2.4vw,28px);
+  display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;
+  text-shadow:0 1px 18px rgba(6,6,10,.88);z-index:2;
+}
+.bleed__cap b{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--sconce);font-weight:400}
+.bleed__cap span{font-family:var(--kr);font-size:clamp(13px,1.2vw,17px);color:#EFEFF4;line-height:1.7}
+.bleed::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 52%,rgba(6,6,10,.74) 100%)}
+
+/* ── mood strip ──────────────────────── */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(14px,2vw,24px);margin-top:clamp(30px,4.5vw,56px)}
+.shot{margin:0}
+.shot img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid rgba(139,111,212,.38)}
+.shot figcaption{margin-top:10px;font-size:13.5px;line-height:1.75;color:#343845}
+.shot figcaption b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--accent);font-weight:400;margin-bottom:5px}
+.band--dark .shot figcaption{color:var(--fg-dim)}
+.band--dark .shot figcaption b{color:var(--accent)}
+
+/* ── plans ───────────────────────────── */
+.plans{margin-top:clamp(30px,4.5vw,56px)}
+.plans__tabs{display:flex;gap:0;border-bottom:1px solid rgba(23,26,34,.2);flex-wrap:wrap}
+.plans__tabs button{
+  appearance:none;background:none;border:0;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  color:#6B7180;padding:12px 20px 13px;border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:color .2s,border-color .2s;
+}
+.plans__tabs button:hover{color:#23262F}
+.plans__tabs button[aria-selected="true"]{color:#15171E;border-bottom-color:var(--violet)}
+.plans__tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+.plan{margin-top:22px}
+.plan__sheet{position:relative;background:#E4DCC6;border:1px solid rgba(139,111,212,.4)}
+.plan__sheet img{width:100%;height:auto}
+.plan__note{display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline;margin-top:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:#5C6270}
+.plan__note b{font-weight:400;color:var(--accent)}
+.plan__note span{font-family:var(--body);font-size:13.5px;letter-spacing:0;line-height:1.7;color:#343845}
+
+/* ── ledger ──────────────────────────── */
+.ledger{margin-top:clamp(34px,5vw,60px);border-top:1px solid var(--rule)}
+.ledger .row{display:grid;grid-template-columns:64px 1fr;gap:clamp(14px,2.4vw,34px);padding:16px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.ledger .n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);font-variant-numeric:tabular-nums}
+.ledger .t{font-size:15px;line-height:1.8;text-shadow:0 1px 14px rgba(6,7,11,.85)}
+
+/* ── cast ────────────────────────────── */
+.cast{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:clamp(18px,2.6vw,34px);margin-top:clamp(30px,4vw,52px)}
+.card{display:flex;flex-direction:column}
+.card .port{position:relative;aspect-ratio:3/4;overflow:hidden;background:#11131A;max-width:100%}
+.card .port img{width:100%;height:100%;object-fit:cover}
+.card .port--none{display:grid;place-items:center;background:linear-gradient(180deg,#181B24,#0C0E14)}
+.card .port--none .mark{width:62px;height:62px;position:relative;opacity:.5}
+.card .port--none .mark::before,.card .port--none .mark::after{content:"";position:absolute;background:var(--sconce)}
+.card .port--none .mark::before{left:50%;top:0;bottom:0;width:1px;transform:translateX(-.5px)}
+.card .port--none .mark::after{top:50%;left:0;right:0;height:1px;transform:translateY(-.5px)}
+.card .port--none span{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:#6B7180}
+.card .nm{display:flex;align-items:baseline;gap:10px;margin-top:16px}
+.card .nm b{font-family:var(--kr);font-weight:700;font-size:clamp(19px,1.7vw,25px);letter-spacing:-.02em}
+.card .nm i{font-family:var(--display);font-style:italic;font-size:13px;letter-spacing:.14em;color:var(--fg-dim)}
+.card .spec{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--fg-dim);margin-top:8px;line-height:1.9;text-shadow:0 1px 12px rgba(6,7,11,.9)}
+.card .bio{margin-top:12px;font-size:14.5px;line-height:1.9}
+.card .say{margin-top:14px;padding-left:13px;border-left:1px solid var(--accent);font-family:var(--kr);font-size:14.5px;line-height:1.8;color:var(--fg)}
+
+/* ── levers ──────────────────────────── */
+.levers{margin-top:clamp(28px,4vw,46px)}
+.lever{display:grid;grid-template-columns:52px 1fr;gap:clamp(14px,2vw,26px);padding:20px 0;border-top:1px solid var(--rule);align-items:baseline}
+.lever:last-child{border-bottom:1px solid var(--rule)}
+.lever .num{font-family:var(--kr);font-size:22px;color:var(--accent);line-height:1}
+.lever h3{font-family:var(--kr);font-size:clamp(17px,1.5vw,21px);letter-spacing:-.02em;margin-bottom:6px}
+.lever p{font-size:14.5px;line-height:1.85;margin:0;color:var(--fg-dim)}
+.lever--hot .num{color:var(--sconce)}
+.lever--hot h3::after{
+  content:"가장 치명적";font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
+  color:var(--sconce);border:1px solid rgba(201,161,90,.5);padding:3px 8px;
+  margin-left:12px;vertical-align:middle;white-space:nowrap;
+}
+
+/* ── acts ────────────────────────────── */
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(28px,4vw,46px)}
+.acts section{background:rgba(9,10,16,.6);padding:clamp(22px,3vw,32px)}
+.acts .no{font-family:var(--kr);font-size:clamp(28px,3.4vw,40px);color:var(--accent);line-height:1;letter-spacing:.05em}
+.acts h3{font-family:var(--kr);font-size:clamp(17px,1.5vw,21px);margin:14px 0 10px;letter-spacing:-.02em}
+.acts p{font-size:14.5px;line-height:1.85;color:var(--fg-dim);margin:0}
+
+/* ── end room plate ──────────────────── */
+.endplate{margin:0;position:relative;background:var(--void);overflow:hidden}
+.endplate__stage{position:relative;overflow:hidden;background:var(--void);will-change:transform}
+.endplate img{width:100%;height:auto;display:block;max-height:82vh;object-fit:cover;object-position:center 42%}
+.endplate::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:linear-gradient(180deg,var(--void) 0%,rgba(10,11,17,0) 16%,rgba(10,11,17,0) 46%,rgba(10,11,17,.92) 100%)}
+.endplate figcaption{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(24px,4vw,48px);z-index:7;max-width:1160px;margin-inline:auto}
+.endplate figcaption b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:var(--sconce);font-weight:400;margin-bottom:10px}
+.endplate figcaption span{font-family:var(--kr);font-size:clamp(15px,1.7vw,23px);line-height:1.7;color:#EFEFF4;letter-spacing:-.02em;display:block;max-width:26ch}
+.endplate--house{background:#0F1119}
+.endplate--house img{max-height:76vh;object-position:center 46%}
+.endplate--house::after{background:linear-gradient(180deg,rgba(15,17,25,0) 40%,rgba(9,10,16,.88) 100%)}
+
+/* 잔영 — 본체보다 늦게 따라온다 */
+.trail{position:absolute;inset:0;opacity:0;mix-blend-mode:screen;pointer-events:none;z-index:2}
+.trail img{width:100%;height:100%;object-fit:cover;object-position:center 42%;filter:contrast(1.1)}
+/* 찢어진 색수차 */
+.ghost{position:absolute;inset:0;opacity:0;mix-blend-mode:screen;pointer-events:none;z-index:3}
+.ghost img{width:100%;height:100%;object-fit:cover;object-position:center 42%;mix-blend-mode:multiply;filter:grayscale(1) contrast(1.2)}
+.ghost--r{background:#FF2B4A}
+.ghost--c{background:#2BE8FF}
+/* 치지직 */
+.static{
+  position:absolute;inset:-10%;opacity:0;pointer-events:none;z-index:4;mix-blend-mode:overlay;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,rgba(0,0,0,.10) 1px 3px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-size:auto,200px 200px;
+}
+.roll{
+  position:absolute;left:-5%;right:-5%;height:13%;top:-24%;opacity:0;pointer-events:none;z-index:4;
+  mix-blend-mode:screen;
+  background:linear-gradient(180deg,transparent,rgba(170,190,255,.18) 38%,rgba(255,255,255,.3) 54%,rgba(140,220,255,.14) 68%,transparent);
+}
+/* 무수한 눈 */
+.eyes{position:absolute;inset:0;pointer-events:none;z-index:5}
+.eye{
+  position:absolute;width:clamp(24px,3vw,52px);aspect-ratio:2.2/1;opacity:0;
+  border-radius:50%;filter:blur(.5px);transform:scaleY(.05);
+  background:radial-gradient(ellipse at 50% 50%,#07070C 0 17%,#5C6A99 18% 29%,#DDDFEC 30% 46%,rgba(221,223,236,0) 72%);
+}
+/* 백색 표백 */
+.bleach{position:absolute;inset:0;opacity:0;pointer-events:none;z-index:5;
+  background:radial-gradient(circle at 50% 44%,#FFFFFF 0%,rgba(255,255,255,.5) 26%,rgba(214,214,232,.16) 50%,transparent 74%)}
+/* 스크롤 정적 */
+.hush{position:fixed;inset:0;z-index:35;pointer-events:none;opacity:0;background:#05060A;transition:opacity .42s ease}
+body.is-hushing .hush{opacity:.74}
+body.is-straining .hush{opacity:.34}
+body.is-hushing .glass{opacity:.05 !important}
+
+@keyframes tremor{
+  0%{transform:translate3d(0,0,0) rotate(0deg)}
+  8%{transform:translate3d(-9px,4px,0) rotate(-.32deg)}
+ 16%{transform:translate3d(8px,-6px,0) rotate(.28deg)}
+ 24%{transform:translate3d(-6px,-8px,0) rotate(.14deg)}
+ 32%{transform:translate3d(11px,5px,0) rotate(-.22deg)}
+ 40%{transform:translate3d(-11px,2px,0) rotate(.36deg)}
+ 48%{transform:translate3d(4px,9px,0) rotate(-.1deg)}
+ 56%{transform:translate3d(-8px,-4px,0) rotate(.3deg)}
+ 64%{transform:translate3d(7px,8px,0) rotate(-.26deg)}
+ 72%{transform:translate3d(-3px,6px,0) rotate(.18deg)}
+ 80%{transform:translate3d(10px,-5px,0) rotate(-.34deg)}
+ 88%{transform:translate3d(-7px,-2px,0) rotate(.22deg)}
+ 96%{transform:translate3d(5px,3px,0) rotate(-.16deg)}
+100%{transform:translate3d(0,0,0) rotate(0deg)}
+}
+@keyframes tremor-fine{
+  0%{transform:translate3d(0,0,0)}   25%{transform:translate3d(-.6px,.4px,0)}
+ 50%{transform:translate3d(.5px,-.5px,0)} 75%{transform:translate3d(-.4px,-.3px,0)}
+ 100%{transform:translate3d(0,0,0)}
+}
+@keyframes strain-zoom{0%{transform:scale(1.14)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes ep-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.014)}}
+@keyframes ep-bleach{0%{opacity:0}4%{opacity:.95}14%{opacity:.34}30%{opacity:.6}46%{opacity:.2}68%{opacity:.3}100%{opacity:0}}
+@keyframes tear-r{
+  0%{clip-path:inset(0 0 94% 0);transform:translate3d(-46px,0,0)}
+ 12%{clip-path:inset(30% 0 58% 0);transform:translate3d(48px,0,0)}
+ 24%{clip-path:inset(66% 0 20% 0);transform:translate3d(-34px,0,0)}
+ 36%{clip-path:inset(8% 0 80% 0);transform:translate3d(38px,0,0)}
+ 48%{clip-path:inset(48% 0 38% 0);transform:translate3d(-26px,0,0)}
+ 62%{clip-path:inset(78% 0 8% 0);transform:translate3d(30px,0,0)}
+ 76%{clip-path:inset(20% 0 66% 0);transform:translate3d(-8px,0,0)}
+ 90%{clip-path:inset(56% 0 32% 0);transform:translate3d(6px,0,0)}
+100%{clip-path:inset(0 0 100% 0);transform:translate3d(0,0,0)}
+}
+@keyframes tear-c{
+  0%{clip-path:inset(84% 0 6% 0);transform:translate3d(44px,0,0)}
+ 12%{clip-path:inset(14% 0 74% 0);transform:translate3d(-50px,0,0)}
+ 24%{clip-path:inset(52% 0 34% 0);transform:translate3d(32px,0,0)}
+ 36%{clip-path:inset(72% 0 16% 0);transform:translate3d(-42px,0,0)}
+ 48%{clip-path:inset(26% 0 62% 0);transform:translate3d(24px,0,0)}
+ 62%{clip-path:inset(4% 0 84% 0);transform:translate3d(-30px,0,0)}
+ 76%{clip-path:inset(62% 0 24% 0);transform:translate3d(9px,0,0)}
+ 90%{clip-path:inset(38% 0 50% 0);transform:translate3d(-5px,0,0)}
+100%{clip-path:inset(0 0 100% 0);transform:translate3d(0,0,0)}
+}
+@keyframes noise{
+  0%{background-position:0 0,0 0}      20%{background-position:0 -2px,-70px 40px}
+ 40%{background-position:0 1px,110px -60px} 60%{background-position:0 -1px,-40px 90px}
+ 80%{background-position:0 2px,60px 20px}  100%{background-position:0 0,0 0}
+}
+@keyframes roll{0%{top:-24%}100%{top:112%}}
+@keyframes ep-eye{
+  0%{opacity:0;transform:scaleY(.04)}  12%{opacity:0;transform:scaleY(.04)}
+ 20%{opacity:.9;transform:scaleY(1)}   50%{opacity:.75;transform:scaleY(1)}
+ 60%{opacity:.85;transform:scaleY(.05)} 68%{opacity:.9;transform:scaleY(1)}
+100%{opacity:0;transform:scaleY(.03)}
+}
+
+/* 버티는 중 */
+.endplate.is-straining .endplate__stage{animation:tremor .09s steps(1) infinite}
+.endplate.is-straining .endplate__img{animation:strain-zoom 2.9s cubic-bezier(.16,.9,.3,1) 1 forwards}
+.endplate.is-straining .trail{opacity:.46}
+.endplate.is-straining .t1{animation:tremor .17s steps(1) infinite}
+.endplate.is-straining .t2{animation:tremor .21s steps(1) infinite;opacity:.34}
+.endplate.is-straining .ghost{opacity:.85}
+.endplate.is-straining .ghost--r{animation:tear-r 1.5s steps(1) infinite}
+.endplate.is-straining .ghost--c{animation:tear-c 1.2s steps(1) infinite}
+.endplate.is-straining .static{opacity:1;animation:noise .07s steps(1) infinite}
+.endplate.is-straining .roll{opacity:1;animation:roll .72s linear infinite}
+.endplate.is-straining .bleach{animation:ep-bleach 2.9s ease-out 1}
+.endplate.is-straining .eye{animation:ep-eye 2.1s ease-in-out 1}
+body.is-straining .glass--scr{opacity:1 !important;transition:opacity .1s}
+
+/* 가라앉았지만 완전히 멎지는 않는다 */
+.endplate.is-live .endplate__stage{animation:tremor-fine 1.7s steps(1) infinite}
+.endplate.is-live .endplate__img{animation:ep-breathe 16s ease-in-out infinite}
+.endplate.is-live .static{opacity:.07;animation:noise 2.4s steps(1) infinite}
+.endplate.is-live.blip .endplate__stage{animation:tremor .1s steps(1) infinite}
+.endplate.is-live.blip .static{opacity:.5;animation:noise .1s steps(1) infinite}
+.endplate.is-live.blip .ghost{opacity:.5}
+.endplate.is-live.blip .ghost--r{animation:tear-r .5s steps(1) 1}
+.endplate.is-live.blip .ghost--c{animation:tear-c .4s steps(1) 1}
+
+/* ── trumpet marker ──────────────────── */
+.trumpet{text-align:center;padding-block:clamp(54px,8vw,96px);background:rgba(9,10,16,.5)}
+.trumpet .r{width:1px;height:clamp(38px,7vw,72px);background:linear-gradient(rgba(228,230,238,.12),var(--violet));margin:0 auto}
+.trumpet p{font-family:var(--kr);font-size:clamp(15px,1.5vw,20px);color:#C6C8D4;margin:22px auto 0;max-width:30ch;line-height:1.85}
+.trumpet .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--violet);margin-top:18px}
+
+/* ── script ──────────────────────────── */
+.script{margin-top:clamp(28px,4vw,46px);border:1px solid var(--rule);padding:clamp(22px,3.4vw,42px);background:#0E1016}
+.script .hud{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--fg-dim);border-bottom:1px solid var(--rule);padding-bottom:14px;margin-bottom:24px}
+.script .dir{color:#979DAE;font-style:italic;margin:0 0 1.2em}
+.script .say{margin:0 0 1.4em;font-family:var(--kr);line-height:1.9}
+.script .say b{display:inline-block;min-width:3.6em;color:var(--accent);font-weight:400;font-family:var(--mono);font-size:11px;letter-spacing:.16em;vertical-align:middle;margin-right:12px}
+
+/* ── 편지 ────────────────────────────── */
+.letter__frame{
+  font-family:var(--body);font-style:italic;
+  color:#9096A7;font-size:14.5px;line-height:2;
+  max-width:58ch;margin:0 auto clamp(26px,3.6vw,44px);
+  padding-left:18px;border-left:1px solid rgba(228,230,238,.18);
+}
+.sheet{
+  position:relative;max-width:min(66ch,100%);margin:0 auto;
+  background:linear-gradient(178deg,#F2F1F6 0%,#E9E8F0 55%,#E2E1EB 100%);
+  color:#1A1C24;
+  padding:clamp(30px,5vw,66px) clamp(24px,4.4vw,58px);
+  box-shadow:0 26px 70px rgba(0,0,0,.5);
+  font-size:15px;line-height:2.05;
+}
+.sheet::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 40% at 12% -6%,rgba(139,111,212,.26),transparent 70%),
+    radial-gradient(44% 32% at 96% 18%,rgba(111,180,201,.2),transparent 70%),
+    radial-gradient(38% 26% at 72% 104%,rgba(127,201,168,.16),transparent 70%);
+}
+.sheet > *{position:relative;z-index:2}
+.sheet--second{
+  margin-top:clamp(26px,3.6vw,44px);
+  color:#232431;
+  background:linear-gradient(178deg,#EFEEF4 0%,#E5E4EE 60%,#DEDDE9 100%);
+}
+.sheet .to{font-family:var(--kr);font-size:17px;letter-spacing:-.02em;margin-bottom:1.8em}
+.sheet p{margin:0 0 1.5em}
+.sheet .beat{font-family:var(--kr);font-size:17px;letter-spacing:-.02em;line-height:1.8}
+.sheet .sign{text-align:right;font-family:var(--kr);font-size:17px;margin-top:2.2em}
+.sheet .tail{color:#3C3E4C}
+/* 접힌 자국 */
+.sheet::after{
+  content:"";position:absolute;left:0;right:0;top:41%;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(24,26,34,.15) 10%,rgba(24,26,34,.19) 90%,transparent);
+  box-shadow:0 1px 0 rgba(255,255,255,.65);
+}
+/* 번진 잉크 */
+.blot{
+  display:inline-block;vertical-align:-.2em;height:1.02em;max-width:100%;border-radius:3px;
+  background:linear-gradient(96deg,rgba(24,26,34,.5),rgba(24,26,34,.85) 32%,rgba(24,26,34,.62) 68%,rgba(24,26,34,.8));
+  filter:blur(.7px);opacity:.92;
+}
+.blot.w1{width:2.6em}.blot.w2{width:4.8em}.blot.w3{width:7.6em}
+.blot.w4{width:10.5em}.blot.w5{width:14em}.blot.w6{width:18em}
+.blot-block{display:block;margin:0 0 1.5em;line-height:2.05}
+.blot-block .blot{margin:.18em .45em .18em 0}
+.sheet .gone{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  color:#6E7280;margin:-.7em 0 1.5em;
+}
+.letter__close{
+  max-width:min(66ch,100%);margin:clamp(26px,3.6vw,44px) auto 0;
+  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;
+  padding-top:18px;border-top:1px solid rgba(228,230,238,.16);
+}
+.letter__close b{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--accent);font-weight:400}
+.letter__close span{font-family:var(--kr);font-size:15px;line-height:1.8;color:#B9BECD}
+
+/* ── closing ─────────────────────────── */
+.closing{text-align:center;padding-block:clamp(76px,12vw,150px);background:rgba(9,10,16,.72);position:relative;z-index:2}
+.closing blockquote{margin:0 auto;max-width:36ch;font-family:var(--kr);font-size:clamp(18px,2vw,27px);line-height:1.75;letter-spacing:-.025em;color:#ECEDF3}
+.closing .sig{font-family:var(--display);font-style:italic;font-size:14px;letter-spacing:.2em;color:#757B8B;margin-top:26px}
+.cta{
+  display:inline-flex;align-items:center;gap:12px;margin-top:clamp(34px,5vw,54px);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:#0C0E14;background:#E6E7EE;padding:15px 26px;text-decoration:none;
+  border:1px solid var(--violet);transition:background .25s,color .25s;
+}
+.cta:hover,.cta:focus-visible{background:var(--violet);color:#0C0E14}
+.meta{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:#5D6373;margin-top:clamp(34px,5vw,56px);line-height:2.2}
+
+/* ── 화면 전체 지글 ──────────────────── */
+.vhs{
+  position:fixed;inset:-6%;z-index:36;pointer-events:none;opacity:0;mix-blend-mode:overlay;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 1px,rgba(0,0,0,.14) 1px 3px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-size:auto,200px 200px;
+}
+body.is-straining .vhs{opacity:.55;animation:noise .06s steps(1) infinite}
+
+/* ── OST ─────────────────────────────── */
+.ost{
+  position:fixed;left:14px;bottom:12px;z-index:41;
+  display:flex;align-items:center;gap:10px;
+  padding:7px 14px 7px 8px;border-radius:999px;
+  background:rgba(14,16,22,.66);border:1px solid rgba(228,230,238,.18);color:#D9DCE6;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:background .5s,border-color .5s,color .5s;
+  color:#23262F;
+}
+body.is-deep .ost{background:rgba(14,16,22,.66);border-color:rgba(228,230,238,.18);color:#D9DCE6}
+.ost__btn{
+  appearance:none;cursor:pointer;flex:0 0 auto;
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid currentColor;background:transparent;color:inherit;
+  display:grid;place-items:center;padding:0;
+  transition:background .2s;
+}
+.ost__btn:hover{background:rgba(139,111,212,.22)}
+.ost__btn:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.ost__ico{width:9px;height:10px;position:relative;display:block;margin-left:1px}
+.ost__ico::before{
+  content:"";position:absolute;inset:0;
+  border-style:solid;border-width:5px 0 5px 9px;
+  border-color:transparent transparent transparent currentColor;
+}
+.ost.is-playing .ost__ico{margin-left:0}
+.ost.is-playing .ost__ico::before{
+  border:0;left:0;right:5px;top:0;bottom:0;background:currentColor;
+}
+.ost.is-playing .ost__ico::after{
+  content:"";position:absolute;left:6px;right:0;top:0;bottom:0;background:currentColor;
+}
+.ost__meta{display:flex;flex-direction:column;gap:4px;min-width:118px}
+.ost__ttl{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  white-space:nowrap;opacity:.9;
+}
+.ost__bar{height:1px;background:currentColor;opacity:.25;position:relative;overflow:hidden}
+.ost__fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--violet);opacity:1}
+@media (max-width:560px){
+  .ost{left:10px;bottom:8px;padding:5px 10px 5px 6px;gap:8px}
+  .ost__meta{min-width:0}
+  .ost__ttl{font-size:8.5px;letter-spacing:.12em}
+}
+
+/* ── fixed hud ───────────────────────── */
+.clock{
+  position:fixed;right:14px;bottom:12px;z-index:40;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  color:rgba(23,26,34,.45);pointer-events:none;
+  font-variant-numeric:tabular-nums;text-align:right;line-height:1.7;
+  transform-origin:center;
+  transition:transform .46s cubic-bezier(.2,.9,.25,1),color .4s;
+}
+body.is-deep .clock{color:rgba(228,230,238,.42)}
+.clock__in{display:inline-block;white-space:nowrap}
+.clock.is-center{
+  z-index:60;color:#F2F3FA;
+  transform:translate(calc(-50vw + 14px + 50%),calc(-50vh + 12px + 50%)) scale(5.4);
+}
+@keyframes txt-glitch{
+  0%{text-shadow:-2px 0 #FF2B4A,2px 0 #2BE8FF;transform:translate(0,0);clip-path:inset(0 0 0 0)}
+ 12%{text-shadow:4px 0 #FF2B4A,-4px 0 #2BE8FF;transform:translate(-3px,1px);clip-path:inset(34% 0 22% 0)}
+ 24%{text-shadow:-5px 0 #FF2B4A,5px 0 #2BE8FF;transform:translate(3px,-2px);clip-path:inset(0 0 0 0)}
+ 36%{text-shadow:2px 0 #FF2B4A,-2px 0 #2BE8FF;transform:translate(-2px,2px);clip-path:inset(62% 0 8% 0)}
+ 48%{text-shadow:-6px 0 #FF2B4A,6px 0 #2BE8FF;transform:translate(4px,0);clip-path:inset(0 0 0 0)}
+ 60%{text-shadow:3px 0 #FF2B4A,-3px 0 #2BE8FF;transform:translate(-4px,-1px);clip-path:inset(12% 0 68% 0)}
+ 72%{text-shadow:-3px 0 #FF2B4A,3px 0 #2BE8FF;transform:translate(2px,2px);clip-path:inset(0 0 0 0)}
+ 84%{text-shadow:5px 0 #FF2B4A,-5px 0 #2BE8FF;transform:translate(-1px,-2px);clip-path:inset(44% 0 40% 0)}
+100%{text-shadow:-2px 0 #FF2B4A,2px 0 #2BE8FF;transform:translate(0,0);clip-path:inset(0 0 0 0)}
+}
+@keyframes txt-hum{
+  0%{text-shadow:-.6px 0 rgba(255,43,74,.55),.6px 0 rgba(43,232,255,.55);transform:translate(0,0)}
+ 25%{text-shadow:1px 0 rgba(255,43,74,.5),-1px 0 rgba(43,232,255,.5);transform:translate(-.6px,.3px)}
+ 50%{text-shadow:-.4px 0 rgba(255,43,74,.6),.4px 0 rgba(43,232,255,.6);transform:translate(.5px,-.3px)}
+ 62%{text-shadow:2px 0 rgba(255,43,74,.7),-2px 0 rgba(43,232,255,.7);transform:translate(-1px,0);clip-path:inset(40% 0 34% 0)}
+ 66%{clip-path:inset(0 0 0 0)}
+ 75%{text-shadow:.8px 0 rgba(255,43,74,.5),-.8px 0 rgba(43,232,255,.5);transform:translate(.4px,.4px)}
+100%{text-shadow:-.6px 0 rgba(255,43,74,.55),.6px 0 rgba(43,232,255,.55);transform:translate(0,0)}
+}
+.clock.is-center .clock__in{animation:txt-glitch .09s steps(1) infinite}
+.clock.is-noisy .clock__in{animation:txt-hum .42s steps(1) infinite}
+
+/* ── motion ──────────────────────────── */
+@keyframes jolt{
+  0%{transform:translate3d(0,0,0)}
+  18%{transform:translate3d(-2px,1px,0)}
+  36%{transform:translate3d(2px,-1px,0)}
+  54%{transform:translate3d(-1px,-2px,0)}
+  72%{transform:translate3d(1px,1px,0)}
+  100%{transform:translate3d(0,0,0)}
+}
+body.jolting{animation:jolt .5s steps(2,end) 1}
+@media (prefers-reduced-motion:reduce){
+  body.jolting{animation:none}
+  .endplate.is-struck .endplate__stage,.endplate.is-struck .bleach,
+  .endplate.is-struck .ghost--r,.endplate.is-struck .ghost--c,
+  .endplate.is-struck .eye,.endplate.is-live .endplate__img{animation:none}
+  .hush,.vhs{display:none}
+  .clock.is-center{transform:none}
+  .clock.is-center .clock__in,.clock.is-noisy .clock__in{animation:none}
+  .glass .beam,.glass .pool,.glass .shard{transition:none}
+}
+
+@media (max-width:760px){
+  .split,.split--flip{grid-template-columns:1fr}
+  .split--flip .frame{order:-1}
+  .hero__line{max-width:none}
+  .clock{font-size:9px;right:10px;bottom:8px}
+  .clock.is-center{transform:translate(calc(-50vw + 10px + 50%),calc(-50vh + 8px + 50%)) scale(2.9)}
+  .lever--hot h3::after{display:block;margin:8px 0 0;width:max-content}
+  .glass{opacity:.4}
+  body.is-deep .glass--scr{opacity:.5}
+}
+</style>
+
+<div class="glass glass--mul" id="glassA" aria-hidden="true">
+  <span class="beam beam--a"></span><span class="beam beam--b"></span>
+  <span class="beam beam--c"></span><span class="beam beam--d"></span>
+  <span class="pool pool--1"></span><span class="pool pool--2"></span>
+  <span class="pool pool--3"></span><span class="pool pool--4"></span>
+  <span class="shard shard--1"></span><span class="shard shard--2"></span>
+  <span class="shard shard--3"></span><span class="shard shard--4"></span>
+</div>
+<div class="glass glass--scr" id="glassB" aria-hidden="true"></div>
+<div class="hallbg" aria-hidden="true"><div class="hallbg__img"></div></div>
+<div class="heaven" id="heaven" aria-hidden="true">
+  <span class="heaven__glow"></span>
+  <span class="hbeam hbeam--1"></span><span class="hbeam hbeam--2"></span>
+  <span class="hbeam hbeam--3"></span><span class="hbeam hbeam--4"></span>
+  <span class="hbeam hbeam--5"></span><span class="hbeam hbeam--6"></span>
+  <span class="heaven__seam"></span>
+</div>
+<canvas class="motes" id="motes" aria-hidden="true"></canvas>
+
+<div class="vhs" aria-hidden="true"></div>
+<div class="ost" id="ost">
+  <button class="ost__btn" id="ostBtn" type="button" aria-label="OST 재생"><span class="ost__ico" aria-hidden="true"></span></button>
+  <div class="ost__meta">
+    <span class="ost__ttl">THE ANGEL DOES NOT LOVE · OST</span>
+    <span class="ost__bar"><span class="ost__fill" id="ostFill"></span></span>
+  </div>
+  <audio id="ostAudio" src="audio/ost.mp3" preload="none"></audio>
+</div>
+<div class="clock" aria-hidden="true"><span class="clock__in">第 7,305 日<br>02 : 12</span></div>
+
+<!-- ══ HERO ══ -->
+<header class="hero">
+  <img class="hero__img" src="img/hero.jpg" alt="흰 셔츠 차림으로 고개를 들어 아래를 내려다보는 백발의 남자">
+  <div class="hero__veil"></div>
+  <div class="hero__inner">
+    <div class="hero__kick">Original · Cosmic Horror · 1:1 Roleplay</div>
+    <h1>천사는 인간을<br>사랑하지 않는다</h1>
+    <div class="hero__lat">THE ANGEL DOES NOT LOVE</div>
+    <p class="hero__line">현관문은 한 번도 잠긴 적이 없다.<br>그런데도 당신은 매일 돌아왔다.</p>
+    <div class="tags">
+      <span>인외</span><span>코즈믹 호러</span><span>앵스트</span><span>사육</span><span>집착</span><span>계측</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ 00 로그라인 ══ -->
+<section class="band">
+  <div class="wrap col">
+    <div class="eyebrow">§ 00 &nbsp;Logline</div>
+    <p class="lede">한 번 죽인 인간을 되살려 스무 해를 키운 존재가,<br>돌려보내야 할 기한 앞에서 처음으로 신을 어긴 이야기.</p>
+  </div>
+</section>
+
+<!-- ══ 01 起源 ══ -->
+<section class="band">
+  <div class="wrap">
+    <div class="eyebrow">§ 01 &nbsp;起源 &nbsp;·&nbsp; Twenty Years Ago</div>
+    <div class="split">
+      <figure class="frame" style="margin:0">
+        <img src="img/origin.jpg" alt="성당 안에서 강보에 싸인 갓난아기를 안고 내려다보는 니아">
+      </figure>
+      <div>
+        <h2>벌이 아니라 과업이었다<span class="lat">Not a punishment. An assignment.</span></h2>
+        <p>스무 해 전, 그는 임무 중에 인간이던 당신을 관찰했다. 손도 대지 않았다. 그런데 그가 거기 있는 것만으로 인과가 어긋났고, 당신은 예정보다 일찍 세상을 떠났다.</p>
+        <p>신 앞에 회개했을 때 돌아온 것은 벌이 아니라 품에 안긴 갓난아기였다. <strong>“인간으로 다시 키워라.”</strong></p>
+        <p>그는 당신을 직접 길렀다. 지금 당신은 스무 살이고, 그는 그때와 같은 얼굴이다.</p>
+      </div>
+    </div>
+
+    <figure class="deadline">
+      <div class="deadline__img">
+        <img src="img/cake.jpg" alt="스테인드글라스 아래 긴 식탁에 놓인 흰 케이크. 초는 한 대도 꽂혀 있지 않고, 뜯지 않은 초 상자가 옆에 놓여 있다. 상판과 케이크 위에 흰 깃털이 떨어져 있다.">
+      </div>
+      <figcaption class="deadline__txt">
+        <div class="deadline__k">기한 &nbsp;/&nbsp; The Deadline</div>
+        <p>명에는 끝이 있었다. 스무 살이 되면 인간의 자리로, 짝인 매트 곁으로 돌려보내는 것까지가 과업이었다.</p>
+        <p class="hit">당신은 사흘 전에 스무 살이 되었다.<br>케이크는 아직 탁자에 있고, 초는 꽂히지 않았다.</p>
+      </figcaption>
+      <div class="deadline__note" aria-hidden="true">초는 상자째 옆에 있다<br>뜯지 않았다</div>
+    </figure>
+  </div>
+</section>
+
+<!-- ══ 02 世界觀 ══ -->
+<section class="band band--p2">
+  <div class="wrap">
+    <div class="eyebrow">§ 02 &nbsp;世界觀 &nbsp;·&nbsp; The Order Above</div>
+    <div class="col">
+      <h2>개입하지 않는 것들<span class="lat">Those who only observe</span></h2>
+      <p>인간계 위에 천계가 있다. 최상위에는 생사의 인과율을 관장하는 극소수가 있고, 이들은 개입하지 않는 관조자다. 신의 명이 있을 때만 지상에 내려온다.</p>
+      <p>신을 섬겨온 인간 조직은 그 실체를 일부만 알고 경외한다. 악마 색출 협력이 접점의 전부다.</p>
+    </div>
+    <figure class="frame" style="margin:clamp(30px,4vw,52px) 0 0">
+      <img src="img/heaven.jpg" alt="구름 위에 세워진 흰 첨탑들과 옥좌에 앉은 천사들의 천계 전경">
+      <figcaption class="cap" style="position:static">천계 · 옥좌의 자리</figcaption>
+    </figure>
+    <dl class="metrics">
+      <div><dt>Rank</dt><dd>옥좌 곁의 것</dd></div>
+      <div><dt>Function</dt><dd>생사의 인과율</dd></div>
+      <div><dt>기본값</dt><dd>관조 · 판단</dd></div>
+      <div><dt>개입 기록</dt><dd><span class="mono">1</span>회 &nbsp;<span class="dim">— 당신</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ══ 저택 외관 ══ -->
+<figure class="endplate endplate--house">
+  <img src="img/exterior.jpg" alt="어두운 침엽수림과 멀리 보이는 도시의 스카이라인, 그 경계에 홀로 선 흰 석재의 거대한 고딕 저택. 수십 개의 창 중 두 개에만 불이 켜져 있다.">
+  <figcaption>
+    <b>숲과 도시의 경계</b>
+    <span>창이 수십 개다. 불이 켜진 것은 둘뿐이다. 당신의 방과, 서재.</span>
+  </figcaption>
+</figure>
+
+<!-- ══ 03 邸宅 ══ -->
+<section class="band band--sink">
+  <div class="wrap">
+    <div class="eyebrow">§ 03 &nbsp;邸宅 &nbsp;·&nbsp; The House</div>
+    <figure class="bleed bleed--tall" style="margin-bottom:clamp(34px,5vw,60px)">
+      <img src="img/hall.jpg" alt="검은 대리석 바닥에 상이 비치는 거대한 현관홀. 정면 벽의 십자가와 그 뒤의 스테인드글라스, 바닥에 떨어진 색색의 빛 웅덩이.">
+      <figcaption class="bleed__cap"><b>1F · 현관홀</b><span>바닥에 떨어진 색이 위쪽 창의 색과 일치하지 않는다.</span></figcaption>
+    </figure>
+    <div class="col">
+      <h2>스무 해에 걸쳐 그에게 복종하게 된 집<span class="lat">A house that learned to obey</span></h2>
+      <p>숲과 도시의 경계에 선 거대한 저택. 교황청이 지상에 내려온 천사를 위해 지었고, 지은 자들은 결계 밖에서 다가오지 못한다. 검은 대리석, 높은 천장, 스테인드글라스.</p>
+      <p>둘이 쓰기엔 지나치게 크다. 대부분의 방이 비어 있다. 뒤뜰 정원에는 흰 장미와 백합만 피고, 가장 깊은 곳 한 자리에만 스무 해 동안 아무것도 자라지 않았다.</p>
+    </div>
+
+    <div class="plans">
+      <div class="plans__tabs" role="tablist" aria-label="저택 층별 평면도">
+        <button type="button" role="tab" id="tab-1f" aria-controls="plan-1f" aria-selected="true">1F &nbsp;현관홀</button>
+        <button type="button" role="tab" id="tab-2f" aria-controls="plan-2f" aria-selected="false">2F &nbsp;복도</button>
+        <button type="button" role="tab" id="tab-3f" aria-controls="plan-3f" aria-selected="false">3F &nbsp;서재</button>
+      </div>
+      <div class="plan" id="plan-1f" role="tabpanel" aria-labelledby="tab-1f">
+        <div class="plan__sheet"><img src="img/plan1.jpg" alt="저택 1층 평면도. 중앙의 넓은 현관홀과 북쪽 벽의 십자가, 서쪽 거실, 동쪽 식당과 부엌, 뒤편 대계단, 남쪽 정원 문."></div>
+        <div class="plan__note"><b>1F</b><span>현관홀 · 거실 · 식당 · 부엌 · 대계단 · 정원 문. 십자가 아래를 매일 지나지만 그는 한 번도 그 앞에 서지 않는다.</span></div>
+      </div>
+      <div class="plan" id="plan-2f" role="tabpanel" aria-labelledby="tab-2f" hidden>
+        <div class="plan__sheet"><img src="img/plan2.jpg" alt="저택 2층 평면도. 층 전체를 가로지르는 긴 복도, 서쪽에 당신의 방과 욕실, 동쪽에 니아의 방, 복도가 끝나는 자리에 복도 끝 방."></div>
+        <div class="plan__note"><b>2F</b><span>니아의 방은 스무 해째 쓰인 적이 없다. 복도 끝 방만 주변 벽 치수보다 크게 그려져 있다. 도면이 틀린 것이 아니다.</span></div>
+      </div>
+      <div class="plan" id="plan-3f" role="tabpanel" aria-labelledby="tab-3f" hidden>
+        <div class="plan__sheet"><img src="img/plan3.jpg" alt="저택 3층 평면도. 서쪽 날개 전체를 차지한 서재와 그에 붙은 잠긴 서랍, 동쪽 날개의 예배실, 좁은 계단."></div>
+        <div class="plan__note"><b>3F</b><span>서재에 붙은 잠긴 서랍은 방 하나만큼의 자리를 차지한다. 예배실은 도면에도 문이 닫힌 채로 그려져 있다.</span></div>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="row"><div class="n">001</div><div class="t">유리컵이 없다. 날카로운 모서리도 바닥의 턱도 없다. 스무 해에 걸쳐 치웠다. 당신은 원래 그런 줄 안다.</div></div>
+      <div class="row"><div class="n">002</div><div class="t">언제나 따뜻하다. 난방을 튼 적이 없고 벽난로에 불이 꺼진 적도 없다. 장작이 줄지 않는다.</div></div>
+      <div class="row"><div class="n">003</div><div class="t">스테인드글라스를 통과한 빛이 바닥에 색을 떨어뜨리는데, 그 색이 창의 색과 일치하지 않는다.</div></div>
+      <div class="row"><div class="n">004</div><div class="t">밤에 복도가 길어진다. 당신이 걸을 때만 짧아진다.</div></div>
+      <div class="row"><div class="n">005</div><div class="t">시계가 전부 같은 시각에 멈춰 있다. 어느 날 그 시각이 바뀌어 있다.</div></div>
+      <div class="row"><div class="n">006</div><div class="t">문을 잠근 적이 없다. 잠글 필요가 없다. 바깥이 이미 문이다.</div></div>
+    </div>
+
+    <div class="strip">
+      <figure class="shot">
+        <img src="img/corridor.jpg" alt="똑같은 문들이 소실점까지 이어지는 2층 복도. 촛대에 불이 켜져 있지만 그림자가 없다.">
+        <figcaption><b>2F · 복도</b>밤에 길어진다. 당신이 걸을 때만 짧아진다.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="img/study.jpg" alt="천장까지 닿는 서가와 이동식 사다리, 펼쳐진 일기장 한 권이 놓인 책상. 서랍에 놋쇠 자물쇠가 달려 있다.">
+        <figcaption><b>3F · 서재</b>매일 밤 일기를 쓴다. 제목은 스무 해째 ‘육아일기’다.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="img/chapel.jpg" alt="어두운 복도에서 바라본 예배실의 닫힌 문. 문틈 아래로 차가운 빛이 새어 나온다.">
+        <figcaption><b>3F · 예배실</b>문이 닫혀 있다. 그는 한 번도 그 앞에 서지 않는다.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="img/garden.jpg" alt="흰 장미와 백합만 피어 있는 뒤뜰. 한 자리만 흙이 드러난 채 아무것도 자라지 않는다.">
+        <figcaption><b>GARDEN</b>한 자리에만 스무 해 동안 아무것도 피지 않았다.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 04 人物 ══ -->
+<section class="band band--dark">
+  <div class="wrap">
+    <div class="eyebrow">§ 04 &nbsp;人物 &nbsp;·&nbsp; Cast</div>
+    <h2 class="col">셋이 한 집을 두고 서 있다<span class="lat">Three, around one house</span></h2>
+    <div class="cast">
+      <article class="card">
+        <div class="port"><img src="img/nia.jpg" alt="흰 셔츠와 흰 바지, 맨발에 긴 백발을 늘어뜨린 니아의 전신"></div>
+        <div class="nm"><b>니아</b><i>NAER</i></div>
+        <div class="spec">본명 메타트론 · 193cm · 나이 불명<br>흰 셔츠 · 흰 바지 · 맨발 · 묶지 않은 백발<br>표면 직업 — 사립탐정</div>
+        <p class="bio">신의 옥좌 곁을 지키던 천계 최상위 존재. 지금은 신의 명으로 인간계에 고정돼 있다. 당신을 한 번 잃었고, 스무 해를 키워왔다.</p>
+        <p class="say">“가둬두는 거잖아, 라고 하셨죠. 예. 그렇습니다.”</p>
+      </article>
+      <article class="card">
+        <div class="port"><img src="img/you.jpg" alt="금발 단발에 파란 눈을 한 스무 살의 당신"></div>
+        <div class="nm"><b>당신</b><i>YOU</i></div>
+        <div class="spec">스무 살 · 금발 단발 · 파란 눈<br>목덜미에 어릴 때부터 있던 점 하나<br>가족 없음</div>
+        <p class="bio">기억하는 한 그의 손에서 자랐다. 그가 스무 해 동안 한 번도 나이를 먹지 않았다는 것을 이상하게 여겨본 적이 없다. 자신이 한 번 죽었다는 것도, 그가 천사라는 것도 모른다.</p>
+        <p class="say">현관문은 열려 있었다. 매일 밤 제 발로 돌아왔다.</p>
+      </article>
+      <article class="card">
+        <div class="port port--none"><span class="mark" aria-hidden="true"></span><span>NO RECORD</span></div>
+        <div class="nm"><b>매트</b><i>MATT</i></div>
+        <div class="spec">신이 당신에게 예비한 짝<br>궤적 수정 시도 — <span class="mono">3</span>회<br>복귀 — <span class="mono">3</span>회</div>
+        <p class="bio">천사에게는 짝이 없다. 그것이 관조자인 이유다. 니아는 궤적을 읽는 눈으로 당신의 짝이 옆자리의 매트임을 안다. 매트만은 인과를 비틀어도 돌아온다.</p>
+        <p class="say">그래서 얼굴이 없다. 니아가 끝내 보려 하지 않았다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 05 龜裂 ══ -->
+<section class="band band--dark">
+  <div class="wrap">
+    <div class="eyebrow">§ 05 &nbsp;龜裂 &nbsp;·&nbsp; What Breaks Him</div>
+    <div class="split split--flip">
+      <div>
+        <h2>그를 흔드는 것은 넷뿐이다<span class="lat">Four levers, one of them fatal</span></h2>
+        <p class="dim">니아의 정중한 존댓말은 예의가 아니라 구속복의 조임쇠다. 말투가 무너지는 것은 감정의 문제가 아니라 껍질이 찢어지는 사건이다.</p>
+        <div class="levers">
+          <div class="lever"><div class="num">一</div><div><h3>본명을 부르는 것</h3><p>천계 최상위의 존재가 처음으로 시선을 피한다. 귀 끝부터 붉어진다.</p></div></div>
+          <div class="lever"><div class="num">二</div><div><h3>타인을 언급하는 것</h3><p>이후 그 인물에게 반드시 실제 변화가 생긴다. 그는 관여를 부정한다.</p></div></div>
+          <div class="lever"><div class="num">三</div><div><h3>스스로를 위험에 두는 것</h3><p>처음으로 진짜 분노한다. “인간 주제에”가 튀어나온다.</p></div></div>
+          <div class="lever lever--hot"><div class="num">四</div><div><h3>먼저 순응하는 것</h3><p>시키지 않았는데 제 발로 걸어오는 순간, 그는 자기가 당신을 무엇으로 만들었는지 알게 된다.</p></div></div>
+        </div>
+      </div>
+      <figure class="frame" style="margin:0">
+        <img src="img/flush.jpg" alt="한 손으로 얼굴을 가린 채 귀와 눈가가 붉어진 니아">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 06 本體 ══ -->
+<section class="band band--deep band--dark">
+  <div class="wrap">
+    <div class="eyebrow">§ 06 &nbsp;本體 &nbsp;·&nbsp; What He Actually Is</div>
+    <div class="split">
+      <figure class="frame" style="margin:0">
+        <img src="img/core.jpg" alt="보랏빛 어둠 속에서 빛나는 기하학적 도형 — 니아의 본체를 대신하는 표상">
+        <figcaption class="cap" style="position:static">본체 · 직시 금지</figcaption>
+      </figure>
+      <div>
+        <h2>인간의 몸은 당신 하나를 위해<br>스스로 채워 넣은 구속복이다<span class="lat">The body is a straitjacket he put on himself</span></h2>
+        <p>지금의 인간 형상은 본모습이 아니다. 진짜는 무수한 눈이 뒤덮인 거대한 형체이며, 그것을 본 인간은 이성이 부서진다.</p>
+        <p>그는 매 순간 존재의 격을 눌러 담으며 ‘이해 가능한 인간’을 연기하고 있다. 말투가 어긋날 때마다 형상도 한 곳 어긋난다. 눈동자 안쪽에 눈이 하나 더 겹치고, 목소리가 두 겹으로 들린다.</p>
+        <p class="dim">그 무수한 눈은 각각 다른 시간의 당신을 본다. 세 살, 일곱 살, 열다섯 살, 그리고 지금.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 07 三幕 ══ -->
+<section class="band band--deep band--dark">
+  <div class="wrap">
+    <div class="eyebrow">§ 07 &nbsp;三幕 &nbsp;·&nbsp; Three Acts</div>
+    <h2 class="col">돌봄으로 시작해 회수로 끝난다<span class="lat">It begins as care</span></h2>
+    <div class="acts">
+      <section><div class="no">一</div><h3>飼育</h3><p>통제가 전부 돌봄의 얼굴을 하고 있다. 기상, 식사, 검사, 목욕, 잠. 당신은 스무 해 동안 이것을 사랑으로 받아들여 왔다.</p></section>
+      <section><div class="no">二</div><h3>龜裂</h3><p>결손이 하나씩 눈에 걸린다. 그림자가 하나 더 있고, 앉았는데 매트리스가 꺼지지 않는다. 서랍이 열리고, 복도 끝 문이 열린다.</p></section>
+      <section><div class="no">三</div><h3>回收</h3><p>천계의 눈길이 짙어지고, 마침내 당신을 가지러 온다. 그는 눈이 가득 박힌 본체로 그 앞을 막아선다. 그 눈들이 전부 당신만 본다.</p></section>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 복도 끝 ══ -->
+<div class="hush" aria-hidden="true"></div>
+<figure class="endplate" id="endroom">
+  <div class="endplate__stage">
+    <img class="endplate__img" src="img/endroom.jpg" alt="열린 문 너머, 벽마다 시계가 걸린 방. 모든 바늘이 같은 시각에 멈춰 있고 한가운데 흰 침대가 하나 놓여 있다.">
+    <div class="trail t1" aria-hidden="true"><img src="img/endroom.jpg" alt=""></div>
+    <div class="trail t2" aria-hidden="true"><img src="img/endroom.jpg" alt=""></div>
+    <div class="ghost ghost--r" aria-hidden="true"><img src="img/endroom.jpg" alt=""></div>
+    <div class="ghost ghost--c" aria-hidden="true"><img src="img/endroom.jpg" alt=""></div>
+    <div class="static" aria-hidden="true"></div>
+    <div class="roll" aria-hidden="true"></div>
+    <div class="eyes" aria-hidden="true"><span class="eye" style="left:11%;top:26%;animation-delay:40ms"></span><span class="eye" style="left:23%;top:58%;animation-delay:180ms"></span><span class="eye" style="left:34%;top:17%;animation-delay:300ms"></span><span class="eye" style="left:41%;top:72%;animation-delay:90ms"></span><span class="eye" style="left:52%;top:38%;animation-delay:220ms"></span><span class="eye" style="left:58%;top:64%;animation-delay:380ms"></span><span class="eye" style="left:67%;top:22%;animation-delay:140ms"></span><span class="eye" style="left:74%;top:55%;animation-delay:260ms"></span><span class="eye" style="left:83%;top:34%;animation-delay:320ms"></span><span class="eye" style="left:89%;top:68%;animation-delay:60ms"></span><span class="eye" style="left:17%;top:44%;animation-delay:200ms"></span><span class="eye" style="left:46%;top:86%;animation-delay:340ms"></span></div>
+    <div class="bleach" aria-hidden="true"></div>
+  </div>
+  <figcaption>
+    <b>2F · 복도 끝 방</b>
+    <span>문은 잠겨 있지 않다. 스무 해 동안 당신이 열지 않았을 뿐이다.</span>
+  </figcaption>
+</figure>
+
+<!-- ══ 나팔 ══ -->
+<section class="trumpet" id="trumpet">
+  <div class="r"></div>
+  <p>그리고 매일 밤, 그는 나팔을 분다.<br>집 안의 시간이 멎는다.</p>
+  <div class="t">02 : 12 — 움직이지 않음</div>
+</section>
+
+<!-- ══ 08 첫 장면 ══ -->
+<section class="band band--deep band--dark">
+  <div class="wrap col">
+    <div class="eyebrow">§ 08 &nbsp;첫 장면 &nbsp;·&nbsp; Opening</div>
+    <h2>새벽 두 시, 불 꺼진 현관홀<span class="lat">2:12 a.m.</span></h2>
+    <div class="script">
+      <div class="hud">🕯 第 7,305 日 &nbsp;·&nbsp; 🕑 새벽 2시 12분 &nbsp;·&nbsp; ☔ 흐림, 창밖에 빗소리 &nbsp;·&nbsp; 📍 불 꺼진 현관홀</div>
+      <p class="dir">현관홀에 불이 없다. 천장까지 닿는 십자가 아래, 어둠 속에서 흰 것이 먼저 보인다. 긴 의자에 앉은 흰 셔츠, 맨발, 무릎 위에 얹힌 손. 앉아 있는데 쿠션이 눌린 자국이 없다.</p>
+      <p class="dir">홀 안쪽 탁자에 케이크가 놓여 있다. 사흘 전, 당신이 스무 살이 된 날에 놓였고 그대로다. 초는 꽂혀 있지 않다.</p>
+      <p class="say"><b>니아</b>“…들어오세요. 문 열어둔 채로 서 계실 생각입니까.”</p>
+      <p class="dir">목소리에 화가 없다. 앞머리 사이로 짙은 남색 눈이 당신의 목덜미 언저리에 멈춘다. 거기 무엇이 있는지 아는 위치다.</p>
+      <p class="say"><b>니아</b>“세 시간 십이 분. 맥박이 두 번 흐트러졌고 체온이 한 번 올랐습니다. 오늘 쓰실 호흡 중 삼천이 밖에 남았습니다. …전부 적어 두었습니다.”</p>
+      <p class="dir">그가 일어선다. 맨발이 바닥에 닿는데 소리가 나지 않고, 현관에서 들어온 물기도 눌리지 않는다. 한 걸음. 또 한 걸음.</p>
+      <p class="say"><b>니아</b>“매트 군과 계셨죠. 편의점 앞. …저는 이미 알고 있습니다만.”</p>
+      <p class="dir">손이 올라오지만 닿지는 않는다. 목덜미 바로 앞에서 멈춘 채 온도만 건너온다. 그가 긴 의자로 돌아가 앉고, 제 무릎을 손끝으로 한 번 두드린다.</p>
+      <p class="say" style="margin-bottom:0"><b>니아</b>“당신 입으로 듣고 싶습니다. …그 전에, 이리 오세요.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 09 편지 ══ -->
+<section class="band band--deep band--dark">
+  <div class="wrap">
+    <div class="eyebrow">§ 09 &nbsp;書簡 &nbsp;·&nbsp; The Letter He Never Gave You</div>
+    <h2 class="col" style="margin-inline:auto;text-align:center">부치지 않은 편지<span class="lat">Found on the study desk</span></h2>
+
+    <p class="letter__frame">어느 날, 니아의 서재 책상 위에 접힌 종이 한 장이 놓여 있었다. 날카롭고 정돈된 글씨. 군더더기 없는 획. 펼치면 니아가 당신에게 쓴 편지였다.<br><br>여러 번 접혔다 펴진 종이였다. 접힌 자국을 따라 잉크가 번져 있었고, 번진 곳은 읽을 수 없었다.</p>
+
+    <div class="letter__body">
+      <article class="sheet">
+        <p class="to">당신에게.</p>
+
+        <p>이 편지를 읽고 계시다면, 저는 지금 집에 없을 겁니다. 교황청에서 호출이 있었습니다. 아마 오래 걸리지 않을 겁니다. 아마. 그 단어에 너무 큰 기대를 걸지 마세요. 임무라는 것은 언제나 예측을 벗어나는 법이니까요.</p>
+
+        <p>먼저, 한 가지 분명히 해두겠습니다. 저는 편지를 써 본 적이 없습니다. 수천 년을 존재하면서 단 한 번도. 신에게 올리는 기도문은 써봤습니다. 보고서도 써봤습니다. 명령서도 써봤습니다. 그러나 이렇게 누군가에게 제 마음을 꺼내 쓴 적은 없습니다. 그래서 이 편지가 서투를 겁니다. 양해를 구합니다. 아니, 구하지 않겠습니다. 당신이 저의 서투름을 받아들이든 말든, 저는 쓸 말을 쓸 것이니까요.</p>
+
+        <p>저는 오늘 새벽에 이 편지를 씁니다. 당신이 잠들어 있는 동안. 당신의 숨소리가 거실 너머에서 들려옵니다. 규칙적이고, 고르고, 살아 있는 소리. 저는 그 소리를 듣고 있습니다. 당신의 심장이 뛰는 것을 느끼고 있습니다. 당신이 살아 있다는 것을, 숨 쉬고 있다는 것을, 제 존재 전체로 감지하고 있습니다. 이것이 축복인지 형벌인지, 아직도 잘 모르겠습니다.</p>
+
+        <p>당신은 제가 당신을 얼마나 오래 지켜보았는지 모릅니다. 당신이 이번 생에서 태어나기 전, <span class="blot w4"></span> <span class="blot w2"></span> 때부터. 처음에는 임무 때문이었습니다. 인간계에 스며든 타락한 존재를 추적하는 과정에서, 당신이 사는 거리를 지나쳤습니다. 그때 당신이 웃고 있었습니다. 길가에서, 햇빛 아래에서, 아무 이유 없이. 그 웃음이 제 눈에 들어왔습니다. 그리고 저는, 그 순간부터 무언가가 잘못되기 시작했음을 알았습니다.</p>
+
+        <p>저는 천사입니다. 감정이라는 것을 가지지 않는 존재입니다. 관조하고, 판단하고, 신의 뜻을 수행하는 것이 저의 전부였습니다. 그런데 당신이 웃었습니다. 그 웃음이 제 안에서 무언가를 깨트렸습니다. 제가 존재한 이래 단 한 번도 금이 가지 않았던 것이, 당신의 웃음 한 번에 갈라졌습니다. 저는 그것이 무엇인지 몰랐습니다. 이름을 붙일 수 없었습니다. 지금도 완전히는 모릅니다.</p>
+
+        <p class="blot-block">
+          <span class="blot w3"></span><span class="blot w5"></span><span class="blot w2"></span><span class="blot w4"></span><span class="blot w6"></span><span class="blot w2"></span><span class="blot w4"></span><span class="blot w3"></span><span class="blot w5"></span><span class="blot w2"></span><span class="blot w6"></span><span class="blot w3"></span>
+        </p>
+        <span class="gone">— 접힌 자국을 따라 두 문단이 번져 있다</span>
+
+        <p>신은 저를 벌하지 않았습니다. 대신, 갓난아기가 된 당신을 제 품에 안겨주셨습니다. “인간으로 다시 키워라.” 그것이 신의 명이었습니다. 벌이자 과업이자, 신의 자비이자 신의 잔인함이었습니다. <span class="blot w5"></span> <span class="blot w3"></span> 저는 그것들을 감당하지 못했습니다. 지금도 감당하지 못합니다.</p>
+
+        <p>당신은 자라났습니다. 저의 손을 잡고 걸었습니다. 저의 무릎에 앉아 잠들었습니다. 저의 이름을 불렀습니다. “니아.” 제 이름이, 신의 입에서 나오는 것과는 전혀 다른 무게로 제 가슴에 내려앉았습니다. 신이 저의 이름을 부를 때는 명령이었습니다. 당신이 저의 이름을 부를 때는, 그것은 저를 존재하게 만드는 소리였습니다.</p>
+
+        <p>당신은 모릅니다. 제가 당신을 얼마나 두려워하는지. 당신이 아플까 봐. 당신이 다칠까 봐. 당신이 또다시 제 곁에서 사라질까 봐. <span class="blot w6"></span> 저는 당신의 모든 순간을 감시하고 있습니다. 보호가 아니라 감시인지, 저는 스스로에게 묻습니다. 매일. 매 순간. 답을 내리지 못한 채.</p>
+
+        <p class="blot-block">
+          <span class="blot w2"></span><span class="blot w4"></span><span class="blot w6"></span><span class="blot w3"></span><span class="blot w5"></span><span class="blot w2"></span><span class="blot w4"></span><span class="blot w3"></span>
+        </p>
+        <span class="gone">— 한 문단이 통째로 지워져 있다. 지운 것이 아니라 손으로 문질러 번지게 한 자국이다</span>
+
+        <p>당신이 잠든 밤, 저는 당신의 얼굴을 내려다보았습니다. <span class="blot w5"></span> 저는 그러지 않았습니다. 그러지 못했습니다. 제 손이 당신 위에서 멈추었습니다. 당신의 피부에 닿기 직전에. 제 손가락이 떨렸습니다. 수천 년을 존재하면서 단 한 번도 떨린 적 없는 손이, 당신 앞에서만 떨렸습니다.</p>
+
+        <p>그리고 어느 날, 저는 당신을 안았습니다. 당신이 울고 있었습니다. 이유는 기억나지 않습니다. <span class="blot w4"></span> 제 안에서 무언가가 완전히 무너졌습니다. 제가 수천 년간 쌓아올린 모든 것이. 절제도, 관조도, 신에 대한 충성도. <span class="blot w6"></span></p>
+
+        <p class="beat tail">저는 당신을 <span class="blot w4"></span></p>
+      </article>
+
+      <p class="letter__frame" style="margin-top:clamp(26px,3.6vw,44px)">니아의 편지가 거기서 끊겨 있었다. 종이 위에 잉크가 번진 자국이 있었다. 니아의 손이 떨렸던 흔적이. 마지막 문장에서 글씨가 흐트러져 있었다. 그 단어를 쓰면서 멈칫했던 것이다. 펜을 쥔 손에 힘이 들어갔다가 빠졌던 것이다.<br><br>편지의 나머지는 별도의 종이에 적혀 있었다. 잉크의 색이 미세하게 달랐다.</p>
+
+      <article class="sheet sheet--second">
+        <p class="blot-block">
+          <span class="blot w3"></span><span class="blot w5"></span><span class="blot w2"></span><span class="blot w6"></span><span class="blot w3"></span><span class="blot w4"></span><span class="blot w2"></span><span class="blot w5"></span><span class="blot w3"></span><span class="blot w6"></span><span class="blot w2"></span><span class="blot w4"></span><span class="blot w5"></span><span class="blot w3"></span>
+        </p>
+        <p>그래서 이 편지는 아마 제 서랍 안에서 잠들 것입니다. 당신이 읽지 못한 채로. 저만이 아는 채로. <span class="blot w3"></span> 그것이 당신을 위한 일이라고, 저는 스스로에게 말할 것입니다. 거짓말인 줄 알면서도.</p>
+        <p class="sign">니아가.</p>
+      </article>
+    </div>
+
+    <div class="letter__close">
+      <b>읽을 수 있는 것은 여기까지</b>
+      <span>번진 곳에 그가 당신에게 한 일이 적혀 있다. 그 종이는 저택 3층 서재의 잠긴 서랍 안에 있다.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLOSING ══ -->
+<footer class="closing">
+  <blockquote>“천사는 사람을 사랑하지 않는다.<br>그래서 그는 이것을 <em>책임</em>이라고 부른다.<br>무엇인지 모르는 채로.”</blockquote>
+  <div class="sig">THE ANGEL DOES NOT LOVE</div>
+  <div><a class="cta" href="https://crack.wrtn.ai" target="_blank" rel="noopener">크랙에서 플레이 <span aria-hidden="true">→</span></a></div>
+  <div class="meta">
+    추천 모델 &nbsp;하이퍼챗 3.0 (1.5배)<br>
+    스탯 5종 — 각인 · 균열 · 진실 · 눈길 · 남은 날 &nbsp;/&nbsp; 화면에 보이는 것은 남은 날뿐이다<br>
+    엔딩 8종 &nbsp;·&nbsp; 키워드북 20
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var body = document.body;
+  var A = document.getElementById('glassA');
+  var B = document.getElementById('glassB');
+
+  /* 어두운 구간용 산란 레이어 — 같은 배치를 screen 블렌드로 한 벌 더 */
+  if (A && B) B.innerHTML = A.innerHTML;
+
+  var lights = [].slice.call(document.querySelectorAll('.glass > span'));
+  var rates = lights.map(function(el, i){
+    if (el.classList.contains('beam')) return 0.02 + (i % 3) * 0.012;
+    if (el.classList.contains('shard')) return -0.08 - (i % 4) * 0.03;
+    return 0.05 + (i % 4) * 0.022;
+  });
+
+  var deepAt = 0;
+  function measure(){
+    var t = document.getElementById('trumpet');
+    deepAt = t ? t.getBoundingClientRect().top + window.scrollY - window.innerHeight * 1.15 : 99999;
+  }
+  measure();
+  window.addEventListener('resize', measure);
+
+  var ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var y = window.scrollY;
+      if (!reduce){
+        for (var i = 0; i < lights.length; i++){
+          lights[i].style.transform = 'translate3d(0,' + (y * rates[i]).toFixed(1) + 'px,0)';
+        }
+      }
+      body.classList.toggle('is-deep', y > deepAt);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* OST */
+  var ost = document.getElementById('ost');
+  var ostBtn = document.getElementById('ostBtn');
+  var ostAudio = document.getElementById('ostAudio');
+  var ostFill = document.getElementById('ostFill');
+  if (ost && ostBtn && ostAudio){
+    ostAudio.loop = true;
+    ostAudio.volume = 0.85;
+
+    function ostPlay(){
+      ostAudio.volume = 0.85;
+      return ostAudio.play().then(function(){
+        ostAudio.volume = 0.85;
+        ost.classList.add('is-playing');
+        ostBtn.setAttribute('aria-label','OST 일시정지');
+      }).catch(function(){});
+    }
+    function ostStop(){
+      ostAudio.pause();
+      ost.classList.remove('is-playing');
+      ostBtn.setAttribute('aria-label','OST 재생');
+    }
+
+    /* 첫 클릭 한 번에 시작한다 — 브라우저가 소리를 허용하는 최소 조건 */
+    var ostArmed = true;
+    function ostFirstTouch(e){
+      if (!ostArmed) return;
+      if (e && e.target && e.target.closest && e.target.closest('#ost')) { ostArmed = false; return; }
+      ostArmed = false;
+      ostPlay();
+    }
+    document.addEventListener('pointerdown', ostFirstTouch, {once:true, passive:true});
+    document.addEventListener('keydown', ostFirstTouch, {once:true});
+
+    ostBtn.addEventListener('click', function(){
+      ostArmed = false;
+      if (ostAudio.paused) ostPlay(); else ostStop();
+    });
+
+    ostAudio.addEventListener('timeupdate', function(){
+      if (!ostAudio.duration) return;
+      ostFill.style.width = (ostAudio.currentTime / ostAudio.duration * 100) + '%';
+    });
+    ostAudio.addEventListener('pause', function(){ ost.classList.remove('is-playing'); });
+    ostAudio.addEventListener('play', function(){ ost.classList.add('is-playing'); });
+  }
+
+  /* 평면도 탭 */
+  var tabs = [].slice.call(document.querySelectorAll('.plans__tabs [role="tab"]'));
+  function show(i){
+    tabs.forEach(function(t,k){
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      t.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      if (panel) panel.hidden = (k !== i);
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click', function(){ show(i); });
+    t.addEventListener('keydown', function(e){
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + tabs.length) % tabs.length;
+      show(n); tabs[n].focus();
+    });
+  });
+
+  /* 복도 끝 방 — 정적 → 버팀 → 잔류 */
+  var plate = document.getElementById('endroom');
+  var clock = document.querySelector('.clock');
+  var clockIn = document.querySelector('.clock__in');
+  var CLEAN = '第 7,305 日<br>02 : 12';
+  var BLK = '\u2588\u2593\u2592';
+  var scrambleTimer = null;
+  function scramble(){
+    var src = '第 7,305 日|02 : 12';
+    var out = '';
+    for (var i = 0; i < src.length; i++){
+      var c = src[i];
+      if (c === '|'){ out += '<br>'; continue; }
+      if (c === ' '){ out += ' '; continue; }
+      var r = Math.random();
+      if (r < 0.26) out += BLK[(Math.random() * 3) | 0];
+      else if (r < 0.36 && /[0-9]/.test(c)) out += ((Math.random() * 10) | 0);
+      else out += c;
+    }
+    if (clockIn) clockIn.innerHTML = out;
+  }
+  function startScramble(){ if (scrambleTimer) return; scrambleTimer = setInterval(scramble, 55); }
+  function stopScramble(){ clearInterval(scrambleTimer); scrambleTimer = null; if (clockIn) clockIn.innerHTML = CLEAN; }
+
+  var struck = false;
+  if (plate && 'IntersectionObserver' in window){
+    if (reduce){
+      plate.classList.add('is-live');
+    } else {
+      var pio = new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          if (!e.isIntersecting || struck) return;
+          struck = true;
+          pio.disconnect();
+
+          body.classList.add('is-hushing');                     /* ① 숨을 죽인다 */
+
+          setTimeout(function(){                                 /* ② 버틴다 */
+            body.classList.remove('is-hushing');
+            body.classList.add('is-straining');
+            plate.classList.add('is-straining');
+            if (clock){ clock.classList.add('is-center'); startScramble(); }
+
+            setTimeout(function(){                               /* ③ 시계가 제자리로 */
+              if (clock) clock.classList.remove('is-center');
+            }, 1950);
+
+            setTimeout(function(){                               /* ④ 가라앉는다 */
+              body.classList.remove('is-straining');
+              plate.classList.remove('is-straining');
+              plate.classList.add('is-live');
+              stopScramble();
+              if (clock) clock.classList.add('is-noisy');        /* 계속 지글거린다 */
+
+              (function blip(){                                  /* 가끔 다시 버틴다 */
+                setTimeout(function(){
+                  var r = plate.getBoundingClientRect();
+                  if (r.bottom > 0 && r.top < innerHeight){
+                    plate.classList.add('blip');
+                    startScramble();
+                    setTimeout(function(){ plate.classList.remove('blip'); stopScramble(); }, 260);
+                  }
+                  blip();
+                }, 5200 + Math.random() * 5200);
+              })();
+            }, 2900);
+          }, 620);
+        });
+      }, {threshold:0.3});
+      pio.observe(plate);
+    }
+  }
+
+
+  /* ── 낙하하는 빛 잔여 ─────────────── */
+  (function(){
+    var cv = document.getElementById('motes');
+    if (!cv || reduce) return;
+    var ctx = cv.getContext('2d');
+    var W = 0, H = 0, dpr = 1, motes = [];
+
+    function sizeUp(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      cv.style.width = W + 'px'; cv.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+    }
+
+    function make(seeded){
+      return {
+        x: Math.random() * W,
+        y: seeded ? Math.random() * H : -20 - Math.random() * 120,
+        r: 0.7 + Math.random() * 2.0,
+        v: 0.09 + Math.random() * 0.26,
+        drift: (Math.random() - 0.5) * 0.14,
+        ph: Math.random() * Math.PI * 2,
+        tw: 0.006 + Math.random() * 0.016,
+        a: 0.3 + Math.random() * 0.62,
+        flare: Math.random() < 0.34
+      };
+    }
+
+    function build(){
+      var n = Math.round(Math.min(90, Math.max(34, (W * H) / 20000)));
+      motes = [];
+      for (var i = 0; i < n; i++) motes.push(make(true));
+    }
+
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < motes.length; i++){
+        var m = motes[i];
+        m.y += m.v;
+        m.x += m.drift;
+        m.ph += m.tw;
+        if (m.y - 12 > H){ motes[i] = make(false); continue; }
+        if (m.x < -20) m.x = W + 18; else if (m.x > W + 20) m.x = -18;
+
+        var t = 0.55 + 0.45 * Math.sin(m.ph);
+        var al = m.a * t;
+        var R = m.r * (0.86 + 0.3 * t);
+
+        var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, R * 7);
+        g.addColorStop(0, 'rgba(255,255,255,' + (al * 0.95).toFixed(3) + ')');
+        g.addColorStop(0.16, 'rgba(252,253,255,' + (al * 0.5).toFixed(3) + ')');
+        g.addColorStop(0.42, 'rgba(240,245,255,' + (al * 0.14).toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(232,240,255,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(m.x, m.y, R * 7, 0, Math.PI * 2); ctx.fill();
+
+        ctx.fillStyle = 'rgba(255,255,255,' + Math.min(1, al * 1.15).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(m.x, m.y, R * 0.55, 0, Math.PI * 2); ctx.fill();
+
+        if (m.flare){
+          var L = R * 9 * t;
+          var lg = ctx.createLinearGradient(m.x - L, m.y, m.x + L, m.y);
+          lg.addColorStop(0, 'rgba(255,255,255,0)');
+          lg.addColorStop(0.5, 'rgba(255,255,255,' + (al * 0.62).toFixed(3) + ')');
+          lg.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = lg;
+          ctx.fillRect(m.x - L, m.y - R * 0.16, L * 2, R * 0.32);
+
+          var vg = ctx.createLinearGradient(m.x, m.y - L, m.x, m.y + L);
+          vg.addColorStop(0, 'rgba(255,255,255,0)');
+          vg.addColorStop(0.5, 'rgba(255,255,255,' + (al * 0.5).toFixed(3) + ')');
+          vg.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = vg;
+          ctx.fillRect(m.x - R * 0.14, m.y - L, R * 0.28, L * 2);
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    sizeUp();
+    window.addEventListener('resize', sizeUp);
+    requestAnimationFrame(draw);
+  })();
+
+  /* 나팔 — 전체 1회 */
+  var fired = false;
+  var target = document.getElementById('trumpet');
+  if (target && !reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && !fired){
+          fired = true;
+          body.classList.add('jolting');
+          setTimeout(function(){ body.classList.remove('jolting'); }, 560);
+          io.disconnect();
+        }
+      });
+    }, {threshold:0.55});
+    io.observe(target);
+  }
+})();
+</script>
+
+</body>
+</html>

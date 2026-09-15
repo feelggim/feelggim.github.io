@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>박제니 — 쓰는 것들</title>
+<meta name="description" content="박제니가 쓰고 만든 이야기들. 천사는 인간을 사랑하지 않는다 · THE BLUE IN NANA SE · 꽃도 아닌것이 어찌 그리 고왔던가.">
+<meta name="theme-color" content="#0A0B11">
+<meta property="og:type" content="website">
+<meta property="og:title" content="박제니 — 쓰는 것들">
+<meta property="og:description" content="세 편의 이야기.">
+<meta property="og:image" content="https://feelggim.github.io/assets/cover-naer.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🕯</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<style>
+:root{
+  --void:#0A0B11;
+  --ink:#0E1017;
+  --fg:#E6E8F0;
+  --dim:#8C93A5;
+  --faint:#5B6172;
+  --rule:rgba(230,232,240,.13);
+  --violet:#8B6FD4;
+  --cyan:#6FB4C9;
+  --rose:#C4566B;
+  --sconce:#C9A15A;
+  --display:"Cormorant Garamond","Nanum Myeongjo",serif;
+  --kr:"Nanum Myeongjo",serif;
+  --body:"Gowun Batang","Nanum Myeongjo",serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --gut:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box}
+html{background:var(--void)}
+body{
+  margin:0;background:var(--void);color:var(--fg);
+  font-family:var(--body);font-size:clamp(15px,.5vw + 13.6px,16.5px);
+  line-height:1.95;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* 아주 옅은 빛 — 화면 위에서 */
+.sky{
+  position:fixed;left:50%;top:-30vh;translate:-50% 0;
+  width:150vw;height:80vh;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 50% 62%,rgba(255,255,255,.16) 0%,rgba(240,244,255,.07) 30%,rgba(230,236,255,.02) 56%,transparent 76%);
+  filter:blur(30px);
+  animation:breathe 15s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.85}50%{opacity:1}}
+
+.wrap{position:relative;z-index:1;max-width:1120px;margin-inline:auto;padding-inline:var(--gut)}
+
+/* ── masthead ── */
+header{padding-block:clamp(84px,16vh,190px) clamp(46px,7vw,86px)}
+.mark{font-family:var(--mono);font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--faint)}
+header h1{
+  margin:.5em 0 0;font-family:var(--kr);font-weight:800;
+  font-size:clamp(30px,5.4vw,58px);line-height:1.22;letter-spacing:-.045em;
+}
+header h1 em{font-style:normal;color:var(--dim)}
+.sub{
+  margin:1.1em 0 0;font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:clamp(14px,1.6vw,20px);letter-spacing:.14em;color:var(--dim);
+}
+.rule{height:1px;background:var(--rule);margin-top:clamp(40px,6vw,72px)}
+
+/* ── works ── */
+.count{
+  display:flex;align-items:center;gap:14px;margin-top:22px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+}
+.count::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+.work{display:block;position:relative;margin-top:clamp(34px,5vw,64px)}
+.work__img{
+  position:relative;overflow:hidden;background:var(--ink);
+  border:1px solid var(--rule);
+}
+.work__img img{
+  width:100%;aspect-ratio:16/9;object-fit:cover;
+  filter:brightness(.82) saturate(.98);
+  transform:scale(1.005);
+  transition:transform 1.1s cubic-bezier(.16,.8,.28,1),filter .7s ease;
+}
+.work__img::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,11,17,.46) 0%,rgba(10,11,17,.06) 26%,rgba(10,11,17,.5) 58%,rgba(10,11,17,.88) 82%,rgba(10,11,17,.97) 100%);
+}
+.work__cap{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:clamp(28px,4.4vw,56px) clamp(20px,3.4vw,44px) clamp(20px,3.2vw,42px);
+  background:linear-gradient(180deg,rgba(10,11,17,0) 0%,rgba(10,11,17,.5) 22%,rgba(10,11,17,.82) 58%,rgba(10,11,17,.94) 100%);
+}
+.work__no{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--sconce);margin-bottom:12px;text-shadow:0 1px 16px rgba(6,7,11,.98),0 0 30px rgba(6,7,11,.9)}
+.work__t{
+  font-family:var(--kr);font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(21px,3.2vw,40px);line-height:1.28;
+  text-shadow:0 2px 26px rgba(6,7,11,.95);
+}
+.work__t .lat{
+  display:block;font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:.4em;letter-spacing:.16em;color:var(--dim);margin-top:.7em;
+}
+.work__line{
+  margin:.9em 0 0;max-width:46ch;
+  font-size:clamp(13.5px,1.25vw,16px);line-height:1.85;color:#CDD2E0;
+  text-shadow:0 1px 18px rgba(6,7,11,.95);
+}
+.work__foot{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
+  margin-top:clamp(14px,2vw,22px);
+}
+.tag{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  padding:4px 10px;border:1px solid rgba(230,232,240,.22);border-radius:999px;
+  color:#C3C8D6;background:rgba(10,11,17,.42);
+}
+.go{
+  text-shadow:0 1px 16px rgba(6,7,11,.98);
+  margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--fg);
+  display:inline-flex;align-items:center;gap:10px;white-space:nowrap;
+}
+.go span{transition:transform .35s cubic-bezier(.16,.8,.28,1)}
+
+@media (hover:hover){
+  .work:hover .work__img img{transform:scale(1.035);filter:brightness(.92) saturate(1.04)}
+  .work:hover .go span{transform:translateX(7px)}
+}
+.work:focus-visible{outline:2px solid var(--violet);outline-offset:6px}
+
+.work--naer .work__no{color:var(--violet)}
+.work--blue .work__no{color:var(--cyan)}
+.work--hong .work__no{color:var(--rose)}
+/* 표지 자체가 제목 — 겹쳐 쓰지 않는다 */
+.work--hong .work__t{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+}
+.work--hong .work__cap{
+  background:linear-gradient(180deg,rgba(10,11,17,0) 0%,rgba(10,11,17,.42) 30%,rgba(10,11,17,.8) 66%,rgba(10,11,17,.95) 100%);
+}
+.work--hong .work__line{margin-top:0}
+
+/* ── footer ── */
+footer{
+  margin-top:clamp(70px,11vw,140px);padding-block:clamp(38px,6vw,68px);
+  border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--faint);line-height:2.3;
+}
+footer b{font-weight:400;color:var(--dim)}
+
+@media (max-width:640px){
+  .work__img img{aspect-ratio:4/3}
+  .go{margin-left:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .sky{animation:none}
+  .work__img img,.go span{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <header>
+    <div class="mark">FEELGGIM · Works</div>
+    <h1>쓰는 것들과<br><em>만드는 것들</em></h1>
+    <p class="sub">Stories, and the rooms they live in</p>
+    <div class="rule"></div>
+    <div class="count">전체 3편</div>
+  </header>
+
+  <main>
+
+    <a class="work work--naer" href="naer/">
+      <figure class="work__img" style="margin:0">
+        <img src="assets/cover-naer.jpg" alt="흰 셔츠 차림으로 고개를 들어 아래를 내려다보는 백발의 남자" style="object-position:52% 18%" loading="eager" decoding="async">
+        <figcaption class="work__cap">
+          <div class="work__no">01 &nbsp;/&nbsp; 인외 · 코즈믹 호러 · 앵스트</div>
+          <h2 class="work__t">천사는 인간을 사랑하지 않는다<span class="lat">The Angel Does Not Love</span></h2>
+          <p class="work__line">현관문은 한 번도 잠긴 적이 없다. 그런데도 당신은 매일 돌아왔다.</p>
+          <div class="work__foot">
+            <span class="tag">인외</span><span class="tag">사육</span><span class="tag">집착</span><span class="tag">계측</span>
+            <span class="go">들어가기 <span aria-hidden="true">→</span></span>
+          </div>
+        </figcaption>
+      </figure>
+    </a>
+
+    <a class="work work--blue" href="theblue/">
+      <figure class="work__img" style="margin:0">
+        <img src="assets/cover-theblue.jpg" alt="푸른 물빛 속에서 붓을 든 백발의 인물 — THE BLUE 포스터" style="object-position:50% 26%" loading="lazy" decoding="async">
+        <figcaption class="work__cap">
+          <div class="work__no">02 &nbsp;/&nbsp; 현대 판타지 · GL · 백합</div>
+          <h2 class="work__t">THE BLUE IN NANA SE<span class="lat">Deep Sea Paintings</span></h2>
+          <p class="work__line">바다에서 날 건진 건, 세상에서 제일 유명한 가수였다.</p>
+          <div class="work__foot">
+            <span class="tag">세이렌</span><span class="tag">GL</span><span class="tag">현대판타지</span><span class="tag">소유</span>
+            <span class="go">들어가기 <span aria-hidden="true">→</span></span>
+          </div>
+        </figcaption>
+      </figure>
+    </a>
+
+    <a class="work work--hong" href="hongwha/">
+      <figure class="work__img" style="margin:0">
+        <img src="assets/cover-hongwha.jpg" alt="검은 바탕에 흰 붓글씨로 쓴 제목과 붉은 모란 — 꽃도 아닌것이 어찌 그리 고왔던가" style="object-position:50% 56%" loading="lazy" decoding="async">
+        <figcaption class="work__cap">
+          <div class="work__no">03 &nbsp;/&nbsp; 동양 판타지 · 후회 · 피폐</div>
+          <h2 class="work__t">꽃도 아닌것이 어찌 그리 고왔던가<span class="lat">Neither Flower Nor Fair</span></h2>
+          <p class="work__line">돌아온 그곳엔, 폭군이 된 그녀와 다른 여자가 있었다.</p>
+          <div class="work__foot">
+            <span class="tag">여황제</span><span class="tag">후회</span><span class="tag">소유욕</span><span class="tag">혐관</span>
+            <span class="go">들어가기 <span aria-hidden="true">→</span></span>
+          </div>
+        </figcaption>
+      </figure>
+    </a>
+
+  </main>
+
+  <footer>
+    <div><b>박제니</b> &nbsp;·&nbsp; 쓰고 그리고 만든다</div>
+    <div>All works are original fiction. &nbsp;무단 전재 및 재배포 금지.</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

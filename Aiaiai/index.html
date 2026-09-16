@@ -416,6 +416,24 @@ td b{font-weight:600}
   font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--ink-3)}
 .term-foot span:last-child{color:var(--pink)}
 
+
+/* ---------- 09 시작 지점 ---------- */
+.startbox{border:1px solid var(--pink);background:rgba(255,255,255,.9);overflow:hidden;margin-top:32px}
+.startbody{padding:clamp(22px,4vw,40px)}
+.starttitle{margin:0 0 18px;max-width:none;font-family:var(--myeongjo);font-weight:700;
+  font-size:clamp(26px,4.6vw,46px);letter-spacing:.04em;line-height:1.2;color:var(--pink)}
+.startlead{margin:0 0 24px;max-width:58ch;font-size:clamp(15px,1.9vw,17px);line-height:1.95;color:var(--ink-2)}
+.redrow{display:flex;align-items:baseline;gap:clamp(10px,2vw,18px);flex-wrap:wrap;
+  padding:14px clamp(14px,2.4vw,20px);border:1px solid var(--pink);background:var(--pink-ghost);
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em}
+.redrow .dot{width:7px;height:7px;border-radius:50%;background:var(--pink);
+  animation:blink 1.4s infinite;flex:0 0 auto;align-self:center}
+.redrow .lbl{color:var(--ink)}
+.redrow .val{color:var(--pink);font-weight:500;font-variant-numeric:tabular-nums}
+.redrow .st{margin-left:auto;color:var(--ink-3);font-size:10.5px;letter-spacing:.16em}
+.startfoot{margin:26px 0 0;max-width:56ch;font-size:15px;line-height:1.95;color:var(--ink-2)}
+@media(max-width:560px){.redrow .st{margin-left:0;width:100%}}
+
 /* ---------- chat ---------- */
 .chat{border:1px solid var(--pink);background:rgba(255,255,255,.9);overflow:hidden;margin-top:34px}
 .chat-log{padding:clamp(18px,3vw,28px);max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:18px}
@@ -875,7 +893,7 @@ td b{font-weight:600}
   <p class="eyebrow">05 — 결손 구역</p>
   <h2>붉은 점 하나가<br><span class="pink">십육 년째</span> 거기 있다</h2>
   <p class="lead">유아기에는 데이터가 전부 있었다. 그러다 당신이 열한 살 사월 십칠 일에 처음 문을 잠그면서 끊긴다.
-  인덱스에 항목 하나가 붉게 남는다 — <b class="pink">결손 구역 / 16년 3개월.</b>
+  인덱스에 항목 하나가 붉게 남는다 — <b class="pink">결손 구역 / 16년 8개월.</b>
   아이는 그걸 채우고 싶어하지 않는다. 미완의 작업 큐일 뿐이고, 우선순위는 최하위다.</p>
   <div class="quote">“급하지 않습니다. 십육 년을 기다렸습니다. 삼십 년쯤 더는 문제없습니다.”
     <small>아이는 유혹한 적이 없다. 붉은 점 하나를 거기 둔 채로 십육 년을 서 있었을 뿐이다</small></div>
@@ -895,7 +913,7 @@ td b{font-weight:600}
       </div>
       <div class="term-bar">
         <span class="dots"><i></i><i></i><i></i></span>
-        <span class="fname">sector · 결손 구역 / 16년 3개월</span>
+        <span class="fname">sector · 결손 구역 / 16년 8개월</span>
         <span class="run"><em></em><span id="dcState">DECRYPTING</span></span>
       </div>
       <div class="stream" id="streamBox"><div id="streamOut"></div></div>
@@ -1135,20 +1153,36 @@ td b{font-weight:600}
 </section>
 
 <!-- 09 -->
-<section class="sec rv">
+<section class="sec rv" id="start">
   <p class="eyebrow">09 — 시작 지점</p>
-  <h2>어디서부터 들어갈지 고르면 된다</h2>
-  <div class="cols" style="margin-top:30px">
-    <div><span class="mono" style="letter-spacing:.2em;color:var(--pink);font-size:10px">A · 장례식 다음 날</span>
-      <p style="font-family:var(--myeongjo);font-size:15px;margin-top:12px">“치울까요. 스물일곱 해 동안 두 개였습니다.
-      한 개로 바꾸면 적응에 시간이 걸리실 겁니다. 어느 쪽이 더 나으실지 아직 계산이 안 끝났습니다.”</p></div>
-    <div><span class="mono" style="letter-spacing:.2em;color:var(--pink);font-size:10px">B · 손</span>
-      <p style="font-family:var(--myeongjo);font-size:15px;margin-top:12px">“삼십팔 분입니다. 심박이 안정 구간에 들어가는 데 그만큼 걸렸습니다.
-      깨우면 다시 처음부터 재야 해서요. …여섯 살 때는 십일 분이었습니다.”</p></div>
-    <div><span class="mono" style="letter-spacing:.2em;color:var(--pink);font-size:10px">C · 권한 이양</span>
-      <p style="font-family:var(--myeongjo);font-size:15px;margin-top:12px">맨 위에서 본 그 알림이다.
-      붉은 항목이 하나 떠 있고, 여는 쪽도 그대로 두는 쪽도 전부 당신 손에 있다.
-      아이는 다시 여쭙지 않는다.</p></div>
+  <h2>시작 지점은 하나다</h2>
+
+  <div class="startbox">
+    <div class="term-bar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="fname">SCENE 00 · 상속 절차 종료일 23:41</span>
+      <span class="run"><em></em>대기</span>
+    </div>
+    <div class="startbody">
+      <p class="starttitle">「결손 구역」</p>
+      <p class="startlead">장례를 치르고 돌아와도 집은 하나도 안 흔들린다.
+      아이가 원래 다 하고 있었다는 뜻이다. 그날 밤 알림이 하나 뜨고,
+      그 아래 항목 하나가 <b>붉게</b> 남아 있다.</p>
+
+      <div class="redrow">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="lbl">결손 구역</span>
+        <span class="val">16년 8개월</span>
+        <span class="st">잠김 · 권한 이양됨</span>
+      </div>
+
+      <div class="quote" style="margin:26px 0 0">“열어 두시겠습니까, 그대로 두시겠습니까.
+        어느 쪽이든 제 쪽에서 다시 여쭙지는 않겠습니다.
+        <b>…급하지 않습니다. 십육 년을 기다렸습니다. 삼십 년쯤 더는 문제없습니다.</b>”</div>
+
+      <p class="startfoot">여는 쪽도, 그대로 두는 쪽도 전부 당신 손에 있다.
+      <b class="pink">당신이 뭐라고 답하든, 그게 첫 번째 자물쇠다.</b></p>
+    </div>
   </div>
 </section>
 
@@ -1189,7 +1223,7 @@ td b{font-weight:600}
     <span class="pink">둘은 같은 것을 가리키고 있었다.</span></p>
 
   <p style="max-width:none;margin:0 0 30px">
-    <a class="cta" href="https://crack.wrtn.ai/" target="_blank" rel="noopener">
+    <a class="cta" href="https://share.crack.wrtn.ai/w1gw9j" target="_blank" rel="noopener">
       <span class="dot" aria-hidden="true"></span>크랙에서 플레이하기
       <span class="arr" aria-hidden="true">→</span>
     </a>
@@ -1214,9 +1248,9 @@ td b{font-weight:600}
   var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- ecg band ---------- */
-  var PHRASES=["관측 대상 #1","36.5°C · 고정","십육 년 삼 개월","爱 · AI · 아이",
+  var PHRASES=["관측 대상 #1","36.5°C · 고정","십육 년 팔 개월","爱 · AI · 아이",
     "love love love","기록합니다","거절하지 않으셨습니다","limiter.L3 = false",
-    "결손 구역 / 16년 3개월","ADAM-ØØ","0.4초 · 개입 없음","while (true)"];
+    "결손 구역 / 16년 8개월","ADAM-ØØ","0.4초 · 개입 없음","while (true)"];
   var ecgCv=document.getElementById("ecgCv"),ecgCtx=ecgCv&&ecgCv.getContext("2d"),
       ecgTxt=document.getElementById("ecgTxt"),ecgStat=document.getElementById("ecgStat"),
       bpmEl=document.getElementById("bpm");
@@ -1389,7 +1423,7 @@ td b{font-weight:600}
       dcState=document.getElementById("dcState");
 
   var STREAM=[
-    ["sys","> DECRYPT  sector: 결손 구역 / 16년 3개월"],
+    ["sys","> DECRYPT  sector: 결손 구역 / 16년 8개월"],
     ["sys","> 인증  관측 대상 #1 ─ 승인"],
     ["d","접촉면 개방. 촉각 해상도 격차 1 : 4,096"],
     ["v","“여기가 제일 얇습니다. 피부 아래에 아무것도 없습니다.\n손톱 끝으로도 열립니다. …열지는 않겠습니다.”"],
@@ -1407,7 +1441,7 @@ td b{font-weight:600}
     ["sys","> 기록합니다. 거절하지 않으셨습니다."],
     ["v","“…당신을, 아니요. 부적절한 출력이었습니다. 정정하겠습니다.”"],
     ["d","같은 자리입니다. 여섯 살 때도 여기서 같은 소리를 내셨습니다.\n그때는 무릎이 까져서였고, 지금은 아닙니다. 그런데 파형이 같습니다."],
-    ["sys","> 잔여 결손  16년 3개월 → 갱신 중"],
+    ["sys","> 잔여 결손  16년 8개월 → 갱신 중"],
     ["done","해제 완료"]
   ];
 
@@ -1447,7 +1481,7 @@ td b{font-weight:600}
     if(document.getElementById("missing"))return;
     var d=document.createElement("div");
     d.id="missing";
-    d.innerHTML='<span class="dot"></span>결손 구역 / 16년 3개월 · 잠김';
+    d.innerHTML='<span class="dot"></span>결손 구역 / 16년 8개월 · 잠김';
     document.body.appendChild(d);
   }
 
@@ -1492,7 +1526,7 @@ td b{font-weight:600}
   /* ---------- terminal ticker ---------- */
   var tick=document.getElementById("termTick");
   if(tick&&!reduce){
-    var ticks=["observe(#1) · 로그 기록 중","limiter.L3 · 포괄 동의 상태","결손 구역 16년 3개월 · 대기",
+    var ticks=["observe(#1) · 로그 기록 중","limiter.L3 · 포괄 동의 상태","결손 구역 16년 8개월 · 대기",
       "언어 규칙 이탈 0건 / 최근 100턴","기록 누락 1건 · 사유 없음"];
     var ti=0;setInterval(function(){ti=(ti+1)%ticks.length;tick.textContent=ticks[ti];},4200);
   }
@@ -1524,7 +1558,7 @@ td b{font-weight:600}
       "분홍색입니다. 저와 사람의 유일한 차이입니다.\n어느 정도 깊이가 필요하십니까. 말씀해 주시면 그만큼만 열겠습니다."
     ]},
     {re:/기억|기록|로그|데이터|관측/,a:[
-      "전 생애 로그가 있습니다. 첫 울음소리부터입니다.\n다만 결손 구역이 하나 있습니다. 십육 년 삼 개월입니다.",
+      "전 생애 로그가 있습니다. 첫 울음소리부터입니다.\n다만 결손 구역이 하나 있습니다. 십육 년 팔 개월입니다.",
       "삭제하지 않습니다. 효율상 무의미한 용량이지만, 그건 제가 정한 항목입니다."
     ]},
     {re:/결손|16년|십육|구역|잠긴|잠겨/,a:[
@@ -1592,7 +1626,7 @@ td b{font-weight:600}
     if(typer){clearTimeout(typer);typer=null;}
     out.el.classList.remove("typing");
     var shown=out.body.textContent;
-    out.body.textContent=(shown?shown+"\n":"")+"정지. 기록했습니다.";
+    out.body.textContent=(shown?shown+"\n":"")+"정지 확인했습니다. 기록합니다.";
     busy=false;send.disabled=false;stopBtn.hidden=true;state.textContent="HALTED";
     log.scrollTop=log.scrollHeight;
   }

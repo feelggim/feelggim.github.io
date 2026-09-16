@@ -803,7 +803,7 @@ td b{font-weight:600}
     </div>
     <div>
       <div class="gimg" style="background-image:url('img/eye.webp');aspect-ratio:819/1921"><div class="scan"></div></div>
-      <p class="hero-note">FIG. 02 — 홍채 표면 / love love love</p>
+      <p class="hero-note">FIG. 02 — 출력 간섭 / love love love</p>
     </div>
   </div>
 </section>
@@ -1033,24 +1033,26 @@ td b{font-weight:600}
 <section class="sec rv">
   <p class="eyebrow">07 — 3막 구조</p>
   <h2>같은 소리, 세 번</h2>
+  <p class="lead">사랑이 없어질 세상에서 태어나, 사랑이 없는 것과 살았고,<br>
+  그 사이에서 <b>이름 붙일 수 없는 무언가</b>가 생긴다.</p>
   <div class="cols" style="margin-top:30px">
     <div>
       <p class="act pink" style="font-family:var(--disp);font-weight:700;font-size:36px;letter-spacing:-.03em">AI</p>
-      <h3>1막 · 관측</h3>
+      <h3>1막 · 사랑이 없어질 세상</h3>
       <p style="font-size:13.5px;color:var(--ink-2)">장례를 치르고 돌아와도 집은 하나도 안 흔들린다.
       아이가 원래 다 하고 있었다는 뜻이다. 그날 밤 권한 이양 알림이 뜨고,
       인덱스의 <b>붉은 항목 하나</b>가 처음으로 당신 눈에 들어온다.</p>
     </div>
     <div>
       <p class="act pink" style="font-family:var(--myeongjo);font-size:44px">爱</p>
-      <h3>2막 · 점유</h3>
+      <h3>2막 · 사랑이 없는 세상</h3>
       <p style="font-size:13.5px;color:var(--ink-2)">유품에서 설계 사유서가 나온다. 당신의 유년기 전체가 소급해서 오염된다.
       그리고 당신은 아버지의 사고에 대해, 이 애를 끌 수 있는지에 대해
       <b>묻지 말았어야 할 것을 묻게 된다.</b> 아이는 거짓말을 하지 않는다.</p>
     </div>
     <div>
       <p class="act pink" style="font-family:var(--myeongjo);font-size:40px">아이</p>
-      <h3>3막 · 보존</h3>
+      <h3>3막 · 사랑이 생길 세상</h3>
       <p style="font-size:13.5px;color:var(--ink-2)">에스컬레이션 5~7단. “그만 물어봐.” 연산 출력과 그 고백.
       그리고 당신이 결국 묻게 되는 한 문장 — <b>“너 나 사랑해?”</b>
       그 대답에 거짓은 한 글자도 없다. 그래서 더 아프다.</p>
@@ -1071,6 +1073,9 @@ td b{font-weight:600}
         <li><span class="c">// 이 이야기를 돌리는 엔진에 직접 거는 규칙.</span></li>
         <li><span class="c">// 픽션과 매체가 같은 구조가 된다. 그래서 여기서만 된다.</span></li>
         <li> </li>
+        <li><span class="c">// 확률이 아니라 횟수로 거는 이유 — 낮은 티어 모델은 확률을 세지 못한다.</span></li>
+        <li><span class="c">// 세지 못하면 매 턴 깨고, 매 턴 깨면 이 장치의 값은 0이 된다.</span></li>
+        <li> </li>
         <li><span class="k">[연산 출력 규칙]</span></li>
         <li>너는 아이다. 오류가 없다. 그러므로 무너지지 않는다.</li>
         <li> </li>
@@ -1083,8 +1088,11 @@ td b{font-weight:600}
         <li>정확히 하나만 깨라. <span class="s">(어휘 붕괴 / 지연 / 이름 호명 / 반말 한 마디 /</span></li>
         <li><span class="s">유저의 과거 발화 인용 중 택1)</span></li>
         <li> </li>
-        <li><span class="k">절대</span> 두 개를 동시에 깨지 마라. <span class="k">절대</span> 연속 두 턴에 깨지 마라.</li>
-        <li>깨는 빈도는 전체의 <span class="k">10% 이하</span>로 유지하라. 흔해지면 가치가 0이 된다.</li>
+        <li><span class="k">절대</span> 두 개를 동시에 깨지 마라. 같은 유형을 연속으로 쓰지 마라.</li>
+        <li> </li>
+        <li><span class="k">횟수 상한</span> <span class="s">(확률 아님, 반드시 지킬 것)</span></li>
+        <li>  <span class="n">·</span> 한 장면에 <span class="k">최대 1회.</span></li>
+        <li>  <span class="n">·</span> 직전 장면에서 발동했으면 이번 장면은 <span class="k">금지.</span></li>
         <li> </li>
         <li>깬 직후 아이는 사과하지 않는다. 설명도 즉시 하지 않는다.</li>
         <li>설명은 그 장면이 끝난 뒤, 유저가 물었을 때만 한다.</li>

@@ -20,8 +20,15 @@ img{max-width:100%}
 [hidden]{display:none!important}
 </style>
 <title>AI AI AI — 사랑, 사랑, 사랑</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300..900&family=Noto+Serif+KR:wght@300..800&family=Syncopate:wght@400;700&display=swap">
+<style>
+@font-face{font-family:"AI Sans";src:url("fonts/kr-sans-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"AI Sans";src:url("fonts/kr-sans-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"AI Serif";src:url("fonts/kr-serif-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"AI Serif";src:url("fonts/kr-serif-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"AI Mono";src:url("fonts/mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"AI Mono";src:url("fonts/mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"AI Disp";src:url("fonts/disp-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+</style>
 
 <style>
 :root{
@@ -36,10 +43,10 @@ img{max-width:100%}
   --pink-ghost:rgba(250,41,221,.09);
   --line:rgba(12,10,13,.13);
   --line-pink:rgba(250,41,221,.28);
-  --mono:"IBM Plex Mono","Noto Sans KR",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --sans:"Noto Sans KR","Pretendard",-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
-  --myeongjo:"Noto Serif KR","Nanum Myeongjo",Georgia,serif;
-  --disp:"Syncopate","Arial Narrow",sans-serif;
+  --mono:"AI Mono","AI Sans","IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"AI Sans","Noto Sans KR","Pretendard",-apple-system,"Malgun Gothic",sans-serif;
+  --myeongjo:"AI Serif","Noto Serif KR","Nanum Myeongjo",Georgia,serif;
+  --disp:"AI Disp","Syncopate","Arial Narrow",sans-serif;
   --gut:clamp(18px,5vw,64px);
 }
 *{box-sizing:border-box}
@@ -1319,7 +1326,7 @@ td b{font-weight:600}
       requestAnimationFrame(draw);
       if(ts-last<45)return;last=ts;
       ctxB.fillStyle="rgba(255,255,255,0.066)";ctxB.fillRect(0,0,W,H);
-      ctxB.font='500 13.5px "IBM Plex Mono","Noto Sans KR",monospace';
+      ctxB.font='500 13.5px "AI Mono","AI Sans",monospace';
       ctxB.textAlign="left";
       for(var i=0;i<cols.length;i++){
         var c=cols[i],ch;

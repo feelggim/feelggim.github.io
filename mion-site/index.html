@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="description" content="미온 : 그날의 온도 — GL 기원불명 호러로맨스. 온계읍, 검은 백합, 그리고 하서온.">
+<meta name="theme-color" content="#E5E2DD">
+<meta property="og:type" content="website">
+<meta property="og:title" content="미온 : 그날의 온도">
+<meta property="og:description" content="온계읍에는 검은 백합이 핀다. 여름은 아직 한 달이나 남았다.">
+<meta property="og:image" content="poster.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="poster.webp" type="image/webp">
+<link rel="preload" as="image" href="poster.webp">
+<title>미온 : 그날의 온도 — 온계읍</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@200;300;400;500;600;700&family=Noto+Sans+KR:wght@200;300;400;500&display=swap">
+<style>
+:root{
+  --paper:#E5E2DD; --paper-hi:#EFEDE9; --paper-lo:#D7D3CC;
+  --ink:#15130F; --ink-2:#3B3731; --ink-3:#6F6962; --faint:#A8A199;
+  --red:#5E2622; --red-lit:#8A3A2E; --gold:#B18A22;
+  --title:'Nanum Myeongjo',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',system-ui,sans-serif;
+  --rule:rgba(21,19,15,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink-2);
+  font-family:var(--serif); font-weight:300; font-size:16px; line-height:2.05;
+  word-break:keep-all; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- 종이 ---------- */
+#paper{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(118% 82% at 50% -6%, var(--paper-hi) 0%, var(--paper) 46%, var(--paper-lo) 100%);}
+#paper::after{content:""; position:absolute; inset:0; opacity:.55;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");}
+#paper::before{content:""; position:absolute; inset:0;
+  background:radial-gradient(84% 66% at 50% 46%, transparent 42%, rgba(120,112,100,.13) 100%);}
+
+/* ---------- 중앙 괘선 = 동화 게이지 ---------- */
+#gauge{position:fixed; left:calc(50% - 348px); top:0; bottom:0; width:1px; z-index:3;
+  pointer-events:none;
+  background:linear-gradient(180deg, transparent 0%, rgba(21,19,15,.16) 6%,
+             rgba(21,19,15,.16) 94%, transparent 100%);}
+#gauge .sq{position:absolute; left:50%; width:7px; height:7px; margin-left:-3.5px;
+  background:var(--red); top:0; transition:top .12s linear;
+  box-shadow:0 0 0 4px var(--paper);}
+#gauge .dots{position:absolute; left:50%; transform:translateX(-50%);
+  writing-mode:vertical-rl; font-size:9px; letter-spacing:.5em; color:var(--faint);
+  top:calc(50% - 2em);}
+@media (max-width:1060px){#gauge{display:none}}
+
+/* ---------- 먹물 ---------- */
+#ooze{position:fixed; inset:0; z-index:5; pointer-events:none; overflow:hidden;
+  mix-blend-mode:multiply;}
+.str{position:absolute; top:-10px; width:var(--w); height:0;
+  transform:translateX(-50%); transform-origin:50% 0; will-change:height,transform;}
+.str s{position:absolute; inset:0; display:block;
+  background:linear-gradient(90deg,
+    rgba(21,19,15,0) 0%, rgba(21,19,15,.34) 14%, rgba(18,16,13,.86) 30%,
+    rgba(12,11,9,.96) 46%, rgba(44,40,34,.8) 56%, rgba(21,19,15,.64) 74%,
+    rgba(21,19,15,.16) 92%, rgba(21,19,15,0) 100%);
+  clip-path:polygon(0 0, 100% 0, 88% 14%, 72% 33%, 66% 55%, 61% 78%, 58% 100%,
+                    42% 100%, 39% 78%, 34% 55%, 28% 33%, 12% 14%);
+  filter:blur(.25px);}
+.str s::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(231,228,222,0) 0%, rgba(231,228,222,0) 42%,
+    rgba(229,226,221,.34) 78%, rgba(229,226,221,.6) 100%);}
+.str b{position:absolute; left:50%; top:-2px; display:block;
+  width:calc(var(--w) * 2.1); height:calc(var(--w) * 0.8);
+  margin-left:calc(var(--w) * -1.05);
+  border-radius:50% 50% 58% 58% / 24% 24% 76% 76%;
+  background:radial-gradient(58% 72% at 44% 26%, rgba(18,16,13,.5) 0%,
+    rgba(21,19,15,.3) 52%, rgba(21,19,15,0) 100%);
+  filter:blur(1.4px);}
+.str i{position:absolute; left:50%; top:100%; display:block;
+  width:var(--bw); height:calc(var(--bw)*1.26);
+  margin-left:calc(var(--bw) * -0.5); margin-top:calc(var(--bw) * -0.4);
+  border-radius:52% 48% 46% 54% / 38% 38% 62% 62%;
+  will-change:transform;
+  background:radial-gradient(40% 32% at 34% 26%, rgba(92,84,72,.95) 0%,
+    rgba(28,25,20,.97) 42%, rgba(12,11,9,.99) 100%);}
+.drp{position:absolute; width:var(--bw); height:calc(var(--bw)*1.26);
+  margin-left:calc(var(--bw) * -0.5);
+  border-radius:52% 48% 46% 54% / 38% 38% 62% 62%;
+  will-change:transform,opacity;
+  background:radial-gradient(40% 32% at 34% 26%, rgba(92,84,72,.92) 0%,
+    rgba(26,23,19,.96) 42%, rgba(12,11,9,.99) 100%);}
+/* 떨어진 자리 — 지워지지 않는다 */
+.blot{position:absolute; border-radius:46% 54% 52% 48% / 52% 46% 54% 48%;
+  background:radial-gradient(60% 58% at 46% 42%, rgba(21,19,15,.5), rgba(21,19,15,.16) 62%, transparent 78%);
+  will-change:transform,opacity;}
+
+/* ---------- 가장자리 촉수 — 번진 먹 ---------- */
+#edges{position:fixed; inset:0; z-index:2; pointer-events:none; overflow:hidden;
+  mix-blend-mode:multiply; opacity:.17;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);
+          mask-image:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);}
+.arm{position:absolute; transform-origin:50% 100%; will-change:transform;}
+.seg{position:absolute; left:0; transform-origin:50% 100%; will-change:transform;
+  background-repeat:no-repeat; background-position-x:0;}
+.arm .seg{filter:grayscale(1) contrast(1.5) brightness(.26)}
+.arm.deep .seg{filter:grayscale(1) contrast(1.3) brightness(.4)}
+@media (max-width:760px){.arm.opt{display:none} #edges{opacity:.12}}
+
+/* ---------- 꽃 — 식물도감 판화처럼 ---------- */
+#field{position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden;
+  mix-blend-mode:multiply;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,transparent 52%,#000 86%,#000 100%);
+          mask-image:linear-gradient(180deg,transparent 0%,transparent 52%,#000 86%,#000 100%);}
+.cluster{position:absolute; bottom:-4vh; width:64vw; height:52vh; will-change:transform;
+  transition:transform .12s linear;}
+.cluster.l{left:-18vw} .cluster.r{right:-18vw}
+.cluster img{position:absolute; width:var(--w); opacity:var(--o);
+  filter:grayscale(1) contrast(1.25) brightness(var(--b)) blur(var(--blur,0px));
+  transform-origin:50% 90%;
+  animation:sway var(--d) ease-in-out infinite alternate; animation-delay:var(--dl);}
+@keyframes sway{from{transform:rotate(calc(var(--r) - var(--amp,3deg))) translateY(0)}
+                to{transform:rotate(calc(var(--r) + var(--amp,3deg))) translateY(-5px)}}
+#front{position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden;
+  mix-blend-mode:multiply;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,transparent 56%,#000 88%,#000 100%);
+          mask-image:linear-gradient(180deg,transparent 0%,transparent 56%,#000 88%,#000 100%);}
+#front img{position:absolute; width:var(--w); opacity:var(--o); transform-origin:50% 92%;
+  filter:grayscale(1) contrast(1.2) brightness(var(--b));
+  animation:sway var(--d) ease-in-out infinite alternate; animation-delay:var(--dl);
+  will-change:transform;}
+
+/* ---------- 소리 ---------- */
+#snd{position:fixed; left:calc(20px + env(safe-area-inset-left,0px));
+  bottom:calc(20px + env(safe-area-inset-bottom,0px)); z-index:8;
+  display:flex; align-items:center; gap:9px; padding:8px 15px 8px 12px;
+  background:rgba(243,241,237,.72); border:1px solid var(--rule);
+  cursor:pointer; color:var(--ink-3);
+  font-family:var(--sans); font-size:10px; letter-spacing:.28em; font-weight:400;
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  transition:color .25s, border-color .25s;}
+#snd:hover{color:var(--ink); border-color:rgba(94,38,34,.5);}
+#snd:focus-visible{outline:1px solid var(--red); outline-offset:3px;}
+#snd .eq{display:flex; align-items:flex-end; gap:2px; height:11px;}
+#snd .eq i{display:block; width:1.5px; height:3px; background:var(--faint);
+  transition:background .25s;}
+#snd[aria-pressed="true"]{color:var(--red);}
+#snd[aria-pressed="true"] .eq i{background:var(--red);
+  animation:eq .9s ease-in-out infinite alternate;}
+#snd[aria-pressed="true"] .eq i:nth-child(2){animation-duration:.62s}
+#snd[aria-pressed="true"] .eq i:nth-child(3){animation-duration:1.15s}
+#snd[aria-pressed="true"] .eq i:nth-child(4){animation-duration:.78s}
+@keyframes eq{from{height:3px} to{height:11px}}
+@media (max-width:760px){#snd .txt{display:none} #snd{padding:9px 11px}}
+
+/* ---------- 본문 틀 ---------- */
+main{position:relative; z-index:4; padding-inline:26px;}
+.wrap{position:relative; max-width:600px; margin-inline:auto;}
+section{padding-block:22vh;}
+#enter{padding-block:8vh 16vh;}
+
+/* 세로 방주 — 포스터의 그 자리 */
+.vert{position:absolute; top:4vh; right:-13vw; writing-mode:vertical-rl;
+  font-family:var(--title); font-size:12.5px; letter-spacing:.62em; line-height:2.4;
+  color:var(--ink-3); white-space:nowrap;}
+.vert::after{content:""; display:block; width:1px; height:56px; margin:1.2em auto 0;
+  background:linear-gradient(180deg,var(--rule),transparent);}
+.vert.l{right:auto; left:-13vw;}
+@media (max-width:1180px){.vert{display:none}}
+
+/* ---------- 진입 ---------- */
+.titleblock{margin:0 0 54px; line-height:1;}
+.titleblock .tt{font-family:var(--title); font-weight:800; font-size:clamp(54px,13vw,96px);
+  color:var(--ink); letter-spacing:.02em; display:inline-block; vertical-align:baseline;}
+.titleblock .hj{font-family:var(--title); font-weight:700; font-size:clamp(20px,4.6vw,32px);
+  color:var(--red); letter-spacing:.16em; margin-left:.5em; vertical-align:baseline;}
+.titleblock .sub{display:flex; align-items:center; gap:16px; margin-top:26px;
+  font-family:var(--title); font-size:clamp(14px,3.4vw,17px); letter-spacing:.42em;
+  color:var(--ink-3);}
+.titleblock .sub i{display:block; height:1px; width:38px; background:var(--rule);}
+.titleblock .sub i:last-child{flex:1; max-width:120px;}
+
+.hero{margin:0 auto; display:block; width:auto; height:min(82vh,860px);
+  max-width:100%; mix-blend-mode:darken;}
+.hero-wrap{text-align:center; margin-bottom:9vh;}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
+  clip-path:inset(50%); white-space:nowrap;}
+
+.eyebrow{font-family:var(--sans); font-size:10px; letter-spacing:.5em;
+  color:var(--ink-3); font-weight:400; margin:0 0 30px;}
+.lead{font-size:16.5px; line-height:2.25; color:var(--ink-2); max-width:29em; margin:0 0 18px;}
+.lead b{color:var(--ink); font-weight:600;
+  box-shadow:inset 0 -.42em 0 rgba(177,138,34,.2);}
+.tag{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; color:var(--ink-3);
+  margin-top:34px; font-weight:300;}
+.cue{margin-top:50px; display:flex; align-items:center; gap:14px;
+  font-family:var(--sans); font-size:10px; letter-spacing:.34em; color:var(--faint);}
+.cue i{display:block; width:1px; height:46px;
+  background:linear-gradient(180deg,var(--rule),transparent);
+  animation:drop 2.6s ease-in-out infinite;}
+@keyframes drop{0%,100%{opacity:.3; transform:scaleY(.6)}50%{opacity:1; transform:scaleY(1)}}
+
+/* ---------- 섹션 ---------- */
+.kicker{font-family:var(--sans); font-size:10px; letter-spacing:.48em; color:var(--ink-3);
+  font-weight:400; margin:0 0 20px; display:flex; align-items:center; gap:14px;}
+.kicker::before{content:""; width:5px; height:5px; background:var(--red); flex:none;}
+h2{font-family:var(--title); font-weight:700; font-size:clamp(27px,6.6vw,40px);
+  color:var(--ink); letter-spacing:-.01em; line-height:1.4; margin:0 0 22px;
+  text-wrap:balance;}
+p{margin:0 0 19px;}
+.note{color:var(--ink-3); font-size:14.5px; line-height:2.05;}
+em{font-style:normal; color:var(--red); font-weight:400;}
+strong{color:var(--ink); font-weight:600;}
+.rule{height:1px; margin:11vh 0 0; position:relative;
+  background:linear-gradient(90deg,var(--rule) 0%, rgba(21,19,15,.06) 60%, transparent 100%);}
+.rule::after{content:""; position:absolute; left:0; top:-2px; width:5px; height:5px;
+  background:var(--red);}
+
+/* 온도 */
+.temp{display:inline-flex; align-items:baseline; gap:9px; margin:2px 0 24px;
+  font-variant-numeric:tabular-nums;}
+.temp .n{font-family:var(--title); font-size:52px; font-weight:700; color:var(--red);
+  letter-spacing:-.03em; line-height:1;}
+.temp .u{font-family:var(--sans); font-size:11px; letter-spacing:.2em; color:var(--ink-3);}
+
+/* 스펙 목록 */
+.spec{list-style:none; padding:0; margin:30px 0 0; display:grid; gap:0;}
+.spec li{padding:16px 2px; display:grid; grid-template-columns:5em 1fr; gap:18px;
+  align-items:baseline; font-size:15px; border-top:1px solid var(--rule);}
+.spec li:last-child{border-bottom:1px solid var(--rule);}
+.spec b{font-family:var(--sans); color:var(--red); font-weight:500; font-size:11px;
+  letter-spacing:.14em;}
+@media (max-width:460px){.spec li{grid-template-columns:1fr; gap:5px}}
+
+/* 인용 */
+.said{font-family:var(--title); font-size:clamp(19px,5vw,26px); line-height:1.95;
+  color:var(--ink); font-weight:400; letter-spacing:-.005em;
+  margin:40px 0; padding:0 0 0 26px; text-wrap:balance;
+  border-left:1px solid rgba(94,38,34,.42);}
+.said small{display:block; font-family:var(--sans); font-size:11px; letter-spacing:.2em;
+  color:var(--faint); margin-top:18px; font-weight:300;}
+
+/* 졸업사진 */
+.photo-row{display:grid; grid-template-columns:minmax(0,190px) 1fr; gap:36px;
+  align-items:start; margin:42px 0 8px;}
+.polaroid{position:relative; margin:0; line-height:0; background:#fff; padding:9px 9px 9px;
+  box-shadow:0 14px 32px rgba(60,52,42,.2), 0 0 0 1px rgba(21,19,15,.08);
+  transform:rotate(-1.4deg); transition:transform .5s cubic-bezier(.2,.7,.3,1), filter .5s;
+  filter:grayscale(.55) contrast(1.04);}
+.polaroid:hover{transform:rotate(0deg) scale(1.03); filter:grayscale(0);}
+.polaroid img{display:block; width:100%; height:auto;}
+.photo-note p{margin-bottom:16px;}
+@media (max-width:620px){
+  .photo-row{grid-template-columns:1fr; gap:26px; justify-items:start;}
+  .polaroid{max-width:220px;}
+}
+
+/* 마지막 */
+#end{padding-block:24vh 26vh; text-align:center;}
+#end .said{border:0; padding:0; margin-inline:auto; max-width:21em;}
+.band{position:relative; margin:0 auto 10vh; max-width:760px; line-height:0;}
+.band img{display:block; width:100%; height:auto;
+  filter:grayscale(.88) contrast(1.1) brightness(1.02);
+  mix-blend-mode:multiply; opacity:.92;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 7%, #000 20%, #000 80%,
+      rgba(0,0,0,.4) 93%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) 8%, #000 28%, #000 72%,
+      rgba(0,0,0,.35) 92%, transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 7%, #000 20%, #000 80%,
+      rgba(0,0,0,.4) 93%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) 8%, #000 28%, #000 72%,
+      rgba(0,0,0,.35) 92%, transparent 100%);
+  mask-composite:intersect;}
+.credit{font-family:var(--sans); font-size:10.5px; letter-spacing:.2em; color:var(--faint);
+  line-height:2.5; margin-top:9vh; font-weight:300;}
+
+/* ---------- 진입 관문 ---------- */
+html.gated, body.gated{overflow:hidden; height:100%;}
+#gate{position:fixed; inset:0; z-index:9; background:var(--paper);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:3vh 24px; text-align:center; gap:0;
+  transition:opacity 1.1s ease, visibility 1.1s;}
+#gate.off{opacity:0; visibility:hidden; pointer-events:none;}
+#gate .inner{position:relative;}
+#gateBtn{appearance:none; -webkit-appearance:none; background:none; border:0; padding:0;
+  margin:0; line-height:0; cursor:pointer; display:block;}
+#gateBtn img{display:block; height:min(84vh,920px); width:auto; max-width:94vw;
+  transition:filter .7s ease, transform .7s cubic-bezier(.2,.7,.3,1);}
+#gateBtn:hover img, #gateBtn:focus-visible img{
+  transform:scale(1.015); filter:contrast(1.05) brightness(1.02);}
+#gateBtn:focus{outline:none}
+#gateBtn:focus-visible{outline:1px solid var(--red); outline-offset:16px;}
+#gate .gword{position:absolute; left:-96px; top:7%; writing-mode:vertical-rl;
+  font-family:var(--title); font-size:13px; letter-spacing:.58em; line-height:2.6;
+  color:var(--ink-3); white-space:nowrap; margin:0;}
+#gate .gword b{color:var(--ink); font-weight:700;}
+#gate .gword::after{content:""; display:block; width:1px; height:60px;
+  margin:1.4em auto 0; background:linear-gradient(180deg,var(--rule),transparent);}
+#gate .ghint{font-family:var(--sans); font-size:10px; letter-spacing:.4em;
+  color:var(--faint); margin:22px 0 0; font-weight:300;
+  animation:hint 3.6s ease-in-out infinite;}
+@keyframes hint{0%,100%{opacity:.3} 50%{opacity:.95}}
+#gate .gnote{display:none;}
+@media (max-width:1180px){
+  #gate .gword{position:static; writing-mode:horizontal-tb; letter-spacing:.3em;
+    font-size:11.5px; line-height:2.2; margin:20px 0 0; order:2;}
+  #gate .gword::after{display:none}
+  #gateBtn img{height:min(64vh,620px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+  html{scroll-behavior:auto}
+  #ooze{display:none}
+}
+</style>
+</head>
+<body>
+<div id="paper" aria-hidden="true"></div>
+<div id="field" aria-hidden="true">
+  <div class="cluster l"></div>
+  <div class="cluster r"></div>
+</div>
+<div id="edges" aria-hidden="true"></div>
+<div id="front" aria-hidden="true"></div>
+<div id="ooze" aria-hidden="true"></div>
+
+<div id="gate">
+  <div class="inner">
+    <p class="gword">꽃말은 &nbsp;<b>사랑</b>&nbsp;, 그리고 &nbsp;<b>저주</b></p>
+    <button id="gateBtn" type="button" aria-label="꽃을 건드려 들어가기">
+      <img src="poster.webp" alt="미온 : 그날의 온도" decoding="async">
+    </button>
+  </div>
+  <p class="ghint">꽃을 건드리면 들어간다</p>
+</div>
+
+<audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+<button id="snd" type="button" aria-pressed="false" aria-label="배경음 켜기">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span class="txt">소리</span>
+</button>
+
+<div id="gauge" aria-hidden="true">
+  <span class="sq"></span>
+</div>
+
+<main>
+<section id="enter"><div class="wrap">
+  <h1 class="sr">미온 : 그날의 온도 — 微溫</h1>
+  <p class="eyebrow">O N G Y E &nbsp;·&nbsp; 溫溪</p>
+  <div class="titleblock" aria-hidden="true">
+    <span class="tt">미온</span><span class="hj">微溫</span>
+    <span class="sub"><i></i>그날의 온도<i></i></span>
+  </div>
+  <p class="lead">
+    버스에서 내리자마자 알았다. 8월인데 덥지 않았다.
+    목덜미에 닿는 공기가 <b>살갗과 구분이 안 됐다.</b>
+  </p>
+  <p class="lead note">
+    관광객은 두 골목 안까지만 들어온다. 세 번째 골목부터는 소리가 줄고,
+    담벼락 이끼가 축축하고, 매미가 운다. 어느 쪽에서 우는지는 알 수 없었다.
+  </p>
+  <p class="tag">GL · 기원불명 인외 · 혐관 · 여름방학 귀향 호러로맨스</p>
+  <p class="cue"><i></i>꽃밭을 헤치고 들어간다</p>
+</div></section>
+
+<section><div class="wrap">
+  <p class="vert">닿아도 &nbsp;닿은 줄 &nbsp;모른다</p>
+  <p class="kicker">Ⅰ &nbsp; 무대</p>
+  <h2>기온이 변하지 않는 마을</h2>
+  <div class="temp"><span class="n">36.5</span><span class="u">℃ &nbsp;일 년 내내</span></div>
+  <p>사방이 산으로 둘러싸인 분지. 차로 삼십 분 나가면 바다가 있다.
+     사계절은 있는데 체감 온도가 거의 변하지 않는다. 한여름 정오에 땀이 안 나고,
+     한겨울에도 입김이 잘 안 보인다.</p>
+  <p>주민들은 <em>"분지라 그렇지"</em>로 정리하고 더 생각하지 않는다.
+     지형이 설명해주는 것 같으니까 아무도 끝까지 안 묻는다.</p>
+  <p class="note">그 온도는 정확히 <strong>사람 살에 닿아도 아무 느낌이 없는 온도</strong>다.
+     체온과 같다. 그래서 닿아도 닿은 줄 모른다.</p>
+  <ul class="spec">
+    <li><b>낮</b><span>기와 얹은 카페, 한복 대여점, 사진 찍는 사람들. 주말이면 꽤 붐빈다</span></li>
+    <li><b>밤 7시</b><span>셔터가 전부 내려가고 관광객이 빠진다. 그때부터가 진짜 온계다</span></li>
+    <li><b>바람</b><span>산이 막아 거의 없다. 빨래가 잘 안 마른다. 다들 그러려니 한다</span></li>
+  </ul>
+  <div class="rule"></div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="vert l">필 &nbsp;이유가 &nbsp;없는 &nbsp;자리에</p>
+  <p class="kicker">Ⅱ &nbsp; 꽃</p>
+  <h2>필 이유가 없는 꽃</h2>
+  <p>정식 이름 쿠로유리. <em>Fritillaria camschatcensis.</em>
+     원래 자생지는 홋카이도·쿠릴 열도·사할린·캄차카의 고산대 초원이다.
+     아한대 고산 식물이고, 원산지에서도 쉽게 못 보는 희귀종이다.</p>
+  <p><strong>한반도 남부 분지에 이 꽃이 필 이유는 아무것도 없다.</strong>
+     그런데 온계에만 핀다. 옮겨 심으면 사흘 안에 죽는다.</p>
+  <p class="note">읍에서는 그냥 '온계 검은백합'이라는 자체 브랜드로 판다.
+     향초, 엽서, 한복 대여점 머리꽂이, 포토스팟 표지판. 아무도 이게 뭔지 모른다.
+     고산 식물인데 왜 여기 있냐고 물으면 <em>"여기가 온도가 안 변해서 그렇다더라"</em>고 답한다.
+     인과가 정확히 거꾸로인데 아무도 이상하게 여기지 않는다.</p>
+  <p class="said">
+    좋아하는 사람 곁에 몰래 두면 마음이 이어지고,<br>
+    상대가 알아채고 그것을 치우면 저주가 된다.
+    <small>꽃말이 「사랑」과 「저주」 양쪽으로 갈린다</small>
+  </p>
+  <p class="note">읍내 기념품 엽서에는 당연히 사랑 쪽만 적혀 있다.</p>
+  <div class="rule"></div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="vert">아무도 &nbsp;오래 &nbsp;옆에 &nbsp;못 &nbsp;있는다</p>
+  <p class="kicker">Ⅲ &nbsp; 사람</p>
+  <h2>하서온</h2>
+  <div class="photo-row">
+    <figure class="polaroid">
+      <img src="seon.webp" alt="하서온의 졸업사진 — 미람여고" loading="lazy" decoding="async">
+    </figure>
+    <div class="photo-note">
+      <p class="note">유저의 졸업앨범에도 같은 사진이 있다.
+         6년 전 것인데 지금과 달라진 데가 없다.</p>
+      <p class="note">그 앨범을 넘기다 보면 앞뒤가 맞지 않는 페이지가 나온다.
+         <strong>한참 보다가 덮고, 저녁을 먹고, 잊는다.</strong></p>
+    </div>
+  </div>
+  <p>칼로 자른 듯 끝이 고른 검은 단발. 앞머리가 눈썹을 덮는다.
+     창백하고 예쁘다는 말을 자주 듣는데 아무도 오래 옆에 못 있는다.
+     귀에 피어싱이 많고, 좌우 개수가 다르다. 기분 따라 그날그날 아무렇게나 낀다.</p>
+  <p class="note">한여름에도 긴팔을 입고 소매가 손등을 반쯤 덮는다.
+     팔뚝과 목덜미를 가리기 위해서다.</p>
+  <p>여섯 해 전, 유저는 서온에게 선을 그었다. 어울리지 않아서.
+     그 뒤 무리가 서온을 은근히 괴롭혔고 유저는 가담하지도, 막지도 않았다.
+     <strong>서온은 그 얘기를 한 번도 먼저 꺼내지 않는다.</strong></p>
+  <p class="said">
+    언제부터 친구였는지,<br>언제부터 아니었는지 모른다.
+    <small>유저의 가장 오래된 기억 속에 이미 서온이 있다 · 처음 만난 장면이 없다</small>
+  </p>
+  <div class="rule"></div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="kicker">Ⅳ &nbsp; 그것</p>
+  <h2>느껴져? 응?</h2>
+  <p>서온의 몸 어디에서든 나온다. 정해진 자리가 없다.
+     피부가 찢어지지 않고 벌어졌다가 닫히며 자국을 남기지 않는다.
+     상처가 아니라 개구부다.</p>
+  <ul class="spec">
+    <li><b>색</b><span>검정. 빛을 정면으로 받으면 아주 짙은 흑자색 — 꽃과 같은 색</span></li>
+    <li><b>돌기</b><span>표면에 노란 돌기가 줄지어 있다. 검은 백합의 노란 수술과 같은 색</span></li>
+    <li><b>온도</b><span>유저 체온과 정확히 같다. 시각이 촉각보다 먼저 안다</span></li>
+    <li><b>소리</b><span>완전 무음. 서온의 숨소리만 남는다</span></li>
+    <li><b>흔적</b><span>자국은 하루면 사라진다. 감각이 둔해지는 것만 남는다</span></li>
+  </ul>
+  <p class="note" style="margin-top:26px">
+    꽃이 그것에서 나온 건지, 그것이 꽃을 닮은 건지, 둘이 애초에 같은 것인지 —</p>
+  <div class="rule"></div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="vert l">편안하다</p>
+  <p class="kicker">Ⅴ &nbsp; 값</p>
+  <h2>우리, 무슨 사이였지?</h2>
+  <p>접촉이 쌓이면 기억이 고쳐진다. 방향은 <strong>언제나 둘 사이가 좋았던 쪽</strong>으로.
+     버린 기억은 서먹했던 시기로, 괴롭힘은 짓궂었던 장난으로,
+     끝내 계속 친했던 사이로.</p>
+  <p class="note">가끔 앞뒤가 맞지 않는 물증이 나온다. 졸업앨범, 옛 메시지, 동창의 말.
+     보면 불쾌하고, 곧 잊는다.</p>
+  <p>관계는 진짜로 좋아진다. 서온은 안정되고, 발작이 줄고, 다정해진다.
+     대가는 미워했던 기억이 사라지는 것이다.
+     <em>사과할 대상도, 사과할 이유도 함께 지워진다.</em></p>
+  <p class="said">
+    편안하다.
+    <small>이것이 이 이야기의 값이다</small>
+  </p>
+  <div class="rule"></div>
+</div></section>
+
+<section id="end"><div class="wrap">
+  <figure class="band">
+    <img src="eye.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  </figure>
+  <p class="said">여름은<br>아직 한 달이나 남았다.</p>
+  <p class="credit">
+    「미온 : 그날의 온도」 &nbsp;·&nbsp; 微溫 &nbsp;·&nbsp; TEPID<br>
+    하서온 × 유저 &nbsp;|&nbsp; 앵스트 · 집착 · 피폐 · 현대판타지
+  </p>
+</div></section>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 진입 관문 ---------- */
+  (function(){
+    var gate = document.getElementById('gate'), gb = document.getElementById('gateBtn');
+    if (!gate || !gb) return;
+    var root = document.documentElement;
+    root.classList.add('gated'); document.body.classList.add('gated');
+    gb.addEventListener('click', function(){
+      gate.classList.add('off');
+      root.classList.remove('gated'); document.body.classList.remove('gated');
+      window.scrollTo(0, 0);
+      setTimeout(function(){ if (gate.parentNode) gate.remove(); }, 1200);
+    });
+  })();
+
+  /* ---------- 꽃밭 심기 ---------- */
+  var L = document.querySelector('.cluster.l'),
+      R = document.querySelector('.cluster.r'),
+      FRONT = document.getElementById('front');
+  var KIND = 8;
+  function pick(){ return 1 + Math.floor(Math.random()*KIND); }
+  function bloom(depth, big){
+    var img = document.createElement('img');
+    img.src = 'f' + pick() + (big ? '' : 's') + '.webp';
+    img.alt=''; img.loading='eager'; img.decoding='async';
+    img.style.setProperty('--o', (0.24 - depth*0.15).toFixed(2));
+    img.style.setProperty('--b', (0.62 + depth*0.28).toFixed(2));
+    img.style.setProperty('--sat', (0.95 - depth*0.45).toFixed(2));
+    img.style.setProperty('--blur', (depth*depth*2.6).toFixed(2) + 'px');
+    img.style.setProperty('--r', (Math.random()*30 - 15).toFixed(1) + 'deg');
+    img.style.setProperty('--d', (4.4 + Math.random()*3.8 + depth*3).toFixed(2) + 's');
+    img.style.setProperty('--dl', (-Math.random()*6).toFixed(2) + 's');
+    return img;
+  }
+
+  /* 뒤쪽 꽃밭 — 스크롤에 갈라짐 */
+  function plant(host, side){
+    var mob = window.innerWidth < 760;
+    var TIERS = 5, PER = mob ? 2 : 3;
+    for (var d=0; d<TIERS; d++){
+      var depth = d/(TIERS-1);                    // 0 앞 ~ 1 뒤
+      var k = Math.pow(depth, 0.72);              // 원근 압축
+      var per = PER + Math.round(depth*2);        // 뒤로 갈수록 개수↑
+      for (var i=0;i<per;i++){
+        var img = bloom(depth, depth <= 0.3);
+        var w = (7.2 - k*5.4) + Math.random()*(1.6 - k*1.1);
+        img.style.setProperty('--w', w.toFixed(2) + 'vw');
+        img.style.setProperty('--amp', (3.8 - depth*2.6).toFixed(1) + 'deg');
+        // 뒤로 갈수록 위로 올라가고(지평선), 간격이 좁아짐
+        img.style.bottom = (k*15 - 8 + Math.random()*(5 - k*3)) + 'vh';
+        var lane = i/(per-1||1);
+        var spread = mob ? 62 : 56;
+        img.style[side] = (Math.pow(lane,1.25)*spread*(1-k*0.22)
+                          + k*7 + Math.random()*(10 - k*7) - 4) + 'vw';
+        img.style.zIndex = String(80 - d*9 - i);
+        host.appendChild(img);
+      }
+    }
+  }
+  plant(L,'left'); plant(R,'right');
+
+  /* 앞쪽 — 촉수보다 앞. 화면 아래에 크게 걸침 */
+  (function(){
+    var FR = window.innerWidth < 760
+      ? [{w:13,b:-5,x:-4,s:'left'}, {w:11,b:-5,x:-3,s:'right'}]
+      : [{w:9.5,b:-4,x:-1,s:'left'},  {w:7,b:-2,x:9,s:'left'},
+         {w:10, b:-4.5,x:-2,s:'right'}, {w:6.5,b:-1.5,x:12,s:'right'}];
+    FR.forEach(function(c,i){
+      var img = bloom(0, true);
+      img.style.setProperty('--w', c.w+'vw');
+      img.style.setProperty('--o', '.17');
+      img.style.setProperty('--b', (0.6 + Math.random()*0.12).toFixed(2));
+      img.style.setProperty('--d', (5.2 + Math.random()*3.2).toFixed(2)+'s');
+      img.style.bottom = c.b+'vh';
+      img.style[c.s]   = c.x+'vw';
+      img.style.zIndex = String(10+i);
+      FRONT.appendChild(img);
+    });
+  })();
+
+  /* ---------- 촉수: 마디 체인 ---------- */
+  var EDGES = document.getElementById('edges');
+  var RATIO = 2092/280;            // arm.png 세로/가로 비
+  var SEGS  = 16;
+  var CFG = [
+    /* h(vh), 기준각, 좌우, x(vw), y(vh), 진폭, 속도, 위상, deep, opt */
+    {h:52, a: 30, s:'left',  x:  3, y:-10, am:4.2, sp:0.44, ph:0.0,  deep:0, opt:0},
+    {h:50, a:-26, s:'right', x:  4, y: -8, am:4.0, sp:0.37, ph:1.6,  deep:0, opt:0},
+    {h:40, a: 10, s:'left',  x: 27, y:-20, am:5.2, sp:0.62, ph:3.3,  deep:1, opt:1},
+    {h:38, a: -8, s:'right', x: 25, y:-22, am:5.0, sp:0.70, ph:4.4,  deep:1, opt:1}
+  ];
+  var ARMS = [];
+  function buildArms(){
+    EDGES.innerHTML=''; ARMS.length=0;
+    var vh = window.innerHeight/100, vw = window.innerWidth/100;
+    CFG.forEach(function(c,idx){
+      var H = c.h*vh, W = H/RATIO, segH = H/SEGS;
+      var root = document.createElement('div');
+      root.className = 'arm' + (c.deep?' deep':'') + (c.opt?' opt':'');
+      root.style.width = W+'px'; root.style.height = segH+'px';
+      root.style[c.s] = (c.x*vw)+'px';
+      root.style.bottom = (c.y*vh)+'px';
+      root.style.transform = 'rotate('+c.a+'deg)';
+      var parent = root, segs = [];
+      for (var i=0;i<SEGS;i++){
+        var d = document.createElement('div');
+        d.className='seg';
+        d.style.width = W+'px';
+        d.style.height = (segH+1)+'px';
+        d.style.bottom = '0';
+        d.style.backgroundImage = "url('"+(c.deep?'arm-sm.png':'arm.png')+"')";
+        d.style.backgroundSize = W+'px '+H+'px';
+        d.style.backgroundPositionY = (-(SEGS-1-i)*segH)+'px';
+        if (i>0){ d.style.position='absolute'; d.style.bottom = segH+'px'; }
+        parent.appendChild(d);
+        segs.push(d); parent = d;
+      }
+      ARMS.push({cfg:c, segs:segs, root:root});
+      EDGES.appendChild(root);
+    });
+  }
+  buildArms();
+  var rbTimer; window.addEventListener('resize', function(){
+    clearTimeout(rbTimer); rbTimer=setTimeout(function(){ buildArms(); onScroll(); }, 220);
+  });
+
+  /* ---------- 점액 ---------- */
+  var OOZE = document.getElementById('ooze'), STR = [], DRP = [];
+  function reseed(s){
+    s.quick = Math.random() < 0.36;
+    s.max   = s.quick ? (26 + Math.random()*46) : (110 + Math.random()*300);
+    s.wait  = s.quick ? (1800 + Math.random()*7000) : (4000 + Math.random()*14000);
+  }
+  function mkStrands(){
+    OOZE.innerHTML = ''; STR.length = 0; DRP.length = 0;
+    var mobile = window.innerWidth < 760, n = mobile ? 5 : 9;
+    for (var i=0;i<n;i++){
+      var d = document.createElement('div'); d.className = 'str';
+      d.appendChild(document.createElement('s'));
+      d.appendChild(document.createElement('b'));
+      d.appendChild(document.createElement('i'));
+      var edge = Math.random() < 0.88;
+      var x = edge ? (Math.random()<0.5 ? Math.random()*17 : 83 + Math.random()*17)
+                   : 30 + Math.random()*40;
+      var w = (edge ? 5 : 3.2) + Math.random()*(edge ? 5.5 : 3);
+      d.style.left = x.toFixed(2) + 'vw';
+      d.style.setProperty('--w',  w.toFixed(1) + 'px');
+      d.style.setProperty('--bw', (w*1.1 + 2.5 + Math.random()*3).toFixed(1) + 'px');
+      d.style.opacity = ((edge ? 0.5 : 0.3) + Math.random()*0.28).toFixed(2);
+      OOZE.appendChild(d);
+      var s = {el:d, bead:d.lastChild, h:0, st:0, ph:Math.random()*7,
+               sp:0.6 + Math.random()*1.1, op:parseFloat(d.style.opacity)};
+      reseed(s); s.wait *= Math.random();   // 첫 등장은 흩어지게
+      STR.push(s);
+    }
+  }
+  function drop(s){
+    var r = s.el.getBoundingClientRect();
+    var d = document.createElement('div'); d.className = 'drp';
+    d.style.setProperty('--bw', s.el.style.getPropertyValue('--bw'));
+    d.style.left = (r.left + r.width/2).toFixed(1) + 'px';
+    d.style.top  = (r.top + s.h - 2).toFixed(1) + 'px';
+    d.style.opacity = s.op.toFixed(2);
+    OOZE.appendChild(d);
+    DRP.push({el:d, x:r.left + r.width/2, y0:r.top + s.h - 2, y:0, v:0.015,
+              op:s.op, land: window.innerHeight * (0.52 + Math.random()*0.42)});
+  }
+  var BLOTS = [], BLOT_MAX = 14;
+  function splash(x, y, w, op){
+    var e = document.createElement('div'); e.className = 'blot';
+    var sz = w * (1.5 + Math.random()*1.1);
+    var rot = (Math.random()*60 - 30).toFixed(0);
+    e.style.width = sz.toFixed(1)+'px';
+    e.style.height = (sz*(0.5 + Math.random()*0.3)).toFixed(1)+'px';
+    e.style.left = (x - sz/2).toFixed(1)+'px';
+    e.style.top  = (y - sz*0.24).toFixed(1)+'px';
+    e.style.transform = 'rotate('+rot+'deg) scale(.3)';
+    e.style.opacity = '0';
+    OOZE.appendChild(e);
+    BLOTS.push(e);
+    while (BLOTS.length > BLOT_MAX){ var old = BLOTS.shift(); if (old.parentNode) old.remove(); }
+    var b = performance.now(), REST = 0.20 + Math.random()*0.14;   // 남는 농도 — 안 지워진다
+    (function grow(t){
+      var k = Math.min(1, (t - b) / 520), ease = 1 - Math.pow(1-k, 3);
+      e.style.transform = 'rotate('+rot+'deg) scale(' + (0.3 + ease*0.7).toFixed(3) + ')';
+      e.style.opacity = (op * (0.95 - (0.95 - REST) * ease)).toFixed(3);
+      if (k < 1) requestAnimationFrame(grow);
+    })(b);
+  }
+
+  function slime(now, dt){
+    var i, s;
+    for (i=0;i<STR.length;i++){
+      s = STR[i];
+      if (s.st === 0){                                  /* 맺히길 기다림 */
+        s.wait -= dt; if (s.wait <= 0) s.st = 1;
+      } else if (s.st === 1){                           /* 쭈우우우욱 */
+        var rate = s.quick ? 0.095 : 0.026;
+        s.h += rate * dt * (0.34 + 0.66 * (1 - s.h/s.max));
+        if (s.h >= s.max - 0.6){ s.h = s.max; s.st = 2; s.wait = s.quick ? 90 : 420; }
+      } else if (s.st === 2){                           /* 끊기기 직전 */
+        s.wait -= dt;
+        if (s.wait <= 0){ drop(s); s.st = 3; }
+      } else {                                          /* 뚝 — 튕겨 올라감 */
+        s.h -= dt * 0.62;
+        if (s.h <= 0){ s.h = 0; s.st = 0; reseed(s); }
+      }
+      if (s.st === 0 && s.h === 0){ s.el.style.height = '0px'; continue; }
+      s.el.style.height = s.h.toFixed(1) + 'px';
+      s.el.style.transform = 'translateX(-50%) rotate('
+        + (Math.sin(now*0.00042*s.sp + s.ph) * 1.7).toFixed(2) + 'deg)';
+      var bs = s.st === 2 ? (1.18 + Math.sin(now*0.012)*0.05)
+                          : 0.42 + 0.62 * Math.min(1, s.h/s.max);
+      s.bead.style.transform = 'scale(' + bs.toFixed(2) + ')';
+      s.bead.style.opacity = Math.min(1, s.h/26).toFixed(2);
+    }
+    for (i=DRP.length-1;i>=0;i--){
+      var p = DRP[i];
+      p.v += 0.0019 * dt;
+      p.y += p.v * dt;
+      var sy = Math.min(2.6, 1 + p.v*5.5), sx = 1/Math.sqrt(sy);
+      p.el.style.transform = 'translateY(' + p.y.toFixed(1) + 'px) scale('
+        + sx.toFixed(3) + ',' + sy.toFixed(3) + ')';
+      if (p.y0 + p.y > p.land){
+        splash(p.x, p.y0 + p.y, parseFloat(p.el.style.getPropertyValue('--bw')) || 8, p.op);
+        p.el.remove(); DRP.splice(i,1);
+      }
+    }
+  }
+
+  var reduce2 = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t0 = performance.now(), tPrev = t0;
+  if (!reduce2){
+    mkStrands();
+    var oTimer; window.addEventListener('resize', function(){
+      clearTimeout(oTimer); oTimer = setTimeout(mkStrands, 280);
+    });
+  }
+  function writhe(now){
+    var tt = (now-t0)/1000;
+    var dt = Math.min(48, now - tPrev); tPrev = now;
+    slime(now, dt);
+    for (var a=0;a<ARMS.length;a++){
+      var A=ARMS[a], c=A.cfg;
+      for (var i=0;i<A.segs.length;i++){
+        var u = i/(A.segs.length-1);
+        var ang = Math.sin(tt*c.sp + u*4.4 + c.ph) * c.am * (0.25+u*0.95)
+                + Math.sin(tt*c.sp*1.63 + u*8.1 + c.ph*1.7) * c.am * 0.42 * u;
+        A.segs[i].style.transform = 'rotate('+ang.toFixed(2)+'deg)';
+      }
+    }
+    requestAnimationFrame(writhe);
+  }
+  if (reduce2){
+    ARMS.forEach(function(A){ A.segs.forEach(function(s,i){
+      var u=i/(A.segs.length-1);
+      s.style.transform='rotate('+(Math.sin(u*4.4)*A.cfg.am*u).toFixed(2)+'deg)';
+    });});
+  } else requestAnimationFrame(writhe);
+
+  /* ---------- 스크롤 ---------- */
+  var prog=0, peak=0, gSq=document.querySelector('#gauge .sq');
+  function onScroll(){
+    var max = document.body.scrollHeight - window.innerHeight;
+    prog = max>0 ? Math.min(1, window.scrollY/max) : 0;
+    var part = Math.min(1, prog*3.1);                 // 초반에 빠르게 갈라짐
+    var push = part*part*(window.innerWidth<760?46:62);
+    L.style.transform = 'translate3d(-'+push+'vw,0,0) scale('+(1+part*0.34)+')';
+    R.style.transform = 'translate3d('+push+'vw,0,0) scale('+(1+part*0.34)+')';
+    var PH = document.getElementById('photo');
+    if (PH) PH.style.transform = 'scale(' + (1.06 + part*0.16) + ') translateY(' + (part*3.2) + 'vh)';
+    var fk = FRONT.children;
+    for (var k=0;k<fk.length;k++){
+      var dir = fk[k].style.right ? 1 : -1;
+      fk[k].style.translate = (dir*part*part*26)+'vw ' + (part*part*10)+'vh';
+    }
+    // 스크롤할수록 촉수가 안쪽으로 밀려들어옴
+    var adv = prog*prog*(window.innerWidth<760 ? 5 : 9);
+    for (var i=0;i<ARMS.length;i++){
+      var dir = ARMS[i].cfg.s==='right' ? -1 : 1;
+      ARMS[i].root.style.translate = (dir*adv)+'vw ' + (-adv*0.5)+'vh';
+    }
+    if (prog > peak) peak = prog;                     // 불가역
+    if (gSq) gSq.style.top = (peak*100).toFixed(2)+'%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---------- 배경음 ---------- */
+  (function(){
+    var au = document.getElementById('bgm'), btn = document.getElementById('snd');
+    if(!au || !btn) return;
+    var TARGET = 0.32, fading = null, wanted = false;
+    try { wanted = localStorage.getItem('mion-bgm') !== 'off'; } catch(e){ wanted = true; }
+
+    function fade(to, done){
+      clearInterval(fading);
+      fading = setInterval(function(){
+        var d = to - au.volume;
+        if (Math.abs(d) < 0.02){ au.volume = to; clearInterval(fading); if(done) done(); return; }
+        au.volume = Math.max(0, Math.min(1, au.volume + d*0.12));
+      }, 40);
+    }
+    function mark(on){
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.setAttribute('aria-label', on ? '배경음 끄기' : '배경음 켜기');
+      try { localStorage.setItem('mion-bgm', on ? 'on' : 'off'); } catch(e){}
+    }
+    function play(){
+      au.volume = 0;
+      var pr = au.play();
+      if (pr && pr.then) pr.then(function(){ mark(true); fade(TARGET); })
+                           .catch(function(){ mark(false); });
+      else { mark(true); fade(TARGET); }
+    }
+    function stop(){ fade(0, function(){ au.pause(); }); mark(false); }
+
+    btn.addEventListener('click', function(){
+      if (au.paused) play(); else stop();
+    });
+
+    /* 첫 상호작용에 얹어 자동 시작 (정책상 제스처 필요) */
+    if (wanted){
+      var armed = true;
+      var kick = function(){
+        if(!armed) return; armed = false;
+        ['pointerdown','keydown','wheel','touchstart','scroll'].forEach(function(ev){
+          window.removeEventListener(ev, kick);
+        });
+        play();
+      };
+      ['pointerdown','keydown','wheel','touchstart','scroll'].forEach(function(ev){
+        window.addEventListener(ev, kick, {passive:true, once:false});
+      });
+      /* 일부 브라우저는 그냥 되기도 함 */
+      play();
+    }
+
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden && !au.paused) fade(0.08);
+      else if (!document.hidden && !au.paused) fade(TARGET);
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>

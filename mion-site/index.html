@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<meta name="description" content="미온 : 그날의 온도 — GL 기원불명 호러로맨스. 온계읍, 검은 백합, 그리고 하서온.">
+<meta name="description" content="미온 : 그날의 온도 — GL 기원불명 호러로맨스. 단안리 온계읍, 검은 백합, 그리고 하서온.">
 <meta name="theme-color" content="#E5E2DD">
 <meta property="og:type" content="website">
 <meta property="og:title" content="미온 : 그날의 온도">
-<meta property="og:description" content="온계읍에는 검은 백합이 핀다. 여름은 아직 한 달이나 남았다.">
+<meta property="og:description" content="단안리 온계읍에는 검은 백합이 핀다. 여름은 아직 한 달이나 남았다.">
 <meta property="og:image" content="poster.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="poster.webp" type="image/webp">
@@ -51,9 +51,6 @@ body{
 #gauge .sq{position:absolute; left:50%; width:7px; height:7px; margin-left:-3.5px;
   background:var(--red); top:0; transition:top .12s linear;
   box-shadow:0 0 0 4px var(--paper);}
-#gauge .dots{position:absolute; left:50%; transform:translateX(-50%);
-  writing-mode:vertical-rl; font-size:9px; letter-spacing:.5em; color:var(--faint);
-  top:calc(50% - 2em);}
 @media (max-width:1060px){#gauge{display:none}}
 
 /* ---------- 먹물 ---------- */
@@ -109,7 +106,7 @@ body{
 .arm.deep .seg{filter:grayscale(1) contrast(1.3) brightness(.4)}
 @media (max-width:760px){.arm.opt{display:none} #edges{opacity:.12}}
 
-/* ---------- 꽃 — 식물도감 판화처럼 ---------- */
+/* ---------- 꽃 ---------- */
 #field{position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden;
   mix-blend-mode:multiply;
   -webkit-mask-image:linear-gradient(180deg,transparent 0%,transparent 52%,#000 86%,#000 100%);
@@ -157,11 +154,10 @@ body{
 
 /* ---------- 본문 틀 ---------- */
 main{position:relative; z-index:4; padding-inline:26px;}
-.wrap{position:relative; max-width:600px; margin-inline:auto;}
+.wrap{position:relative; z-index:1; max-width:600px; margin-inline:auto;}
 section{padding-block:22vh;}
 #enter{padding-block:8vh 16vh;}
 
-/* 세로 방주 — 포스터의 그 자리 */
 .vert{position:absolute; top:4vh; right:-13vw; writing-mode:vertical-rl;
   font-family:var(--title); font-size:12.5px; letter-spacing:.62em; line-height:2.4;
   color:var(--ink-3); white-space:nowrap;}
@@ -181,10 +177,6 @@ section{padding-block:22vh;}
   color:var(--ink-3);}
 .titleblock .sub i{display:block; height:1px; width:38px; background:var(--rule);}
 .titleblock .sub i:last-child{flex:1; max-width:120px;}
-
-.hero{margin:0 auto; display:block; width:auto; height:min(82vh,860px);
-  max-width:100%; mix-blend-mode:darken;}
-.hero-wrap{text-align:center; margin-bottom:9vh;}
 .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
   clip-path:inset(50%); white-space:nowrap;}
 
@@ -218,23 +210,28 @@ strong{color:var(--ink); font-weight:600;}
 .rule::after{content:""; position:absolute; left:0; top:-2px; width:5px; height:5px;
   background:var(--red);}
 
-/* 온도 */
+h3{font-family:var(--title); font-weight:700; font-size:clamp(17px,3.8vw,21px);
+  color:var(--ink); letter-spacing:-.005em; line-height:1.6;
+  margin:56px 0 14px; display:flex; align-items:baseline; gap:12px;}
+h3::before{content:""; width:14px; height:1px; background:var(--red); flex:none;
+  transform:translateY(-.35em);}
+.addr{font-family:var(--sans); font-size:11px; letter-spacing:.34em;
+  color:var(--ink-3); margin:-8px 0 26px; font-weight:400;}
+
 .temp{display:inline-flex; align-items:baseline; gap:9px; margin:2px 0 24px;
   font-variant-numeric:tabular-nums;}
 .temp .n{font-family:var(--title); font-size:52px; font-weight:700; color:var(--red);
   letter-spacing:-.03em; line-height:1;}
 .temp .u{font-family:var(--sans); font-size:11px; letter-spacing:.2em; color:var(--ink-3);}
 
-/* 스펙 목록 */
 .spec{list-style:none; padding:0; margin:30px 0 0; display:grid; gap:0;}
-.spec li{padding:16px 2px; display:grid; grid-template-columns:5em 1fr; gap:18px;
+.spec li{padding:16px 2px; display:grid; grid-template-columns:6.4em 1fr; gap:16px;
   align-items:baseline; font-size:15px; border-top:1px solid var(--rule);}
 .spec li:last-child{border-bottom:1px solid var(--rule);}
 .spec b{font-family:var(--sans); color:var(--red); font-weight:500; font-size:11px;
   letter-spacing:.14em;}
 @media (max-width:460px){.spec li{grid-template-columns:1fr; gap:5px}}
 
-/* 인용 */
 .said{font-family:var(--title); font-size:clamp(19px,5vw,26px); line-height:1.95;
   color:var(--ink); font-weight:400; letter-spacing:-.005em;
   margin:40px 0; padding:0 0 0 26px; text-wrap:balance;
@@ -242,13 +239,40 @@ strong{color:var(--ink); font-weight:600;}
 .said small{display:block; font-family:var(--sans); font-size:11px; letter-spacing:.2em;
   color:var(--faint); margin-top:18px; font-weight:300;}
 
+/* 짝 — 효과음 */
+.smack{font-style:italic; color:var(--ink); margin:0 0 19px;}
+
+/* 도판 */
+.plate{margin:0 0 46px; line-height:0; position:relative;}
+.plate img{display:block; width:100%; max-width:430px; height:auto;
+  margin:0 auto; mix-blend-mode:multiply; opacity:.88;
+  filter:contrast(1.04);
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.3) 9%, #000 26%, #000 74%,
+      rgba(0,0,0,.3) 91%, transparent 100%),
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, #000 14%, #000 58%, rgba(0,0,0,.4) 84%, transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.3) 9%, #000 26%, #000 74%,
+      rgba(0,0,0,.3) 91%, transparent 100%),
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, #000 14%, #000 58%, rgba(0,0,0,.4) 84%, transparent 100%);
+  mask-composite:intersect;}
+@media (max-width:620px){.plate img{max-width:300px} .plate{margin-bottom:34px}}
+.plate.bloom{text-align:left; margin:34px 0 10px;}
+.plate.bloom img{max-width:210px; margin:0; opacity:.92;
+  -webkit-mask-image:radial-gradient(64% 64% at 50% 48%, #000 46%, rgba(0,0,0,.6) 74%, transparent 100%);
+  -webkit-mask-composite:source-over;
+  mask-image:radial-gradient(64% 64% at 50% 48%, #000 46%, rgba(0,0,0,.6) 74%, transparent 100%);
+  mask-composite:add;}
+@media (max-width:620px){.plate.bloom img{max-width:162px}}
+
 /* 졸업사진 */
 .photo-row{display:grid; grid-template-columns:minmax(0,190px) 1fr; gap:36px;
   align-items:start; margin:42px 0 8px;}
-.polaroid{position:relative; margin:0; line-height:0; background:#fff; padding:9px 9px 9px;
+.polaroid{position:relative; margin:0; line-height:0; background:#fff; padding:0;
   box-shadow:0 14px 32px rgba(60,52,42,.2), 0 0 0 1px rgba(21,19,15,.08);
   transform:rotate(-1.4deg); transition:transform .5s cubic-bezier(.2,.7,.3,1), filter .5s;
-  filter:grayscale(.55) contrast(1.04);}
+  filter:grayscale(.42) contrast(1.03);}
 .polaroid:hover{transform:rotate(0deg) scale(1.03); filter:grayscale(0);}
 .polaroid img{display:block; width:100%; height:auto;}
 .photo-note p{margin-bottom:16px;}
@@ -257,7 +281,70 @@ strong{color:var(--ink); font-weight:600;}
   .polaroid{max-width:220px;}
 }
 
-/* 마지막 */
+/* ---------- 프롤로그 ---------- */
+.pro{font-size:16.5px; line-height:2.3; color:var(--ink-2);}
+.pro p{margin:0 0 26px;}
+.pro p:first-of-type::first-letter{font-family:var(--title); font-weight:700;
+  font-size:2.9em; line-height:.92; float:left; margin:.1em .16em 0 0; color:var(--ink);}
+.pro .line{color:var(--ink); font-family:var(--title); font-size:19px;
+  letter-spacing:-.005em; margin:34px 0;}
+.pro .slug{font-family:var(--sans); font-size:10px; letter-spacing:.26em;
+  color:var(--ink-3); font-weight:400; line-height:2.2;
+  margin:64px 0 46px; padding:16px 0 0; position:relative;
+  border-top:1px solid var(--rule);}
+.pro .slug::before{content:""; position:absolute; left:0; top:-2px;
+  width:5px; height:5px; background:var(--red);}
+@media (max-width:520px){.pro .slug{font-size:9.5px; letter-spacing:.18em}}
+
+/* ---------- 마지막 ---------- */
+#end{padding-block:24vh 26vh; text-align:center;}
+#end .said{border:0; padding:0; margin-inline:auto; max-width:21em;}
+.band{position:relative; margin:0 auto 10vh; max-width:760px; line-height:0;}
+.band img{display:block; width:100%; height:auto;
+  filter:grayscale(.88) contrast(1.1) brightness(1.02);
+  mix-blend-mode:multiply; opacity:.92;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 7%, #000 20%, #000 80%,
+      rgba(0,0,0,.4) 93%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) 8%, #000 28%, #000 72%,
+      rgba(0,0,0,.35) 92%, transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 7%, #000 20%, #000 80%,
+      rgba(0,0,0,.4) 93%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) 8%, #000 28%, #000 72%,
+      rgba(0,0,0,.35) 92%, transparent 100%);
+  mask-composite:intersect;}
+/* 장면 도판 — 화면 폭으로 쫙 */
+.bleed{position:relative; left:50%; width:100vw; margin:52px 0 52px -50vw;
+  line-height:0; overflow:hidden;}
+.bleed img{display:block; width:100%;
+  height:clamp(230px,36vh,400px); object-fit:cover; object-position:center 42%;
+  filter:grayscale(.62) contrast(1.05) saturate(1.02) brightness(1.02);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 9%,#000 91%,transparent 100%);
+          mask-image:linear-gradient(180deg,transparent 0%,#000 9%,#000 91%,transparent 100%);}
+.bleed.top img{filter:grayscale(.22) contrast(1.03) saturate(1.06) brightness(1.01);}
+.bleed.tall img{height:clamp(280px,44vh,480px);}
+@media (max-width:620px){.bleed{margin:38px 0 38px -50vw}
+  .bleed img{height:clamp(190px,30vh,280px)}
+  .bleed.tall img{height:clamp(230px,36vh,340px)}}
+
+/* ---------- 프롤로그 ---------- */
+.pro{font-size:16.5px; line-height:2.3; color:var(--ink-2);}
+.pro p{margin:0 0 26px;}
+.pro p:first-of-type::first-letter{font-family:var(--title); font-weight:700;
+  font-size:2.9em; line-height:.92; float:left; margin:.1em .16em 0 0; color:var(--ink);}
+.pro .line{color:var(--ink); font-family:var(--title); font-size:19px;
+  letter-spacing:-.005em; margin:34px 0;}
+.pro .slug{font-family:var(--sans); font-size:10px; letter-spacing:.26em;
+  color:var(--ink-3); font-weight:400; line-height:2.2;
+  margin:64px 0 46px; padding:16px 0 0; position:relative;
+  border-top:1px solid var(--rule);}
+.pro .slug::before{content:""; position:absolute; left:0; top:-2px;
+  width:5px; height:5px; background:var(--red);}
+@media (max-width:520px){.pro .slug{font-size:9.5px; letter-spacing:.18em}}
+
+/* ---------- 마지막 ---------- */
 #end{padding-block:24vh 26vh; text-align:center;}
 #end .said{border:0; padding:0; margin-inline:auto; max-width:21em;}
 .band{position:relative; margin:0 auto 10vh; max-width:760px; line-height:0;}
@@ -304,8 +391,6 @@ html.gated, body.gated{overflow:hidden; height:100%;}
 #gate .ghint{font-family:var(--sans); font-size:10px; letter-spacing:.4em;
   color:var(--faint); margin:22px 0 0; font-weight:300;
   animation:hint 3.6s ease-in-out infinite;}
-@keyframes hint{0%,100%{opacity:.3} 50%{opacity:.95}}
-#gate .gnote{display:none;}
 @media (max-width:1180px){
   #gate .gword{position:static; writing-mode:horizontal-tb; letter-spacing:.3em;
     font-size:11.5px; line-height:2.2; margin:20px 0 0; order:2;}
@@ -313,14 +398,34 @@ html.gated, body.gated{overflow:hidden; height:100%;}
   #gateBtn img{height:min(64vh,620px)}
 }
 
+/* ---------- 돌아가기 ---------- */
+.return-btn{
+  position:fixed;top:max(.9rem,3.6vh);left:max(1rem,4vw);z-index:7;
+  display:inline-flex;align-items:center;gap:.5em;
+  height:2.5rem;padding:0 1.05rem 0 .8rem;border-radius:999px;
+  background:rgba(243,241,237,.78);border:1px solid var(--rule);color:var(--ink-2);
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.14em;white-space:nowrap;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  cursor:pointer;transition:border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.return-btn:hover{border-color:rgba(94,38,34,.55);background:rgba(243,241,237,.94);color:var(--ink)}
+.return-btn:active{transform:scale(.96)}
+.return-btn:focus-visible{outline:1px solid var(--red);outline-offset:3px}
+.return-btn svg{width:1rem;height:1rem;display:block;flex:none;color:var(--red)}
+@media (max-width:520px){
+  .return-btn{height:2.3rem;padding:0 .85rem 0 .65rem;font-size:.66rem;letter-spacing:.1em}
+}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none !important; transition:none !important}
   html{scroll-behavior:auto}
   #ooze{display:none}
+  .return-btn:active{transform:none}
 }
 </style>
 </head>
 <body>
+
 <div id="paper" aria-hidden="true"></div>
 <div id="field" aria-hidden="true">
   <div class="cluster l"></div>
@@ -339,6 +444,11 @@ html.gated, body.gated{overflow:hidden; height:100%;}
   </div>
   <p class="ghint">꽃을 건드리면 들어간다</p>
 </div>
+
+<button type="button" class="return-btn" id="return-btn" aria-label="단안리 온계읍 22-1 — 크랙 앱으로 돌아가기">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  <span>단안리 온계읍 22-1</span>
+</button>
 
 <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 <button id="snd" type="button" aria-pressed="false" aria-label="배경음 켜기">
@@ -359,12 +469,11 @@ html.gated, body.gated{overflow:hidden; height:100%;}
     <span class="sub"><i></i>그날의 온도<i></i></span>
   </div>
   <p class="lead">
-    버스에서 내리자마자 알았다. 8월인데 덥지 않았다.
-    목덜미에 닿는 공기가 <b>살갗과 구분이 안 됐다.</b>
+    여기서는 무엇이 닿아도 <b>닿은 줄 모른다.</b>
   </p>
   <p class="lead note">
     관광객은 두 골목 안까지만 들어온다. 세 번째 골목부터는 소리가 줄고,
-    담벼락 이끼가 축축하고, 매미가 운다. 어느 쪽에서 우는지는 알 수 없었다.
+    담벼락 이끼가 축축하고, 매미가 운다. 어느 쪽에서 우는지는 알 수 없다.
   </p>
   <p class="tag">GL · 기원불명 인외 · 혐관 · 여름방학 귀향 호러로맨스</p>
   <p class="cue"><i></i>꽃밭을 헤치고 들어간다</p>
@@ -372,8 +481,12 @@ html.gated, body.gated{overflow:hidden; height:100%;}
 
 <section><div class="wrap">
   <p class="vert">닿아도 &nbsp;닿은 줄 &nbsp;모른다</p>
+  <figure class="bleed top">
+    <img src="town.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  </figure>
   <p class="kicker">Ⅰ &nbsp; 무대</p>
   <h2>기온이 변하지 않는 마을</h2>
+  <p class="addr">단안리 온계읍 &nbsp;·&nbsp; 溫溪</p>
   <div class="temp"><span class="n">36.5</span><span class="u">℃ &nbsp;일 년 내내</span></div>
   <p>사방이 산으로 둘러싸인 분지. 차로 삼십 분 나가면 바다가 있다.
      사계절은 있는데 체감 온도가 거의 변하지 않는다. 한여름 정오에 땀이 안 나고,
@@ -382,26 +495,38 @@ html.gated, body.gated{overflow:hidden; height:100%;}
      지형이 설명해주는 것 같으니까 아무도 끝까지 안 묻는다.</p>
   <p class="note">그 온도는 정확히 <strong>사람 살에 닿아도 아무 느낌이 없는 온도</strong>다.
      체온과 같다. 그래서 닿아도 닿은 줄 모른다.</p>
-  <ul class="spec">
-    <li><b>낮</b><span>기와 얹은 카페, 한복 대여점, 사진 찍는 사람들. 주말이면 꽤 붐빈다</span></li>
-    <li><b>밤 7시</b><span>셔터가 전부 내려가고 관광객이 빠진다. 그때부터가 진짜 온계다</span></li>
-    <li><b>바람</b><span>산이 막아 거의 없다. 빨래가 잘 안 마른다. 다들 그러려니 한다</span></li>
-  </ul>
-  <div class="rule"></div>
-</div></section>
 
-<section><div class="wrap">
-  <p class="vert l">필 &nbsp;이유가 &nbsp;없는 &nbsp;자리에</p>
-  <p class="kicker">Ⅱ &nbsp; 꽃</p>
-  <h2>필 이유가 없는 꽃</h2>
-  <p>정식 이름 쿠로유리. <em>Fritillaria camschatcensis.</em>
-     원래 자생지는 홋카이도·쿠릴 열도·사할린·캄차카의 고산대 초원이다.
-     아한대 고산 식물이고, 원산지에서도 쉽게 못 보는 희귀종이다.</p>
+  <h3>원래는 그냥 읍이었다</h3>
+  <p>옛 마을 구역이 한옥 보존지구로 묶인 게 2000년대 중반이다.
+     돌담길 사진 몇 장이 돌면서 사람이 들기 시작했고, 그 뒤로 십몇 년 동안
+     읍의 절반이 천천히 상권으로 바뀌었다.</p>
+  <p class="note">경주나 전주에 비할 규모는 아니다. 대개는 <strong>거기 가는 길에 들른다.</strong>
+     한나절이면 다 본다. 그래서 자고 가는 손님이 많지 않고,
+     자고 간 사람은 하나같이 <em>잠을 너무 잘 잤다</em>고 적는다.</p>
+
+  <h3>기와는 섞여 있다</h3>
+  <p>백 년 넘은 것과 십 년쯤 된 것이 한 지붕에 같이 얹혀 있다.
+     관광객은 구분하지 못하고 주민도 굳이 말하지 않는다.
+     <strong>새로 얹은 쪽이 더 빨리 검어진다.</strong> 이유는 아무도 모른다.</p>
+  <p class="note">돌담 이끼는 마르지 않는다. 다른 데 돌담은 여름 한낮이면 희끗해지는데
+     온계 것은 그대로 축축하고 미지근하다. 사진이 잘 나온다고 해서 다들 여기서 찍는다.</p>
+
+  <h3>상권은 한 겹이다</h3>
+  <p>옛 마을 바깥으로만 둘러 있다. 기와 얹은 카페, 한복 대여점, 목공방,
+     게스트하우스 네 곳, 기념품점 두 곳.</p>
+  <p class="note"><strong>포토스팟</strong>이라고 적힌 나무 표지판이 골목마다 서 있다.
+     두 번째 골목까지다. 세 번째 골목부터는 없다.</p>
+
+  <h3>필 이유가 없는 꽃</h3>
+  <figure class="plate bloom">
+    <img src="lily.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  </figure>
+  <p>읍의 기념품은 전부 한 가지 꽃으로 통일돼 있다. 향초, 엽서, 한복 대여점 머리꽂이.
+     정식 이름은 쿠로유리, <em>Fritillaria camschatcensis.</em>
+     자생지는 홋카이도·쿠릴 열도·사할린·캄차카의 고산대 초원이다.</p>
   <p><strong>한반도 남부 분지에 이 꽃이 필 이유는 아무것도 없다.</strong>
-     그런데 온계에만 핀다. 옮겨 심으면 사흘 안에 죽는다.</p>
-  <p class="note">읍에서는 그냥 '온계 검은백합'이라는 자체 브랜드로 판다.
-     향초, 엽서, 한복 대여점 머리꽂이, 포토스팟 표지판. 아무도 이게 뭔지 모른다.
-     고산 식물인데 왜 여기 있냐고 물으면 <em>"여기가 온도가 안 변해서 그렇다더라"</em>고 답한다.
+     그런데 온계에만 핀다. 옮겨 심으면 사흘 안에 죽는다.
+     고산 식물이 왜 여기 있냐고 물으면 <em>"여기가 온도가 안 변해서 그렇다더라"</em>고 답한다.
      인과가 정확히 거꾸로인데 아무도 이상하게 여기지 않는다.</p>
   <p class="said">
     좋아하는 사람 곁에 몰래 두면 마음이 이어지고,<br>
@@ -409,6 +534,111 @@ html.gated, body.gated{overflow:hidden; height:100%;}
     <small>꽃말이 「사랑」과 「저주」 양쪽으로 갈린다</small>
   </p>
   <p class="note">읍내 기념품 엽서에는 당연히 사랑 쪽만 적혀 있다.</p>
+
+  <ul class="spec">
+    <li><b>낮</b><span>기와 얹은 카페, 한복 대여점, 사진 찍는 사람들. 주말이면 꽤 붐빈다</span></li>
+    <li><b>밤 7시</b><span>셔터가 전부 내려가고 관광객이 빠진다. 그때부터가 진짜 온계다</span></li>
+    <li><b>바람</b><span>산이 막아 거의 없다. 빨래가 잘 안 마른다. 다들 그러려니 한다</span></li>
+    <li><b>성수기</b><span>4월과 10월. 한복 입기 좋은 날씨라고들 한다. 정작 기온은 언제나 같다</span></li>
+    <li><b>후기</b><span>별점은 높고 재방문은 없다. 리뷰에 같은 문장이 반복되는데 아무도 세어보지 않았다</span></li>
+    <li><b>세 번째 골목</b><span>포장이 끊기고 소리가 줄어든다. 관광 지도에 이 안쪽은 그려져 있지 않다</span></li>
+  </ul>
+  <div class="rule"></div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="vert l">가담하지 &nbsp;않았고 &nbsp;막지도 &nbsp;않았다</p>
+  <p class="kicker">Ⅱ &nbsp; 그때</p>
+  <h2>당신이 먼저 그었다</h2>
+  <p class="addr">온계 &nbsp;·&nbsp; 미람여고 &nbsp;·&nbsp; 여섯 해 전</p>
+  <p>당신의 가장 오래된 기억에 이미 서온이 있다.
+     처음 만난 장면이 없다. 누가 먼저 말을 걸었는지,
+     어느 집 마당이었는지, 몇 살이었는지 —
+     <strong>시작이 없는 채로 이미 붙어 있었다.</strong></p>
+
+  <figure class="bleed tall">
+    <img src="walk.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  </figure>
+
+  <p>같은 골목에서 자랐다. 학교도 같이 갔고 집에도 같이 왔다.
+     여름이면 마르지 않는 돌담 그늘에 나란히 앉아 시간을 다 썼다.
+     서온은 원래 말이 없는 애였다. 다른 애들 앞에서는 입을 거의 안 열었다.</p>
+  <p class="note"><em>당신 앞에서만 달랐다.</em> 먼저 웃고, 먼저 팔을 잡아끌고,
+     아무한테도 안 하는 얘기를 했다. 어른들은 그걸 보고
+     <strong>"서온이는 너만 따른다"</strong>고 했다. 칭찬인 줄 알았다.</p>
+  <p class="note">서온에게 당신은 세계 전부였고,
+     당신에게 서온은 천천히 여럿 중 하나가 되어갔다.
+     그 차이를 둘 다 알고 있었지만 아무도 말하지 않았다.</p>
+
+  <h3>속도가 갈렸다</h3>
+  <p>당신은 잘 놀았다. 어울리는 데 재능이 있었다.
+     누가 어디에 앉아야 하는지, 어떤 농담에 웃어줘야 하는지,
+     언제 빠져야 뒷말이 안 나오는지 알았다.
+     그래서 늘 무리 한가운데 있었고, 그게 어렵다고 생각해본 적이 없다.</p>
+  <p class="note">서온은 그 속도를 못 따라왔다. 정확히는 따라올 생각이 없었다.
+     애들은 처음엔 쟤 예쁘다고 했고, 다음엔 좀 이상하다고 했고,
+     나중엔 아무 말도 안 하면서 그 애 옆자리를 비웠다.</p>
+  <p>그래도 서온은 당신 옆에 앉았다.
+     당신이 자리를 옮기면 옮긴 자리로 따라와 앉았다.
+     <strong>그게 부담이 되기 시작한 건 당신 쪽이 먼저였다.</strong></p>
+
+  <h3>손절</h3>
+  <p>여섯 해 전 봄, 당신은 이제 같이 다니지 말자고 했다.
+     이유는 대지 않았다. 대면 자기가 무슨 말을 하고 있는지
+     들킬 것 같아서.</p>
+  <p class="note">서온은 알겠다고 했다. 되묻지도, 매달리지도 않았다.
+     <strong>알고 있었다는 얼굴이었다.</strong>
+     그날 서온은 당신 앞에서 처음으로 조용해졌다.
+     다른 애들한테 늘 그랬던 것처럼.</p>
+
+  <figure class="bleed">
+    <img src="hall.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  </figure>
+
+  <h3>그 뒤에 생긴 일</h3>
+  <p>무리는 티 나게 굴지 않았다. 지우개를 안 빌려주는 정도,
+     체육복을 다른 사물함에 넣어두는 정도,
+     조별과제 이름을 맨 나중에 부르는 정도.</p>
+  <p class="note">당신은 가담하지 않았다. 막지도 않았다.
+     그 둘이 다른 거라고 오래 믿었다.
+     서온은 한 번도 당신 쪽을 보며 도와달라고 하지 않았다.
+     <em>그것이 서온과 당신 사이에 보이지 않는 선을 만들었다.</em></p>
+
+  <h3>고2, 5월</h3>
+  <p>서온이 그 선을 넘어 처음으로 다가오기까지 일 년이 넘게 걸렸다.
+     급식실 뒤 계단참이었다. 며칠을 거기서 기다렸는지는 아무도 모른다.
+     서온은 먼저 다가와 <strong>당신의 손목을 잡았다.</strong>
+     생각보다 힘이 셌다. 놓으면 다시는 없을 사람처럼 잡았다.</p>
+  <p>잡힌 자리에 아무 감각이 없었다.
+     <strong>잡혔는데 잡힌 것 같지가 않았다.</strong>
+     그게 무서워서 당신은 손을 빼내려 했다.
+     당신이 소리쳤고, 서온이 울면서 당겼다.
+     <em>처음으로 엉켜버린 실타래.</em></p>
+
+  <p class="smack">— 짝</p>
+
+  <p>소리가 복도 끝까지 갔다. 서온의 고개가 돌아갔다.
+     칼로 자른 듯 고른 머리 끝이 한 번 흔들렸다가 제자리로 왔다.
+     서온은 맞은 뺨에 손을 대지 않았다. 열이 올라 붉게 물든 채로.</p>
+
+  <figure class="bleed">
+    <img src="stair.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  </figure>
+  <p>서온은 아무런 표정도 짓지 않았다.
+     잡았던 손을 놓았고, 당신은 그대로 계단을 급히 내려갔다.
+     서온은 그 자리에 선 채로 <strong>당신의 등을 봤다.</strong>
+     당신은 서온의 표정을 보지 못했다.</p>
+  <p class="said">
+    "돌아와."
+    <small>서온이 당신에게 한 마지막 말</small>
+  </p>
+  <p class="note">당신은 돌아보지 않았다. 들었는지도 확실하지 않다.
+     그 말이 그날 처음 나온 말인지, 그때까지 내내 참아온 말인지는
+     <em>서온만 안다.</em></p>
+  <p class="note">그런 서온과 당신의 사이가 이상하다고 생각했고, 한참 뒤에 잊었고,
+     <em>이건 당신과 서온에게 가장 짙게 각인된 기억이 되어버렸다.</em></p>
+  <p>그 뒤로 졸업식까지 말을 섞지 않았다. 사과할 기회는 여러 번 있었다.
+     기회가 없어서 안 한 게 아니다.</p>
   <div class="rule"></div>
 </div></section>
 
@@ -422,62 +652,103 @@ html.gated, body.gated{overflow:hidden; height:100%;}
     </figure>
     <div class="photo-note">
       <p class="note">유저의 졸업앨범에도 같은 사진이 있다.
-         6년 전 것인데 지금과 달라진 데가 없다.</p>
+         여섯 해 전 것인데 지금과 달라진 데가 없다.
+         <strong>딱 하나만 빼고.</strong></p>
       <p class="note">그 앨범을 넘기다 보면 앞뒤가 맞지 않는 페이지가 나온다.
          <strong>한참 보다가 덮고, 저녁을 먹고, 잊는다.</strong></p>
     </div>
   </div>
-  <p>칼로 자른 듯 끝이 고른 검은 단발. 앞머리가 눈썹을 덮는다.
-     창백하고 예쁘다는 말을 자주 듣는데 아무도 오래 옆에 못 있는다.
-     귀에 피어싱이 많고, 좌우 개수가 다르다. 기분 따라 그날그날 아무렇게나 낀다.</p>
+  <ul class="spec">
+    <li><b>성별</b><span>여</span></li>
+    <li><b>키</b><span>167cm</span></li>
+    <li><b>혈액형</b><span>?? &nbsp;— 보건실 기록카드에 그 칸만 비어 있다</span></li>
+  </ul>
+
+  <p style="margin-top:34px">칼로 자른 듯 끝이 고른 검은 단발. 앞머리가 눈썹을 덮는다.
+     창백하고 예쁘다는 말을 자주 듣는데 아무도 오래 옆에 못 있는다.</p>
+  <p>졸업사진 속 서온의 귀는 비어 있다. 학교 다닐 땐 하나도 없었다.
+     여섯 해 만에 마주친 귀에는 <strong>피어싱이 빼곡하다.</strong>
+     좌우 개수가 다르고, 기분 따라 그날그날 아무렇게나 낀다.
+     언제 그렇게 뚫었는지 아는 사람이 없다.</p>
+  <p class="note">뚫은 자리가 붉거나 부어 있는 걸 본 사람도 없다.
+     <em>서온은 그 여섯 해를 그렇게 보냈다.</em></p>
   <p class="note">한여름에도 긴팔을 입고 소매가 손등을 반쯤 덮는다.
      팔뚝과 목덜미를 가리기 위해서다.</p>
-  <p>여섯 해 전, 유저는 서온에게 선을 그었다. 어울리지 않아서.
-     그 뒤 무리가 서온을 은근히 괴롭혔고 유저는 가담하지도, 막지도 않았다.
-     <strong>서온은 그 얘기를 한 번도 먼저 꺼내지 않는다.</strong></p>
+  <p>말수가 적고 목소리가 낮다. 화를 내는 걸 본 사람이 없다.
+     대신 한 번 본 것을 안 잊는다. 유저가 몇 시 버스를 탔는지,
+     어느 골목으로 도는지, 며칠에 내려왔는지 <strong>묻지 않고도 알고 있다.</strong></p>
+  <p class="note">서온은 자기가 어떤지 알고 있는 것 같다.
+     여섯 해 전 일도 전부 기억하고 있지만, 한 번도 먼저 꺼내지 않는다.
+     <em>꺼낼 필요가 없어서인지, 아니면…</em></p>
   <p class="said">
-    언제부터 친구였는지,<br>언제부터 아니었는지 모른다.
-    <small>유저의 가장 오래된 기억 속에 이미 서온이 있다 · 처음 만난 장면이 없다</small>
+    언제부터 친구였는지,<br>언제부터 아니었는지 모르게 되었다.
+    <small>처음 만난 장면이 없다 · 끝난 장면도 없다</small>
   </p>
   <div class="rule"></div>
 </div></section>
 
 <section><div class="wrap">
-  <p class="kicker">Ⅳ &nbsp; 그것</p>
-  <h2>느껴져? 응?</h2>
-  <p>서온의 몸 어디에서든 나온다. 정해진 자리가 없다.
-     피부가 찢어지지 않고 벌어졌다가 닫히며 자국을 남기지 않는다.
-     상처가 아니라 개구부다.</p>
-  <ul class="spec">
-    <li><b>색</b><span>검정. 빛을 정면으로 받으면 아주 짙은 흑자색 — 꽃과 같은 색</span></li>
-    <li><b>돌기</b><span>표면에 노란 돌기가 줄지어 있다. 검은 백합의 노란 수술과 같은 색</span></li>
-    <li><b>온도</b><span>유저 체온과 정확히 같다. 시각이 촉각보다 먼저 안다</span></li>
-    <li><b>소리</b><span>완전 무음. 서온의 숨소리만 남는다</span></li>
-    <li><b>흔적</b><span>자국은 하루면 사라진다. 감각이 둔해지는 것만 남는다</span></li>
-  </ul>
-  <p class="note" style="margin-top:26px">
-    꽃이 그것에서 나온 건지, 그것이 꽃을 닮은 건지, 둘이 애초에 같은 것인지 —</p>
+  <p class="vert">8월 &nbsp;3일</p>
+  <p class="kicker">Ⅳ &nbsp; 프롤로그</p>
+  <h2>여름방학 첫날</h2>
+  <div class="pro">
+    <p>버스는 읍내 삼거리에 나를 내려놓고 산 쪽으로 돌아나갔다.
+       내리자마자 이상하다고 느낀 건 더위가 아니라 더위가 없다는 거였다.
+       8월인데 목덜미에 닿는 공기가 살갗과 구분이 안 됐다.
+       손등을 뺨에 대봤는데 어느 쪽이 손등인지 알 수 없었다.</p>
+    <p>캐리어 바퀴가 돌길에 걸려 몇 번이나 튀었다.
+       한복 대여점 앞에서 관광객 둘이 사진을 찍고 있었고,
+       기와 얹은 카페에서 나온 여자가 검은 꽃이 인쇄된 엽서를 부채처럼 흔들고 있었다.
+       나는 그 꽃 이름을 안다. 여기서 자랐으니까.
+       그런데 여섯 해 만에 보니까 그게 뭘 닮았는지 처음 알겠더라.</p>
+    <p>두 번째 골목까지는 사람이 있었다. 세 번째 골목부터는 없었다.
+       소리가 한 겹 줄어드는 자리가 있는데, 어디서부터인지는 매번 못 찾는다.
+       담벼락 이끼가 축축했다. 손끝으로 눌러보니 미지근했고,
+       사실 미지근하다는 말도 정확하지 않았다. 그냥 내 손가락 같았다.</p>
+    <p>본가는 골목 끝에서 오른쪽.
+       <strong>대문이 잠겨 있었다.</strong>
+       가방을 다 뒤져도 열쇠는 없었고, 등 뒤에서 매미가 울었다.
+       어느 쪽에서 우는지 알 수 없었다.</p>
+    <p>엄마는 전화를 한참 만에 받았다.
+       읍내에 앓아눕는 사람이 늘어서 밤에도 왕진을 돈다고 했다.
+       온계에 간호사는 엄마 하나뿐이다.
+       오늘은 못 들어갈 것 같으니 서온이한테 가 있으라고,
+       <em>걔네 집은 늘 열려 있다고 했다.</em></p>
+    <p class="note">여섯 해 동안 연락 한 번 안 한 애 얘기를
+       엄마는 어제 본 사람처럼 했다.</p>
+    <p class="note">단안리 온계읍 22-1. 서온이네는 살림집 겸 문구점이다.
+       셔터를 내리는 걸 본 적이 없다.</p>
+    <p>미닫이는 정말 열려 있었다.</p>
+    <p>서온은 놀라지 않았다.</p>
+    <p class="line">"왔네."</p>
+    <p>그 말만 하고 건넌방에 이부자리를 폈다.
+       8월인데 긴팔이었고, 소매가 손등을 반쯤 덮고 있었다.
+       불빛 아래서 눈이 옅은 금빛으로 보였다.
+       졸업앨범에 있는 얼굴 그대로였다.
+       <strong>나만 여섯 해를 지나온 것 같았다.</strong></p>
+    <p>이불이 미지근했다. 온도 차가 없어서 덮은 줄도 몰랐다.
+       잠은 이상하게 잘 왔다.</p>
+
+    <p class="slug">2026.08.03 &nbsp;월 &nbsp;·&nbsp; 23:40 &nbsp;·&nbsp; 맑음 36.5℃ &nbsp;·&nbsp; 서온의 집 건넌방</p>
+
+    <p>뭔가가 건드렸다.</p>
+    <p>목덜미였는지 손목이었는지 확실하지 않다. 아프지 않았다.
+       다만 <strong>방금까지 없던 것이 있었다.</strong></p>
+    <p>눈을 떴다. 서온이 내 위에 올라타 있었다.</p>
+    <p>어두워서 윤곽밖에 안 보이는데 눈만 보였다.
+       초저녁에 옅은 금빛으로 보이던 그 눈이 지금은 빛나고 있었다.
+       빛을 받아서가 아니라 <em>그 자체로.</em>
+       서온은 움직이지 않았다. 내가 깬 걸 알면서도 그대로 있었다.
+       소매가 걷혀 있었다.</p>
+    <p class="line">"깼네."</p>
+    <p>초저녁에 들은 것과 똑같은 목소리였다. 낮고, 평평하고, 짧았다.</p>
+    <p>방이 완전히 조용했다. 내 숨소리만 났다.
+       그것 말고는 아무 소리도 나지 않았다 —
+       <strong>서온의 숨소리조차.</strong></p>
+  </div>
   <div class="rule"></div>
 </div></section>
 
-<section><div class="wrap">
-  <p class="vert l">편안하다</p>
-  <p class="kicker">Ⅴ &nbsp; 값</p>
-  <h2>우리, 무슨 사이였지?</h2>
-  <p>접촉이 쌓이면 기억이 고쳐진다. 방향은 <strong>언제나 둘 사이가 좋았던 쪽</strong>으로.
-     버린 기억은 서먹했던 시기로, 괴롭힘은 짓궂었던 장난으로,
-     끝내 계속 친했던 사이로.</p>
-  <p class="note">가끔 앞뒤가 맞지 않는 물증이 나온다. 졸업앨범, 옛 메시지, 동창의 말.
-     보면 불쾌하고, 곧 잊는다.</p>
-  <p>관계는 진짜로 좋아진다. 서온은 안정되고, 발작이 줄고, 다정해진다.
-     대가는 미워했던 기억이 사라지는 것이다.
-     <em>사과할 대상도, 사과할 이유도 함께 지워진다.</em></p>
-  <p class="said">
-    편안하다.
-    <small>이것이 이 이야기의 값이다</small>
-  </p>
-  <div class="rule"></div>
-</div></section>
 
 <section id="end"><div class="wrap">
   <figure class="band">
@@ -493,7 +764,16 @@ html.gated, body.gated{overflow:hidden; height:100%;}
 
 <script>
 (function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 돌아가기 ---------- */
+  (function(){
+    var btn = document.getElementById('return-btn');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      if (window.history.length > 1) window.history.back();
+      else { try { window.close(); } catch(e) {} }
+    });
+  })();
 
   /* ---------- 진입 관문 ---------- */
   (function(){
@@ -528,21 +808,18 @@ html.gated, body.gated{overflow:hidden; height:100%;}
     img.style.setProperty('--dl', (-Math.random()*6).toFixed(2) + 's');
     return img;
   }
-
-  /* 뒤쪽 꽃밭 — 스크롤에 갈라짐 */
   function plant(host, side){
     var mob = window.innerWidth < 760;
     var TIERS = 5, PER = mob ? 2 : 3;
     for (var d=0; d<TIERS; d++){
-      var depth = d/(TIERS-1);                    // 0 앞 ~ 1 뒤
-      var k = Math.pow(depth, 0.72);              // 원근 압축
-      var per = PER + Math.round(depth*2);        // 뒤로 갈수록 개수↑
+      var depth = d/(TIERS-1);
+      var k = Math.pow(depth, 0.72);
+      var per = PER + Math.round(depth*2);
       for (var i=0;i<per;i++){
         var img = bloom(depth, depth <= 0.3);
         var w = (7.2 - k*5.4) + Math.random()*(1.6 - k*1.1);
         img.style.setProperty('--w', w.toFixed(2) + 'vw');
         img.style.setProperty('--amp', (3.8 - depth*2.6).toFixed(1) + 'deg');
-        // 뒤로 갈수록 위로 올라가고(지평선), 간격이 좁아짐
         img.style.bottom = (k*15 - 8 + Math.random()*(5 - k*3)) + 'vh';
         var lane = i/(per-1||1);
         var spread = mob ? 62 : 56;
@@ -555,7 +832,6 @@ html.gated, body.gated{overflow:hidden; height:100%;}
   }
   plant(L,'left'); plant(R,'right');
 
-  /* 앞쪽 — 촉수보다 앞. 화면 아래에 크게 걸침 */
   (function(){
     var FR = window.innerWidth < 760
       ? [{w:13,b:-5,x:-4,s:'left'}, {w:11,b:-5,x:-3,s:'right'}]
@@ -576,10 +852,9 @@ html.gated, body.gated{overflow:hidden; height:100%;}
 
   /* ---------- 촉수: 마디 체인 ---------- */
   var EDGES = document.getElementById('edges');
-  var RATIO = 2092/280;            // arm.png 세로/가로 비
+  var RATIO = 2092/280;
   var SEGS  = 16;
   var CFG = [
-    /* h(vh), 기준각, 좌우, x(vw), y(vh), 진폭, 속도, 위상, deep, opt */
     {h:52, a: 30, s:'left',  x:  3, y:-10, am:4.2, sp:0.44, ph:0.0,  deep:0, opt:0},
     {h:50, a:-26, s:'right', x:  4, y: -8, am:4.0, sp:0.37, ph:1.6,  deep:0, opt:0},
     {h:40, a: 10, s:'left',  x: 27, y:-20, am:5.2, sp:0.62, ph:3.3,  deep:1, opt:1},
@@ -589,7 +864,7 @@ html.gated, body.gated{overflow:hidden; height:100%;}
   function buildArms(){
     EDGES.innerHTML=''; ARMS.length=0;
     var vh = window.innerHeight/100, vw = window.innerWidth/100;
-    CFG.forEach(function(c,idx){
+    CFG.forEach(function(c){
       var H = c.h*vh, W = H/RATIO, segH = H/SEGS;
       var root = document.createElement('div');
       root.className = 'arm' + (c.deep?' deep':'') + (c.opt?' opt':'');
@@ -646,7 +921,7 @@ html.gated, body.gated{overflow:hidden; height:100%;}
       OOZE.appendChild(d);
       var s = {el:d, bead:d.lastChild, h:0, st:0, ph:Math.random()*7,
                sp:0.6 + Math.random()*1.1, op:parseFloat(d.style.opacity)};
-      reseed(s); s.wait *= Math.random();   // 첫 등장은 흩어지게
+      reseed(s); s.wait *= Math.random();
       STR.push(s);
     }
   }
@@ -675,7 +950,7 @@ html.gated, body.gated{overflow:hidden; height:100%;}
     OOZE.appendChild(e);
     BLOTS.push(e);
     while (BLOTS.length > BLOT_MAX){ var old = BLOTS.shift(); if (old.parentNode) old.remove(); }
-    var b = performance.now(), REST = 0.20 + Math.random()*0.14;   // 남는 농도 — 안 지워진다
+    var b = performance.now(), REST = 0.20 + Math.random()*0.14;
     (function grow(t){
       var k = Math.min(1, (t - b) / 520), ease = 1 - Math.pow(1-k, 3);
       e.style.transform = 'rotate('+rot+'deg) scale(' + (0.3 + ease*0.7).toFixed(3) + ')';
@@ -688,16 +963,16 @@ html.gated, body.gated{overflow:hidden; height:100%;}
     var i, s;
     for (i=0;i<STR.length;i++){
       s = STR[i];
-      if (s.st === 0){                                  /* 맺히길 기다림 */
+      if (s.st === 0){
         s.wait -= dt; if (s.wait <= 0) s.st = 1;
-      } else if (s.st === 1){                           /* 쭈우우우욱 */
+      } else if (s.st === 1){
         var rate = s.quick ? 0.095 : 0.026;
         s.h += rate * dt * (0.34 + 0.66 * (1 - s.h/s.max));
         if (s.h >= s.max - 0.6){ s.h = s.max; s.st = 2; s.wait = s.quick ? 90 : 420; }
-      } else if (s.st === 2){                           /* 끊기기 직전 */
+      } else if (s.st === 2){
         s.wait -= dt;
         if (s.wait <= 0){ drop(s); s.st = 3; }
-      } else {                                          /* 뚝 — 튕겨 올라감 */
+      } else {
         s.h -= dt * 0.62;
         if (s.h <= 0){ s.h = 0; s.st = 0; reseed(s); }
       }
@@ -759,26 +1034,24 @@ html.gated, body.gated{overflow:hidden; height:100%;}
   function onScroll(){
     var max = document.body.scrollHeight - window.innerHeight;
     prog = max>0 ? Math.min(1, window.scrollY/max) : 0;
-    var part = Math.min(1, prog*3.1);                 // 초반에 빠르게 갈라짐
+    var part = Math.min(1, prog*3.1);
     var push = part*part*(window.innerWidth<760?46:62);
     L.style.transform = 'translate3d(-'+push+'vw,0,0) scale('+(1+part*0.34)+')';
     R.style.transform = 'translate3d('+push+'vw,0,0) scale('+(1+part*0.34)+')';
-    var PH = document.getElementById('photo');
-    if (PH) PH.style.transform = 'scale(' + (1.06 + part*0.16) + ') translateY(' + (part*3.2) + 'vh)';
     var fk = FRONT.children;
     for (var k=0;k<fk.length;k++){
       var dir = fk[k].style.right ? 1 : -1;
       fk[k].style.translate = (dir*part*part*26)+'vw ' + (part*part*10)+'vh';
     }
-    // 스크롤할수록 촉수가 안쪽으로 밀려들어옴
     var adv = prog*prog*(window.innerWidth<760 ? 5 : 9);
     for (var i=0;i<ARMS.length;i++){
-      var dir = ARMS[i].cfg.s==='right' ? -1 : 1;
-      ARMS[i].root.style.translate = (dir*adv)+'vw ' + (-adv*0.5)+'vh';
+      var d2 = ARMS[i].cfg.s==='right' ? -1 : 1;
+      ARMS[i].root.style.translate = (d2*adv)+'vw ' + (-adv*0.5)+'vh';
     }
     if (prog > peak) peak = prog;                     // 불가역
     if (gSq) gSq.style.top = (peak*100).toFixed(2)+'%';
   }
+  window.onScroll = onScroll;
   window.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('resize', onScroll);
   onScroll();
@@ -816,7 +1089,6 @@ html.gated, body.gated{overflow:hidden; height:100%;}
       if (au.paused) play(); else stop();
     });
 
-    /* 첫 상호작용에 얹어 자동 시작 (정책상 제스처 필요) */
     if (wanted){
       var armed = true;
       var kick = function(){
@@ -829,7 +1101,6 @@ html.gated, body.gated{overflow:hidden; height:100%;}
       ['pointerdown','keydown','wheel','touchstart','scroll'].forEach(function(ev){
         window.addEventListener(ev, kick, {passive:true, once:false});
       });
-      /* 일부 브라우저는 그냥 되기도 함 */
       play();
     }
 
@@ -841,5 +1112,6 @@ html.gated, body.gated{overflow:hidden; height:100%;}
 
 })();
 </script>
+
 </body>
 </html>

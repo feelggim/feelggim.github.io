@@ -315,54 +315,22 @@ h3::before{content:""; width:14px; height:1px; background:var(--red); flex:none;
     linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) 8%, #000 28%, #000 72%,
       rgba(0,0,0,.35) 92%, transparent 100%);
   mask-composite:intersect;}
-/* 장면 도판 — 화면 폭으로 쫙 */
+/* 장면 도판 — 화면 폭으로 쫙. 높이를 폭에 묶어 크롭 비율 고정 */
 .bleed{position:relative; left:50%; width:100vw; margin:52px 0 52px -50vw;
   line-height:0; overflow:hidden;}
 .bleed img{display:block; width:100%;
-  height:clamp(230px,36vh,400px); object-fit:cover; object-position:center 42%;
+  height:clamp(240px, calc(100vw / 2.35), 76vh);
+  object-fit:cover; object-position:center 42%;
   filter:grayscale(.62) contrast(1.05) saturate(1.02) brightness(1.02);
   -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 9%,#000 91%,transparent 100%);
           mask-image:linear-gradient(180deg,transparent 0%,#000 9%,#000 91%,transparent 100%);}
 .bleed.top img{filter:grayscale(.22) contrast(1.03) saturate(1.06) brightness(1.01);}
-.bleed.tall img{height:clamp(280px,44vh,480px);}
-@media (max-width:620px){.bleed{margin:38px 0 38px -50vw}
-  .bleed img{height:clamp(190px,30vh,280px)}
-  .bleed.tall img{height:clamp(230px,36vh,340px)}}
+.bleed.tall img{height:clamp(290px, calc(100vw / 1.92), 86vh);}
+@media (max-width:760px){
+  .bleed{margin:38px 0 38px -50vw}
+  .bleed img{height:clamp(200px, calc(100vw / 1.5), 360px)}
+  .bleed.tall img{height:clamp(240px, calc(100vw / 1.25), 430px)}}
 
-/* ---------- 프롤로그 ---------- */
-.pro{font-size:16.5px; line-height:2.3; color:var(--ink-2);}
-.pro p{margin:0 0 26px;}
-.pro p:first-of-type::first-letter{font-family:var(--title); font-weight:700;
-  font-size:2.9em; line-height:.92; float:left; margin:.1em .16em 0 0; color:var(--ink);}
-.pro .line{color:var(--ink); font-family:var(--title); font-size:19px;
-  letter-spacing:-.005em; margin:34px 0;}
-.pro .slug{font-family:var(--sans); font-size:10px; letter-spacing:.26em;
-  color:var(--ink-3); font-weight:400; line-height:2.2;
-  margin:64px 0 46px; padding:16px 0 0; position:relative;
-  border-top:1px solid var(--rule);}
-.pro .slug::before{content:""; position:absolute; left:0; top:-2px;
-  width:5px; height:5px; background:var(--red);}
-@media (max-width:520px){.pro .slug{font-size:9.5px; letter-spacing:.18em}}
-
-/* ---------- 마지막 ---------- */
-#end{padding-block:24vh 26vh; text-align:center;}
-#end .said{border:0; padding:0; margin-inline:auto; max-width:21em;}
-.band{position:relative; margin:0 auto 10vh; max-width:760px; line-height:0;}
-.band img{display:block; width:100%; height:auto;
-  filter:grayscale(.88) contrast(1.1) brightness(1.02);
-  mix-blend-mode:multiply; opacity:.92;
-  -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 7%, #000 20%, #000 80%,
-      rgba(0,0,0,.4) 93%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) 8%, #000 28%, #000 72%,
-      rgba(0,0,0,.35) 92%, transparent 100%);
-  -webkit-mask-composite:source-in;
-  mask-image:
-    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.4) 7%, #000 20%, #000 80%,
-      rgba(0,0,0,.4) 93%, transparent 100%),
-    linear-gradient(180deg, transparent 0%, rgba(0,0,0,.35) 8%, #000 28%, #000 72%,
-      rgba(0,0,0,.35) 92%, transparent 100%);
-  mask-composite:intersect;}
 .credit{font-family:var(--sans); font-size:10.5px; letter-spacing:.2em; color:var(--faint);
   line-height:2.5; margin-top:9vh; font-weight:300;}
 

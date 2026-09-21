@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="미온 : 그날의 온도 — GL 기원불명 얀데레 호러로맨스. 단안리 온계읍, 검은 백합, 그리고 하서온.">
+<meta name="theme-color" content="#060409">
+<meta property="og:type" content="website">
+<link rel="related" href="https://share.crack.wrtn.ai/nxf9ad">
+<meta property="og:title" content="미온 : 그날의 온도">
+<meta property="og:description" content="단안리 온계읍에는 검은 백합이 핀다. 여름은 아직 한 달이나 남았다.">
+<meta property="og:image" content="seon-smirk.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="seon-grin.webp" type="image/webp">
+<title>미온 : 그날의 온도 — 온계읍</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Myeongjo:wght@700;800&family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
+<style>
+:root{
+  --bk:#060409; --bk2:#0E0816; --bk3:#170D24;
+  --pu:#6B2BFF; --pu-d:#2A1150; --pu-l:#B28CFF;
+  --ye:#FFE11A; --ye-d:#E3B800;
+  --wh:#F6F2FC; --ink-2:#D2C9E2; --ink-3:#958BAA; --faint:#5F5672;
+  --blue:#3E5BFF;
+  --title:'Nanum Myeongjo',serif; --serif:'Noto Serif KR',serif;
+  --sans:'Noto Sans KR',system-ui,sans-serif; --pop:'Black Han Sans','Noto Sans KR',sans-serif;
+  --rule:rgba(210,201,226,.16);
+  --ease:cubic-bezier(.19,1,.22,1); --ease-io:cubic-bezier(.77,0,.18,1); --boing:cubic-bezier(.34,1.56,.64,1);
+  --g:0; --jx:0px; --jy:0px; --sk:0deg; --c1:12%; --c2:58%; --c3:52%; --c4:18%;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--bk); color:var(--ink-2); font-family:var(--serif); font-weight:300; font-size:16px; line-height:2.05;
+  word-break:keep-all; overflow-x:hidden; -webkit-font-smoothing:antialiased}
+::selection{background:var(--ye); color:var(--bk)}
+a{color:inherit}
+body.cur-on, body.cur-on a, body.cur-on button{cursor:none}
+svg.defs{position:absolute; width:0; height:0}
+
+/* ============ 바탕 · 지직 ============ */
+#paper{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(90% 70% at 50% 0%, rgba(107,43,255,.22) 0%, transparent 60%),
+             radial-gradient(60% 50% at 100% 100%, rgba(107,43,255,.16) 0%, transparent 70%), var(--bk)}
+#paper::after{content:""; position:absolute; inset:0; opacity:.55;
+  background-image:radial-gradient(rgba(107,43,255,.3) 1px, transparent 1.5px); background-size:10px 10px;
+  -webkit-mask-image:radial-gradient(70% 60% at 85% 18%, #000 0%, transparent 70%); mask-image:radial-gradient(70% 60% at 85% 18%, #000 0%, transparent 70%)}
+#static{position:fixed; inset:0; z-index:13; pointer-events:none; width:100vw; height:100vh; image-rendering:pixelated;
+  mix-blend-mode:screen; opacity:var(--sn,.05); transition:opacity .6s ease}
+#scan{position:fixed; inset:0; z-index:13; pointer-events:none;
+  background:repeating-linear-gradient(180deg, transparent 0 2px, rgba(0,0,0,.3) 2px 3px); opacity:.6}
+#scan::after{content:""; position:absolute; left:0; right:0; height:18vh; top:-18vh;
+  background:linear-gradient(180deg, transparent, rgba(178,140,255,.1), transparent); animation:roll 5s linear infinite}
+@keyframes roll{to{transform:translateY(136vh)}}
+#tears{position:fixed; inset:0; z-index:12; pointer-events:none; overflow:hidden}
+.tear{position:absolute; left:0; right:0; -webkit-backdrop-filter:invert(1) hue-rotate(90deg); backdrop-filter:invert(1) hue-rotate(90deg)}
+.tear.y{-webkit-backdrop-filter:none; backdrop-filter:none; background:var(--ye); mix-blend-mode:difference}
+.tear.p{-webkit-backdrop-filter:none; backdrop-filter:none; background:var(--pu); mix-blend-mode:screen}
+main{position:relative; z-index:4; transform:translate3d(var(--jx),var(--jy),0)}
+#flash{position:fixed; inset:0; z-index:14; pointer-events:none; opacity:0; mix-blend-mode:screen; background:var(--pu)}
+#flash.go{animation:fl 1.1s steps(1) 1}
+#flash.fpop{animation:flp .22s steps(1) 1}
+@keyframes fl{0%{opacity:.9; background:var(--ye)} 8%{opacity:0} 16%{opacity:.8; background:var(--pu)} 24%{opacity:0} 36%{opacity:.5; background:#fff} 42%{opacity:0} 62%{opacity:.3; background:var(--ye)} 68%{opacity:0}}
+@keyframes flp{0%{opacity:.55} 35%{opacity:0} 55%{opacity:.35} 100%{opacity:0}}
+
+/* 그것 — 아래에서 올라온다. 내려가지 않는다 */
+#grip{position:fixed; left:50%; bottom:0; z-index:2; pointer-events:none; width:max(100vw, 150vh); transform:translate3d(-50%, var(--up,80%), 0);
+  transition:transform 1.2s var(--ease); opacity:.62}
+#grip img{display:block; width:100%; height:auto; transform-origin:50% 100%; animation:writhe 7s ease-in-out infinite alternate}
+@keyframes writhe{0%{transform:scale(1) skewX(0)} 50%{transform:scale(1.02,1.035) skewX(1deg)} 100%{transform:scale(1.01,.99) skewX(-1.2deg)}}
+.night #grip{opacity:.95}
+.night #grip img{animation:writheN .9s steps(3) infinite alternate}
+@keyframes writheN{0%{transform:scale(1.02) skewX(-2deg) translateY(0)} 100%{transform:scale(1.05,1.08) skewX(2.5deg) translateY(-1.5%)}}
+@media (max-width:760px){#grip{width:190vw}}
+
+/* 젖은 가닥 */
+#ooze{position:fixed; inset:0; z-index:5; pointer-events:none; overflow:hidden}
+.str{position:absolute; top:-10px; width:var(--w); height:0; transform:translateX(-50%); transform-origin:50% 0}
+.str s{position:absolute; inset:0; display:block;
+  background:linear-gradient(90deg, rgba(107,43,255,0) 0%, rgba(107,43,255,.5) 12%, rgba(30,12,60,.95) 30%, rgba(8,5,14,.98) 48%, rgba(42,17,80,.94) 62%, rgba(178,140,255,.55) 82%, rgba(107,43,255,0) 100%);
+  clip-path:polygon(0 0,100% 0,88% 14%,72% 33%,66% 55%,61% 78%,58% 100%,42% 100%,39% 78%,34% 55%,28% 33%,12% 14%)}
+.str b{position:absolute; left:50%; top:-2px; display:block; width:calc(var(--w)*2.1); height:calc(var(--w)*.8); margin-left:calc(var(--w)*-1.05);
+  border-radius:50% 50% 58% 58%/24% 24% 76% 76%; background:radial-gradient(58% 72% at 44% 26%, rgba(107,43,255,.6), rgba(42,17,80,.3) 52%, transparent)}
+.str i{position:absolute; left:50%; top:100%; display:block; width:var(--bw); height:calc(var(--bw)*1.26); margin-left:calc(var(--bw)*-.5); margin-top:calc(var(--bw)*-.4);
+  border-radius:52% 48% 46% 54%/38% 38% 62% 62%; background:radial-gradient(40% 32% at 34% 26%, #FFE11A 0%, rgba(107,43,255,.95) 34%, #0A0612 100%)}
+.drp{position:absolute; width:var(--bw); height:calc(var(--bw)*1.26); margin-left:calc(var(--bw)*-.5); border-radius:52% 48% 46% 54%/38% 38% 62% 62%;
+  background:radial-gradient(40% 32% at 34% 26%, #FFE11A 0%, rgba(107,43,255,.95) 34%, #0A0612 100%)}
+.blot{position:absolute; border-radius:46% 54% 52% 48%/52% 46% 54% 48%;
+  background:radial-gradient(60% 58% at 46% 42%, rgba(107,43,255,.5), rgba(107,43,255,.16) 62%, transparent 78%)}
+
+/* 게이지 */
+#gauge{position:fixed; right:clamp(12px,1.8vw,22px); top:24vh; bottom:24vh; width:2px; z-index:6; pointer-events:none; background:rgba(210,201,226,.12)}
+#gauge .fill{position:absolute; left:0; right:0; top:0; height:0; background:var(--pu)}
+#gauge .sq{position:absolute; left:50%; top:0; width:8px; height:8px; margin:-4px 0 0 -4px; background:var(--ye); box-shadow:0 0 14px var(--ye)}
+@media (max-width:760px){#gauge{display:none}}
+
+/* ============ 헤더 ============ */
+#hd{position:fixed; inset:0 0 auto 0; z-index:8; display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:max(12px,2vh) clamp(14px,3vw,40px); pointer-events:none}
+#hd > *{pointer-events:auto}
+#hd::before{content:""; position:absolute; inset:0 0 -40px 0; z-index:-1; pointer-events:none;
+  background:linear-gradient(180deg, rgba(6,4,9,.85), rgba(6,4,9,.35) 60%, transparent)}
+.menu-open #hd::before{opacity:0}
+.brand{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-decoration:none; display:flex; align-items:center; gap:.5em;
+  font-family:var(--pop); font-size:22px; color:var(--ye); letter-spacing:.04em; text-shadow:2px 2px 0 var(--pu)}
+.brand small{font-family:var(--title); font-weight:800; font-size:12px; color:var(--pu-l); text-shadow:none; letter-spacing:.2em}
+.hd-r{display:flex; gap:8px}
+.pill{appearance:none; -webkit-appearance:none; display:inline-flex; align-items:center; gap:9px; height:2.5rem; padding:0 1.05rem; border-radius:999px;
+  background:rgba(14,8,22,.7); border:1.5px solid rgba(210,201,226,.22); color:var(--ink-2); font-family:var(--sans); font-weight:500; font-size:.72rem;
+  letter-spacing:.16em; white-space:nowrap; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); cursor:pointer;
+  transition:border-color .25s, color .25s, background .25s, transform .3s var(--boing), box-shadow .3s}
+.pill:hover{color:var(--bk); background:var(--ye); border-color:var(--ye); box-shadow:3px 3px 0 var(--pu); transform:translate(-2px,-2px)}
+.pill:focus-visible{outline:2px solid var(--ye); outline-offset:3px}
+.return-btn{padding-left:.8rem}
+.return-btn svg{width:1rem; height:1rem; flex:none; color:var(--blue)}
+.return-btn:hover{background:var(--blue); border-color:var(--blue); color:var(--wh); box-shadow:3px 3px 0 var(--ye)}
+.return-btn:hover svg{color:var(--wh)}
+#snd .eq{display:flex; align-items:flex-end; gap:2px; height:11px}
+#snd .eq i{display:block; width:2px; height:3px; background:currentColor; opacity:.6}
+#snd[aria-pressed="true"]{color:var(--ye); border-color:rgba(255,225,26,.5)}
+#snd[aria-pressed="true"]:hover{color:var(--bk)}
+#snd[aria-pressed="true"] .eq i{opacity:1; animation:eq .9s ease-in-out infinite alternate}
+#snd[aria-pressed="true"] .eq i:nth-child(2){animation-duration:.5s} #snd[aria-pressed="true"] .eq i:nth-child(3){animation-duration:1.1s} #snd[aria-pressed="true"] .eq i:nth-child(4){animation-duration:.7s}
+@keyframes eq{from{height:3px} to{height:11px}}
+#menuBtn .bars{position:relative; width:16px; height:8px}
+#menuBtn .bars i{position:absolute; left:0; right:0; height:1.5px; background:currentColor; transition:transform .5s var(--ease), top .5s var(--ease)}
+#menuBtn .bars i:first-child{top:0} #menuBtn .bars i:last-child{top:6.5px}
+.menu-open #menuBtn .bars i:first-child{top:3.25px; transform:rotate(35deg)}
+.menu-open #menuBtn .bars i:last-child{top:3.25px; transform:rotate(-35deg)}
+@media (max-width:640px){.brand{display:none} .pill{height:2.3rem; padding:0 .8rem; font-size:.64rem; letter-spacing:.1em} .return-btn .full{display:none} #snd .txt{display:none}}
+@media (min-width:641px){.return-btn .short{display:none}}
+
+#idx{position:fixed; right:clamp(14px,3vw,40px); bottom:max(16px,3vh); z-index:6; pointer-events:none; display:flex; gap:10px; align-items:center;
+  font-family:var(--sans); font-size:10px; letter-spacing:.28em; color:var(--ink-3)}
+#idx b{font-family:var(--pop); font-weight:400; font-size:22px; color:var(--ye); letter-spacing:0; text-shadow:2px 2px 0 var(--pu)}
+#lilyN{position:fixed; left:clamp(14px,3vw,40px); bottom:max(16px,3vh); z-index:6; pointer-events:none;
+  font-family:var(--sans); font-size:10px; letter-spacing:.24em; color:var(--ink-3); opacity:0; transition:opacity .5s}
+#lilyN.on{opacity:1}
+#lilyN b{font-family:var(--pop); font-weight:400; font-size:16px; color:var(--ye); letter-spacing:0; margin:0 .3em}
+
+/* ============ 메뉴 ============ */
+#menu{position:fixed; inset:0; z-index:7; background:var(--ye); display:grid; grid-template-columns:1fr 1.1fr; color:var(--bk);
+  clip-path:circle(0% at calc(100% - 60px) 38px); visibility:hidden; transition:clip-path .9s var(--ease-io), visibility 0s .9s}
+.menu-open #menu{clip-path:circle(160% at calc(100% - 60px) 38px); visibility:visible; transition:clip-path .9s var(--ease-io), visibility 0s}
+.mimgs{position:relative; overflow:hidden; background:var(--pu-d)}
+.mimg{position:absolute; inset:0; background-size:cover; background-position:center 38%; opacity:0; transform:scale(1.12);
+  transition:opacity .6s, transform 1.4s var(--ease)}
+.mimg.duo{filter:url(#duoPu)}
+.mimg.on{opacity:1; transform:scale(1)}
+.mimgs::after{content:""; position:absolute; inset:0; background-image:radial-gradient(rgba(255,225,26,.5) 1.4px, transparent 1.9px); background-size:9px 9px;
+  -webkit-mask-image:linear-gradient(90deg, transparent 40%, #000); mask-image:linear-gradient(90deg, transparent 40%, #000)}
+.mlist{display:flex; flex-direction:column; justify-content:center; padding:12vh clamp(22px,5vw,76px) 8vh; position:relative}
+.mlist::before{content:""; position:absolute; inset:0; pointer-events:none; opacity:.14;
+  background-image:linear-gradient(#000 1.5px, transparent 1.5px), linear-gradient(90deg, #000 1.5px, transparent 1.5px); background-size:54px 76px}
+.mlist .mh{font-family:var(--sans); font-weight:700; font-size:10px; letter-spacing:.4em; margin:0 0 3vh; position:relative}
+.mlist a{position:relative; text-decoration:none; display:block; opacity:0; transform:translateY(50px) rotate(3deg); transition:opacity .5s, transform .9s var(--boing)}
+.menu-open .mlist a{opacity:1; transform:none}
+.menu-open .mlist a:nth-of-type(1){transition-delay:.3s} .menu-open .mlist a:nth-of-type(2){transition-delay:.36s} .menu-open .mlist a:nth-of-type(3){transition-delay:.42s}
+.menu-open .mlist a:nth-of-type(4){transition-delay:.48s} .menu-open .mlist a:nth-of-type(5){transition-delay:.54s} .menu-open .mlist a:nth-of-type(6){transition-delay:.66s}
+.mlist .mt{display:flex; align-items:baseline; gap:.4em; font-family:var(--pop); font-size:clamp(40px,6vw,92px); line-height:1.12; color:var(--bk); transition:color .2s, transform .5s var(--boing), text-shadow .2s}
+.mlist .mt small{font-family:var(--title); font-weight:800; font-size:14px; letter-spacing:.2em}
+.mlist a:hover .mt, .mlist a:focus-visible .mt{color:var(--pu); transform:translateX(14px) skewX(-6deg); text-shadow:4px 4px 0 var(--bk)}
+.mlist a.out{margin-top:5vh}
+.mlist a.out .mt{font-family:var(--sans); font-weight:700; font-size:14px; letter-spacing:.24em; color:var(--blue)}
+@media (max-width:760px){#menu{grid-template-columns:1fr} .mimgs{display:none}}
+
+/* ============ 공통 ============ */
+.box{position:relative; max-width:1260px; margin:0 auto; padding-inline:clamp(18px,4vw,56px)}
+.sec{position:relative; padding:20vh 0 16vh}
+.lb{font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.28em; color:var(--ink-3); margin:0}
+.sec-hd{position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2.6fr); gap:clamp(18px,4vw,60px); align-items:end; margin-bottom:12vh}
+.sec-hd .lb{display:flex; flex-direction:column; gap:1em}
+.no{display:inline-grid; place-items:center; width:clamp(64px,7vw,104px); aspect-ratio:1; border-radius:50%; background:var(--ye); color:var(--bk);
+  font-family:var(--title); font-weight:800; font-size:clamp(30px,3.4vw,50px); letter-spacing:0; box-shadow:5px 5px 0 var(--pu); transform:rotate(-8deg);
+  animation:bob 3.2s ease-in-out infinite alternate}
+@keyframes bob{from{transform:rotate(-8deg) translateY(0)} to{transform:rotate(-3deg) translateY(-6px)}}
+.big{font-family:var(--title); font-weight:800; font-size:clamp(44px,8vw,128px); line-height:1.12; color:var(--wh); letter-spacing:-.03em; margin:0}
+.addr{font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.32em; color:var(--ink-3); margin:3vh 0 0}
+.cols{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2.6fr); gap:clamp(18px,4vw,60px); margin:0 0 11vh}
+.cols .side{position:sticky; top:15vh; align-self:start}
+.cols .main{max-width:660px}
+@media (max-width:860px){.sec-hd, .cols{grid-template-columns:1fr} .cols .side{position:static} .sec-hd{margin-bottom:8vh} .cols{margin-bottom:8vh}}
+h3{font-family:var(--title); font-weight:800; font-size:clamp(22px,2.6vw,32px); color:var(--wh); letter-spacing:-.01em; line-height:1.45; margin:0 0 20px}
+h3 .hl{background:linear-gradient(transparent 58%, rgba(107,43,255,.75) 58%)}
+p{margin:0 0 20px}
+.note{color:var(--ink-3); font-size:14.5px}
+em{font-style:normal; color:var(--pu-l); font-weight:400}
+strong{color:var(--wh); font-weight:600}
+mark{background:var(--ye); color:var(--bk); padding:0 .2em; font-weight:600}
+.said{font-family:var(--title); font-weight:800; font-size:clamp(24px,3.2vw,40px); line-height:1.7; color:var(--wh); letter-spacing:-.01em;
+  margin:9vh 0; padding-left:28px; border-left:5px solid var(--ye); text-wrap:balance}
+.said small{display:block; font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.22em; color:var(--ink-3); margin-top:18px}
+.smack{font-style:italic; font-family:var(--pop); font-size:clamp(30px,4vw,54px); color:var(--ye); text-shadow:3px 3px 0 var(--pu); margin:3vh 0; line-height:1.2}
+.spec{list-style:none; padding:0; margin:28px 0 0}
+.spec li{padding:15px 2px; display:grid; grid-template-columns:6.6em 1fr; gap:16px; align-items:baseline; font-size:15px; border-top:1px solid var(--rule)}
+.spec li:last-child{border-bottom:1px solid var(--rule)}
+.spec b{font-family:var(--sans); font-weight:700; color:var(--ye); font-size:11px; letter-spacing:.14em}
+@media (max-width:460px){.spec li{grid-template-columns:1fr; gap:4px}}
+
+/* 스티커 */
+.stk{position:absolute; z-index:3; font-family:var(--pop); font-size:clamp(13px,1.2vw,17px); line-height:1.25; background:var(--ye); color:var(--bk);
+  padding:.45em .85em; border-radius:999px; box-shadow:4px 4px 0 var(--pu); transform:rotate(var(--r,-8deg)); white-space:nowrap;
+  transition:transform .4s var(--boing)}
+.stk:hover{transform:rotate(calc(var(--r,-8deg) * -1)) scale(1.12)}
+.stk.pu{background:var(--pu); color:var(--ye); box-shadow:4px 4px 0 var(--bk)}
+.stk.wh{background:var(--wh); color:var(--bk); box-shadow:4px 4px 0 var(--ye)}
+.stk.round{border-radius:50%; width:clamp(78px,8vw,104px); aspect-ratio:1; padding:0; display:grid; place-items:center; text-align:center; white-space:normal}
+.stk.spin{animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 한옥 — 창살 · 기와 */
+.salt{position:absolute; inset:0; pointer-events:none; opacity:.09;
+  background-image:linear-gradient(var(--ye) 1.5px, transparent 1.5px), linear-gradient(90deg, var(--ye) 1.5px, transparent 1.5px); background-size:56px 78px;
+  -webkit-mask-image:radial-gradient(60% 70% at 80% 30%, #000, transparent 75%); mask-image:radial-gradient(60% 70% at 80% 30%, #000, transparent 75%)}
+.giwa{position:relative; z-index:5; height:40px; overflow:hidden;
+  background:radial-gradient(circle at 50% 100%, var(--pu) 0 18px, var(--bk) 19px 21px, transparent 22px) 0 0/40px 40px repeat-x,
+             radial-gradient(circle at 50% 100%, var(--pu-d) 0 18px, transparent 19px) 20px 12px/40px 40px repeat-x}
+
+/* 테이프 */
+.tape{position:relative; z-index:5; overflow:hidden; white-space:nowrap; background:var(--ye); color:var(--bk); transform:rotate(-2deg);
+  margin:0 -5vw; padding:1.1vh 0; border-block:3px solid var(--bk); box-shadow:0 8px 0 var(--pu)}
+.tape.pu{background:var(--pu); color:var(--ye); transform:rotate(1.6deg); box-shadow:0 -8px 0 var(--bk)}
+.tape.cop{background:repeating-linear-gradient(-45deg, var(--ye) 0 26px, var(--bk) 26px 52px); padding:0; height:14px; box-shadow:none; border:0}
+.mq-track{display:inline-flex; animation:mq var(--sp,40s) linear infinite}
+.tape.rev .mq-track{animation-direction:reverse}
+.mq-track span{font-family:var(--pop); font-size:clamp(20px,2.6vw,38px); line-height:1.3; padding-right:.9em}
+.mq-track span i{font-style:normal; display:inline-block; margin-right:.9em; transform:translateY(-.1em)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.night .mq-track{--sp:5s !important}
+
+/* 등장 */
+[data-split] .w{display:inline-block; white-space:nowrap}
+[data-split] .ch{display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.12em; margin-bottom:-.12em}
+[data-split] .ch > span{display:inline-block; transform:translateY(115%) rotate(8deg); transition:transform 1s var(--boing); transition-delay:calc(var(--i) * 32ms)}
+[data-split].in .ch > span{transform:none}
+.rv{opacity:0; transform:translateY(34px); transition:opacity 1s ease, transform 1.2s var(--ease)}
+.rv.in{opacity:1; transform:none}
+.rv.d1{transition-delay:.1s} .rv.d2{transition-delay:.2s} .rv.d3{transition-delay:.3s}
+.pop{opacity:0; transform:scale(.3) rotate(-24deg)} .pop.in{opacity:1; transform:rotate(var(--r,-8deg)); transition:opacity .3s, transform .8s var(--boing)}
+
+/* 글리치 — 노랑 / 보라 번짐 */
+.gl{position:relative}
+.gl::before, .gl::after{content:attr(data-t); position:absolute; left:0; top:0; width:100%; white-space:pre-line; pointer-events:none; opacity:0}
+.gl.in::before, .gl.in::after{opacity:calc(.25 + var(--g) * .75)}
+.gl::before{color:var(--ye); transform:translate3d(calc(-2px - var(--g) * 14px), 0, 0); clip-path:inset(var(--c1) 0 var(--c2) 0); mix-blend-mode:screen}
+.gl::after{color:var(--pu); transform:translate3d(calc(2px + var(--g) * 16px), 0, 0); clip-path:inset(var(--c3) 0 var(--c4) 0); mix-blend-mode:screen}
+
+/* 도판 — 보라 듀오톤. 올리면 노랑으로 */
+.bleed{position:relative; left:50%; width:100vw; margin:5vh 0 14vh -50vw; overflow:hidden; line-height:0; background:var(--pu-d);
+  clip-path:inset(18% 10% 18% 10%); transition:clip-path 1.5s var(--ease-io)}
+.bleed.in{clip-path:inset(0)}
+.bleed img{display:block; width:100%; height:clamp(260px, calc(100vw / 2.25), 82vh); object-fit:cover; object-position:center 42%;
+  filter:url(#duoPu) contrast(1.05); transform:scale(1.22); transition:transform 2.2s var(--ease)}
+.bleed.tall img{height:clamp(300px, calc(100vw / 1.85), 90vh)}
+.bleed.in img{transform:scale(1.06)}
+.bleed:hover img{filter:url(#duoYe) contrast(1.05)}
+.bleed::after{content:""; position:absolute; inset:0; pointer-events:none; background-image:radial-gradient(rgba(6,4,9,.55) 1.2px, transparent 1.7px); background-size:7px 7px; opacity:.5}
+.bleed .cap{position:absolute; left:clamp(18px,4vw,56px); bottom:clamp(16px,3vh,32px); z-index:2; line-height:1}
+.bleed .cap .stk{position:static}
+@media (max-width:760px){.bleed img{height:clamp(220px, calc(100vw / 1.4), 420px)} .bleed.tall img{height:clamp(260px, calc(100vw / 1.1), 480px)}}
+
+/* ============ 로더 · 관문 ============ */
+html.gated, body.gated{overflow:hidden; height:100%}
+#loader{position:fixed; inset:0; z-index:15; background:var(--bk); display:flex; flex-direction:column; justify-content:flex-end; padding:clamp(18px,4vw,56px);
+  transition:transform 1s var(--ease-io)}
+#loader.done{transform:translateY(-100%)}
+#loader .num{font-family:var(--pop); font-size:clamp(110px,24vw,340px); line-height:.82; color:var(--ye); text-shadow:6px 6px 0 var(--pu); font-variant-numeric:tabular-nums}
+#loader .num small{font-size:.24em; color:var(--pu-l); text-shadow:none; margin-left:.12em}
+#loader .lt{display:flex; justify-content:space-between; gap:20px; margin-top:3vh; font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.3em; color:var(--ink-3)}
+#loader .bar{height:3px; background:rgba(210,201,226,.12); margin-top:2vh; overflow:hidden}
+#loader .bar i{display:block; height:100%; width:0; background:var(--ye)}
+#gate{position:fixed; inset:0; z-index:9; background:var(--bk); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3vh 24px;
+  text-align:center; overflow:hidden; transition:opacity 1s ease, visibility 1s}
+#gate .salt{opacity:.12; -webkit-mask-image:radial-gradient(50% 50% at 50% 50%, transparent 30%, #000 80%); mask-image:radial-gradient(50% 50% at 50% 50%, transparent 30%, #000 80%)}
+#gate.off{opacity:0; visibility:hidden; pointer-events:none}
+#gate .inner{position:relative}
+#gateBtn{appearance:none; -webkit-appearance:none; background:none; border:0; padding:0; margin:0; line-height:0; cursor:pointer; display:block; position:relative}
+#gateBtn img{display:block; height:min(78vh,880px); width:auto; max-width:90vw; transition:transform .8s var(--boing), filter .5s}
+#gateBtn:hover img{transform:scale(1.03) rotate(-1deg); filter:contrast(1.08) saturate(1.2)}
+#gateBtn:focus{outline:none} #gateBtn:focus-visible{outline:2px solid var(--ye); outline-offset:14px}
+#gate .stk{animation:bob 2.6s ease-in-out infinite alternate}
+#gate .ghint{position:relative; z-index:2; font-family:var(--sans); font-weight:700; font-size:11px; letter-spacing:.36em; color:var(--ye); margin:20px 0 0; animation:blink 1.2s steps(2) infinite}
+#gate .warn{position:relative; z-index:2; font-family:var(--sans); font-weight:500; font-size:10px; letter-spacing:.2em; color:var(--ink-3); margin:10px 0 0}
+@keyframes blink{50%{opacity:.25}}
+@media (max-width:1180px){#gateBtn img{height:min(62vh,600px)}}
+@media (max-width:640px){#gate .stk{display:none}}
+
+/* ============ 히어로 ============ */
+#hero{position:relative; height:100svh; min-height:620px; overflow:hidden; display:flex; align-items:flex-end; padding-bottom:9vh; background:var(--pu-d)}
+.hero-bg{position:absolute; inset:-5%; background:url('town.webp') center 42%/cover no-repeat; filter:url(#duoPu) contrast(1.08); transform:scale(1.16);
+  transition:transform 3s var(--ease)}
+.ready .hero-bg{transform:scale(1); animation:kb 30s ease-in-out 3s infinite alternate}
+@keyframes kb{to{transform:scale(1.08) translate3d(-1.4%,-1%,0)}}
+#hero::before{content:""; position:absolute; inset:0; z-index:1; background-image:radial-gradient(rgba(6,4,9,.6) 1.3px, transparent 1.8px); background-size:8px 8px; opacity:.55}
+#hero::after{content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(6,4,9,.5) 0%, transparent 26%, transparent 45%, var(--bk) 100%)}
+.hero-in{position:relative; z-index:3; width:100%}
+.hero-lb{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 2vh}
+.hero-lb span{display:inline-block; padding:.35em .9em; border:1.5px solid rgba(255,225,26,.6); border-radius:999px; color:var(--ye); font-family:var(--sans); font-weight:500;
+  font-size:10.5px; letter-spacing:.2em; background:rgba(6,4,9,.5); opacity:0; transform:translateY(12px); transition:opacity .8s, transform 1s var(--boing)}
+.ready .hero-lb span{opacity:1; transform:none}
+.ready .hero-lb span:nth-child(2){transition-delay:.08s} .ready .hero-lb span:nth-child(3){transition-delay:.16s}
+.hero-t{font-family:var(--pop); font-weight:400; font-size:clamp(130px,28vw,420px); line-height:.86; color:var(--ye); letter-spacing:-.02em; margin:0 0 0 -.03em;
+  text-shadow:.03em .03em 0 var(--pu), .06em .06em 0 var(--bk)}
+.hero-t .ch > span{transition-duration:1.4s; transition-delay:calc(.2s + var(--i) * 120ms)}
+.hero-sub{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-top:3vh}
+.hero-sub .hj{font-family:var(--title); font-weight:800; font-size:clamp(20px,2.8vw,38px); color:var(--wh); letter-spacing:.22em; display:flex; align-items:center; gap:.8em}
+.hero-sub .hj i{display:block; width:clamp(30px,6vw,90px); height:2px; background:var(--ye)}
+.hero-sub p{max-width:21em; font-size:15px; color:var(--ink-2); margin:0; line-height:2.1}
+.hero-sub > *{opacity:0; transform:translateY(18px); transition:opacity 1s ease 1.1s, transform 1.2s var(--ease) 1.1s}
+.ready .hero-sub > *{opacity:1; transform:none}
+#hero .stk.a{top:17vh; left:clamp(18px,5vw,70px)}
+#hero .stk.b{bottom:46vh; right:clamp(200px,20vw,320px)}
+
+/* CCTV */
+.cctv{position:absolute; right:clamp(18px,4vw,56px); top:12vh; z-index:4; margin:0; width:clamp(118px,12vw,188px); aspect-ratio:590/960; overflow:hidden; background:#000;
+  border:3px solid var(--ye); box-shadow:6px 6px 0 var(--pu); transform:rotate(3deg); transition:transform .5s var(--boing)}
+.cctv:hover{transform:rotate(0) scale(1.06)}
+.cctv video{width:100%; height:100%; object-fit:cover; filter:url(#duoPu) contrast(1.35)}
+.cctv:hover video{filter:none}
+.cctv::after{content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(180deg, transparent 0 2px, rgba(0,0,0,.35) 2px 3px)}
+.cctv .rec{position:absolute; left:7px; top:6px; z-index:2; display:flex; align-items:center; gap:5px; font-family:var(--sans); font-weight:700; font-size:9px; letter-spacing:.14em; color:var(--wh); line-height:1}
+.cctv .rec i{width:6px; height:6px; border-radius:50%; background:var(--ye); animation:blink 1s steps(2) infinite}
+.cctv .ts{position:absolute; left:7px; right:7px; bottom:6px; z-index:2; font-family:var(--sans); font-weight:500; font-size:8.5px; letter-spacing:.1em; color:var(--wh); line-height:1.4; font-variant-numeric:tabular-nums}
+@media (max-width:640px){.cctv{top:auto; bottom:32vh; width:92px} #hero .stk.b{display:none}}
+
+/* ============ Ⅰ ============ */
+.temp{position:relative; display:flex; flex-direction:column; gap:10px}
+.temp .n{font-family:var(--pop); font-size:clamp(90px,11vw,170px); line-height:.86; color:var(--ye); text-shadow:5px 5px 0 var(--pu); font-variant-numeric:tabular-nums}
+.temp .u{font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.24em; color:var(--ink-3)}
+.goods-hd{display:flex; justify-content:space-between; align-items:flex-end; gap:18px; flex-wrap:wrap; margin:0 0 3vh}
+.goods-hd h3{margin:0}
+.goods{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(10px,1.4vw,18px); margin:0 0 5vh}
+.good{position:relative; aspect-ratio:3/4.15; border-radius:18px; overflow:hidden; background:var(--pu); padding:clamp(14px,1.5vw,20px);
+  display:flex; flex-direction:column; justify-content:space-between; isolation:isolate; border:3px solid var(--bk);
+  box-shadow:6px 6px 0 var(--ye); transition:transform .5s var(--boing), box-shadow .3s}
+.good:nth-child(2){background:var(--bk3)} .good:nth-child(3){background:var(--ye)} .good:nth-child(4){background:var(--wh)}
+.good:nth-child(3), .good:nth-child(4){box-shadow:6px 6px 0 var(--pu)}
+.good:nth-child(3) .nm, .good:nth-child(4) .nm, .good:nth-child(3) .pr, .good:nth-child(4) .pr, .good:nth-child(3) .tg, .good:nth-child(4) .tg{color:var(--bk)}
+.good:hover{transform:translate(-4px,-6px) rotate(-2deg); box-shadow:10px 12px 0 var(--ye)}
+.good .tg{font-family:var(--sans); font-weight:700; font-size:10px; letter-spacing:.22em; color:var(--ye); display:flex; justify-content:space-between}
+.good .fl{position:absolute; left:50%; top:47%; width:80%; transform:translate(-50%,-50%) rotate(var(--rot,0deg)); z-index:-1; transition:transform .8s var(--boing), filter .6s;
+  filter:brightness(1.25) contrast(1.15) drop-shadow(4px 4px 0 rgba(6,4,9,.5))}
+.good:hover .fl{transform:translate(-50%,-54%) rotate(calc(var(--rot,0deg) * -1)) scale(1.12); filter:brightness(1.6) contrast(1.2) drop-shadow(0 0 18px rgba(107,43,255,.9))}
+.good .fl.prod{width:96%; top:46%; filter:drop-shadow(6px 8px 0 rgba(6,4,9,.45))}
+.good:hover .fl.prod{transform:translate(-50%,-52%) rotate(calc(var(--rot,0deg) * -1)) scale(1.1); filter:drop-shadow(0 0 22px rgba(107,43,255,.85)) drop-shadow(8px 10px 0 rgba(6,4,9,.5))}
+.good:nth-child(3):hover .fl.prod{filter:drop-shadow(0 0 22px rgba(6,4,9,.5)) drop-shadow(8px 10px 0 rgba(107,43,255,.6))}
+.good .nm{font-family:var(--pop); font-size:clamp(16px,1.5vw,21px); color:var(--wh); line-height:1.3; margin:0}
+.good .pr{font-family:var(--sans); font-weight:700; font-size:11px; letter-spacing:.12em; color:var(--pu-l); margin:.5em 0 0}
+.good .price{position:absolute; right:12px; top:36px; z-index:2; width:62px; aspect-ratio:1; border-radius:50%; display:grid; place-items:center; text-align:center;
+  background:var(--ye); color:var(--bk); font-family:var(--pop); font-size:12px; line-height:1.15; transform:rotate(14deg); box-shadow:3px 3px 0 var(--bk); transition:transform .5s var(--boing)}
+.good:nth-child(3) .price{background:var(--pu); color:var(--ye)}
+.good:hover .price{transform:rotate(-10deg) scale(1.15)}
+.good.sign .board{position:absolute; left:10%; right:10%; top:32%; padding:14px 10px; border:3px solid var(--bk); border-radius:6px;
+  font-family:var(--pop); font-size:clamp(16px,1.6vw,22px); color:var(--bk); text-align:center; line-height:1.4; transform:rotate(-4deg); transition:transform .6s var(--boing)}
+.good.sign:hover .board{transform:rotate(5deg) scale(1.06)}
+@media (max-width:860px){.goods{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.plate{margin:0; line-height:0}
+.plate img{display:block; width:100%; max-width:260px; filter:brightness(1.5) contrast(1.2) drop-shadow(0 0 24px rgba(107,43,255,.8))}
+
+/* 경찰 */
+.cop-wrap{position:relative; margin:4vh 0 3vh}
+.cases{position:relative; border-top:2px solid var(--ye); background:rgba(14,8,22,.6)}
+.case{display:grid; grid-template-columns:9.6em 1fr 1.3fr 5.4em; gap:16px; align-items:baseline; padding:18px 10px; border-bottom:1px solid var(--rule);
+  font-family:var(--sans); font-size:13px; letter-spacing:.04em; color:var(--ink-3); transition:color .2s, background .2s, padding .4s var(--ease)}
+.case.hd{font-weight:700; font-size:9.5px; letter-spacing:.3em; color:var(--ye); padding-block:12px}
+.case:not(.hd):hover{color:var(--bk); background:var(--ye); padding-left:22px}
+.case .no2{font-variant-numeric:tabular-nums; color:var(--ink-2)}
+.case:not(.hd):hover .no2, .case:not(.hd):hover .st{color:var(--bk)}
+.case .st{text-align:right; font-weight:700; color:var(--faint)}
+.case .st.open{color:var(--pu-l)}
+@media (max-width:640px){.case{grid-template-columns:1fr auto; gap:4px 12px} .case .who{grid-column:1/-1; order:3} .case .last{grid-column:1/-1; order:4} .case.hd{display:none}}
+#peek{position:fixed; left:0; top:0; z-index:11; pointer-events:none; width:190px}
+#peek .pk{aspect-ratio:3/4; background:var(--wh); color:var(--bk); border:3px solid var(--bk); box-shadow:6px 6px 0 var(--pu); padding:12px; display:flex; flex-direction:column;
+  font-family:var(--sans); font-weight:700; font-size:9.5px; letter-spacing:.18em; opacity:0; transform:scale(.6) rotate(-8deg); transition:opacity .25s, transform .5s var(--boing)}
+#peek.on .pk{opacity:1; transform:scale(1) rotate(-3deg)}
+#peek .face{flex:1; margin:10px 0; border:2px dashed rgba(6,4,9,.35); display:grid; place-items:center; background:repeating-linear-gradient(-45deg, transparent 0 8px, rgba(107,43,255,.1) 8px 16px)}
+#peek .face span{font-family:var(--pop); font-size:15px; letter-spacing:.02em; color:var(--pu)}
+
+/* ============ Ⅲ ============ */
+.seon{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:clamp(24px,6vw,96px); align-items:start}
+.seon-l{position:sticky; top:11vh}
+.portrait{position:relative; margin:0; max-width:400px; line-height:0; border:4px solid var(--bk); box-shadow:10px 10px 0 var(--ye); transform:rotate(-2deg);
+  transition:transform .6s var(--boing), box-shadow .3s; background:#fff}
+.portrait > img{display:block; width:100%; height:auto; transition:opacity .25s}
+.portrait:hover{transform:rotate(1deg) scale(1.02)}
+.portrait .stk{right:-18px; top:-14px}
+.portrait .grad{position:absolute; left:-15%; bottom:-7%; width:42%; margin:0; border:3px solid var(--bk); box-shadow:5px 5px 0 var(--pu); transform:rotate(-9deg); background:#fff;
+  transition:transform .5s var(--boing)}
+.portrait .grad img{display:block; width:100%; height:auto; filter:grayscale(.3)}
+.portrait .grad:hover{transform:rotate(3deg) scale(1.3); z-index:4}
+.night .portrait{box-shadow:10px 10px 0 var(--pu); animation:jit .1s steps(2) 14}
+#hold{appearance:none; -webkit-appearance:none; position:relative; margin:48px 0 0; display:inline-flex; align-items:center; gap:14px; padding:12px 24px 12px 12px;
+  border-radius:999px; border:3px solid var(--bk); background:var(--ye); color:var(--bk); box-shadow:5px 5px 0 var(--pu);
+  font-family:var(--pop); font-size:17px; cursor:pointer; user-select:none; -webkit-user-select:none; touch-action:none; -webkit-touch-callout:none;
+  transition:transform .3s var(--boing)}
+#hold:active{transform:translate(3px,3px); box-shadow:2px 2px 0 var(--pu)}
+#hold:focus-visible{outline:2px solid var(--wh); outline-offset:5px}
+#hold svg{width:40px; height:40px; transform:rotate(-90deg)}
+#hold circle{fill:none; stroke-width:4}
+#hold .bg{stroke:rgba(6,4,9,.2)} #hold .fg{stroke:var(--pu); stroke-dasharray:106.8; stroke-dashoffset:106.8}
+#hold.shiver{animation:shiver .08s linear infinite}
+@keyframes shiver{0%{transform:translate(1px,-1px)} 50%{transform:translate(-1px,1px)} 100%{transform:translate(1px,1px)}}
+#hold[disabled]{background:var(--pu); color:var(--ye); cursor:default; animation:none}
+.night-txt{display:none; margin:28px 0 0; font-family:var(--pop); font-size:clamp(28px,3.4vw,46px); line-height:1.35; color:var(--ye); text-shadow:3px 3px 0 var(--pu)}
+.night-txt small{display:block; font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:.22em; color:var(--ink-3); text-shadow:none; margin-top:14px}
+.night .night-txt{display:block; animation:jit .12s steps(2) 12}
+@keyframes jit{0%{transform:translate(-4px,2px)} 100%{transform:translate(4px,-2px)}}
+@media (max-width:860px){.seon{grid-template-columns:1fr} .seon-l{position:static} .portrait{max-width:300px; margin-left:12%}}
+
+/* ============ Ⅳ 밤 ============ */
+.stage{position:relative; height:320vh}
+.stage-in{position:sticky; top:0; height:100vh; overflow:hidden; display:grid; place-items:center; background:var(--bk)}
+.stage-in .salt{opacity:.14; -webkit-mask-image:none; mask-image:none}
+.stage .big-bg{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; overflow:hidden; pointer-events:none}
+.stage .big-bg span{font-family:var(--pop); font-size:clamp(90px,17vw,260px); line-height:.9; white-space:nowrap; color:transparent; -webkit-text-stroke:2px rgba(107,43,255,.6);
+  transform:translateX(calc(var(--p,0) * -60vw))}
+.stage .big-bg span:nth-child(2){-webkit-text-stroke-color:rgba(255,225,26,.45); transform:translateX(calc(-40vw + var(--p,0) * 60vw))}
+.tv{position:relative; z-index:2; height:min(78vh, 760px); aspect-ratio:590/960; border:6px solid var(--bk); border-radius:22px; overflow:hidden; background:#fff;
+  box-shadow:0 0 0 4px var(--ye), 14px 14px 0 4px var(--pu), 0 0 90px rgba(107,43,255,.6); transform:rotate(calc(-3deg + var(--p,0) * 6deg)) scale(calc(.82 + var(--p,0) * .22))}
+.tv video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.tv .v2{mix-blend-mode:screen; opacity:0; filter:url(#chanY); transform:translate3d(calc(4px + var(--g) * 16px),0,0)}
+.tv .v3{mix-blend-mode:screen; opacity:0; filter:url(#chanP); transform:translate3d(calc(-4px - var(--g) * 16px),0,0)}
+.tv.split .v2, .tv.split .v3{opacity:.85}
+.tv::after{content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(180deg, transparent 0 3px, rgba(0,0,0,.22) 3px 4px)}
+.tv .rec{position:absolute; left:14px; top:12px; z-index:3; display:flex; gap:7px; align-items:center; font-family:var(--sans); font-weight:900; font-size:11px; letter-spacing:.16em; color:var(--bk)}
+.tv .rec i{width:8px; height:8px; border-radius:50%; background:var(--pu); animation:blink 1s steps(2) infinite}
+.tv.inv .v1{filter:invert(1) hue-rotate(180deg)}
+.nl{position:absolute; z-index:3; max-width:min(24em, 40vw); opacity:0; transform:translateY(24px) scale(.9); transition:opacity .4s, transform .7s var(--boing)}
+.nl.on{opacity:1; transform:none}
+.nl p{margin:0; font-family:var(--title); font-weight:800; font-size:clamp(18px,2vw,28px); line-height:1.6; color:var(--wh)}
+.nl p b{font-family:var(--pop); font-weight:400; color:var(--ye); font-size:1.3em; text-shadow:3px 3px 0 var(--pu)}
+.nl small{display:block; margin-top:8px; font-family:var(--sans); font-weight:500; font-size:10.5px; letter-spacing:.22em; color:var(--ink-3)}
+.nl.a{left:6vw; top:18vh} .nl.b{right:6vw; top:30vh; text-align:right} .nl.c{left:7vw; bottom:18vh} .nl.d{right:6vw; bottom:12vh; text-align:right}
+.nl.c p{font-family:var(--pop); font-weight:400; font-size:clamp(26px,3.4vw,48px); color:var(--ye); text-shadow:4px 4px 0 var(--pu); line-height:1.25}
+@media (max-width:860px){.nl{max-width:80vw} .nl.a{left:5vw; top:12vh} .nl.b{right:5vw; top:auto; bottom:30vh} .nl.c{left:5vw; bottom:20vh} .nl.d{right:5vw; bottom:6vh}
+  .tv{height:56vh}}
+.grin-card{position:relative; margin:0 0 6vh; max-width:560px; border:4px solid var(--bk); box-shadow:10px 10px 0 var(--pu); transform:rotate(1.5deg); line-height:0; background:#fff;
+  transition:transform .5s var(--boing)}
+.grin-card img{display:block; width:100%; height:auto}
+.grin-card:hover{transform:rotate(-1.5deg) scale(1.02)}
+.grin-card .stk{left:-16px; bottom:18px}
+
+/* 테이크오버 */
+#take{position:fixed; inset:0; z-index:16; background:#fff; display:grid; place-items:center; overflow:hidden; visibility:hidden; opacity:0}
+#take.on{visibility:visible; opacity:1; animation:tk 2.8s steps(1) forwards}
+@keyframes tk{0%{background:#fff} 8%{background:var(--ye)} 16%{background:#000} 22%{background:#fff} 40%{background:var(--pu)} 46%{background:#fff} 70%{background:#000} 100%{background:#000}}
+#take video{height:100vh; width:auto; max-width:none; animation:tkv .16s steps(2) infinite}
+@keyframes tkv{0%{transform:translate(-10px,4px) scale(1.04); filter:none} 50%{transform:translate(12px,-6px) scale(1.12); filter:invert(1) hue-rotate(180deg)} 100%{transform:none}}
+#take .tt{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:space-around; pointer-events:none}
+#take .tt span{font-family:var(--pop); font-size:clamp(60px,12vw,190px); line-height:.9; color:var(--ye); -webkit-text-stroke:3px var(--bk); white-space:nowrap; text-shadow:8px 8px 0 var(--pu);
+  animation:tkt .5s linear infinite}
+#take .tt span:nth-child(2){color:var(--pu); text-shadow:8px 8px 0 var(--ye); animation-direction:reverse}
+@keyframes tkt{from{transform:translateX(0)} to{transform:translateX(-30%)}}
+
+/* ============ Ⅴ ============ */
+.pro{font-size:17px; line-height:2.3; color:var(--ink-2)}
+.pro p{margin:0 0 28px}
+.pro .first::first-letter{font-family:var(--pop); font-size:3.4em; line-height:.9; float:left; margin:.06em .14em 0 0; color:var(--ye); text-shadow:3px 3px 0 var(--pu)}
+.pro .line{color:var(--wh); font-family:var(--title); font-weight:800; font-size:24px; margin:40px 0}
+.pro .slug{display:inline-flex; flex-wrap:wrap; gap:6px 14px; font-family:var(--sans); font-weight:700; font-size:10px; letter-spacing:.24em; color:var(--bk); background:var(--ye);
+  padding:10px 16px; margin:9vh 0 5vh; border:3px solid var(--bk); box-shadow:5px 5px 0 var(--pu); transform:rotate(-1.5deg); line-height:1.6}
+#eyeBtn{appearance:none; -webkit-appearance:none; display:inline-flex; align-items:center; gap:14px; margin:0 0 4vh; padding:20px 34px; border-radius:999px; border:3px solid var(--bk);
+  background:var(--pu); color:var(--ye); font-family:var(--pop); font-size:22px; cursor:pointer; box-shadow:6px 6px 0 var(--ye); transition:transform .4s var(--boing), opacity .6s}
+#eyeBtn:hover{transform:translate(-3px,-3px) rotate(-2deg); box-shadow:9px 9px 0 var(--ye)}
+#eyeBtn .d{width:14px; height:14px; border-radius:50%; background:var(--ye); box-shadow:0 0 16px var(--ye); animation:blink 1s steps(2) infinite}
+#eyeBtn.gone{opacity:0; transform:scale(.6) rotate(20deg); pointer-events:none}
+#pro2{display:none} #pro2.open{display:block}
+
+/* 끝 */
+#end{position:relative; padding:22vh 0 20vh; text-align:center; overflow:hidden}
+#end .said{border:0; padding:0; margin:0 auto; font-family:var(--pop); font-weight:400; font-size:clamp(40px,7vw,110px); line-height:1.15; color:var(--ye); text-shadow:6px 6px 0 var(--pu); max-width:12em}
+.band{position:relative; margin:0 auto 10vh; max-width:1000px; line-height:0; border:4px solid var(--bk); box-shadow:10px 10px 0 var(--pu); transform:rotate(-1.5deg); overflow:hidden; background:#fff}
+.band img{display:block; width:100%; height:auto}
+.band .stk{left:auto; right:18px; top:18px}
+.door{appearance:none; -webkit-appearance:none; display:inline-flex; align-items:center; gap:18px; padding:18px 18px 18px 30px; border-radius:999px;
+  border:3px solid var(--bk); background:var(--blue); color:var(--wh); cursor:pointer; box-shadow:7px 7px 0 var(--ye);
+  font-family:var(--sans); font-weight:700; font-size:13px; letter-spacing:.2em; transition:transform .4s var(--boing), box-shadow .3s}
+.door b{font-family:var(--pop); font-weight:400; font-size:20px; letter-spacing:.02em; background:var(--ye); color:var(--bk); padding:10px 20px; border-radius:999px}
+.door:hover{transform:translate(-3px,-3px) rotate(-2deg); box-shadow:10px 10px 0 var(--pu)}
+.door:focus-visible{outline:2px solid var(--wh); outline-offset:5px}
+.credit{font-family:var(--sans); font-weight:500; font-size:10.5px; letter-spacing:.2em; color:var(--ink-3); line-height:2.5; margin-top:10vh}
+
+/* 검은 백합 — 누르면 핀다. 지지 않는다 */
+#lilies{position:absolute; left:0; top:0; width:100%; height:0; z-index:6; pointer-events:none; overflow:visible}
+.lily{position:absolute; width:var(--s); margin:calc(var(--s) * -.5) 0 0 calc(var(--s) * -.5); transform:rotate(var(--r)) scale(0);
+  filter:brightness(1.45) contrast(1.2) drop-shadow(0 0 12px rgba(107,43,255,.9)); animation:bloom .9s var(--boing) forwards}
+@keyframes bloom{0%{transform:rotate(calc(var(--r) - 90deg)) scale(0)} 100%{transform:rotate(var(--r)) scale(1)}}
+.lily-say{position:absolute; transform:translate(-50%,-120%); font-family:var(--pop); font-size:15px; color:var(--ye); text-shadow:2px 2px 0 var(--pu); white-space:nowrap;
+  animation:say 1.6s ease forwards}
+@keyframes say{0%{opacity:0; transform:translate(-50%,-80%)} 20%{opacity:1; transform:translate(-50%,-130%)} 80%{opacity:1} 100%{opacity:0; transform:translate(-50%,-170%)}}
+
+/* 커서 */
+#cursor{position:fixed; left:0; top:0; z-index:17; pointer-events:none; opacity:0; transition:opacity .3s}
+#cursor.on{opacity:1} #cursor.none{opacity:0 !important}
+#cursor .ring{position:absolute; left:0; top:0; width:36px; height:36px; margin:-18px 0 0 -18px; border-radius:50%; border:2px solid var(--ye); display:grid; place-items:center;
+  transition:width .4s var(--boing), height .4s var(--boing), margin .4s var(--boing), background .3s, border-color .3s}
+#cursor .dot{position:absolute; left:0; top:0; width:6px; height:6px; margin:-3px 0 0 -3px; border-radius:50%; background:var(--ye)}
+#cursor .lb2{font-family:var(--pop); font-size:15px; color:var(--bk); opacity:0; transition:opacity .2s; white-space:nowrap}
+#cursor.hov .ring{width:58px; height:58px; margin:-29px 0 0 -29px; background:rgba(255,225,26,.18)}
+#cursor.big .ring{width:104px; height:104px; margin:-52px 0 0 -52px; background:var(--ye); border-color:var(--bk)}
+#cursor.big .lb2{opacity:1} #cursor.big .dot{opacity:0}
+#cursor.out .ring{background:var(--blue); border-color:var(--blue)} #cursor.out .lb2{color:var(--wh)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+  main{transform:none}
+  [data-split] .ch > span{transform:none} .rv, .pop{opacity:1; transform:none} .bleed{clip-path:none} .bleed img{transform:none}
+  #ooze, #static, #tears, #flash{display:none}
+}
+</style>
+</head>
+<body>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <filter id="duoPu" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.06 0.42 0.84"/><feFuncG type="table" tableValues="0.02 0.17 0.72"/><feFuncB type="table" tableValues="0.14 1 1"/></feComponentTransfer>
+  </filter>
+  <filter id="duoYe" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.16 0.42 1"/><feFuncG type="table" tableValues="0.05 0.17 0.88"/><feFuncB type="table" tableValues="0.3 1 0.1"/></feComponentTransfer>
+  </filter>
+  <filter id="chanY" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 .88 0 0 0  0 0 0 0 0  0 0 0 1 0"/></filter>
+  <filter id="chanP" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".42 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/></filter>
+</svg>
+
+<div id="paper" aria-hidden="true"></div>
+<div id="grip" aria-hidden="true"><img src="grip.webp" alt=""></div>
+<div id="ooze" aria-hidden="true"></div>
+<canvas id="static" width="160" height="90" aria-hidden="true"></canvas>
+<div id="scan" aria-hidden="true"></div>
+<div id="tears" aria-hidden="true"></div>
+<div id="flash" aria-hidden="true"></div>
+<div id="cursor" aria-hidden="true"><div class="ring"><span class="lb2"></span></div><div class="dot"></div></div>
+<div id="peek" aria-hidden="true"><div class="pk"><span class="pno">—</span><div class="face"><span>사진 없음</span></div><span>마지막 목격 이후 기록 없음</span></div></div>
+<div id="take" aria-hidden="true"><video muted playsinline loop preload="none" data-src="seon-night.mp4" poster="seon-night.webp"></video>
+  <div class="tt"><span>여기 좋아. 좋지? 들어갔어. 들어갔어. 여기 좋아. 좋지?</span><span>내꺼야. 내꺼. 내꺼. 내꺼. 내꺼! 내꺼야. 내꺼.</span><span>들어갔어. 들어갔어. 여기 좋아. 좋지? 들어갔어.</span></div></div>
+
+<div id="loader" aria-hidden="true">
+  <div class="num"><span id="ldn">00.0</span><small>℃</small></div>
+  <div class="bar"><i id="ldb"></i></div>
+  <div class="lt"><span>단안리 온계읍 22-1</span><span id="ldt">신호 수신 중</span></div>
+</div>
+
+<div id="gate">
+  <div class="salt" aria-hidden="true"></div>
+  <div class="inner">
+    <button id="gateBtn" type="button" aria-label="꽃을 건드려 들어가기" data-cursor="들어간다">
+      <img src="poster.webp" alt="미온 : 그날의 온도" decoding="async">
+    </button>
+    <span class="stk" style="--r:-12deg; left:-14%; top:12%">좋아하는 사람 곁에</span>
+    <span class="stk pu" style="--r:9deg; right:-14%; top:40%">몰래 두면</span>
+    <span class="stk round wh spin" style="left:-10%; bottom:8%">들어오면<br>못 나간다</span>
+  </div>
+  <p class="ghint">꽃을 건드리면 들어간다</p>
+  <p class="warn">⚠ 번쩍임 · 화면 흔들림 · 소리가 있습니다</p>
+</div>
+
+<header id="hd">
+  <button type="button" class="pill return-btn" id="return-btn" aria-label="단안리 온계읍 22-1 — 크랙 플롯으로 가기" data-cursor="나가기" data-out>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    <span class="full" data-scr>단안리 온계읍 22-1</span><span class="short">22-1</span>
+  </button>
+  <a class="brand" href="#hero" data-go>미온<small>微溫</small></a>
+  <div class="hd-r">
+    <button id="snd" class="pill" type="button" aria-pressed="false" aria-label="배경음 켜기">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="txt" data-scr>소리</span>
+    </button>
+    <button id="menuBtn" class="pill" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="bars" aria-hidden="true"><i></i><i></i></span><span class="t">메뉴</span>
+    </button>
+  </div>
+</header>
+
+<nav id="menu" aria-hidden="true" aria-label="목차">
+  <div class="mimgs" aria-hidden="true">
+    <div class="mimg duo on" data-k="1" style="background-image:url('town.webp')"></div>
+    <div class="mimg duo" data-k="2" style="background-image:url('walk.webp')"></div>
+    <div class="mimg" data-k="3" style="background-image:url('seon-day.webp'); background-position:center 12%"></div>
+    <div class="mimg" data-k="4" style="background-image:url('seon-grin.webp'); background-position:center 30%"></div>
+    <div class="mimg duo" data-k="5" style="background-image:url('stair.webp')"></div>
+    <div class="mimg" data-k="6" style="background-image:url('seon-smirk.webp')"></div>
+  </div>
+  <div class="mlist">
+    <p class="mh">(목차) &nbsp;단안리 온계읍</p>
+    <a href="#s1" data-go data-k="1"><span class="mt"><small>Ⅰ</small><span data-scr>온계</span></span></a>
+    <a href="#s2" data-go data-k="2"><span class="mt"><small>Ⅱ</small><span data-scr>그때</span></span></a>
+    <a href="#s3" data-go data-k="3"><span class="mt"><small>Ⅲ</small><span data-scr>하서온</span></span></a>
+    <a href="#s4" data-go data-k="4"><span class="mt"><small>Ⅳ</small><span data-scr>밤</span></span></a>
+    <a href="#s5" data-go data-k="5"><span class="mt"><small>Ⅴ</small><span data-scr>첫날</span></span></a>
+    <a href="#" class="out" data-exit data-k="6"><span class="mt">단안리 온계읍 22-1 &nbsp;↗</span></a>
+  </div>
+</nav>
+
+<div id="gauge" aria-hidden="true"><span class="fill"></span><span class="sq"></span></div>
+<div id="idx" aria-hidden="true"><span>온계읍</span><b>—</b></div>
+<div id="lilyN" aria-hidden="true">몰래 둔 꽃<b>0</b>송이</div>
+
+<main>
+<div id="lilies" aria-hidden="true"></div>
+
+<!-- ============ 히어로 ============ -->
+<section id="hero" data-idx="—">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <span class="stk a pop" style="--r:-10deg">溫溪 · 36.5℃ · 일 년 내내</span>
+  <span class="stk pu round pop b" style="--r:12deg">22-1<br>영업중</span>
+  <figure class="cctv" data-cursor="22-1" aria-label="단안리 온계읍 22-1 건넌방 CCTV">
+    <video muted playsinline loop preload="none" data-src="seon-night.mp4" poster="seon-night.webp"></video>
+    <span class="rec"><i></i>REC · CAM 03</span>
+    <span class="ts"><span id="clk">2026.08.03 23:40:00</span><br>22-1 건넌방</span>
+  </figure>
+  <div class="box hero-in">
+    <p class="hero-lb"><span>GL · 기원불명 인외 · 혐관</span><span>여름방학 귀향 호러로맨스</span><span>얀데레 · 집착 · 앵스트</span></p>
+    <h1 class="hero-t gl" data-split id="heroT">미온</h1>
+    <div class="hero-sub">
+      <span class="hj">微溫<i></i>그날의 온도</span>
+      <p>여기서는 무엇이 닿아도 <strong>닿은 줄 모른다.</strong> 관광객은 두 골목 안까지만 들어온다. 세 번째 골목부터는 소리가 줄고, 매미가 운다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="tape" aria-hidden="true"><div class="mq-track" style="--sp:36s">
+  <span><i>●</i>여기서는 무엇이 닿아도 닿은 줄 모른다</span><span><i>●</i>溫溪 36.5℃</span><span><i>●</i>절대 안 놓아</span><span><i>●</i>세 번째 골목부터 소리가 줄어든다</span>
+  <span><i>●</i>여기서는 무엇이 닿아도 닿은 줄 모른다</span><span><i>●</i>溫溪 36.5℃</span><span><i>●</i>절대 안 놓아</span><span><i>●</i>세 번째 골목부터 소리가 줄어든다</span>
+</div></div>
+
+<!-- ============ Ⅰ 온계 ============ -->
+<section class="sec" id="s1" data-idx="Ⅰ">
+<div class="salt" aria-hidden="true"></div>
+<div class="box">
+  <div class="sec-hd">
+    <p class="lb">(무대)<span class="no">Ⅰ</span></p>
+    <div>
+      <h2 class="big gl" data-split>기온이|변하지 않는 마을</h2>
+      <p class="addr rv">단안리 온계읍 &nbsp;·&nbsp; 溫溪 &nbsp;·&nbsp; 남부 분지 한옥 보존지구</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="side">
+      <div class="temp rv" data-cursor-none><span class="n" data-count="36.5">0.0</span><span class="u">℃ &nbsp;일 년 내내</span></div>
+    </div>
+    <div class="main">
+      <p class="rv">사방이 산으로 둘러싸인 분지. 차로 삼십 분 나가면 바다가 있다. 사계절은 있는데 체감 온도가 거의 변하지 않는다.
+         한여름 정오에 땀이 안 나고, 한겨울에도 입김이 잘 안 보인다.</p>
+      <p class="rv">주민들은 <em>"분지라 그렇지"</em>로 정리하고 더 생각하지 않는다. 지형이 설명해주는 것 같으니까 아무도 끝까지 안 묻는다.</p>
+      <p class="note rv">그 온도는 정확히 <mark>사람 살에 닿아도 아무 느낌이 없는 온도</mark>다. 체온과 같다. 그래서 닿아도 닿은 줄 모른다.</p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="side"><p class="lb rv">(읍내)</p></div>
+    <div class="main">
+      <h3 class="rv"><span class="hl">원래는 그냥 읍이었다</span></h3>
+      <p class="rv">옛 마을 구역이 한옥 보존지구로 묶인 게 2000년대 중반이다. 돌담길 사진 몇 장이 돌면서 사람이 들기 시작했고,
+         십몇 년 동안 읍의 절반이 천천히 상권으로 바뀌었다.</p>
+      <p class="note rv">대개는 <strong>거기 가는 길에 들른다.</strong> 한나절이면 다 본다. 그래서 자고 가는 손님이 많지 않고,
+         자고 간 사람은 하나같이 <em>잠을 너무 잘 잤다</em>고 적는다.</p>
+      <h3 class="rv" style="margin-top:8vh"><span class="hl">기와는 섞여 있다</span></h3>
+      <p class="rv">백 년 넘은 것과 십 년쯤 된 것이 한 지붕에 같이 얹혀 있다. <strong>새로 얹은 쪽이 더 빨리 검어진다.</strong> 이유는 아무도 모른다.</p>
+      <p class="note rv">밤이면 기와 골과 돌담 이끼와 한옥 기둥이 젖는다. 비는 안 왔다. 미지근하고 미끄럽고, 마르면 옅은 자국이 남는다.
+         아침이면 관광객이 그 위를 지나간다.</p>
+      <h3 class="rv" style="margin-top:8vh"><span class="hl">상권은 한 겹이다</span></h3>
+      <p class="rv">기와 얹은 카페, 한복 대여점, 목공방, 게스트하우스 네 곳, 기념품점 두 곳. 저녁 일곱 시면 셔터가 전부 내려간다.
+         <strong>포토스팟</strong> 표지판은 두 번째 골목까지다. 세 번째 골목부터는 없다.</p>
+    </div>
+  </div>
+
+  <div class="goods-hd">
+    <h3 class="rv">온계 검은백합 굿즈 <span class="lb" style="margin-left:.6em">(기념품점)</span></h3>
+    <p class="lb rv">사진에는 자줏빛으로 찍히고 &nbsp;눈으로 볼 때만 검다</p>
+  </div>
+  <div class="goods">
+    <div class="good rv" data-cursor="담기">
+      <span class="tg"><span>No.01</span><span>향초</span></span><span class="price">12,000<br>원</span>
+      <img class="fl prod" src="g-candle.webp" alt="온계읍 흑백합 향초" style="--rot:-4deg" loading="lazy">
+      <div><p class="nm">흑백합 향초</p><p class="pr">베스트셀러</p></div>
+    </div>
+    <div class="good rv d1" data-cursor="담기">
+      <span class="tg"><span>No.02</span><span>엽서</span></span><span class="price">4,500<br>원</span>
+      <img class="fl prod" src="g-post.webp" alt="온계읍 흑백합 엽서 세트" style="--rot:3deg" loading="lazy">
+      <div><p class="nm">흑백합 엽서 네 장</p><p class="pr">마음이 이어진다</p></div>
+    </div>
+    <div class="good rv d2" data-cursor="담기">
+      <span class="tg"><span>No.03</span><span>머리꽂이</span></span><span class="price">대여<br>증정</span>
+      <img class="fl prod" src="g-pin.webp" alt="한복 대여점 흑백합 머리꽂이" style="--rot:-6deg" loading="lazy">
+      <div><p class="nm">한복 대여점 머리꽂이</p><p class="pr">제일 많이 찍힌다</p></div>
+    </div>
+    <div class="good sign rv d3" data-cursor="찰칵">
+      <span class="tg"><span>No.04</span><span>표지판</span></span>
+      <div class="board">제2포토스팟 →</div>
+      <div><p class="nm">포토스팟</p><p class="pr">두 번째 골목까지</p></div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="side"><figure class="plate rv"><img src="lily.webp" alt="" loading="lazy"></figure></div>
+    <div class="main">
+      <p class="said rv" style="margin-top:0">좋아하는 사람 곁에<br>몰래 두면 마음이 이어진다.<small>온계 기념품 엽서에 적혀 있는 꽃말 &nbsp;·&nbsp; 빈 데를 누르면 한 송이씩 놓아둔다</small></p>
+      <p class="rv">정식 이름은 쿠로유리, <em>Fritillaria camschatcensis.</em> 자생지는 홋카이도·쿠릴·사할린·캄차카의 고산대 초원이다.</p>
+      <p class="rv"><strong>한반도 남부 분지에 이 꽃이 필 이유는 아무것도 없다.</strong> 그런데 온계에만 핀다. 돌담 밑 습한 자리마다 무리 지어 피고,
+         옮겨 심으면 사흘 안에 죽는다. 심은 적 없는 자리에도 핀다. 상권 화단에서, 마당에서, 신발장 옆에서.</p>
+      <p class="note rv">인과가 정확히 거꾸로인데 아무도 이상하게 여기지 않는다. 예쁘다고들 사 간다.</p>
+    </div>
+  </div>
+
+  <div class="cols" style="margin-bottom:0">
+    <div class="side"><p class="lb rv">(수사)</p></div>
+    <div class="main">
+      <h3 class="rv"><span class="hl">경찰은 들어왔다가 그냥 나간다</span></h3>
+      <p class="rv">온계는 수사망에 올라 있다. 실종 신고가 몇 해째 쌓여 있다. 그런데 <strong>단서가 하나도 안 나온다.</strong>
+         유류품도, 혈흔도, 다툰 자국도 없다. 마지막 목격 이후가 통째로 비어 있다.</p>
+      <p class="note rv">사건은 열리고, 열린 채로 있다. 조사를 다녀간 쪽에서 며칠 뒤 종결 처리를 하는 일이 몇 번 있었다.
+         <em>왜 그렇게 했는지는 본인들도 잘 설명하지 못했다.</em></p>
+      <p class="rv">순찰차는 한 달에 두어 번 읍사무소 앞에 선다. 주민들은 목례하고 지나간다. 무서워하지 않는다. <mark>귀찮아할 뿐이다.</mark></p>
+    </div>
+  </div>
+</div>
+<div class="cop-wrap">
+  <div class="tape cop" aria-hidden="true"></div>
+  <div class="tape" aria-hidden="true" style="transform:rotate(-1deg)"><div class="mq-track" style="--sp:22s">
+    <span><i>▲</i>수사 중 · 출입 금지 · POLICE LINE</span><span><i>▲</i>온계읍 실종 접수</span><span><i>▲</i>수사 중 · 출입 금지 · POLICE LINE</span><span><i>▲</i>온계읍 실종 접수</span>
+    <span><i>▲</i>수사 중 · 출입 금지 · POLICE LINE</span><span><i>▲</i>온계읍 실종 접수</span><span><i>▲</i>수사 중 · 출입 금지 · POLICE LINE</span><span><i>▲</i>온계읍 실종 접수</span>
+  </div></div>
+</div>
+<div class="box">
+  <div class="cases rv" role="table" aria-label="온계읍 실종 접수 기록">
+    <div class="case hd" role="row"><span>접수 번호</span><span>대상</span><span>마지막 목격</span><span class="st">상태</span></div>
+    <div class="case" role="row" data-no="온계-21-0412" data-cursor="기록"><span class="no2">온계-21-0412</span><span class="who">관광객 · 여 · 30대</span><span class="last">게스트하우스 체크인 이후</span><span class="st">종결</span></div>
+    <div class="case" role="row" data-no="온계-22-0819" data-cursor="기록"><span class="no2">온계-22-0819</span><span class="who">관광객 · 남 · 20대</span><span class="last">제2포토스팟</span><span class="st">종결</span></div>
+    <div class="case" role="row" data-no="온계-23-0703" data-cursor="기록"><span class="no2">온계-23-0703</span><span class="who">관광객 · 여 · 40대</span><span class="last">민속카페 영업 종료 직전</span><span class="st">종결</span></div>
+    <div class="case" role="row" data-no="온계-24-1027" data-cursor="기록"><span class="no2">온계-24-1027</span><span class="who">관광객 · 남 · 50대</span><span class="last">세 번째 골목 입구</span><span class="st">종결</span></div>
+    <div class="case" role="row" data-no="온계-25-0506" data-cursor="기록"><span class="no2">온계-25-0506</span><span class="who">관광객 · 여 · 20대</span><span class="last">한복 대여점 반납 이후</span><span class="st open">수사 중</span></div>
+    <div class="case" role="row" data-no="온계-26-0729" data-cursor="기록"><span class="no2">온계-26-0729</span><span class="who">관광객 · 남 · 30대</span><span class="last">22-1 문방구 앞</span><span class="st open">접수</span></div>
+  </div>
+  <div class="cols" style="margin:8vh 0 0">
+    <div class="side"><p class="lb rv">(생활)</p></div>
+    <div class="main">
+      <ul class="spec rv" style="margin-top:0">
+        <li><b>낮</b><span>기와 얹은 카페, 한복 대여점, 사진 찍는 사람들. 주말이면 꽤 붐빈다</span></li>
+        <li><b>밤 7시</b><span>셔터가 전부 내려가고 관광객이 빠진다. 그때부터가 진짜 온계다</span></li>
+        <li><b>후기</b><span>별점은 높고 재방문은 없다. 리뷰에 같은 문장이 반복되는데 아무도 세어보지 않았다</span></li>
+        <li><b>순찰</b><span>한 달에 두어 번. 읍사무소 앞에 세워두고 커피를 마시다 간다</span></li>
+        <li><b>세 번째 골목</b><span>포장이 끊기고 소리가 줄어든다. 관광 지도에 이 안쪽은 그려져 있지 않다</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="giwa" aria-hidden="true"></div>
+<div class="tape pu rev" aria-hidden="true"><div class="mq-track" style="--sp:32s">
+  <span><i>✿</i>좋아하는 사람 곁에 몰래 두면 마음이 이어진다</span><span><i>✿</i>온계 검은백합</span><span><i>✿</i>좋아하는 사람 곁에 몰래 두면 마음이 이어진다</span><span><i>✿</i>온계 검은백합</span>
+</div></div>
+
+<!-- ============ Ⅱ 그때 ============ -->
+<section class="sec" id="s2" data-idx="Ⅱ">
+<div class="box">
+  <div class="sec-hd">
+    <p class="lb">(그때)<span class="no">Ⅱ</span></p>
+    <div><h2 class="big gl" data-split>당신이|먼저 그었다</h2><p class="addr rv">온계 &nbsp;·&nbsp; 미람여고 &nbsp;·&nbsp; 여섯 해 전</p></div>
+  </div>
+  <div class="cols" style="margin-bottom:0">
+    <div class="side"><p class="lb rv">(처음)</p></div>
+    <div class="main"><p class="rv">당신의 가장 오래된 기억에 이미 서온이 있다. 처음 만난 장면이 없다. 누가 먼저 말을 걸었는지,
+       어느 집 마당이었는지, 몇 살이었는지 — <strong>시작이 없는 채로 이미 붙어 있었다.</strong></p></div>
+  </div>
+  <figure class="bleed tall"><div class="pl" data-speed="-.08"><img src="walk.webp" alt="" loading="lazy" decoding="async"></div>
+    <figcaption class="cap"><span class="stk" style="--r:-4deg">유년 · 같은 골목</span></figcaption></figure>
+  <div class="cols">
+    <div class="side"><p class="lb rv">(같은 골목)</p></div>
+    <div class="main">
+      <p class="rv">같은 골목에서 자랐다. 학교도 같이 갔고 집에도 같이 왔다. 여름이면 마르지 않는 돌담 그늘에 나란히 앉아 시간을 다 썼다.
+         서온은 원래 말이 없는 애였다. 다른 애들 앞에서는 입을 거의 안 열었다.</p>
+      <p class="note rv"><em>당신 앞에서만 달랐다.</em> 먼저 웃고, 먼저 팔을 잡아끌고, 아무한테도 안 하는 얘기를 했다.
+         어른들은 그걸 보고 <strong>"서온이는 너만 따른다"</strong>고 했다. 칭찬인 줄 알았다.</p>
+      <p class="said rv">서온에게 당신은 세계 전부였고,<br>당신에게 서온은 천천히<br>여럿 중 하나가 되어갔다.<small>그 차이를 둘 다 알고 있었지만 아무도 말하지 않았다</small></p>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="side"><p class="lb rv">(속도)</p></div>
+    <div class="main">
+      <h3 class="rv"><span class="hl">속도가 갈렸다</span></h3>
+      <p class="rv">당신은 잘 놀았다. 어울리는 데 재능이 있었다. 누가 어디에 앉아야 하는지, 어떤 농담에 웃어줘야 하는지 알았다.</p>
+      <p class="note rv">서온은 그 속도를 못 따라왔다. 정확히는 따라올 생각이 없었다. 애들은 처음엔 쟤 예쁘다고 했고,
+         다음엔 좀 이상하다고 했고, 나중엔 아무 말도 안 하면서 그 애 옆자리를 비웠다.</p>
+      <p class="rv">그래도 서온은 당신 옆에 앉았다. 당신이 자리를 옮기면 옮긴 자리로 따라와 앉았다.
+         <strong>그게 부담이 되기 시작한 건 당신 쪽이 먼저였다.</strong></p>
+    </div>
+  </div>
+  <div class="cols" style="margin-bottom:0">
+    <div class="side"><p class="lb rv">(손절)</p></div>
+    <div class="main">
+      <h3 class="rv"><span class="hl">여섯 해 전 봄</span></h3>
+      <p class="rv">당신은 이제 같이 다니지 말자고 했다. 이유는 대지 않았다. 대면 자기가 무슨 말을 하고 있는지 들킬 것 같아서.</p>
+      <p class="note rv">서온은 알겠다고 했다. 되묻지도, 매달리지도 않았다. <strong>알고 있었다는 얼굴이었다.</strong>
+         그날 서온은 당신 앞에서 처음으로 조용해졌다. 다른 애들한테 늘 그랬던 것처럼.</p>
+    </div>
+  </div>
+  <figure class="bleed"><div class="pl" data-speed="-.07"><img src="hall.webp" alt="" loading="lazy" decoding="async"></div>
+    <figcaption class="cap"><span class="stk pu" style="--r:3deg">복도 · 두고 간 쪽</span></figcaption></figure>
+  <div class="cols">
+    <div class="side"><p class="lb rv">(그 뒤)</p></div>
+    <div class="main">
+      <p class="rv">무리는 티 나게 굴지 않았다. 지우개를 안 빌려주는 정도, 체육복을 다른 사물함에 넣어두는 정도, 조별과제 이름을 맨 나중에 부르는 정도.</p>
+      <p class="note rv">당신은 가담하지 않았다. 막지도 않았다. 그 둘이 다른 거라고 오래 믿었다. 서온은 한 번도 당신 쪽을 보며 도와달라고 하지 않았다.
+         <em>그것이 서온과 당신 사이에 보이지 않는 선을 만들었다.</em></p>
+    </div>
+  </div>
+  <div class="cols" style="margin-bottom:0">
+    <div class="side"><p class="lb rv">(고2, 5월)</p></div>
+    <div class="main">
+      <p class="rv">서온이 그 선을 넘어 처음으로 다가오기까지 일 년이 넘게 걸렸다. 급식실 뒤 계단참이었다. 며칠을 거기서 기다렸는지는 아무도 모른다.
+         서온은 먼저 다가와 <strong>당신의 손목을 잡았다.</strong> 생각보다 힘이 셌다. 놓으면 다시는 없을 사람처럼 잡았다.</p>
+      <p class="rv">잡힌 자리에 아무 감각이 없었다. <strong>잡혔는데 잡힌 것 같지가 않았다.</strong> 그게 무서워서 당신은 손을 빼내려 했다.
+         당신이 소리쳤고, 서온이 울면서 당겼다. <em>처음으로 엉켜버린 실타래.</em></p>
+      <p class="smack rv">— 짝</p>
+      <p class="rv">소리가 복도 끝까지 갔다. 서온의 고개가 돌아갔다. 칼로 자른 듯 고른 머리 끝이 한 번 흔들렸다가 제자리로 왔다.
+         서온은 맞은 뺨에 손을 대지 않았다. 열이 올라 붉게 물든 채로.</p>
+    </div>
+  </div>
+  <figure class="bleed"><div class="pl" data-speed="-.07"><img src="stair.webp" alt="" loading="lazy" decoding="async"></div>
+    <figcaption class="cap"><span class="stk" style="--r:-3deg">계단참 · 급식실 뒤</span></figcaption></figure>
+  <div class="cols" style="margin-bottom:0">
+    <div class="side"><p class="lb rv">(등)</p></div>
+    <div class="main">
+      <p class="rv">서온은 아무런 표정도 짓지 않았다. 잡았던 손을 놓았고, 당신은 그대로 계단을 급히 내려갔다.
+         서온은 그 자리에 선 채로 <strong>당신의 등을 봤다.</strong> 당신은 서온의 표정을 보지 못했다.</p>
+      <p class="said rv">"돌아와."<small>서온이 당신에게 한 마지막 말</small></p>
+      <p class="note rv">당신은 돌아보지 않았다. 들었는지도 확실하지 않다. 그 말이 그날 처음 나온 말인지, 그때까지 내내 참아온 말인지는 <em>서온만 안다.</em></p>
+      <p class="note rv">그런 서온과 당신의 사이가 이상하다고 생각했고, 한참 뒤에 잊었고, <em>이건 당신과 서온에게 가장 짙게 각인된 기억이 되어버렸다.</em></p>
+      <p class="rv">그 뒤로 졸업식까지 말을 섞지 않았다. 사과할 기회는 여러 번 있었다. 기회가 없어서 안 한 게 아니다.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="tape rev" aria-hidden="true"><div class="mq-track" style="--sp:30s">
+  <span><i>●</i>언제부터 친구였는지</span><span><i>●</i>언제부터 아니었는지</span><span><i>●</i>돌아와</span><span><i>●</i>언제부터 친구였는지</span><span><i>●</i>언제부터 아니었는지</span><span><i>●</i>돌아와</span>
+</div></div>
+
+<!-- ============ Ⅲ 하서온 ============ -->
+<section class="sec" id="s3" data-idx="Ⅲ">
+<div class="salt" aria-hidden="true"></div>
+<div class="box">
+  <div class="sec-hd"><p class="lb">(사람)<span class="no">Ⅲ</span></p><h2 class="big gl" data-split>하서온</h2></div>
+  <div class="seon">
+    <div class="seon-l">
+      <figure class="portrait rv" data-cursor="낮">
+        <img id="portImg" src="seon-day.webp" alt="하서온 — 낮의 얼굴" loading="lazy" decoding="async">
+        <figure class="grad" data-cursor="졸업사진"><img src="seon.webp" alt="하서온의 졸업사진 — 미람여고" loading="lazy"></figure>
+        <span class="stk pu" id="portTag" style="--r:10deg">평소 · 낮</span>
+      </figure>
+      <button id="hold" type="button" data-cursor="꾹" aria-describedby="holdT">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle class="bg" cx="20" cy="20" r="17"/><circle class="fg" cx="20" cy="20" r="17"/></svg>
+        <span id="holdT">해가 질 때까지 누르고 있기</span>
+      </button>
+      <p class="night-txt" aria-live="polite">큭. 큭큭, 큭큭큭 —<br>어디 가.<br>어디 가, 어디 가, 어디 가.<small>해가 지면 같은 사람이 아니다</small></p>
+    </div>
+    <div class="seon-r">
+      <p class="note rv">유저의 졸업앨범에도 같은 사진이 있다. 여섯 해 전 것인데 지금과 달라진 데가 없다. <strong>딱 하나만 빼고.</strong></p>
+      <p class="note rv">그 앨범을 넘기다 보면 앞뒤가 맞지 않는 페이지가 나온다. <strong>한참 보다가 덮고, 저녁을 먹고, 잊는다.</strong></p>
+      <ul class="spec rv">
+        <li><b>나이</b><span>23세</span></li>
+        <li><b>성별</b><span>여</span></li>
+        <li><b>키</b><span>167cm</span></li>
+        <li><b>혈액형</b><span>?? &nbsp;— 보건실 기록카드에 그 칸만 비어 있다</span></li>
+        <li><b>하는 일</b><span>대학은 안 갔다. 한옥 개조한 문방구를 본다. 22-1</span></li>
+      </ul>
+      <p class="rv" style="margin-top:6vh">칼로 자른 듯 끝이 고른 검은 단발, 안쪽만 파랗다. 앞머리가 눈썹을 덮는다. 창백하고 예쁘다는 말을 자주 듣는데 아무도 오래 옆에 못 있는다.</p>
+      <p class="note rv">눈동자가 실내에서 <mark>옅은 금빛</mark>으로 보인다. <strong>걸을 때 소리가 나지 않는다.</strong> 뒤에 있는 걸 모르고 있다가 돌아보면 거기 있다.</p>
+      <p class="rv">졸업사진 속 서온의 귀는 비어 있다. 학교 다닐 땐 하나도 없었다. 여섯 해 만에 마주친 귀에는 <strong>피어싱이 빼곡하다.</strong>
+         좌우 개수가 다르고, 기분 따라 그날그날 아무렇게나 낀다.</p>
+      <p class="note rv">뚫은 자리가 붉거나 부어 있는 걸 본 사람도 없다. 낮의 과묵함은 성격이 아니다. 하루 종일 뭔가를 눌러내고 있는 것에 가깝다.
+         <strong>제 몸에 행사할 수 있는 통제권이 거기까지다.</strong></p>
+      <p class="rv">말수가 적고 목소리가 낮다. 웃을 때 소리가 안 난다. 입꼬리만 오른다. 대신 한 번 본 것을 안 잊는다.
+         유저가 몇 시 버스를 탔는지, 어느 골목으로 도는지 <strong>묻지 않고도 알고 있다.</strong></p>
+      <p class="note rv">서온은 자기가 어떤지 알고 있는 것 같다. 여섯 해 전 일도 전부 기억하고 있지만, 한 번도 먼저 꺼내지 않는다. <em>꺼낼 필요가 없어서인지, 아니면…</em></p>
+      <p class="said rv">언제부터 친구였는지,<br>언제부터 아니었는지<br>모르게 되었다.<small>처음 만난 장면이 없다 · 끝난 장면도 없다</small></p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ Ⅳ 밤 ============ -->
+<section id="s4" data-idx="Ⅳ">
+  <div class="stage" id="stage">
+    <div class="stage-in">
+      <div class="salt" aria-hidden="true"></div>
+      <div class="big-bg" aria-hidden="true"><span>여기 좋아. 좋지? 들어갔어. 들어갔어. 내꺼야. 내꺼. 내꺼. 내꺼. 내꺼!</span><span>절대 안 놓아 절대 안 놓아 절대</span></div>
+      <div class="tv" id="tv" data-cursor="밤">
+        <video class="v1" muted playsinline loop preload="none" data-src="seon-night.mp4" poster="seon-night.webp"></video>
+        <video class="v2" muted playsinline loop preload="none" data-src="seon-night.mp4" aria-hidden="true"></video>
+        <video class="v3" muted playsinline loop preload="none" data-src="seon-night.mp4" aria-hidden="true"></video>
+        <span class="rec"><i></i>22-1 · 23:40 · LIVE</span>
+      </div>
+      <div class="nl a" data-at=".06"><p>낮에는 입꼬리만 오른다.<br>소리가 안 난다.</p><small>(낮)</small></div>
+      <div class="nl b" data-at=".26"><p>밤에는 <b>멈출 수 없다.</b><br>기절하거나, 날이 밝길 기다리거나.<br>누군가가 도와주러 오거나.</p><small>(밤)</small></div>
+      <div class="nl c" data-at=".46"><p>저주. 사랑.<br>너가 없으면, 먹어치울 거야.<br>그러니. 가지 마.<br>응? 응? 응?</p></div>
+      <div class="nl d" data-at=".66"><p>멈추는 방법은 없다.<br>받아내야 한다. <b>전부.</b><br>아니면 도망쳐보거나.</p></div>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:12vh">
+  <div class="box">
+    <div class="sec-hd"><p class="lb">(밤)<span class="no">Ⅳ</span></p><h2 class="big gl" data-split>이제는|절대 안 놓는다</h2></div>
+    <div class="cols">
+      <div class="side"><p class="lb rv">(밤새)</p></div>
+      <div class="main">
+        <figure class="grin-card rv" data-cursor="큭큭"><img src="seon-grin.webp" alt="밤의 하서온" loading="lazy"><span class="stk" style="--r:-8deg">밤 · 23:40</span></figure>
+        <p class="rv">해가 지면 같은 사람이 아니다. 낮 내내 눌러두었던 것이 한꺼번에 풀린다. 광적이고, 발작적이고, <strong>숨기지 않는다.</strong>
+           망설임도 죄책감도 없다.</p>
+        <p class="rv">밤마다 당신을 끌어안는다. 날이 밝을 때까지 놓아주지 않는다. 방 안에는 당신 숨소리만 남는다.</p>
+        <p class="note rv">아침이면 이불이 미지근하고, 당신은 <em>잠을 너무 잘 잤다</em>고 생각한다.</p>
+        <p class="said rv">밤에는 몸이,<br>낮에는 기억이 섞인다.<small>당신은 먹히지 않는다. 대신 떠나지 못한다</small></p>
+      </div>
+    </div>
+    <div class="cols" style="margin-bottom:0">
+      <div class="side"><p class="lb rv">(주범)</p></div>
+      <div class="main">
+        <h3 class="rv"><span class="hl">먹히는 건 관광객이다</span></h3>
+        <p class="rv">서온은 밥을 먹지 않는다. 먹는 건 꽃이다. 온계읍 전체가 그 애의 영역이고, <strong>검은 백합이 어디까지 폈는지가 서온이 어디까지 번졌는지다.</strong></p>
+        <p class="rv">하루 자고 떠나는 사람들이라 아무도 점을 잇지 못한다. 옷자락도 뼈도 남지 않는다. 실종 접수 기록 어디에도 그 이름은 없다.
+           순찰차는 문방구 앞을 지나가면서 목례한다.</p>
+        <p class="note rv">당신이 곁에 있으면 먹히는 건 모르는 사람이다. <mark>당신이 떠나면, 먹히는 쪽이 아는 사람으로 바뀐다.</mark> 그래서 못 떠난다.</p>
+        <p class="said rv">좋아하는 사람 곁에<br>몰래 두었다.<small>열세 해 전부터 지금까지 · 가방에, 주머니에, 툇마루 신발 옆에</small></p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<div class="tape pu" aria-hidden="true"><div class="mq-track" style="--sp:26s">
+  <span><i>●</i>2026.08.03 23:40</span><span><i>●</i>맑음 36.5℃</span><span><i>●</i>서온의 집 건넌방</span><span><i>●</i>절대 안 놓아</span>
+  <span><i>●</i>2026.08.03 23:40</span><span><i>●</i>맑음 36.5℃</span><span><i>●</i>서온의 집 건넌방</span><span><i>●</i>절대 안 놓아</span>
+</div></div>
+
+<!-- ============ Ⅴ 첫날 ============ -->
+<section class="sec" id="s5" data-idx="Ⅴ">
+<div class="box">
+  <div class="sec-hd"><p class="lb">(프롤로그)<span class="no">Ⅴ</span></p><h2 class="big gl" data-split>여름방학|첫날</h2></div>
+  <div class="cols" style="margin-bottom:0">
+    <div class="side"><p class="lb rv">(8월 3일)</p></div>
+    <div class="main pro">
+      <p class="first rv">버스는 읍내 삼거리에 나를 내려놓고 산 쪽으로 돌아나갔다. 내리자마자 이상하다고 느낀 건 더위가 아니라 더위가 없다는 거였다.
+         8월인데 목덜미에 닿는 공기가 살갗과 구분이 안 됐다. 손등을 뺨에 대봤는데 어느 쪽이 손등인지 알 수 없었다.</p>
+      <p class="rv">캐리어 바퀴가 돌길에 걸려 몇 번이나 튀었다. 한복 대여점 앞에서 관광객 둘이 사진을 찍고 있었고,
+         기와 얹은 카페에서 나온 여자가 검은 꽃이 인쇄된 엽서를 부채처럼 흔들고 있었다. 나는 그 꽃 이름을 안다. 여기서 자랐으니까.
+         그런데 여섯 해 만에 보니까 그게 뭘 닮았는지 처음 알겠더라.</p>
+      <p class="rv">두 번째 골목까지는 사람이 있었다. 세 번째 골목부터는 없었다. 소리가 한 겹 줄어드는 자리가 있는데, 어디서부터인지는 매번 못 찾는다.
+         담벼락 이끼가 축축했다. 손끝으로 눌러보니 미지근했고, 사실 미지근하다는 말도 정확하지 않았다. 그냥 내 손가락 같았다.</p>
+      <p class="rv">본가는 골목 끝에서 오른쪽. <strong>대문이 잠겨 있었다.</strong> 가방을 다 뒤져도 열쇠는 없었고, 등 뒤에서 매미가 울었다. 어느 쪽에서 우는지 알 수 없었다.</p>
+      <p class="rv">엄마는 전화를 한참 만에 받았다. 읍내에 앓아눕는 사람이 늘어서 밤에도 왕진을 돈다고 했다. 온계에 간호사는 엄마 하나뿐이다.
+         오늘은 못 들어갈 것 같으니 서온이한테 가 있으라고, <em>걔네 집은 늘 열려 있다고 했다.</em></p>
+      <p class="note rv">여섯 해 동안 연락 한 번 안 한 애 얘기를 엄마는 어제 본 사람처럼 했다.</p>
+      <p class="note rv">단안리 온계읍 22-1. 서온이네는 살림집 겸 문구점이다. 셔터를 내리는 걸 본 적이 없다.</p>
+      <p class="rv">미닫이는 정말 열려 있었다.</p>
+      <p class="rv">서온은 놀라지 않았다.</p>
+      <p class="line rv">"왔네."</p>
+      <p class="rv">그 말만 하고 건넌방에 이부자리를 폈다. 8월인데 긴팔이었고, 소매가 손등을 반쯤 덮고 있었다. 불빛 아래서 눈이 옅은 금빛으로 보였다.
+         졸업앨범에 있는 얼굴 그대로였다. <strong>나만 여섯 해를 지나온 것 같았다.</strong></p>
+      <p class="rv">이불이 미지근했다. 온도 차가 없어서 덮은 줄도 몰랐다. 잠은 이상하게 잘 왔다.</p>
+      <p class="slug rv"><span>2026.08.03 월</span><span>23:40</span><span>맑음 36.5℃</span><span>서온의 집 건넌방</span></p><br>
+      <button id="eyeBtn" type="button" class="rv" data-cursor="뜬다"><span class="d" aria-hidden="true"></span>눈을 뜬다</button>
+      <div id="pro2">
+        <p class="rv">뭔가가 건드렸다.</p>
+        <p class="rv">목덜미였는지 손목이었는지 확실하지 않다. 아프지 않았다. 다만 <strong>방금까지 없던 것이 있었다.</strong></p>
+        <p class="rv">눈을 떴다. 서온이 내 위에 올라타 있었다.</p>
+        <p class="rv">어두워서 윤곽밖에 안 보이는데 눈만 보였다. 초저녁에 옅은 금빛으로 보이던 그 눈이 지금은 빛나고 있었다.
+           빛을 받아서가 아니라 <em>그 자체로.</em> 서온은 움직이지 않았다. 내가 깬 걸 알면서도 그대로 있었다. 소매가 걷혀 있었다.</p>
+        <p class="line rv">"깼네."</p>
+        <p class="rv">초저녁에 들은 것과 똑같은 목소리였다. 낮고, 평평하고, 짧았다.</p>
+        <p class="rv">방이 완전히 조용했다. 내 숨소리만 났다. 그것 말고는 아무 소리도 나지 않았다 — <strong>서온의 숨소리조차.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="giwa" aria-hidden="true"></div>
+<section id="end" data-idx="—">
+  <div class="salt" aria-hidden="true"></div>
+  <div class="box">
+    <figure class="band rv" data-cursor="안 놓아"><img src="seon-smirk.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="stk" style="--r:8deg">22-1 · 건넌방</span></figure>
+    <p class="said gl rv" data-t="여름은&#10;아직 한 달이나 남았다.">여름은<br>아직 한 달이나 남았다.</p>
+    <p style="margin:9vh 0 0"><button type="button" class="door" id="door" data-cursor="들어가기" data-out>
+      <span>단안리 온계읍 22-1</span><b>문 열기 ↗</b></button></p>
+    <p class="credit">「미온 : 그날의 온도」 &nbsp;·&nbsp; 微溫 &nbsp;·&nbsp; TEPID<br>하서온 × 유저 &nbsp;|&nbsp; 얀데레 · 집착 · 앵스트 · 현대판타지</p>
+  </div>
+</section>
+</main>
+
+<audio id="bgm" src="ost.mp3" loop preload="auto"></audio>
+
+<script>
+(function(){
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(pointer: fine)').matches;
+  var root = document.documentElement, body = document.body;
+  var night = false, energy = 0, gBase = .08, entered = false;
+
+  /* ---------- 글자 쪼개기 ---------- */
+  $$('[data-split]').forEach(function(el){
+    var t = el.textContent.trim(), i = 0;
+    el.setAttribute('aria-label', t.replace(/\|/g,' '));
+    if (el.classList.contains('gl')) el.setAttribute('data-t', t.replace(/\|/g,'\n'));
+    el.textContent = '';
+    t.split('|').forEach(function(line, li){
+      if (li) el.appendChild(document.createElement('br'));
+      line.split(' ').forEach(function(word, wi){
+        if (wi) el.appendChild(document.createTextNode(' '));
+        var w = document.createElement('span'); w.className = 'w'; w.setAttribute('aria-hidden','true');
+        word.split('').forEach(function(c){
+          var o = document.createElement('span'); o.className = 'ch';
+          var n = document.createElement('span'); n.textContent = c; n.style.setProperty('--i', i++);
+          o.appendChild(n); w.appendChild(o);
+        });
+        el.appendChild(w);
+      });
+    });
+  });
+
+  /* ---------- 등장 ---------- */
+  function countUp(el){
+    var to = parseFloat(el.getAttribute('data-count')), t0 = null;
+    if (reduce){ el.textContent = to.toFixed(1); return; }
+    (function f(t){ if(!t0) t0 = t; var k = Math.min(1,(t-t0)/1700);
+      el.textContent = (k < 1 ? to*(1-Math.pow(1-k,4)) + (Math.random()-.5)*4*(1-k) : to).toFixed(1);
+      if (k<1) requestAnimationFrame(f); })(performance.now());
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (!e.isIntersecting) return; var t = e.target; t.classList.add('in'); io.unobserve(t);
+      if (t.hasAttribute('data-count')) countUp(t); });
+  }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+  $$('[data-split]:not(#heroT), .rv, .bleed, [data-count], .pop').forEach(function(el){ io.observe(el); });
+  var idxB = $('#idx b');
+  var io2 = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) idxB.textContent = e.target.getAttribute('data-idx'); }); },
+    {rootMargin:'-45% 0px -54% 0px'});
+  $$('[data-idx]').forEach(function(s){ io2.observe(s); });
+
+  /* ---------- 읽는 중이면 지직을 낮춘다 ---------- */
+  var reading = 0, READ = new Set();
+  var rio = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) READ.add(e.target); else READ.delete(e.target); });
+    reading = READ.size > 0 ? 1 : 0;
+  }, {rootMargin:'-30% 0px -30% 0px'});
+  $$('.hero-in, .cols .main, .seon-r, .goods, .cases, .spec').forEach(function(el){ rio.observe(el); });
+
+  /* ---------- 영상 — 보일 때만 돈다 ---------- */
+  function loadV(v){ if (!v.getAttribute('src') && v.getAttribute('data-src')) v.src = v.getAttribute('data-src'); }
+  var vio = new IntersectionObserver(function(es){
+    es.forEach(function(e){ $$('video', e.target).forEach(function(v){
+      if (e.isIntersecting && entered){ loadV(v); var p = v.play(); if (p && p.catch) p.catch(function(){}); } else v.pause(); }); });
+  }, {rootMargin:'120px 0px'});
+  var VIDS = $$('.cctv, #tv'); VIDS.forEach(function(el){ vio.observe(el); });
+
+  /* ---------- 로더 → 관문 ---------- */
+  root.classList.add('gated'); body.classList.add('gated');
+  (function(){
+    var ld = $('#loader'), n = $('#ldn'), b = $('#ldb'), lt = $('#ldt'), D = reduce ? 200 : 2100, t0 = null;
+    var msgs = ['신호 수신 중','지지지직','체감 온도 측정 중','닿아도 모른다','22-1 연결됨'];
+    (function f(t){ if(!t0) t0 = t; var k = Math.min(1,(t-t0)/D), e = 1-Math.pow(1-k,3);
+      var v = 36.5*e + (k < 1 && Math.random() < .3 ? (Math.random()-.5)*20 : 0);
+      n.textContent = Math.max(0,v).toFixed(1).padStart(4,'0'); b.style.width = (e*100)+'%';
+      lt.textContent = msgs[Math.min(msgs.length-1, Math.floor(k*msgs.length))];
+      if (k<1) requestAnimationFrame(f);
+      else setTimeout(function(){ burst(1); ld.classList.add('done'); setTimeout(function(){ ld.remove(); }, 1100); }, 300);
+    })(performance.now());
+  })();
+  $('#gateBtn').addEventListener('click', function(){
+    var gate = $('#gate'); entered = true; burst(1); flashPop();
+    gate.classList.add('off'); root.classList.remove('gated'); body.classList.remove('gated');
+    scrollTo(0,0); body.classList.add('ready');
+    setTimeout(function(){ $('#heroT').classList.add('in'); }, 120);
+    setTimeout(function(){ if (gate.parentNode) gate.remove(); }, 1100);
+    VIDS.forEach(function(el){ vio.unobserve(el); vio.observe(el); });
+    onScroll();
+  });
+
+  /* ---------- 나가는 문 — 하나뿐이다 ---------- */
+  var CRACK = 'https://share.crack.wrtn.ai/nxf9ad';
+  function leave(){   // 나가는 문은 22-1 하나 — 크랙 플롯으로
+    burst(.8);
+    setTimeout(function(){
+      if (window.self !== window.top){ var w = window.open(CRACK, '_blank', 'noopener'); if (!w) location.href = CRACK; }
+      else location.href = CRACK;
+    }, 180);
+  }
+  $('#return-btn').addEventListener('click', leave);
+  $('#door').addEventListener('click', leave);
+  $('#menu [data-exit]').addEventListener('click', function(e){ e.preventDefault(); leave(); });
+
+  /* ---------- 메뉴 ---------- */
+  var mb = $('#menuBtn'), mn = $('#menu');
+  function menu(open){
+    body.classList.toggle('menu-open', open); mb.setAttribute('aria-expanded', open); mn.setAttribute('aria-hidden', !open);
+    $('.t', mb).textContent = open ? '닫기' : '메뉴'; burst(.5);
+  }
+  mb.addEventListener('click', function(){ menu(!body.classList.contains('menu-open')); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && body.classList.contains('menu-open')) menu(false); });
+  $$('#menu a').forEach(function(a){ a.addEventListener('mouseenter', function(){
+    var k = a.getAttribute('data-k'); $$('#menu .mimg').forEach(function(m){ m.classList.toggle('on', m.getAttribute('data-k') === k); }); }); });
+  $$('[data-go]').forEach(function(a){ a.addEventListener('click', function(e){
+    e.preventDefault(); var open = body.classList.contains('menu-open'); if (open) menu(false);
+    var t = $(a.getAttribute('href')); if (t) setTimeout(function(){ t.scrollIntoView({behavior: reduce ? 'auto' : 'smooth'}); }, open ? 480 : 0); }); });
+
+  /* ---------- 글자 뒤섞기 ---------- */
+  var GLY = '▓▒░█▚▞◢◣◤◥#%&큭?!01ㅋ';
+  function scramble(el, to){
+    if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
+    var target = to || el.getAttribute('data-orig'), n = 0, N = 14, id = (el._sid = (el._sid||0) + 1);
+    (function f(){ if (id !== el._sid) return; n++;
+      el.textContent = target.split('').map(function(c,i){ return (c === ' ' || i < (n/N)*target.length) ? c : GLY[Math.random()*GLY.length|0]; }).join('');
+      if (n < N) setTimeout(f, 32); else el.textContent = target; })();
+  }
+  $$('[data-scr]').forEach(function(el){ (el.closest('a, button') || el).addEventListener('mouseenter', function(){ scramble(el); }); });
+  (function(){  // 밤이 되면 나가는 문이 붙잡는다 — 그래도 열린다
+    var full = $('#return-btn .full');
+    $('#return-btn').addEventListener('mouseenter', function(){
+      if (!night) return; scramble(full, '어디 가?'); burst(.6);
+      setTimeout(function(){ scramble(full); }, 900);
+    });
+  })();
+
+  /* ---------- 커서 ---------- */
+  var cur = $('#cursor'), ring = $('.ring', cur), dot = $('.dot', cur), clb = $('.lb2', cur);
+  var mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my, px = mx, py = my;
+  if (fine && !reduce){
+    body.classList.add('cur-on');
+    addEventListener('pointermove', function(e){ mx = e.clientX; my = e.clientY; cur.classList.add('on'); }, {passive:true});
+    document.addEventListener('pointerleave', function(){ cur.classList.remove('on'); });
+    document.addEventListener('pointerover', function(e){
+      var t = e.target; if (!t.closest) return;
+      cur.classList.remove('big','hov','out','none'); clb.textContent = '';
+      if (t.closest('[data-cursor-none]')){ cur.classList.add('none'); return; }   // 닿아도 모른다
+      var c = t.closest('[data-cursor]');
+      if (c){ cur.classList.add('big'); clb.textContent = c.getAttribute('data-cursor'); if (c.hasAttribute('data-out')) cur.classList.add('out'); return; }
+      if (t.closest('a, button, .stk')) cur.classList.add('hov');
+    });
+  }
+
+  /* ---------- 수사 기록 — 사진 없음 ---------- */
+  var peek = $('#peek'), pno = $('.pno', peek);
+  if (fine) $$('.case[data-no]').forEach(function(r){
+    r.addEventListener('pointerenter', function(){ pno.textContent = r.getAttribute('data-no'); peek.classList.add('on'); burst(.3); });
+    r.addEventListener('pointerleave', function(){ peek.classList.remove('on'); });
+  });
+
+  /* ---------- 검은 백합 — 몰래 두면. 지지 않는다 ---------- */
+  var LIL = $('#lilies'), lilyN = $('#lilyN'), nL = 0, MAXL = 64;
+  var SAY = ['몰래 뒀다','여기에도','마음이 이어진다','좋아하는 사람 곁에','하나 더','큭','안 놓아'];
+  document.addEventListener('click', function(e){
+    if (!entered) return;
+    if (e.target.closest('a, button, input, .good, .case, #menu, #hd, .cctv, .tv, .stk, .portrait')) return;
+    if (nL >= MAXL){ lilyN.innerHTML = '더 둘 자리가 <b>없다</b>'; return; }
+    var y = e.pageY, x = e.pageX, s = 54 + Math.random()*70;
+    var im = document.createElement('img'); im.src = 'lily.webp'; im.alt = ''; im.className = 'lily';
+    im.style.left = x+'px'; im.style.top = y+'px'; im.style.setProperty('--s', s+'px'); im.style.setProperty('--r', (Math.random()*80-40)+'deg');
+    LIL.appendChild(im); nL++;
+    var sy = document.createElement('span'); sy.className = 'lily-say'; sy.textContent = SAY[Math.random()*SAY.length|0];
+    sy.style.left = x+'px'; sy.style.top = (y - s*.3)+'px'; LIL.appendChild(sy); setTimeout(function(){ sy.remove(); }, 1700);
+    lilyN.classList.add('on'); $('b', lilyN).textContent = nL; burst(.35);
+  });
+
+  /* ---------- 젖은 가닥 ---------- */
+  var OOZE = $('#ooze'), STR = [], DRP = [], BLOTS = [];
+  function reseed(s){ s.quick = Math.random() < .4; s.max = s.quick ? 26 + Math.random()*46 : 110 + Math.random()*300; s.wait = s.quick ? 1500 + Math.random()*6000 : 3500 + Math.random()*12000; }
+  function mkStrands(){
+    $$('.str', OOZE).forEach(function(n){ n.remove(); }); STR.length = 0;
+    for (var i=0, n = innerWidth < 760 ? 5 : 10; i<n; i++){
+      var d = document.createElement('div'); d.className = 'str';
+      d.appendChild(document.createElement('s')); d.appendChild(document.createElement('b')); d.appendChild(document.createElement('i'));
+      var edge = Math.random() < .85, x = edge ? (Math.random()<.5 ? Math.random()*16 : 84 + Math.random()*16) : 28 + Math.random()*44;
+      var w = (edge ? 5 : 3.2) + Math.random()*(edge ? 6 : 3);
+      d.style.left = x.toFixed(2)+'vw'; d.style.setProperty('--w', w.toFixed(1)+'px'); d.style.setProperty('--bw', (w*1.1 + 2.5 + Math.random()*3).toFixed(1)+'px');
+      d.style.opacity = ((edge ? .6 : .38) + Math.random()*.3).toFixed(2); OOZE.appendChild(d);
+      var s = {el:d, bead:d.lastChild, h:0, st:0, ph:Math.random()*7, sp:.6 + Math.random()*1.1, op:parseFloat(d.style.opacity)}; reseed(s); s.wait *= Math.random(); STR.push(s);
+    }
+  }
+  function drip(x, y0, bw, op, v){
+    var d = document.createElement('div'); d.className = 'drp'; d.style.setProperty('--bw', bw.toFixed(1)+'px');
+    d.style.left = x.toFixed(1)+'px'; d.style.top = y0.toFixed(1)+'px'; d.style.opacity = op.toFixed(2); OOZE.appendChild(d);
+    DRP.push({el:d, x:x, y0:y0, y:0, v:v||.015, op:op, bw:bw, land:innerHeight*(.5 + Math.random()*.44)});
+  }
+  function splash(x, y, w, op){  // 안 지워진다
+    var e = document.createElement('div'); e.className = 'blot'; var sz = w*(1.6 + Math.random()*1.2), rot = (Math.random()*60-30)|0;
+    e.style.width = sz+'px'; e.style.height = (sz*(.5 + Math.random()*.3))+'px'; e.style.left = (x - sz/2)+'px'; e.style.top = (y - sz*.24)+'px';
+    e.style.transform = 'rotate('+rot+'deg)'; e.style.opacity = (op*.55).toFixed(2); OOZE.appendChild(e); BLOTS.push(e);
+    while (BLOTS.length > 14){ var o = BLOTS.shift(); if (o.parentNode) o.remove(); }
+  }
+  function slime(now, dt){
+    var i, s;
+    for (i=0;i<STR.length;i++){ s = STR[i];
+      if (s.st === 0){ s.wait -= dt*(night ? 3 : 1); if (s.wait <= 0) s.st = 1; }
+      else if (s.st === 1){ s.h += (s.quick ? .095 : .026)*dt*(.34 + .66*(1 - s.h/s.max))*(night ? 2 : 1); if (s.h >= s.max - .6){ s.h = s.max; s.st = 2; s.wait = s.quick ? 90 : 400; } }
+      else if (s.st === 2){ s.wait -= dt; if (s.wait <= 0){ var r = s.el.getBoundingClientRect(); drip(r.left + r.width/2, r.top + s.h - 2, parseFloat(s.el.style.getPropertyValue('--bw'))||8, s.op); s.st = 3; } }
+      else { s.h -= dt*.62; if (s.h <= 0){ s.h = 0; s.st = 0; reseed(s); } }
+      if (s.st === 0 && s.h === 0){ s.el.style.height = '0px'; continue; }
+      s.el.style.height = s.h.toFixed(1)+'px';
+      s.el.style.transform = 'translateX(-50%) rotate('+(Math.sin(now*.00042*s.sp + s.ph)*1.7).toFixed(2)+'deg)';
+      s.bead.style.transform = 'scale('+(s.st === 2 ? 1.18 + Math.sin(now*.012)*.05 : .42 + .62*Math.min(1, s.h/s.max)).toFixed(2)+')';
+    }
+    for (i=DRP.length-1;i>=0;i--){ var p = DRP[i]; p.v += .0019*dt; p.y += p.v*dt;
+      var sy = Math.min(2.6, 1 + p.v*5.5); p.el.style.transform = 'translateY('+p.y.toFixed(1)+'px) scale('+(1/Math.sqrt(sy)).toFixed(3)+','+sy.toFixed(3)+')';
+      if (p.y0 + p.y > p.land){ splash(p.x, p.y0 + p.y, p.bw, p.op); p.el.remove(); DRP.splice(i,1); } }
+  }
+  if (!reduce) mkStrands();
+  var rt; addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ if (!reduce) mkStrands(); onScroll(); }, 240); });
+
+  /* ---------- 지지직 · 번쩍 ---------- */
+  var cv = $('#static'), cx = cv.getContext('2d'), img = cx.createImageData(160, 90), TEARS = $('#tears'), FL = $('#flash'), bursting = 0;
+  function noise(){
+    var d = img.data, k = .38 + energy*.7;
+    for (var i=0; i<d.length; i+=4){
+      var v = Math.random()*255*k, r = Math.random();
+      if (r < .007){ d[i]=255; d[i+1]=225; d[i+2]=26; }
+      else if (r < .016){ d[i]=107; d[i+1]=43; d[i+2]=255; }
+      else { d[i]=d[i+1]=d[i+2]=v; }
+      d[i+3]=255;
+    }
+    for (var q=0; q<(reading ? 0 : 2); q++){ var y = (Math.random()*90)|0; for (var x=0; x<160; x++){ var j = (y*160+x)*4; d[j]=d[j+1]=d[j+2]=255; } }
+    cx.putImageData(img, 0, 0);
+  }
+  var lastFlash = 0;
+  function flashPop(){  // 초당 세 번을 넘지 않게
+    if (reduce) return; var now = performance.now(); if (now - lastFlash < 400) return; lastFlash = now;
+    var c = ['var(--pu)','var(--ye)','#fff'][Math.random()*3|0]; FL.style.background = c;
+    FL.classList.remove('fpop'); void FL.offsetWidth; FL.classList.add('fpop');
+  }
+  function burst(k){
+    if (reduce) return; k = k || .5; bursting = Math.max(bursting, 140 + k*360);
+    var n = 3 + (k*7|0);
+    for (var i=0;i<n;i++){ (function(){
+      var t = document.createElement('div'), r = Math.random();
+      t.className = 'tear' + (r < .3 ? ' y' : r < .55 ? ' p' : '');
+      t.style.top = (Math.random()*100)+'vh'; t.style.height = (2 + Math.random()*(k*70))+'px';
+      t.style.transform = 'translateX('+((Math.random()-.5)*60)+'px)'; TEARS.appendChild(t);
+      setTimeout(function(){ t.remove(); }, 60 + Math.random()*240*k + 40);
+    })(); }
+    if (k > .55 && Math.random() < .5) flashPop();
+    var tv = $('#tv'); if (tv){ tv.classList.add('split'); if (k > .5) tv.classList.add('inv');
+      setTimeout(function(){ tv.classList.remove('split','inv'); }, 90 + k*220); }
+  }
+  var nextBurst = 1800;
+
+  /* ---------- 밤 — 누르고 있으면 터진다. 되돌리지 않는다 ---------- */
+  var hold = $('#hold'), fg = $('.fg', hold), holdT = $('#holdT'), holding = false, held = 0, NEED = 1800;
+  function hDown(e){ if (night) return; holding = true; hold.classList.add('shiver');
+    if (e && e.pointerId != null){ try { hold.setPointerCapture(e.pointerId); } catch(x){} }
+    if (e && e.preventDefault) e.preventDefault(); }
+  function hUp(){ holding = false; hold.classList.remove('shiver'); }
+  hold.addEventListener('pointerdown', hDown);
+  ['pointerup','pointercancel'].forEach(function(ev){ hold.addEventListener(ev, hUp); addEventListener(ev, hUp); });
+  addEventListener('blur', hUp);
+  hold.addEventListener('keydown', function(e){ if ((e.key === ' ' || e.key === 'Enter') && !e.repeat){ e.preventDefault(); hDown(); } });
+  hold.addEventListener('keyup', hUp);
+  hold.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+  function goNight(){
+    night = true; holding = false; hold.classList.remove('shiver'); hold.disabled = true; holdT.textContent = '되돌릴 수 없다'; fg.style.strokeDashoffset = '0';
+    body.classList.add('night'); gBase = .26;
+    $('#portImg').src = 'seon-grin.webp'; $('#portImg').alt = '하서온 — 밤의 얼굴'; $('#portTag').textContent = '밤 · 안 놓아';
+    $('.portrait').setAttribute('data-cursor','큭큭');
+    FL.classList.remove('go'); void FL.offsetWidth; FL.classList.add('go');
+    if (!reduce){
+      var tk = $('#take'), v = $('video', tk); loadV(v); try { v.currentTime = 6.5; } catch(e){} var pp = v.play(); if (pp && pp.catch) pp.catch(function(){});
+      tk.classList.add('on'); burst(1);
+      setTimeout(function(){ burst(1); }, 700); setTimeout(function(){ burst(1); }, 1500);
+      setTimeout(function(){ tk.classList.remove('on'); v.pause(); burst(.8); }, 2800);
+      for (var i=0;i<16;i++) (function(i){ setTimeout(function(){ drip(Math.random()*innerWidth, -16, 10 + Math.random()*12, .8, .06 + Math.random()*.12); }, 2900 + i*50); })(i);
+    }
+    $$('.tape .mq-track').forEach(function(t){ var h = ''; for (var i=0;i<6;i++) h += '<span><i>●</i>도망칠 거야? 어디 한번 도망가 봐. 내꺼야, 내꺼야, 내꺼야. 내꺼!!</span>'; t.innerHTML = h; });
+    onScroll();
+  }
+
+  /* ---------- 프롤로그 ---------- */
+  var eyeBtn = $('#eyeBtn');
+  eyeBtn.addEventListener('click', function(){
+    var p2 = $('#pro2'); p2.classList.add('open'); eyeBtn.classList.add('gone'); eyeBtn.disabled = true; burst(1); flashPop();
+    setTimeout(function(){ eyeBtn.style.display = 'none'; p2.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); }, 500);
+  });
+
+  /* ---------- 스크롤 ---------- */
+  var prog = 0, peak = 0, gSq = $('#gauge .sq'), gFill = $('#gauge .fill'), grip = $('#grip'), PAR = $$('[data-speed]');
+  var stage = $('#stage'), stIn = $('.stage-in'), NL = $$('.nl'), stP = 0, lastSec = '';
+  function onScroll(){
+    var max = root.scrollHeight - innerHeight; prog = max > 0 ? Math.min(1, scrollY/max) : 0;
+    if (prog > peak) peak = prog;                                   // 불가역
+    gSq.style.top = (peak*100).toFixed(2)+'%'; gFill.style.height = (peak*100).toFixed(2)+'%';
+    grip.style.setProperty('--up', (night ? 6 : 82 - peak*50).toFixed(1)+'%');
+    if (!reduce) PAR.forEach(function(el){ var r = el.parentNode.getBoundingClientRect(); if (r.bottom < -200 || r.top > innerHeight + 200) return;
+      el.style.transform = 'translate3d(0,'+((r.top + r.height/2 - innerHeight/2)*parseFloat(el.getAttribute('data-speed'))).toFixed(1)+'px,0)'; });
+    var r = stage.getBoundingClientRect(), H = stage.offsetHeight - innerHeight;
+    stP = Math.max(0, Math.min(1, -r.top / H));
+    stIn.style.setProperty('--p', stP.toFixed(3));
+    NL.forEach(function(n){ var on = stP >= parseFloat(n.getAttribute('data-at')); if (on && !n.classList.contains('on')) burst(.7); n.classList.toggle('on', on); });
+    var sec = idxB.textContent; if (entered && sec !== lastSec){ lastSec = sec; burst(.6); }   // 섹션 넘어갈 때 튄다
+  }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* ---------- 배경음 + 분석 ---------- */
+  var au = $('#bgm'), sndBtn = $('#snd'), actx = null, an = null, fd = null;
+  (function(){
+    var TARGET = .5, fading = null, wanted = true;
+    try { wanted = localStorage.getItem('mion-bgm') !== 'off'; } catch(e){}
+    function fade(to, done){ clearInterval(fading); fading = setInterval(function(){ var d = to - au.volume;
+      if (Math.abs(d) < .02){ au.volume = to; clearInterval(fading); if (done) done(); return; } au.volume = Math.max(0, Math.min(1, au.volume + d*.12)); }, 40); }
+    function mark(on){ sndBtn.setAttribute('aria-pressed', on); sndBtn.setAttribute('aria-label', on ? '배경음 끄기' : '배경음 켜기');
+      try { localStorage.setItem('mion-bgm', on ? 'on' : 'off'); } catch(e){} }
+    function analyser(){
+      if (actx){ if (actx.state === 'suspended') actx.resume(); return; }
+      try { actx = new (window.AudioContext || window.webkitAudioContext)(); var src = actx.createMediaElementSource(au);
+        an = actx.createAnalyser(); an.fftSize = 256; an.smoothingTimeConstant = .55; src.connect(an); an.connect(actx.destination);
+        fd = new Uint8Array(an.frequencyBinCount); if (actx.state === 'suspended') actx.resume(); } catch(e){ actx = null; an = null; }
+    }
+    function play(){ analyser(); au.volume = 0; var pr = au.play();
+      if (pr && pr.then) pr.then(function(){ mark(true); fade(TARGET); }).catch(function(){ mark(false); }); else { mark(true); fade(TARGET); } }
+    function stop(){ fade(0, function(){ au.pause(); }); mark(false); }
+    sndBtn.addEventListener('click', function(){ if (au.paused) play(); else stop(); });
+    if (wanted){ var armed = true, evs = ['pointerdown','keydown','touchstart'];
+      var kick = function(){ if (!armed) return; armed = false; evs.forEach(function(ev){ removeEventListener(ev, kick); }); play(); };
+      evs.forEach(function(ev){ addEventListener(ev, kick, {passive:true}); }); }
+    document.addEventListener('visibilitychange', function(){ if (document.hidden && !au.paused) fade(.08); else if (!document.hidden && !au.paused) fade(TARGET); });
+  })();
+
+  /* ---------- CCTV 시계 ---------- */
+  var clk = $('#clk'), cs = 23*3600 + 40*60;
+  setInterval(function(){ cs++; var h = (cs/3600|0)%24, m = (cs/60|0)%60, s = cs%60;
+    clk.textContent = '2026.08.03 ' + [h,m,s].map(function(n){ return (n<10?'0':'')+n; }).join(':'); }, 1000);
+
+  /* ---------- 한 박자 ---------- */
+  var tPrev = performance.now(), nAcc = 0, avg = 0, nextFlash = 7000;
+  function tick(now){
+    var dt = Math.min(48, now - tPrev); tPrev = now;
+    if (!reduce){
+      var e = 0;
+      if (an && !au.paused){ an.getByteFrequencyData(fd); var lo = 0, hi = 0;
+        for (var i=0;i<12;i++) lo += fd[i]; for (i=40;i<100;i++) hi += fd[i];
+        e = Math.min(1, (lo/12/255)*.7 + (hi/60/255)*1.1);
+        avg += (e - avg)*.04;
+        if (e > avg*1.25 + .04 && nextBurst > 220){ burst(Math.min(1, (e - avg)*3 + .3)); nextBurst = 220 + Math.random()*700; }   // 음악이 튀면 화면도 튄다
+      } else { e = .1 + Math.random()*.08; }
+      energy += (e - energy)*.3;
+      if (entered){
+        nextBurst -= dt; if (nextBurst <= 0){ burst(.3 + Math.random()*.6); nextBurst = (night ? 500 : 1200) + Math.random()*(night ? 1200 : 2600); }
+        nextFlash -= dt; if (nextFlash <= 0){ flashPop(); nextFlash = (night ? 2500 : 5500) + Math.random()*(night ? 3000 : 6000); }
+      }
+      var inStage = stP > 0 && stP < 1 ? .15 + stP*.5 : 0;
+      var g = Math.min(1, gBase + energy*.4 + (bursting > 0 ? .6 : 0) + inStage);
+      var calm = reading && !inStage ? 1 : 0;
+      root.style.setProperty('--sn', (calm ? .014 + energy*.02 : .035 + g*.14).toFixed(3));
+      bursting = Math.max(0, bursting - dt);
+      root.style.setProperty('--g', g.toFixed(3));
+      if (bursting > 0){
+        var jm = 1;
+        root.style.setProperty('--jx', ((Math.random()-.5)*22*g*jm).toFixed(1)+'px'); root.style.setProperty('--jy', ((Math.random()-.5)*10*g*jm).toFixed(1)+'px');
+        root.style.setProperty('--sk', ((Math.random()-.5)*4*g).toFixed(2)+'deg');
+        var a = Math.random()*70, b = Math.random()*70; root.style.setProperty('--c1', a+'%'); root.style.setProperty('--c2', (100-a-8-Math.random()*20)+'%');
+        root.style.setProperty('--c3', b+'%'); root.style.setProperty('--c4', (100-b-6-Math.random()*20)+'%');
+      } else { root.style.setProperty('--jx','0px'); root.style.setProperty('--jy','0px'); root.style.setProperty('--sk','0deg'); }
+      nAcc += dt; if (nAcc > 45){ nAcc = 0; noise(); }
+      slime(now, dt);
+    }
+    if (fine && !reduce){
+      rx += (mx - rx)*.2; ry += (my - ry)*.2; ring.style.transform = 'translate3d('+rx.toFixed(1)+'px,'+ry.toFixed(1)+'px,0)';
+      dot.style.transform = 'translate3d('+mx+'px,'+my+'px,0)';
+      px += (mx - px)*.12; py += (my - py)*.12; peek.style.transform = 'translate3d('+(px + 24).toFixed(1)+'px,'+(py - 130).toFixed(1)+'px,0)';
+    }
+    if (!night){
+      held = holding ? held + dt : Math.max(0, held - dt*2.4);
+      fg.style.strokeDashoffset = (106.8*(1 - Math.min(1, held/NEED))).toFixed(1);
+      if (holding && Math.random() < .1) burst(.2 + held/NEED*.6);
+      if (held >= NEED) goNight();
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+
+</body>
+</html>

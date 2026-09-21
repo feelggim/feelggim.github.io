@@ -276,14 +276,47 @@ html.gated, body.gated{overflow:hidden; height:100%}
 #gate.off{opacity:0; visibility:hidden; pointer-events:none}
 #gate .inner{position:relative}
 #gateBtn{appearance:none; -webkit-appearance:none; background:none; border:0; padding:0; margin:0; line-height:0; cursor:pointer; display:block; position:relative}
-#gateBtn img{display:block; height:min(78vh,880px); width:auto; max-width:90vw; transition:transform .8s var(--boing), filter .5s}
-#gateBtn:hover img{transform:scale(1.03) rotate(-1deg); filter:contrast(1.08) saturate(1.2)}
+/* 관문 — 검은 백합 하나. 뛴다. 흐른다 */
+.glily{position:relative; display:block; width:min(60vh,82vw,600px); aspect-ratio:1; margin-bottom:min(9vh,60px)}
+.glily > span, .gbeat > span{display:block}
+.glily .glow{position:absolute; inset:8%; border-radius:50%; background:radial-gradient(closest-side, rgba(107,43,255,.75), rgba(107,43,255,.18) 60%, transparent);
+  animation:gGlow 1.15s ease-out infinite}
+.glily .pool{position:absolute; left:14%; right:14%; bottom:-9%; height:12%; border-radius:50%;
+  background:radial-gradient(closest-side, rgba(255,225,26,.28), rgba(107,43,255,.35) 45%, transparent); filter:blur(4px); animation:gGlow 1.15s ease-out infinite}
+.gbeat{position:absolute; inset:0; animation:gBeat 1.15s cubic-bezier(.3,1.6,.5,1) infinite}
+.gjit{position:absolute; inset:0; animation:gJit 3.4s steps(1) infinite}
+.gjit img{position:absolute; inset:0; width:100%; height:100%; display:block}
+.gjit .m{filter:brightness(1.45) contrast(1.2) drop-shadow(0 0 16px rgba(107,43,255,.95)) drop-shadow(0 0 42px rgba(107,43,255,.6))}
+.gjit .y, .gjit .p{mix-blend-mode:screen; opacity:0}
+.gjit .y{filter:url(#chanY) brightness(2.4); animation:gSplitY 3.4s steps(1) infinite}
+.gjit .p{filter:url(#chanP) brightness(2.6); animation:gSplitP 3.4s steps(1) infinite}
+@keyframes gBeat{0%{transform:scale(1)} 12%{transform:scale(1.075)} 22%{transform:scale(.99)} 34%{transform:scale(1.11)} 58%,100%{transform:scale(1)}}
+@keyframes gGlow{0%,100%{opacity:.55} 12%{opacity:.85} 34%{opacity:1}}
+@keyframes gJit{0%,61%{transform:none} 62%{transform:translate(-14px,5px) skewX(6deg)} 63%{transform:translate(12px,-4px)} 64%{transform:translate(-6px,0) skewX(-4deg)} 65%,88%{transform:none}
+  89%{transform:translate(9px,3px)} 90%{transform:translate(-11px,-2px) skewX(3deg)} 91%,100%{transform:none}}
+@keyframes gSplitY{0%,61%{opacity:0} 62%,65%{opacity:.8; transform:translateX(12px)} 66%,88%{opacity:0} 89%,91%{opacity:.7; transform:translateX(-9px)} 92%,100%{opacity:0}}
+@keyframes gSplitP{0%,61%{opacity:0} 62%,65%{opacity:.85; transform:translateX(-13px)} 66%,88%{opacity:0} 89%,91%{opacity:.75; transform:translateX(10px)} 92%,100%{opacity:0}}
+.gdrip{position:absolute; left:var(--x); top:var(--y); width:var(--w); height:0; margin-left:calc(var(--w) * -.5); animation:gStr var(--d) cubic-bezier(.5,0,.7,1) var(--dl) infinite}
+.gdrip s{position:absolute; inset:0; display:block;
+  background:linear-gradient(90deg, rgba(107,43,255,0) 0%, rgba(107,43,255,.55) 14%, rgba(30,12,60,.96) 32%, rgba(8,5,14,.98) 50%, rgba(42,17,80,.94) 64%, rgba(178,140,255,.6) 84%, rgba(107,43,255,0) 100%);
+  clip-path:polygon(0 0,100% 0,84% 18%,68% 40%,62% 70%,58% 100%,42% 100%,38% 70%,32% 40%,16% 18%)}
+.gdrip b{position:absolute; left:50%; top:100%; width:calc(var(--w) * 1.9); height:calc(var(--w) * 2.3); margin:calc(var(--w) * -.7) 0 0 calc(var(--w) * -.95);
+  border-radius:52% 48% 46% 54%/38% 38% 62% 62%; background:radial-gradient(40% 32% at 34% 26%, #FFE11A 0%, rgba(107,43,255,.95) 34%, #0A0612 100%);
+  animation:gDrop var(--d) cubic-bezier(.55,0,1,.45) var(--dl) infinite}
+@keyframes gStr{0%{height:0} 62%{height:var(--h)} 66%{height:calc(var(--h) * .55)} 100%{height:0}}
+@keyframes gDrop{0%{transform:scale(.4); opacity:1} 60%{transform:scale(1.15); opacity:1} 62%{transform:translateY(0) scale(1,1.2); opacity:1}
+  84%{transform:translateY(46vh) scale(.8,1.9); opacity:.95} 85%,100%{transform:translateY(48vh) scale(0); opacity:0}}
+.gname{position:absolute; left:50%; bottom:-4%; transform:translateX(-50%) rotate(-4deg); z-index:3; font-family:var(--pop); font-size:min(15vh,20vw,150px); line-height:1; color:var(--ye);
+  text-shadow:.04em .04em 0 var(--pu), .08em .08em 0 var(--bk); white-space:nowrap; pointer-events:none}
+.gname small{display:block; margin-top:.25em; font-family:var(--title); font-weight:800; font-size:.16em; letter-spacing:.4em; color:var(--wh); text-shadow:none; text-align:center}
+#gateBtn .glily{transition:transform .8s var(--boing), filter .5s}
+#gateBtn:hover .glily{transform:scale(1.04) rotate(-2deg); filter:saturate(1.25) brightness(1.1)}
 #gateBtn:focus{outline:none} #gateBtn:focus-visible{outline:2px solid var(--ye); outline-offset:14px}
 #gate .stk{animation:bob 2.6s ease-in-out infinite alternate}
 #gate .ghint{position:relative; z-index:2; font-family:var(--sans); font-weight:700; font-size:11px; letter-spacing:.36em; color:var(--ye); margin:20px 0 0; animation:blink 1.2s steps(2) infinite}
 #gate .warn{position:relative; z-index:2; font-family:var(--sans); font-weight:500; font-size:10px; letter-spacing:.2em; color:var(--ink-3); margin:10px 0 0}
 @keyframes blink{50%{opacity:.25}}
-@media (max-width:1180px){#gateBtn img{height:min(62vh,600px)}}
+
 @media (max-width:640px){#gate .stk{display:none}}
 
 /* ============ 히어로 ============ */
@@ -558,7 +591,18 @@ html.gated, body.gated{overflow:hidden; height:100%}
   <div class="salt" aria-hidden="true"></div>
   <div class="inner">
     <button id="gateBtn" type="button" aria-label="꽃을 건드려 들어가기" data-cursor="들어간다">
-      <img src="poster.webp" alt="미온 : 그날의 온도" decoding="async">
+      <span class="glily" aria-hidden="true">
+        <span class="glow"></span><span class="pool"></span>
+        <span class="gbeat"><span class="gjit">
+          <img class="m" src="lily.webp" alt="" decoding="async"><img class="y" src="lily.webp" alt=""><img class="p" src="lily.webp" alt="">
+          <i class="gdrip" style="--x:11%; --y:74%; --w:14px; --h:120px;  --d:3.1s; --dl:-.4s"><s></s><b></b></i>
+          <i class="gdrip" style="--x:44%; --y:95%; --w:18px; --h:170px; --d:3.8s; --dl:-2.1s"><s></s><b></b></i>
+          <i class="gdrip" style="--x:79%; --y:91%; --w:15px; --h:140px; --d:2.6s; --dl:-1.2s"><s></s><b></b></i>
+          <i class="gdrip" style="--x:95%; --y:45%; --w:11px; --h:80px;  --d:4.4s; --dl:-3s"><s></s><b></b></i>
+          <i class="gdrip" style="--x:30%; --y:62%; --w:9px;  --h:60px;  --d:5.2s; --dl:-.9s"><s></s><b></b></i>
+        </span></span>
+        <span class="gname">미온<small>微溫 · 그날의 온도</small></span>
+      </span>
     </button>
     <span class="stk" style="--r:-12deg; left:-14%; top:12%">좋아하는 사람 곁에</span>
     <span class="stk pu" style="--r:9deg; right:-14%; top:40%">몰래 두면</span>

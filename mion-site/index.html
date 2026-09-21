@@ -500,6 +500,19 @@ html.gated, body.gated{overflow:hidden; height:100%}
 #cursor.big .lb2{opacity:1} #cursor.big .dot{opacity:0}
 #cursor.out .ring{background:var(--blue); border-color:var(--blue)} #cursor.out .lb2{color:var(--wh)}
 
+/* 비명 구간 — 미쳐 날뛴다 */
+.frenzy #grip{opacity:1}
+.frenzy #grip img{animation:writheN .16s steps(2) infinite alternate}
+.frenzy [data-split].in .ch > span{animation:jit .09s steps(2) infinite; transition:none}
+.frenzy .no, .frenzy .stk, .frenzy .smack, .frenzy .nl.on{animation:jit .07s steps(2) infinite}
+.frenzy .tv{box-shadow:0 0 0 4px var(--ye), 18px 18px 0 4px var(--pu), 0 0 160px rgba(255,225,26,.7)}
+.frenzy .bleed img{filter:url(#duoYe) contrast(1.3)}
+/* 글 많은 구간 — 글자는 가만히 */
+.calm [data-split].in .ch > span, .calm .cols p, .calm .cols .said, .calm .spec, .calm .cases{animation:none !important}
+.calm #tears{opacity:.35}
+.calm .gl.in::before, .calm .gl.in::after{opacity:.18}
+.frenzy #static{opacity:calc(var(--sn,.05) + .08)}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none !important; transition:none !important}
   main{transform:none}
@@ -507,10 +520,8 @@ html.gated, body.gated{overflow:hidden; height:100%}
   #ooze, #static, #tears, #flash{display:none}
 }
 </style>
-</head>
-<body>
 
-<svg class="defs" aria-hidden="true" focusable="false">
+</head><body><svg class="defs" aria-hidden="true" focusable="false">
   <filter id="duoPu" color-interpolation-filters="sRGB">
     <feColorMatrix type="saturate" values="0"/>
     <feComponentTransfer><feFuncR type="table" tableValues="0.06 0.42 0.84"/><feFuncG type="table" tableValues="0.02 0.17 0.72"/><feFuncB type="table" tableValues="0.14 1 1"/></feComponentTransfer>
@@ -995,7 +1006,7 @@ html.gated, body.gated{overflow:hidden; height:100%}
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = matchMedia('(pointer: fine)').matches;
   var root = document.documentElement, body = document.body;
-  var night = false, energy = 0, gBase = .08, entered = false;
+  var night = false, energy = 0, gBase = .08, entered = false, startMusic = function(){};
 
   /* ---------- 글자 쪼개기 ---------- */
   $$('[data-split]').forEach(function(el){
@@ -1042,7 +1053,7 @@ html.gated, body.gated{overflow:hidden; height:100%}
     es.forEach(function(e){ if (e.isIntersecting) READ.add(e.target); else READ.delete(e.target); });
     reading = READ.size > 0 ? 1 : 0;
   }, {rootMargin:'-30% 0px -30% 0px'});
-  $$('.hero-in, .cols .main, .seon-r, .goods, .cases, .spec').forEach(function(el){ rio.observe(el); });
+  $$('.hero-in, .cols, .seon-r, .goods, .cases, .spec, #pro2').forEach(function(el){ rio.observe(el); });
 
   /* ---------- 영상 — 보일 때만 돈다 ---------- */
   function loadV(v){ if (!v.getAttribute('src') && v.getAttribute('data-src')) v.src = v.getAttribute('data-src'); }
@@ -1066,7 +1077,7 @@ html.gated, body.gated{overflow:hidden; height:100%}
     })(performance.now());
   })();
   $('#gateBtn').addEventListener('click', function(){
-    var gate = $('#gate'); entered = true; burst(1); flashPop();
+    var gate = $('#gate'); entered = true; startMusic(); burst(1); flashPop();
     gate.classList.add('off'); root.classList.remove('gated'); body.classList.remove('gated');
     scrollTo(0,0); body.classList.add('ready');
     setTimeout(function(){ $('#heroT').classList.add('in'); }, 120);
@@ -1221,25 +1232,25 @@ html.gated, body.gated{overflow:hidden; height:100%}
   }
   var lastFlash = 0;
   function flashPop(){  // 초당 세 번을 넘지 않게
-    if (reduce) return; var now = performance.now(); if (now - lastFlash < 400) return; lastFlash = now;
+    if (reduce || calmNow) return; var now = performance.now(); if (now - lastFlash < 400) return; lastFlash = now;
     var c = ['var(--pu)','var(--ye)','#fff'][Math.random()*3|0]; FL.style.background = c;
     FL.classList.remove('fpop'); void FL.offsetWidth; FL.classList.add('fpop');
   }
   function burst(k){
-    if (reduce) return; k = k || .5; bursting = Math.max(bursting, 140 + k*360);
-    var n = 3 + (k*7|0);
+    if (reduce) return; k = k || .5; if (calmNow) k *= .3; bursting = Math.max(bursting, 140 + k*360);
+    var n = calmNow ? 1 + (Math.random()*2|0) : 3 + (k*7|0) + (frenzy > 0 ? 8 : 0);
     for (var i=0;i<n;i++){ (function(){
       var t = document.createElement('div'), r = Math.random();
       t.className = 'tear' + (r < .3 ? ' y' : r < .55 ? ' p' : '');
-      t.style.top = (Math.random()*100)+'vh'; t.style.height = (2 + Math.random()*(k*70))+'px';
+      t.style.top = (Math.random()*100)+'vh'; t.style.height = (2 + Math.random()*(k*(frenzy > 0 ? 140 : 70)))+'px';
       t.style.transform = 'translateX('+((Math.random()-.5)*60)+'px)'; TEARS.appendChild(t);
       setTimeout(function(){ t.remove(); }, 60 + Math.random()*240*k + 40);
     })(); }
-    if (k > .55 && Math.random() < .5) flashPop();
+    if (!calmNow && k > .55 && Math.random() < .5) flashPop();
     var tv = $('#tv'); if (tv){ tv.classList.add('split'); if (k > .5) tv.classList.add('inv');
       setTimeout(function(){ tv.classList.remove('split','inv'); }, 90 + k*220); }
   }
-  var nextBurst = 1800;
+  var nextBurst = 1800, calmNow = 0;
 
   /* ---------- 밤 — 누르고 있으면 터진다. 되돌리지 않는다 ---------- */
   var hold = $('#hold'), fg = $('.fg', hold), holdT = $('#holdT'), holding = false, held = 0, NEED = 1800;
@@ -1297,6 +1308,7 @@ html.gated, body.gated{overflow:hidden; height:100%}
 
   /* ---------- 배경음 + 분석 ---------- */
   var au = $('#bgm'), sndBtn = $('#snd'), actx = null, an = null, fd = null;
+  au.load();
   (function(){
     var TARGET = .5, fading = null, wanted = true;
     try { wanted = localStorage.getItem('mion-bgm') !== 'off'; } catch(e){}
@@ -1306,15 +1318,20 @@ html.gated, body.gated{overflow:hidden; height:100%}
       try { localStorage.setItem('mion-bgm', on ? 'on' : 'off'); } catch(e){} }
     function analyser(){
       if (actx){ if (actx.state === 'suspended') actx.resume(); return; }
-      try { actx = new (window.AudioContext || window.webkitAudioContext)(); var src = actx.createMediaElementSource(au);
-        an = actx.createAnalyser(); an.fftSize = 256; an.smoothingTimeConstant = .55; src.connect(an); an.connect(actx.destination);
-        fd = new Uint8Array(an.frequencyBinCount); if (actx.state === 'suspended') actx.resume(); } catch(e){ actx = null; an = null; }
+      try {
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+        var hook = function(){ if (an || actx.state !== 'running') return;
+          try { var src = actx.createMediaElementSource(au); an = actx.createAnalyser(); an.fftSize = 256; an.smoothingTimeConstant = .55;
+            src.connect(an); an.connect(actx.destination); fd = new Uint8Array(an.frequencyBinCount); } catch(e){ an = null; } };
+        if (actx.state === 'running') hook(); else actx.resume().then(hook).catch(function(){});
+      } catch(e){ actx = null; an = null; }
     }
     function play(){ analyser(); au.volume = 0; var pr = au.play();
       if (pr && pr.then) pr.then(function(){ mark(true); fade(TARGET); }).catch(function(){ mark(false); }); else { mark(true); fade(TARGET); } }
     function stop(){ fade(0, function(){ au.pause(); }); mark(false); }
     sndBtn.addEventListener('click', function(){ if (au.paused) play(); else stop(); });
-    if (wanted){ var armed = true, evs = ['pointerdown','keydown','touchstart'];
+    startMusic = function(){ if (au.paused) play(); };
+    if (wanted){ var armed = true, evs = ['keydown'];
       var kick = function(){ if (!armed) return; armed = false; evs.forEach(function(ev){ removeEventListener(ev, kick); }); play(); };
       evs.forEach(function(ev){ addEventListener(ev, kick, {passive:true}); }); }
     document.addEventListener('visibilitychange', function(){ if (document.hidden && !au.paused) fade(.08); else if (!document.hidden && !au.paused) fade(TARGET); });
@@ -1326,7 +1343,8 @@ html.gated, body.gated{overflow:hidden; height:100%}
     clk.textContent = '2026.08.03 ' + [h,m,s].map(function(n){ return (n<10?'0':'')+n; }).join(':'); }, 1000);
 
   /* ---------- 한 박자 ---------- */
-  var tPrev = performance.now(), nAcc = 0, avg = 0, nextFlash = 7000;
+  var tPrev = performance.now(), nAcc = 0, avg = 0, nextFlash = 7000, midAvg = 0, frenzy = 0, fTick = 0, heard = 0;
+  var SCREAM = [105, 128];   // 미온ost.mp3 기준 초
   function tick(now){
     var dt = Math.min(48, now - tPrev); tPrev = now;
     if (!reduce){
@@ -1335,6 +1353,11 @@ html.gated, body.gated{overflow:hidden; height:100%}
         for (var i=0;i<12;i++) lo += fd[i]; for (i=40;i<100;i++) hi += fd[i];
         e = Math.min(1, (lo/12/255)*.7 + (hi/60/255)*1.1);
         avg += (e - avg)*.04;
+        // 비명·큭큭 대역(약 1~5kHz)이 확 치고 올라오면 발광
+        var mid = 0; for (i=6;i<30;i++) mid += fd[i]; mid = mid/24/255;
+        heard += dt;
+        if (heard > 4000 && mid > midAvg*1.35 + .05 && mid > .38) frenzy = Math.max(frenzy, 360);
+        midAvg += (mid - midAvg)*(heard < 4000 ? .2 : .03);
         if (e > avg*1.25 + .04 && nextBurst > 220){ burst(Math.min(1, (e - avg)*3 + .3)); nextBurst = 220 + Math.random()*700; }   // 음악이 튀면 화면도 튄다
       } else { e = .1 + Math.random()*.08; }
       energy += (e - energy)*.3;
@@ -1342,16 +1365,26 @@ html.gated, body.gated{overflow:hidden; height:100%}
         nextBurst -= dt; if (nextBurst <= 0){ burst(.3 + Math.random()*.6); nextBurst = (night ? 500 : 1200) + Math.random()*(night ? 1200 : 2600); }
         nextFlash -= dt; if (nextFlash <= 0){ flashPop(); nextFlash = (night ? 2500 : 5500) + Math.random()*(night ? 3000 : 6000); }
       }
+      // 후반부 비명 구간 — 1:45~2:08 통째로 발광, 직전 1:41~1:45는 달아오른다
+      if (!au.paused){ var ct = au.currentTime;
+        if (ct >= SCREAM[0] && ct <= SCREAM[1]) frenzy = Math.max(frenzy, 140);
+        else if (ct >= SCREAM[0] - 4 && ct < SCREAM[0] && nextBurst > 260) nextBurst = 120 + Math.random()*160; }
+      if (frenzy > 0){
+        frenzy -= dt; fTick -= dt;
+        if (!body.classList.contains('frenzy')) body.classList.add('frenzy');
+        if (fTick <= 0){ burst(1); fTick = calm ? 260 + Math.random()*300 : 60 + Math.random()*70; if (Math.random() < .5) flashPop(); }
+      } else if (body.classList.contains('frenzy')) body.classList.remove('frenzy');
       var inStage = stP > 0 && stP < 1 ? .15 + stP*.5 : 0;
-      var g = Math.min(1, gBase + energy*.4 + (bursting > 0 ? .6 : 0) + inStage);
       var calm = reading && !inStage ? 1 : 0;
+      if (calm !== calmNow){ calmNow = calm; body.classList.toggle('calm', !!calm); }
+      var g = calm ? Math.min(.3, gBase + energy*.15) : frenzy > 0 ? 1 : Math.min(1, gBase + energy*.4 + (bursting > 0 ? .6 : 0) + inStage);
       root.style.setProperty('--sn', (calm ? .014 + energy*.02 : .035 + g*.14).toFixed(3));
       bursting = Math.max(0, bursting - dt);
       root.style.setProperty('--g', g.toFixed(3));
       if (bursting > 0){
-        var jm = 1;
+        var jm = calm ? .12 : frenzy > 0 ? 2.4 : 1;
         root.style.setProperty('--jx', ((Math.random()-.5)*22*g*jm).toFixed(1)+'px'); root.style.setProperty('--jy', ((Math.random()-.5)*10*g*jm).toFixed(1)+'px');
-        root.style.setProperty('--sk', ((Math.random()-.5)*4*g).toFixed(2)+'deg');
+        root.style.setProperty('--sk', calm ? '0deg' : ((Math.random()-.5)*4*g).toFixed(2)+'deg');
         var a = Math.random()*70, b = Math.random()*70; root.style.setProperty('--c1', a+'%'); root.style.setProperty('--c2', (100-a-8-Math.random()*20)+'%');
         root.style.setProperty('--c3', b+'%'); root.style.setProperty('--c4', (100-b-6-Math.random()*20)+'%');
       } else { root.style.setProperty('--jx','0px'); root.style.setProperty('--jy','0px'); root.style.setProperty('--sk','0deg'); }
@@ -1374,6 +1407,4 @@ html.gated, body.gated{overflow:hidden; height:100%}
   requestAnimationFrame(tick);
 })();
 </script>
-
-</body>
-</html>
+</body></html>

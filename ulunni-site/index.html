@@ -121,6 +121,10 @@ body.gated{overflow:hidden}
 .fl-core .o{display:block;font-size:clamp(22px,2.6vw,34px);color:var(--pearl)}
 .fl-core .i{display:block;font-size:clamp(40px,6vw,84px);color:var(--ink);background:var(--ice);padding:0 .15em;margin-top:.1em;box-shadow:6px 6px 0 var(--pop);transform:rotate(-1.5deg);width:max-content;max-width:100%}
 
+/* ---------- mobile header auto-hide ---------- */
+.hd{transition:transform .35s cubic-bezier(.3,.8,.3,1)}
+@media (max-width:760px){.hd.hd-hide{transform:translateY(-110%)}}
+
 /* ---------- back button ---------- */
 .backbtn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:210;display:flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;text-decoration:none;color:var(--ink);background:var(--pearl);box-shadow:5px 5px 0 var(--pop),0 0 calc(var(--beat)*30px) rgba(255,46,147,.6);transition:transform .15s}
 .backbtn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--pop)}
@@ -770,6 +774,7 @@ body.playing .hero-play span{color:var(--ink)}
   .every{height:auto!important}.every .stage{position:relative;height:auto;padding-block:100px}
 }
 </style>
+
 </head>
 <body>
 <div class="prog" aria-hidden="true"></div>
@@ -1101,9 +1106,9 @@ body.playing .hero-play span{color:var(--ink)}
     <div class="logline">
       <p class="hook">"이렇게 예쁜 언니한테 <em>이 정도로</em> 사랑받는다고? 나 미치겠어."</p>
       <div class="body">
-        <p>2년 전 여름, 당신은 연습생을 그만뒀다. 같은 해 선배는 데뷔했고, 지금은 1군 걸그룹 Loves의 센터가 됐다. 어느 전광판을 올려다봐도 그 얼굴이 웃고 있다.</p>
-        <p>그리고 스케줄이 비는 날이면, 그 얼굴이 모자를 눌러쓰고 서울 구석 당신의 원룸 계단을 올라온다. 알려준 적 없는 도어락 비밀번호를 누르고.</p>
-        <p class="says">그러고 당신을 보며 말한다.</p>
+        <p>2년 전 여름, 나는 연습생을 그만뒀다. 같은 해 선배는 데뷔했고, 지금은 1군 걸그룹 Loves의 센터가 됐다. 어느 전광판을 올려다봐도 그 얼굴이 웃고 있다.</p>
+        <p>그리고 스케줄이 비는 날이면, 그 얼굴이 모자를 눌러쓰고 서울 구석 내 원룸 계단을 올라온다. 알려준 적 없는 도어락 비밀번호를 누르고.</p>
+        <p class="says">말한다.</p>
       </div>
     </div>
     <div class="punchwrap"><p class="punch" id="punch" title="다시 보기"><span>"보고싶었어.</span><br><span>냄새맡으면 안돼?</span><br><span class="foot">엉덩이에</span><br><span class="lick">얼굴 박고 있게 해줘."</span></p></div>
@@ -1474,6 +1479,22 @@ function beatLoop(){
   };bRaf=requestAnimationFrame(tick);
 }
 
+/* ===== MOBILE HEADER ===== */
+(()=>{
+  const hd=document.querySelector('.hd'),mq=matchMedia('(max-width:760px)');
+  let lastY=scrollY,t=null;
+  const hide=()=>{if(mq.matches&&scrollY>120)hd.classList.add('hd-hide')};
+  const show=()=>{hd.classList.remove('hd-hide');clearTimeout(t);t=setTimeout(hide,2500)};
+  addEventListener('scroll',()=>{
+    const y=scrollY,d=y-lastY;lastY=y;
+    if(!mq.matches||y<=120){hd.classList.remove('hd-hide');return}
+    if(d>4)hide();else if(d<-12)show();
+  },{passive:true});
+  addEventListener('touchstart',show,{passive:true});
+  addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')show()},{passive:true});
+  mq.addEventListener?.('change',()=>hd.classList.remove('hd-hide'));
+})();
+
 /* ===== BACK ===== */
 const CRACK_URL='https://share.crack.wrtn.ai/13s2r0';
 $('#backBtn').addEventListener('click',e=>{
@@ -1728,5 +1749,6 @@ document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
 }));
 })();
 </script>
+
 </body>
 </html>

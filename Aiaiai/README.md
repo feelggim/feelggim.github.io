@@ -46,8 +46,7 @@ audio/aiaiai.mp3    배경음
   누르는 순간 재생된다. 우측 하단 버튼으로 껐다 켤 수 있다.
 - 하단 대화창은 미리 써 둔 아이의 발화에서 회신한다.
   실시간 AI 응답이 필요하면 별도 API 프록시를 붙여야 한다.
-- 폰트는 Google Fonts에서 Noto Sans KR / Noto Serif KR / IBM Plex Mono / Syncopate를
-  불러온다. 오프라인에서는 대체 폰트로 표시된다.
+- 폰트는 Google Fonts에서 불러온다. 오프라인에서는 대체 폰트로 표시된다.
 - 다크 모드를 쓰지 않는다. 흰 배경 고정이다.
 
 ---

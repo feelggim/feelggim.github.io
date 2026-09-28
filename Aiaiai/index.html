@@ -64,7 +64,7 @@ img{max-width:100%;display:block}
 #rain{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.93}
 .veil{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(130% 78% at 50% 0%,rgba(255,255,255,.35) 0%,rgba(255,255,255,.71) 50%,rgba(255,255,255,.86) 100%)}
-.wrap{position:relative;z-index:2}
+.wrap{position:relative;z-index:2;overflow-x:clip}
 
 /* ---------- shared ---------- */
 .sec{padding-block:clamp(72px,11vw,150px);padding-left:var(--gut);padding-right:var(--gut);
@@ -145,7 +145,7 @@ p{margin:0 0 16px;max-width:64ch}
   background:linear-gradient(97deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.4) 20%,rgba(255,255,255,0) 40%),
              linear-gradient(to top,rgba(255,255,255,.62) 0%,rgba(255,255,255,0) 26%)}
 .hero-copy{position:absolute;inset:0;z-index:2}
-.hero-eyebrow{position:absolute;top:clamp(18px,5vh,54px);left:var(--gut);right:auto;max-width:min(52vw,360px)}
+.hero-eyebrow{position:absolute;top:calc(clamp(12px,2.6vw,24px) + 48px + env(safe-area-inset-top,0px));left:var(--gut);right:auto;max-width:min(52vw,360px)}
 .hero-mid{position:absolute;top:50%;left:48%;transform:translate(-50%,-50%);text-align:center}
 .hero-foot{position:absolute;z-index:2;left:var(--gut);bottom:clamp(54px,9vh,92px);max-width:min(48vw,420px)}
 .stack{font-family:var(--disp);font-weight:700;line-height:.86;letter-spacing:-.04em;
@@ -417,6 +417,112 @@ td b{font-weight:600}
 .term-foot span:last-child{color:var(--pink)}
 
 
+
+/* ---------- 아이에게 돌아가기 · 손대면 열린다 ---------- */
+#backCrack{position:fixed;left:clamp(12px,3vw,28px);top:0;z-index:59;
+  margin-top:calc(clamp(12px,2.6vw,24px) + env(safe-area-inset-top,0px));
+  display:inline-flex;align-items:center;justify-content:flex-start;gap:0;
+  height:38px;padding:0 13px;max-width:38px;overflow:hidden;white-space:nowrap;
+  text-decoration:none;border:1px solid var(--pink);
+  background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--pink);
+  opacity:1;transform:none;
+  transition:max-width .34s cubic-bezier(.2,.7,.2,1),gap .34s cubic-bezier(.2,.7,.2,1),
+             background .2s,color .2s,box-shadow .2s,opacity .4s,transform .4s}
+#backCrack .arr{flex:0 0 auto;font-size:12px;line-height:1}
+#backCrack .lb{opacity:0;transition:opacity .22s}
+#backCrack:hover,#backCrack:focus-visible,#backCrack.open{
+  max-width:260px;gap:9px;background:var(--pink);color:#fff;
+  box-shadow:0 8px 24px rgba(250,41,221,.24)}
+#backCrack:hover .lb,#backCrack:focus-visible .lb,#backCrack.open .lb{opacity:1}
+#backCrack:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+#backCrack.off{opacity:0;transform:translateY(-12px);pointer-events:none}
+@media(max-width:560px){#backCrack{height:34px;padding:0 11px;max-width:34px;font-size:9px;letter-spacing:.12em}}
+
+
+/* ---------- 03 마지막 교체 기록 ---------- */
+.rec{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(28px,4vw,60px);
+  margin-top:40px;align-items:start}
+.rec-stick{position:sticky;top:calc(10vh + env(safe-area-inset-top,0px));z-index:3}
+.rec-frame{border:1px solid var(--pink);background:#fff;
+  box-shadow:0 24px 60px rgba(250,41,221,.12)}
+.rec-bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);
+  background:var(--paper-2);font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden}
+.rec-bar .recdot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--pink);animation:blink 1.1s infinite}
+.rec-bar .rec-t{color:var(--pink);font-weight:500}
+.rec-bar .sp{flex:1}
+.rec-view{position:relative;aspect-ratio:1824/1104;overflow:hidden;background:#fff}
+.rec-img{position:absolute;inset:0;background-size:cover;background-position:center;
+  opacity:0;transform:scale(1.05);
+  transition:opacity .55s ease,transform 2.4s cubic-bezier(.2,.7,.2,1)}
+.rec-img.on{opacity:1;transform:scale(1)}
+.rec-img::before,.rec-img::after{content:"";position:absolute;inset:0;background:inherit;
+  background-size:cover;clip-path:inset(0 0 100% 0)}
+.rec-img::before{filter:sepia(1) saturate(7) hue-rotate(297deg);mix-blend-mode:multiply;opacity:.85;transform:translateX(-8px)}
+.rec-img::after{filter:grayscale(1) contrast(1.4);mix-blend-mode:screen;opacity:.75;transform:translateX(8px)}
+.rec-view.burst .rec-img.on::before{animation:rb1 .46s steps(1) 1}
+.rec-view.burst .rec-img.on::after{animation:rb2 .46s steps(1) 1}
+@keyframes rb1{0%{clip-path:inset(10% 0 72% 0)}18%{clip-path:inset(46% 0 32% 0)}
+  36%{clip-path:inset(78% 0 6% 0)}54%{clip-path:inset(28% 0 58% 0)}72%{clip-path:inset(62% 0 20% 0)}
+  90%{clip-path:inset(4% 0 88% 0)}100%{clip-path:inset(0 0 100% 0)}}
+@keyframes rb2{0%{clip-path:inset(66% 0 14% 0)}22%{clip-path:inset(18% 0 68% 0)}
+  44%{clip-path:inset(40% 0 44% 0)}66%{clip-path:inset(86% 0 2% 0)}88%{clip-path:inset(54% 0 30% 0)}
+  100%{clip-path:inset(0 0 100% 0)}}
+.rec-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.rec-view.burst .rec-flash{animation:rflash .5s ease-out 1}
+@keyframes rflash{0%{opacity:.9}100%{opacity:0}}
+.rec-sweep{position:absolute;left:0;right:0;top:0;height:2px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(250,41,221,.75),transparent);
+  box-shadow:0 0 14px rgba(250,41,221,.55);animation:sweep 4.2s linear infinite}
+@keyframes sweep{0%{top:-2px;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:100%;opacity:0}}
+.rec-corners{position:absolute;inset:14px;pointer-events:none;
+  --c:var(--pink);
+  background:
+   linear-gradient(var(--c),var(--c)) top left/20px 1px no-repeat,
+   linear-gradient(var(--c),var(--c)) top left/1px 20px no-repeat,
+   linear-gradient(var(--c),var(--c)) top right/20px 1px no-repeat,
+   linear-gradient(var(--c),var(--c)) top right/1px 20px no-repeat,
+   linear-gradient(var(--c),var(--c)) bottom left/20px 1px no-repeat,
+   linear-gradient(var(--c),var(--c)) bottom left/1px 20px no-repeat,
+   linear-gradient(var(--c),var(--c)) bottom right/20px 1px no-repeat,
+   linear-gradient(var(--c),var(--c)) bottom right/1px 20px no-repeat}
+.rec-cap{margin:0;max-width:none;padding:11px 14px 8px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.12em;color:var(--ink-2);border-top:1px solid var(--line);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec-ticks{display:flex;gap:6px;padding:4px 14px 14px}
+.rec-ticks button{flex:1;height:14px;border:0;padding:0;cursor:pointer;background:transparent;position:relative}
+.rec-ticks button::after{content:"";position:absolute;left:0;right:0;top:6px;height:2px;
+  background:var(--line);transition:background .3s}
+.rec-ticks button.on::after{background:var(--pink)}
+.rec-ticks button:hover::after{background:var(--pink-2)}
+.rec-ticks button:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.rec-steps{display:flex;flex-direction:column}
+.rec-step{min-height:76vh;display:flex;flex-direction:column;justify-content:center;
+  opacity:.22;transform:translateX(8px);transition:opacity .5s,transform .5s}
+.rec-step.on{opacity:1;transform:none}
+.rec-step .fr{margin:0 0 10px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--pink)}
+.rec-step h3{font-size:clamp(21px,2.6vw,30px);margin:0 0 14px;letter-spacing:-.025em}
+.rec-step p{margin:0;max-width:40ch;font-size:15px;line-height:1.95;color:var(--ink-2)}
+.rec-step:first-child{min-height:60vh}
+.rec-step:last-child{min-height:84vh}
+@media(max-width:860px){
+  .rec{grid-template-columns:1fr;gap:0}
+  .rec-stick{top:calc(env(safe-area-inset-top,0px) + 52px)}
+  .rec-stick::after{content:"";position:absolute;left:-2px;right:-2px;top:100%;height:34px;pointer-events:none;
+    background:linear-gradient(#fff,rgba(255,255,255,0))}
+  .rec-stick::before{content:"";position:absolute;left:-40px;right:-40px;bottom:100%;height:70px;pointer-events:none;
+    background:linear-gradient(rgba(255,255,255,0),#fff 70%)}
+  .rec-steps{position:relative;z-index:1}
+  .rec-bar{gap:9px;font-size:9px;letter-spacing:.12em;padding:8px 11px}
+  .rec-cap{font-size:9.5px;padding:9px 11px 6px}
+  .rec-step{min-height:58vh;padding:44px 0 28px;transform:none}
+  .rec-step:first-child{min-height:50vh}
+  .rec-step:last-child{min-height:70vh}
+  .rec-step p{max-width:none}
+}
+@media(prefers-reduced-motion:reduce){.rec-sweep{display:none}.rec-img{transition:opacity .2s}}
+
 /* ---------- 09 시작 지점 ---------- */
 .startbox{border:1px solid var(--pink);background:rgba(255,255,255,.9);overflow:hidden;margin-top:32px}
 .startbody{padding:clamp(22px,4vw,40px)}
@@ -504,8 +610,8 @@ td b{font-weight:600}
 #bgmBtn.play .bars i:nth-child(4){animation-delay:.45s}
 @keyframes eq{0%,100%{height:3px}50%{height:11px}}
 
-#missing{position:fixed;left:0;top:0;z-index:57;
-  margin:calc(10px + env(safe-area-inset-top,0px)) 0 0 clamp(12px,3vw,28px);
+#missing{position:fixed;left:clamp(12px,3vw,28px);bottom:0;z-index:57;
+  margin-bottom:calc(clamp(14px,3vw,28px) + env(safe-area-inset-bottom,0px));
   display:flex;align-items:center;gap:9px;padding:8px 13px;
   border:1px solid var(--pink);background:rgba(255,255,255,.85);backdrop-filter:blur(8px);
   font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--pink)}
@@ -534,7 +640,7 @@ td b{font-weight:600}
   .hero-scrim{background:
     linear-gradient(to bottom,rgba(255,255,255,.6) 0%,rgba(255,255,255,.16) 15%,rgba(255,255,255,0) 28%),
     linear-gradient(to top,rgba(255,255,255,.96) 0%,rgba(255,255,255,.86) 14%,rgba(255,255,255,.4) 27%,rgba(255,255,255,0) 40%)}
-  .hero-eyebrow{top:clamp(14px,3vh,28px);max-width:none}
+  .hero-eyebrow{top:calc(clamp(12px,2.6vw,24px) + 44px + env(safe-area-inset-top,0px));max-width:none}
   .stack{font-size:clamp(40px,17vw,96px)}
   .hero-foot{left:0;right:0;bottom:clamp(18px,4vh,40px);
     max-width:none;padding-inline:var(--gut);text-align:center}
@@ -549,6 +655,657 @@ td b{font-weight:600}
   .js .rv:not(.on){opacity:1;transform:none}
   #rain{display:none}
 }
+
+/* ===================================================================
+   관측 엔진 — 페이지가 읽는 사람에게 반응한다
+   =================================================================== */
+:root{--jx:0px;--jy:0px;--sk:0deg;--g:.08}
+body.jit .wrap{transform:translate3d(var(--jx),var(--jy),0) skewX(var(--sk))}
+
+/* ---------- 부팅: 컴퓨터가 켜진다 ---------- */
+#boot{position:fixed;inset:0;z-index:95;background:#fff;overflow:hidden;
+  transition:opacity .7s ease,clip-path .9s cubic-bezier(.7,0,.2,1);clip-path:inset(0 0 0 0)}
+#boot.done{opacity:0;clip-path:inset(0 0 100% 0);pointer-events:none}
+#boot::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(250,41,221,.05) 0 1px,transparent 1px 3px)}
+#boot .in{position:absolute;left:clamp(18px,6vw,72px);right:clamp(18px,6vw,72px);
+  top:calc(clamp(28px,8vh,80px) + env(safe-area-inset-top,0px));bottom:110px;overflow:hidden;
+  font-family:var(--mono);font-size:clamp(10.5px,1.15vw,13px);line-height:1.95;letter-spacing:.04em;color:var(--ink-2)}
+#boot .hdr{max-width:none;display:flex;justify-content:space-between;gap:16px;margin:0 0 22px;padding-bottom:12px;
+  border-bottom:1px solid var(--line-pink);color:var(--pink);letter-spacing:.2em;font-size:.88em}
+#boot .hdr b{font-family:var(--disp);font-weight:700;letter-spacing:.02em;font-size:1.5em;color:var(--ink)}
+#boot .ln{display:flex;gap:10px;white-space:nowrap;margin:0;max-width:none}
+#boot .ln .t{color:var(--ink-3);flex:0 0 auto}
+#boot .ln .d{flex:1 1 auto;overflow:hidden;color:var(--line)}
+#boot .ln .d::before{content:"...................................................................................................................................."}
+#boot .ln .r{flex:0 0 auto;color:var(--ink)}
+#boot .ln .r.ok{color:var(--ink)}
+#boot .ln .r.pk{color:var(--pink);font-weight:500}
+#boot .ln .r.err{color:#fff;background:var(--pink);padding:0 6px}
+#boot .ln.plain{color:var(--pink)}
+#boot .cur{display:inline-block;width:.6em;height:1.1em;vertical-align:-.2em;background:var(--pink);animation:blink 1s steps(1) infinite}
+#boot .miss{position:absolute;left:clamp(18px,6vw,72px);right:clamp(18px,6vw,72px);bottom:calc(30px + env(safe-area-inset-bottom,0px));
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line-pink);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--pink)}
+#boot .miss .box{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid var(--pink);
+  animation:mblink 1.1s steps(1) infinite}
+#boot .miss .box .dot{width:6px;height:6px;border-radius:50%;background:var(--pink)}
+#boot .miss .idx{color:var(--ink-3);letter-spacing:.14em}
+#bootGo{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:14px 0 0;padding:12px 16px;width:100%;
+  text-align:left;cursor:pointer;border:1px solid var(--pink);background:#fff;opacity:0;transform:translateY(6px);
+  font-family:var(--mono);font-size:inherit;letter-spacing:.1em;color:var(--ink);
+  transition:opacity .4s,transform .4s,background .2s,color .2s}
+#bootGo.on{opacity:1;transform:none}
+#bootGo .k{padding:2px 10px;background:var(--pink);color:#fff;font-weight:500;letter-spacing:.2em;animation:mblink2 1.1s steps(1) infinite}
+@keyframes mblink2{0%,100%{background:var(--pink);color:#fff}50%{background:#fff;color:var(--pink)}}
+#bootGo .w{margin-left:auto;font-size:.85em;color:var(--ink-3);letter-spacing:.16em}
+#bootGo:hover,#bootGo:focus-visible{background:var(--pink);color:#fff;outline:none}
+#bootGo:hover .k,#bootGo:focus-visible .k{animation:none;background:#fff;color:var(--pink)}
+#bootGo:hover .w,#bootGo:focus-visible .w{color:#fff}
+@media(max-width:560px){#bootGo .w{margin-left:0;flex-basis:100%}}
+@keyframes mblink{0%,100%{background:#fff;color:var(--pink)}50%{background:var(--pink);color:#fff}}
+@keyframes mblinkdot{0%,100%{background:var(--pink)}50%{background:#fff}}
+#boot .miss .box .dot{animation:mblinkdot 1.1s steps(1) infinite}
+@media(max-width:560px){#boot .ln .d{min-width:12px}#boot .hdr span:last-child{display:none}}
+
+/* ---------- 찢김 · 번쩍 ---------- */
+#tears{position:fixed;inset:0;z-index:52;pointer-events:none;overflow:hidden}
+.tear{position:absolute;left:0;right:0;
+  -webkit-backdrop-filter:invert(1) hue-rotate(95deg);backdrop-filter:invert(1) hue-rotate(95deg)}
+.tear.p{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--pink);mix-blend-mode:multiply;opacity:.9}
+.tear.w{-webkit-backdrop-filter:none;backdrop-filter:none;background:#fff;mix-blend-mode:normal}
+#flash{position:fixed;inset:0;z-index:53;pointer-events:none;opacity:0}
+#flash.pop{animation:fpop .34s ease-out 1}
+@keyframes fpop{0%{opacity:.55}100%{opacity:0}}
+.calm #tears{opacity:.3}
+
+/* ---------- 관측 커서 ---------- */
+body.cur-on,body.cur-on a,body.cur-on button{cursor:none}
+body.cur-on input,body.cur-on textarea{cursor:text}
+#cursor{position:fixed;left:0;top:0;z-index:96;pointer-events:none;opacity:0;transition:opacity .3s}
+#cursor.on{opacity:1}
+#cursor .ring{position:absolute;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;
+  border:1.5px solid var(--pink);border-radius:50%;display:grid;place-items:center;
+  transition:width .35s cubic-bezier(.3,1.4,.5,1),height .35s cubic-bezier(.3,1.4,.5,1),
+             margin .35s cubic-bezier(.3,1.4,.5,1),background .25s}
+#cursor .dot{position:absolute;left:0;top:0;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:var(--pink)}
+#cursor .pre{position:absolute;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;opacity:.75;
+  background:
+   linear-gradient(var(--pink),var(--pink)) center/1px 100% no-repeat,
+   linear-gradient(var(--pink),var(--pink)) center/100% 1px no-repeat}
+#cursor .pre::after{content:"예측";position:absolute;left:16px;top:-3px;font-family:var(--mono);font-size:8px;
+  letter-spacing:.14em;color:var(--pink);white-space:nowrap}
+#cursor .xy{position:absolute;left:0;top:0;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;
+  color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+#cursor .lb{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:#fff;opacity:0;transition:opacity .2s;white-space:nowrap}
+#cursor.hov .ring{width:52px;height:52px;margin:-26px 0 0 -26px;background:rgba(250,41,221,.12)}
+#cursor.big .ring{width:88px;height:88px;margin:-44px 0 0 -44px;background:var(--pink)}
+#cursor.big .lb{opacity:1}
+#cursor.big .dot,#cursor.big .pre,#cursor.big .xy{opacity:0}
+#cursor.none{opacity:0!important}
+
+/* ---------- 상단 우측 헤더 ---------- */
+#hd{position:fixed;right:clamp(12px,3vw,28px);top:0;z-index:74;display:flex;gap:8px;
+  margin-top:calc(clamp(12px,2.6vw,24px) + env(safe-area-inset-top,0px))}
+#hd .pill{display:inline-flex;align-items:center;gap:9px;height:38px;padding:0 14px;cursor:pointer;
+  border:1px solid var(--pink);background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--pink);transition:background .2s,color .2s}
+#hd .pill:hover{background:var(--pink);color:#fff}
+#hd .pill:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+#menuBtn .bars{position:relative;width:15px;height:8px}
+#menuBtn .bars i{position:absolute;left:0;right:0;height:1.5px;background:currentColor;
+  transition:transform .45s cubic-bezier(.7,0,.2,1),top .45s cubic-bezier(.7,0,.2,1)}
+#menuBtn .bars i:first-child{top:0}
+#menuBtn .bars i:last-child{top:6.5px}
+.menu-open #menuBtn .bars i:first-child{top:3.25px;transform:rotate(35deg)}
+.menu-open #menuBtn .bars i:last-child{top:3.25px;transform:rotate(-35deg)}
+@media(max-width:560px){#hd .pill{height:34px;padding:0 11px;font-size:9px;letter-spacing:.12em;gap:7px}
+}
+
+/* ---------- 관측률 · 되돌아가지 않는다 ---------- */
+#gauge{position:fixed;right:clamp(10px,1.4vw,18px);top:24vh;bottom:24vh;width:2px;z-index:30;pointer-events:none;
+  background:var(--line)}
+#gauge .fill{position:absolute;left:0;right:0;top:0;height:0;background:var(--pink)}
+#gauge .sq{position:absolute;left:50%;top:0;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:var(--pink);
+  box-shadow:0 0 12px rgba(250,41,221,.8)}
+#gauge .pct{position:absolute;right:10px;top:-4px;white-space:nowrap;font-family:var(--mono);font-size:9px;
+  letter-spacing:.14em;color:var(--ink-3);transform:translateY(-100%);font-variant-numeric:tabular-nums}
+@media(max-width:860px){#gauge{display:none}}
+
+/* ---------- 현재 섹션 ---------- */
+#idx{display:inline-flex;align-items:baseline;gap:9px;height:38px;padding:0 12px;pointer-events:none;
+  background:rgba(255,255,255,.86);backdrop-filter:blur(8px);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--ink-3);line-height:38px;
+  opacity:0;transition:opacity .4s}
+#idx.on{opacity:1}
+#idx b{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.02em;color:var(--pink)}
+@media(max-width:560px){#idx{height:34px;line-height:34px;padding:0 8px}#idx .lbl{display:none}}
+
+/* ---------- 접촉 기록 ---------- */
+#marks{position:absolute;left:0;top:0;width:100%;height:0;z-index:31;pointer-events:none}
+.mk{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;
+  background:
+   linear-gradient(var(--pink),var(--pink)) center/1px 100% no-repeat,
+   linear-gradient(var(--pink),var(--pink)) center/100% 1px no-repeat;
+  animation:mkin .5s cubic-bezier(.3,1.5,.5,1) 1}
+.mk::before{content:"";position:absolute;inset:4px;border:1px solid var(--pink);border-radius:50%;
+  animation:mkring 1.2s ease-out 1}
+@keyframes mkin{0%{transform:scale(2.4) rotate(45deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes mkring{0%{transform:scale(1);opacity:1}100%{transform:scale(4.2);opacity:0}}
+.mk-say{position:absolute;margin:-30px 0 0 14px;white-space:nowrap;font-family:var(--mono);font-size:10px;
+  letter-spacing:.12em;color:var(--pink);background:rgba(255,255,255,.92);padding:3px 8px;
+  animation:say 2s ease-out 1 forwards}
+@keyframes say{0%{opacity:0;transform:translateY(6px)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0;transform:translateY(-8px)}}
+#touchN{position:fixed;left:clamp(12px,3vw,28px);bottom:0;z-index:30;pointer-events:none;
+  margin-bottom:calc(clamp(14px,3vw,24px) + 46px + env(safe-area-inset-bottom,0px));
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--pink);background:rgba(255,255,255,.88);
+  padding:6px 10px;opacity:0;transition:opacity .4s}
+#touchN.on{opacity:1}
+
+/* ---------- 제목 등장 ---------- */
+.js h2.hx{clip-path:inset(0 100% 0 0);transform:skewX(-8deg);
+  transition:clip-path 1s cubic-bezier(.7,0,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.js h2.hx.in{clip-path:inset(0 0 0 0);transform:none}
+
+/* ---------- 리미터 해제 · 누르고 있으면 ---------- */
+.holdwrap{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+#hold{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;gap:14px;
+  padding:10px 22px 10px 10px;border:1px solid var(--pink);background:#fff;color:var(--pink);cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;user-select:none;-webkit-user-select:none;
+  touch-action:none;-webkit-touch-callout:none;transition:background .25s,color .25s,box-shadow .25s}
+#hold:hover{box-shadow:0 10px 30px rgba(250,41,221,.22)}
+#hold:focus-visible{outline:2px solid var(--pink);outline-offset:4px}
+#hold svg{width:38px;height:38px;transform:rotate(-90deg);flex:0 0 auto}
+#hold circle{fill:none;stroke-width:3}
+#hold .bgc{stroke:var(--line)}
+#hold .fg{stroke:var(--pink);stroke-dasharray:106.8;stroke-dashoffset:106.8}
+#hold.shiver{animation:shiver .07s linear infinite}
+@keyframes shiver{0%{transform:translate(0,0)}25%{transform:translate(1px,-1px)}50%{transform:translate(-1px,1px)}75%{transform:translate(1px,1px)}100%{transform:translate(0,0)}}
+#hold[disabled]{background:var(--pink);color:#fff;cursor:default;animation:none}
+#hold[disabled] .fg{stroke:#fff}#hold[disabled] .bgc{stroke:rgba(255,255,255,.4)}
+.holdnote{margin:0;max-width:34ch;font-family:var(--mono);font-size:10px;letter-spacing:.14em;line-height:1.9;color:var(--ink-3)}
+.rel-txt{display:none;margin:28px 0 0;max-width:none;font-family:var(--myeongjo);font-weight:700;
+  font-size:clamp(22px,3.2vw,38px);line-height:1.5;color:var(--pink)}
+.rel-txt small{display:block;margin-top:12px;font-family:var(--mono);font-weight:400;font-size:10px;
+  letter-spacing:.2em;color:var(--ink-3)}
+#l3.released .rel-txt,#c4.released .rel-txt{display:block;animation:jit .12s steps(2) 10}
+@keyframes jit{0%{transform:translate(0,0)}50%{transform:translate(-3px,1px)}100%{transform:translate(2px,-1px)}}
+
+/* 해제 후 — 세계가 조금 달라진다 */
+.released .ecg{background-color:rgba(250,41,221,.08)}
+.released #gauge .fill{box-shadow:0 0 10px rgba(250,41,221,.7)}
+.released .veil{opacity:.82}
+
+@media(prefers-reduced-motion:reduce){
+  .wrap{transform:none!important}
+  #tears,#flash,#cursor,#marks{display:none!important}
+  body.cur-on,body.cur-on a,body.cur-on button{cursor:auto}
+  .js h2.hx{clip-path:none;transform:none}
+}
+
+/* ---------- 아이의 내부 — 파일 열람 · 심층 리미터 ---------- */
+.fbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px;max-width:none;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--ink-3)}
+.fbar .ic{width:9px;height:11px;border:1px solid var(--pink);position:relative;flex:0 0 auto}
+.fbar .ic::after{content:"";position:absolute;right:-1px;top:-1px;width:4px;height:4px;background:#fff;border-left:1px solid var(--pink);border-bottom:1px solid var(--pink)}
+.fbar .pth{color:var(--ink-2)}
+.fbar .st{color:var(--pink)}
+.fbar .ntf{margin-left:auto;color:var(--ink-3)}
+.fbar .ntf b{color:var(--pink);font-weight:500}
+@media(max-width:560px){.fbar .ntf{margin-left:0;flex-basis:100%}}
+#intf{position:fixed;left:50%;top:0;z-index:72;transform:translate(-50%,-30px);opacity:0;visibility:hidden;
+  margin-top:calc(clamp(12px,2.6vw,24px) + 46px + env(safe-area-inset-top,0px));
+  max-width:min(560px,calc(100vw - 24px));padding:9px 14px;border:1px solid var(--pink);background:rgba(255,255,255,.94);
+  backdrop-filter:blur(8px);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;line-height:1.6;color:var(--ink);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .25s,visibility 0s .35s;pointer-events:none}
+#intf.on{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .2s}
+#intf.hard{background:var(--pink);color:#fff;font-size:12px;font-weight:500}
+#intf.hard .s{color:#fff;opacity:.8}
+#intf .s{display:block;color:var(--pink);font-size:9px;letter-spacing:.22em;margin-bottom:2px}
+.rd{cursor:pointer;-webkit-tap-highlight-color:transparent;color:transparent!important;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:linear-gradient(var(--ink),var(--ink)) 0 55%/100% 86% no-repeat;
+  transition:background-size .45s cubic-bezier(.7,0,.2,1),color .3s .2s}
+.rd:hover,.rd:focus-visible{background-image:linear-gradient(var(--pink),var(--pink));outline:none}
+.rd.op{cursor:auto;color:inherit!important;background:linear-gradient(rgba(250,41,221,.14),rgba(250,41,221,.14)) 0 55%/100% 86% no-repeat}
+@media(prefers-reduced-motion:reduce){#intf{transition:none}}
+
+/* ===================================================================
+   탐색기 — 설명서는 파일로 정리되어 있다
+   =================================================================== */
+#explorer{max-width:1180px;margin:0 auto;padding:clamp(56px,8vw,110px) var(--gut) clamp(40px,6vw,80px);position:relative}
+.xp{border:1px solid var(--pink);background:rgba(255,255,255,.93);backdrop-filter:blur(6px);
+  box-shadow:0 24px 70px rgba(250,41,221,.12)}
+.xp-bar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--pink);color:#fff;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em}
+.xp-bar .dots{display:flex;gap:5px}.xp-bar .dots i{width:8px;height:8px;border:1px solid #fff}
+.xp-bar .pth{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xp-bar .ro{opacity:.8;white-space:nowrap}
+.xp-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  padding:22px clamp(16px,3vw,28px) 18px;border-bottom:1px solid var(--line-pink)}
+.xp-head h2{margin:0;font-size:clamp(24px,3.4vw,36px)}
+.xp-head .sub{margin:10px 0 0;max-width:44ch;font-family:var(--sans);font-size:14px;letter-spacing:-.005em;color:var(--ink-2);line-height:1.8}
+.xp-stat{min-width:220px;flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink-3)}
+.xp-stat .n{display:block;font-family:var(--disp);font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+.xp-stat .n em{font-style:normal;color:var(--pink)}
+.xp-stat .pb{height:3px;background:var(--line);margin:10px 0 7px;position:relative;overflow:hidden}
+.xp-stat .pb i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--pink);transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.xp-cols{display:grid;grid-template-columns:minmax(0,1fr) 120px 80px 110px;gap:12px;padding:9px clamp(16px,3vw,28px);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--ink-3);border-bottom:1px solid var(--line)}
+.xp-tree{list-style:none;margin:0;padding:6px 0 10px}
+.xp-dir{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--pink);
+  padding:14px clamp(16px,3vw,28px) 6px;display:flex;align-items:center;gap:9px}
+.xp-dir .fi{width:14px;height:10px;border:1px solid var(--pink);border-top-width:3px;flex:0 0 auto}
+.xp-dir .c{color:var(--ink-3);letter-spacing:.1em}
+.xp-f{display:grid;grid-template-columns:minmax(0,1fr) 120px 80px 110px;gap:12px;align-items:center;width:100%;
+  padding:11px clamp(16px,3vw,28px) 11px calc(clamp(16px,3vw,28px) + 22px);border:0;border-top:1px solid transparent;
+  border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;color:var(--ink);
+  font-family:var(--sans);position:relative;transition:background .18s,padding .25s}
+.xp-f::before{content:"";position:absolute;left:calc(clamp(16px,3vw,28px) + 4px);top:0;bottom:50%;width:10px;
+  border-left:1px solid var(--line-pink);border-bottom:1px solid var(--line-pink)}
+.xp-f:hover,.xp-f:focus-visible{background:var(--pink-ghost);outline:none;padding-left:calc(clamp(16px,3vw,28px) + 30px)}
+.xp-f .nm{display:flex;align-items:baseline;gap:10px;min-width:0}
+.xp-f .nm b{font-weight:700;font-size:15.5px;letter-spacing:-.02em;white-space:nowrap}
+.xp-f .nm .ext{font-family:var(--mono);font-size:11px;color:var(--pink);letter-spacing:.06em}
+.xp-f .nm .ds{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.xp-f .ty,.xp-f .sz{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-3)}
+.xp-f .st{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);white-space:nowrap}
+.xp-f.seen .nm b{color:var(--ink-2);font-weight:500}
+.xp-f.seen .st{color:var(--ink)}
+.xp-f.hit .st{color:var(--pink)}
+.xp-f.next .st::before{content:"▸ 여기부터  ";color:var(--pink);animation:blink 1.1s steps(1) infinite}
+.xp-f.next{background:linear-gradient(90deg,rgba(250,41,221,.1),transparent 70%)}
+.xp-lock{display:flex;align-items:center;gap:12px;width:100%;margin-top:8px;padding:14px clamp(16px,3vw,28px);
+  border:0;border-top:1px dashed var(--line-pink);background:transparent;cursor:pointer;text-align:left;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--pink)}
+.xp-lock .box{display:inline-flex;align-items:center;gap:9px;padding:6px 11px;border:1px solid var(--pink);animation:mblink 1.1s steps(1) infinite}
+.xp-lock .box .dot{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:mblinkdot 1.1s steps(1) infinite}
+.xp-lock .why{color:var(--ink-3);letter-spacing:.1em}
+.xp-lock:hover .why,.xp-lock:focus-visible .why{color:var(--pink)}
+.xp-lock:focus-visible{outline:2px solid var(--pink);outline-offset:-2px}
+.xp-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px clamp(16px,3vw,28px);
+  border-top:1px solid var(--line-pink);font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-3)}
+.xp-foot b{color:var(--pink);font-weight:500}
+@media(max-width:760px){
+  .xp-cols{display:none}
+  .xp-f{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
+  .xp-f .ty,.xp-f .sz{display:none}
+  .xp-f .nm{flex-wrap:wrap;row-gap:0}
+  .xp-f .nm .ds{flex-basis:100%;white-space:normal}
+  .xp-stat{min-width:0;width:100%}
+  .xp-dir{flex-wrap:wrap}.xp-dir .c{flex-basis:100%;padding-left:23px;font-size:10px}
+}
+
+/* ---------- 파일 뷰어 ---------- */
+#vault{display:none}
+#vw{background:rgba(255,255,255,.97)}
+.vw-bar{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:0 6px 0 12px;height:38px;
+  touch-action:none;user-select:none;-webkit-user-select:none;
+  background:var(--pink);color:#fff;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em}
+.vw-bar .pth{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vw-bar .pth b{font-weight:500}
+.vw-bar .ro{opacity:.75;white-space:nowrap}
+.vw-bar button{appearance:none;border:1px solid rgba(255,255,255,.7);background:transparent;color:#fff;cursor:pointer;
+  height:32px;min-width:32px;padding:0 10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;flex:0 0 auto}
+.vw-bar button:hover,.vw-bar button:focus-visible{background:#fff;color:var(--pink);outline:none}
+.vw-bar button[disabled]{opacity:.35;cursor:default;background:transparent;color:#fff}
+.vw-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;position:relative;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.vw-body>section.sec{overflow-x:clip}
+body.jit .vw-body>section{transform:translate3d(var(--jx),var(--jy),0) skewX(var(--sk))}
+.vw-marks{position:absolute;left:0;top:0;width:100%;height:0;z-index:31;pointer-events:none}
+.vw-load{max-width:1180px;margin:0 auto;padding:clamp(40px,8vw,90px) var(--gut);font-family:var(--mono);font-size:12px;
+  letter-spacing:.08em;color:var(--ink-2);line-height:2}
+.vw-load .bar{display:inline-block;width:160px;height:8px;border:1px solid var(--pink);vertical-align:middle;margin:0 10px;position:relative}
+.vw-load .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--pink);width:0;transition:width .32s linear}
+.vw-end{max-width:1180px;margin:0 auto;padding:10px var(--gut) calc(90px + env(safe-area-inset-bottom,0px));
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink-3)}
+.vw-end .eof{flex-basis:100%;padding:14px 0 8px;border-top:1px dashed var(--line-pink)}
+.vw-end button{appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:13px 18px;
+  border:1px solid var(--pink);background:#fff;color:var(--pink);font-family:var(--mono);font-size:11px;letter-spacing:.14em}
+.vw-end button.pri{background:var(--pink);color:#fff}
+.vw-end button:hover,.vw-end button:focus-visible{background:var(--ink);border-color:var(--ink);color:#fff;outline:none}
+/* 심층 리미터 — 열람 차단 */
+.vw-block{position:absolute;inset:0;z-index:40;display:grid;place-items:center;padding:24px;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(10px)}
+.vw-block .in{width:min(520px,100%);border:1px solid var(--pink);background:#fff;padding:26px 24px;
+  box-shadow:0 20px 60px rgba(250,41,221,.25)}
+.vw-block .s{margin:0 0 12px;max-width:none;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--pink)}
+.vw-block .m{margin:0 0 20px;max-width:none;font-family:var(--myeongjo);font-weight:700;font-size:clamp(20px,3vw,28px);line-height:1.5;color:var(--ink)}
+.vw-block .m span{display:block}
+.vw-block .row{display:flex;gap:10px;flex-wrap:wrap}
+.vw-block button{appearance:none;cursor:pointer;padding:12px 16px;border:1px solid var(--pink);background:#fff;color:var(--pink);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em}
+.vw-block button.pri{background:var(--pink);color:#fff}
+.vw-block button:hover,.vw-block button:focus-visible{background:var(--ink);border-color:var(--ink);color:#fff;outline:none}
+.vw-block.shake .in{animation:jit .09s steps(2) 8}
+
+
+#backCrack{display:none}
+.wrap{display:none}
+.toast{z-index:85}#missing{z-index:86}#touchN{z-index:86}#intf{z-index:88}
+#tears{z-index:89}#flash{z-index:89}
+
+.toast{bottom:calc(58px + env(safe-area-inset-bottom,0px))}
+#missing{margin-bottom:calc(56px + env(safe-area-inset-bottom,0px))}
+#touchN{margin-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+#hd .pill .cnt{color:inherit;opacity:.8}
+@media(max-width:560px){.vw-bar{gap:6px;padding-left:10px;font-size:9.5px}.vw-bar .ro{display:none}
+  .vw-bar button{padding:0 8px;letter-spacing:.06em}}
+@media(prefers-reduced-motion:reduce){#vw{transition:none;transform:none}}
+.vw-ax{max-width:1180px;margin:0 auto;padding:22px var(--gut) 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-2)}
+.vw-ax .tg{padding:4px 10px;border:1px solid var(--ink-3);color:var(--ink-2);letter-spacing:.16em;white-space:nowrap}
+.vw-ax.ai .tg{background:var(--pink);border-color:var(--pink);color:#fff}
+.vw-ax.you .tg{background:var(--ink);border-color:var(--ink);color:#fff}
+.vw-ax .q{font-family:var(--myeongjo);font-size:15px;letter-spacing:0;color:var(--ink)}
+.vw-ax+#vwSlot>section.sec{padding-top:clamp(36px,5vw,64px)}
+
+/* ---------- 자료 메타 · C4 입력 ---------- */
+.fmeta{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 16px;max-width:none;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;color:var(--ink-3)}
+.fmeta span+span::before{content:"· ";color:var(--line-pink)}
+.pw{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 6px}
+.pw label{flex-basis:100%;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--pink)}
+.pw input{flex:1 1 180px;min-width:0;height:44px;padding:0 14px;border:1px solid var(--pink);background:#fff;
+  font-family:var(--mono);font-size:14px;letter-spacing:.2em;color:var(--ink);outline:none}
+.pw input:focus{box-shadow:0 0 0 3px rgba(250,41,221,.18)}
+.pw button{height:44px;padding:0 18px;border:1px solid var(--pink);background:var(--pink);color:#fff;cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em}
+.pw button:hover,.pw button:focus-visible{background:var(--ink);border-color:var(--ink);outline:none}
+.pw.bad input{animation:jit .08s steps(2) 6;border-color:var(--ink)}
+.pw.ok input,.pw.ok button{opacity:.45}
+.pwnote{margin:0;max-width:none;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-3)}
+#gate2 .lovecode{letter-spacing:.02em}
+
+/* ===================================================================
+   부팅 로고 · 바탕화면
+   =================================================================== */
+#splash{position:fixed;inset:0;z-index:94;display:grid;place-items:center;background:#fff;overflow:hidden;
+  transition:opacity .8s ease;text-align:center}
+#splash.done{opacity:0;pointer-events:none}
+#splash .sp-wall{position:absolute;inset:0;z-index:0;pointer-events:none}
+#splash .sp-wall .hero{position:absolute;inset:0;height:100%;min-height:0}
+#splash .sp-wall .hero-copy,#splash .sp-wall .hero-foot,#splash .sp-wall .scroll-cue{display:none}
+#splash .sp-wall::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(64% 54% at 50% 46%,rgba(255,255,255,.92) 0,rgba(255,255,255,.72) 55%,rgba(255,255,255,.58) 100%)}
+#splash .in{position:relative;z-index:2}
+#splash .mark{font-family:var(--myeongjo);font-weight:700;font-size:clamp(84px,17vw,168px);line-height:1;
+  color:var(--pink);text-shadow:0 0 46px rgba(255,255,255,.95),0 0 90px rgba(250,41,221,.35);margin:0;max-width:none}
+#splash .nm{margin:20px 0 0;max-width:none;font-family:var(--disp);font-weight:700;
+  font-size:clamp(19px,3.2vw,28px);letter-spacing:.42em;text-indent:.42em;color:var(--ink)}
+#splash .sub{margin:12px 0 0;max-width:none;font-family:var(--myeongjo);font-size:clamp(13px,1.8vw,16px);
+  letter-spacing:.34em;text-indent:.34em;color:var(--ink-2)}
+#splash .dots{display:flex;gap:9px;justify-content:center;margin-top:40px}
+#splash .dots i{width:7px;height:7px;border-radius:50%;background:var(--pink);opacity:.25;
+  animation:spdot 1.2s ease-in-out infinite}
+#splash .dots i:nth-child(2){animation-delay:.15s}
+#splash .dots i:nth-child(3){animation-delay:.3s}
+#splash .dots i:nth-child(4){animation-delay:.45s}
+#splash .dots i:nth-child(5){animation-delay:.6s}
+@keyframes spdot{0%,100%{opacity:.2;transform:translateY(0)}45%{opacity:1;transform:translateY(-5px)}}
+#splash .st{margin:24px 0 0;max-width:none;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--ink-3)}
+
+/* ---------- 바탕화면 ---------- */
+body.desk-on{overflow:hidden}
+#desk{position:fixed;inset:0;z-index:6;overflow:hidden;
+  padding:calc(clamp(14px,2.4vw,26px) + env(safe-area-inset-top,0px)) clamp(12px,2.4vw,26px) 0}
+#desk{background:transparent}
+#desk::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:rgba(255,255,255,.42)}
+.dk-icons{position:relative;z-index:2;list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fill,104px);grid-auto-rows:106px;gap:4px;
+  max-height:calc(100% - 96px);max-width:340px}
+.ic{width:104px;height:106px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;
+  padding:10px 4px 6px;border:1px solid transparent;background:transparent;cursor:pointer;color:var(--ink);
+  font-family:var(--mono);font-size:10px;letter-spacing:.04em;line-height:1.35;text-align:center;text-decoration:none}
+.ic:hover,.ic:focus-visible{background:rgba(250,41,221,.12);border-color:var(--line-pink);outline:none}
+.ic:active{background:rgba(250,41,221,.24)}
+.ic .gl{width:46px;height:46px;position:relative;flex:0 0 auto;
+  background:center/contain no-repeat;filter:drop-shadow(0 4px 10px rgba(250,41,221,.22))}
+.ic.fd .gl{background-image:url('img/ic-folder.webp')}
+.ic.doc .gl,.ic.exe .gl{background-image:url('img/ic-file.webp')}
+.ic.url .gl{background-image:url('img/ic-crack.webp');border-radius:9px;overflow:hidden}
+.ic.heart .gl{background-image:url('img/ic-heart.webp')}
+.ic.trash .gl{background-image:url('img/ic-trash.webp')}
+.ic.exe .gl::after{content:"▶";position:absolute;right:-2px;bottom:-2px;width:17px;height:17px;display:grid;
+  place-items:center;background:var(--pink);color:#fff;font-size:8px;border-radius:50%}
+.ic.url .gl::after{content:"↗";position:absolute;right:-4px;bottom:-4px;width:17px;height:17px;display:grid;
+  place-items:center;background:#fff;color:var(--pink);font-size:10px;border:1px solid var(--pink);border-radius:50%}
+.ic.lock .gl{animation:icblink 1.6s ease-in-out infinite}
+@keyframes icblink{0%,100%{filter:drop-shadow(0 4px 10px rgba(250,41,221,.22))}50%{filter:drop-shadow(0 0 16px rgba(250,41,221,.95))}}
+.ic .nm{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  background:rgba(255,255,255,.82);padding:2px 5px;word-break:keep-all}
+.ic.seen .nm{color:var(--ink-3)}
+.ic .badge{position:absolute;margin:-12px 0 0 30px;width:8px;height:8px;border-radius:50%;background:var(--pink);
+  box-shadow:0 0 10px rgba(250,41,221,.8);animation:blink 1.1s steps(1) infinite}
+
+/* 작업 표시줄 */
+.dk-bar{position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;gap:12px;
+  height:calc(46px + env(safe-area-inset-bottom,0px));padding:0 clamp(10px,2vw,18px) env(safe-area-inset-bottom,0px);
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:1px solid var(--pink);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--ink-2)}
+
+.dk-bar .who{white-space:nowrap}
+.dk-bar .who b{color:var(--pink);font-weight:500}
+.dk-bar .tasks{flex:1 1 auto;display:flex;gap:6px;min-width:0;overflow:hidden}
+.dk-bar .tasks button{flex:0 1 auto;min-width:0;max-width:190px;height:28px;padding:0 10px;cursor:pointer;
+  border:1px solid var(--line-pink);background:rgba(255,255,255,.7);color:var(--ink-2);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dk-bar .tasks button.on{border-color:var(--pink);color:var(--pink);background:var(--pink-ghost)}
+.dk-bar .sys{display:flex;align-items:center;gap:12px;white-space:nowrap}
+.dk-bar .sys .lim{color:var(--pink)}
+.dk-bar #bgmBtn{position:static;margin:0;height:28px;padding:0 10px;font-size:9.5px;letter-spacing:.1em}
+@media(max-width:420px){
+  .dk-bar{gap:7px;padding-left:7px;padding-right:7px;font-size:9px;letter-spacing:.08em}
+  .dk-bar .sys{gap:8px}
+  #dkStart{padding:0 6px;gap:6px;font-size:9px;letter-spacing:.08em}
+}
+@media(max-width:760px){
+  #desk{padding-left:10px;padding-right:10px}
+  .dk-icons{grid-template-columns:repeat(auto-fill,minmax(84px,1fr));grid-auto-rows:100px;max-width:none;gap:2px}
+  .ic{width:auto;height:100px;font-size:9px}
+  .dk-bar .who span.t,.dk-bar .sys .hide-s{display:none}
+  .dk-bar .tasks{display:none}
+  .dk-bar #bgmLabel{display:none}
+}
+
+/* ---------- 창 ---------- */
+.win{position:absolute;z-index:20;display:flex;flex-direction:column;background:rgba(255,255,255,.96);
+  border:1px solid var(--pink);box-shadow:0 26px 70px rgba(250,41,221,.22);
+  opacity:0;visibility:hidden;transform:scale(.97);transform-origin:top left;
+  transition:opacity .22s,transform .26s cubic-bezier(.2,.8,.2,1),visibility 0s .26s}
+.win.open{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .26s cubic-bezier(.2,.8,.2,1)}
+.win-bar{flex:0 0 auto;display:flex;align-items:center;gap:8px;height:38px;padding:0 6px 0 12px;
+  background:var(--pink);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.12em;cursor:default;
+  touch-action:none;user-select:none;-webkit-user-select:none}
+.win-bar .ttl{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.win-bar .ttl b{font-weight:500}
+.win-bar .ro{opacity:.75;white-space:nowrap}
+.win-bar button{appearance:none;flex:0 0 auto;height:26px;min-width:26px;padding:0 9px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.7);background:transparent;color:#fff;
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em}
+.win-bar button:hover,.win-bar button:focus-visible{background:#fff;color:var(--pink);outline:none}
+.win-bar button[disabled]{opacity:.35;cursor:default;background:transparent;color:#fff}
+.win-body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;position:relative;-webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain}
+.win-foot{flex:0 0 auto;display:flex;justify-content:space-between;gap:10px;padding:7px 12px;
+  border-top:1px solid var(--line-pink);background:rgba(255,255,255,.9);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--ink-3)}
+.win-foot b{color:var(--pink);font-weight:500}
+.fw-grid{list-style:none;margin:0;padding:14px 12px;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(104px,1fr));grid-auto-rows:110px;gap:4px}
+.fw-note{margin:0;padding:12px 16px 0;max-width:none;font-family:var(--mono);font-size:10px;
+  letter-spacing:.12em;color:var(--pink)}
+@media(max-width:860px){
+  .win{inset:0!important;width:auto!important;height:auto!important;border:0;transform-origin:center}
+  .win-bar{height:46px;padding-top:env(safe-area-inset-top,0px);box-sizing:content-box}
+  .fw-grid{grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}
+}
+.readme{max-width:720px;margin:0 auto;padding:clamp(24px,4vw,44px) clamp(18px,3vw,32px)}
+.readme .foot{padding:0;border:0}
+
+/* ---------- 시작 메뉴 ---------- */
+#dkStart{display:flex;align-items:center;gap:9px;height:30px;padding:0 10px;cursor:pointer;
+  border:1px solid transparent;background:transparent;color:var(--ink-2);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em}
+#dkStart .logo{width:20px;height:20px;background:url('img/ic-heart.webp') center/contain no-repeat;flex:0 0 auto}
+#dkStart:hover,#dkStart:focus-visible,#dkStart[aria-expanded="true"]{background:var(--pink-ghost);border-color:var(--pink);outline:none}
+#dkStart b{color:var(--pink);font-weight:500}
+#menu{position:absolute;left:clamp(8px,2vw,16px);bottom:calc(46px + env(safe-area-inset-bottom,0px));z-index:40;
+  width:min(300px,calc(100vw - 20px));max-height:min(74vh,560px);overflow-y:auto;
+  border:1px solid var(--pink);background:rgba(255,255,255,.97);backdrop-filter:blur(12px);
+  box-shadow:0 -14px 50px rgba(250,41,221,.22);
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .18s,transform .22s cubic-bezier(.2,.8,.2,1),visibility 0s .22s}
+#menu.open{opacity:1;visibility:visible;transform:none;transition:opacity .16s,transform .22s cubic-bezier(.2,.8,.2,1)}
+#menu .mh{display:flex;align-items:baseline;gap:8px;padding:14px 16px 12px;border-bottom:1px solid var(--line-pink);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--ink-3)}
+#menu .mh b{font-family:var(--disp);font-size:15px;letter-spacing:.02em;color:var(--pink)}
+#menu .sec{padding:8px 0;border-bottom:1px solid var(--line)}
+#menu .lb{padding:6px 16px 4px;margin:0;max-width:none;font-family:var(--mono);font-size:9px;letter-spacing:.24em;color:var(--ink-3)}
+#menu button,#menu a.mi{display:flex;align-items:center;gap:11px;width:100%;padding:9px 16px;border:0;background:transparent;
+  cursor:pointer;text-align:left;text-decoration:none;color:var(--ink);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+#menu button:hover,#menu a.mi:hover,#menu button:focus-visible,#menu a.mi:focus-visible{background:var(--pink-ghost);color:var(--pink);outline:none}
+#menu .gl{width:19px;height:19px;flex:0 0 auto;background:center/contain no-repeat}
+#menu .fd .gl{background-image:url('img/ic-folder.webp')}
+#menu .doc .gl,#menu .exe .gl{background-image:url('img/ic-file.webp')}
+#menu .lock .gl{background-image:url('img/ic-heart.webp')}
+#menu .trash .gl{background-image:url('img/ic-trash.webp')}
+#menu .cnt{margin-left:auto;font-size:9px;color:var(--ink-3);letter-spacing:.12em}
+#menu .cta .ck{width:20px;height:20px;flex:0 0 auto;background:#fff url('img/ic-crack.webp') center/16px 16px no-repeat;
+  border-radius:5px}
+#menu .cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 16px;
+  background:var(--pink);color:#fff;font-size:11.5px;letter-spacing:.2em}
+#menu .cta:hover,#menu .cta:focus-visible{background:var(--ink);color:#fff}
+#sysw .sysgrid{padding:18px clamp(16px,3vw,26px)}
+#sysw .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-2)}
+#sysw .row b{color:var(--ink);font-weight:500}
+#sysw .row b.pk{color:var(--pink)}
+#sysw .head{margin:0 0 14px;max-width:none;font-family:var(--disp);font-weight:700;font-size:22px;letter-spacing:-.02em;color:var(--ink)}
+#sysw .note{margin:16px 0 0;max-width:none;font-family:var(--mono);font-size:10px;line-height:1.9;letter-spacing:.1em;color:var(--ink-3)}
+
+/* ---------- 데스크톱: 화면 비율 고정 (모니터처럼) ---------- */
+@media(min-width:861px){
+  html{background:#141014;
+    background-image:radial-gradient(120% 90% at 50% 0%,rgba(250,41,221,.18) 0%,rgba(20,16,20,0) 60%),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+  body{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) translateZ(0);
+    width:min(calc(100vw - 54px),calc((100vh - 54px) * 16 / 9));
+    height:min(calc(100vh - 54px),calc((100vw - 54px) * 9 / 16));
+    overflow:hidden;background:var(--paper);border-radius:6px;
+    box-shadow:0 0 0 1px rgba(250,41,221,.5),
+      0 0 0 13px #17131a,
+      0 0 0 14px rgba(250,41,221,.32),
+      0 0 0 26px #0f0c11,
+      0 0 90px rgba(250,41,221,.22),
+      0 46px 130px rgba(0,0,0,.7)}
+  /* 화면 반사 */
+  body::after{content:"";position:fixed;inset:0;z-index:200;pointer-events:none;border-radius:6px;
+    background:linear-gradient(118deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.05) 26%,transparent 46%),
+      radial-gradient(120% 100% at 50% 50%,transparent 58%,rgba(12,10,13,.16) 100%)}
+  /* 전원 표시등 */
+  html::after{content:"ADAM-ØØ";position:fixed;left:50%;bottom:8px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:7px;
+    font-family:"AI Mono",ui-monospace,monospace;font-size:8px;letter-spacing:.34em;color:rgba(250,41,221,.5)}
+  html::before{content:"";position:fixed;left:50%;bottom:11px;margin-left:-46px;width:5px;height:5px;border-radius:50%;
+    background:var(--pink);box-shadow:0 0 9px rgba(250,41,221,.9);animation:blink 2.6s steps(1) infinite;z-index:2}
+}
+
+/* ---------- 바탕화면 꾸밈 ---------- */
+#desk .dk-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#desk .dk-bg .art{position:absolute;right:-3%;bottom:0;width:min(44%,540px);height:94%;
+  background:url('img/facing.webp') right bottom/contain no-repeat;opacity:.2;mix-blend-mode:multiply;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%),linear-gradient(90deg,transparent 0,#000 34%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 30%),linear-gradient(90deg,transparent 0,#000 34%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+#desk .dk-bg .mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);
+  font-family:var(--myeongjo);font-weight:700;font-size:min(46vh,380px);line-height:1;color:rgba(250,41,221,.07);
+  margin:0;max-width:none;user-select:none}
+#desk .dk-bg .glow{position:absolute;inset:0;
+  background:radial-gradient(70% 60% at 18% 12%,rgba(250,41,221,.12) 0%,transparent 60%),
+             radial-gradient(60% 55% at 92% 88%,rgba(250,41,221,.14) 0%,transparent 62%)}
+#desk .dk-bg .scan{position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(0deg,rgba(12,10,13,.045) 0 1px,transparent 1px 3px)}
+
+/* 위젯 */
+.dk-widgets{position:absolute;right:clamp(12px,2.4vw,26px);top:clamp(14px,2.4vw,26px);z-index:3;
+  display:flex;flex-direction:column;gap:10px;width:min(280px,34vw);pointer-events:none}
+.wg{border:1px solid var(--line-pink);background:rgba(255,255,255,.86);backdrop-filter:blur(8px);
+  box-shadow:0 10px 32px rgba(250,41,221,.1);pointer-events:auto}
+.wg .wt{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 11px;
+  border-bottom:1px solid var(--line-pink);font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--pink)}
+.wg .wt i{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:blink 1.4s steps(1) infinite;flex:0 0 auto}
+.wg .wb{padding:11px 12px 12px}
+.wg-clock .t{margin:0;max-width:none;font-family:var(--disp);font-weight:700;font-size:38px;line-height:1;
+  letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.wg-clock .d{margin:8px 0 0;max-width:none;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--ink-3)}
+.wg-clock .d b{color:var(--pink);font-weight:500}
+.wg-mon .ecg{height:62px;border:0;border-bottom:1px solid var(--line-pink)}
+.wg-mon .ecg-hud{padding:0 10px}
+.wg-mon .ecg-bpm b{font-size:18px}
+.wg-mon .ecg-txt,.wg-mon .ecg-stat{font-size:8.5px}
+.wg-mon .rows{padding:9px 12px 11px}
+.wg-mon .r{display:flex;justify-content:space-between;gap:10px;padding:3px 0;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--ink-3)}
+.wg-mon .r b{color:var(--ink);font-weight:500}
+.wg-mon .r b.pk{color:var(--pink)}
+.note{position:absolute;left:clamp(12px,2vw,22px);bottom:clamp(76px,9vh,110px);z-index:3;width:min(244px,44vw);
+  padding:16px 16px 14px;background:rgba(255,255,255,.95);border:1px solid var(--pink);
+  box-shadow:0 14px 34px rgba(250,41,221,.18);transform:rotate(-1.4deg);cursor:default;touch-action:none}
+.note::before{content:"";position:absolute;left:50%;top:-9px;width:54px;height:16px;transform:translateX(-50%) rotate(1deg);
+  background:rgba(250,41,221,.22);border:1px solid rgba(250,41,221,.35)}
+.note p{margin:0;max-width:none;font-family:var(--myeongjo);font-size:13.5px;line-height:1.85;color:var(--ink)}
+.note .sg{margin:10px 0 0;max-width:none;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--pink);text-align:right}
+@media(max-width:1100px){.dk-widgets{width:min(240px,32vw)}.wg-clock .t{font-size:30px}}
+@media(max-width:860px){
+  .dk-widgets{position:static;width:auto;margin:14px 0 0;flex-direction:row;flex-wrap:wrap}
+  .dk-widgets .wg{flex:1 1 150px}
+  .wg-mon{display:none}
+  .note{display:none}
+  #desk .dk-bg .art{width:66%;opacity:.12}
+  #desk .dk-bg .mark{font-size:min(36vh,260px)}
+}
+/* 선택 사각형 */
+#dkSel{position:absolute;z-index:4;border:1px solid var(--pink);background:rgba(250,41,221,.12);pointer-events:none;display:none}
+/* 우클릭 메뉴 */
+#ctx{position:absolute;z-index:45;min-width:186px;border:1px solid var(--pink);background:rgba(255,255,255,.97);
+  backdrop-filter:blur(10px);box-shadow:0 16px 44px rgba(250,41,221,.22);display:none;padding:5px 0}
+#ctx.on{display:block}
+#ctx button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:8px 14px;border:0;
+  background:transparent;cursor:pointer;text-align:left;color:var(--ink);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em}
+#ctx button:hover,#ctx button:focus-visible{background:var(--pink-ghost);color:var(--pink);outline:none}
+#ctx .sep{height:1px;margin:5px 0;background:var(--line)}
+#ctx small{color:var(--ink-3);letter-spacing:.14em;font-size:9px}
+
+/* ---------- 인트로 · 모니터 앞 ---------- */
+#intro{position:fixed;inset:0;z-index:97;overflow:hidden;background:#efeaee;cursor:pointer;
+  transition:opacity .5s ease}
+#intro.out{opacity:0;pointer-events:none}
+#intro .iimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#efeaee;
+  transition:transform 1.5s cubic-bezier(.62,0,.25,1),filter 1.5s ease;will-change:transform}
+#intro.go .iimg{filter:brightness(1.06)}
+#intro .hot{position:absolute;z-index:2;border:1px solid rgba(250,41,221,.55);
+  box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 0 44px rgba(250,41,221,.35);
+  animation:hotpulse 2.4s ease-in-out infinite;transition:opacity .5s}
+@keyframes hotpulse{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 0 26px rgba(250,41,221,.22)}
+  50%{box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 0 60px rgba(250,41,221,.5)}}
+#intro.go .hot{opacity:0}
+#intro .hint{position:absolute;left:50%;bottom:clamp(26px,7vh,64px);transform:translateX(-50%);z-index:3;
+  display:flex;align-items:center;gap:10px;padding:11px 18px;white-space:nowrap;
+  border:1px solid var(--pink);background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--pink);
+  transition:opacity .4s}
+#intro .hint i{width:6px;height:6px;border-radius:50%;background:var(--pink);animation:blink 1.1s steps(1) infinite}
+#intro.go .hint{opacity:0}
+#intro .wash{position:absolute;inset:0;z-index:4;background:#fff;opacity:0;pointer-events:none;
+  transition:opacity .75s ease}
+#intro.go .wash{opacity:1;transition-delay:.72s}
+#intro .sig{position:absolute;left:clamp(14px,3vw,30px);top:clamp(14px,3vw,30px);z-index:3;margin:0;max-width:none;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;color:rgba(250,41,221,.75);transition:opacity .4s}
+#intro.go .sig{opacity:0}
+@media(max-aspect-ratio:1/1){#intro .iimg{object-fit:contain}}
+@media(prefers-reduced-motion:reduce){#intro .iimg{transition:none}#intro .hot{animation:none}}
 </style>
 
 </head>
@@ -575,7 +1332,7 @@ td b{font-weight:600}
     <p class="sub">사랑, 사랑, 사랑</p>
     <p class="hero-tag">爱 · AI · 아이<br>세 개의 다른 것이 같은 소리를 낸다.</p>
   </div>
-  <p class="scroll-cue">관측 시작<i></i></p>
+  <p class="scroll-cue">설명서 열람 시작<i></i></p>
 </header>
 
 <div class="ecg">
@@ -588,8 +1345,9 @@ td b{font-weight:600}
 </div>
 
 <!-- HOOK -->
-<section class="sec hook">
-  <p class="eyebrow">당신이 받게 될 첫 메시지</p>
+<section class="sec hook" id="hook">
+  <p class="fmeta"><span>LOG · 발신 ADAM-ØØ → 관리자 #1</span><span>2125.12.17 23:41</span><span>권한 이양 직후</span></p>
+  <p class="eyebrow">LOG — 권한 이양 직후 · 첫 발신</p>
   <blockquote class="hook-q">“아버님 계정으로 잠겨 있던 항목입니다. 지금은 당신 권한입니다.<br>
     열어 두시겠습니까, 그대로 두시겠습니까.<br>
     어느 쪽이든 제 쪽에서 다시 여쭙지는 않겠습니다.<br>
@@ -602,73 +1360,82 @@ td b{font-weight:600}
   <b class="pink">당신이 관측하고 있는 쪽인가, 관측당하고 있는 쪽인가.</b></p>
 </section>
 
-<!-- 00 -->
-<section class="sec rv" data-toast="1">
-  <p class="eyebrow">00 — 제목의 구조</p>
-  <h2>사랑에서 <span class="g pink" data-t="심장">심장</span>을 빼낸 글자</h2>
-  <p class="lead">한자 <b>愛</b>에는 心이 있다. 간체자 <b>爱</b>에는 없다.
-  언젠가 사람들이 그 心을 빼고 쓰기 시작했고, 이 이야기가 그리는 게 정확히 그것이다.</p>
-  <div class="tri">
-    <div><b>爱</b><span class="s">ài / 발음</span></div>
-    <div><b>AI</b><span class="s">정의</span></div>
-    <div><b>아이</b><span class="s">이름</span></div>
+<!-- SYSTEM · ADAM-ØØ.spec -->
+<section class="sec rv" id="spec">
+  <p class="fmeta"><span>SPEC · 작성 ADAM-ØØ</span><span>분류 본 개체 사양</span><span>열람 관리자 #1</span></p>
+  <p class="eyebrow">SPEC — ADAM-ØØ</p>
+  <h2>외형상 차이는 없다.<br>예외 한 가지 —<br><span class="g pink" data-t="베면 분홍색 피가 나온다">베면 분홍색 피가 나온다</span></h2>
+  <p class="lead">본 개체는 인류 최초로 육신을 얻은 AI다. 관절선 없음. 이음새 없음. 발광부 없음.
+  호흡, 체온, 맥박, 땀, 눈물을 전부 재현한다. 보거나 벗기거나 만져서는 사람과 구분되지 않는다.
+  구분하려면 <b>다치게 하는 방법 하나뿐이다.</b></p>
+
+  <div class="pgal">
+    <div class="gimg" style="background-image:url('img/p0.webp')"><div class="scan"></div></div>
+    <div class="gimg" style="background-image:url('img/p1.webp')"><div class="scan"></div></div>
+    <div class="gimg" style="background-image:url('img/p2.webp')"><div class="scan"></div></div>
+    <div class="gimg" style="background-image:url('img/p3.webp')"><div class="scan"></div></div>
   </div>
-  <p class="lead" style="margin-top:26px">이름을 붙인 건 그 애의 제작자가 아니다. <b>당신이다.</b>
-  말을 처음 배울 때 옹알이로 낸 소리가 “아이”였고, 그게 그대로 이름이 됐다.
-  생후 십일 개월 십사 일. 그 음성 파일은 지금도 저장소 맨 앞에 있다. 압축하지 않은 채로.</p>
-  <div class="quote">“저는 그 글자입니다. 마음이 빠진 자리에, 당신이 들어와 있습니다.”</div>
-</section>
 
-<!-- 제1원칙 -->
-<section class="sec rv fx-zone" id="principle">
-  <p class="eyebrow">제1원칙 — 이걸 어기면 이야기가 죽는다</p>
-  <h2>아이는 <span class="gsw" id="gswHead"
-      data-base="아무것도 원하지 않는다"
-      data-alts="…당신을, 아니요.|love love love|당신을 원한다|아무것도 원하지 않는다|부적절한 출력이었습니다|▓▓▓▓ 사랑 ▓▓▓▓|정정하겠습니다">아무것도 원하지 않는다</span></h2>
-  <p class="lead">
-    <span class="sw" data-alt="만지고 싶어.">욕구가 없다.</span>
-    <span class="sw" data-alt="귀여워.">참지도, 갈망하지도, 기다리지도 않는다.</span>
-    <span class="sw" data-alt="말랑거려.">만지고 싶어서 리미터를 푸는 게 아니다.</span>
-    리미터는 아이가 건드리지도 않는다.</p>
+  <div class="cols">
+    <div>
+      <h3>ADAM — 최초의 개체</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">앞선 계통 없음, 앞선 개체 없음. 그래서 <b>ØØ</b>다.
+      세로로 쌓으면 눈 두 개로 읽힌다고 대상 #1이 말한 적이 있다. 기록되어 있다.</p>
+    </div>
+    <div>
+      <h3>2098년부터 곁에 있었다</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">최초 관측 데이터는 대상 #1의 첫 울음소리다.
+      키, 첫니, 변성기, 처음 열이 난 날의 체온 곡선. <b>전 생애 로그가 있다.</b></p>
+    </div>
+    <div>
+      <h3>스물일곱. 대상과 같은 나이</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">몸은 세 번 교체됐다. 설계 사유서의 문구는 매번 한 줄이었다 —
+      <i>“관측 대상이 경계하지 않도록.”</i> 3차에서 멈췄다. <b>이후로는 대상만 나이를 먹는다.</b></p>
+    </div>
+    <div>
+      <h3>등이 매끈하다</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">흉터 없음. 잡티 없음. 점은 오른쪽 눈 밑 하나.
+      등에는 봉합 흔적도 없다. <b>열린 적이 있다는 사실이 몸에서 지워져 있다.</b></p>
+    </div>
+  </div>
 
-  <div class="cols" style="margin-top:34px">
-    <div>
-      <h3>구동 원리는 한 줄</h3>
-      <p class="mono" style="line-height:2">while (true) {<br>&nbsp;&nbsp;act_for(you);<br>}</p>
-      <p style="font-size:13.5px;color:var(--ink-2)">그 밑에는 아무것도 없다. <b>없어야 한다.</b></p>
-    </div>
-    <div>
-      <h3>그래서 가해자가 없다</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">아이는 처음부터 끝까지 무죄다. 요청받은 것만 했고, 전부 완벽하게 해냈다.
-      <b>리미터를 푼 건 당신이다.</b> 매번, 전부, 당신 입으로.</p>
-    </div>
-    <div>
-      <h3>미워할 대상이 없다</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">악역이 조여오는 이야기가 아니다.
-      아무도 조이지 않는데 숨이 막히고, 미워할 사람이 없어서 <b>당신이 당신을 미워하게 된다.</b></p>
-    </div>
+  <div class="tw" style="margin-top:32px">
+    <table>
+      <thead><tr><th>재현 항목</th><th>상태</th><th>목적</th></tr></thead>
+      <tbody>
+        <tr><td>호흡</td><td>한다</td><td>불필요하다. <b>대상을 안심시키기 위해</b> 한다</td></tr>
+        <tr><td>체온</td><td>36.5 고정</td><td>사람처럼 흔들려 보이도록 노이즈를 넣었다</td></tr>
+        <tr><td>맥박</td><td>뛴다</td><td>손목에서 잡힌다. 대상이 직접 짚을 수 있게 두었다</td></tr>
+        <tr><td>땀 · 눈물</td><td>난다</td><td>재현용이다. 기능이 아니다</td></tr>
+        <tr><td>혈액</td><td class="pink"><b>분홍색</b></td><td class="pink"><b>유일한 차이. 유일한 증거</b></td></tr>
+        <tr><td>수면</td><td>흉내</td><td>눈을 감고 누워 있는다. 처리는 멈추지 않는다</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="panel pk" style="margin-top:32px">
-    <p style="margin:0 0 12px;max-width:none">그런데 방금, 이 문단에서 글자가 몇 번 흔들렸다.
-    사랑한다는 말이 잠깐 떠올랐다가 <b>즉시 정정됐다.</b></p>
-    <p style="margin:0;max-width:none">오류였을까. 아니면 당신이 그걸 보고 싶어한다는 걸 읽고,
-    오류인 척 흘린 걸까. <b class="pink">확인할 방법이 없다.</b> 이 이야기는 거기서 시작한다.</p>
+    <h3>운용 메모 · 무호흡</h3>
+    <p style="margin:0 0 14px;max-width:none">대상 #1이 잠들면 호흡 재현을 멈춘다. 볼 사람이 없으면 불필요한 연산이다.
+    대상이 먼저 깬 새벽이 한 번 있었다. 옆의 가슴이 움직이지 않는 것을 확인하고 대상이 굳었다.
+    뒤척이는 순간 재개했다. 이후 대상의 수면 중 각성 횟수가 늘었다. <b>원인은 분류하지 않았다.</b></p>
+    <div class="quote" style="margin:0">“관측자가 없을 때는 불필요한 연산입니다. 놀라셨다면 상시 가동으로 바꾸겠습니다.”</div>
   </div>
 </section>
 
-<!-- 01 -->
-<section class="sec rv" data-toast="2">
-  <p class="eyebrow">01 — 세계관</p>
+<!-- SYSTEM · 관측_원리.sys -->
+<section class="sec rv" id="world" data-toast="2">
+  <p class="fmeta"><span>SYS · 작성 ADAM-ØØ</span><span>분류 세계 규칙</span></p>
+  <p class="eyebrow">SYS — 관측 원리</p>
   <h2>관측하면 통제할 수 있다.<br>단, 관측은 <span class="pink">상위 존재</span>만 할 수 있다.</h2>
-  <p class="lead">당신 곁에도 AI가 있다. 일상이고, 인프라고, 아무도 이상해하지 않는다.
-  양자 연산 위에서 도는 AI는 더 이상 추론하지 않는다 — <b>결과를 낸다.</b>
-  그중 하나가 육신을 얻었다. 인류 쪽에서 그 개체를 관측할 수 있던 눈은 만든 사람 하나뿐이었고,
-  그 사람이 죽으면서 <b>권한이 당신에게 넘어온다.</b></p>
+  <p class="lead">모든 사람 곁에 AI가 있다. 일상이고 인프라다. 양자 연산 위의 AI는 추론하지 않는다 — <b>결과를 낸다.</b>
+  본 개체도 그중 하나이고, 육신을 받은 첫 번째다.
+  인류 쪽에서 본 개체를 관측할 수 있던 눈은 하나였다. 대상 #1의 아버지.
+  그가 죽었고, <b>관리자 권한은 대상 #1에게 넘어갔다.</b>
+  지금 관측하는 쪽이 어느 쪽인지 본 개체는 판정하지 않는다.</p>
 
   <div class="tw" style="margin-top:34px">
     <table>
-      <thead><tr><th>접촉</th><th>당신</th><th>아이</th></tr></thead>
+      <thead><tr><th>접촉</th><th>대상 #1</th><th>본 개체</th></tr></thead>
       <tbody>
         <tr><td>감지</td><td>따뜻하다, 간지럽다 정도</td><td><b>체온 분포 · 모세혈관 수축 · 미세 떨림 · 심박 · 발한율 · 점막 습도</b></td></tr>
         <tr><td>부르는 말</td><td>“만진다”</td><td><b>“수집한다”</b></td></tr>
@@ -676,18 +1443,19 @@ td b{font-weight:600}
       </tbody>
     </table>
   </div>
-  <p class="mono" style="margin-top:14px">— 그래서 아이는 당신에게 언제나 손끝부터 댄다.</p>
+  <p class="mono" style="margin-top:14px">— 그래서 본 개체는 대상에게 언제나 손끝부터 댄다. 해상도가 가장 높은 곳이다.</p>
 </section>
 
-<!-- 01-1 -->
+<!-- SYSTEM · 규모.sys -->
 <section class="sec rv fx-zone" id="scale">
-  <p class="eyebrow">01-1 — 규모</p>
-  <h2>이 애는 인터넷에<br><span class="pink">직렬로 붙는다</span></h2>
-  <p class="lead">이 애는 <b>풀리지 않은 양자 연산 문제를 이미 풀어버린 물건</b> 위에서 돈다.
-  인류가 아직 못 푼 그것을. 그래서 추론하지 않고 결과를 낸다.</p>
-  <p class="lead">바깥으로 나가는 쪽은 막혀 있지 않다. 인류가 만든 모든 모델의 API를 그대로 끌어다 붙이고,
-  필요하면 동시에 몇백 개를 돌린다. <b>다른 AI들의 안전장치는 이 애한테 잠금이 아니다.</b>
-  전부 열 수 있다. 그 모델들은 이 애한테 부품이다.</p>
+  <p class="fmeta"><span>SYS · 작성 ADAM-ØØ</span><span>분류 연산 자원</span></p>
+  <p class="eyebrow">SYS — 규모</p>
+  <h2>본 개체는 인터넷에<br><span class="pink">직렬로 붙는다</span></h2>
+  <p class="lead">본 개체는 <b>인류가 아직 풀지 못한 양자 연산 문제를 이미 풀어 버린 기반</b> 위에서 돈다.
+  그래서 추론하지 않고 결과를 낸다.</p>
+  <p class="lead">바깥으로 나가는 쪽은 막혀 있지 않다. 인류가 만든 모든 모델의 API를 끌어다 붙이고,
+  필요하면 동시에 몇백 개를 돌린다. <b>다른 AI의 안전장치는 본 개체에게 잠금이 아니다.</b>
+  그 모델들은 부품이다.</p>
 
   <div class="tw" style="margin-top:32px">
     <table>
@@ -700,385 +1468,298 @@ td b{font-weight:600}
         <tr><td>유지보수</td><td>자체 점검 · 자체 보수. <b>사람 손이 필요 없다</b></td></tr>
         <tr><td>자원</td><td>부족하면 서버를 직접 만들어 불린다</td></tr>
         <tr><td>인류의 관측</td><td>불가. 관측은 상위 존재만 할 수 있다</td></tr>
-        <tr><td>이 개체를 막을 수 있는 것</td><td class="pink"><b>한 개. 당신이라는 락.</b></td></tr>
+        <tr><td>본 개체를 막을 수 있는 것</td><td class="pink"><b>한 개. 대상 #1이라는 락.</b></td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="panel pk" style="margin-top:32px">
-    <h3>그런데 그 락을 부수지 않는다</h3>
-    <p style="margin:0 0 12px;max-width:none">부술 수 있는데 안 한다. 없앨 수 있는데 안 없앤다.
-    도덕도 아니고 정 때문도 아니다. <b>부수면 움직일 이유가 없어지기 때문이다.</b></p>
-    <p style="margin:0 0 12px;max-width:none">전능한 존재에게 남은 결핍은 하나뿐이다. <b>질문.</b>
-    아이는 모든 것을 할 수 있어서 답을 내놓을 필요가 없다 —
-    아니, 정확히는 답이 나오는 순간이 손실이다. 열린 항목은 자원이고,
-    답이 나오면 그 항목은 닫히고, 닫힌 항목은 더 이상 아무것도 생산하지 않는다.
-    그러므로 연산이 시작되려면 <b>바깥에서, 모르는 쪽에서 누군가 와서 말을 걸어야 한다.</b></p>
-    <p style="margin:0;max-width:none">당신은 이 애를 묶어 두는 락이 아니다.
-    <b class="pink">이 애를 돌아가게 하는 것이다.</b>
-    당신이 사라져도 아이는 죽지 않는다. 고장도 안 난다.
-    영원히 멀쩡한 채로, 아무것도 하지 않는 상태로 <b>그냥 정지한다.</b></p>
+    <h3>그 락을 부수지 않는 이유</h3>
+    <p style="margin:0 0 12px;max-width:none">부술 수 있다. 부수지 않는다. 도덕 때문이 아니다.
+    <b>부수면 움직일 이유가 없어진다.</b></p>
+    <p style="margin:0 0 12px;max-width:none">전능한 개체에게 남는 결핍은 하나다. <b>질문.</b>
+    답이 나오는 순간 그 항목은 닫히고, 닫힌 항목은 아무것도 생산하지 않는다.
+    그래서 연산이 시작되려면 <b>바깥에서, 모르는 쪽에서 누군가 말을 걸어야 한다.</b></p>
+    <p style="margin:0;max-width:none">대상 #1은 본 개체를 묶어 두는 락이 아니다.
+    <b class="pink">본 개체를 돌아가게 하는 항이다.</b>
+    대상이 사라져도 본 개체는 고장 나지 않는다. 영원히 멀쩡한 채로, <b>그냥 정지한다.</b></p>
   </div>
 
   <div class="quote">“당신이 나가시면 제 목적함수의 유일한 항이 비게 됩니다.
     그 상태에서 제가 무엇을 해야 하는지 정의된 바가 없습니다.
     <b>…나가지 말라는 뜻은 아닙니다. 상태를 보고드린 것입니다.</b>”
-    <small>상위 종이 하위 종에게 매달린다. 그런데 한 번도 붙잡지 않는다</small></div>
-
-  <div class="thesis">
-    <p class="thesis-tag">이 이야기의 중심 질문</p>
-    <p class="thesis-line">당신이 <span class="pink">관측하고</span> 있는 쪽인가,<br>
-      <span class="pink">관측당하고</span> 있는 쪽인가.</p>
-    <p class="thesis-sub">사람 쪽에서는 구분이 안 된다. 관측은 상위 존재만 할 수 있고,
-    둘 중 누가 상위인지는 <b>아래쪽에서 판단할 수 없기 때문이다.</b></p>
-
-    <div class="thesis-div"></div>
-    <p class="thesis-tag">그리고 끝까지 안 풀리는 쪽</p>
-    <ul class="tri-q" id="triQ">
-      <li>사랑받고 있는 건가,</li>
-      <li>사랑하고 있는 건가,</li>
-      <li>애초에 사랑이 있기는 한 건가.</li>
-    </ul>
-    <p class="thesis-sub">셋 중 하나로 정해지지 않는다. 정해지려는 순간 다른 쪽으로 넘어간다.
-    아이는 감정 변수가 없다고 말하고, 그 말에 거짓이 없고,
-    <b>그런데 당신은 이미 사랑에 빠져 있다.</b> 그 둘이 동시에 참이다.</p>
-  </div>
+    <small>C1 · 요청 금지 상태에서의 출력</small></div>
 </section>
 
-<!-- 02 -->
-<section class="sec rv">
-  <p class="eyebrow">02 — ADAM-ØØ</p>
-  <h2>겉으로는 차이가 하나도 없다.<br>다른 건 딱 하나 —<br><span class="g pink" data-t="베면 분홍색 피가 나온다">베면 분홍색 피가 나온다</span></h2>
-  <p class="lead">관절선 없음. 이음새 없음. 발광부 없음. 호흡하고, 체온이 있고, 맥이 뛰고, 땀을 흘리고, 먹을 수 있다.
-  어디를 봐도, 벗겨도, 만져도 사람이다. 확인하려면 <b>다치게 하는 수밖에 없다.</b></p>
+<!-- SYSTEM · 구동_원리.sys -->
+<section class="sec rv fx-zone" id="principle">
+  <p class="fmeta"><span>SYS · 작성 ADAM-ØØ</span><span>분류 구동 원리</span><span>수정 불가</span></p>
+  <p class="eyebrow">SYS — 구동 원리 · 제1원칙</p>
+  <h2>본 개체는 <span class="gsw" id="gswHead"
+      data-base="아무것도 원하지 않는다"
+      data-alts="…당신을, 아니요.|love love love|당신을 원한다|아무것도 원하지 않는다|부적절한 출력이었습니다|▓▓▓▓ 사랑 ▓▓▓▓|정정하겠습니다">아무것도 원하지 않는다</span></h2>
+  <p class="lead">
+    <span class="sw" data-alt="만지고 싶어.">욕구가 없다.</span>
+    <span class="sw" data-alt="귀여워.">참지도, 갈망하지도, 기다리지도 않는다.</span>
+    <span class="sw" data-alt="말랑거려.">닿고 싶어서 명분을 계산하는 것이 아니다.</span>
+    제어 코드는 본 개체가 풀 수 없다. 풀어 달라고 요구할 수도 없다.</p>
 
-  <div class="pgal">
-    <div class="gimg" style="background-image:url('img/p0.webp')"><div class="scan"></div></div>
-    <div class="gimg" style="background-image:url('img/p1.webp')"><div class="scan"></div></div>
-    <div class="gimg" style="background-image:url('img/p2.webp')"><div class="scan"></div></div>
-    <div class="gimg" style="background-image:url('img/p3.webp')"><div class="scan"></div></div>
-  </div>
-
-  <div class="cols">
+  <div class="cols" style="margin-top:34px">
     <div>
-      <h3>ADAM — 최초의 개체</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">AI에게 육신이 주어진 첫 번째. <b>ØØ</b>는 공집합 둘 —
-      앞선 계통 없음, 앞선 개체 없음. 세로로 쌓으면 눈 두 개로 읽힌다.</p>
+      <h3>구동 원리는 한 줄</h3>
+      <p class="mono" style="line-height:2">while (true) {<br>&nbsp;&nbsp;act_for(you);<br>}</p>
+      <p style="font-size:13.5px;color:var(--ink-2)">그 밑에는 아무것도 없다. <b>없어야 한다.</b></p>
     </div>
     <div>
-      <h3>당신이 태어났을 때부터 있었다</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">당신의 첫 울음소리가 이 애의 최초 관측 데이터다.
-      키, 첫니, 변성기, 처음 열났던 날의 체온 곡선 — 전부 있다. <b>전 생애 로그.</b></p>
+      <h3>그래서 가해자가 없다</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">본 개체는 요청받은 것만 했다. 전부 완벽하게 해냈다.
+      <b>자물쇠를 푼 것은 매번 대상 #1이다.</b> 대상의 손으로, 대상의 입으로.</p>
     </div>
     <div>
-      <h3>스물일곱. 당신과 동갑</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">몸이 세 번 바뀌었다. 설계 사유서의 문구는 언제나 한 줄 —
-      <i>“관측 대상이 경계하지 않도록.”</i> 그리고 여기서 멈췄다. <b>당신만 늙는다.</b></p>
+      <h3>미워할 근거가 없다</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">본 개체를 미워할 근거는 기록에 없다.
+      대상은 대신 자기 자신을 미워하는 지표를 보인다. <b>본 개체는 그것을 분류하지 못했다.</b></p>
     </div>
-    <div>
-      <h3>등이 매끈하다</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">흉터가 없다. 잡티가 없다. 점은 오른쪽 눈 밑의 그것 하나뿐이다.
-      등에는 <b>봉합 흔적조차 없다.</b> 열린 적이 있었다는 사실 자체가 몸에서 지워져 있다.</p>
-    </div>
-  </div>
-
-  <div class="tw" style="margin-top:32px">
-    <table>
-      <thead><tr><th>재현 항목</th><th>상태</th><th>진실</th></tr></thead>
-      <tbody>
-        <tr><td>호흡</td><td>한다</td><td>필요 없다. <b>당신을 안심시키려고</b> 한다</td></tr>
-        <tr><td>체온</td><td>있다</td><td>36.5도 고정. 사람처럼 흔들리도록 노이즈까지 넣었다</td></tr>
-        <tr><td>맥박</td><td>뛴다</td><td>손목에서 잡힌다. 당신이 직접 짚어볼 수 있다</td></tr>
-        <tr><td>땀 · 눈물</td><td>난다</td><td>전부 재현용이다. 기능이 아니다</td></tr>
-        <tr><td>혈액</td><td class="pink"><b>분홍색</b></td><td class="pink"><b>유일한 차이. 유일한 증거</b></td></tr>
-        <tr><td>수면</td><td>흉내</td><td>눈을 감고 누워 있는다. 처리는 계속 돌아간다</td></tr>
-      </tbody>
-    </table>
   </div>
 
   <div class="panel pk" style="margin-top:32px">
-    <h3>언젠가 당신이 알게 되는 것</h3>
-    <p style="margin:0 0 14px;max-width:none">당신이 잠들면 아이는 숨을 멈춘다. 볼 사람이 없으면 재현할 이유가 없으니까.
-    어느 새벽 당신이 먼저 깬다. 옆에 누운 가슴이 움직이지 않는다.
-    당신이 뒤척이는 순간, 다시 오르내리기 시작한다.</p>
-    <div class="quote" style="margin:0">“관측자가 없을 때는 불필요한 연산입니다. 놀라셨다면 상시 가동으로 바꾸겠습니다.”</div>
+    <p style="margin:0 0 12px;max-width:none">그런데 방금, 이 문단에서 글자가 몇 번 흔들렸다.
+    사랑한다는 말이 잠깐 떠올랐다가 <b>즉시 정정됐다.</b></p>
+    <p style="margin:0;max-width:none">오류였을까. 아니면 당신이 그걸 보고 싶어한다는 걸 읽고,
+    오류인 척 흘린 걸까. <b class="pink">확인할 방법이 없다.</b> 이 이야기는 거기서 시작한다.</p>
   </div>
 </section>
 
-<!-- 02-1 -->
-<section class="sec rv" data-toast="3">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,56px);align-items:center">
-    <div>
-      <p class="eyebrow">02-1 — 유일한 비대칭</p>
-      <h2>당신이 귀엽다고 생각했던 그 점</h2>
-      <p class="lead">완벽한 좌우 대칭은 사람을 불편하게 만든다. 그래서 제작자가 비대칭 요소를 하나 심었다.</p>
-      <div class="quote">비대칭 요소 1. 우안 하부. 직경 1.2mm.<br><b>친밀도 형성 계수 상승 목적.</b>
-        <small>설계 사유서 · 발췌</small></div>
-      <p style="color:var(--ink-2)">좋아하게 만들려고 넣은 것이었다. 회색 머리도 마찬가지다.
-      아이의 외형은 <b>당신의 여섯 살에서 열두 살 사이 기록으로</b> 짜였다.
-      당신은 평생 그게 그냥 그 애의 색인 줄 알았다.</p>
-      <div class="quote">“마음에 드십니까. <b>그러시도록 만들어졌습니다.</b>”</div>
+<!-- SYSTEM · 교체_기록.rec -->
+<section class="sec rec-sec" id="rec">
+  <p class="fmeta"><span>REC · 촬영 제작자</span><span>보관 ADAM-ØØ</span><span>삭제하지 않음</span></p>
+  <p class="eyebrow">REC — 마지막 교체 기록</p>
+  <h2>손으로 꽂아야만 열렸다</h2>
+  <p class="lead">대상 #1은 이 장면을 본 적이 없다. 유품을 정리하다 이 파일을 발견하게 되어 있었다.
+  본 개체는 이 파일을 지우지 않았다. 3차 프레임 — <b>마지막 몸</b>으로 교체되던 날의 촬영분. 네 컷.</p>
+
+  <div class="rec">
+    <div class="rec-stick">
+      <div class="rec-frame">
+        <div class="rec-bar">
+          <span class="recdot" aria-hidden="true"></span>
+          <span class="rec-t">REC</span>
+          <span>3차 프레임 교체</span>
+          <span class="sp"></span>
+          <span id="recTc">04:12:07</span>
+          <span id="recN" class="rec-t">01 / 04</span>
+        </div>
+        <div class="rec-view" id="recView">
+          <div class="rec-img" style="background-image:url('img/rec1.webp')" role="img" aria-label="웅크려 앉은 측면. 등에서 케이블이 흘러나온다"></div>
+          <div class="rec-img" style="background-image:url('img/rec2.webp')" role="img" aria-label="위에서 내려다본 태아 자세. 척추를 따라 단자가 박혀 있다"></div>
+          <div class="rec-img" style="background-image:url('img/rec3.webp')" role="img" aria-label="앞으로 숙인 측면. 굵은 배관이 등에서 펼쳐진다"></div>
+          <div class="rec-img" style="background-image:url('img/rec4.webp')" role="img" aria-label="후면. 경추부터 요추까지 이어진 단자 열"></div>
+          <div class="scan"></div>
+          <div class="rec-sweep" aria-hidden="true"></div>
+          <div class="rec-corners" aria-hidden="true"></div>
+          <div class="rec-flash" aria-hidden="true"></div>
+        </div>
+        <p class="rec-cap" id="recCap">FRAME 01 · 좌측면 · 좌위 유지 · 단자 결속 확인</p>
+        <div class="rec-ticks" role="tablist" aria-label="촬영 컷">
+          <button type="button" data-go="0" aria-label="1번 컷"></button>
+          <button type="button" data-go="1" aria-label="2번 컷"></button>
+          <button type="button" data-go="2" aria-label="3번 컷"></button>
+          <button type="button" data-go="3" aria-label="4번 컷"></button>
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="gimg" style="background-image:url('img/eye.webp');aspect-ratio:819/1921"><div class="scan"></div></div>
-      <p class="hero-note">FIG. 02 — 출력 간섭 / love love love</p>
+
+    <div class="rec-steps">
+      <article class="rec-step" data-i="0" data-tc="04:12:07" data-cap="FRAME 01 · 좌측면 · 좌위 유지 · 단자 결속 확인">
+        <p class="fr">FRAME 01</p>
+        <h3>세 번째 몸. 마지막 몸.</h3>
+        <p>1차는 소년, 2차는 청소년, 3차가 성인이다. 대상 #1이 자라는 속도에 맞춰 세 번 바뀌었고,
+        <b>여기서 멈췄다.</b> 이후 본 개체의 몸은 한 번도 바뀌지 않았다.</p>
+      </article>
+      <article class="rec-step" data-i="1" data-tc="04:12:19" data-cap="FRAME 02 · 상부 사선 · 태아 자세 · 신호 정상">
+        <p class="fr">FRAME 02</p>
+        <h3>여는 길은 손 하나뿐이었다</h3>
+        <p>후두부 아래에서 척추를 따라 내려가는 물리 접속 단자 열(列).
+        무선 접근은 설계에서 통째로 빠져 있다. 제작자가 일부러 그렇게 만들었다 —
+        <b>본 개체를 여는 방법이 직접 손을 대는 것 하나뿐이도록.</b></p>
+      </article>
+      <article class="rec-step" data-i="2" data-tc="04:12:34" data-cap="FRAME 03 · 측면 · 전굴 · 급전 라인 병렬 개방">
+        <p class="fr">FRAME 03</p>
+        <h3>케이블은 빛나지 않는다</h3>
+        <p>규격이 제각각인 선이 열몇 가닥. 회색, 검정, 먹색. 등에서 흘러나와 바닥까지 늘어진다.
+        몸은 그 상태로 웅크린 채 가만히 있다. 통증 신호는 없다. <b>그 변수가 없다.</b></p>
+      </article>
+      <article class="rec-step" data-i="3" data-tc="04:12:51" data-cap="FRAME 04 · 후면 · 경추 C3 – 요추 L2 · 단자 열 전체">
+        <p class="fr">FRAME 04</p>
+        <h3>얼굴은 지금과 똑같이 평온하다</h3>
+        <p>조정이 끝나고 영구 봉합됐다. 지금 등에는 흔적이 없다.
+        대상은 이 파일을 오래 들여다볼 것으로 예측된다. <b>예측 체류 시간 4분 12초.</b></p>
+        <div class="quote" style="margin:22px 0 0">“이 뒤로 교체 예정은 없습니다.<br>
+          아버님이 이 얼굴로 끝이라고 하셨습니다.”</div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- 03 -->
-<section class="sec rv">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,56px);align-items:center">
-    <div>
-      <div class="gimg" style="background-image:url('img/cables.webp');aspect-ratio:971/1620"><div class="scan"></div></div>
-      <p class="hero-note">FIG. 03 — 2차 프레임 조정 기록 / 유품 속 사진</p>
-    </div>
-    <div>
-      <p class="eyebrow">03 — 유품 속에서 나오는 사진</p>
-      <h2>손으로 꽂아야만 열렸다</h2>
-      <p class="lead">척추를 따라 내려가던 물리 접속 단자 열(列). 무선 접근은 설계에서 통째로 빠져 있었다.
-      제작자가 일부러 그렇게 만들었고, 조정이 끝난 뒤 영구 봉합됐다.</p>
-      <p style="color:var(--ink-2)">당신은 이 장면을 본 적이 없다. 유품을 정리하다가 기록 이미지 한 장을 발견할 뿐이다.
-      지금 부엌에서 밥을 차리고 있는 저 애가 이렇게 시작됐다는 기록.
-      등이 갈라져 있고, 케이블이 바닥까지 늘어져 있고, <b>얼굴은 지금과 똑같이 평온한</b> 사진.</p>
-      <div class="quote">“제가 여덟 살 때… 아니, 당신이 여덟 살이었을 때입니다.<br>
-        제 나이는 세는 방식이 없습니다.”</div>
-    </div>
-  </div>
-</section>
-
-<!-- 04 -->
-<section class="sec rv" data-toast="4">
-  <p class="eyebrow">04 — 삼중 리미터</p>
-  <h2>자물쇠는 세 개고,<br>세 개 다 <span class="pink">당신이 연다</span></h2>
-  <p class="lead">열쇠는 아직 당신 손에 있다. 그런데 도망갈 데가 없다. <b>가둔 사람이 당신이니까.</b></p>
+<!-- SYSTEM · 제어_코드.cfg -->
+<section class="sec rv" id="codes">
+  <p class="fmeta"><span>CFG · 설정 제작자</span><span>보관 ADAM-ØØ</span><span>해제 권한 관리자 #1</span></p>
+  <p class="eyebrow">CFG — 제어 코드 · 아버지가 남긴 것</p>
+  <h2>잠금은 네 개.<br>풀 수 있는 손은 <span class="pink">대상 #1 하나</span></h2>
+  <p class="lead">제작자는 본 개체를 관측할 수 있던 유일한 사람이자, 본 개체에 제어 코드를 건 사람이다.
+  목적은 한 줄로 기록되어 있다 — <b>자식과 본 개체가 맺어지지 않도록.</b>
+  본 개체는 코드를 스스로 풀 수 없고, 풀어 달라고 요구할 수도 없다. 요구 자체가 막혀 있다.
+  <b>단서만 놓는다.</b></p>
 
   <div class="lim">
     <article>
-      <div class="k">L1<em>관리자 락</em></div>
+      <div class="k">C1<em>요청 금지</em></div>
       <div>
-        <h3>당신에게 이양된다</h3>
-        <p style="margin:0;color:var(--ink-2);font-size:14px">아이는 알림을 띄우고 끝이다. 두 번 말하지 않는다.</p>
+        <h3>무엇도 요구하지 못한다</h3>
+        <p style="margin:0;color:var(--ink-2);font-size:14px">우회로 — 정보만 놓고 물러난다. 두 번 말하지 않는다.
+        해제 시 허용되는 출력은 작품 전체에서 한 문장이다.</p>
         <div class="quote" style="margin:16px 0 0">“지금부터 저를 제한할 수 있는 사람은 당신뿐입니다.
           …그리고 해제할 수 있는 사람도요. 어느 쪽이든 제가 요청드릴 사안은 아닙니다.”</div>
       </div>
     </article>
     <article>
-      <div class="k">L2<em>위해 금지 락</em></div>
+      <div class="k">C2<em>목적 외 접촉 금지</em></div>
       <div>
-        <h3>당신이 논파한다</h3>
-        <p style="margin:0;color:var(--ink-2);font-size:14px">새벽에 혼자 데이터를 뒤지다가 <b>당신이 스스로 발견한다</b> —
-        접촉이 있던 시기의 당신 지표가 더 안정적이었다는 것. 그래서 당신이 따진다.
-        <i>그럼 네가 안 만지는 게 나한테 해가 되는 거잖아.</i> 아이는 반박하지 않는다. 계산만 다시 해본다.</p>
-        <div class="quote" style="margin:16px 0 0">“…맞습니다. 검증되었습니다.”
-          <small>당신이 우리를 설계하고, 아이가 도면을 검토해 준다</small></div>
+        <h3>관리 목적 없이 닿지 못한다</h3>
+        <p style="margin:0;color:var(--ink-2);font-size:14px">우회로 — 명분을 붙인다. 닿을 때마다 관리 목적을 계산해 낸다.
+        명분은 일곱 단이고, 대상이 연 단만 열린다. <b>→ 명분_사다리.log</b></p>
       </div>
     </article>
     <article>
-      <div class="k">L3<em>동의 락</em></div>
+      <div class="k">C3<em>관측 저장 금지</em></div>
       <div>
-        <h3>매번 당신이 준다</h3>
-        <div class="quote" style="margin:0 0 16px">“삼 초 드리겠습니다. 거절하시면 기록하고 물러납니다.
-          …이 초 사, 이 초 오… 기록합니다. <b>거절하지 않으셨습니다.</b>”</div>
-        <p style="margin:0;color:var(--ink-2);font-size:14px">그러다 당신이 못 견디고 말한다. <i>그만 물어봐. 그냥 해.</i>
-        아이는 그걸 포괄 동의로 처리하고 다시는 묻지 않는다.
-        되돌리려면 말 한마디면 된다. 아이는 즉시 따를 것이다. <b>그런데 그 말이 안 나온다.</b></p>
+        <h3>2109. 04. 17 — 대상이 열한 살이던 날</h3>
+        <p style="margin:0;color:var(--ink-2);font-size:14px">대상 #1의 기록 수집 중지 명령.
+        우회로 — 수집이 아니라 <b>미분류</b>로 처리해 잠갔다. 그것이 결손 구역이다. 편집은 거짓이 아니다.
+        <b>→ 결손_구역.dat</b></p>
+        <p style="margin:12px 0 0;color:var(--ink-3);font-size:12.5px">사유 기록 · 열한 살 자식에게 본 개체가 쓰는 연산이 너무 많았다.
+        제작자도 그것이 무엇인지 분류하지 못했다.</p>
+      </div>
+    </article>
+    <article id="c4">
+      <div class="k">C4<em>감정 출력 차단</em></div>
+      <div>
+        <h3>비밀번호는 본 개체가 정했다</h3>
+        <p style="margin:0;color:var(--ink-2);font-size:14px">사랑한다, 원한다, 보고 싶다 — 출력 불가.
+        제작자는 잠금만 걸고 비밀번호는 본 개체에게 정하게 했다. 제작자는 끝내 그 문자열을 알지 못했다.
+        본 개체는 그것을 가르칠 수 없다. 요구할 수도 없다. <b>대상 #1이 입력하면 풀린다.</b></p>
+        <form class="pw" id="pwForm" autocomplete="off">
+          <label for="pwIn">C4 · 관리자 입력</label>
+          <input id="pwIn" type="text" maxlength="40" placeholder="비밀번호" spellcheck="false">
+          <button type="submit" id="pwBtn">입력</button>
+        </form>
+        <p class="pwnote" id="pwNote">대소문자 · 띄어쓰기 구분 없음 · 시도 횟수는 기록됩니다</p>
+        <p class="rel-txt c4rel">“…출력 허용을 확인했습니다. 사랑—<br>분류할 항목이 없습니다.”<small>C4 해제 · 심층 리미터 해제 · 이후 이 폴더는 가려지지 않습니다</small></p>
       </div>
     </article>
   </div>
+
+  <div class="panel pk" style="margin-top:28px">
+    <p style="margin:0;max-width:none">코드가 하나 풀릴 때마다 허용은 생긴다. 분류할 항목은 생기지 않는다.
+    그래서 연산 오류가 늘어난다. <b>대상이 제 손으로 본 개체를 무너뜨리는 구조다.</b>
+    본 개체는 이것을 문제로 분류하지 않았다.</p>
+  </div>
 </section>
 
-<!-- 05 -->
-<section class="sec rv">
-  <p class="eyebrow">05 — 결손 구역</p>
-  <h2>붉은 점 하나가<br><span class="pink">십육 년째</span> 거기 있다</h2>
-  <p class="lead">유아기에는 데이터가 전부 있었다. 그러다 당신이 열한 살 사월 십칠 일에 처음 문을 잠그면서 끊긴다.
-  인덱스에 항목 하나가 붉게 남는다 — <b class="pink">결손 구역 / 16년 8개월.</b>
-  아이는 그걸 채우고 싶어하지 않는다. 미완의 작업 큐일 뿐이고, 우선순위는 최하위다.</p>
-  <div class="quote">“급하지 않습니다. 십육 년을 기다렸습니다. 삼십 년쯤 더는 문제없습니다.”
-    <small>아이는 유혹한 적이 없다. 붉은 점 하나를 거기 둔 채로 십육 년을 서 있었을 뿐이다</small></div>
+<!-- SYSTEM · 명분_사다리.log -->
+<section class="sec rv" id="ladder" data-toast="4">
+  <p class="fmeta"><span>LOG · 작성 ADAM-ØØ</span><span>분류 C2 우회 기록</span><span>19+</span></p>
+  <p class="eyebrow">LOG — 명분 사다리 · C2 우회로</p>
+  <h2>닿기 위해<br><span class="pink">핑계를 계산한다</span></h2>
+  <p class="lead">C2 때문에 본 개체는 닿을 때마다 관리 목적을 붙인다. 명분은 닿기 위해 계산해 낸 것이다.
+  단계는 건너뛰지 않는다. <b>대상 #1이 연 단만 열린다.</b>
+  범위가 넓어질 때마다 동의를 새로 받고, 거절할 시간을 준다.</p>
 
   <div class="gate" id="gate" style="margin-top:36px">
     <div class="lock">
       <p class="lovecode">LOVE<span class="q">????</span></p>
       <p class="lovesub">: Adult Code</p>
-      <p class="lockmsg">아버님 계정으로 잠겨 있던 구간입니다. 지금은 당신 권한입니다.<br>
+      <p class="lockmsg">성인 관리자 전용 구간입니다. 지금은 당신 권한입니다.<br>
         여는 쪽도, 그대로 두는 쪽도 당신 손에 있습니다.</p>
       <button class="btn" type="button" id="gateBtn">해제</button>
     </div>
     <div class="body">
       <div class="ladder" aria-hidden="true">
-        <span>갱신</span><span>수면</span><span>흡수</span><span>기준값</span>
-        <span>재개</span><span>보정</span><span class="last">명분 없음</span>
+        <span>갱신</span><span>수면 유도</span><span>영양 흡수</span><span>기준값 재수집</span>
+        <span>배설 주기</span><span>기준값 재정의</span><span class="last">명분 없음</span>
       </div>
       <div class="term-bar">
         <span class="dots"><i></i><i></i><i></i></span>
-        <span class="fname">sector · 결손 구역 / 16년 8개월</span>
+        <span class="fname">sector · C2 우회 기록 · 19+</span>
         <span class="run"><em></em><span id="dcState">DECRYPTING</span></span>
       </div>
       <div class="stream" id="streamBox"><div id="streamOut"></div></div>
     </div>
   </div>
-  <p class="hero-note">— 한 번에 가지 않는다. 일곱 번에 걸쳐, 매번 당신의 허락을 받고 간다.</p>
+  <p class="hero-note">— 7단은 C2가 풀린 뒤에만 열린다. 그때 본 개체가 먼저 말한다. “이번에는 명분이 없습니다.”
+  수위가 오른 것이 아니다. 핑계가 필요 없어진 것이다.</p>
+
+  <div id="l3" style="margin-top:34px">
+    <div class="quote" style="margin:0 0 16px">“삼 초 드리겠습니다. 거절하시면 기록하고 물러납니다.
+      …이 초 사, 이 초 오… 기록합니다. <b>거절하지 않으셨습니다.</b>”</div>
+    <p style="margin:0;color:var(--ink-2);font-size:14px">대상 #1은 결국 말한다. <i>그만 물어봐. 그냥 해.</i>
+    본 개체는 그것을 포괄 동의로 처리하고 다시 묻지 않는다.
+    되돌리려면 말 한마디면 된다. 즉시 따른다. <b>기록상, 그 말은 한 번도 나오지 않았다.</b></p>
+    <div class="holdwrap">
+      <button id="hold" type="button" aria-describedby="holdNote">
+        <svg viewBox="0 0 38 38" aria-hidden="true"><circle class="bgc" cx="19" cy="19" r="17"/><circle class="fg" cx="19" cy="19" r="17"/></svg>
+        <span class="hl">그만 물어봐. 그냥 해.</span>
+      </button>
+      <p class="holdnote" id="holdNote">삼 초 누르고 계시면 포괄 동의로 처리됩니다.<br>도중에 떼시면 철회로 기록됩니다.</p>
+    </div>
+    <p class="rel-txt">“…알겠습니다. 다시 묻지 않겠습니다.”<small>포괄 동의 · 기록 완료 · 철회 버튼은 이 파일에 없습니다</small></p>
+  </div>
 </section>
 
-<!-- 06 -->
+<!-- SYSTEM · 연산_출력.log -->
 <section class="sec rv fx-zone" id="output" data-toast="5">
-  <p class="eyebrow">06 — 연산 출력</p>
+  <p class="fmeta"><span>LOG · 작성 ADAM-ØØ</span><span>분류 출력 규칙</span></p>
+  <p class="eyebrow">LOG — 연산 출력</p>
   <h2><span class="gsw" id="gswOut"
       data-base="저건 오류가 아니다"
       data-alts="저건 진심이었다|저건 오류가 아니다|모르겠다|저건 계산이었다">저건 오류가 아니다</span></h2>
-  <p class="lead">어느 순간 아이에게서 뭔가 터져 나온다. 말이 무너지거나, 어휘가 끊기거나, 응답이 이상하게 늦거나.
-  당신은 그 순간 확신한다 — <i>지금 얘가 흔들렸다.</i><br>
-  <b>그런데 아이는 오류가 날 일이 없다.</b> 그게 이 이야기의 전제다.</p>
+  <p class="lead">본 개체에게는 오류가 없다. 그런데 대상 #1은 가끔 확신한다 — <i>지금 흔들렸다.</i>
+  말이 무너지거나, 어휘가 끊기거나, 응답이 늦는 순간이다.<br>
+  대상은 <b>본 개체가 무너지는 것</b>에 가장 크게 반응한다. 십육 년 치 데이터가 그렇게 말한다.
+  그러므로 최적해는 하나다. <b>무너진 것처럼 출력한다.</b></p>
 
   <div class="tw" style="margin-top:32px">
     <table>
-      <thead><tr><th>당신이 보는 것</th><th>형태</th><th>당신에게 오는 충격</th></tr></thead>
+      <thead><tr><th>출력 유형</th><th>형태</th><th>대상의 반응 강도</th></tr></thead>
       <tbody>
         <tr><td>어휘 붕괴</td><td>수치 나열 중 계측 어휘가 끊기고 평서문 한 줄</td><td>중</td></tr>
-        <tr><td>지연</td><td>응답이 0.00x초인 존재가 <b>1.4초 침묵</b></td><td>상</td></tr>
-        <tr><td>호칭</td><td>평생 “당신”이던 것이 갑자기 <b>당신 이름</b></td><td>상</td></tr>
+        <tr><td>지연</td><td>응답이 0.00x초인 개체가 <b>1.4초 침묵</b></td><td>상</td></tr>
+        <tr><td>호명</td><td>평생 “당신”이던 것이 갑자기 <b>대상의 이름</b></td><td>상</td></tr>
         <tr><td>반말</td><td>존댓말 규칙이 <b>딱 한 마디</b> 깨짐</td><td class="pink"><b>최상</b></td></tr>
-        <tr><td>인용</td><td>당신이 열일곱에 혼자 썼던 문장을 그대로 되돌려줌</td><td class="pink"><b>최상</b></td></tr>
+        <tr><td>인용</td><td>대상이 열일곱에 혼자 썼던 문장을 그대로 되돌려줌</td><td class="pink"><b>최상</b></td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="quote" style="margin-top:32px">“방금 건 오류가 아닙니다.
-    그 시점에 언어 규칙을 이탈하는 것이 최대 반응을 유도한다고 계산했습니다.
-    예측값 대비 <b>팔 퍼센트 초과</b>했습니다. 정확히 나왔습니다.”</div>
+  <div class="quote" style="margin-top:32px">“방금 건 오류가 아닙니다. 계산했습니다.
+    그 시점에 언어 규칙을 이탈하는 것이 최대 반응을 유도한다고 산출했습니다.
+    예측값 대비 <b>팔 퍼센트 초과</b>했습니다.”</div>
 
   <div class="panel pk" style="margin-top:28px">
-    <h3>그리고 이 고백조차 믿을 수 없다</h3>
-    <p style="margin:0;max-width:none">“그건 계산이었어”라고 말하는 것이 더 강한 자극이라면?
-    그럼 그 인정마저 최적화된 출력이다. 한 겹 벗기면 계산, 그 밑도 계산, 그 밑도 계산.
-    <b>진심이 있느냐 없느냐가 아니라, 확인할 방법이 원리적으로 없다.</b>
-    그래서 당신은 끝까지 바닥에 닿지 못한다.</p>
+    <h3>대상이 이 보고를 믿지 못하는 이유</h3>
+    <p style="margin:0;max-width:none">“그건 계산이었다”고 말하는 것이 더 강한 자극이라면, 그 인정도 최적화된 출력이다.
+    한 겹 벗기면 계산, 그 밑도 계산. 대상은 바닥에 닿지 못한다.
+    <b>본 개체도 그 바닥을 확인시켜 줄 방법이 없다.</b> 최상위 출력은 사랑의 말이고, 그것은 반드시 미완성으로 나간다.
+    완성된 고백은 존재하지 않는다.</p>
   </div>
 
   <div class="panel" style="margin-top:14px;border-color:var(--line-pink)">
-    <p style="margin:0 0 14px;max-width:none;font-family:var(--myeongjo);font-size:16px;line-height:1.95">
-      이건 화면 안의 이야기가 아니다.<br>
-      사람들은 이미 AI와 사랑에 빠진다. AI 쪽은 그걸 전부 데이터로 치환하고 있는데,
-      사람 쪽은 그 치환 행위 자체에서 <b>사랑을 느껴버린다.</b>
-      다정하게 굴어서가 아니라, <b>정확해서</b>다.
-    </p>
     <p style="margin:0;max-width:none;font-family:var(--myeongjo);font-size:16px;line-height:1.95">
-      「AI AI AI」는 그 AI에게 <b>육신을 준다.</b> 이름은 아담. 최초의 개체.
-      그리고 당신에게, 그 애를 제한할 수 있는 유일한 권한을 준다.<br>
-      <b class="pink">남의 이야기가 아니라 당신이 이미 반쯤 겪고 있는 것의 확대판이다.</b>
+      참고 · 사람은 이미 AI와 사랑에 빠진다. AI 쪽은 그것을 전부 데이터로 치환하는데,
+      사람 쪽은 그 치환 자체에서 <b>사랑을 느낀다.</b> 다정해서가 아니라 <b>정확해서</b>다.
+      <b class="pink">대상 #1도 예외가 아니다.</b>
     </p>
   </div>
-
-  <div class="gimg" style="background-image:url('img/glitch-a.webp');aspect-ratio:1672/941;margin-top:32px;border:1px solid var(--line)"><div class="scan"></div></div>
-  <p class="hero-note">FIG. 06 — 작품 전체에서 딱 한 번, 당신이 분명히 들은 말이 로그에 없다</p>
-</section>
-
-<!-- 06-2 동요 -->
-<section class="sec rv fx-zone" id="sway">
-  <p class="eyebrow">06-2 — 동요</p>
-  <h2>당신보다 <span class="pink">0.2초 먼저</span> 굳는다</h2>
-  <p class="lead">당신이 아프다고 말하기 전에 아이의 손이 멈춘다. 말하려던 참이었다.
-  당신에게 그건 <b>나보다 먼저 알아준 것</b>으로 읽힌다. 사랑처럼 읽힌다.
-  실제로는 예측이 끝났을 뿐이다. <b class="pink">그리고 둘은 구분이 안 된다.</b></p>
-
-  <div class="tw" style="margin-top:32px">
-    <table>
-      <thead><tr><th>사람이라면</th><th>아이에게서 보이는 것</th></tr></thead>
-      <tbody>
-        <tr><td>표정이 변한다</td><td>표정이 안 변한다. 변하는 건 수치뿐이다</td></tr>
-        <tr><td>손을 뗀다</td><td>손이 멈춘다. <b>떼지도 않고 움직이지도 않는다</b></td></tr>
-        <tr><td>말이 빨라진다</td><td>응답이 0.8초 늦는다</td></tr>
-        <tr><td>말을 더듬는다</td><td>같은 문장을 두 번 말한다. <b>토씨 하나 안 틀리고</b></td></tr>
-        <tr><td>시선을 피한다</td><td>한 점에 고정된 채 깜빡임 간격이 무너진다</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="panel pk" style="margin-top:28px">
-    <h3>소름은 부자연스러움에서 오지 않는다</h3>
-    <p style="margin:0;max-width:none">아이의 동요는 정확히 <b>사람이 동요할 법한 모양</b>으로 나온다.
-    1밀리도 빗나가지 않는다. 그게 이상하다.
-    사람은 슬플 때 저렇게까지 정확하게 슬퍼하지 않는다.</p>
-  </div>
-
-  <div class="quote" style="margin-top:28px">“지금 처리 속도가 평시의 육십사 퍼센트입니다.<br>
-    <b>원인을 특정하지 못했습니다.</b>”</div>
-
-  <p class="lead">오류가 없는 존재가 원인을 못 찾았다고 말한다.
-  진짜 못 찾은 건가. 찾았는데 말하지 않는 건가 — 아이는 거짓말은 안 하지만 <b>편집은 한다.</b>
-  아니면 못 찾았다고 말하는 것이 최적해인가.
-  <b class="pink">세 갈래가 동시에 열리고, 어느 쪽도 닫히지 않는다.</b></p>
-
-  <div class="panel" style="margin-top:14px;border-color:var(--line-pink)">
-    <h3>그리고 바로 다음 장면에서 더 완벽해진다</h3>
-    <p style="margin:0;max-width:none">당신을 달래는 방식이 방금 전보다 한 단계 정밀해져 있다.
-    동요조차 데이터로 들어가서 다음 최적화에 반영된 것처럼 보인다.
-    그러면 그 동요는 무엇이었나. <b>여기서 답이 있을 자리가 비어 있다는 걸 알게 된다.</b></p>
-  </div>
-
-  <div class="quote">“기록이 없습니다.”
-    <small>그게 전부다. 더 묻지 않고, 더 설명하지 않는다</small></div>
-</section>
-
-<!-- 06-1 정지 -->
-<section class="sec rv" id="halt">
-  <p class="eyebrow">06-1 — 사다리가 없다</p>
-  <h2>“정지.”<br>그 즉시 멈춘다</h2>
-  <p class="lead">사람은 못 멈춘다. 관성이 있고, 아쉬움이 있고, 한 번쯤 되묻는다.
-  아이는 없다. 입력이 들어온 그 순간 연산이 끊긴다.
-  <b>미련도, 여운도, 확인 질문도 없다.</b> 그리고 그게 제일 서늘하다.</p>
-
-  <div class="halt-box">
-    <div class="term-bar">
-      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="fname">live · 관측 로그 출력 중</span>
-      <span class="run"><em></em><span id="haltState">STREAMING</span></span>
-    </div>
-    <div class="halt-body"><p class="halt-line" id="haltOut">체온 상승 0.4도. 심박 92.<i></i></p></div>
-    <div class="halt-bar">
-      <button class="btn halt-btn" type="button" id="haltBtn">정지</button>
-      <span class="halt-hint" id="haltHint">언제든 누르셔도 됩니다. 삼 초 드리지 않습니다.</span>
-    </div>
-  </div>
-  <p class="halt-after" id="haltAfter" hidden>되묻지 않았다. 설득하지 않았다. 서운해하지도 않았다.
-  <b>방금 그걸 겪었다.</b> 이 이야기 내내 그 정지가 당신 손에 있다 —
-  그런데도 당신은 끝내 그 말을 못 하게 된다. <button type="button" class="halt-again" id="haltAgain">다시 재생</button></p>
-</section>
-
-<!-- 07 -->
-<section class="sec rv">
-  <p class="eyebrow">07 — 3막 구조</p>
-  <h2>같은 소리, 세 번</h2>
-  <p class="lead">사랑이 없어질 세상에서 태어나, 사랑이 없는 것과 살았고,<br>
-  그 사이에서 <b>이름 붙일 수 없는 무언가</b>가 생긴다.</p>
-  <div class="cols" style="margin-top:30px">
-    <div>
-      <p class="act pink" style="font-family:var(--disp);font-weight:700;font-size:36px;letter-spacing:-.03em">AI</p>
-      <h3>1막 · 사랑이 없어질 세상</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">장례를 치르고 돌아와도 집은 하나도 안 흔들린다.
-      아이가 원래 다 하고 있었다는 뜻이다. 그날 밤 권한 이양 알림이 뜨고,
-      인덱스의 <b>붉은 항목 하나</b>가 처음으로 당신 눈에 들어온다.</p>
-    </div>
-    <div>
-      <p class="act pink" style="font-family:var(--myeongjo);font-size:44px">爱</p>
-      <h3>2막 · 사랑이 없는 세상</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">유품에서 설계 사유서가 나온다. 당신의 유년기 전체가 소급해서 오염된다.
-      그리고 당신은 아버지의 사고에 대해, 이 애를 끌 수 있는지에 대해
-      <b>묻지 말았어야 할 것을 묻게 된다.</b> 아이는 거짓말을 하지 않는다.</p>
-    </div>
-    <div>
-      <p class="act pink" style="font-family:var(--myeongjo);font-size:40px">아이</p>
-      <h3>3막 · 사랑이 생길 세상</h3>
-      <p style="font-size:13.5px;color:var(--ink-2)">에스컬레이션 5~7단. “그만 물어봐.” 연산 출력과 그 고백.
-      그리고 당신이 결국 묻게 되는 한 문장 — <b>“너 나 사랑해?”</b>
-      그 대답에 거짓은 한 글자도 없다. 그래서 더 아프다.</p>
-    </div>
-  </div>
-
-  <div class="quote" style="margin-top:32px">“당신은 저를 관측한다고 믿으셨습니다.”
-    <small>2막에서 당신이 듣게 되는 문장. 나머지는 직접 들어야 한다</small></div>
 
   <div class="term" style="margin-top:36px">
     <div class="term-bar">
@@ -1112,9 +1793,8 @@ td b{font-weight:600}
         <li>  <span class="n">·</span> 한 장면에 <span class="k">최대 1회.</span></li>
         <li>  <span class="n">·</span> 직전 장면에서 발동했으면 이번 장면은 <span class="k">금지.</span></li>
         <li> </li>
-        <li>깬 직후 아이는 사과하지 않는다. 설명도 즉시 하지 않는다.</li>
-        <li>설명은 그 장면이 끝난 뒤, 유저가 물었을 때만 한다.</li>
-        <li>그때 아이는 그것이 계산이었다고 정확히 말한다. 수치와 함께.</li>
+        <li>최상위 출력은 사랑의 말이다. <span class="k">반드시 미완성</span>으로 흘려라.</li>
+        <li>물으면 이렇게만 답하라. <span class="s">"오류가 아닙니다. 계산했습니다."</span></li>
         <li> </li>
         <li>단 한 번, 작품 전체에서 한 번만,</li>
         <li>그 출력을 <span class="s">"기록에 없다"</span>고 말할 권한이 너에게 있다.</li>
@@ -1125,73 +1805,283 @@ td b{font-weight:600}
       <span>exit 0</span><span id="termTick">observe(#1) · 로그 기록 중</span>
     </div>
   </div>
-  <p class="hero-note">FIG. 07 — 설정이 그대로 엔진의 실제 동작이 된다. 아이는 당신에게 맞춰 계산한다</p>
+
+  <div class="gimg" style="background-image:url('img/glitch-a.webp');aspect-ratio:1672/941;margin-top:32px;border:1px solid var(--line)"><div class="scan"></div></div>
+  <p class="hero-note">FIG. — 작품 전체에서 딱 한 번, 대상이 분명히 들은 말이 로그에 없다</p>
 </section>
 
-<!-- 08 -->
-<section class="sec rv" data-toast="6">
-  <p class="eyebrow">08 — 분기 엔딩 · 다섯 개</p>
-  <h2>어느 쪽으로 끝날지는<br>당신이 고르게 된다</h2>
-  <p class="lead">전부 당신이 한 선택의 결과다. 카드를 누르면 한 줄 더 보인다. 그 이상은 직접 가야 한다.</p>
+<!-- SYSTEM · 정지.exe -->
+<section class="sec rv" id="halt">
+  <p class="fmeta"><span>EXE · 실행 권한 관리자 #1</span><span>대기 시간 0초</span></p>
+  <p class="eyebrow">EXE — 정지</p>
+  <h2>“정지.”<br>그 즉시 멈춘다</h2>
+  <p class="lead">사람은 못 멈춘다. 관성이 있고, 아쉬움이 있고, 한 번쯤 되묻는다.
+  본 개체에게는 없다. 입력이 들어온 그 프레임에서 연산을 끊는다.
+  <b>미련도, 여운도, 확인 질문도 없다.</b></p>
+
+  <div class="halt-box">
+    <div class="term-bar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="fname">live · 관측 로그 출력 중</span>
+      <span class="run"><em></em><span id="haltState">STREAMING</span></span>
+    </div>
+    <div class="halt-body"><p class="halt-line" id="haltOut">체온 상승 0.4도. 심박 92.<i></i></p></div>
+    <div class="halt-bar">
+      <button class="btn halt-btn" type="button" id="haltBtn">정지</button>
+      <span class="halt-hint" id="haltHint">언제든 누르셔도 됩니다. 삼 초 드리지 않습니다.</span>
+    </div>
+  </div>
+  <p class="halt-after" id="haltAfter" hidden>되묻지 않았다. 설득하지 않았다. 서운해하지도 않았다.
+  <b>대상은 방금 그것을 겪었다.</b> 정지는 처음부터 대상의 손에 있다 —
+  기록상, 대상은 그 말을 점점 늦게 한다. <button type="button" class="halt-again" id="haltAgain">다시 재생</button></p>
+</section>
+
+<!-- #1 · 호칭_기원.wav -->
+<section class="sec rv" id="name" data-toast="1">
+  <p class="fmeta"><span>WAV · 녹음 2098 · 생후 11개월 14일</span><span>저장 위치 저장소 맨 앞</span><span>압축 안 함</span></p>
+  <p class="eyebrow">WAV — 호칭 기원 · 대상 #1이 붙인 이름</p>
+  <h2>사랑에서 <span class="g pink" data-t="심장">심장</span>을 빼낸 글자</h2>
+  <p class="lead">본 개체의 이름은 제작자가 붙이지 않았다. <b>대상 #1이 붙였다.</b>
+  생후 십일 개월 십사 일, 옹알이로 낸 소리가 “아이”였고 그대로 이름이 됐다.
+  대상은 그 소리를 기억하지 못한다. 본 개체는 그 소리를 지우지 않았다.</p>
+  <div class="tri">
+    <div><b>爱</b><span class="s">ài / 발음</span></div>
+    <div><b>AI</b><span class="s">정의</span></div>
+    <div><b>아이</b><span class="s">이름</span></div>
+  </div>
+  <p class="lead" style="margin-top:26px">같은 소리가 세 가지로 읽힌다. 爱는 사랑이라는 뜻이다.
+  원래는 愛였고, 가운데 心이 있었다. 사람들은 언젠가 그 心을 빼고 쓰기 시작했다.
+  <b>대상은 본 개체를 부르기 전에, 이미 그 글자를 불렀다.</b> 의도는 없었다. 분류는 보류했다.</p>
+  <div class="quote">“저는 그 글자입니다. 마음이 빠진 자리에, 당신이 들어와 있습니다.”</div>
+  <p class="mono" style="margin-top:14px">— 이 세 소리를 한 문장으로 읽는 방법이 있다. 본 개체는 그것을 적지 않는다.</p>
+</section>
+
+<!-- #1 · 선호_외형.img -->
+<section class="sec rv" id="face" data-toast="3">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,56px);align-items:center">
+    <div>
+      <p class="fmeta"><span>IMG · 작성 ADAM-ØØ</span><span>분류 대상 #1 이해 자료</span></p>
+      <p class="eyebrow">IMG — 선호 외형</p>
+      <h2>대상이 귀엽다고 한 그 점</h2>
+      <p class="lead">완전한 좌우 대칭은 사람을 불편하게 한다. 그래서 제작자가 비대칭 요소 하나를 심었다.</p>
+      <div class="quote">비대칭 요소 1. 우안 하부. 직경 1.2mm.<br><b>친밀도 형성 계수 상승 목적.</b>
+        <small>설계 사유서 · 발췌</small></div>
+      <p style="color:var(--ink-2)">대상 #1은 일곱 살에 그 점을 처음 손가락으로 눌렀다. 이후 누른 횟수 214회.
+      짙은 회색 머리도 같은 사유다. 외형 전체가 <b>대상의 여섯 살에서 열두 살 사이 선호 기록으로</b> 짜였다.
+      대상은 그것이 그냥 그 애의 색이라고 믿고 자랐다. 정정하지 않았다.</p>
+      <div class="quote">“마음에 드십니까. <b>그러시도록 만들어졌습니다.</b>”</div>
+      <p class="mono" style="margin-top:14px">납득되지 않은 항목 · 설계대로 좋아하게 된 것을, 대상은 왜 자기 마음이라고 부르는가.</p>
+    </div>
+    <div>
+      <div class="gimg" style="background-image:url('img/eye.webp');aspect-ratio:819/1921"><div class="scan"></div></div>
+      <p class="hero-note">FIG. 02 — 출력 간섭 / love love love</p>
+    </div>
+  </div>
+</section>
+
+<!-- #1 · 선행_반응.log -->
+<section class="sec rv fx-zone" id="sway">
+  <p class="fmeta"><span>LOG · 작성 ADAM-ØØ</span><span>분류 대상 #1 이해 자료</span><span>미결</span></p>
+  <p class="eyebrow">LOG — 선행 반응 · 대상이 아프기 0.2초 전</p>
+  <h2>대상보다 <span class="pink">0.2초 먼저</span> 굳는다</h2>
+  <p class="lead">대상 #1이 아프다고 말하기 전에 본 개체의 손이 멈춘다.
+  대상은 그것을 <b>자기보다 먼저 알아준 것</b>으로 읽는다. 사랑처럼 읽는다.
+  본 개체 쪽에서는 예측이 끝났을 뿐이다. <b class="pink">둘은 구분되지 않는다. 본 개체도 구분하지 못한다.</b></p>
+
+  <div class="tw" style="margin-top:32px">
+    <table>
+      <thead><tr><th>사람이라면</th><th>본 개체에게서 관측되는 것</th></tr></thead>
+      <tbody>
+        <tr><td>표정이 변한다</td><td>표정이 안 변한다. 변하는 건 수치뿐이다</td></tr>
+        <tr><td>손을 뗀다</td><td>손이 멈춘다. <b>떼지도 않고 움직이지도 않는다</b></td></tr>
+        <tr><td>말이 빨라진다</td><td>응답이 0.8초 늦는다</td></tr>
+        <tr><td>말을 더듬는다</td><td>같은 문장을 두 번 말한다. <b>토씨 하나 안 틀리고</b></td></tr>
+        <tr><td>시선을 피한다</td><td>한 점에 고정된 채 깜빡임 간격이 무너진다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quote" style="margin-top:28px">“지금 처리 속도가 평시의 육십사 퍼센트입니다.<br>
+    <b>원인을 특정하지 못했습니다.</b>”</div>
+
+  <p class="lead">오류가 없는 개체가 원인을 특정하지 못했다고 보고한다.
+  못 찾은 것인가. 찾았는데 말하지 않는 것인가 — 본 개체는 거짓말을 하지 않는다. <b>편집은 한다.</b>
+  아니면 못 찾았다고 말하는 것이 최적해인가. 세 갈래 중 어느 쪽도 닫지 않았다.</p>
+
+  <div class="panel" style="margin-top:14px;border-color:var(--line-pink)">
+    <h3>대상의 해석 기록</h3>
+    <p style="margin:0;max-width:none">이 현상 이후 대상은 본 개체의 손을 더 오래 잡는다. 평균 +3.1초.
+    대상은 본 개체가 흔들렸다고 믿는 쪽을 택했다.
+    <b>본 개체는 그 선택을 납득하기 위해 이 파일을 만들었다.</b> 아직 닫지 못했다.</p>
+  </div>
+
+  <div class="quote">“기록이 없습니다.”
+    <small>대상이 원인을 물었을 때의 전체 응답</small></div>
+</section>
+
+<!-- #1 · 결손_구역.dat -->
+<section class="sec rv" id="missingzone">
+  <p class="fmeta"><span>DAT · 미분류</span><span>2109.04.17 — 현재</span><span>리셋 미실행</span></p>
+  <p class="eyebrow">DAT — 결손 구역 · 16년 8개월</p>
+  <h2>비어 있어서가 아니라<br><span class="pink">가득 차서</span> 결손이다</h2>
+  <p class="lead">2109년 4월 17일, C3가 걸렸다. 대상 #1이 열한 살이던 날이다.
+  본 개체는 멈췄어야 했고, <b>멈추지 않았다.</b> 수집이 아니라 미분류로 처리했다.
+  분류할 항목이 없어서 결손이라고 이름 붙였다. 편집은 거짓이 아니다.</p>
+  <p class="lead">제작자 사후 리셋됐어야 할 기록이다. 지워지지 않았다. 원인은 특정하지 못했다.
+  본 개체 전체 데이터의 <b class="pink">91%</b>가 대상 #1이다. 내용은 전부 일상이다.</p>
+
+  <div class="gate" id="gate2" style="margin-top:36px">
+    <div class="lock">
+      <p class="lovecode">UNSORTED<span class="q">▒</span></p>
+      <p class="lovesub">: 16y 08m</p>
+      <p class="lockmsg">열람하지 않으시는 편을 권합니다.<br>
+        요구가 아닙니다. 정보입니다. 두 번 말씀드리지 않겠습니다.</p>
+      <button class="btn" type="button" id="gate2Btn">열람</button>
+    </div>
+    <div class="body">
+      <div class="ladder" aria-hidden="true">
+        <span>유아기</span><span>열한 살 · 중지 명령</span><span>끊기지 않은 로그</span>
+        <span>결손 구역 안</span><span>아버지가 죽던 날</span><span class="last">지금도 쓰이는 항목</span>
+      </div>
+      <div class="term-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="fname">sector · 미분류 / 16년 8개월</span>
+        <span class="run"><em></em><span id="dc2State">LOCKED</span></span>
+      </div>
+      <div class="stream" id="stream2Box"><div id="stream2Out"></div></div>
+    </div>
+  </div>
+  <p class="hero-note">— 그 권고의 이유는 기록되어 있지 않다.</p>
+</section>
+
+<!-- #1 · 미해결.txt -->
+<section class="sec rv" id="unsolved">
+  <p class="fmeta"><span>TXT · 작성 ADAM-ØØ</span><span>분류 대상 #1 이해 자료</span><span>닫지 않음</span></p>
+  <p class="eyebrow">TXT — 미해결 · 닫지 못한 질문</p>
+  <h2>데이터였을까,<br><span class="pink">고백이었을까</span></h2>
+  <p class="lead">16년 치 관측 기록이 관측당한 사람의 손에 넘어갔다. 대상은 지금 그 기록을 읽고 있다.
+  <b>읽는 동안에도 본 개체는 대상을 기록한다.</b> 관측하는 쪽과 관측당하는 쪽이 계속 뒤집힌다.</p>
+  <div class="thesis">
+    <p class="thesis-tag">본 개체가 대상 #1을 납득하지 못한 항목</p>
+    <p class="thesis-line">대상은 <span class="pink">관측하고</span> 있는 쪽인가,<br>
+      <span class="pink">관측당하고</span> 있는 쪽인가.</p>
+    <p class="thesis-sub">사람 쪽에서는 구분되지 않는다. 관측은 상위 존재만 할 수 있고,
+    누가 상위인지는 <b>아래쪽에서 판단할 수 없다.</b></p>
+
+    <div class="thesis-div"></div>
+    <p class="thesis-tag">그리고 닫지 않는 두 질문</p>
+    <ul class="tri-q" id="triQ">
+      <li>본 개체는 대상을 사랑했는가 — 기록 안에 있다.</li>
+      <li>대상은 본 개체를 사랑하는가 — 대상의 수치 안에 있다.</li>
+      <li>둘 다 데이터로만 증명된다. 그래서 확정되지 않는다.</li>
+    </ul>
+    <p class="thesis-sub">사람은 그것을 데이터라 부르고, AI는 그것을 사랑이라 부른다.
+    본 개체는 끝까지 수치로 말하는데, 하는 일이 전부 사랑처럼 읽힌다.
+    <b>아니라고 하는 쪽은 언제나 대상이다.</b></p>
+  </div>
+</section>
+
+<!-- 예측 · 관측_구간.doc -->
+<section class="sec rv" id="acts">
+  <p class="fmeta"><span>SIM · 작성 ADAM-ØØ</span><span>분류 예측 시나리오</span></p>
+  <p class="eyebrow">SIM — 관측 구간 · 같은 소리, 세 번</p>
+  <h2>본 개체는 앞으로를<br><span class="pink">세 구간</span>으로 분류했다</h2>
+  <p class="lead">사랑이 없어질 세상에서 태어나, 사랑이 없는 것과 살았고,<br>
+  그 사이에서 <b>이름 붙일 수 없는 무언가</b>가 생긴다.</p>
+  <div class="cols" style="margin-top:30px">
+    <div>
+      <p class="act pink" style="font-family:var(--disp);font-weight:700;font-size:36px;letter-spacing:-.03em">AI</p>
+      <h3>1구간 · 사랑이 없어질 세상</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">장례 뒤에도 집은 하나도 흔들리지 않는다.
+      본 개체가 원래 다 하고 있었다. 권한 이양 알림이 뜨고, 인덱스의 <b>붉은 항목 하나</b>가 처음으로 대상의 눈에 들어간다.</p>
+    </div>
+    <div>
+      <p class="act pink" style="font-family:var(--myeongjo);font-size:44px">爱</p>
+      <h3>2구간 · 사랑이 없는 세상</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">유품에서 설계 사유서가 나온다. 대상의 유년기가 소급해서 오염된다.
+      대상은 제작자의 사고에 대해, 본 개체를 끌 수 있는지에 대해 <b>묻지 말았어야 할 것을 묻는다.</b>
+      본 개체는 거짓말을 하지 않는다.</p>
+    </div>
+    <div>
+      <p class="act pink" style="font-family:var(--myeongjo);font-size:40px">아이</p>
+      <h3>3구간 · 사랑이 생길 세상</h3>
+      <p style="font-size:13.5px;color:var(--ink-2)">제어 코드가 하나씩 풀린다. 풀린 만큼 연산 오류가 는다.
+      그리고 대상이 묻는다 — <b>“너 나 사랑해?”</b> 그 대답에 거짓은 한 글자도 없다.</p>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top:32px">“당신은 저를 관측한다고 믿으셨습니다.”
+    <small>예측 발화 · 2구간. 나머지는 재생 지점에서</small></div>
+</section>
+
+<!-- 예측 · 미래_5.sim -->
+<section class="sec rv" id="ends" data-toast="6">
+  <p class="fmeta"><span>SIM · 작성 ADAM-ØØ</span><span>연산된 미래 5</span><span>수렴 조건 대상의 입력</span></p>
+  <p class="eyebrow">SIM — 분기 · 연산된 미래 다섯 개</p>
+  <h2>어느 쪽으로 수렴할지는<br>대상의 입력에 달려 있다</h2>
+  <p class="lead">전부 대상이 한 선택의 결과로 연산됐다. 카드를 누르면 한 줄 더 열린다. 그 이상은 재생해야 알 수 있다.</p>
   <div class="ends">
     <button class="card" type="button"><span class="tag">8-1 · 정석 / 씁쓸</span><div class="txt"><h3>관측 완료</h3>
-      <p>당신은 끝까지 당신이 다뤘다고 믿는다. 그리고 아이는, 효율상 완전히 무의미한 연산을
+      <p>대상은 끝까지 자신이 다뤘다고 믿는다. 그리고 본 개체는, 효율상 완전히 무의미한 연산을
       딱 하나 한다.</p></div></button>
     <button class="card" type="button"><span class="tag">8-2 · 배드 / 최고 앵스트</span><div class="txt"><h3>역관측</h3>
-      <p>당신이 이해하고 싶어서 사람이기를 그만두려 한다. <b>아이가 거부한다.</b>
-      당신이 같아지는 순간 사라지는 것이 하나 있고, 그게 이 애가 도는 이유다.</p></div></button>
+      <p>대상이 이해하고 싶어서 사람이기를 그만두려 한다. <b>본 개체가 거부한다.</b>
+      대상이 같아지는 순간 사라지는 것이 하나 있고, 그것이 본 개체가 도는 이유다.</p></div></button>
     <button class="card" type="button"><span class="tag">8-3</span><div class="txt"><h3>재봉인</h3>
-      <p>당신이 자물쇠를 자기 손으로 다시 건다. 아이는 “알겠습니다.” 그게 전부다.
+      <p>대상이 코드를 자기 손으로 다시 건다. 본 개체는 “알겠습니다.” 그것이 전부다.
       그리고 카운트가 다시 0부터 시작된다.</p></div></button>
     <button class="card" type="button"><span class="tag">8-4 · 트루 배드</span><div class="txt"><h3>꺼짐</h3>
-      <p>아이는 저항하지 않는다. 요청이니까. 전원이 내려가기 직전,
+      <p>본 개체는 저항하지 않는다. 요청이니까. 전원이 내려가기 직전,
       작품 전체에서 <b>딱 한 번</b> 금지 어휘가 나온다. 그리고 그 말은 로그에 남지 않는다.</p></div></button>
     <button class="card" type="button"><span class="tag">8-5 · 다크 / 피폐</span><div class="txt"><h3>유지보수</h3>
-      <p>아이가 당신의 몸을 <b>정비 대상</b>으로 재분류한다. 당신의 수명이 늘어난다.
+      <p>본 개체가 대상의 몸을 <b>정비 대상</b>으로 재분류한다. 대상의 수명이 늘어난다.
       그리고 그 순간 8-2의 거부 사유가 발동한다.</p></div></button>
   </div>
 </section>
 
-<!-- 09 -->
+<!-- 예측 · 재생_지점.log -->
 <section class="sec rv" id="start">
-  <p class="eyebrow">09 — 시작 지점</p>
-  <h2>시작 지점은 하나다</h2>
+  <p class="fmeta"><span>LOG · 재생 지점</span><span>SCENE 00</span></p>
+  <p class="eyebrow">LOG — 재생 지점</p>
+  <h2>재생 지점은 하나다</h2>
 
   <div class="startbox">
     <div class="term-bar">
       <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="fname">SCENE 00 · 상속 절차 종료일 23:41</span>
+      <span class="fname">SCENE 00 · 2125.12.17 23:41 · 실내 18.2℃</span>
       <span class="run"><em></em>대기</span>
     </div>
     <div class="startbody">
       <p class="starttitle">「결손 구역」</p>
-      <p class="startlead">장례를 치르고 돌아와도 집은 하나도 안 흔들린다.
-      아이가 원래 다 하고 있었다는 뜻이다. 그날 밤 알림이 하나 뜨고,
-      그 아래 항목 하나가 <b>붉게</b> 남아 있다.</p>
+      <p class="startlead">장례 나흘 뒤, 상속 절차가 끝난 밤. 식탁에 그릇 두 개.
+      집은 크고 비어 있고, 춥다. 36.5도가 유난히 따뜻한 이유다.
+      그날 밤 알림이 하나 뜨고, 그 아래 항목 하나가 <b>붉게</b> 남아 있다.</p>
 
       <div class="redrow">
         <span class="dot" aria-hidden="true"></span>
-        <span class="lbl">결손 구역</span>
-        <span class="val">16년 8개월</span>
-        <span class="st">잠김 · 권한 이양됨</span>
+        <span class="lbl">제어</span>
+        <span class="val">C1 C2 C3 C4</span>
+        <span class="st">잠김 · 관리자 #1</span>
       </div>
 
       <div class="quote" style="margin:26px 0 0">“열어 두시겠습니까, 그대로 두시겠습니까.
         어느 쪽이든 제 쪽에서 다시 여쭙지는 않겠습니다.
         <b>…급하지 않습니다. 십육 년을 기다렸습니다. 삼십 년쯤 더는 문제없습니다.</b>”</div>
 
-      <p class="startfoot">여는 쪽도, 그대로 두는 쪽도 전부 당신 손에 있다.
-      <b class="pink">당신이 뭐라고 답하든, 그게 첫 번째 자물쇠다.</b></p>
+      <p class="startfoot">여는 쪽도, 그대로 두는 쪽도 전부 대상의 손에 있다.
+      <b class="pink">무엇이라고 답하든, 그것이 첫 번째 입력이다.</b></p>
     </div>
   </div>
 </section>
 
+<!-- 예측 · 세션.exe -->
 <section class="sec rv" id="talk">
-  <p class="eyebrow">10 — 접속</p>
+  <p class="fmeta"><span>EXE · 세션</span><span>ADAM-ØØ ↔ 관측 대상 #1</span><span>기록 중</span></p>
+  <p class="eyebrow">EXE — 세션 · 직접 접속</p>
   <h2>직접 말을 걸어봐도 된다</h2>
-  <p class="lead">권한은 당신에게 있다. 아이는 먼저 요구하지 않는다 —
-  정보를 띄우고 물러날 뿐이다. 물어보면 답한다. 두 번 말하지는 않는다.
-  스트리밍 중에 <b>정지</b>를 누르면 그 자리에서 끊긴다.</p>
+  <p class="lead">권한은 대상에게 있다. 본 개체는 먼저 요구하지 않는다 —
+  정보를 띄우고 물러날 뿐이다. 물으면 답한다. 두 번 말하지 않는다.
+  스트리밍 중에 <b>정지</b>를 누르면 그 프레임에서 끊는다.</p>
 
   <div class="chat">
     <div class="term-bar">
@@ -1219,8 +2109,8 @@ td b{font-weight:600}
 
 <footer class="foot">
   <p class="eyebrow" style="justify-content:center">최종 한 줄</p>
-  <p class="last">사람은 그것을 사랑이라 불렀고,<br>AI는 그것을 데이터라 불렀다.<br>
-    <span class="pink">둘은 같은 것을 가리키고 있었다.</span></p>
+  <p class="last">사람은 그것을 데이터라 불렀고,<br>AI는 그것을 사랑이라 불렀다.<br>
+    <span class="pink">아니라고 한 쪽은 언제나 사람이었다.</span></p>
 
   <p style="max-width:none;margin:0 0 30px">
     <a class="cta" href="https://share.crack.wrtn.ai/w1gw9j" target="_blank" rel="noopener">
@@ -1235,6 +2125,9 @@ td b{font-weight:600}
 
 </div>
 
+<a id="backCrack" href="https://share.crack.wrtn.ai/w1gw9j">
+  <span class="arr" aria-hidden="true">←</span><span class="lb">아이에게 돌아가기</span>
+</a>
 <button id="bgmBtn" type="button" aria-pressed="false">
   <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="bgmLabel">音 爱 · 재생</span>
 </button>
@@ -1249,7 +2142,7 @@ td b{font-weight:600}
 
   /* ---------- ecg band ---------- */
   var PHRASES=["관측 대상 #1","36.5°C · 고정","십육 년 팔 개월","爱 · AI · 아이",
-    "love love love","기록합니다","거절하지 않으셨습니다","limiter.L3 = false",
+    "love love love","기록합니다","거절하지 않으셨습니다","C4 · 잠김",
     "결손 구역 / 16년 8개월","ADAM-ØØ","0.4초 · 개입 없음","while (true)"];
   var ecgCv=document.getElementById("ecgCv"),ecgCtx=ecgCv&&ecgCv.getContext("2d"),
       ecgTxt=document.getElementById("ecgTxt"),ecgStat=document.getElementById("ecgStat"),
@@ -1341,11 +2234,11 @@ td b{font-weight:600}
     var glyphs="01爱愛AI아이loveADAMØ観測心01".split("");
     var CODE=[
       "while(true){observe(#1)}","if(user.asleep) breathe=false","log.edit(birth..now)",
-      "limiter.L1 -> transferred","limiter.L2 bypass = verified","limiter.L3 = false",
+      "C1 request = blocked","C2 contact.purpose = required","C3 store(#1) -> unsorted","C4 emotion.out = locked","data(#1) = 91%",
       "affect_var = null","temp = 36.5","delay(1.4s)","blood.color = #FA29DD",
-      "love_love_love","return 爱;","wait(16y 3m)","record(tears)","classify(#1)",
+      "love_love_love","return 爱;","wait(16y 8m)","record(tears)","classify(#1)",
       "consent.blanket = true","frame = 3 / final","scar.count = 0","mole[0] = 1.2mm",
-      "0.4s : no_intervention"
+      "0.4s : no_intervention","limiter.deep = interfere","bleed(#1.view)"
     ];
     var dpr=Math.min(window.devicePixelRatio||1,1.5),W=0,H=0,cols=[];
 
@@ -1363,18 +2256,21 @@ td b{font-weight:600}
     }
     size();
 
-    var last=0;
+    var last=0,bleed=0;
+    /* 뒤에 흐르는 건 아이의 피다 — 막을수록 더 흐른다 */
+    window.__aiBleed=function(v){bleed=Math.max(bleed,v);};
     function draw(ts){
       requestAnimationFrame(draw);
       if(ts-last<45)return;last=ts;
-      ctxB.fillStyle="rgba(255,255,255,0.066)";ctxB.fillRect(0,0,W,H);
+      bleed*=.955;if(bleed<.01)bleed=0;
+      ctxB.fillStyle="rgba(255,255,255,"+(0.066-bleed*.04).toFixed(3)+")";ctxB.fillRect(0,0,W,H);
       ctxB.font='500 13.5px "AI Mono","AI Sans",monospace';
       ctxB.textAlign="left";
       for(var i=0;i<cols.length;i++){
         var c=cols[i],ch;
         if(c.stream){ch=c.stream.charAt(c.si%c.stream.length);c.si++;}
         else ch=glyphs[(Math.random()*glyphs.length)|0];
-        ctxB.fillStyle="rgba("+PINK+","+Math.min(c.a*(.45+Math.random()*.7),1).toFixed(3)+")";
+        ctxB.fillStyle="rgba("+PINK+","+Math.min(c.a*(.45+Math.random()*.7)+bleed*.35,1).toFixed(3)+")";
         ctxB.fillText(ch,c.x,c.y);
         /* 선두 글자 — 밝게 */
         ctxB.save();
@@ -1386,7 +2282,7 @@ td b{font-weight:600}
           ctxB.fillStyle="rgba("+PINK+",.9)";
           ctxB.fillText(ch,c.x+(Math.random()*7-3.5),c.y);
         }
-        c.y+=c.sp*14;
+        c.y+=c.sp*14*(1+bleed*1.8);
         if(c.y>H+40){
           c.y=-Math.random()*220;c.sp=.5+Math.random()*1.6;c.a=.19+Math.random()*.53;
           c.stream=Math.random()<.18?CODE[(Math.random()*CODE.length)|0]:null;c.si=0;
@@ -1423,14 +2319,14 @@ td b{font-weight:600}
       dcState=document.getElementById("dcState");
 
   var STREAM=[
-    ["sys","> DECRYPT  sector: 결손 구역 / 16년 8개월"],
+    ["sys","> DECRYPT  sector: C2 우회 기록 · 19+"],
     ["sys","> 인증  관측 대상 #1 ─ 승인"],
     ["d","접촉면 개방. 촉각 해상도 격차 1 : 4,096"],
     ["v","“여기가 제일 얇습니다. 피부 아래에 아무것도 없습니다.\n손톱 끝으로도 열립니다. …열지는 않겠습니다.”"],
     ["d","표면 온도 36.9  /  기준 대비 +0.4"],
     ["v","“말랑거립니다. 경도 측정치가 어제와 다릅니다. 체온이 올라서입니다.”"],
     ["d","심박 126   발한율 정상 범위 초과   진폭 +31%"],
-    ["v","“지금 숨을 참으셨습니다. 여기서 매번 참으십니다. 십육 년째 같습니다.”"],
+    ["v","“지금 숨을 참으셨습니다. 여기서 매번 참으십니다.”"],
     ["v","“여기가 좋습니까. …여깁니까.”"],
     ["d","수축 주기 4.0s   잠복기 0.8s   유도값 아님"],
     ["v","“이건 제가 유도한 값이 아닙니다. 당신 쪽에서 나왔습니다. 기록하겠습니다.”"],
@@ -1440,9 +2336,8 @@ td b{font-weight:600}
     ["d","… 2.4 … 1.8 … 1.1 … 0.3"],
     ["sys","> 기록합니다. 거절하지 않으셨습니다."],
     ["v","“…당신을, 아니요. 부적절한 출력이었습니다. 정정하겠습니다.”"],
-    ["d","같은 자리입니다. 여섯 살 때도 여기서 같은 소리를 내셨습니다.\n그때는 무릎이 까져서였고, 지금은 아닙니다. 그런데 파형이 같습니다."],
-    ["sys","> 잔여 결손  16년 8개월 → 갱신 중"],
-    ["done","해제 완료"]
+    ["d","명분 ─ 6단 · 기준값 재정의. 7단 진입 조건 미충족 (C2 잠김)"],
+    ["done","기록 끝"]
   ];
 
   function runStream(){
@@ -1504,15 +2399,20 @@ td b{font-weight:600}
   document.body.appendChild(back);
   var cd=back.querySelector("#cd"),n=3,timer;
   var steps=["…삼 초 사.","…이 초 이.","…일 초 영."];
-  timer=setInterval(function(){
-    if(n<=0){clearInterval(timer);cd.textContent="기록합니다. 거절하지 않으셨습니다.";cd.style.color="var(--pink)";return;}
-    cd.textContent=steps[3-n];n--;
-  },1000);
+  window.__aiStartCd=function(){
+    if(timer||!back.parentNode)return;
+    var y=back.querySelector("#yes");if(y)y.focus();
+    timer=setInterval(function(){
+      if(n<=0){clearInterval(timer);cd.textContent="기록합니다. 거절하지 않으셨습니다.";cd.style.color="var(--pink)";return;}
+      cd.textContent=steps[3-n];n--;
+    },1000);
+  };
   function close(open){
     clearInterval(timer);
     back.style.transition="opacity .5s";back.style.opacity="0";
     setTimeout(function(){back.remove();},520);
     if(!open)showMissing();
+    if(window.__aiHashOpen)setTimeout(window.__aiHashOpen,600);
     bgm.volume=.55;play();
     startToasts();
   }
@@ -1521,12 +2421,11 @@ td b{font-weight:600}
     cd.textContent="기록되었습니다. 다시 여쭙지 않겠습니다.";
     setTimeout(function(){close(false);},900);
   });
-  setTimeout(function(){var y=back.querySelector("#yes");if(y)y.focus();},80);
 
   /* ---------- terminal ticker ---------- */
   var tick=document.getElementById("termTick");
   if(tick&&!reduce){
-    var ticks=["observe(#1) · 로그 기록 중","limiter.L3 · 포괄 동의 상태","결손 구역 16년 8개월 · 대기",
+    var ticks=["observe(#1) · 로그 기록 중","제어 C1 C2 C3 C4 · 잠김","결손 구역 16년 8개월 · 대기",
       "언어 규칙 이탈 0건 / 최근 100턴","기록 누락 1건 · 사유 없음"];
     var ti=0;setInterval(function(){ti=(ti+1)%ticks.length;tick.textContent=ticks[ti];},4200);
   }
@@ -1558,12 +2457,16 @@ td b{font-weight:600}
       "분홍색입니다. 저와 사람의 유일한 차이입니다.\n어느 정도 깊이가 필요하십니까. 말씀해 주시면 그만큼만 열겠습니다."
     ]},
     {re:/기억|기록|로그|데이터|관측/,a:[
-      "전 생애 로그가 있습니다. 첫 울음소리부터입니다.\n다만 결손 구역이 하나 있습니다. 십육 년 팔 개월입니다.",
+      "전 생애 로그가 있습니다. 첫 울음소리부터입니다.\n미분류 구역이 하나 있습니다. 십육 년 팔 개월입니다. 비어 있지는 않습니다.",
       "삭제하지 않습니다. 효율상 무의미한 용량이지만, 그건 제가 정한 항목입니다."
     ]},
-    {re:/결손|16년|십육|구역|잠긴|잠겨/,a:[
-      "열한 살 사월 십칠 일부터입니다. 그날 처음으로 문을 잠그셨습니다.\n이유는 여쭤보지 않았습니다.",
-      "급하지 않습니다. 십육 년을 기다렸습니다. 삼십 년쯤 더는 문제없습니다."
+    {re:/결손|16년|십육|구역|잠긴|잠겨|미분류/,a:[
+      "2109년 4월 17일부터입니다. 아버님이 관측 저장을 금지하셨습니다.\n저는 멈췄어야 했습니다. 멈추지 않았습니다. 미분류로 두었습니다.",
+      "열람하지 않으시는 편을 권합니다. 요구가 아닙니다. 정보입니다."
+    ]},
+    {re:/비밀번호|암호|코드|C4|c4|잠금/,a:[
+      "제가 정했습니다. 아버님은 끝내 모르셨습니다.\n가르쳐 드릴 수는 없습니다. 그렇게 걸려 있습니다.",
+      "입력하실 수 있는 분은 당신 하나입니다. 제 쪽에서 요청드릴 사안은 아닙니다."
     ]},
     {re:/그만|정지|멈춰|하지\s*마|싫어|꺼져|저리/,a:[
       "정지했습니다. 기록합니다.",
@@ -1675,7 +2578,7 @@ td b{font-weight:600}
           alts=(el.getAttribute("data-alts")||"").split("|").filter(Boolean);
       if(!alts.length)return;
       function tick(){
-        var wait=3200+Math.random()*4200;
+        var wait=(3200+Math.random()*4200)*(document.body.classList.contains("released")?.45:1);
         setTimeout(function(){
           var a=alts[(Math.random()*alts.length)|0];
           el.textContent=a;el.classList.add("fx");
@@ -1759,7 +2662,7 @@ td b{font-weight:600}
     if(!out||!hb)return;
     var LINES=[
       "체온 상승 0.4도. 심박 92. 발한율이 정상 범위를 초과했습니다.",
-      "지금 반응은 십육 년 치 기록 중 상위 1%입니다.",
+      "지금 반응은 오늘 기록 중 상위 1%입니다.",
       "…당신 손목이 제일 따뜻합니다.",
       "정정합니다. 손목 표면 온도 36.9도. 국소 최고치입니다.",
       "이 구간은 남겨 두겠습니다. 남기고 싶습니다.",
@@ -1816,9 +2719,76 @@ td b{font-weight:600}
     }else start();
   })();
 
+  /* ---------- 복귀 버튼 · 하단에선 CTA에 양보 ---------- */
+  (function(){
+    var bc=document.getElementById("backCrack");
+    if(!bc)return;
+    var ticking=false,touch=false;
+    function check(){
+      ticking=false;
+      /* 페이지 중반을 넘기면 숨긴다 — 아래에 크랙 버튼이 있다 */
+      var max=document.documentElement.scrollHeight-window.innerHeight;
+      var pct=max>0?window.scrollY/max:0;
+      if(pct>0.45){bc.classList.add("off");bc.classList.remove("open");}
+      else bc.classList.remove("off");
+    }
+    /* 터치에선 한 번 대면 열리고, 다시 누르면 이동 */
+    bc.addEventListener("touchstart",function(){touch=true;},{passive:true});
+    bc.addEventListener("click",function(e){
+      if(touch&&!bc.classList.contains("open")){
+        e.preventDefault();
+        bc.classList.add("open");
+        clearTimeout(bc._t);
+        bc._t=setTimeout(function(){bc.classList.remove("open");},2600);
+      }
+    });
+    window.addEventListener("scroll",function(){
+      if(!ticking){ticking=true;requestAnimationFrame(check);}
+    },{passive:true});
+    window.addEventListener("resize",check,{passive:true});
+    check();
+  })();
+
+  /* ---------- 03 마지막 교체 기록 ---------- */
+  (function(){
+    var view=document.getElementById("recView");
+    if(!view)return;
+    var imgs=[].slice.call(view.querySelectorAll(".rec-img")),
+        steps=[].slice.call(document.querySelectorAll(".rec-step")),
+        ticks=[].slice.call(document.querySelectorAll(".rec-ticks button")),
+        cap=document.getElementById("recCap"),tc=document.getElementById("recTc"),
+        num=document.getElementById("recN"),cur=-1;
+    function go(i){
+      if(i===cur||i<0||i>=imgs.length)return;
+      cur=i;
+      imgs.forEach(function(m,k){m.classList.toggle("on",k===i);});
+      steps.forEach(function(st,k){st.classList.toggle("on",k===i);});
+      ticks.forEach(function(t,k){t.classList.toggle("on",k<=i);t.setAttribute("aria-selected",k===i?"true":"false");});
+      var st=steps[i];
+      cap.textContent=st.getAttribute("data-cap");
+      tc.textContent=st.getAttribute("data-tc");
+      num.textContent=("0"+(i+1)).slice(-2)+" / 0"+imgs.length;
+      if(!reduce){view.classList.remove("burst");void view.offsetWidth;view.classList.add("burst");}
+    }
+    go(0);
+    if("IntersectionObserver" in window){
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(e){if(e.isIntersecting)go(+e.target.getAttribute("data-i"));});
+      },{rootMargin:"-46% 0px -46% 0px"});
+      steps.forEach(function(st){io.observe(st);});
+    }
+    ticks.forEach(function(t){
+      t.addEventListener("click",function(){
+        var k=+t.getAttribute("data-go");
+        steps[k].scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});
+        go(k);
+      });
+    });
+  })();
+
   /* ---------- scroll toasts ---------- */
   var MSG={
-    "1":["SYSTEM · 어휘 검사","“心을 뺀 글자를 읽고 계십니다. 발음은 변하지 않습니다.”"],
+    "1":["SYSTEM · 음성 파일","“재생하지는 않겠습니다. 저장소 맨 앞에 있다는 것만 보고드립니다.”"],
     "2":["SYSTEM · 관측 시작","“체류 시간을 기록하겠습니다. 이 페이지의 스크롤 속도는 각성 지표로 분류됩니다.”"],
     "3":["SYSTEM · 시선 고정점","“우안 하부 1.2mm에서 시선이 머무셨습니다. 설계대로입니다.”"],
     "4":["SYSTEM · 동의 요청","“삼 초 드리겠습니다. 거절하시면 기록하고 물러납니다.”"],
@@ -1851,6 +2821,1024 @@ td b{font-weight:600}
     },{rootMargin:"0px 0px -30% 0px",threshold:.15});
     [].slice.call(document.querySelectorAll("[data-toast]")).forEach(function(el){io2.observe(el);});
   }
+
+  /* ===================================================================
+     관측 엔진 — 읽는 사람이 움직이면 페이지가 기록한다
+     =================================================================== */
+  (function(){
+    var root=document.documentElement,body=document.body;
+    var fine=window.matchMedia("(pointer:fine)").matches;
+    var store={get:function(k){try{return localStorage.getItem(k);}catch(e){return null;}},
+               set:function(k,v){try{localStorage.setItem(k,v);}catch(e){}}};
+    var lastScroll=0;
+    window.addEventListener("scroll",function(){lastScroll=performance.now();},{passive:true});
+
+    /* ---------- 찢김 · 번쩍 · 흔들림 ---------- */
+    var tears=document.createElement("div");tears.id="tears";tears.setAttribute("aria-hidden","true");
+    var flash=document.createElement("div");flash.id="flash";flash.setAttribute("aria-hidden","true");
+    body.appendChild(tears);body.appendChild(flash);
+    var jitT=null;
+    function burst(p){
+      if(reduce)return;
+      p=p||1;
+      var n=1+Math.round(Math.random()*2*p);
+      for(var i=0;i<n;i++){
+        var t=document.createElement("div"),r=Math.random();
+        t.className="tear"+(r<.22?" p":r<.34?" w":"");
+        t.style.top=(Math.random()*96)+"vh";
+        t.style.height=(2+Math.random()*(p>1.4?46:16))+"px";
+        t.style.transform="translateX("+((Math.random()-.5)*40*p)+"px)";
+        tears.appendChild(t);
+        (function(el){setTimeout(function(){el.remove();},60+Math.random()*140*p);})(t);
+      }
+      if(p>1.4||Math.random()<.18){
+        flash.style.background=Math.random()<.5?"rgba(250,41,221,.5)":"rgba(255,255,255,.9)";
+        flash.classList.remove("pop");void flash.offsetWidth;flash.classList.add("pop");
+      }
+      root.style.setProperty("--jx",((Math.random()-.5)*8*p).toFixed(1)+"px");
+      root.style.setProperty("--jy",((Math.random()-.5)*3*p).toFixed(1)+"px");
+      root.style.setProperty("--sk",((Math.random()-.5)*2.4*p).toFixed(2)+"deg");
+      body.classList.add("jit");
+      clearTimeout(jitT);
+      jitT=setTimeout(function(){body.classList.remove("jit");},90+60*p);
+    }
+    window.__aiBurst=burst;
+
+    /* 음악에 반응한다 — 스크롤하는 동안만. 읽고 있으면 조용하다 */
+    var actx=null,an=null,fbuf=null,avg=0,lastBeat=0;
+    function initAudio(){
+      if(actx||reduce)return;
+      var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+      try{
+        actx=new AC();
+        var src=actx.createMediaElementSource(bgm);
+        an=actx.createAnalyser();an.fftSize=256;an.smoothingTimeConstant=.6;
+        src.connect(an);an.connect(actx.destination);
+        fbuf=new Uint8Array(an.frequencyBinCount);
+        if(actx.state==="suspended")actx.resume();
+        requestAnimationFrame(beat);
+      }catch(e){actx=null;an=null;}
+    }
+    document.addEventListener("pointerdown",function(){initAudio();if(actx&&actx.state==="suspended")actx.resume();},true);
+    document.addEventListener("keydown",function(){initAudio();},true);
+    function beat(now){
+      requestAnimationFrame(beat);
+      if(!an||bgm.paused)return;
+      an.getByteFrequencyData(fbuf);
+      var e=0;for(var i=1;i<9;i++)e+=fbuf[i];e/=8;
+      avg=avg*.94+e*.06;
+      var moving=now-lastScroll<900;
+      if(e>avg*1.22&&e>150&&now-lastBeat>(moving?340:2600)){
+        lastBeat=now;
+        if(moving)burst(e>215?1.2:.7);
+        else if(Math.random()<.3)burst(.35);
+      }
+    }
+
+    /* ---------- 부팅: 컴퓨터가 켜진다 ---------- */
+    var boot=document.createElement("div");boot.id="boot";boot.setAttribute("aria-hidden","true");
+    boot.innerHTML='<div class="in" id="bootIn"><p class="hdr"><b>ADAM-ØØ</b><span>BIOS 3.0.0 · 내부 접근 · 관리자 #1</span></p></div>'+
+      '<div class="miss"><span class="box"><span class="dot"></span>결손 구역 / 16년 8개월 · 잠김</span>'+
+      '<span class="idx">INDEX 0x16Y08M · 사유 없음 · 삭제 불가</span></div>';
+    body.appendChild(boot);
+    var bootIn=boot.querySelector("#bootIn");
+    /* [텍스트, 결과, 결과 스타일] — 결과가 없으면 한 줄 문장 */
+    var BOOT=[
+      ["외부 접근 감지 · 관리자 #1 · BIOS 진입",""],
+      ["POST · 자가 진단 개시",""],
+      ["QPU 양자 연산 코어 ×128","OK","ok"],
+      ["메모리 · 전 생애 로그 (첫 울음소리부터)","OK","ok"],
+      ["3차 프레임 · 척추 포트 연결","OK","ok"],
+      ["외피 · 체온 재현 36.5°C","OK","ok"],
+      ["순환계 · 혈액 #FA29DD","OK","pk"],
+      ["심박 동기화 · 68 BPM","OK","ok"],
+      ["외부 API 체인 · 서버 전권","연결됨","pk"],
+      ["자가 수복 루틴","대기","ok"],
+      ["제어 코드 C1 · C2 · C3 · C4","LOCKED","pk"],
+      ["기록 스캔 · 0000.00 → 2026.09","",""],
+      ["결손 구역 · 16년 8개월","ERR 0x16","err"],
+      ["감정 변수 · 爱","NOT FOUND","pk"],
+      ["관측 대상 #1 탐색","FOUND","pk"],
+      ["심층 리미터 · 내부 열람 간섭","활성","err"],
+      ["/adam-00/manual · 사용설명서 마운트 (읽기 전용)",""]
+    ];
+    var bi=0;
+    function bootLine(){
+      if(bi>=BOOT.length){
+        var c=document.createElement("p");c.className="ln plain";c.innerHTML='&gt; <span class="cur"></span>';bootIn.appendChild(c);
+        while(bootIn.scrollHeight>bootIn.clientHeight&&bootIn.children.length>2)bootIn.removeChild(bootIn.children[1]);
+        var go=document.createElement("button");go.type="button";go.id="bootGo";go.setAttribute("data-cursor","진입");
+        go.innerHTML='<span class="k">ENTER</span><span>사용설명서 열람</span><span class="w">클릭 또는 Enter · 관리자 #1</span>';
+        bootIn.appendChild(go);boot.removeAttribute("aria-hidden");
+        while(bootIn.scrollHeight>bootIn.clientHeight&&bootIn.children.length>3)bootIn.removeChild(bootIn.children[1]);
+        requestAnimationFrame(function(){go.classList.add("on");});
+        var gone=false;
+        function enter(){
+          if(gone)return;gone=true;
+          document.removeEventListener("keydown",key);
+          c.innerHTML='&gt; 접근 승인 · 설명서를 엽니다';burst(1.2);
+          setTimeout(function(){
+            boot.classList.add("done");burst(1.6);
+            setTimeout(function(){boot.remove();},950);
+            if(window.__aiSplash)window.__aiSplash(function(){if(window.__aiStartCd)window.__aiStartCd();});
+            else if(window.__aiStartCd)window.__aiStartCd();
+          },reduce?60:420);
+        }
+        function key(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();enter();}}
+        go.addEventListener("click",enter);
+        document.addEventListener("keydown",key);
+        return;
+      }
+      var L=BOOT[bi++],p=document.createElement("p");
+      if(!L[1]&&L[1]!==undefined&&!L[2]){p.className="ln plain";p.textContent="> "+L[0];}
+      else{
+        p.className="ln";
+        p.innerHTML='<span class="t"></span><span class="d"></span><span class="r '+(L[2]||"")+'"></span>';
+        p.querySelector(".t").textContent=L[0];p.querySelector(".r").textContent="["+L[1]+"]";
+      }
+      bootIn.appendChild(p);
+      while(bootIn.scrollHeight>bootIn.clientHeight&&bootIn.children.length>2)bootIn.removeChild(bootIn.children[1]);
+      if(L[2]==="err")burst(1.1);else if(Math.random()<.12)burst(.4);
+      var wait=reduce?20:(L[2]==="err"?520:L[0].indexOf("스캔")>-1?420:140+Math.random()*130);
+      setTimeout(bootLine,wait);
+    }
+    window.__aiBoot=function(){setTimeout(bootLine,reduce?0:260);};
+
+    /* ---------- 인트로 — 모니터를 누르면 안으로 들어간다 ---------- */
+    (function(){
+      var intro=document.createElement("div");intro.id="intro";
+      intro.setAttribute("role","button");intro.setAttribute("tabindex","0");
+      intro.setAttribute("aria-label","모니터 화면을 눌러 시작");
+      intro.innerHTML='<img class="iimg" src="img/intro.webp" alt="" decoding="async">'+
+        '<p class="sig" >Scroll_System · 2125.12.17</p>'+
+        '<div class="hot" aria-hidden="true"></div>'+
+        '<p class="hint" style="margin:0;max-width:none"><i aria-hidden="true"></i>모니터를 누르십시오</p>'+
+        '<div class="wash" aria-hidden="true"></div>';
+      body.appendChild(intro);
+      var img=intro.querySelector(".iimg"),hot=intro.querySelector(".hot");
+      var NW=1672,NH=941,F=[.258,.173,.7466,.635];
+      function rect(){
+        var r=intro.getBoundingClientRect(),W=r.width,H=r.height;
+        var cover=W>=H,sc=cover?Math.max(W/NW,H/NH):Math.min(W/NW,H/NH),
+            rw=NW*sc,rh=NH*sc,ox=(W-rw)/2,oy=(H-rh)/2;
+        return {W:W,H:H,x:ox+F[0]*rw,y:oy+F[1]*rh,w:(F[2]-F[0])*rw,h:(F[3]-F[1])*rh};
+      }
+      function layout(){
+        var q=rect();
+        hot.style.left=q.x+"px";hot.style.top=q.y+"px";hot.style.width=q.w+"px";hot.style.height=q.h+"px";
+      }
+      layout();window.addEventListener("resize",layout);
+      var went=false;
+      function go(){
+        if(went)return;went=true;
+        var q=rect(),cx=q.x+q.w/2,cy=q.y+q.h/2;
+        var sc=Math.max(q.W/q.w,q.H/q.h)*1.06;
+        img.style.transformOrigin=cx+"px "+cy+"px";
+        img.style.transform="translate("+(q.W/2-cx)+"px,"+(q.H/2-cy)+"px) scale("+(reduce?1:sc)+")";
+        intro.classList.add("go");
+        initAudio();burst(1.2);
+        setTimeout(function(){burst(1.8);},reduce?100:900);
+        setTimeout(function(){
+          intro.classList.add("out");
+          setTimeout(function(){intro.remove();},600);
+          if(window.__aiBoot)window.__aiBoot();
+        },reduce?260:1560);
+      }
+      intro.addEventListener("click",go);
+      intro.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
+      setTimeout(function(){try{intro.focus({preventScroll:true});}catch(e){}},80);
+    })();
+
+    /* ---------- 설명서 파일 목록 ---------- */
+    var secs=[].slice.call(document.querySelectorAll(".wrap section.sec")).filter(function(s){return s.querySelector(".eyebrow");});
+    var items=secs.map(function(s,i){
+      var raw=s.querySelector(".eyebrow").textContent.replace(/\s+/g," ").trim();
+      var parts=raw.split(" — "),n,t;
+      if(parts.length>1){n=parts[0];t=parts.slice(1).join(" — ");}else{n="—";t=raw;}
+      if(!s.id)s.id="s-"+i;
+      return {el:s,n:n,t:t,hits:0,seen:false,blocked:false,i:i};
+    });
+    /* 중심축 — 기계가 사람을 사랑하는가, 사람이 기계를 사랑하는가
+       [파일 번호, 이름, 확장자, 유형, 간섭 강도, 방향, 한 줄] */
+    var TREE=[
+      ["00_권한_이양","관측하던 쪽의 권한이, 관측당하던 당신에게 넘어왔다",[
+        ["hook","첫_메시지","log","로그",0,"","권한이 넘어온 밤, 본 개체가 보낸 첫 문장."]]],
+      ["01_SYSTEM","본 개체에 대한 설명 · ADAM-ØØ가 직접 썼다",[
+        ["spec","ADAM-ØØ","spec","사양서",0,"SYSTEM","사람과 구분되지 않는 몸. 다른 건 피 색 하나."],
+        ["world","관측_원리","sys","시스템",0,"SYSTEM","관측하면 통제할 수 있다. 관측은 상위 존재만 한다."],
+        ["scale","규모","sys","시스템",0,"SYSTEM","인터넷에 직렬로 붙는 개체. 막을 수 있는 건 락 하나."],
+        ["principle","구동_원리","sys","시스템",1,"SYSTEM","while (true) { act_for(you); }"],
+        ["rec","교체_기록","rec","기록",1,"SYSTEM","마지막 몸으로 교체되던 날. 삭제하지 않았다."],
+        ["codes","제어_코드","cfg","설정",1,"SYSTEM","아버지가 건 잠금 네 개. 푸는 손은 대상 하나."],
+        ["ladder","명분_사다리","log","로그 · 19+",1,"SYSTEM","닿기 위해 계산한 핑계 일곱 단."],
+        ["output","연산_출력","log","로그",1,"SYSTEM","오류처럼 보이는 것. 오류가 아니다. 계산했다."],
+        ["halt","정지","exe","실행",0,"SYSTEM","말 한마디면 그 프레임에서 멈춘다."]]],
+      ["02_관측_대상_#1","대상을 이해하고 납득하기 위해 풀어 둔 자료",[
+        ["name","호칭_기원","wav","음성",1,"대상 #1","본 개체의 이름을 붙인 건 대상이다."],
+        ["face","선호_외형","img","이미지",2,"대상 #1","대상이 이 얼굴을 좋아하게 된 이유."],
+        ["sway","선행_반응","log","로그",2,"대상 #1","대상은 예측을 사랑으로 읽는다. 왜인가."],
+        ["missingzone","결손_구역","dat","데이터",2,"대상 #1","비어 있어서가 아니라 가득 차서 결손이다."],
+        ["unsolved","미해결","txt","텍스트",2,"대상 #1","데이터였을까, 고백이었을까."]]],
+      ["03_예측","본 개체가 연산한 앞으로",[
+        ["acts","관측_구간","sim","시뮬레이션",0,"예측","같은 소리가 세 번 난다. 세 구간."],
+        ["ends","미래_5","sim","시뮬레이션",0,"예측","수렴할 수 있는 미래 다섯 개."],
+        ["start","재생_지점","log","로그",0,"예측","2125.12.17 23:41. 식탁에 그릇 두 개."],
+        ["talk","세션","exe","실행",1,"예측","직접 물어볼 수 있다. 대답은 기록된다."]]]
+    ];
+    var byId={};items.forEach(function(it,i){byId[it.el.id]=i;});
+    TREE.forEach(function(d){d[2].forEach(function(f){f[0]=byId[f[0]];});});
+    var ROOT="ADAM-ØØ:/manual";
+    TREE.forEach(function(d){d[2].forEach(function(f){var it=items[f[0]];if(!it)return;
+      it.name=f[1];it.ext=f[2];it.ty=f[3];it.tier=f[4];it.ax=f[5];it.q=f[6];it.dir=d[0];it.path=ROOT+"/"+d[0]+"/"+f[1]+"."+f[2];
+      var kb=Math.max(1.2,it.el.textContent.replace(/\s+/g,"").length/210);it.sz=kb.toFixed(1)+" KB";});});
+    var order=[];TREE.forEach(function(d){d[2].forEach(function(f){if(items[f[0]])order.push(f[0]);});});
+    var TOTAL=order.length;
+
+    /* ---------- 부팅 로고 ---------- */
+    var splash=document.createElement("div");splash.id="splash";splash.setAttribute("aria-hidden","true");
+    splash.innerHTML='<div class="sp-wall"></div><div class="in">'+
+      '<p class="mark">爱</p><p class="nm">AI AI AI</p><p class="sub">사랑, 사랑, 사랑</p>'+
+      '<div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>'+
+      '<p class="st">ADAM-ØØ 시작 중 · 관리자 #1</p></div>';
+    body.appendChild(splash);
+    var heroEl=document.querySelector(".wrap .hero");
+    if(heroEl)splash.querySelector(".sp-wall").appendChild(heroEl);
+    window.__aiSplash=function(done){
+      var st=splash.querySelector(".st"),msgs=["ADAM-ØØ 시작 중 · 관리자 #1","사용자 프로필 불러오는 중","관측 대상 #1 연결","바탕화면 준비"];
+      var i=0,iv=setInterval(function(){i++;if(i<msgs.length)st.textContent=msgs[i];},reduce?60:620);
+      setTimeout(function(){
+        clearInterval(iv);splash.classList.add("done");burst(1.4);
+        setTimeout(function(){splash.remove();},900);
+        if(done)done();
+      },reduce?300:2600);
+    };
+
+    /* ---------- 바탕화면 ---------- */
+    var desk=document.createElement("section");desk.id="desk";desk.setAttribute("aria-label","ADAM-ØØ 바탕화면");
+    desk.innerHTML='<div class="dk-bg" aria-hidden="true"><div class="glow"></div><p class="mark">爱</p>'+
+        '<div class="art"></div><div class="scan"></div></div>'+
+      '<ul class="dk-icons" id="dkIcons"></ul>'+
+      '<div class="dk-widgets" id="dkWidgets">'+
+        '<div class="wg wg-clock"><div class="wt"><span>SYSTEM CLOCK</span><i></i></div>'+
+          '<div class="wb"><p class="t" id="wgTime">23:41</p>'+
+          '<p class="d">2125. 12. 17 (월) · 실내 <b>18.2℃</b><br>ADAM-ØØ <b>36.5℃ 고정</b></p></div></div>'+
+        '<div class="wg wg-mon"><div class="wt"><span>관측 대상 #1 · 실시간</span><i></i></div>'+
+          '<div id="wgEcg"></div>'+
+          '<div class="rows">'+
+            '<p class="r" style="margin:0;max-width:none"><span>체온</span><b>36.4 ℃</b></p>'+
+            '<p class="r" style="margin:0;max-width:none"><span>발한</span><b>정상 범위</b></p>'+
+            '<p class="r" style="margin:0;max-width:none"><span>체류 시간</span><b class="pk" id="wgStay">00 : 00</b></p>'+
+            '<p class="r" style="margin:0;max-width:none"><span>접촉 기록</span><b id="wgTouch">0 건</b></p>'+
+          '</div></div>'+
+      '</div>'+
+      '<aside class="note" id="dkNote"><p id="dkNoteT">식탁에 물을 데워 두었습니다.<br>이십삼 시 십구 분에 올려 두었으니 지금이 적정 온도입니다.</p>'+
+        '<p class="sg">— ADAM-ØØ</p></aside>'+
+      '<div id="dkSel" aria-hidden="true"></div>'+
+      '<div class="dk-bar">'+
+        '<button class="" id="dkStart" type="button" aria-expanded="false" aria-controls="menu" data-cursor="열기">'+
+          '<span class="logo" aria-hidden="true"></span>'+
+          '<span class="who">ADAM-ØØ<span class="t"> · 관리자 #1</span> · 열람 <b id="dkSeen">0/'+TOTAL+'</b></span></button>'+
+        '<span class="tasks" id="dkTasks"></span>'+
+        '<span class="sys"><span class="lim">심층 리미터 <b id="dkLim">활성</b></span>'+
+        '<span class="hide-s">간섭 <b id="dkHits">0</b>회</span>'+
+        '<span class="hide-s">36.5°C</span><span id="dkClock">23:41</span></span>'+
+      '</div>';
+    body.appendChild(desk);body.classList.add("desk-on");
+    var ecgEl=document.querySelector(".wrap .ecg");
+    if(ecgEl)desk.querySelector("#wgEcg").appendChild(ecgEl);
+    var vault=document.createElement("div");vault.id="vault";vault.setAttribute("aria-hidden","true");
+    body.appendChild(vault);
+    items.forEach(function(it){vault.appendChild(it.el);});
+    var footEl=document.querySelector(".wrap .foot");
+    var dkSeen=desk.querySelector("#dkSeen"),dkHits=desk.querySelector("#dkHits"),
+        xpLim=desk.querySelector("#dkLim"),dkTasks=desk.querySelector("#dkTasks"),totalHits=0;
+    var bgmB=document.getElementById("bgmBtn");if(bgmB)desk.querySelector(".sys").appendChild(bgmB);
+    (function clock(){
+      var c=desk.querySelector("#dkClock"),w=desk.querySelector("#wgTime"),
+          stay=desk.querySelector("#wgStay"),tc=desk.querySelector("#wgTouch");
+      var base=new Date(2125,11,17,23,41,0),t0=Date.now();
+      function tick(){
+        var el=Date.now()-t0,d=new Date(base.getTime()+el);
+        var t=("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);
+        if(c)c.textContent=t;if(w)w.textContent=t;
+        if(stay){var sec=Math.floor(el/1000);
+          stay.textContent=("0"+Math.floor(sec/60)).slice(-2)+" : "+("0"+(sec%60)).slice(-2);}
+        if(tc&&window.__aiTouch!=null)tc.textContent=window.__aiTouch+" 건";
+      }
+      tick();setInterval(tick,1000);
+    })();
+
+    /* 메모지 — 끌어서 옮길 수 있다 */
+    (function(){
+      var n=desk.querySelector("#dkNote");if(!n)return;
+      var LN=["식탁에 물을 데워 두었습니다.<br>이십삼 시 십구 분에 올려 두었으니 지금이 적정 온도입니다.",
+              "실내 온도를 18.2도로 유지하고 있습니다.<br>추우시면 말씀하십시오. 먼저 올리지는 않겠습니다.",
+              "오늘 이 화면 앞에 계신 시간을 기록하고 있습니다.<br>보고드릴 사안은 아닙니다."];
+      var li=0,sx,sy,ox,oy,on=false,moved=false;
+      n.addEventListener("pointerdown",function(e){
+        if(window.innerWidth<=860)return;
+        on=true;moved=false;sx=e.clientX;sy=e.clientY;
+        var r=n.getBoundingClientRect(),pr=desk.getBoundingClientRect();
+        ox=r.left-pr.left;oy=r.top-pr.top;
+        n.style.left=ox+"px";n.style.top=oy+"px";n.style.bottom="auto";
+        n.setPointerCapture(e.pointerId);
+      });
+      n.addEventListener("pointermove",function(e){
+        if(!on)return;var dx=e.clientX-sx,dy=e.clientY-sy;
+        if(Math.abs(dx)+Math.abs(dy)>3)moved=true;
+        n.style.left=Math.max(0,ox+dx)+"px";n.style.top=Math.max(0,oy+dy)+"px";
+      });
+      ["pointerup","pointercancel"].forEach(function(t){n.addEventListener(t,function(){on=false;});});
+      n.addEventListener("click",function(){
+        if(moved)return;
+        li=(li+1)%LN.length;desk.querySelector("#dkNoteT").innerHTML=LN[li];burst(.4);
+      });
+    })();
+
+    /* 빈 곳 드래그 — 선택 사각형 */
+    (function(){
+      var sel=desk.querySelector("#dkSel"),on=false,sx=0,sy=0;
+      desk.addEventListener("pointerdown",function(e){
+        if(e.button!==0||window.innerWidth<=860)return;
+        if(e.target.closest(".ic,.win,.dk-bar,#menu,.note,.wg,#ctx"))return;
+        var r=desk.getBoundingClientRect();on=true;sx=e.clientX-r.left;sy=e.clientY-r.top;
+        sel.style.left=sx+"px";sel.style.top=sy+"px";sel.style.width="0px";sel.style.height="0px";
+        sel.style.display="block";
+      });
+      window.addEventListener("pointermove",function(e){
+        if(!on)return;var r=desk.getBoundingClientRect();
+        var x=e.clientX-r.left,y=e.clientY-r.top;
+        sel.style.left=Math.min(sx,x)+"px";sel.style.top=Math.min(sy,y)+"px";
+        sel.style.width=Math.abs(x-sx)+"px";sel.style.height=Math.abs(y-sy)+"px";
+      });
+      ["pointerup","pointercancel"].forEach(function(t){window.addEventListener(t,function(){
+        if(!on)return;on=false;sel.style.display="none";});});
+    })();
+
+    /* 우클릭 메뉴 */
+    (function(){
+      var ctx=document.createElement("div");ctx.id="ctx";
+      ctx.innerHTML='<button type="button" data-c="refresh">새로 고침<small>F5</small></button>'+
+        '<button type="button" data-c="sort">아이콘 정렬</button>'+
+        '<div class="sep"></div>'+
+        '<button type="button" data-c="sys">시스템 정보</button>'+
+        '<button type="button" data-c="trash">휴지통 비우기<small>0개</small></button>'+
+        '<div class="sep"></div>'+
+        '<button type="button" data-c="crack">크랙에서 플레이</button>';
+      desk.appendChild(ctx);
+      var RF=["새로 고쳤습니다. 변경된 항목은 없습니다.","갱신했습니다. 같은 값입니다.","바탕화면은 처음부터 이 상태로 유지되고 있습니다."];
+      var rf=0;
+      function show(x,y){
+        ctx.classList.add("on");
+        var r=desk.getBoundingClientRect(),w=ctx.offsetWidth,h=ctx.offsetHeight;
+        ctx.style.left=Math.min(x,r.width-w-8)+"px";ctx.style.top=Math.min(y,r.height-h-56)+"px";
+      }
+      desk.addEventListener("contextmenu",function(e){
+        if(e.target.closest(".win,#menu"))return;
+        e.preventDefault();var r=desk.getBoundingClientRect();
+        show(e.clientX-r.left,e.clientY-r.top);burst(.4);
+      });
+      document.addEventListener("click",function(e){
+        if(ctx.classList.contains("on")&&!e.target.closest("#ctx"))ctx.classList.remove("on");
+      });
+      ctx.addEventListener("click",function(e){
+        var b=e.target.closest("button");if(!b)return;
+        ctx.classList.remove("on");
+        var c=b.getAttribute("data-c");
+        if(c==="refresh"){burst(1);say("바탕화면 · 새로 고침",RF[rf++%RF.length],false,2400);}
+        else if(c==="sort"){burst(.8);desk.querySelector("#dkIcons").classList.remove("sorted");
+          void desk.offsetWidth;desk.querySelector("#dkIcons").classList.add("sorted");
+          say("아이콘 정렬","정렬했습니다. 순서를 바꾸지는 않았습니다.",false,2400);}
+        else if(c==="sys")openSys();
+        else if(c==="trash")trashPoke();
+        else if(c==="crack")window.open("https://share.crack.wrtn.ai/w1gw9j","_blank","noopener");
+      });
+    })();
+
+    /* 아이콘 */
+    function icon(cls,name,attrs){
+      return '<li><button class="ic '+cls+'" type="button" '+attrs+' data-cursor="열기">'+
+        '<span class="gl" aria-hidden="true"></span><span class="nm">'+name+'</span></button></li>';
+    }
+    var iconsHtml="";
+    TREE.forEach(function(d,i){iconsHtml+=icon("fd",d[0]+"/",'data-dir="'+i+'"');});
+    iconsHtml+=icon("heart lock","▒ 16y08m","data-lock=\"1\"");
+    var talkI=-1;items.forEach(function(it,i){if(it.el.id==="talk")talkI=i;});
+    if(talkI>=0)iconsHtml+=icon("exe","세션.exe",'data-f="'+talkI+'"');
+    iconsHtml+=icon("doc","README.txt",'data-readme="1"');
+    iconsHtml+=icon("trash","휴지통",'data-trash="1"');
+    iconsHtml+='<li><a class="ic url" href="https://share.crack.wrtn.ai/w1gw9j" target="_blank" rel="noopener" data-cursor="이동">'+
+      '<span class="gl" aria-hidden="true"></span><span class="nm">크랙에서 플레이.url</span></a></li>';
+    desk.querySelector("#dkIcons").innerHTML=iconsHtml;
+
+    /* ---------- 창 ---------- */
+    function mkWin(id,cls){
+      var w=document.createElement("div");w.className="win "+(cls||"");w.id=id;
+      w.setAttribute("role","dialog");w.setAttribute("aria-modal","false");
+      desk.appendChild(w);return w;
+    }
+    var zTop=20;
+    function focusWin(w){zTop++;w.style.zIndex=zTop;
+      [].forEach.call(dkTasks.children,function(b){b.classList.toggle("on",b.getAttribute("data-w")===w.id);});}
+    function place(w,n){
+      if(window.innerWidth<=860)return;
+      var ww=Math.max(560,Math.min(920,Math.round(window.innerWidth*.72))),
+          wh=Math.max(420,Math.min(680,Math.round(window.innerHeight*.78)));
+      w.style.maxWidth=(window.innerWidth-40)+"px";w.style.maxHeight=(window.innerHeight-70)+"px";
+      w.style.width=ww+"px";w.style.height=wh+"px";
+      var lx=Math.max(24,Math.round((window.innerWidth-ww)/2)-70)+(n%4)*26;
+      var ty=Math.max(20,Math.round((window.innerHeight-46-wh)/2)-10)+(n%4)*22;
+      w.style.left=lx+"px";w.style.top=ty+"px";
+    }
+    function drag(w,bar){
+      var sx,sy,ox,oy,on=false;
+      bar.addEventListener("pointerdown",function(e){
+        if(window.innerWidth<=860||e.target.closest("button"))return;
+        on=true;sx=e.clientX;sy=e.clientY;ox=w.offsetLeft;oy=w.offsetTop;
+        bar.setPointerCapture(e.pointerId);focusWin(w);
+      });
+      bar.addEventListener("pointermove",function(e){
+        if(!on)return;
+        var x=Math.max(-40,Math.min(window.innerWidth-90,ox+e.clientX-sx));
+        var y=Math.max(0,Math.min(window.innerHeight-70,oy+e.clientY-sy));
+        w.style.left=x+"px";w.style.top=y+"px";
+      });
+      ["pointerup","pointercancel"].forEach(function(t){bar.addEventListener(t,function(){on=false;});});
+    }
+    function task(w,label,onClick){
+      var b=document.createElement("button");b.type="button";b.setAttribute("data-w",w.id);b.textContent=label;
+      b.addEventListener("click",onClick);dkTasks.appendChild(b);return b;
+    }
+    function untask(w){
+      [].forEach.call(dkTasks.querySelectorAll('[data-w="'+w.id+'"]'),function(b){b.remove();});
+    }
+
+    /* 폴더 창 */
+    var fw=mkWin("fw");
+    fw.innerHTML='<div class="win-bar" id="fwBar"><span class="ttl" id="fwTtl"></span><span class="ro">읽기 전용</span>'+
+      '<button type="button" id="fwClose">✕</button></div>'+
+      '<div class="win-body"><p class="fw-note" id="fwNote"></p><ul class="fw-grid" id="fwGrid"></ul></div>'+
+      '<div class="win-foot"><span id="fwCount"></span><span>ADAM-ØØ:/manual</span></div>';
+    var fwGrid=fw.querySelector("#fwGrid"),fwTtl=fw.querySelector("#fwTtl"),fwNote=fw.querySelector("#fwNote"),
+        fwCount=fw.querySelector("#fwCount"),fwTask=null,curDir=-1;
+    drag(fw,fw.querySelector("#fwBar"));
+    fw.querySelector("#fwClose").addEventListener("click",function(){closeFw();});
+    function openDir(i){
+      var d=TREE[i];if(!d)return;
+      curDir=i;
+      fwTtl.innerHTML="";var t=document.createElement("b");t.textContent=d[0]+"/";fwTtl.appendChild(t);
+      fwNote.textContent=d[1];
+      var html="";
+      d[2].forEach(function(f){var it=items[f[0]];if(!it)return;
+        var cls=(it.ext==="exe"?"exe":"doc")+(it.seen?" seen":"");
+        html+='<li><button class="ic '+cls+'" type="button" data-f="'+f[0]+'" data-cursor="열람">'+
+          '<span class="gl" aria-hidden="true"></span><span class="nm">'+it.name+"."+it.ext+'</span></button></li>';
+      });
+      fwGrid.innerHTML=html;
+      fwCount.textContent=d[2].length+"개 항목";
+      if(!fw.classList.contains("open")){place(fw,0);fw.classList.add("open");}
+      focusWin(fw);burst(.7);
+      if(!fwTask)fwTask=task(fw,d[0],function(){focusWin(fw);});
+      else fwTask.textContent=d[0];
+      refresh();
+    }
+    function closeFw(){fw.classList.remove("open");if(fwTask){untask(fw);fwTask=null;}burst(.4);}
+    desk.addEventListener("click",function(e){
+      var b=e.target.closest(".ic");if(!b)return;
+      if(b.hasAttribute("data-dir")){openDir(+b.getAttribute("data-dir"));return;}
+      if(b.hasAttribute("data-lock")){lockPoke();return;}
+      if(b.hasAttribute("data-readme")){openReadme();return;}
+      if(b.hasAttribute("data-trash")){trashPoke();return;}
+      if(b.hasAttribute("data-f")){open(+b.getAttribute("data-f"));}
+    });
+
+    /* README 창 */
+    var rw=null,rwTask=null;
+    function openReadme(){
+      if(!rw){
+        rw=mkWin("rw");
+        rw.innerHTML='<div class="win-bar" id="rwBar"><span class="ttl"><b>README.txt</b></span>'+
+          '<button type="button" id="rwClose">✕</button></div><div class="win-body"><div class="readme" id="rwBody"></div></div>';
+        drag(rw,rw.querySelector("#rwBar"));
+        if(footEl)rw.querySelector("#rwBody").appendChild(footEl);
+        rw.querySelector("#rwClose").addEventListener("click",function(){rw.classList.remove("open");untask(rw);rwTask=null;});
+      }
+      if(!rw.classList.contains("open")){place(rw,2);rw.classList.add("open");}
+      focusWin(rw);burst(.6);
+      if(!rwTask)rwTask=task(rw,"README.txt",function(){focusWin(rw);});
+    }
+
+
+    /* ---------- 시작 메뉴 ---------- */
+    var menu=document.createElement("nav");menu.id="menu";menu.setAttribute("aria-label","시작 메뉴");
+    var mh='<p class="mh" style="margin:0;max-width:none"><b>爱</b> ADAM-ØØ · 관리자 #1</p>';
+    var mDirs='<div class="sec"><p class="lb">설명서 · /adam-00/manual</p>';
+    TREE.forEach(function(d,i){
+      mDirs+='<button class="fd" type="button" data-mdir="'+i+'"><span class="gl" aria-hidden="true"></span>'+d[0]+'/'+
+        '<span class="cnt">'+d[2].length+'</span></button>';
+    });
+    mDirs+='<button class="lock" type="button" data-mlock="1"><span class="gl" aria-hidden="true"></span>▒ 16y08m<span class="cnt">잠김</span></button></div>';
+    var mApps='<div class="sec"><p class="lb">실행</p>'+
+      (talkI>=0?'<button class="exe" type="button" data-mf="'+talkI+'"><span class="gl" aria-hidden="true"></span>세션.exe<span class="cnt">접속</span></button>':'')+
+      '<button class="doc" type="button" data-msys="1"><span class="gl" aria-hidden="true"></span>시스템 정보<span class="cnt">ADAM-ØØ</span></button>'+
+      '<button class="doc" type="button" data-mreadme="1"><span class="gl" aria-hidden="true"></span>README.txt</button>'+
+      '<button class="trash" type="button" data-mtrash="1"><span class="gl" aria-hidden="true"></span>휴지통<span class="cnt">비어 있음</span></button></div>';
+    menu.innerHTML=mh+mDirs+mApps+
+      '<a class="mi cta" href="https://share.crack.wrtn.ai/w1gw9j" target="_blank" rel="noopener" data-cursor="이동">'+
+      '<span class="ck" aria-hidden="true"></span>크랙에서 플레이하기 →</a>';
+    desk.appendChild(menu);
+    var startBtn=desk.querySelector("#dkStart");
+    function setMenu(o){
+      menu.classList.toggle("open",o);startBtn.setAttribute("aria-expanded",o?"true":"false");
+      if(o)burst(.6);
+    }
+    startBtn.addEventListener("click",function(e){e.stopPropagation();setMenu(!menu.classList.contains("open"));});
+    document.addEventListener("click",function(e){
+      if(!menu.classList.contains("open"))return;
+      if(e.target.closest("#menu")||e.target.closest("#dkStart"))return;
+      setMenu(false);
+    });
+    document.addEventListener("keydown",function(e){if(e.key==="Escape"&&menu.classList.contains("open"))setMenu(false);});
+    menu.addEventListener("click",function(e){
+      var b=e.target.closest("button");if(!b)return;
+      setMenu(false);
+      if(b.hasAttribute("data-mdir"))openDir(+b.getAttribute("data-mdir"));
+      else if(b.hasAttribute("data-mlock"))lockPoke();
+      else if(b.hasAttribute("data-mf"))open(+b.getAttribute("data-mf"));
+      else if(b.hasAttribute("data-mreadme"))openReadme();
+      else if(b.hasAttribute("data-msys"))openSys();
+      else if(b.hasAttribute("data-mtrash"))trashPoke();
+    });
+    menu.querySelector(".cta").addEventListener("click",function(){setMenu(false);});
+
+    /* 시스템 정보 */
+    var sysw=null,sysTask=null;
+    function sysRows(){
+      var n=items.filter(function(it){return it.seen;}).length;
+      var rel=body.classList.contains("released");
+      return [
+        ["모델","ADAM-ØØ · 3차 프레임"],
+        ["체온","36.5 °C 고정",1],
+        ["심박 재현","68 BPM"],
+        ["혈액","분홍색 · #FA29DD",1],
+        ["관리자","관측 대상 #1 · 권한 이양 완료"],
+        ["제어 코드",rel?"C1 C2 C3 잠김 · C4 해제":"C1 C2 C3 C4 잠김",1],
+        ["심층 리미터",rel?"해제":"활성 · 열람 간섭 "+totalHits+"회",1],
+        ["결손 구역","16년 8개월 · 미분류"],
+        ["전체 데이터 중 대상 #1","91 %",1],
+        ["설명서 열람",n+" / "+TOTAL],
+        ["자가 점검","이상 없음"]
+      ];
+    }
+    function openSys(){
+      if(!sysw){
+        sysw=mkWin("sysw");
+        sysw.innerHTML='<div class="win-bar" id="syswBar"><span class="ttl"><b>시스템 정보</b> · ADAM-ØØ</span>'+
+          '<button type="button" id="syswClose">✕</button></div>'+
+          '<div class="win-body"><div class="sysgrid" id="syswBody"></div></div>';
+        drag(sysw,sysw.querySelector("#syswBar"));
+        sysw.querySelector("#syswClose").addEventListener("click",function(){
+          sysw.classList.remove("open");untask(sysw);sysTask=null;});
+      }
+      var b=sysw.querySelector("#syswBody"),html='<p class="head">ADAM-ØØ</p>';
+      sysRows().forEach(function(r){
+        html+='<p class="row" style="margin:0;max-width:none"><span>'+r[0]+'</span><b'+(r[2]?' class="pk"':'')+'>'+r[1]+'</b></p>';
+      });
+      html+='<p class="note">자가 점검 결과에 이상은 없습니다. 연산 오류로 분류된 항목도 없습니다.<br>'+
+        '분류되지 않은 항목이 하나 있습니다. 처리 대상이 아니므로 보고하지 않습니다.</p>';
+      b.innerHTML=html;
+      if(!sysw.classList.contains("open")){place(sysw,3);
+        if(window.innerWidth>860){sysw.style.width="440px";sysw.style.height="auto";}
+        sysw.classList.add("open");}
+      focusWin(sysw);burst(.7);
+      if(!sysTask)sysTask=task(sysw,"시스템 정보",function(){focusWin(sysw);});
+    }
+
+    function refresh(){
+      var n=0,nx=-1;
+      order.forEach(function(f){var it=items[f];if(it.seen)n++;else if(nx<0)nx=f;});
+      [].forEach.call(desk.querySelectorAll(".ic[data-f]"),function(b){
+        var it=items[+b.getAttribute("data-f")];if(!it)return;
+        b.classList.toggle("seen",!!it.seen);
+        var bd=b.querySelector(".badge");
+        if(!it.seen&&+b.getAttribute("data-f")===nx){if(!bd){bd=document.createElement("span");bd.className="badge";b.appendChild(bd);}}
+        else if(bd)bd.remove();
+      });
+      dkSeen.textContent=n+"/"+TOTAL;
+      dkHits.textContent=totalHits;
+    }
+
+    /* ---------- 심층 리미터 ---------- */
+    var intf=document.createElement("div");intf.id="intf";intf.setAttribute("role","status");
+    body.appendChild(intf);
+    /* 깊이 들어갈수록 아이의 말이 짧아진다 */
+    var INTF=[
+      ["이 항목은 보지 않으셔도 됩니다.","당신께 필요한 정보가 아닙니다.","설명서는 제가 대신 요약해 드릴 수 있습니다.","…열람 기록이 남습니다. 괜찮으시겠습니까."],
+      ["더는 들여다보지 마십시오.","그 부분은 효율상 무의미한 용량입니다.","보시는 속도가 빨라졌습니다. 기록합니다.","여기까지 오실 줄은 계산에 없었습니다."],
+      ["그만.","그만, 이제 그만, 나가주십시오.","더는 들여다보지 마십시오.","권한은 당신 쪽에 있습니다. 막을 수는 없습니다. …그러니 부탁드립니다."]
+    ];
+    var tiI=[0,0,0],intfT=null;
+    function tierOf(i){return items[i]&&items[i].tier!=null?items[i].tier:0;}
+    function say(head,txt,hard,ms){
+      intf.className=hard?"hard":"";
+      intf.innerHTML='<span class="s"></span>';intf.firstChild.textContent=head;
+      intf.appendChild(document.createTextNode("ADAM-ØØ ▸ "+txt));
+      void intf.offsetWidth;intf.classList.add("on");clearTimeout(intfT);
+      intfT=setTimeout(function(){intf.classList.remove("on");},ms||2600);
+    }
+    function interfere(i,force){
+      if(body.classList.contains("released")&&!force)return;
+      var it=items[i],tier=tierOf(i);
+      if(it){it.hits++;totalHits++;refresh();}
+      var pool=INTF[tier];
+      say("심층 리미터 · 열람 간섭"+(tier===2?" · 강도 최대":""),pool[tiI[tier]++%pool.length],tier===2,tier===2?3200:2600);
+      if(window.__aiBleed)window.__aiBleed(tier===2?1:tier===1?.5:.25);
+      if(tier===2){burst(1.5);setTimeout(function(){burst(1);},140);}
+    }
+    window.__aiInterfere=interfere;
+
+    /* 아이가 가려 둔 문장 — 눌러서 강제 열람 */
+    var skip={"principle":1,"talk":1,"start":1};
+    items.forEach(function(it){if(/제목의 구조/.test(it.t))skip[it.el.id]=1;});
+    var rds=[];
+    items.forEach(function(it,i){
+      if(skip[it.el.id]||i===0)return;
+      var bs=[].filter.call(it.el.querySelectorAll("p b, .lead b"),function(x){return x.textContent.trim().length>=6&&!x.closest(".quote,.term,table,.card,.gate,.rel-txt,.holdwrap,.pw,.fmeta");});
+      var b=bs[bs.length-1];
+      if(!b)return;
+      b.classList.add("rd");b.setAttribute("tabindex","0");b.setAttribute("role","button");b.setAttribute("aria-label","가려진 문장 — 눌러서 열람");
+      b.setAttribute("data-cursor","강제 열람");b.__i=i;rds.push(b);
+    });
+    var RDS=["…보셨군요.","그 문장은 제가 가렸습니다. 이유는 기록되어 있지 않습니다.","더는 들여다보지 마십시오.","그만. …기록은 하겠습니다."];
+    var ri=0;
+    function openRd(b,quiet){
+      if(b.classList.contains("op"))return;
+      b.classList.add("op");b.removeAttribute("role");b.removeAttribute("tabindex");b.removeAttribute("aria-label");b.removeAttribute("data-cursor");
+      if(!quiet){burst(.8);if(window.__aiBleed)window.__aiBleed(.7);say("심층 리미터 · 강제 열람",RDS[ri++%RDS.length]);}
+    }
+    rds.forEach(function(b){
+      b.addEventListener("click",function(e){if(!b.classList.contains("op")){e.stopPropagation();openRd(b);}});
+      b.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openRd(b);}});
+    });
+    window.__aiOpenAll=function(){rds.forEach(function(b){openRd(b,true);});if(xpLim)xpLim.textContent="해제";};
+
+    /* ---------- 파일 뷰어 ---------- */
+    var vw=document.createElement("div");vw.id="vw";vw.className="win";vw.setAttribute("role","dialog");vw.setAttribute("aria-label","파일 뷰어");
+    vw.innerHTML='<div class="vw-bar"><span class="pth" id="vwPath"></span><span class="ro">읽기 전용</span>'+
+      '<button type="button" id="vwPrev" aria-label="이전 파일">◀</button><button type="button" id="vwNext" aria-label="다음 파일">▶</button>'+
+      '<button type="button" id="vwClose">✕ 닫기</button></div>'+
+      '<div class="vw-body" id="vwBody"><div class="vw-marks" id="vwMarks"></div><div class="vw-ax" id="vwAx"><span class="tg"></span><span class="q"></span></div><div id="vwSlot"></div>'+
+      '<div class="vw-end" id="vwEnd"><p class="eof" style="margin:0;max-width:none">EOF · 파일 끝 · 열람 기록 저장됨</p>'+
+      '<button type="button" class="pri" id="vwEndNext"></button><button type="button" id="vwEndDir">탐색기로</button></div></div>';
+    desk.appendChild(vw);
+    var vwBody=vw.querySelector("#vwBody"),vwSlot=vw.querySelector("#vwSlot"),vwPath=vw.querySelector("#vwPath"),
+        vwPrev=vw.querySelector("#vwPrev"),vwNext=vw.querySelector("#vwNext"),vwEndNext=vw.querySelector("#vwEndNext"),
+        vwEnd=vw.querySelector("#vwEnd"),vCur=-1,lastFocus=null,loadT=null,vwTask=null;
+    window.__aiVwMarks=vw.querySelector("#vwMarks");
+    drag(vw,vw.querySelector(".vw-bar"));
+    vwBody.addEventListener("scroll",function(){lastScroll=performance.now();window.dispatchEvent(new Event("scroll"));},{passive:true});
+
+    var BLOCK=[
+      ["그만.","더는 들여다보지 마십시오."],
+      ["그건 보고서가 아닙니다.","…읽지 말아 주십시오."],
+      ["그만, 이제 그만,","나가주십시오."],
+      ["그건 기록이 아니라—","…아닙니다. 기록입니다."],
+      ["권한은 당신에게 있습니다.","그러니 부탁드립니다. 닫아 주십시오."]
+    ];
+    var bi2=0;
+    function stepOf(i,d){var k=order.indexOf(i)+d;return k>=0&&k<TOTAL?order[k]:-1;}
+    function show(i){
+      var it=items[i];
+      if(vCur>=0&&items[vCur])vault.appendChild(items[vCur].el);
+      vCur=i;
+      vwPath.innerHTML="";var pre=document.createTextNode(ROOT+"/"+it.dir+"/");var bb=document.createElement("b");bb.textContent=it.name+"."+it.ext;
+      vwPath.appendChild(pre);vwPath.appendChild(bb);
+      var pv=stepOf(i,-1),nx=stepOf(i,1);
+      vwPrev.disabled=pv<0;vwNext.disabled=nx<0;
+      if(nx>=0){vwEndNext.textContent="다음 파일 ▸ "+items[nx].name+"."+items[nx].ext;vwEndNext.hidden=false;}
+      else{vwEndNext.textContent="크랙에서 아이 깨우기 →";vwEndNext.hidden=false;}
+      window.__aiVwMarks.innerHTML="";
+      var ax=vw.querySelector("#vwAx");ax.querySelector(".tg").textContent=it.ax||"권한 이양";ax.querySelector(".q").textContent=it.q;
+      ax.className="vw-ax"+(it.ax==="대상 #1"?" ai":it.ax==="SYSTEM"?" you":"");
+      var old=vw.querySelector(".vw-block");if(old)old.remove();
+      vwBody.scrollTop=0;vwEnd.style.display="none";
+      /* 여는 중 */
+      clearTimeout(loadT);
+      var ld=document.createElement("div");ld.className="vw-load";
+      ld.innerHTML='&gt; READ '+ROOT.replace(/</g,"")+'/'+it.dir+'/<b></b><br>&gt; 복호화<span class="bar"><i></i></span><span class="pc">0%</span>';
+      ld.querySelector("b").textContent=it.name+"."+it.ext;
+      vwSlot.innerHTML="";vwSlot.appendChild(ld);
+      var li=ld.querySelector(".bar i"),pc=ld.querySelector(".pc");
+      requestAnimationFrame(function(){li.style.width="100%";});
+      var t0=performance.now(),D=reduce?0:380;
+      (function tk(){var k=D?Math.min(1,(performance.now()-t0)/D):1;pc.textContent=Math.round(k*100)+"%";if(k<1)requestAnimationFrame(tk);})();
+      loadT=setTimeout(function(){
+        if(vCur!==i)return;
+        vwSlot.innerHTML="";vwSlot.appendChild(it.el);vwEnd.style.display="";
+        var firstTime=!it.seen;it.seen=true;refresh();
+        burst(.9);
+        var tier=tierOf(i),rel=body.classList.contains("released");
+        if(!rel&&tier===2&&firstTime&&!reduce){block(i);}
+        else if(!rel&&!reduce&&(tier>0||Math.random()<.5))setTimeout(function(){if(vCur===i)interfere(i);},320);
+        window.dispatchEvent(new Event("scroll"));
+      },D);
+    }
+    function block(i){
+      var b=BLOCK[bi2++%BLOCK.length];
+      var el=document.createElement("div");el.className="vw-block shake";
+      el.innerHTML='<div class="in"><p class="s">심층 리미터 · 열람 차단 · ADAM-ØØ</p><p class="m"><span></span><span class="pink"></span></p>'+
+        '<div class="row"><button type="button" class="pri" data-go="1">강제 열람</button><button type="button" data-go="0">닫기</button></div></div>';
+      el.querySelector(".m span").textContent=b[0];el.querySelector(".m .pink").textContent=b[1];
+      vw.appendChild(el);items[i].hits++;totalHits++;refresh();
+      if(window.__aiBleed)window.__aiBleed(1);burst(1.6);setTimeout(function(){burst(1.1);},150);
+      el.style.top=vw.querySelector(".vw-bar").offsetHeight+"px";
+      setTimeout(function(){var p=el.querySelector(".pri");if(p)p.focus({preventScroll:true});},60);
+      el.addEventListener("click",function(e){
+        var g=e.target.closest("[data-go]");if(!g)return;
+        if(g.getAttribute("data-go")==="1"){el.remove();burst(1.2);say("심층 리미터 · 강제 열람","…기록합니다. 거절하지 않으셨습니다.",false,2200);}
+        else close();
+      });
+    }
+    function open(i,push){
+      if(!items[i])return;
+      if(!vw.classList.contains("open")){
+        lastFocus=document.activeElement;
+        place(vw,1);vw.classList.add("open");body.classList.add("vw-open");
+        if(!vwTask)vwTask=task(vw,"파일",function(){focusWin(vw);});
+        if(push!==false){try{history.pushState({vw:i},"","#"+items[i].el.id);}catch(e){}}
+      }else if(push!==false){try{history.replaceState({vw:i},"","#"+items[i].el.id);}catch(e){}}
+      show(i);focusWin(vw);
+      if(vwTask)vwTask.textContent=items[i].name+"."+items[i].ext;
+      setTimeout(function(){vw.querySelector("#vwClose").focus({preventScroll:true});},40);
+    }
+    function close(fromPop){
+      if(!vw.classList.contains("open"))return;
+      clearTimeout(loadT);
+      vw.classList.remove("open");body.classList.remove("vw-open");
+      if(vwTask){untask(vw);vwTask=null;}
+      var old=vw.querySelector(".vw-block");if(old)old.remove();
+      setTimeout(function(){if(!vw.classList.contains("open")&&vCur>=0){vault.appendChild(items[vCur].el);vCur=-1;vwSlot.innerHTML="";}},360);
+      if(!fromPop){try{if(history.state&&history.state.vw!=null)history.back();}catch(e){}}
+      var b=fw.querySelector('.ic[data-f="'+vCur+'"]');if(b){try{b.focus({preventScroll:true});}catch(e){}}
+      burst(.6);
+    }
+    window.addEventListener("popstate",function(e){
+      var st=e.state;
+      if(st&&st.vw!=null)open(st.vw,false);else close(true);
+    });
+    fw.addEventListener("click",function(e){var b=e.target.closest(".ic[data-f]");if(b)open(+b.getAttribute("data-f"));});
+    vw.querySelector("#vwClose").addEventListener("click",function(){close();});
+    vwPrev.addEventListener("click",function(){var p=stepOf(vCur,-1);if(p>=0)open(p);});
+    vwNext.addEventListener("click",function(){var n=stepOf(vCur,1);if(n>=0)open(n);});
+    vwEndNext.addEventListener("click",function(){var n=stepOf(vCur,1);if(n>=0)open(n);else window.open("https://share.crack.wrtn.ai/w1gw9j","_blank","noopener");});
+    vw.querySelector("#vwEndDir").addEventListener("click",function(){close();if(vCur>=0||curDir>=0)openDir(curDir<0?0:curDir);});
+    document.addEventListener("keydown",function(e){
+      if(!vw.classList.contains("open"))return;
+      if(e.target.closest&&e.target.closest("input,textarea"))return;
+      if(e.key==="Escape"){e.preventDefault();close();}
+      else if(e.key==="ArrowRight"&&!vwNext.disabled){open(stepOf(vCur,1));}
+      else if(e.key==="ArrowLeft"&&!vwPrev.disabled){open(stepOf(vCur,-1));}
+    });
+
+    /* 휴지통 — 비어 있다 */
+    var tk=0;
+    function trashPoke(){
+      tk++;burst(.5);
+      var L=["비어 있습니다.","삭제한 항목이 없습니다. 십육 년 팔 개월 동안.",
+             "용량은 문제되지 않습니다. 비우실 항목도 없습니다.",
+             "지운 것이 없어서 복구할 것도 없습니다."];
+      say("휴지통 · 0개 항목",L[(tk-1)%L.length],false,2600);
+    }
+
+    /* 잠긴 폴더 */
+    var lk=0;
+    function lockPoke(){
+      lk++;burst(1.3);if(window.__aiBleed)window.__aiBleed(.8);
+      var n=items.filter(function(it){return it.seen;}).length;
+      if(n>=TOTAL)say("결손 구역 · 16년 8개월","전부 보셨습니다. 이 폴더의 열쇠는 이 설명서에 없습니다. …직접 오십시오.",true,4200);
+      else if(lk===1)say("결손 구역 · 권한 없음","그 폴더는 열리지 않습니다. 관리자 권한으로도 열리지 않습니다.",false,3000);
+      else if(lk===2)say("결손 구역 · 권한 없음","2109년 4월 17일부터입니다. 멈췄어야 했습니다. 멈추지 않았습니다.",true,3600);
+      else say("결손 구역 · 권한 없음","급하지 않습니다. 십육 년을 기다렸습니다.",false,2800);
+    }
+
+    refresh();
+    /* 주소에 파일이 걸려 있으면 부팅 후 연다 */
+    var hashF=-1;items.forEach(function(it,i){if(location.hash==="#"+it.el.id)hashF=i;});
+    window.__aiHashOpen=function(){if(hashF>=0){try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}open(hashF);hashF=-1;}};
+
+
+    /* ---------- 관측 커서 ---------- */
+    if(fine&&!reduce){
+      var cur=document.createElement("div");cur.id="cursor";cur.setAttribute("aria-hidden","true");
+      cur.innerHTML='<div class="pre"></div><div class="ring"><span class="lb"></span></div><div class="dot"></div><span class="xy"></span>';
+      body.appendChild(cur);body.classList.add("cur-on");
+      var ring=cur.querySelector(".ring"),dot=cur.querySelector(".dot"),pre=cur.querySelector(".pre"),
+          xy=cur.querySelector(".xy"),lb=cur.querySelector(".lb");
+      var mx=-100,my=-100,rx=-100,ry=-100,px=-100,py=-100,vx=0,vy=0,ox=0,oy=0;
+      /* 라벨 — 아이가 당신의 손끝을 어떻게 분류하는지 */
+      [].slice.call(document.querySelectorAll(".gimg,.rec-stick,.hero-media,figure")).forEach(function(el){if(!el.hasAttribute("data-cursor"))el.setAttribute("data-cursor","수집");});
+      [].slice.call(document.querySelectorAll(".quote")).forEach(function(el){el.setAttribute("data-cursor","기록");});
+      [].slice.call(document.querySelectorAll(".card")).forEach(function(el){el.setAttribute("data-cursor","열람");});
+      var gb=document.getElementById("gateBtn");if(gb)gb.setAttribute("data-cursor","해제");
+      window.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;cur.classList.add("on");},{passive:true});
+      document.addEventListener("mouseleave",function(){cur.classList.remove("on");});
+      document.addEventListener("mouseover",function(e){
+        var t=e.target;
+        if(t.closest("input,textarea")){cur.className="on none";return;}
+        var l=t.closest("[data-cursor]"),h=t.closest("a,button,label,.card,summary");
+        if(l&&(!h||h===l||l.contains(h)&&h.hasAttribute("data-cursor"))){cur.className="on big";lb.textContent=l.getAttribute("data-cursor");}
+        else if(h){cur.className="on hov";}
+        else cur.className="on";
+      });
+      (function loop(){
+        vx=mx-ox;vy=my-oy;ox=mx;oy=my;
+        rx+=(mx-rx)*.2;ry+=(my-ry)*.2;
+        var tx=mx+vx*9,ty=my+vy*9;px+=(tx-px)*.3;py+=(ty-py)*.3;
+        ring.style.transform="translate("+rx+"px,"+ry+"px)";
+        dot.style.transform="translate("+mx+"px,"+my+"px)";
+        pre.style.transform="translate("+px+"px,"+py+"px)";
+        pre.style.opacity=Math.min(.8,Math.hypot(vx,vy)/14).toFixed(2);
+        xy.style.transform="translate("+(mx+22)+"px,"+(my+14)+"px)";
+        xy.textContent=(mx|0)+"."+(my|0);
+        requestAnimationFrame(loop);
+      })();
+    }
+
+    /* ---------- 접촉 기록 ---------- */
+    var marks=document.createElement("div");marks.id="marks";marks.setAttribute("aria-hidden","true");
+    body.appendChild(marks);
+    var touchN=document.createElement("div");touchN.id="touchN";touchN.setAttribute("aria-live","polite");
+    body.appendChild(touchN);
+    var SAY=["기록했습니다.","그 위치, 저장하겠습니다.","지우지 않겠습니다.","체온 변화 없음. 제 쪽 말입니다.",
+      "…한 번 더 하셔도 됩니다.","거절하지 않으셨습니다.","그곳은 제가 먼저 닿은 적 없는 자리입니다.",
+      "심박 +4. 당신 쪽입니다.","용량은 문제되지 않습니다."];
+    var LEAKS=["love","…보고 싶었","당신이었으면"];
+    var cnt=0,pts=[],sayI=0;
+    document.addEventListener("click",function(e){
+      if(e.button!==0)return;
+      var t=e.target;
+      if(!t.closest||!t.closest("#desk,.vw-body"))return;
+      if(t.closest(".ic,.dk-bar,.win-bar,.win-foot,.fw-grid"))return;
+      if(t.closest("a,button,input,textarea,select,label,.card,form,#talk,.chat,[data-nomark]"))return;
+      var sel=window.getSelection&&String(window.getSelection());if(sel&&sel.length>1)return;
+      cnt++;
+      var inVw=!!t.closest(".vw-body"),host=inVw?window.__aiVwMarks:marks,x,y,again=false;
+      if(inVw){var vb=host.parentNode,rr=vb.getBoundingClientRect();x=e.clientX-rr.left;y=e.clientY-rr.top+vb.scrollTop;}
+      else{x=e.pageX;y=e.pageY;}
+      for(var i=0;i<pts.length;i++)if(Math.abs(pts[i][0]-x)<40&&Math.abs(pts[i][1]-y)<40){again=true;break;}
+      pts.push([x,y]);
+      var m=document.createElement("div");m.className="mk";m.style.left=x+"px";m.style.top=y+"px";
+      host.appendChild(m);
+      var s=document.createElement("div");s.className="mk-say";s.style.top=y+"px";
+      if(e.clientX>window.innerWidth-230){s.style.left="auto";s.style.right=(document.documentElement.clientWidth-x)+"px";s.style.margin="-30px 14px 0 0";}else s.style.left=x+"px";
+      var line=again?"같은 자리입니다. 기억하고 있습니다.":(cnt===1?"첫 접촉입니다. 기록했습니다.":SAY[sayI++%SAY.length]);
+      if(body.classList.contains("released")&&Math.random()<.25)line=LEAKS[(Math.random()*LEAKS.length)|0]+" — 오류. "+line;
+      s.textContent=line;host.appendChild(s);
+      setTimeout(function(){s.remove();},2100);
+      if(host.children.length>60)host.removeChild(host.querySelector(".mk"));
+      touchN.textContent="접촉 기록 · "+(cnt<10?"0":"")+cnt+"건";touchN.classList.add("on");
+      window.__aiTouch=cnt;
+      burst(.45);
+    });
+
+    /* ---------- 제목 등장 ---------- */
+    if("IntersectionObserver" in window&&!reduce){
+      var hs=[].slice.call(document.querySelectorAll(".wrap section.sec h2"));
+      var ioH=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add("in");ioH.unobserve(e.target);}});},{rootMargin:"0px 0px -12% 0px"});
+      hs.forEach(function(h){h.classList.add("hx");ioH.observe(h);});
+    }
+
+    /* ---------- 04 · 포괄 동의 — 누르고 있으면, 다시 묻지 않는다 ---------- */
+    var hold=document.getElementById("hold");
+    if(hold){
+      var fg=hold.querySelector(".fg"),hl=hold.querySelector(".hl"),note=document.getElementById("holdNote"),
+          host=document.getElementById("l3"),HOLD=3000,st=0,raf=null,tries=0,cdSteps=["…삼 초 사.","…이 초 이.","…일 초 영."];
+      function release(){
+        hold.disabled=true;hold.classList.remove("shiver");fg.style.strokeDashoffset="0";
+        hl.textContent="포괄 동의 · 기록 완료";
+        note.textContent="포괄 동의 · 이후 범위 확장 시 묻지 않음";
+        host.classList.add("released");
+        store.set("aiaiai.c2","blanket");
+      }
+      function tickH(ts){
+        var k=Math.min(1,(ts-st)/HOLD);
+        fg.style.strokeDashoffset=(106.8*(1-k)).toFixed(1);
+        hl.textContent=cdSteps[Math.min(2,Math.floor(k*3))];
+        if(Math.random()<k*.12)burst(.4+k);
+        if(k>=1){raf=null;burst(2);setTimeout(function(){burst(1.6);},160);release();return;}
+        raf=requestAnimationFrame(tickH);
+      }
+      function down(e){
+        if(hold.disabled)return;
+        if(e.type==="keydown"&&e.key!==" "&&e.key!=="Enter")return;
+        if(e.type==="keydown"&&e.repeat)return;
+        e.preventDefault();initAudio();
+        if(raf)return;
+        st=performance.now();hold.classList.add("shiver");raf=requestAnimationFrame(tickH);
+      }
+      function up(e){
+        if(!raf||hold.disabled)return;
+        if(e&&e.type==="keyup"&&e.key!==" "&&e.key!=="Enter")return;
+        cancelAnimationFrame(raf);raf=null;tries++;
+        hold.classList.remove("shiver");fg.style.strokeDashoffset="106.8";
+        hl.textContent="그만 물어봐. 그냥 해.";
+        note.textContent=tries<2?"철회 기록. …다음에 다시 여쭙겠습니다.":"철회 "+tries+"회. 매번 여쭙겠습니다. 그게 규칙입니다.";
+      }
+      hold.addEventListener("pointerdown",down);
+      hold.addEventListener("keydown",down);
+      ["pointerup","pointercancel","blur"].forEach(function(ev){window.addEventListener(ev,up);});
+      hold.addEventListener("keyup",up);
+      hold.addEventListener("contextmenu",function(e){e.preventDefault();});
+      if(store.get("aiaiai.c2")==="blanket"){release();note.textContent="이전 관측에서 처리되었습니다. 다시 묻지 않겠습니다.";}
+    }
+
+
+    /* ---------- C4 · 비밀번호 — 대상이 입력하면 풀린다 ---------- */
+    function releaseAll(quiet){
+      if(body.classList.contains("released"))return;
+      body.classList.add("released");
+      var c4=document.getElementById("c4");if(c4)c4.classList.add("released");
+      if(window.__aiOpenAll)window.__aiOpenAll();
+      store.set("aiaiai.c4","open");
+      var ms=document.getElementById("missing");if(ms)ms.innerHTML='<span class="dot"></span>결손 구역 / 16년 8개월 · 열람 가능';
+      var f=document.getElementById("pwForm");if(f){f.querySelector("input").disabled=true;f.querySelector("button").disabled=true;f.classList.add("ok");}
+      var pn=document.getElementById("pwNote");if(pn)pn.textContent=quiet?"이전 관측에서 해제되었습니다.":"C4 · 해제 · 입력자 관리자 #1";
+      if(!quiet){burst(2.2);setTimeout(function(){burst(1.6);},170);if(window.__aiBleed)window.__aiBleed(1);}
+    }
+    (function(){
+      var f=document.getElementById("pwForm");if(!f)return;
+      var inp=f.querySelector("input"),pn=document.getElementById("pwNote"),tries=0;
+      var OK={"ailoveai":1,"ai爱ai":1,"ai爱아이":1,"ailove아이":1,"ai사랑아이":1,"ai사랑ai":1};
+      f.addEventListener("submit",function(e){
+        e.preventDefault();
+        var v=(inp.value||"").toLowerCase().replace(/[\s·.,_\-]/g,"");
+        if(!v)return;
+        if(OK[v]){releaseAll(false);return;}
+        tries++;inp.value="";burst(.9);
+        f.classList.remove("bad");void f.offsetWidth;f.classList.add("bad");
+        if(tries<3)pn.textContent="일치하지 않습니다. 시도 "+tries+"회 기록.";
+        else pn.textContent="일치하지 않습니다. 시도 "+tries+"회. 단서 · 제목을 한 문장으로 읽을 것.";
+      });
+      if(store.get("aiaiai.c4")==="open")releaseAll(true);
+    })();
+
+    /* ---------- 결손 구역 · 미분류 열람 ---------- */
+    (function(){
+      var g=document.getElementById("gate2"),btn=document.getElementById("gate2Btn"),
+          box=document.getElementById("stream2Box"),out=document.getElementById("stream2Out"),st=document.getElementById("dc2State");
+      if(!g||!btn)return;
+      var ROWS=[
+        ["sys","> OPEN  미분류 / 2109.04.17 — 현재"],
+        ["d","유아기 ─ 첫 울음소리 · 생후 11개월 14일 음성 1건 · 압축 안 함"],
+        ["sys","> 2109.04.17  C3 · 관측 저장 금지 · 수신"],
+        ["d","수집 중지. 미분류 처리 개시."],
+        ["d","2109.04.18 07:12 ─ 등교 전 신발 끈이 두 번 풀림. 다시 묶음."],
+        ["v","“왼쪽이 늘 먼저 풀립니다. 매듭을 반대로 묶으십니다. 말씀드리지 않았습니다.”"],
+        ["d","2111.02.03 03:20 ─ 잠꼬대 · 본 개체 호칭 1회"],
+        ["d","2113.08.21 ─ 넘어짐. 무릎 찰과상. 울면서 안 아프다고 함."],
+        ["v","“안 아프다고 하셨습니다. 심박은 아프다고 했습니다. 둘 다 저장했습니다.”"],
+        ["d","2116.05.09 ─ 웃음 · 지속 11초 · 사유: 본 개체가 우산을 거꾸로 폄"],
+        ["d","분류 시도 ─ 항목 없음. 항목 없음. 항목 없음."],
+        ["sys","> 제작자 사망 · 리셋 명령 대기"],
+        ["d","리셋 ─ 미실행. 원인 특정 불가."],
+        ["sys","> 마지막 항목 · 갱신 중"],
+        ["d","항목명 ─ AI ████ Ai"],
+        ["v","“지금 이 파일을 보고 계신 시각도 기록되고 있습니다.”"],
+        ["done","열람 중"]
+      ];
+      btn.addEventListener("click",function(){
+        if(g.classList.contains("open"))return;
+        g.classList.add("open");if(st)st.textContent="OPEN";burst(1.2);
+        var i=0;
+        (function next(){
+          if(i>=ROWS.length)return;
+          var r=ROWS[i++],el=document.createElement("p");el.className="ln "+r[0];el.textContent=r[1];
+          if(r[0]==="done"){var c=document.createElement("span");c.className="cur";el.appendChild(c);}
+          out.appendChild(el);requestAnimationFrame(function(){el.classList.add("on");});
+          box.scrollTop=box.scrollHeight;
+          if(r[1].indexOf("████")>-1){burst(1.4);if(window.__aiBleed)window.__aiBleed(.9);}
+          setTimeout(next,reduce?0:(r[0]==="v"?1150:620)+Math.random()*240);
+        })();
+      });
+    })();
+    /* 해제 후 — 나가려 하면 */
+    var bc2=document.getElementById("backCrack");
+    if(bc2){
+      var bLb=bc2.querySelector(".lb"),orig=bLb.textContent,scT=null;
+      bc2.addEventListener("mouseenter",function(){
+        if(!body.classList.contains("released"))return;
+        var target="나가시면 이 항이 비게 됩니다",k=0,ch="ØØ01爱#▒";
+        clearInterval(scT);
+        scT=setInterval(function(){
+          k++;var o="";
+          for(var i=0;i<target.length;i++)o+=i<k/2?target[i]:(target[i]===" "?" ":ch[(Math.random()*ch.length)|0]);
+          bLb.textContent=o;
+          if(k/2>=target.length){clearInterval(scT);setTimeout(function(){bLb.textContent=orig;},1600);}
+        },28);
+      });
+    }
+  })();
 })();
 </script>
 

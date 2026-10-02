@@ -8,7 +8,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="백화여자예술대학교 | Rainbow : 멜팅다운">
 <meta property="og:description" content="백 가지 꽃이 피는 학교, 단 하나의 꽃이 젖는다. 오메가버스 · GL · 캠퍼스 다크로맨스 (R19)">
-<meta property="og:image" content="img/og.jpg">
+<meta property="og:image" content="https://feelggim.github.io/baekhwa/img/og.jpg">
+<meta property="og:url" content="https://feelggim.github.io/baekhwa/">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="rating" content="adult">
@@ -366,7 +367,7 @@ body.locked{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.take{animation:none}.take .r{animation:none}}
 
 /* aurora: soft rainbow light behind the whole page, breathing with the music */
-#aurora{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;filter:blur(34px) saturate(1.4);opacity:.8}
+#aurora{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;filter:blur(30px) saturate(1.1);opacity:.75}
 .util,header.gnb,main,footer{position:relative;z-index:1}
 header.gnb{z-index:30}
 .tint{background:rgba(243,241,248,.55)}
@@ -441,6 +442,7 @@ header.gnb{z-index:30}
 .play:hover{background-position:100% 100%;transform:translateY(-2px)}
 .play.soon{opacity:.75;cursor:default}
 .play svg{width:16px;height:16px;fill:currentColor}
+img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .fab.show{opacity:1;transform:none;pointer-events:auto}
 .fab{transition:opacity .4s,transform .4s;opacity:0;transform:translateY(16px);pointer-events:none;position:fixed;right:clamp(14px,3vw,28px);bottom:calc(env(safe-area-inset-bottom,0px) + clamp(14px,3vw,28px));z-index:40}
 
@@ -832,7 +834,7 @@ header.gnb{z-index:30}
   </div>
 </footer>
 
-<div class="fab"><a class="play" data-play href="#"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg>크랙에서 플레이하기</a></div>
+<div class="fab show"><a class="play" data-play href="#"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg>크랙으로 돌아가기</a></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <div class="sheet" id="sheet"></div>
 </div>
@@ -898,8 +900,8 @@ $(function(){
   (function float(){
     if(!reduce){var t=(Date.now()-t0)/1000,sy=$(window).scrollTop();
       $("#heroBg").css("transform","scale(1.06) translate("+(-mx*14)+"px,"+(sy*.25-my*10)+"px)");
-      $("#pills>span").each(function(i){var d=+$(this).data("d"),r=parseFloat(this.style.transform.replace(/.*rotate\(([-\d.]+)deg\).*/,"$1"))||0;
-        var bt=window.__beat||0;$(this).css({translate:(Math.sin(t*.6+i)*8+mx*40*d)+"px "+(Math.cos(t*.5+i*1.7)*10+my*30*d-sy*d*.35-bt*26*d)+"px",scale:String(1+bt*.3*d)})});}
+      $("#pills>span").each(function(i){var d=+$(this).data("d");
+        $(this).css({translate:(Math.sin(t*.22+i)*14+mx*30*d)+"px "+(Math.cos(t*.18+i*1.7)*16+my*22*d-sy*d*.35)+"px",rotate:(Math.sin(t*.12+i*2)*14)+"deg"})});}
     requestAnimationFrame(float)})();
 
 
@@ -909,20 +911,22 @@ $(function(){
     var kind=di%4===3?"bubble":"pill3d",cls=["","b","p",""][di%4],sc=.55+Math.random()*.75;
     var $e=$("<span>").addClass(kind+" "+(kind==="pill3d"?cls:"")).appendTo("#drift");
     if(kind==="bubble"){var bs=26+Math.random()*50;$e.css({width:bs,height:bs})}
-    DR.push({el:$e[0],x:(di%2?.04+Math.random()*.16:.8+Math.random()*.16),y:Math.random()*2.2,z:.3+Math.random()*.9,rot:Math.random()*360,vr:(Math.random()-.5)*14,ph:Math.random()*6.28,sc:sc});
+    DR.push({el:$e[0],x:(di%2?.04+Math.random()*.16:.8+Math.random()*.16),y:Math.random()*2.2,z:.3+Math.random()*.9,rot:Math.random()*360,vr:(Math.random()<.5?-1:1)*(3+Math.random()*5),ph:Math.random()*6.28,sc:sc});
   }
   (function drift(){
-    var t=(Date.now()-t0)/1000,sy=$(window).scrollTop(),vh=innerHeight,vw=innerWidth,bb=(window.__bands&&window.__bands())||[0,0,0];
+    var t=(Date.now()-t0)/1000,sy=$(window).scrollTop(),vh=innerHeight,vw=innerWidth;
     DR.forEach(function(d){
-      var y=((d.y*vh - sy*d.z*.55)%(vh*2.2)+vh*2.2)%(vh*2.2)-vh*.3;
-      var x=d.x*vw+Math.sin(t*.4+d.ph)*30*d.z+mx*40*d.z;
-      var bt=window.__beat||0;d.kick=(d.kick||0)*.9+bt*(.6+d.z*.5);var r=reduce?d.rot:d.rot+t*d.vr+d.kick*18,s=d.sc*(1+bb[0]*.35+bt*.45);
-      d.el.style.transform="translate("+x+"px,"+(y+Math.cos(t*.5+d.ph)*14-d.kick*28*d.z)+"px) rotate("+r+"deg) scale("+s+")";
+      var y=((d.y*vh - sy*d.z*.4 - t*6*d.z)%(vh*2.2)+vh*2.2)%(vh*2.2)-vh*.3;
+      var x=d.x*vw+Math.sin(t*.07+d.ph)*vw*.05*d.z+Math.sin(t*.19+d.ph*2)*18+mx*24*d.z;
+      y+=Math.cos(t*.11+d.ph)*28*d.z;
+      var r=reduce?d.rot:d.rot+t*d.vr,s=d.sc*(1+Math.sin(t*.3+d.ph)*.04);
+      d.el.style.transform="translate("+x+"px,"+y+"px) rotate("+r+"deg) scale("+s+")";
     });
     requestAnimationFrame(drift)})();
 
   /* play on Crack: paste the character link here */
-  var CRACK_URL="";
+  $(document).on("contextmenu dragstart",function(e){e.preventDefault()});
+  var CRACK_URL="https://share.crack.wrtn.ai/vd3v0t";
   $("[data-play]").each(function(){
     if(CRACK_URL){$(this).attr({href:CRACK_URL,target:"_blank",rel:"noopener"})}
     else{$(this).addClass("soon").attr("aria-disabled","true").contents().last()[0].nodeValue="크랙 공개 예정"}
@@ -971,7 +975,7 @@ $(function(){
 
   /* active menu on scroll */
   var secs=$("section[id]");
-  $(window).on("scroll",function(){$(".fab").toggleClass("show",$(window).scrollTop()>innerHeight*.8);var id="";secs.each(function(){if(this.getBoundingClientRect().top<innerHeight*.35)id=this.id});
+  $(window).on("scroll",function(){var id="";secs.each(function(){if(this.getBoundingClientRect().top<innerHeight*.35)id=this.id});
     $("#menu a").removeClass("on").filter('[href="#'+id+'"]').addClass("on")});
 
   /* sound */
@@ -1000,38 +1004,35 @@ $(function(){
 
 });
 
-/* aurora renderer */
+/* scent renderer: pale perfume haze curling upward, breathing slowly with the music */
 (function(){
   var c=document.getElementById("aurora");if(!c||!c.getContext)return;var x=c.getContext("2d");
   var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches,W,H,S=6;
   function size(){W=Math.ceil(innerWidth/S);H=Math.ceil(innerHeight/S);c.width=W;c.height=H}
   addEventListener("resize",size);size();
-  var hues=[330,280,200,175,40,345];
-  var blobs=hues.map(function(h,i){return{h:h,x:Math.random(),y:Math.random(),r:.35+Math.random()*.25,sx:.02+Math.random()*.03,sy:.015+Math.random()*.025,ph:i*1.3}});
-  var lv=[0,0,0],t=0,last=performance.now(),beat=0,prevB=0;
+  var hues=[335,285,205,170,320];
+  var wisps=hues.map(function(h,i){return{h:h,x:.12+i*.19+Math.random()*.06,ph:Math.random()*6.28,f:.6+Math.random()*.6,w:.05+Math.random()*.04}});
+  var clouds=[[330,.2,.3],[270,.75,.25],[190,.55,.8]].map(function(o,i){return{h:o[0],x:o[1],y:o[2],ph:i*2.1}});
+  var lv=0,t=0,last=performance.now();
+  window.__beat=0;
   function frame(now){
     var dt=Math.min((now-last)/1000,.05);last=now;
     var b=window.__bands&&window.__bands();
-    if(b){for(var k=0;k<3;k++)lv[k]+=(b[k]-lv[k])*.25;var rise=b[0]-prevB;prevB=b[0];if(rise>.035)beat=Math.min(1,beat+.8+rise*4)}else{for(k=0;k<3;k++)lv[k]*=.95}
-    beat*=.88;window.__beat=beat;
-    var speed=(reduce?.25:1)*(1+lv[1]*4+beat*3);t+=dt*speed;
+    lv+=(((b?b[0]*.6+b[1]*.4:0))-lv)*.02;
+    t+=dt*(reduce?.3:1)*(1+lv*.8);
     x.globalCompositeOperation="source-over";x.clearRect(0,0,W,H);
     x.globalCompositeOperation="lighter";
-    /* drifting colour clouds */
-    blobs.forEach(function(o,i){
-      var px=(.5+.42*Math.sin(t*o.sx*6+o.ph))*W,py=(.5+.38*Math.cos(t*o.sy*6+o.ph*1.7))*H;
-      var rr=Math.max(W,H)*o.r*(1+lv[0]*.8+beat*.5);
-      var hue=(o.h+t*8+lv[2]*90+beat*40)%360,a=.2+lv[0]*.45+beat*.35;
-      var g=x.createRadialGradient(px,py,0,px,py,rr);g.addColorStop(0,"hsla("+hue+",90%,72%,"+a+")");g.addColorStop(1,"hsla("+hue+",90%,72%,0)");
+    clouds.forEach(function(o){
+      var px=(o.x+.08*Math.sin(t*.05+o.ph))*W,py=(o.y+.06*Math.cos(t*.04+o.ph))*H,rr=Math.max(W,H)*(.42+lv*.12);
+      var g=x.createRadialGradient(px,py,0,px,py,rr);g.addColorStop(0,"hsla("+o.h+",70%,82%,"+(.14+lv*.12)+")");g.addColorStop(1,"hsla("+o.h+",70%,82%,0)");
       x.fillStyle=g;x.fillRect(0,0,W,H)});
-    /* aurora curtains */
-    for(var r=0;r<3;r++){
-      var base=H*(.22+r*.26),amp=H*(.06+lv[1]*.25+beat*.08),hue=(300-r*70+t*12)%360;
-      var g2=x.createLinearGradient(0,base-H*.25,0,base+H*.12);
-      g2.addColorStop(0,"hsla("+hue+",95%,75%,0)");g2.addColorStop(.6,"hsla("+((hue+40)%360)+",95%,72%,"+(.15+lv[r]*.6+beat*.3)+")");g2.addColorStop(1,"hsla("+((hue+80)%360)+",95%,70%,0)");
-      x.fillStyle=g2;x.beginPath();x.moveTo(0,H);
-      for(var i=0;i<=W;i+=2){var y=base+Math.sin(i*.035+t*(.6+r*.25)+r)*amp+Math.sin(i*.011-t*.4+r*2)*amp*.8;x.lineTo(i,y)}
-      x.lineTo(W,H);x.closePath();x.fill()}
+    wisps.forEach(function(w){
+      for(var j=0;j<26;j++){
+        var u=j/25,yy=H*(1.1-u*1.25),sway=Math.sin(u*3.2*w.f-t*.35+w.ph)*W*(.05+u*.09)*(1+lv*.6)+Math.sin(u*7-t*.6+w.ph*2)*W*.015;
+        var xx=w.x*W+sway,rr=W*w.w*(.6+u*1.4),a=(.09+lv*.08)*Math.sin(u*Math.PI);
+        var hue=(w.h+u*30+Math.sin(t*.1+w.ph)*15)%360;
+        var g=x.createRadialGradient(xx,yy,0,xx,yy,rr);g.addColorStop(0,"hsla("+hue+",75%,80%,"+a+")");g.addColorStop(1,"hsla("+hue+",75%,80%,0)");
+        x.fillStyle=g;x.fillRect(xx-rr,yy-rr,rr*2,rr*2)}});
     requestAnimationFrame(frame)}
   requestAnimationFrame(frame);
 })();

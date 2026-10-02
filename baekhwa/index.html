@@ -224,6 +224,11 @@ section.sec{padding-block:clamp(70px,9vw,120px)}
 .card .fig img{position:relative;height:100%;width:auto;max-width:none;object-fit:contain;object-position:bottom;transition:transform .9s cubic-bezier(.2,.7,.1,1)}
 .card:hover .fig img{transform:scale(1.05) translateY(-6px)}
 .card .fig img.fade-r{-webkit-mask-image:linear-gradient(90deg,#000 80%,transparent 99%);mask-image:linear-gradient(90deg,#000 80%,transparent 99%)}
+.s-winter{background:linear-gradient(170deg,#EEF4FC 0%,#C9DDF3 100%)!important}
+.s-spring{background:linear-gradient(170deg,#FDF1F5 0%,#F3C6D7 100%)!important}
+.s-summer{background:linear-gradient(170deg,#EEF9F4 0%,#BCE4D2 100%)!important}
+.s-autumn{background:linear-gradient(170deg,#FCF3E9 0%,#E8C9A2 100%)!important}
+.card .fig[class*="s-"]::before{opacity:.18}
 .card .info{padding:16px 18px 18px;border-top:1px solid rgba(255,255,255,.1)}
 .card .info small{font-family:var(--f-display);letter-spacing:.3em;font-size:12px;color:#F6A8C4}
 .card .info b{display:block;font-family:var(--f-serif);font-size:22px;font-weight:600;margin:2px 0}
@@ -975,7 +980,7 @@ $(function(){
     s.d.forEach(function(d){h+='<div class="dept"><b>'+d[0]+(d[2]?'<em>'+d[2]+'</em>':'')+'</b><p>'+d[1]+'</p></div>'});$("#depts").append(h+'</div>')});
 
   /* four */
-  FOUR.forEach(function(c,i){$("#cards").append('<button type="button" class="card" data-i="'+i+'"><div class="fig"><img src="img/'+c.k+'.webp" alt="'+c.nm+'" class="'+(c.k==="winter"||c.k==="spring"?"fade-r":"")+'" loading="lazy"></div><div class="info"><small>'+c.sw+'</small><b>'+c.nm+'</b><span>'+c.meta+'</span></div></button>')});
+  FOUR.forEach(function(c,i){$("#cards").append('<button type="button" class="card" data-i="'+i+'"><div class="fig s-'+c.k+'"><img src="img/'+c.k+'.webp" alt="'+c.nm+'" class="'+(c.k==="winter"||c.k==="spring"?"fade-r":"")+'" loading="lazy"></div><div class="info"><small>'+c.sw+'</small><b>'+c.nm+'</b><span>'+c.meta+'</span></div></button>')});
 
   /* modal */
   var mode,idx,last;
@@ -983,7 +988,7 @@ $(function(){
     if(m==="place"){var p=PLACES[i];
       h='<button class="close" type="button" aria-label="닫기">×</button><div class="media"><img src="img/'+p.img+'.webp" alt="'+p.nm+'"></div><div class="body"><small>CAMPUS</small><h3 id="mTitle">'+p.nm+'</h3><div class="meta">'+p.tag+' · '+p.sub+'</div><p style="margin-top:16px">'+p.body+'</p><div class="chips">'+p.s.map(function(x){return "<span>"+x+"</span>"}).join("")+'</div><div class="mnav"><button class="btn navy" type="button" data-step="-1">이전</button><button class="btn navy" type="button" data-step="1">다음</button></div></div>';
     }else{var c=FOUR[i];
-      h='<button class="close" type="button" aria-label="닫기">×</button><div class="media char"><img src="img/'+c.k+'.webp" alt="'+c.nm+'" class="'+(c.k==="winter"||c.k==="spring"?"fade-r":"")+'"></div><div class="body"><small>'+c.sw+'</small><h3 id="mTitle">'+c.nm+'</h3><div class="meta">'+c.meta+'</div><blockquote>"'+c.q+'"</blockquote><p>'+c.body+'</p><dl>'+c.spec.map(function(s){return "<dt>"+s[0]+"</dt><dd>"+(s[0]==="향"?'<span class="notes">'+s[1].split("|").map(function(n){return "<span>"+n+"</span>"}).join("")+'</span>':s[1])+"</dd>"}).join("")+'</dl><div class="mnav"><button class="btn navy" type="button" data-step="-1">이전</button><button class="btn navy" type="button" data-step="1">다음</button></div></div>';}
+      h='<button class="close" type="button" aria-label="닫기">×</button><div class="media char s-'+c.k+'"><img src="img/'+c.k+'.webp" alt="'+c.nm+'" class="'+(c.k==="winter"||c.k==="spring"?"fade-r":"")+'"></div><div class="body"><small>'+c.sw+'</small><h3 id="mTitle">'+c.nm+'</h3><div class="meta">'+c.meta+'</div><blockquote>"'+c.q+'"</blockquote><p>'+c.body+'</p><dl>'+c.spec.map(function(s){return "<dt>"+s[0]+"</dt><dd>"+(s[0]==="향"?'<span class="notes">'+s[1].split("|").map(function(n){return "<span>"+n+"</span>"}).join("")+'</span>':s[1])+"</dd>"}).join("")+'</dl><div class="mnav"><button class="btn navy" type="button" data-step="-1">이전</button><button class="btn navy" type="button" data-step="1">다음</button></div></div>';}
     $("#sheet").html(h);$("#modal").addClass("on").hide().fadeIn(220);$("#sheet .close").trigger("focus");$("body").css("overflow","hidden")}
   function closeModal(){$("#modal").fadeOut(180,function(){$(this).removeClass("on")});$("body").css("overflow","");last&&last.focus()}
   $("#places").on("click",".place",function(){last=this;openModal("place",+$(this).data("i"))});

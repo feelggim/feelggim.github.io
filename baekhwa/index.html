@@ -153,6 +153,11 @@ section.sec{padding-block:clamp(70px,9vw,120px)}
 .sched li{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .sched li b{font-family:var(--f-display);font-size:22px;color:var(--navy);font-weight:400;font-variant-numeric:tabular-nums}
 .sched li span small{display:block;color:var(--muted);font-size:12.5px}
+.sched li.key{margin:6px -14px;padding:14px;border:0;border-radius:14px;background:linear-gradient(115deg,rgba(201,238,240,.75),rgba(228,218,255,.7),rgba(249,211,227,.75));box-shadow:0 10px 24px -14px rgba(10,52,111,.45)}
+.sched li.key b{color:#2f6fb3}
+.sched li.key span{font-weight:700;color:var(--navy)}
+.sched li.key small{color:#2e4a78;font-weight:500}
+.sched li .flag{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:99px;background:var(--navy);color:#fff;font-style:normal;font-size:10.5px;letter-spacing:.14em;vertical-align:2px}
 
 /* about */
 .about{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
@@ -398,6 +403,8 @@ header.gnb{z-index:30}
 .chap-h b{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,5vw,64px);line-height:1;background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent}
 .chap-h h3{margin:0;font-family:var(--f-serif);font-size:clamp(24px,2.6vw,32px);font-weight:600;color:#fff}
 .chap-h p{margin:8px 0 0;color:rgba(236,230,240,.6);font-size:14px}
+.chap-tag{display:inline-block;margin:0 0 12px;padding:5px 14px;border-radius:99px;font-size:11px;letter-spacing:.24em;color:#0A346F;font-weight:700;background:linear-gradient(115deg,#F9D3E3,#E4DAFF,#C9EEF0)}
+.chap-tag i{font-style:normal;opacity:.6;margin-left:8px;letter-spacing:.1em}
 .prose{max-width:44em;margin-left:164px;font-family:var(--f-serif);font-size:16.5px;line-height:2.05;color:rgba(236,230,240,.88)}
 .prose p{margin:0 0 1.1em}
 .prose em{font-style:normal;color:#F6A8C4}
@@ -417,6 +424,7 @@ header.gnb{z-index:30}
 .rel p{margin:0;font-size:13px;line-height:1.75;color:rgba(236,230,240,.7)}
 .routes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0 0 164px}
 .routes div{border-radius:16px;padding:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);min-width:0}
+.routes p.lock{margin-top:10px;padding-top:10px;border-top:1px dashed rgba(246,168,196,.35);color:#F6A8C4;font-size:12.5px}
 .routes div.hid{border-style:dashed;border-color:rgba(246,168,196,.5)}
 .routes b{display:block;font-size:16px;color:#fff;margin-bottom:6px}
 .routes p{margin:0;font-size:13.5px;line-height:1.8;color:rgba(236,230,240,.72)}
@@ -528,7 +536,7 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
       <div class="col"><h4>캠퍼스</h4><a href="#campus">캠퍼스맵</a><a href="#campus">화심관·향음관</a><a href="#campus">화무관·채화관</a><a href="#campus">백합관·온실</a></div>
       <div class="col"><h4>학생생활</h4><a href="#life">보건실·억제제</a><a href="#life">교칙</a><a href="#notice">학생회 공지</a></div>
       <div class="col"><h4>사계</h4><a href="#four">한겨울</a><a href="#four">박제니</a><a href="#four">주제하</a><a href="#four">도자림</a></div>
-      <div class="col"><h4>세계관</h4><a href="#world">형질의 세계</a><a href="#world">작년 장마</a><a href="#world">루트</a><a href="#prologue">프롤로그</a></div>
+      <div class="col"><h4>세계관</h4><a href="#world">형질의 세계</a><a href="#world">넷의 이유</a><a href="#world">루트</a><a href="#prologue">프롤로그</a></div>
     </div>
   </div>
 </header>
@@ -751,22 +759,22 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
       </div>
 
       <div class="chap">
-        <div class="chap-h"><b>III</b><div><h3>작년 장마, 백합 온실</h3><p>넷 다 기억하지 못하는 밤.</p></div></div>
+        <div class="chap-h"><b>III</b><div><span class="chap-tag">HIDDEN ENDING<i>히든 엔딩</i></span><h3>넷이 붙어 다니는 이유</h3><p>아무도 묻지 않는다. 물어도 대답하지 않는다.</p></div></div>
         <div class="prose">
-          <p>작년 장마. 히트가 온 우성 오메가 선배가 백합 온실에 있었다. 러트 동조에 끌려 넷이 그곳으로 몰려왔다. 그날 무슨 일이 있었는지, 넷 다 기억이 없다. 남은 건 조각뿐이다.</p>
+          <p>우성 알파끼리는 페로몬이 서로를 밀어낸다. 한 공간에 오래 있으면 신경이 곤두서고, 그래서 우성 알파 넷이 친구로 지내는 일은 거의 없다. 그런데 사계는 같이 다닌다. 같은 라운지, 같은 귀빈석, 같은 침묵. 학생들이 아는 건 이 정도다. 나머지는 소문뿐이다.</p>
         </div>
         <ul class="frags">
-          <li>겨울이 "내 애 낳아"라고 한 것.</li>
-          <li>언뜻언뜻 스치는, 자기들의 흥분되고 고양된 목소리.</li>
-          <li>정신을 차렸을 때 엉망이 되어 있던 온실.</li>
-          <li>누가 치웠는지 모르는데, 정리는 되어 있었다.</li>
-          <li>선배는 얼마 뒤 이사를 갔다. 한동안 넷과 연락이 오갔지만, 차차 끊어졌다.</li>
+          <li>"작년 장마부터였대."</li>
+          <li>장마가 끝난 뒤, 백합 온실 자물쇠가 바뀌었다.</li>
+          <li>백합관 꼭대기 층은 한동안 비어 있었다.</li>
+          <li>한겨울이 그 얘기를 꺼내면, 주제하가 끊는다. 도자림은 다른 데를 본다.</li>
+          <li>박제니만, 그 얘기가 나올 때 웃는다.</li>
         </ul>
         <div class="prose" style="margin-top:26px">
-          <p>넷에게 죄의식은 없다. 넷이 같이 다니는 이유는 공범이라서가 아니라, 서로가 그날의 유일한 증인이라서다. 그리고 그날 이후 넷 사이에는 말하지 않아도 지키는 규칙이 하나 생겼다.</p>
+          <p>친해서가 아니다. 그렇다고 서로를 믿는 것 같지도 않다. 다만 넷 사이에는 누가 정한 적 없는 규칙이 하나 있다.</p>
         </div>
         <div class="rule-quote">우성 오메가 앞에서는, 넷이 동시에 모이지 않는다.</div>
-        <div class="prose" style="margin-top:22px"><p>또 동조가 터지면 그날이 반복될 테니까. 그래서 당신 앞에는 언제나 한 명씩만 나타나고, 하나가 빠지면 다른 하나가 들어온다. 학생들 사이에는 이런 말이 돈다. <em>사계가 다 모이면 그 해는 끝난 거다.</em></p></div>
+        <div class="prose" style="margin-top:22px"><p>왜인지는 넷만 안다. 아니, 어쩌면 넷도 다 알지는 못한다. 그래서 당신 앞에는 언제나 한 명씩만 나타나고, 하나가 빠지면 다른 하나가 들어온다. 학생들 사이에는 이런 말이 돈다. <em>사계가 다 모이면 그 해는 끝난 거다.</em></p></div>
       </div>
 
       <div class="chap">
@@ -786,9 +794,9 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
         <div class="prose"><p>당신은 입학 전부터 억제제를 처방받았고, 목에는 차단제를 감았다. 그래도 향은 샌다. 넷은 각자의 방식으로 먼저 다가오고, 먼저 제안하고, 먼저 도발한다. 고르는 건 당신이다. 한 명과 각인 금지의 선 직전까지 가는 순간, 이야기는 갈라진다.</p></div>
         <div class="routes">
           <div><b>공통 루트</b><p>넷이 모두 다가온다. 당신의 선택에 따라 관계가 쌓인다.</p></div>
-          <div><b>개별 루트</b><p>각인하는 순간 그 사람의 루트로 확정된다. 나머지 셋은 사라지지 않고, 질투로 남는다.</p></div>
-          <div><b>사계 전원 루트</b><p>장마, 히트, 동조, 그리고 온실. 이번엔 기억이 남고, 문을 여는 건 당신이다.</p></div>
-          <div class="hid"><b>아니면… 뭐</b><p>학교가 공개하지 않는 것. 연락이 끊긴 선배, 정리된 온실, 이사가 고른 꽃.</p></div>
+          <div><b>개별 루트</b><p>각인하는 순간 그 사람의 루트로 확정된다. 나머지 셋은 사라지지 않고, 질투로 남는다.</p><p class="lock">🔒 한 사람에게 먼저 각인되거나 그 아이를 가지면, 사계 전원 루트와 히든 루트는 닫힌다.</p></div>
+          <div><b>사계 전원 루트</b><p>비가 길어지는 계절, 한 송이를 두고 네 손이 동시에 뻗는다. 이번엔 아무도 잊지 않는다. 문을 여는 건 당신이다.</p></div>
+          <div class="hid"><b>아니면… 뭐</b><p>학교가 공개하지 않는 것. 비어 있던 층, 바뀐 자물쇠, 이사가 고른 꽃.</p></div>
         </div>
       </div>
 
@@ -848,7 +856,7 @@ var NOTICES={
  "학생회":[["hot","주기 관리표 제출 기한 (학생회실, 화심관)","2032.03.08"],["","형질별 출입 구역 안내 개정","2032.03.15"],["","4층 라운지 이용 문의는 받지 않습니다","2032.03.20"],["","백화제 부스 운영 회의","2032.08.20"],["","학생증 재발급 신청","2032.04.10"]]
 };
 var SCHED=[
- {t:"1학기",d:[["03","입학식","화무관 대강당. 첫 만남, 향이 처음 새는 날."],["04","과별 MT","외부 숙소, 학교의 통제 밖."],["04–05","1학기 실기 평가","듀엣 · 2인 씬 · 파드되 · 화보"],["06–07","장마","신입생의 첫 히트가 겹치기 쉬운 시기."]]},
+ {t:"1학기",d:[["03","입학식","화무관 대강당. 첫 만남, 향이 처음 새는 날."],["04","과별 MT","외부 숙소, 학교의 통제 밖."],["04–05","1학기 실기 평가","듀엣 · 2인 씬 · 파드되 · 화보"],["06–07","장마","비가 길어지는 계절. 꽃이 가장 쉽게 젖는 때.","key"]]},
  {t:"2학기",d:[["09","백화제","화경호를 따라 켜지는 등불, 공개 무대와 소문."],["10","2학기 실기","인물화 · 정기 공연"],["12","Scroll 엔터테인먼트 쇼케이스","1년 차 데드라인. 누구 곁에 설지 정해집니다."]]}
 ];
 var PLACES=[
@@ -858,7 +866,7 @@ var PLACES=[
  {nm:"화무관 연습동",tag:"신관 · 무용과",img:"dance",sub:"전면 거울 · 나무 마루",body:"대강당에 붙은 노출콘크리트 연습동. 전면 거울과 나무 마루, 아침 7시면 피아노 반주가 흘러나옵니다. 땀 때문에 차단제가 잘 먹히지 않습니다.",s:["송진","땀","바닥 왁스"]},
  {nm:"채화관",tag:"신관 · 시각예술학부",img:"studio",sub:"모델과 · 회화과 · 미디어아트과",body:"노출콘크리트와 넓은 유리. 1층 스튜디오는 하얀 무한배경, 3층 화실은 밤새 불이 켜져 있습니다. 지하 암실은 이중문 너머 붉은 안전등만 켜진 밀폐 공간입니다.",s:["테레빈유","물감","약품 냄새"]},
  {nm:"백합관",tag:"구관 · 기숙사",img:"omega-floor",sub:"우성 오메가 단독 층",body:"크림색 석조, 창마다 검은 철제 발코니. 우성 오메가 단독 층은 꼭대기 층으로, 전용 카드키 엘리베이터와 복도 끝 무거운 문을 지나야 합니다. 공기 정화기 소리가 낮게 깔려 있습니다.",s:["낮은 기계음","무거운 문","카드키"]},
- {nm:"백합 온실",tag:"화심관 뒤",img:"greenhouse",sub:"작년 장마, 그날의 장소",body:"흰 철골의 빅토리아풍 유리 온실. 유리에는 늘 김이 서려 밖에서는 안이 흐릿하게만 보입니다. 스프링클러가 돌면 안개처럼 물이 퍼지고, 백합 향이 머리가 아플 만큼 진하게 갇혀 있습니다.",s:["진한 백합","끈적한 습기","흐린 유리"]},
+ {nm:"백합 온실",tag:"화심관 뒤",img:"greenhouse",sub:"장마가 끝나고 자물쇠가 바뀐 곳",body:"흰 철골의 빅토리아풍 유리 온실. 유리에는 늘 김이 서려 밖에서는 안이 흐릿하게만 보입니다. 스프링클러가 돌면 안개처럼 물이 퍼지고, 백합 향이 머리가 아플 만큼 진하게 갇혀 있습니다.",s:["진한 백합","끈적한 습기","흐린 유리"]},
  {nm:"화경호",tag:"캠퍼스 중앙",img:"lake",sub:"꽃을 비추는 거울",body:"수양버들과 낮은 돌난간, 호숫가 벤치. 맑은 날에는 화심관 시계탑이 수면에 비치고, 비 오는 날에는 빗방울이 번집니다. 비가 오는 날마다 뭔가 일어납니다.",s:["수양버들","돌난간","번지는 빗방울"]}
 ];
 var SCHOOLS=[
@@ -940,7 +948,7 @@ $(function(){
   /* schedule */
   var si=0;
   function sched(){var s=SCHED[si];$("#calTitle").text("2032학년도 "+s.t);
-    $("#sched").hide().html(s.d.map(function(d){return '<li><b>'+d[0]+'</b><span>'+d[1]+'<small>'+d[2]+'</small></span></li>'}).join("")).fadeIn(250)}
+    $("#sched").hide().html(s.d.map(function(d){return '<li'+(d[3]?' class="key"':'')+'><b>'+d[0]+'</b><span>'+d[1]+(d[3]?'<em class="flag">💧</em>':'')+'<small>'+d[2]+'</small></span></li>'}).join("")).fadeIn(250)}
   sched();$("#calPrev,#calNext").on("click",function(){si=(si+1)%2;sched()});
 
   /* places */

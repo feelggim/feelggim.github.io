@@ -498,6 +498,20 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .sig .tx h2{margin:16px 0 8px;font-family:var(--f-display);font-weight:400;font-size:clamp(46px,7vw,96px);letter-spacing:.24em;line-height:1;color:var(--ink)}
 .sig .tx .k{display:flex;align-items:center;gap:14px;letter-spacing:.55em;font-size:15px;color:var(--ink)}
 .sig .tx .k::before,.sig .tx .k::after{content:"";width:36px;height:1px;background:var(--ink)}
+.hook{margin:0 auto 54px;display:grid;gap:5px;max-width:820px;text-align:left}
+.hook figure{position:relative;margin:0;height:clamp(84px,11vw,150px);overflow:hidden;border-radius:3px;clip-path:inset(50% 0 50% 0);transition:clip-path 1.3s cubic-bezier(.7,0,.2,1)}
+.hook.in figure{clip-path:inset(0 0 0 0)}
+.hook.in figure:nth-child(2){transition-delay:.32s}.hook.in figure:nth-child(3){transition-delay:.64s}.hook.in figure:nth-child(4){transition-delay:.96s}
+.hook img{width:100%;height:100%;object-fit:cover;object-position:var(--pos);filter:grayscale(1) contrast(1.12) brightness(.85) blur(6px);transform:scale(1.14);transition:filter 2.2s ease,transform 7s cubic-bezier(.2,.6,.2,1)}
+.hook.in img{filter:grayscale(1) contrast(1.12) brightness(.9) blur(0);transform:scale(1.02)}
+.hook.in figure:nth-child(2) img{transition-delay:.32s}.hook.in figure:nth-child(3) img{transition-delay:.64s}.hook.in figure:nth-child(4) img{transition-delay:.96s}
+.hook figure::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,11,18,.6),transparent 26%,transparent 74%,rgba(14,11,18,.5));pointer-events:none}
+.hook figure::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(115deg,rgba(246,168,196,.5),rgba(183,166,255,.35),rgba(139,226,224,.4));mix-blend-mode:color;opacity:0;transition:opacity .6s ease;pointer-events:none}
+.hook figure:hover::before{opacity:1}
+.hook figure:hover img{filter:grayscale(.2) contrast(1.05) brightness(1) blur(0);transform:scale(1.07);transition:filter .6s ease,transform 1.2s ease}
+.hook b{position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:2;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(10,52,111,.85);font-family:var(--f-serif);font-weight:600;font-size:15px;color:#fff}
+@media (prefers-reduced-motion:reduce){.hook figure,.hook img{transition:none}}
+.w-close .hook + p{font-size:clamp(20px,2.6vw,28px);letter-spacing:.02em;margin-bottom:30px}
 .sig .tx p{margin:34px 0 0;max-width:24em;font-family:var(--f-serif);font-size:clamp(17px,1.8vw,21px);line-height:1.95;color:#3A3F55}
 .sig .tx .turn{margin-top:40px;font-size:12.5px;letter-spacing:.24em;color:var(--muted);display:flex;align-items:center;gap:12px}
 .sig .tx .turn::after{content:"";width:1px;height:40px;background:linear-gradient(var(--muted),transparent)}
@@ -696,7 +710,7 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
           <div class="field"><span class="k">이름</span><span>직접 입력</span></div>
           <div class="field"><span class="k">전공</span><div class="majors" id="majors"></div></div>
           <div class="field"><span class="k">페로몬 향</span><span>예) 비에 젖은 백합, 복숭아 우유, 오래된 책장</span></div>
-          <div class="field"><span class="k">외형</span><span>키, 머리, 눈, 분위기</span></div>
+          <div class="field"><span class="k">외형</span><span>키, 머리, 눈, 분위기<br><b style="color:var(--navy)">추천</b> 어깨에 닿는 까만 머리 + 앞머리 <small style="color:var(--muted)">— 이렇게 설정하면 CG 몰입도가 높아져요</small></span></div>
           <div class="field fixed"><span class="k">나이</span><span class="v">20세</span></div>
           <div class="field fixed"><span class="k">성별</span><span class="v">여성</span></div>
           <div class="field fixed"><span class="k">형질</span><span class="v">우성 오메가</span></div>
@@ -840,6 +854,12 @@ img{-webkit-user-drag:none;-webkit-touch-callout:none}
       </div>
 
       <div class="w-close">
+          <div class="hook" aria-hidden="true">
+            <figure style="--pos:78% 45%"><img src="img/hook-winter.webp" alt=""><b>冬</b></figure>
+            <figure style="--pos:35% 45%"><img src="img/hook-spring.webp" alt=""><b>春</b></figure>
+            <figure style="--pos:40% 35%"><img src="img/hook-summer.webp" alt=""><b>夏</b></figure>
+            <figure style="--pos:42% 40%"><img src="img/hook-autumn.webp" alt=""><b>秋</b></figure>
+          </div>
         <p>백 가지 꽃이 피는 학교에서, 단 하나의 꽃이 젖는다.</p>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="play" data-play href="#"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg>크랙에서 플레이하기</a><a class="btn ghost" href="#top">처음으로 돌아가기</a></div>
       </div>
@@ -881,8 +901,10 @@ var SCHED=[
  {t:"2학기",d:[["09","백화제","화경호를 따라 켜지는 등불, 공개 무대와 소문."],["10","2학기 실기","인물화 · 정기 공연"],["12","Scroll 엔터테인먼트 쇼케이스","1년 차 데드라인. 누구 곁에 설지 정해집니다."]]}
 ];
 var PLACES=[
- {nm:"화심관",tag:"구관 · 본관",img:"lounge",sub:"이사실 · 학생회실 · 4층 사계 라운지",body:"회색 화강암 석조에 높은 아치 창, 꼭대기에는 시계탑. 삐걱이는 짙은 나무 계단과 놋쇠 난간, 오래된 샹들리에. 발소리가 울려 누가 오는지 다 들립니다. 4층 사계 라운지는 벨벳 소파와 통창이 있는 곳으로, 아무도 올라가지 않습니다.",s:["오래된 종이","나무 왁스","울리는 발소리"]},
- {nm:"향음관",tag:"신관 · 음악예술학부",img:"practice",sub:"보컬과 · 기악과 · 지하 녹음실",body:"유리 커튼월에 흰 흡음 패널. 복도 내내 문틈으로 발성과 피아노가 새어 나와 겹칩니다. 방음문이 닫히면 바깥 소리가 뚝 끊깁니다. 지하 녹음실 문 위에는 녹음 중을 알리는 붉은 램프.",s:["새어 나오는 피아노","붉은 램프","갑작스런 정적"]},
+ {nm:"화심관",tag:"구관 · 본관",img:"hwasim",sub:"이사실 · 학생회실 · 보건실",body:"회색 화강암 석조에 높은 아치 창, 꼭대기에는 시계탑. 삐걱이는 짙은 나무 계단과 놋쇠 난간, 오래된 샹들리에. 발소리가 울려 누가 오는지 다 들립니다.",s:["오래된 종이","나무 왁스","울리는 발소리"]},
+ {nm:"사계 라운지",tag:"화심관 4층",img:"lounge",sub:"사계 전용 · 아무도 올라가지 않는 곳",body:"화심관 꼭대기 층. 벨벳 소파와 대리석 바닥, 캠퍼스와 호수가 한눈에 내려다보이는 통창. 학생들은 이 층에 올라가지 않습니다. 사계의 자리니까요.",s:["벨벳 소파","대리석","내려다보이는 캠퍼스"]},
+ {nm:"향음관",tag:"신관 · 음악예술학부",img:"hyangeum",sub:"보컬과 · 기악과 · 지하 녹음실",body:"유리 커튼월에 흰 흡음 패널. 복도 내내 문틈으로 발성과 피아노가 새어 나와 겹칩니다. 방음문이 닫히면 바깥 소리가 뚝 끊깁니다. 지하 녹음실 문 위에는 녹음 중을 알리는 붉은 램프.",s:["새어 나오는 피아노","붉은 램프","갑작스런 정적"]},
+ {nm:"향음관 지하 녹음실",tag:"향음관 지하 · 한겨울의 방",img:"recording",sub:"붉은 ON AIR 램프 · 이중 방음문",body:"향음관 지하, 한겨울이 사실상 혼자 쓰는 방. 문 위 붉은 램프가 켜져 있으면 아무도 문을 열지 않습니다. 소파 위엔 늘 그녀의 재킷이 걸려 있고, 안에서 무슨 소리가 나도 방음문 밖으로는 새어 나오지 않아요.",s:["붉은 램프","가죽 소파","새지 않는 소리"]},
  {nm:"화무관 대강당",tag:"구관 · 공연예술학부",img:"hall",sub:"붉은 벨벳 객석 · 2층 귀빈석",body:"붉은 벽돌 아치의 오래된 대강당. 입학식과 정기 공연이 열립니다. 2층 귀빈석은 사계의 고정석입니다.",s:["벨벳","샹들리에","2층 귀빈석"]},
  {nm:"화무관 연습동",tag:"신관 · 무용과",img:"dance",sub:"전면 거울 · 나무 마루",body:"대강당에 붙은 노출콘크리트 연습동. 전면 거울과 나무 마루, 아침 7시면 피아노 반주가 흘러나옵니다. 땀 때문에 차단제가 잘 먹히지 않습니다.",s:["송진","땀","바닥 왁스"]},
  {nm:"채화관",tag:"신관 · 시각예술학부",img:"studio",sub:"모델과 · 회화과 · 미디어아트과",body:"노출콘크리트와 넓은 유리. 1층 스튜디오는 하얀 무한배경, 3층 화실은 밤새 불이 켜져 있습니다. 지하 암실은 이중문 너머 붉은 안전등만 켜진 밀폐 공간입니다.",s:["테레빈유","물감","약품 냄새"]},
@@ -1090,6 +1112,11 @@ $(function(){
     requestAnimationFrame(frame)}
   requestAnimationFrame(frame);
 })();
+
+/* hook strips: slide in when the signature band comes into view */
+(function(){var h=document.querySelector(".hook");if(!h)return;
+  if(!("IntersectionObserver" in window)){h.classList.add("in");return}
+  var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){h.classList.add("in");io.disconnect()}},{threshold:.25});io.observe(h)})();
 </script>
 </body>
 </html>

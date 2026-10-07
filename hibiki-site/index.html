@@ -711,21 +711,22 @@ body.in #hero .seal{opacity:.9;transform:rotate(-4deg) scale(1)}
 /* ── 붉게 물드는 박자 ── */
 #bink{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:58;mix-blend-mode:multiply;transition:opacity 1.2s}
 /* ── 입장 족자 ── */
-.jiku{position:absolute;top:0;z-index:1;width:clamp(96px,11vw,170px);transform-origin:50% 0;animation:sway 7s ease-in-out infinite}
-.jiku.l{left:clamp(18px,7vw,130px)}.jiku.r{right:clamp(18px,7vw,130px);animation-delay:-3.5s}
+.jiku{position:absolute;top:0;z-index:1;width:clamp(96px,11vw,170px);transform-origin:50% 0;animation:jsway 6s ease-in-out infinite}
+.jiku.l{left:clamp(18px,7vw,130px)}.jiku.r{right:clamp(18px,7vw,130px);animation-duration:6.8s;animation-delay:-2.3s}
 .jiku .rod{display:block;height:14px;margin:0 -12px;background:linear-gradient(#3a2a20,#16110e 60%,#000);border-radius:7px;box-shadow:0 3px 8px rgba(0,0,0,.35);position:relative;z-index:2}
 .jiku .rod.top{margin:0 -4px;height:10px}
 .jiku .rod.bot::before,.jiku .rod.bot::after{content:"";position:absolute;top:-2px;width:14px;height:18px;border-radius:4px;background:linear-gradient(#c9a24e,#7a5a22)}
 .jiku .rod.bot::before{left:-8px}.jiku .rod.bot::after{right:-8px}
 .jiku .cord{position:absolute;left:50%;top:-60px;width:1px;height:60px;background:#3a2a20}
-.jiku .paper{position:relative;height:min(64vh,560px);background:linear-gradient(90deg,#6b1a20 0 9%,#efe8da 9% 91%,#6b1a20 91%);border-top:14px solid #6b1a20;border-bottom:26px solid #6b1a20;overflow:hidden;clip-path:inset(0 0 100% 0);animation:unroll 1.8s .3s cubic-bezier(.7,0,.2,1) forwards;box-shadow:inset 0 0 30px rgba(60,40,20,.18)}
+.jiku .paper{position:relative;height:min(64vh,560px);background:linear-gradient(90deg,#6b1a20 0 9%,#efe8da 9% 91%,#6b1a20 91%);border-top:14px solid #6b1a20;border-bottom:26px solid #6b1a20;overflow:hidden;box-shadow:inset 0 0 30px rgba(60,40,20,.18)}
 .jiku .paper::before{content:"";position:absolute;inset:0 9%;background:repeating-linear-gradient(90deg,transparent 0 3px,rgba(120,90,60,.035) 3px 4px)}
 .jiku .ji{position:absolute;left:0;right:0;top:9%;text-align:center;font-family:var(--brush);font-size:clamp(48px,6vw,96px);line-height:1.08;color:#16110e;letter-spacing:.06em;height:auto}
 .jiku.r .ji{color:#8a1622}
 .jiku .js{position:absolute;right:16%;bottom:16%;writing-mode:vertical-rl;font-family:var(--jp);font-size:clamp(10px,.9vw,13px);letter-spacing:.3em;color:#3a322c}
 .jiku .hk{position:absolute;left:18%;bottom:9%;width:clamp(20px,2vw,28px);height:clamp(20px,2vw,28px);color:#8a1622}
 .jiku .hk svg{width:100%;height:100%}
-@keyframes unroll{to{clip-path:inset(0 0 0 0)}}
+@keyframes jsway{0%,100%{transform:rotate(-1.3deg)}50%{transform:rotate(1.3deg)}}
+@media (prefers-reduced-motion:reduce){.jiku{animation:none}}
 @keyframes sway{0%,100%{transform:rotate(-.6deg)}50%{transform:rotate(.6deg)}}
 @media (max-width:760px){.jiku{width:64px}.jiku.l{left:8px}.jiku.r{right:8px}.jiku .paper{height:46vh}.jiku .ji{font-size:40px}.jiku .js{display:none}}
 #enter .box{z-index:3}

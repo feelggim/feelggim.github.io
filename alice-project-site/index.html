@@ -310,6 +310,7 @@ section.sec{padding-block:clamp(72px,10vw,128px);position:relative}
 @keyframes jit{0%,100%{transform:none}31%{transform:translate(3px,-1px) skewX(8deg)}33%{transform:none}77%{transform:translate(-4px,2px)}79%{transform:none}}
 .qcard .info{padding:14px 16px 16px;border-top:2px solid var(--c)}
 .qcard .house{font-family:var(--f-ko);font-size:22px;line-height:1.2}
+.qcard .house .ht{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--dim);margin-left:9px;vertical-align:2px}
 .qcard .latin{font-family:var(--f-disp);font-weight:700;font-size:11px;letter-spacing:.24em;color:var(--c)}
 .qcard .sin{float:right;font-family:var(--f-mono);font-size:12px;color:var(--ash);border:1px solid var(--line);padding:1px 7px;margin-top:4px}
 .qcard .one{font-size:13px;color:#b9c1d1;margin:10px 0 0;min-height:3.4em}
@@ -317,6 +318,9 @@ section.sec{padding-block:clamp(72px,10vw,128px);position:relative}
 .qcard .nm .qname{font-size:15px}
 .qcard .maskbadge.keep{color:var(--alert)!important;border-color:var(--alert)!important}
 .qd-toggle button[disabled]{opacity:.55;cursor:not-allowed}
+.qcard .pairbadge{position:absolute;left:10px;bottom:10px;z-index:2;display:inline-flex;align-items:center;gap:6px;font-family:var(--f-ko);font-size:13px;letter-spacing:.02em;padding:4px 11px 4px 8px;color:#fff;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 45%,rgba(4,5,11,.9)),color-mix(in srgb,var(--c2) 45%,rgba(4,5,11,.9)));border:1px solid #fff;box-shadow:0 0 14px color-mix(in srgb,var(--c2) 55%,transparent),0 0 6px color-mix(in srgb,var(--c) 55%,transparent);text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.qcard .pairbadge i{font-style:normal;color:#ff6fbf;text-shadow:0 0 8px #ff3ea5;font-size:14px}
+.relp{font-weight:400;color:#fff;padding:1px 8px;margin-right:4px;background:linear-gradient(90deg,color-mix(in srgb,var(--c) 35%,transparent),color-mix(in srgb,var(--c2) 35%,transparent));border:1px solid color-mix(in srgb,var(--c) 50%,var(--c2))}
 .qcard .maskbadge{position:absolute;right:10px;bottom:10px;z-index:2;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;padding:2px 6px;background:rgba(4,5,11,.8);border:1px solid var(--c);color:var(--c)}
 
 /* dialog */
@@ -2082,7 +2086,7 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v)
 
 /* ---------- data ---------- */
 const Q=[
- {id:'superbia',maskRule:'name',house:'슈페르비아',latin:'SUPERBIA',sin:'교만',name:'루시탄',c:'#d4dcff',opal:true,colorName:'오팔 · 실버',
+ {id:'superbia',ht:167,htNote:'',maskRule:'name',house:'슈페르비아',latin:'SUPERBIA',sin:'교만',name:'루시탄',c:'#d4dcff',opal:true,colorName:'오팔 · 실버',
   ring:[69.5,7],focus:[66.5,19],clock:'2시 방향',
   district:'거울 크롬 마천루가 빽빽하게 솟아 있다. 원더에서 가장 높고, 가장 차가운 구역.',
   one:'누구도 자기 위에 두지 않는 여자. 한 번도 고개를 숙인 적이 없다.',
@@ -2093,7 +2097,7 @@ const Q=[
   rel:'이라 가문과 앙숙.',
   imgs:{mask:'assets/lucitan-mask.webp'}, card:'assets/lucitan-mask.webp', panel:'assets/lucitan-mask.webp',
   riddle:'거울은 앞만 비추지. 뒤가 궁금하면… 깨야 해.'},
- {id:'avaritia',maskRule:'name',house:'아바리티아',latin:'AVARITIA',sin:'탐욕',name:'아우룸',c:'#ffc53d',colorName:'골드',
+ {id:'avaritia',ht:170,htNote:'',maskRule:'name',house:'아바리티아',latin:'AVARITIA',sin:'탐욕',name:'아우룸',c:'#ffc53d',colorName:'골드',
   ring:[75,39.6],focus:[73,51],clock:'5시 방향',
   district:'금 장식이 들어간 흰 금고형 데이터 뱅크. 토끼굴 게이트 바로 옆에서, 들어오는 것을 전부 센다.',
   one:'회중시계를 여러 개 걸고, 입마저 자물쇠로 잠근 여자.',
@@ -2103,7 +2107,7 @@ const Q=[
   mask:'코와 입을 덮는 흰 하프 마스크. 앞판은 금 마름모 격자 그릴, 윗선은 양쪽으로 뾰족하게 솟았다. 양옆에 호박빛으로 빛나는 금 원형 정화통, 흰 가죽 스트랩마다 사슬 달린 금 자물쇠. 탐욕스러운 자가 입까지 잠가둔 형상.',
   imgs:{mask:'assets/aurum-mask.webp?v=3'}, card:'assets/aurum-mask.webp?v=3', panel:'assets/aurum-mask.webp?v=3',
   riddle:'시계를 제일 많이 가진 여자가 시간을 제일 아끼더라. 남의 것까지.'},
- {id:'luxuria',maskRule:'inner',house:'룩수리아',latin:'LUXURIA',sin:'색욕',name:'단테',c:'#ff3ea5',colorName:'핫핑크',
+ {id:'luxuria',ht:168,htNote:'',maskRule:'inner',house:'룩수리아',latin:'LUXURIA',sin:'색욕',name:'단테',c:'#ff3ea5',colorName:'핫핑크',
   ring:[81.4,22.5],focus:[82,34],clock:'3시 방향',
   district:'핫핑크 LED가 감긴 곡선 건물들. 원더 사교계가 여기서 열린다.',
   one:'장갑을 끼지 않는 여자. 긴 앞머리 너머로 눈이 보일 듯 말 듯하다.',
@@ -2113,7 +2117,7 @@ const Q=[
   mask:'코와 입을 덮는 흰 크롬 비대칭 하프 마스크. 앞판은 보석처럼 깎인 장미빛 유리이고, 핑크 네온 선이 사선으로 가른다. 양옆에 핑크 LED가 든 원형 필터, 귀에 걸리는 핑크 네온 튜브와 크롬 쇠사슬. 눈앞엔 분홍빛 투명 바이저.',
   imgs:{mask:'assets/dante-mask.webp'}, card:'assets/dante-mask.webp', panel:'assets/dante-mask.webp',
   riddle:'만지는 게 전부인 사람도 있어. 그 손이 차가운지 뜨거운지는… 잡아봐야 알지.'},
- {id:'invidia',house:'인비디아',latin:'INVIDIA',sin:'질투',name:'디아닌',c:'#a8ff3e',colorName:'애시드 그린',
+ {id:'invidia',ht:165,htNote:'',house:'인비디아',latin:'INVIDIA',sin:'질투',name:'디아닌',c:'#a8ff3e',colorName:'애시드 그린',
   ring:[31.4,7.2],focus:[32,19],clock:'10시 방향',
   district:'거울 패널과 기워 붙인 모듈, 감시 안테나와 카메라. 아케디아 구역 바로 옆에서 모든 걸 본다.',
   one:'남의 눈, 남의 머리카락. 기워 붙인 자국이 형광으로 빛난다.',
@@ -2123,8 +2127,9 @@ const Q=[
   wear:'오버사이즈 흰 후드 크롭 재킷, 주렁주렁 단 남의 ID 카드·이름표·배지, 흰 카고 팬츠, 짝짝이 신발(애시드 그린 부츠와 검은 컴뱃 부츠).',
   mask:null, noMask:'없음. 그런 걸 신경 쓰지 않는다. 처음부터 맨얼굴로 유저를 만난다.',
   imgs:{full:'assets/dianin-full.webp?v=2'}, bare:true, card:'assets/dianin-full.webp?v=2', panel:'assets/dianin-full.webp?v=2',
+  rel:'<b class="relp" style="--c2:#a35cff">♥ 굴라 가문과 연인</b> · 20년째. 굴라를 무릎에 앉혀 두고 디저트 먹는 걸 지켜보는 게 낙이다.', pair:{house:'굴라',c:'#a35cff'},
   riddle:'저 애 몸엔 남의 것이 너무 많아. 이제 뭘 더 베끼고 싶을까?'},
- {id:'gula',house:'굴라',latin:'GULA',sin:'탐식',name:'사티아',c:'#a35cff',colorName:'그레이프 퍼플',
+ {id:'gula',ht:155,htNote:' · 일곱 중 제일 작다.',house:'굴라',latin:'GULA',sin:'탐식',name:'사티아',c:'#a35cff',colorName:'그레이프 퍼플',
   ring:[18.6,22.5],focus:[18.5,33],clock:'8시 방향',
   district:'보라 액체가 출렁이는 탱크와 반투명 바이오 돔. 배관이 끝없이 이어진다.',
   one:'젤리처럼 비치는 몸. 손에서 디저트가 떨어질 날이 없다.',
@@ -2134,8 +2139,9 @@ const Q=[
   wear:'스트랩과 버클이 달린 흰 크롭 패딩 재킷, 사탕·구슬·마카롱이 든 투명 PVC 플리츠 스커트, 하트·마카롱 참, 소매에서 늘어진 보라 액체 튜브, 끈 달린 흰 청키 부츠. 손엔 숟가락 꽂힌 케이크 한 조각.',
   mask:null, noMask:'없음. 먹어야 해서 쓰지 않는다. 처음부터 맨얼굴로 유저를 만난다.',
   imgs:{full:'assets/satia-full.webp?v=2'}, bare:true, card:'assets/satia-full.webp?v=2', panel:'assets/satia-full.webp?v=2',
+  rel:'<b class="relp" style="--c2:#a8ff3e">♥ 인비디아 가문과 연인</b> · 20년째. 인비디아의 무릎 위가 제자리고, 디저트를 먹여주기도 한다.', pair:{house:'인비디아',c:'#a8ff3e'},
   riddle:'배고픈 애한테 디저트를 주면 안 돼. 더 큰 걸 원하게 되거든.'},
- {id:'ira',maskRule:'keep',house:'이라',latin:'IRA',sin:'분노',name:'바탄',c:'#ff2b3b',colorName:'레이저 레드',
+ {id:'ira',ht:170,htNote:'',maskRule:'keep',house:'이라',latin:'IRA',sin:'분노',name:'바탄',c:'#ff2b3b',colorName:'레이저 레드',
   ring:[24.6,39.5],focus:[27,51],clock:'7시 방향',
   district:'방폭벽과 탐조등으로 둘러친 군사 요새. 탐조등이 쉬지 않는다.',
   one:'호흡기 마스크, 등에 멘 크로케 채. 피부의 금 사이로 붉은빛이 샌다.',
@@ -2147,7 +2153,7 @@ const Q=[
   rel:'슈페르비아 가문과 앙숙.',
   imgs:{mask:'assets/batan-mask.webp'}, card:'assets/batan-mask.webp', panel:'assets/batan-mask.webp',
   riddle:'화난 사람 마스크는 벗기지 마. 숨 쉬는 소리부터 무서워지니까.'},
- {id:'acedia',house:'아케디아',latin:'ACEDIA',sin:'나태',name:'녹틸',c:'#2fe6ff',colorName:'시안',flick:true,
+ {id:'acedia',ht:179,htNote:' · 일곱 중 제일 크다. 늘 주저앉아 있어서 아무도 모른다. 일어서면 긴 머리가 바닥에 끌린다.',house:'아케디아',latin:'ACEDIA',sin:'나태',name:'녹틸',c:'#2fe6ff',colorName:'시안',flick:true,
   ring:[49.8,5.3],focus:[49,15],clock:'12시 방향',
   district:null,
   one:'늘 졸고 있다. 아무것도 안 하는 것처럼 보인다.',
@@ -2780,7 +2786,7 @@ function cardArt(q){
 function refreshCard(id){
   const q=Q.find(x=>x.id===id), c=document.querySelector(`.qcard[data-q="${id}"]`); if(!q||!c) return;
   const art=c.querySelector('.art'); const halo=art.querySelector('.halo').outerHTML;
-  art.innerHTML=halo+cardArt(q)+(badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'?'keep':''}">${badgeTxt(q)}</span>`:'');
+  art.innerHTML=halo+cardArt(q)+(q.pair?`<span class="pairbadge" style="--c2:${q.pair.c}"><i>♥</i>${q.pair.house}와 연인</span>`:'')+(badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'?'keep':''}">${badgeTxt(q)}</span>`:'');
   glitch(art);
 }
 const grid=$('#queens-grid');
@@ -2788,8 +2794,8 @@ grid.innerHTML=Q.map(q=>{
   const halo=q.opal?'opal':(q.flick?'flick':'');
   const art=cardArt(q);
   return `<div class="qcard" role="button" tabindex="0" data-q="${q.id}" style="--c:${q.c}">
-    <div class="art"><span class="halo ${halo}"></span>${art}${badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'?'keep':''}">${badgeTxt(q)}</span>`:''}</div>
-    <div class="info"><span class="sin">${q.sin}</span><div class="latin">${q.latin}</div><div class="house">${q.house}</div>
+    <div class="art"><span class="halo ${halo}"></span>${art}${q.pair?`<span class="pairbadge" style="--c2:${q.pair.c}"><i>♥</i>${q.pair.house}와 연인</span>`:''}${badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'?'keep':''}">${badgeTxt(q)}</span>`:''}</div>
+    <div class="info"><span class="sin">${q.sin}</span><div class="latin">${q.latin}</div><div class="house">${q.house}<span class="ht">${q.ht}cm</span></div>
     <p class="one">${q.one}</p>
     <div class="nm">이름 · ${nameHTML(q)}</div></div></div>`;
 }).join('');
@@ -2868,6 +2874,7 @@ function openQueen(id){
       <dl class="status">
         <div class="r"><dt>가문 색</dt><dd>${q.colorName}</dd></div>
         <div class="r"><dt>나이</dt><dd>200살 근처 · 외형은 20대</dd></div>
+        <div class="r"><dt>키</dt><dd>${q.ht}cm${q.htNote}</dd></div>
         <div class="r"><dt>머리</dt><dd>${q.hair}</dd></div>
         <div class="r"><dt>눈</dt><dd>${q.eyes}</dd></div>
         ${q.body?`<div class="r"><dt>몸</dt><dd>${q.body}</dd></div>`:''}

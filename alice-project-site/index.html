@@ -401,6 +401,26 @@ dialog.qd[open]{animation:qdIn .55s cubic-bezier(.2,1.3,.4,1)}
 .howto .step b{display:block;font-family:var(--f-ko);font-weight:400;font-size:19px;color:var(--porcelain)}
 .howto .step span{color:var(--ash);font-size:14px}
 .howto .step:hover{border-color:var(--hack2)}
+.arc{margin-top:clamp(36px,5vw,64px);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 40%),#05070d;position:relative}
+.arc::after{content:"COPY 허가 ─ 1회";position:absolute;right:clamp(10px,3vw,28px);top:-13px;transform:rotate(3deg);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;padding:3px 8px;background:#ffd23d;color:#0b0d14;pointer-events:none}
+.arc-hd{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;color:var(--ash)}
+.arc-hd b{color:var(--alert);font-weight:400;animation:blink 1s steps(1) infinite;margin-right:4px}
+.arc-bd{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(18px,3vw,36px);padding:clamp(16px,3vw,28px)}
+@media (max-width:820px){.arc-bd{grid-template-columns:minmax(0,1fr)}}
+.arc h3{font-family:var(--f-ko);font-weight:400;font-size:clamp(20px,2.4vw,26px);color:var(--porcelain);margin:0 0 8px}
+.arc p{color:var(--ash);font-size:14px;margin:0 0 14px}
+.arc-tip{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px;font-size:13.5px;color:var(--ash)}
+.arc-tip b{display:inline-block;min-width:5.4em;color:var(--hack2);font-weight:400;font-family:var(--f-ko);font-size:12px;letter-spacing:.08em}
+.arc-no{display:flex;flex-wrap:wrap;gap:6px}
+.arc-no span{font-size:12px;padding:4px 8px;border:1px solid rgba(255,43,59,.45);color:#ff8a93;background:rgba(255,43,59,.06)}
+.arc-no .k{border-color:var(--alert);background:var(--alert);color:#fff;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em}
+.arc-r{display:flex;flex-direction:column;gap:12px;min-width:0}
+#arcTx{display:block;width:100%;box-sizing:border-box;resize:none;overflow:hidden;font:400 13.5px/2.1em var(--f-body);color:var(--porcelain);background:#03050a repeating-linear-gradient(180deg,transparent 0 calc(2.1em - 1px),rgba(237,241,247,.07) calc(2.1em - 1px) 2.1em) local;border:1px solid var(--line);border-left:2px solid var(--hack2);padding:0 14px;margin:0;-webkit-user-select:text;user-select:text;cursor:text;word-break:keep-all;outline:none}
+#arcTx:focus{border-color:#2a3a66;border-left-color:var(--hack2)}
+.arc-cp{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-family:var(--f-ko);font-size:15px;padding:10px 18px;border:1px solid var(--hack2);color:var(--porcelain);background:rgba(34,240,255,.08);cursor:pointer;transition:background .2s,border-color .2s}
+.arc-cp .mono{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.2em;color:var(--hack2)}
+.arc-cp:hover{background:rgba(34,240,255,.16)}
+.arc-cp.ok{border-color:#a8ff3e;background:rgba(168,255,62,.1)}.arc-cp.ok .mono{color:#a8ff3e}
 
 /* ===== prologue ===== */
 .prologue{background:linear-gradient(180deg,var(--void),#08060f 30%,#08060f 70%,var(--void))}
@@ -546,6 +566,7 @@ section.prologue{padding-bottom:0}
 .fz-ib .r>span:first-child{color:#7d879c;border-right:1px solid #2a2f3d}
 .fz-ib .c{color:var(--hack)}
 .fz-ib .dm{color:#5d667c}
+.fz-ib .hd{color:#58c7d4;font-size:.86em;letter-spacing:0;margin-bottom:10px;word-break:keep-all;overflow-wrap:anywhere}
 .fz-go{display:inline-flex;align-items:center;gap:12px;font-family:var(--f-ko);font-size:clamp(16px,2vw,19px);letter-spacing:.04em;color:#fff;background:#0b0d14;padding:16px 28px;text-decoration:none;border:1px solid #0b0d14;box-shadow:6px 6px 0 var(--hack);transition:transform .15s,box-shadow .15s}
 .fz-go:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--hack2)}
 .fz-go .mono{font-family:var(--f-mono);font-size:.72em;letter-spacing:.18em;color:var(--hack2)}
@@ -1894,7 +1915,7 @@ html.locked main>section.sec:not(#world)>.wrap,html.locked #map .map-wrap{filter
     <div class="sec-head">
       <div class="sec-num" aria-hidden="true">05</div>
       <div><span class="en">HOW IT RUNS</span><h2 data-ml="{&quot;ja&quot;: &quot;シミュレーション案内&quot;, &quot;zh&quot;: &quot;模拟说明&quot;, &quot;en&quot;: &quot;HOW IT RUNS&quot;}">시뮬레이션 안내</h2></div>
-      <p data-ml="{&quot;ja&quot;: &quot;七人のクイーンを一人ずつ訪ねるシミュレーション。世界は君を待ってくれない。場面の終わりごとにワンダーの状態が表示される。&quot;, &quot;zh&quot;: &quot;这是一场逐一拜访七位女王的模拟。世界不会等你。每个场景结束时都会显示仙境的状态。&quot;, &quot;en&quot;: &quot;Visit the seven queens one by one. The world won’t wait for you. Wonder’s status shows after every scene.&quot;}">퀸 일곱 명을 하나씩 찾아가는 시뮬레이션이다. 세계는 너를 기다려주지 않는다. 매 장면 끝에 원더의 상태가 뜬다.</p>
+      <p data-ml="{&quot;ja&quot;: &quot;七人のクイーンを一人ずつ訪ねるシミュレーション。世界は君を待ってくれない。毎回の返答の一番上にワンダーの状態が表示される。&quot;, &quot;zh&quot;: &quot;这是一场逐一拜访七位女王的模拟。世界不会等你。每次回复的最上方都会显示仙境的状态。&quot;, &quot;en&quot;: &quot;Visit the seven queens one by one. The world won’t wait for you. Wonder’s status shows at the top of every reply.&quot;}">퀸 일곱 명을 하나씩 찾아가는 시뮬레이션이다. 세계는 너를 기다려주지 않는다. 매 답변 맨 위에 원더의 상태가 뜬다.</p>
     </div>
     <div class="sys">
       <div class="term" id="term">
@@ -1905,10 +1926,38 @@ html.locked main>section.sec:not(#world)>.wrap,html.locked #map .map-wrap{filter
       <div class="howto">
         <div class="step"><b>굴을 오른다</b><span>스무 살 생일, 하얀 토끼를 따라 원더로 올라간다.</span></div>
         <div class="step"><b>퀸을 찾아간다</b><span>퀸 앞에 끌려가지 않는다. 체셔의 안내를 따라 일곱 구역을 직접 찾아간다.</span></div>
-        <div class="step"><b>이름을 얻는다</b><span>처음엔 가문명으로만 부를 수 있다. 이름을 허락받는 순간 관계가 바뀐다.</span></div>
+        <div class="step"><b>이름을 얻는다</b><span>처음엔 가문명에 「님」을 붙여야 말을 받아준다. 이름을 허락받는 순간 관계가 바뀐다.</span></div>
         <div class="step"><b>링을 센다</b><span>링 점등은 일곱 칸. 하나 켜질 때마다 무언가가 진행된다. 다 켜지면 어떻게 되는지는 아직 아무도 말해주지 않는다.</span></div>
         <div class="step"><b>순수도를 지킨다</b><span>네 몸의 순수성. 깎이는 이유는 알려주지 않는다.</span></div>
-        <div class="step"><b>체셔의 말을 듣는다</b><span>맨 아래 한 줄. 맞는 말인지 거짓말인지는 네가 판단해.</span></div>
+        <div class="step"><b>체셔의 말을 듣는다</b><span>상태창 맨 아래 한 줄. 맞는 말인지 거짓말인지는 네가 판단해.</span></div>
+      </div>
+    </div>
+    <div class="arc" id="arc">
+      <div class="arc-hd"><span><b>●</b> WONDER · 입국 신고서</span><span>FORM A-20 · 하얀 장미 전용</span></div>
+      <div class="arc-bd">
+        <div class="arc-l">
+          <h3>앨리스 등록 양식</h3>
+          <p>크랙 프로필에 붙여넣고 채워 와. 원더는 적힌 것만 안다. 비워둔 칸은 아무도 지어내지 않는다.</p>
+          <ul class="arc-tip">
+            <li><b>이름 칸</b>앨리스. 본명은 괄호 안에. 퀸들은 어차피 앨리스라고 부른다.</li>
+            <li><b>퀸 호칭</b>처음엔 가문명에 「님」. 빼먹으면 차만 마신다.</li>
+          </ul>
+          <div class="arc-no" aria-label="반입 금지"><span class="k">반입 금지</span><span>남성·미성년</span><span>개조된 몸·링</span><span>진실을 아는 설정</span><span>퀸과 아는 사이</span><span>면역 외 능력</span></div>
+        </div>
+        <div class="arc-r">
+          <textarea id="arcTx" readonly rows="10" spellcheck="false" aria-label="앨리스 프로필 양식">이름: 앨리스 (본명: ○○ / 원더에선 모두가 '앨리스'라고 부른다)
+성별·나이: 여성 · 스무 살
+생일: ○월 ○일 (원더력 3017년 이날 원더에 도착=D+0, 인포 날짜 기준)
+외형: 키 / 체형 / 머리 / 눈 / 눈에 띄는 특징 — 기계 파츠·유전자 개조 없음(하얀 장미)
+성격:
+말투:
+래빗홀 시절: 무슨 일을 하며 살았는지, 동네에서 어떤 취급을 받았는지
+양부모: 어떤 사람들이었는지, 지금 어떤 마음인지
+원더에 올라온 지금: 체념 / 분노 / 기대 / 무감각 …
+(선택) 좋아하는 것·싫어하는 것·습관:
+(선택) 밤 취향: 원하는 것 · 피하고 싶은 소재</textarea>
+          <button class="arc-cp" id="arcCp" type="button">양식 복사 <span class="mono">COPY</span></button>
+        </div>
       </div>
     </div>
   </div>
@@ -2369,7 +2418,7 @@ function intrude(msg){
 
 /* ---------- citizen code (shown in the intro gate and in manual chapter 05) ---------- */
 const CODE=[
-  {t:'퀸은 가문명으로 부르십시오. 허락 없이 이름을 부르면 퀸께서는 대답하지 않으십니다. 조용히 차를 드실 뿐입니다.',c:'진짜야. 일곱 다 똑같아. 찻잔만 들어.',key:1,intro:1},
+  {t:'퀸은 가문명에 「님」을 붙여 부르십시오. 붙이지 않거나 허락 없이 이름을 부르면 퀸께서는 대답하지 않으십니다. 조용히 차를 드실 뿐입니다.',c:'진짜야. 일곱 다 똑같아. 찻잔만 들어.',key:1,intro:1},
   {t:'이름은 퀸께서 허락하실 때 받습니다. 마스크를 쓰신 퀸의 얼굴은 묻지 마십시오. 이름을 허락하시면, 보여주실 분은 보여주십니다.'},
   {t:'퀸께서는 원더에서 내려오지 않으십니다.',intro:1},
   {t:'신규 시민은 일곱 가문의 저택에 돌아가며 머뭅니다. 머물 저택은 원더가 정합니다.',intro:1},
@@ -2850,18 +2899,17 @@ qd.addEventListener('click',e=>{ if(e.target===qd) qd.close(); });
 const bar=(n,t,a='■',b='□')=>a.repeat(n)+b.repeat(t-n);
 const ringBar=n=>'●'.repeat(n)+'○'.repeat(7-n);
 const STATES=[
- {loc:'원더 · 토끼굴 게이트 · 검문소',time:'D+0 · 인공 새벽',pur:10,ring:0,queen:null,ch:'늦었다는 건 거짓말이야. 넌 딱 맞춰 왔어. 그게 문제지.'},
- {loc:'원더 · 슈페르비아 구역 · 크롬 회랑',time:'D+1 · 인공 오후',pur:10,ring:2,queen:['슈페르비아 루시탄 │ 교만 │ 오팔','누구도 자기 위에 두지 않는 여자. 한 번도 고개를 숙인 적이 없다','경계 → 호기심','가문명만'],ch:'거울은 앞만 비추지. 뒤가 궁금하면… 깨야 해.'},
- {loc:'원더 · 아바리티아 구역 · 금고 회랑',time:'D+2 · 인공 저녁',pur:10,ring:3,queen:['아바리티아 아우룸 │ 탐욕 │ 골드','회중시계를 여러 개 걸고, 입마저 자물쇠로 잠근 여자','계산 → 흥미','가문명만'],ch:'시계를 제일 많이 가진 여자가 시간을 제일 아끼더라. 남의 것까지.'},
- {loc:'원더 · 아케디아 구역 · ▒▒ 데이터 손상',time:'D+4 · 인공 ??시',pur:9,ring:5,queen:['아케디아 녹틸 │ 나태 │ 시안','늘 졸고 있다. 아무것도 안 하는 것처럼 보인다','─ 측정 불가','가문명만'],ch:'자는 척하는 애가 제일 많이 들어. 지지직… 방금 건 못 들은 걸로 해.'}
+ {hd:'[ #1｜📅3017.03.14·D+0｜🕐인공 아침 06:00｜🌸봄｜📍원더·토끼굴 게이트 ]',pur:10,ring:0,queen:null,ch:'늦었다는 건 거짓말이야. 넌 딱 맞춰 왔어. 그게 문제지.'},
+ {hd:'[ #47｜📅3017.03.25·D+11｜🕐인공 오후 14:20｜🌸봄｜📍원더·슈페르비아 구역 ]',pur:10,ring:2,queen:['슈페르비아 루시탄 │ 교만 │ 오팔','누구도 자기 위에 두지 않는 여자. 한 번도 고개를 숙인 적이 없다','경계 → 호기심','가문명만'],ch:'거울은 앞만 비추지. 뒤가 궁금하면… 깨야 해.'},
+ {hd:'[ #73｜📅3017.03.31·D+17｜🕐인공 저녁 19:05｜🌸봄｜📍원더·아바리티아 구역 ]',pur:10,ring:3,queen:['아바리티아 아우룸 │ 탐욕 │ 골드','회중시계를 여러 개 걸고, 입마저 자물쇠로 잠근 여자','계산 → 흥미','가문명만'],ch:'시계를 제일 많이 가진 여자가 시간을 제일 아끼더라. 남의 것까지.'},
+ {hd:'[ #118｜📅3017.04.12·D+29｜🕐인공 ??:??｜🌸봄｜📍원더·아케디아 구역·▒▒ ]',pur:9,ring:5,queen:['아케디아 녹틸 │ 나태 │ 시안','늘 졸고 있다. 아무것도 안 하는 것처럼 보인다','─ 측정 불가','가문명만'],ch:'자는 척하는 애가 제일 많이 들어. 지지직… 방금 건 못 들은 걸로 해.'}
 ];
 let turn=0;
 function esc(s){return s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
 function renderInfo(){
   const s=STATES[turn], L='━━━━━━━━━━━━━━━━━━━━━━━━━━', l='──────────────────────────';
   const q=s.queen?[' 지금 마주한 퀸',' '+s.queen[0],' '+s.queen[1],' 감정   │ '+s.queen[2],' 호칭   │ '+s.queen[3]]:[' 지금 마주한 퀸',' ─ 없음 ─'];
-  const lines=[L,'  <span class="g">ALICE PROJECT</span>',L,
-    ' 위치   │ '+esc(s.loc),' 시간   │ '+esc(s.time),
+  const lines=['<span class="g">'+esc(s.hd)+'</span>','',L,'  <span class="g">ALICE PROJECT</span>',L,
     ' 순수도 │ '+bar(s.pur,10)+' '+(s.pur*10)+'%',
     ' 링 점등 │ '+ringBar(s.ring)+' '+s.ring+'/7', l, ...q.map(esc), l,
     ' <span class="c">체셔 ─ "'+esc(s.ch)+'"</span>', L];
@@ -3082,8 +3130,8 @@ function fzCross(){
 }
 async function fzIb(run){
   const el=$('#fzIb'), r=(k,v)=>`<div class="r"><span>${k}</span><span>${v}</span></div>`;
-  el.innerHTML=['<div class="hr"></div>','<div class="t">ALICE PROJECT</div>','<div class="hr"></div>',
-    r('위치','원더 · 토끼굴 게이트'), r('시간','D+0 · 인공 아침'), r('거처','배정 대기 · 원더가 정합니다'),
+  el.innerHTML=['<div class="hd">[ #1｜📅3017·D+0｜🕐인공 아침 06:00｜📍원더·토끼굴 게이트 ]</div>','<div class="hr"></div>','<div class="t">ALICE PROJECT</div>','<div class="hr"></div>',
+    r('거처','배정 대기 · 원더가 정합니다'),
     r('순수도','■■■■■■■■■■ 100%'), r('링 점등','○○○○○○○ 0/7'), r('동색','─'), r('수색','△△△ 0/3'),
     '<div class="hr th"></div>','<div>지금 마주한 퀸</div>','<div class="dm">─ 없음 ─</div>','<div class="hr th"></div>',
     '<div class="c">체셔 ─ "늦었다는 건 거짓말이야. 넌 딱 맞춰 왔어. 그게 문제지."</div>','<div class="hr"></div>'].join('');
@@ -3171,6 +3219,21 @@ function railUpd(){ if(innerWidth<1420||!rPro) return;
 addEventListener('scroll',railUpd,{passive:true}); addEventListener('resize',railUpd); railUpd();
 setInterval(()=>{ if(document.hidden||innerWidth<1420) return; rHex.textContent=Array.from({length:12},()=>(Math.random()*65535|0).toString(16).toUpperCase().padStart(4,'0')).join('\n'); },600);
 { const cT=$('#cctvT'); if(cT) setInterval(()=>{ if(document.hidden) return; const d=new Date(); cT.textContent='D-0 · '+[d.getHours(),d.getMinutes(),d.getSeconds()].map(n=>String(n).padStart(2,'0')).join(':'); },1000); }
+
+/* ---------- arrival card : 프로필 양식 복사 (이것만 복사 허용) ---------- */
+{ const tx=$('#arcTx'), cp=$('#arcCp'), CPH='양식 복사 <span class="mono">COPY</span>';
+  const fit=()=>{ tx.style.height='auto'; tx.style.height=(tx.scrollHeight+2)+'px'; };
+  fit(); addEventListener('resize',fit); addEventListener('load',fit); if(document.fonts) document.fonts.ready.then(fit);
+  cp.addEventListener('click',async()=>{
+    const v=tx.value; let ok=false;
+    try{ if(navigator.clipboard&&window.isSecureContext){ await navigator.clipboard.writeText(v); ok=true; } }catch(e){}
+    if(!ok){ try{ tx.focus({preventScroll:true}); tx.setSelectionRange(0,v.length); ok=document.execCommand('copy'); }catch(e){} }
+    tapBuzz(30);
+    if(ok){ cp.classList.add('ok'); cp.innerHTML='복사됨 <span class="mono">COPIED</span>'; say('이번만 봐줄게. 프로필에 붙여넣고 채워 와.');
+      clearTimeout(cp._t); cp._t=setTimeout(()=>{ cp.classList.remove('ok'); cp.innerHTML=CPH; },2400); }
+    else { tx.focus({preventScroll:true}); tx.setSelectionRange(0,v.length); say('복사가 막혔네. 칸을 길게 눌러서 직접 가져가.'); }
+  });
+}
 
 /* ---------- no right-click · no copy ---------- */
 const editable=t=>t&&t.closest&&t.closest('input,textarea,select,[contenteditable="true"]');

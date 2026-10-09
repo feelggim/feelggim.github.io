@@ -1,0 +1,28 @@
+# ALICE PROJECT · 앨리스 프로젝트
+
+> 우린 이미 디스토피아에 살고 있어
+
+크랙 GL 디스토피아 사이버펑크 시뮬레이션 「앨리스 프로젝트」의 소개 홈페이지입니다.
+
+- 스토리 · 이미지 · 홈페이지 · 노래 — 만든이 **Scroll**
+- 본 롤플레잉은 크랙 내 Scroll이 올린 게시글에서만 공유 중입니다.
+- 이외 사이트로의 무단 이동 시 법적 책임을 묻겠습니다.
+
+## 올리는 법 (GitHub Pages)
+
+1. GitHub에서 새 저장소를 만든다 (예: `alice-project`).
+2. 이 폴더 안의 파일을 **그대로** 저장소 맨 위에 올린다. `index.html`, `assets/` 폴더, `.nojekyll`이 같은 층에 있어야 한다.
+3. 저장소 **Settings → Pages → Build and deployment**에서 Source를 `Deploy from a branch`, Branch를 `main` / `/ (root)`로 두고 저장한다.
+4. 1~2분 뒤 `https://<아이디>.github.io/<저장소이름>/` 주소로 열린다.
+
+## 크랙 작품 주소 연결
+
+`index.html`에서 `const CRACK_URL='';` 를 찾아 따옴표 안에 크랙 작품 주소를 넣으면, 마지막 장면의 버튼이 그 주소로 이동한다.
+
+## 구성
+
+- `index.html` — 페이지 전체 (스타일·스크립트 포함)
+- `assets/` — 이미지, 도트 스프라이트, 배경음(`bgm.mp3`), 픽셀 글꼴
+- 글꼴은 Google Fonts에서 불러온다 (인터넷 연결 필요)
+
+© Scroll. All rights reserved.

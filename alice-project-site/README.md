@@ -8,12 +8,6 @@
 - 본 롤플레잉은 크랙 내 Scroll이 올린 게시글에서만 공유 중입니다.
 - 이외 사이트로의 무단 이동 시 법적 책임을 묻겠습니다.
 
-## 올리는 법 (GitHub Pages)
-
-1. GitHub에서 새 저장소를 만든다 (예: `alice-project`).
-2. 이 폴더 안의 파일을 **그대로** 저장소 맨 위에 올린다. `index.html`, `assets/` 폴더, `.nojekyll`이 같은 층에 있어야 한다.
-3. 저장소 **Settings → Pages → Build and deployment**에서 Source를 `Deploy from a branch`, Branch를 `main` / `/ (root)`로 두고 저장한다.
-4. 1~2분 뒤 `https://<아이디>.github.io/<저장소이름>/` 주소로 열린다.
 
 ## 크랙 작품 주소 연결
 

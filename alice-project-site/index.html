@@ -2097,7 +2097,7 @@ const Q=[
   rel:'이라 가문과 앙숙.',
   imgs:{mask:'assets/lucitan-mask.webp'}, card:'assets/lucitan-mask.webp', panel:'assets/lucitan-mask.webp',
   riddle:'거울은 앞만 비추지. 뒤가 궁금하면… 깨야 해.'},
- {id:'avaritia',ht:170,htNote:'',maskRule:'name',house:'아바리티아',latin:'AVARITIA',sin:'탐욕',name:'아우룸',c:'#ffc53d',colorName:'골드',
+ {id:'avaritia',ht:170,htNote:'',maskRule:'rare',house:'아바리티아',latin:'AVARITIA',sin:'탐욕',name:'아우룸',c:'#ffc53d',colorName:'골드',
   ring:[75,39.6],focus:[73,51],clock:'5시 방향',
   district:'금 장식이 들어간 흰 금고형 데이터 뱅크. 토끼굴 게이트 바로 옆에서, 들어오는 것을 전부 센다.',
   one:'회중시계를 여러 개 걸고, 입마저 자물쇠로 잠근 여자.',
@@ -2405,7 +2405,7 @@ function requestName(id,btn){
     $$(`.qname[data-id="${id}"]`).forEach(el=>{el.classList.remove('locked'); decode(el,q.name)});
     $$(`.reqbtn[data-id="${id}"]`).forEach(b=>{b.disabled=true;b.textContent='허락됨'});
     noiseBurst(.12,.06); blip(1320,.06);
-    const mm=!q.maskRule?'':(q.maskRule==='name'?(q.bare||q.imgs.face?' …마스크를 벗었다.':' …마스크를 벗었다. 얼굴은 직접 가서 확인해.'):(q.maskRule==='inner'?' 겉 마스크를 벗었다. 그 아래에 한 겹이 더 있다.':' 이름은 허락했지만, 마스크는 그대로다.'));
+    const mm=!q.maskRule||q.maskRule==='rare'?'':(q.maskRule==='name'?(q.bare||q.imgs.face?' …마스크를 벗었다.':' …마스크를 벗었다. 얼굴은 직접 가서 확인해.'):(q.maskRule==='inner'?' 겉 마스크를 벗었다. 그 아래에 한 겹이 더 있다.':' 이름은 허락했지만, 마스크는 그대로다.'));
     intrude(`체셔가 문을 열어줬다 ─ ${q.house}의 이름은 ${q.name}.${mm}`);
     refreshCard(id);
     ringEmbed(q,(qd.open&&qd.querySelector(`.qname[data-id="${id}"]`))||btn||document.querySelector(`.qcard[data-q="${id}"]`));
@@ -2773,10 +2773,11 @@ new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting&&en.intersect
 const RULE={
   name:'이름을 허락하기 전까지는 누구든 마스크를 쓰고 만난다. 이름을 허락하면 벗는다.',
   keep:'이름을 허락해도 마스크를 거의 벗지 않는다.',
-  inner:'이름을 허락해도 마스크를 거의 벗지 않는다. 겉 마스크를 벗어도, 안에 얇은 마스크가 한 겹 더 있다.'
+  inner:'이름을 허락해도 마스크를 거의 벗지 않는다. 겉 마스크를 벗어도, 안에 얇은 마스크가 한 겹 더 있다.',
+  rare:'마스크는 있지만 거의 쓰지 않는다. 늘 세고 적는 관측자라서. 「가리는 건 보이는 쪽이 하는 거야.」'
 };
-function ruleHTML(q){ if(!q.maskRule) return '쓰지 않는다'; return RULE[q.maskRule]+(q.maskRule==='name'?'':' <span class="redact"><span>████</span> 이유 열람 불가</span>'); }
-function badgeTxt(q){ if(!q.mask) return ''; if(q.bare) return revealed.has(q.id)?'UNMASKED':''; if(!revealed.has(q.id)) return 'MASK'; return q.maskRule==='name'?(q.imgs.face?'UNMASKED':'UNMASKED · 직접 확인'):'MASK ON'; }
+function ruleHTML(q){ if(!q.maskRule) return '쓰지 않는다'; return RULE[q.maskRule]+(q.maskRule==='name'||q.maskRule==='rare'?'':' <span class="redact"><span>████</span> 이유 열람 불가</span>'); }
+function badgeTxt(q){ if(!q.mask) return ''; if(q.bare) return revealed.has(q.id)?'UNMASKED':''; if(q.maskRule==='rare') return 'MASK · RARELY'; if(!revealed.has(q.id)) return 'MASK'; return q.maskRule==='name'?(q.imgs.face?'UNMASKED':'UNMASKED · 직접 확인'):'MASK ON'; }
 function cardArt(q){
   const unmasked=revealed.has(q.id)&&q.maskRule==='name'&&q.imgs.face;
   const src=unmasked?q.imgs.face:q.card;
@@ -2786,7 +2787,7 @@ function cardArt(q){
 function refreshCard(id){
   const q=Q.find(x=>x.id===id), c=document.querySelector(`.qcard[data-q="${id}"]`); if(!q||!c) return;
   const art=c.querySelector('.art'); const halo=art.querySelector('.halo').outerHTML;
-  art.innerHTML=halo+cardArt(q)+(q.pair?`<span class="pairbadge" style="--c2:${q.pair.c}"><i>♥</i>${q.pair.house}와 연인</span>`:'')+(badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'?'keep':''}">${badgeTxt(q)}</span>`:'');
+  art.innerHTML=halo+cardArt(q)+(q.pair?`<span class="pairbadge" style="--c2:${q.pair.c}"><i>♥</i>${q.pair.house}와 연인</span>`:'')+(badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'&&q.maskRule!=='rare'?'keep':''}">${badgeTxt(q)}</span>`:'');
   glitch(art);
 }
 const grid=$('#queens-grid');
@@ -2794,7 +2795,7 @@ grid.innerHTML=Q.map(q=>{
   const halo=q.opal?'opal':(q.flick?'flick':'');
   const art=cardArt(q);
   return `<div class="qcard" role="button" tabindex="0" data-q="${q.id}" style="--c:${q.c}">
-    <div class="art"><span class="halo ${halo}"></span>${art}${q.pair?`<span class="pairbadge" style="--c2:${q.pair.c}"><i>♥</i>${q.pair.house}와 연인</span>`:''}${badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'?'keep':''}">${badgeTxt(q)}</span>`:''}</div>
+    <div class="art"><span class="halo ${halo}"></span>${art}${q.pair?`<span class="pairbadge" style="--c2:${q.pair.c}"><i>♥</i>${q.pair.house}와 연인</span>`:''}${badgeTxt(q)?`<span class="maskbadge ${revealed.has(q.id)&&q.maskRule!=='name'&&q.maskRule!=='rare'?'keep':''}">${badgeTxt(q)}</span>`:''}</div>
     <div class="info"><span class="sin">${q.sin}</span><div class="latin">${q.latin}</div><div class="house">${q.house}<span class="ht">${q.ht}cm</span></div>
     <p class="one">${q.one}</p>
     <div class="nm">이름 · ${nameHTML(q)}</div></div></div>`;
@@ -2880,7 +2881,7 @@ function openQueen(id){
         ${q.body?`<div class="r"><dt>몸</dt><dd>${q.body}</dd></div>`:''}
         <div class="r"><dt>차림</dt><dd>${q.wear}</dd></div>
         <div class="r"><dt>마스크</dt><dd>${q.mask||q.noMask||'쓰지 않는다'}</dd></div>
-        ${q.mask?`<div class="r"><dt>벗는 때</dt><dd>${ruleHTML(q)}</dd></div>`:''}
+        ${q.mask?`<div class="r"><dt>${q.maskRule==='rare'?'쓰는 때':'벗는 때'}</dt><dd>${ruleHTML(q)}</dd></div>`:''}
         ${q.rel?`<div class="r"><dt>관계</dt><dd>${q.rel}</dd></div>`:''}
         <div class="r"><dt>원하는 것</dt><dd class="redact"><span>████████████</span> 열람 불가</dd></div>
         <div class="r"><dt>공각</dt><dd class="redact"><span>██████</span> 열람 불가</dd></div>

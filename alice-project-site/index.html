@@ -519,6 +519,12 @@ section.prologue{padding-bottom:0}
 @keyframes fzjit{50%{transform:scale(calc(1 + var(--p,0) * .06)) translate(calc(var(--p,0) * 3px),calc(var(--p,0) * -2px))}}
 .fz-vig{inset:0;z-index:11;pointer-events:none;background:radial-gradient(ellipse at center,transparent calc(70% - var(--p,0) * 40%),rgba(0,0,0,.95));opacity:0;transition:opacity .2s}
 .fz.holding .fz-vig{opacity:1}
+.fz-more{left:50%;bottom:clamp(10px,2.4vh,22px);z-index:13;transform:translate(-50%,6px);display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;color:#8a93a8;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s}
+.fz-more i{font-style:normal;color:var(--hack2);animation:fzdn 1.1s ease-in-out infinite}
+@keyframes fzdn{50%{transform:translateY(4px)}}
+.fz-more.on{opacity:1;transform:translate(-50%,0)}
+.fz.ph-done .fz-more{color:#5d667c}
+.fz.ph-done .fz-more i{color:#0b0d14}
 .fz-tip{margin-top:14px;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;color:#5d667c;opacity:0;transition:opacity .8s;min-height:1.4em}
 
 /* E · crossed */
@@ -1980,6 +1986,7 @@ html.locked main>section.sec:not(#world)>.wrap,html.locked #map .map-wrap{filter
       <div class="fz-by">크랙에서 이어집니다. <b>Scroll</b></div>
       <button class="fz-rp" id="fzReplay" type="button">↺ 첫날 다시 보기</button>
     </div>
+    <div class="fz-more" id="fzMore" aria-hidden="true"><i>▼</i>한 번 더 내리면 · 제작 기록</div>
     <canvas class="fz-noise" id="fzNoise" width="160" height="90" aria-hidden="true"></canvas>
     <div class="fz-scan" aria-hidden="true"></div>
     <button class="fz-skip" id="fzSkip" type="button">건너뛰기 ▸▸</button>
@@ -3093,6 +3100,62 @@ new IntersectionObserver(es=>es.forEach(en=>{
   FZ.vis=en.isIntersecting; if(FZ.vis) fzGrain();
   if(en.intersectionRatio>=.55&&FZ.st==='idle'&&!document.documentElement.classList.contains('locked')&&!introOn()) fzPlay();
 }),{threshold:[0,.55]}).observe(fz);
+
+/* ---------- finale catch : 내려오면 한 번 걸리고, 더 내리면 제작 기록 ---------- */
+const CT={armed:true,on:false,pin:0,anim:0,push:0,last:0,grace:0,warned:false,ty:null,moved:false,lastY:scrollY};
+const fzMore=$('#fzMore');
+const ctW=e=>{ if(e.ctrlKey) return; e.preventDefault(); if(Math.abs(e.deltaY)>=2) ctPush(e.deltaY>0?1:-1); };
+const ctTS=e=>{ CT.ty=e.touches[0].clientY; CT.moved=false; };
+const ctTM=e=>{ if(e.target.closest&&e.target.closest('#fzHold')) return; e.preventDefault(); if(CT.ty==null||CT.moved) return;
+  const dy=CT.ty-e.touches[0].clientY; if(Math.abs(dy)>36){ CT.moved=true; ctPush(dy>0?1:-1); } };
+const ctTE=()=>{ CT.ty=null; };
+const ctK=e=>{ const k=e.key, tg=e.target;
+  if(tg&&tg.closest&&tg.closest('input,textarea,select,[contenteditable]')) return;
+  if(k===' '&&tg&&tg.closest&&tg.closest('button,a')) return;
+  const dn=k==='ArrowDown'||k==='PageDown'||k==='End'||(k===' '&&!e.shiftKey), up=k==='ArrowUp'||k==='PageUp'||k==='Home'||(k===' '&&e.shiftKey);
+  if(!dn&&!up) return; e.preventDefault(); if(!e.repeat) ctPush(dn?1:-1); };
+function ctBind(on){ const w=window, f=on?w.addEventListener:w.removeEventListener;
+  f.call(w,'wheel',ctW,{passive:false}); f.call(w,'touchstart',ctTS,{passive:true}); f.call(w,'touchmove',ctTM,{passive:false}); f.call(w,'touchend',ctTE); f.call(w,'keydown',ctK); }
+function ctEngage(){
+  CT.armed=false; CT.on=true; CT.push=0; CT.warned=false; CT.last=performance.now(); fzMore.classList.remove('on'); ctBind(true);
+  const y0=scrollY, y1=Math.round(scrollY+fz.getBoundingClientRect().top); CT.pin=y1;
+  cancelAnimationFrame(CT.anim); CT.anim=0;
+  if(reduce||Math.abs(y1-y0)<4){ scrollTo({top:y1,behavior:'instant'}); CT.grace=performance.now()+700; return; }
+  const t0=performance.now(), D=560;
+  const step=now=>{ if(!CT.on){ CT.anim=0; return; } const k=Math.min(1,(now-t0)/D), e=1-Math.pow(1-k,3);
+    scrollTo({top:Math.round(y0+(y1-y0)*e),behavior:'instant'}); if(k<1) CT.anim=requestAnimationFrame(step); else { CT.anim=0; CT.grace=performance.now()+700; tapBuzz(30); } };
+  CT.anim=requestAnimationFrame(step);
+}
+function ctRelease(dir){
+  CT.on=false; cancelAnimationFrame(CT.anim); CT.anim=0; ctBind(false); fzMore.classList.remove('on');
+  if(dir>0) scrollTo({top:document.documentElement.scrollHeight,behavior:reduce?'instant':'smooth'});
+}
+function ctBump(){ if(!reduce) fz.animate([{translate:'0 0'},{translate:'0 -18px'},{translate:'0 0'}],{duration:460,easing:'cubic-bezier(.3,1.6,.5,1)'}); tapBuzz(25); }
+function ctPush(dir){
+  if(CT.anim){ CT.last=performance.now(); return; }       /* 걸리는 동안 들어온 관성은 같은 스크롤로 친다 */
+  if(dir<0){ ctRelease(-1); return; }                       /* 위로는 바로 놓아준다 */
+  const now=performance.now(), same=now-CT.last<380; CT.last=now; if(same||now<CT.grace) return;   /* 한 번의 스크롤(관성 포함)=한 번, 걸린 직후 0.7초는 무시 */
+  CT.push++; ctBump();
+  if(FZ.st==='idle'||FZ.st==='play'){                        /* 재생 중엔 안 넘어간다 */
+    shake($('#fzSkip'));
+    if(CT.push===2) say('아직이야. 끝까지 봐.');
+    if(CT.push>=6){ fzSkip(); CT.push=0; say('급하네. 그럼 이것만 누르고 가.'); CT.last=performance.now(); }
+    return;
+  }
+  if(!CT.warned){                                            /* 한 번 걸린다 */
+    CT.warned=true; fzMore.classList.add('on');
+    if(FZ.st==='end'){ const tp=$('#fzTip'); tp.style.color='var(--hack)'; decode(tp,'// 더 내려가면 굴 밖이야. 그래도 갈래? ─ C',500); }
+    return;
+  }
+  ctRelease(1);                                              /* 한 번 더 내리면 제작 기록 */
+}
+addEventListener('scroll',()=>{
+  const y=scrollY, down=y>CT.lastY+0.5; CT.lastY=y;
+  if(CT.on){ if(!CT.anim&&Math.abs(y-CT.pin)>1) scrollTo({top:CT.pin,behavior:'instant'}); return; }
+  const r=fz.getBoundingClientRect();
+  if(r.top>innerHeight*.6) CT.armed=true;                   /* 위로 다시 올라가면 다시 걸린다 */
+  if(CT.armed&&down&&r.top<innerHeight*.42&&r.bottom>innerHeight*.6&&!document.documentElement.classList.contains('locked')&&!introOn()) ctEngage();
+},{passive:true});
 
 /* ---------- clutter : 교차 테이프 · 감시 레일 · CCTV ---------- */
 $$('.cb .tp,.ft-tape').forEach(tp=>{ const t=tp.dataset.t||'', u=`<span>${t}</span>`, n=Math.max(3,Math.ceil(2400/Math.max(1,t.length*8.5)));

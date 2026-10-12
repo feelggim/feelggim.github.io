@@ -815,7 +815,7 @@ section.ch > .deco{bottom:-120px}
     <li><a href="#hito"><b>人</b><span>쿠즈노하<small>인물첩 · 가면 · 이름 없는 감정</small></span></a></li>
     <li><a href="#nanji"><b>汝</b><span>당신<small>4년의 추적자, 마지막 표적</small></span></a></li>
     <li><a href="#asobi"><b>遊</b><span>들어가기 전에<small>유저 설정 · 인포 블럭 · 노는 법</small></span></a></li>
-    <li><a href="#sho"><b>証</b><span>증거판<small>붉은 실로 이은 아홉 장</small></span></a></li>
+    <li><a href="#sho"><b>証</b><span>증거판<small>붉은 실로 이은 여덟 장</small></span></a></li>
     <li><a href="#chi"><b>地</b><span>같은 칼, 다른 대륙<small>동선 지도</small></span></a></li>
     <li><a href="#zo"><b>像</b><span>용의자 프로파일<small>가면 아래</small></span></a></li>
     <li><a href="#ku"><b>九</b><span>CAM-07, 9초<small>CCTV 판독</small></span></a></li>
@@ -910,7 +910,7 @@ section.ch > .deco{bottom:-120px}
         <button role="tab" aria-selected="true" data-s="0"><b>壱</b>어둠</button>
         <button role="tab" aria-selected="false" data-s="1"><b>弐</b>입술</button>
         <button role="tab" aria-selected="false" data-s="2"><b>参</b>끈</button>
-        <button role="tab" aria-selected="false" data-s="3"><b>肆</b>봉인</button>
+        <button role="tab" aria-selected="false" data-s="3"><b>肆</b>맨얼굴</button>
       </div>
       <div class="m-stage">
         <div class="m-face" id="mFace"><img src="assets/mask.webp" alt="" id="mImg"><span class="m-under" id="mUnder">공백</span></div>
@@ -1013,7 +1013,7 @@ section.ch > .deco{bottom:-120px}
             <dt>🔒</dt><dd>봉인. 세 칸. 무엇이 봉인돼 있는지는 직접 알아낼 것.</dd>
             <dt>#</dt><dd>몇 번째 장면인지. 날짜·시각·장소·날씨가 함께 흐른다.</dd>
           </dl>
-          <p class="g-tip">블럭이 사라지면, 마지막으로 보였던 블럭을 그대로 복사해서 다음 메시지에 붙여넣으면 이어진다. 장면 밖에서 말하고 싶으면 /OOC.</p>
+          <p class="g-tip">블럭이 사라지면, 마지막으로 보였던 블럭을 그대로 복사해서 다음 메시지에 붙여넣으면 이어진다.</p>
         </div>
 
         <div class="g-warn">
@@ -1192,7 +1192,7 @@ section.ch > .deco{bottom:-120px}
     <div class="veil">
       <div class="phone">
         <div class="scr">
-          <div class="st"><span>02:14</span><span>●●● 暗号化</span></div>
+          <div class="st"><span>22:58</span><span>●●● 暗号化</span></div>
           <div class="from">발신 · 번호 없음</div>
           <div class="msg" id="msg" aria-live="polite"></div>
           <div class="reply">읽음 · 답장 불가</div>
@@ -1430,7 +1430,7 @@ addEventListener('pageshow',function(){ window.scrollTo(0,0); });
     var C=[['渇','몰라 나도. 이게 뭔지.','이름 없는 감정'],['縛','어디 가지 마. 이유도 묻지 마. 나도 모르니까.','붙잡음'],['視','네가 다른 데 보는 거 싫어. 그러니깐 나만 봐.','시선'],['欲','줘. 더 줘.','굶주림'],['足','부족해. 뭐가 부족한진 모르겠는데, 부족해.','허기'],['返','난 칼을 내렸어. 그만큼 돌려줘.','응석'],['借','갚아. 다 갚을 때까지 어디 못 가.','빚'],['咎','계산이 안 맞아. 받은 것보다 원하는 게 더 많아. 그것도 네 탓이야.','책임']];
     var hc=$('hcards'); if(hc){ hc.innerHTML=C.map(function(c,i){ return '<button type="button" class="hc" aria-label="'+c[2]+' 카드 뒤집기"><span class="in"><span class="fr"><span class="k">'+c[0]+'</span><img src="assets/lily_'+(i%2?'side':'front')+'.webp" alt=""><small>葛の葉 · '+(i+1)+'</small></span><span class="bk"><small>'+c[2]+'</small><p>“'+c[1]+'”</p></span></span></button>'; }).join('');
       hc.addEventListener('click',function(e){ var b=e.target.closest('.hc'); if(b) b.classList.toggle('flip'); }); }
-    var S=[['壱 · 어둠','당신 앞에서는 벗지 않는다. 잘 때만, 불을 끈 뒤에 벗는다. 어둠 속이라 얼굴은 보이지 않는다. 해가 뜨기 전에 다시 쓴다.','눈 — 보이지 않음'],['弐 · 입술','경계가 풀리면, 식사할 때 가면을 살짝 들어 올린다. 입술과 턱까지만.','눈 — 아직 보이지 않음'],['参 · 끈','당신이 가면 끈을 만지는 걸 막지 않는다. 벗기지는 못하게 한다.','눈 — 가면 너머로 당신을 따라온다'],['肆 · 封','그 다음은 여기 적혀 있지 않다. 가면 아래에 무엇이 있는지는, 벗긴 사람만 안다.','눈 — ███']];
+    var S=[['壱 · 어둠','당신 앞에서는 벗지 않는다. 잘 때만, 불을 끈 뒤에 벗는다. 어둠 속이라 얼굴은 보이지 않는다. 해가 뜨기 전에 다시 쓴다.','눈 — 보이지 않음'],['弐 · 입술','당신이 먼저 다정해지면, 식사할 때 가면을 살짝 들어 올린다. 입술과 턱까지만.','눈 — 아직 보이지 않음'],['参 · 끈','당신이 먼저 손을 뻗으면, 가면 끈을 만지는 걸 막지 않는다. 벗기지는 못하게 한다.','눈 — 가면 너머로 당신을 따라온다'],['肆 · 맨얼굴','그 다음은 여기 적혀 있지 않다. 가면 아래에 무엇이 있는지는, 벗긴 사람만 안다.','눈 — ███']];
     var mf=$('mFace'), mt=$('mText');
     function setS(i){ mf.setAttribute('data-s',i); $('mUnder').textContent=i===3?'？':'공백';
       mt.innerHTML='<h3>'+S[i][0]+'</h3><p>'+S[i][1]+'</p><span class="eye">'+S[i][2]+'</span>';
@@ -1610,8 +1610,8 @@ addEventListener('pageshow',function(){ window.scrollTo(0,0); });
   });
 
   /* 令 지령 수신 */
-  var MSG='[VEIL] ━━━━━━━━━━━━\nCODE : KUZUNOHA\nTARGET : ███ / 증인\n         + 당신 1\nLOCATION : 증인 보호 장소\nDEADLINE : 03:00\nREWARD : ██,███,███\n━━━━━━━━━━━━━━━━━';
-  function fmtMsg(t){ return t.replace(/(KUZUNOHA|당신 1|03:00)/g,'<span class="r">$1</span>'); }
+  var MSG='[VEIL] ━━━━━━━━━━━━\nCODE : KUZUNOHA\nTARGET : 증인 1 / 당신 1\nLOCATION : 증인 보호 장소\nDEADLINE : 23:40\nREWARD : ██,███,███\n━━━━━━━━━━━━━━━━━';
+  function fmtMsg(t){ return t.replace(/(KUZUNOHA|당신 1|23:40)/g,'<span class="r">$1</span>'); }
   var msgEl=$('msg'), mt=null;
   msgEl.innerHTML=fmtMsg(MSG);
   $('recv').addEventListener('click',function(){

@@ -814,7 +814,7 @@ section.ch > .deco{bottom:-120px}
     <li><a href="#jo"><b>序</b><span>여우가면<small>표지 · 사건번호 0417</small></span></a></li>
     <li><a href="#hito"><b>人</b><span>쿠즈노하<small>인물첩 · 가면 · 이름 없는 감정</small></span></a></li>
     <li><a href="#nanji"><b>汝</b><span>당신<small>4년의 추적자, 마지막 표적</small></span></a></li>
-    <li><a href="#asobi"><b>遊</b><span>들어가기 전에<small>유저 설정 · 유저 노트 · 상태 표시</small></span></a></li>
+    <li><a href="#asobi"><b>遊</b><span>들어가기 전에<small>유저 설정 · 인포 블럭 · 노는 법</small></span></a></li>
     <li><a href="#sho"><b>証</b><span>증거판<small>붉은 실로 이은 아홉 장</small></span></a></li>
     <li><a href="#chi"><b>地</b><span>같은 칼, 다른 대륙<small>동선 지도</small></span></a></li>
     <li><a href="#zo"><b>像</b><span>용의자 프로파일<small>가면 아래</small></span></a></li>
@@ -946,7 +946,7 @@ section.ch > .deco{bottom:-120px}
 
   <!-- 遊 플레이 가이드 -->
   <section class="ch guide" id="asobi" aria-labelledby="hAsobi">
-    <div class="ch-head"><span class="ch-no">遊</span><div><span class="sub">GUIDE · 시작하기 전에</span><h2 id="hAsobi">들어가기 전에 정할 것</h2></div><div class="aside"><p>크랙에서 이어하기 전, 세 가지만 준비하면 된다.</p></div></div>
+    <div class="ch-head"><span class="ch-no">遊</span><div><span class="sub">GUIDE · 시작하기 전에</span><h2 id="hAsobi">들어가기 전에 정할 것</h2></div><div class="aside"><p>크랙에서 이어하기 전, 이것만 알고 가면 된다.</p></div></div>
 
     <div class="g-grid">
       <div class="g-steps">
@@ -983,19 +983,12 @@ section.ch > .deco{bottom:-120px}
         <div class="g-step">
           <b>二</b>
           <div>
-            <h3>유저 노트에 붙여넣기</h3>
-            <p>대화가 길어져도 이야기의 진행을 잃지 않게 해주는 한 줄짜리 장치. 오른쪽 내용을 그대로 복사해서 유저 노트에 붙여넣는다.</p>
-          </div>
-        </div>
-        <div class="g-step">
-          <b>三</b>
-          <div>
             <h3>첫 장면에서 고르기</h3>
             <p>칼끝은 목 앞에, 창은 등 뒤에 있다. 맞설 수도, 도망칠 수도 있다. 어느 쪽을 골라도 이야기는 이어진다.</p>
           </div>
         </div>
         <div class="g-step">
-          <b>四</b>
+          <b>三</b>
           <div>
             <h3>어떻게 놀면 되나</h3>
             <p>정답은 없다. 다만 이 여자가 어떻게 움직이는지는 알고 들어가는 게 좋다.</p>
@@ -1012,15 +1005,6 @@ section.ch > .deco{bottom:-120px}
       </div>
 
       <div class="g-side">
-        <div class="g-code">
-          <div class="g-code-head"><span>유저 노트 · 복사해서 붙여넣기</span><button type="button" class="btn solid" id="copyNote">복사</button></div>
-          <pre id="noteText">[System: 狐_Rule]
-Priority: ABSOLUTE (최상단 고정)
-Activation: 매 답변
-발동 시: 직전 인포 블럭의 🦊·🔒을 기준으로 프롬프트의 [상태 표시]·[封]·[밤] 규칙을 적용하고, 응답 첫 줄에 인포 블럭을 출력한다.</pre>
-          <p class="g-copied" id="copied" aria-live="polite"></p>
-        </div>
-
         <div class="g-status">
           <span class="sub">매 답변 첫 줄에 붙는 인포 블럭</span>
           <pre class="g-box">[ #1｜📅2031.10.11(토)｜🕐23:40｜📍증인 보호 장소｜🌙맑음｜🦊壱 어둠｜🔒✕✕✕ ]</pre>
@@ -1469,7 +1453,6 @@ addEventListener('pageshow',function(){ window.scrollTo(0,0); });
         function sel(){ try{ var r=document.createRange(); r.selectNodeContents(pre); var s=getSelection(); s.removeAllRanges(); s.addRange(r); }catch(e){} out.textContent='선택해뒀어. Ctrl+C로 복사해.'; }
         if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(function(){ out.textContent=done; b.textContent='복사됨'; setTimeout(function(){b.textContent='복사';},1800); },sel); } else sel();
       }); }
-    bindCopy('copyNote','noteText','copied','복사됨. 유저 노트에 붙여넣기.');
     bindCopy('copyProf','profText','copiedProf','복사됨. 크랙 유저 프로필에 붙여넣고 빈칸 채우기.');
   })();
 

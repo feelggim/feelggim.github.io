@@ -409,7 +409,7 @@ dialog.qd[open]{animation:qdIn .55s cubic-bezier(.2,1.3,.4,1)}
 .pbrief{margin-top:clamp(36px,5vw,64px);border:1px solid var(--line);background:linear-gradient(180deg,rgba(34,240,255,.03),transparent 30%),#05070d;position:relative}
 .rl-hd{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;color:var(--ash)}
 .rl-hd b{color:var(--alert);font-weight:400;animation:blink 1s steps(1) infinite;margin-right:4px}
-.rl-bd{padding:clamp(16px,3vw,28px);display:grid;gap:clamp(18px,3vw,28px)}
+.rl-bd{padding:clamp(16px,3vw,28px);display:grid;gap:clamp(18px,3vw,28px);word-break:keep-all;overflow-wrap:anywhere}
 .rl-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
 .rl-title h3{font-family:var(--f-ko);font-weight:400;font-size:clamp(22px,2.8vw,30px);color:var(--porcelain);margin:0}
 .rl-title span{font-family:var(--f-mono);font-size:12px;letter-spacing:.22em;color:var(--hack2)}
@@ -435,8 +435,8 @@ dialog.qd[open]{animation:qdIn .55s cubic-bezier(.2,1.3,.4,1)}
 .rl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .rl-card{border:1px solid var(--line);background:linear-gradient(135deg,#0c1220,#080c17);padding:14px 16px;min-width:0}
 .rl-card.wide{grid-column:1/-1}
-.rl-card h4{margin:0 0 6px;font-family:var(--f-ko);font-weight:400;font-size:18px;color:var(--porcelain);display:flex;align-items:baseline;gap:8px}
-.rl-card h4 small{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;color:var(--ash)}
+.rl-card h4{margin:0 0 6px;font-family:var(--f-ko);font-weight:400;font-size:18px;color:var(--porcelain);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;row-gap:2px}
+.rl-card h4 small{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;color:var(--ash);white-space:nowrap}
 .rl-card p{margin:0 0 6px;font-size:13.5px;line-height:1.65;color:var(--ash)}
 .rl-card p:last-child{margin-bottom:0}
 .rl-card p b{color:var(--porcelain);font-weight:600}
@@ -454,7 +454,31 @@ dialog.qd[open]{animation:qdIn .55s cubic-bezier(.2,1.3,.4,1)}
 .rl-hint div{display:grid;grid-template-columns:96px 1fr;gap:8px;align-items:baseline;font-size:13.5px;line-height:1.55;color:#ffd6f6}
 .rl-hint div b{font-family:var(--f-ko);font-weight:400;color:var(--porcelain);display:flex;align-items:center;gap:6px;white-space:nowrap}
 .rl-hint div b i{width:10px;height:10px;border-radius:50%;border:2px solid var(--c);box-shadow:0 0 6px var(--c);flex:none}
-@media (max-width:760px){.rl-hm{display:none}.rl-flow{grid-template-columns:1fr}.rl-flow li::after{content:"▼";right:auto;left:50%;top:auto;bottom:-14px;transform:translateX(-50%)}.rl-flow li:nth-child(3n)::after{content:"▼"}.rl-flow li:last-child::after{content:none}.rl-grid,.rl-hint{grid-template-columns:1fr}.rl-pm{grid-template-columns:1fr}}
+.rl-tldr{border:1px solid var(--line);background:rgba(4,5,11,.6);padding:10px 14px;font-size:13.5px;line-height:1.7;color:var(--ash)}
+.rl-tldr>b:first-child{display:inline-block;font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.2em;color:var(--hack2);margin-right:10px}
+.rl-tldr b{color:var(--porcelain);font-weight:600}
+.rl-chq{font-family:var(--f-ko);color:#ffd6f6!important;font-size:14px!important}
+.rl-cond{display:grid;gap:0;margin:6px 0 10px;border-top:1px solid #1b2238}
+.rl-cond div{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:baseline;padding:8px 2px;border-bottom:1px solid #1b2238;font-size:13.5px;line-height:1.6;color:var(--ash)}
+.rl-cond div span b{color:var(--porcelain);font-weight:600}
+.rl-cond div>b{font-family:var(--f-ko);font-weight:400;color:var(--porcelain);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.rl-cond div>b i{width:10px;height:10px;border-radius:50%;border:2px solid var(--c);box-shadow:0 0 6px var(--c);flex:none}
+.rl-cond div>b small{font-family:var(--f-ko);font-size:11px;color:#69739a;margin-left:2px}
+.rl-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 8px}
+.rl-notes div{border:1px solid var(--line);background:rgba(4,5,11,.6);padding:10px 12px;display:grid;gap:4px;align-content:start;font-size:13px;line-height:1.6;color:var(--ash)}
+.rl-notes div>b{font-family:var(--f-ko);font-weight:400;font-size:15px;color:var(--porcelain);display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.rl-notes div>b small{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;color:var(--ash)}
+.rl-notes span b{color:var(--porcelain);font-weight:600}
+.rl-notes.al{grid-template-columns:repeat(2,minmax(0,1fr))}
+.rl-notes.al div,.rl-notes div.x{border-color:rgba(255,43,59,.55);background:rgba(40,4,10,.45)}
+.rl-notes.al div>b small,.rl-notes div.x>b small{color:#ff8b95}
+.rl-card.end .rl-notes{grid-template-columns:repeat(2,minmax(0,1fr))}
+.rl-card.end .rl-notes div:last-child{grid-column:1/-1}
+.rl-gauge{position:relative;height:12px;margin:8px 0 22px;border:1px solid #2a3350;background:linear-gradient(90deg,#ff2b3b 0 70%,#22f0ff 70% 100%);opacity:.9}
+.rl-gauge i{position:absolute;left:70%;top:-5px;bottom:-5px;width:2px;background:#fff;box-shadow:0 0 6px #fff}
+.rl-gauge span{position:absolute;left:70%;top:16px;transform:translateX(-50%);font-family:var(--f-mono);font-size:11px;color:var(--porcelain)}
+.rl-c{display:block;margin-top:6px;font-family:var(--f-ko);color:#ffd6f6}
+@media (max-width:760px){.rl-hm{display:none}.rl-flow{grid-template-columns:1fr}.rl-flow li::after{content:"▼";right:auto;left:50%;top:auto;bottom:-14px;transform:translateX(-50%)}.rl-flow li:nth-child(3n)::after{content:"▼"}.rl-flow li:last-child::after{content:none}.rl-grid,.rl-hint{grid-template-columns:1fr}.rl-pm{grid-template-columns:1fr}.rl-notes,.rl-notes.al,.rl-card.end .rl-notes{grid-template-columns:1fr}.rl-cond div{grid-template-columns:1fr;gap:2px}}
 .arc{margin-top:clamp(36px,5vw,64px);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 40%),#05070d;position:relative}
 .arc::after{content:"COPY 허가 ─ 1회";position:absolute;right:clamp(10px,3vw,28px);top:-13px;transform:rotate(3deg);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;padding:3px 8px;background:#ffd23d;color:#0b0d14;pointer-events:none}
 .arc-hd{display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;color:var(--ash)}
@@ -1981,8 +2005,8 @@ html.locked main>section.sec:not(#world)>.wrap,html.locked #map .map-wrap{filter
         <div class="step"><b>굴을 오른다</b><span>스무 살 생일, 하얀 토끼를 따라 원더로 올라간다.</span></div>
         <div class="step"><b>퀸을 찾아간다</b><span>퀸 앞에 끌려가지 않는다. 체셔의 안내를 따라 일곱 구역을 직접 찾아간다.</span></div>
         <div class="step"><b>이름을 얻는다</b><span>처음엔 가문명에 「님」을 붙여야 말을 받아준다. 이름을 허락받는 순간 관계가 바뀐다.</span></div>
-        <div class="step"><b>링을 센다</b><span>링 점등은 일곱 칸. 하나 켜질 때마다 무언가가 진행된다. 다 켜지면 어떻게 되는지는 아직 아무도 말해주지 않는다.</span></div>
-        <div class="step"><b>순수도를 지킨다</b><span>네 몸의 순수성. 상태창은 깎인 이유를 알려주지 않는다. 뭐가 깎는지는 아래 판 규칙에.</span></div>
+        <div class="step"><b>링을 센다</b><span>링 점등은 일곱 칸. 검진 한 번에 한 칸. 다 켜지면 판이 끝난다—그 뒤에 무슨 일이 일어나는지는 아무도 말해주지 않는다.</span></div>
+        <div class="step"><b>순수도를 지킨다</b><span>네 몸의 순수성. 70 아래면 검진이 실패한다—공짜는 아니지만. 뭐가 깎는지는 아래 판 규칙에.</span></div>
         <div class="step"><b>체셔의 말을 듣는다</b><span>상태창 맨 아래 한 줄. 맞는 말인지 거짓말인지는 네가 판단해.</span></div>
       </div>
     </div>
@@ -1990,37 +2014,56 @@ html.locked main>section.sec:not(#world)>.wrap,html.locked #map .map-wrap{filter
       <div class="rl-hd"><span><b>●</b> WONDER NET · 판 규칙</span><span>PLAYER BRIEFING<span class="rl-hm"> · 숫자는 전부 상태창에</span></span></div>
       <div class="rl-bd">
         <div class="rl-title"><h3>원더는 이렇게 굴러간다</h3><span>HOW WONDER RUNS</span></div>
-        <p class="rl-lead">퀸들이 다정한 건 진짜야. 근데 원더는 <b>판</b>이고, 판엔 규칙이 있어. 다는 못 알려줘. …들으니까.<span class="mono">─ C</span></p>
+        <p class="rl-lead">퀸들이 다정한 건 진짜야. 근데 원더는 <b>판</b>이고, 판엔 규칙이 있어. 규칙은 다 알려줄게—<b>일곱 칸이 다 차면 무슨 일이 일어나는지만 빼고.</b><span class="mono">─ C</span></p>
+        <div class="rl-tldr"><b>한 줄 요약</b>퀸을 찾아다니며 지내다 → 어느 퀸의 조건이 걸리면 <b>안건</b> → 첨탑 링이 하나씩 붉어지는 <b>동색</b> → 일곱 개가 다 붉으면 <b>카드병정</b>이 와서 <b>검진</b> → 머리 위 링 한 칸 → 사흘 쉬고 다시. <b>일곱 칸이 다 켜지거나 순수도 상한이 무너지면 판이 끝난다.</b> 결말은 네 몫.</div>
         <ol class="rl-flow">
           <li style="--nc:#7dffb2"><div class="k"><i>1</i><b>평온</b><em>QUIET</em></div><p>회복기. 퀸들을 찾아다니고, 차를 마시고, 이름을 얻는다.</p></li>
-          <li style="--nc:#ffc53d"><div class="k"><i>2</i><b>안건</b><em>MOTION</em></div><p>어느 퀸의 감정이 선을 넘으면, 그 퀸이 체스판 의회에 <b>카드병정 출동</b>을 올린다. 한 번에 하나.</p></li>
-          <li style="--nc:#ff2b3b"><div class="k"><i>3</i><b>동색</b><em>VOTE</em></div><p>첨탑 링이 <b>시간대마다 하나씩</b> 붉어진다. 가까운 퀸부터. 아무도 거부하지 않는다—괴로워하면서 붉어질 뿐.</p><div class="rl-rg"><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#a35cff"></i><i style="--c:#ff2b3b"></i><i style="--c:#2fe6ff"></i><small>◆◆◆◆◇◇◇ 4/7</small></div></li>
+          <li style="--nc:#ffc53d"><div class="k"><i>2</i><b>안건</b><em>MOTION</em></div><p>어느 퀸의 <b>발동 조건</b>이 걸리면 그 퀸이 체스판 의회에 <b>카드병정 출동</b>을 올린다. 한 번에 하나. 회복기·열린 안건 중이면 <b>대기열</b>에 섰다가, 회복기 끝난 첫 인공 아침에 맨 앞부터. 칸이 켜진 퀸은 다시 못 낸다.</p></li>
+          <li style="--nc:#ff2b3b"><div class="k"><i>3</i><b>동색</b><em>VOTE</em></div><p>안건이 열리면 즉시 <b>2/7</b>—낸 퀸, 그리고 늘 찬성하는 녹틸. 그 뒤 <b>시간대마다 +1</b>, 가까운 퀸부터 (가장 가까운 사이 &gt; 이름 &gt; 만남 &gt; 못 만남). 아무도 거부하지 않는다—괴로워하면서 붉어질 뿐. 이라의 링은 원래 빨개서 늘 찬성한 것처럼 보인다.</p><div class="rl-rg"><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#a35cff"></i><i style="--c:#ff2b3b"></i><i style="--c:#2fe6ff"></i><small>◆◆◆◆◇◇◇ 4/7</small></div></li>
           <li style="--nc:#ff2b3b"><div class="k"><i>4</i><b>출동</b><em>7 / 7</em></div><p>일곱 개가 다 붉으면 <b>다음 시간대</b>, 카드병정이 앨리스를 <b>어디서든</b> 붙잡아 간다.</p><div class="rl-rg"><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><i style="--c:#ff2b3b"></i><small>◆◆◆◆◆◆◆ 7/7</small></div></li>
-          <li style="--nc:#22f0ff"><div class="k"><i>5</i><b>검진</b><em>CHECK-UP</em></div><p>머리 위 링에 <b>한 칸</b>, 안건 낸 퀸의 색으로. 통증이 남고 그날 밤 꿈을 꾼다. 일곱 칸이 다 차면? <b>▒▒▒ 열람 권한 없음</b></p><div class="rl-rg"><i class="on" style="--c:#ff3ea5"></i><i class="on" style="--c:#d4dcff"></i><i class="on" style="--c:#ffc53d"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><small style="color:var(--ash)">링 점등 3/7</small></div></li>
+          <li style="--nc:#22f0ff"><div class="k"><i>5</i><b>검진</b><em>CHECK-UP</em></div><p>머리 위 링에 <b>한 칸</b>, 안건 낸 퀸의 색으로. 통증이 남고 그날 밤 꿈을 꾼다. 순수도 <b>70 미만</b>이면 실패—칸이 안 켜진다. 일곱 칸이 다 켜지면 판이 끝난다. 그다음은? <b>▒▒▒ 열람 권한 없음</b></p><div class="rl-rg"><i class="on" style="--c:#ff3ea5"></i><i class="on" style="--c:#d4dcff"></i><i class="on" style="--c:#ffc53d"></i><i class="u"></i><i class="u"></i><i class="u"></i><i class="u"></i><small style="color:var(--ash)">링 점등 3/7</small></div></li>
           <li style="--nc:#7dffb2"><div class="k"><i>6</i><b>회복기</b><em>RESET</em></div><p>사흘 쉰다. 첨탑 링은 원래 색으로, 거처는 새로 배정. 다시 1로.</p></li>
         </ol>
-        <div class="rl-loop">↻ 이걸 일곱 번</div>
+        <div class="rl-loop">↻ 이걸 일곱 번 · 빨라야 5일, 늦어도 9일 간격</div>
         <div class="rl-grid">
+          <div class="rl-card wide"><h4>안건은 언제 올라오나 <small>WHEN A QUEEN MOVES</small></h4>
+            <p class="rl-chq">「퀸마다 방아쇠가 달라. 숨길 생각 없어—<b>알아도 막을 순 없거든.</b>」</p>
+            <div class="rl-cond"><div><b><i style="--c:#d4dcff"></i>슈페르비아<small>루시탄</small></b><span>앨리스가 다른 퀸에게 <b>먼저 이름</b>을 받았을 때 / 다른 퀸의 칸이 <b>자기보다 먼저</b> 켜졌을 때</span></div><div><b><i style="--c:#ffc53d"></i>아바리티아<small>아우룸</small></b><span>자기가 거처 주인인데 앨리스가 <b>딴 데서 밤</b>을 보냈을 때 / 검진 뒤 거처가 다른 퀸에게 넘어갔을 때</span></div><div><b><i style="--c:#ff3ea5"></i>룩수리아<small>단테</small></b><span>앨리스와 <b>처음 맨살</b>이 닿았을 때</span></div><div><b><i style="--c:#a8ff3e"></i>인비디아<small>디아닌</small></b><span>앨리스가 다른 퀸에게 <b>이름</b>을 받거나 그 퀸과 <b>가장 가까운 사이</b>가 됐을 때—감시망으로 반드시 안다</span></div><div><b><i style="--c:#a35cff"></i>굴라<small>사티아</small></b><span>못 만난 날이 <b>사흘 연속</b> → 나흘째 인공 아침 (도착한 날부터 센다)</span></div><div><b><i style="--c:#ff2b3b"></i>이라<small>바탄</small></b><span>앨리스가 <b>바탄에게 거역</b>했을 때 / <b>루시탄 칸</b>이 자기보다 먼저 켜졌을 때</span></div><div><b><i style="--c:#2fe6ff"></i>아케디아<small>녹틸</small></b><span>갈망 안건 없음. 나머지 칸이 다 켜지면 <b>마지막에</b> 낸다</span></div></div>
+            <div class="rl-notes">
+              <div><b>공통 <small>ALL BUT ACEDIA</small></b><span><b>가장 가까운 사이</b>(성인판: 잠자리 / 전체이용가: 유대)가 된 퀸은 그 즉시 조건이 걸린다.</span></div>
+              <div><b>바닥 규칙 <small>FLOOR</small></b><span>회복기가 끝나고 <b>나흘</b> 동안 안건이 없으면, <b>닷새째 인공 아침</b>에 칸 없는 퀸 중 <b>가장 오래 못 만난 퀸</b>이 낸다.</span></div>
+              <div><b>만남의 기준 <small>MEETING</small></b><span>같은 장면에서 얼굴을 마주한 것만 센다. 방송·첨탑 너머로 본 건 안 친다.</span></div>
+            </div></div>
           <div class="rl-card"><h4>하루와 거처 <small>TIME · HOME</small></h4>
             <div class="rl-time"><span style="--bg:#13213a">아침</span><span style="--bg:#1a2842">오후</span><span style="--bg:#23183a">저녁</span><span style="--bg:#070a14">밤</span></div>
             <p>장면이 넘어가면 한 칸. 도착한 날이 <b>D+0</b>, 날짜는 프로필 생일부터 흐른다.</p>
-            <p>일곱 저택 중 한 곳이 거처(검진마다 새로). <b>밤은 거처에서</b>, 낮엔 어디든. 퀸들이 위치를 알면 숨은 게 아니다.</p></div>
+            <p>일곱 저택 중 한 곳이 거처(검진마다 새로 배정). <b>밤은 거처에서</b>, 낮엔 어디든. 어느 퀸도 앨리스를 혼자 가질 수 없다.</p></div>
           <div class="rl-card"><h4>회복기 <small>QUIET DAYS</small></h4>
             <p>도착 후 사흘(D+0~D+2), 그리고 검진 받은 뒤 사흘.</p>
-            <p><b>안건이 안 올라오는 조용한 시간</b>—퀸들을 만나러 다니기 제일 좋은 때.</p></div>
+            <p><b>안건이 안 올라오는 조용한 시간</b>—퀸들을 만나러 다니기 제일 좋은 때. 그동안 걸린 조건은 대기열에 쌓였다가 회복기 끝난 첫 아침에 터진다.</p></div>
           <div class="rl-card"><h4>숨기와 수색 <small>HIDE &amp; SEEK</small></h4>
             <div class="rl-meter"><i>1</i><i>2</i><i>3</i><i class="al">4 ⚠</i></div>
-            <p>퀸들이 위치를 모르면 숨은 것. 시간대마다 수색 <b>+1</b>—검진이 쌓일수록 더 빨리, 래빗홀은 아침마다.</p>
-            <p>3을 넘기면 경보 → <b>긴급 안건 → 즉시 7/7 → 그 시간대 안에 붙잡힌다.</b> 스스로 거처로 돌아가면 0.</p></div>
+            <p>퀸들이 위치를 모르면 숨은 것. 시간대마다 <b>+1</b>, 링 점등 <b>4칸부터 +2</b>. 래빗홀로 내려가면 <b>인공 아침마다 +1</b>—넓고 복잡해서.</p>
+            <p>3을 넘기면 경보 → <b>긴급 안건 → 즉시 7/7 → 그 시간대 안에 붙잡힌다.</b> 회복기 중에도. <b>스스로 거처로 돌아가면 0.</b> 거처 밖의 밤은 순수도를 깎고, 숨겨 준 사람이 위험해진다.</p></div>
           <div class="rl-card"><h4>언더월드 <small>OFF THE BOARD</small></h4>
             <p>래빗홀보다 더 아래. <b>판 밖</b>이라 있는 동안 수색·안건·동색이 전부 멈추고 붙잡히지도 않는다.</p>
             <p>대신 순수도가 밤마다 크게 깎인다. 돌아오면 멈춘 자리부터 다시 흐른다.</p></div>
-          <div class="rl-card wide"><h4>순수도 <small>PURITY · 시작 100</small></h4>
+          <div class="rl-card wide"><h4>순수도 <small>PURITY · 시작·상한 100</small></h4>
+            <div class="rl-gauge" aria-hidden="true"><i></i><span>70</span></div>
             <div class="rl-pm"><span class="m">DRINK ME · EAT ME 1회<b>−10</b></span><span class="m">저택 아닌 원더에서 밤<b>−5</b></span><span class="m">래빗홀에서 밤<b>−10</b></span><span class="m">언더월드에서 밤<b>−20</b></span><span class="m">도색 한 부위 (상한도 −30)<b>−30</b></span><span class="p">퀸 저택에서 약 없이 보낸 밤<b>+5</b></span></div>
-            <p>원더는 깨끗한 걸 좋아한다. 낮아지면 무슨 일이 생기는지는… 직접 알아내. 상태창은 왜 깎였는지 안 알려준다.</p></div>
-          <div class="rl-card wide"><h4>안건은 언제 <small>CHESHIRE · 귀띔</small></h4>
-            <div class="rl-hint"><div><b><i style="--c:#d4dcff"></i>슈페르비아</b><span>"제일 먼저가 아니면 못 참아. 이름도, 칸도."</span></div><div><b><i style="--c:#ffc53d"></i>아바리티아</b><span>"자기 집 손님이 남의 집에서 자고 오면? 시계가 빨라져."</span></div><div><b><i style="--c:#ff3ea5"></i>룩수리아</b><span>"처음 닿는 순간을 조심해. 그 손은 기억하거든."</span></div><div><b><i style="--c:#a8ff3e"></i>인비디아</b><span>"감시망은 다 봐. 네가 누구한테 무슨 이름을 받았는지도."</span></div><div><b><i style="--c:#a35cff"></i>굴라</b><span>"굶기지 마. 사흘이면 배가 고파져."</span></div><div><b><i style="--c:#ff2b3b"></i>이라</b><span>"거역하지 마. 그리고 거울 여자 칸이 먼저 켜지면… 알지?"</span></div><div><b><i style="--c:#2fe6ff"></i>아케디아</b><span>"자는 애는 안건을 안 내. …아직은."</span></div></div>
-            <p>가까워질수록 퀸들은 앨리스를 <b>자기 색으로 칠하고 싶어진다.</b> 그리고 <b>오래 못 본 퀸은 기다리지 않는다.</b></p></div>
+            <div class="rl-notes al">
+              <div><b>70 <small>THRESHOLD</small></b><span>검진 때 <b>70 미만이면 실패</b>—칸이 안 켜진다. 회복기는 똑같이 오고, 안건 낸 퀸은 대기열 맨 앞으로. → <b>정화</b>: 70이 될 때까지 거처에 붙잡힌다. 그동안 숨을 수 없고, 약을 건넨 쪽이 위험해진다.</span></div>
+              <div><b>시듦 <small>WITHERED</small></b><span>도색으로 <b>상한이 70 아래</b>로 떨어지면 하얀 장미가 시든다. 다시는 검진이 안 되고 <b>판이 멈춘다.</b></span></div>
+            </div>
+            <p>원더가 앨리스를 얼마나 깨끗하다고 보는지. 상태창은 왜 깎였는지 안 알려준다. <span class="rl-c">「일부러 떨어뜨리면 검진을 피할 수 있어. …공짜는 아니지만.」</span></p></div>
+          <div class="rl-card wide end"><h4>판이 끝나는 길 <small>ENDGAME</small></h4>
+            <div class="rl-notes">
+              <div class="x"><b>일곱 칸 <small>7 / 7 RING</small></b><span>머리 위 링 일곱 칸이 다 켜지면 판이 끝난다. 그 순간에서 이야기가 멈추고, 그다음은 네가 쓴다. <b>무슨 일이 일어나는지는—직접 알아내.</b></span></div>
+              <div class="x"><b>시듦 <small>WITHERED</small></b><span>순수도 상한이 70 아래로 떨어지면 판이 멈춘다. 검진도, 안건도, 수색도 더는 없다.</span></div>
+              <div><b>퀸이 무너질 때 <small>COLLAPSE</small></b><span>드물게 퀸이 무너질 수 있다. 그 퀸의 표가 사라지고(<b>n/6</b>), 그 퀸의 칸이 아직 없었다면 <b>회색</b>으로 닫힌다—필요한 검진이 하나 줄어든다.</span></div>
+              <div><b>퀸은 멈추지 않는다 <small>NO ESCAPE</small></b><span>아무리 가까워져도 퀸은 검진을 멈추지 않고, 앨리스를 데리고 도망치지 않는다. 각자 방식으로 괴로워할 뿐.</span></div>
+              <div><b>자유설정 시작 <small>FREE MODE</small></b><span>자유설정으로 들어오면 이 판이 <b>전부 꺼진다.</b> 숫자도 링도 병정도 없이, 네가 정한 상황에서 시작.</span></div>
+            </div></div>
         </div>
       </div>
     </div>

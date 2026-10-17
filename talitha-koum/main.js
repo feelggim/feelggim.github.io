@@ -18,6 +18,7 @@ addEventListener('touchmove', e => { const t = e.touches[0]; if (t) setPointer(t
 setPointer(mx, my);
 
 /* ── smooth scroll ── */
+ScrollTrigger.config({ ignoreMobileResize: true });
 const lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add(t => lenis.raf(t * 1000));
@@ -446,3 +447,10 @@ gsap.set('#gate .t-mid', { xPercent: -50 });
 gsap.to('#gate .temple', { scale: 1.05, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 });
 gsap.fromTo('#s-word .t-front', { scale: 1 }, { scale: 1.35, ease: 'none', scrollTrigger: { trigger: '#s-word', start: 'top top', end: () => '+=' + innerHeight * 2.2, scrub: true } });
 gsap.to('.inscr span', { yPercent: -55, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: .6 } });
+
+/* ── 이미지 저장 방지: 우클릭·길게 누르기·드래그 ── */
+addEventListener('contextmenu', e => { if (!e.target.closest('input,textarea')) e.preventDefault(); });
+addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+document.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); });
+/* ── 모바일: 이미지 미리 디코딩해서 장면 진입 때 빈 화면 깜빡임 방지 ── */
+addEventListener('load', () => { document.querySelectorAll('img').forEach(i => { i.decode && i.decode().catch(() => {}); }); });

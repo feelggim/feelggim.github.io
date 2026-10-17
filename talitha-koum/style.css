@@ -614,3 +614,17 @@ body.entered .inscr{opacity:1}
 @media (max-width:900px){.incense.l,.incense.r{display:none}.incense.pray{height:56vh;margin-left:-11vh}}
 @media (max-width:900px){.t-torch{display:block!important;width:13vw;top:40%}.t-torch.l{left:12%}.t-torch.r{left:88%}}
 .t-torch.r{transform:translate(-50%,-50%) scaleX(-1)}
+
+/* ── 이미지 저장 방지 (우클릭·길게 누르기·드래그) ── */
+img,.bg,.card-img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+body{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+input,textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+
+/* ── 모바일 깜빡임 방지 ── */
+@supports (height:100lvh){.scene,.stage{height:100lvh}}
+@media (hover:none),(pointer:coarse),(max-width:900px){
+  #grain{display:none!important}
+  .stage .bg,#gateZoom,.stage.live .bg{animation:none!important}
+  .zoom,.track,.temple img,.inscr span,.fin-cam,.crowd2 .fig img,.void,.void .riser{will-change:auto}
+  .t-torch::before{animation-duration:3.6s}
+}

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talitha Koum : 소녀여 일어나라</title>
+<meta name="description" content="태양에 바쳐질 히브리 여인과, 응답 없는 신의 딸을 자처하는 파라오. 축제까지 30일.">
+<meta property="og:title" content="Talitha Koum : 소녀여 일어나라">
+<meta property="og:description" content="꺾으려는 자와 꺾이지 않는 자. 두 신 사이의 이야기.">
+<meta property="og:image" content="assets/og_cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Serif+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+<!-- ═══ S0 입장 ═══ -->
+<div id="gate" aria-modal="true" role="dialog">
+  <div class="temple" aria-hidden="true">
+    <img class="t-back" src="assets/hall_back.webp" alt="">
+    <img class="t-mid" src="assets/col_mid.webp" alt="">
+    <img class="t-front" src="assets/col_front.webp" alt="">
+    <i class="t-torch l"></i><i class="t-torch r"></i>
+    <div class="t-shade"></div>
+    <img class="incense l" src="assets/smoke.webp" alt=""><img class="incense r" src="assets/smoke.webp" alt="">
+  </div>
+  <div class="gate-inner">
+    <div class="gate-flame" aria-hidden="true"></div>
+    <p class="gate-eyebrow">CRACK · UNSAFE · BY SCROLL</p>
+    <h1 class="gate-title" aria-label="Talitha Koum">Talitha Koum</h1>
+    <p class="pron">[ 탈리타 쿰 ]</p>
+    <p class="gate-sub">소녀여 일어나라</p>
+    <p class="gate-tag">태양에 바쳐질 히브리 여인과,<br>응답 없는 신의 딸을 자처하는 파라오.<br>축제까지 30일.</p>
+    <div class="gate-entry">
+      <p class="gate-age">이 이야기에는 19세 이상 이용가 내용이 포함되어 있습니다.<br>만 19세 이상이십니까?</p>
+      <div class="gate-btns">
+        <button class="gate-btn" data-sound="on">들어간다 · 소리와 함께</button>
+        <button class="gate-btn ghost" data-sound="off">들어간다 · 소리 없이</button>
+      </div>
+      <a class="gate-leave" href="https://www.google.com">아니오, 돌아갑니다</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HUD ═══ -->
+<header id="hud" aria-label="탐색">
+  <nav class="hud-nav">
+    <a href="#s-world" title="세계"><span class="glyph">𓏺</span><em>세계</em></a>
+    <a href="#s-people" title="인물"><span class="glyph">𓏻</span><em>인물</em></a>
+    <a href="#s-prayer" title="기도"><span class="glyph">𓏼</span><em>기도</em></a>
+    <a href="#s-end" title="시작"><span class="glyph">𓏽</span><em>시작</em></a>
+  </nav>
+  <div class="hud-sky" aria-hidden="true"><div class="hud-arc"></div><div class="hud-sun"></div><span class="hud-noon">정오</span></div>
+  <button id="sound" class="hud-sound" aria-label="소리">음 <b>有</b></button>
+</header>
+<div id="dday" aria-live="polite">오페트 대축제 <b>D-30</b></div>
+<div id="torch" aria-hidden="true"></div>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="inscr l" aria-hidden="true"><span>𓂝𓊽𓄿𓊹𓀭𓂀𓎡𓆑𓆣𓋴𓌳𓀭𓋞𓃭𓁐𓀭𓂀𓊪𓊪𓂀𓇋𓂀𓆑𓊪𓀭𓎡𓌳𓆣𓇋𓊹𓊹𓌳𓀭𓌳𓌳𓄿𓀭𓇋𓀭𓆑𓈎𓊽𓅓𓊪𓊽𓆑𓆣𓌳𓅓𓆑𓎡𓉐𓏏𓆣𓌳𓌳𓊹𓁐𓋴𓆣𓆑𓆓𓂀𓌳𓀭𓇼𓁐𓍿𓉐𓆑𓊪𓂋𓂝𓎛𓌳𓋞𓎛𓋴𓅓𓇋𓐍𓏏𓆓𓂋𓇋𓂀𓌳𓅓𓃭𓍿</span></div><div class="inscr r" aria-hidden="true"><span>𓇯𓂝𓅱𓎛𓅓𓇼𓂀𓆣𓃭𓊪𓏏𓂋𓂝𓊽𓋞𓍿𓊪𓀭𓉐𓂀𓂋𓆑𓌳𓐍𓇯𓎡𓂝𓂝𓆓𓋴𓇼𓍿𓌳𓐍𓎛𓂀𓎡𓂀𓈖𓍿𓆓𓉐𓂀𓀭𓅱𓆓𓅓𓊹𓌳𓉐𓎡𓎛𓅓𓆓𓄿𓇯𓉐𓋴𓇳𓎛𓋴𓏏𓇼𓆣𓍿𓀭𓁐𓂋𓅓𓊽𓅱𓇋𓄿𓄿𓋞𓈎𓍿𓂀𓏏𓎛𓄿𓆑𓈖𓇯𓊽𓎡𓊪𓈎𓆑𓈖</span></div>
+<div class="frieze top" aria-hidden="true"></div><div class="frieze bottom" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+
+<main id="world">
+
+<!-- ═══ S1 말씀 ═══ -->
+<section class="scene" id="s-word">
+  <div class="stage">
+    <div class="temple word" aria-hidden="true">
+      <img class="t-back" src="assets/relief.webp" alt="">
+      <img class="t-front" src="assets/col_front.webp" alt="">
+      <i class="t-torch l"></i><i class="t-torch r"></i>
+      <div class="t-shade"></div>
+    </div>
+    <p class="hebrew" dir="rtl">ראה ראיתי את עני עמי אשר במצרים</p>
+    <p class="verse" id="verse1">여호와께서 가라사대 내가 애굽에 있는 내 백성의 고통을 정녕히 보고 그들이 그 간역자로 인하여 부르짖음을 듣고 그 우고를 알고</p>
+    <p class="ref">출애굽기 3:7</p>
+    <div class="sandlight"></div>
+    <p class="hint">스크롤 · 걸어 들어가기</p>
+  </div>
+</section>
+
+<!-- ═══ S2 테베 ═══ -->
+<section class="scene" id="s-world">
+  <div class="stage">
+    <img class="bg" src="assets/harbor.webp" alt="아침의 테베 부두" id="harbor">
+    <img class="bg" src="assets/thebes.webp" alt="셉세트라의 테베" id="thebes">
+    <div class="shade"></div>
+    <div class="caption c-left">
+      <p class="line">나일의 물이 오르는 계절, 테베.</p>
+      <p class="line">라의 딸이라 불리는 파라오 앞에,<br>쇠사슬에 묶인 이방의 여자가 끌려온다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S3 탑문 ═══ -->
+<section class="scene" id="s-gate">
+  <div class="stage">
+    <div class="zoom" id="gateZoom">
+      <img class="bg" src="assets/gate_closed.webp" alt="닫힌 카르나크 탑문">
+      <img class="bg" src="assets/gate_open.webp" alt="열린 카르나크 탑문" id="gateOpen">
+    </div>
+    <div class="rays" aria-hidden="true"></div>
+    <div class="shade"></div>
+    <p class="caption c-center big" id="gateText">카르나크. 라의 집.</p>
+    <div class="blackout" id="gateBlack"></div>
+  </div>
+</section>
+
+<!-- ═══ S4 기둥의 숲 ═══ -->
+<section class="scene" id="s-hall">
+  <div class="stage dark">
+    <img class="bg" src="assets/hall_back.webp" alt="" id="hallBack">
+    <img class="layer" src="assets/col_mid.webp" alt="" id="colMid">
+    <div class="relief" id="relief">
+      <div class="relief-tex"></div>
+      <p class="hidden-verse">너는 나 외에는<br>다른 신들을<br>네게 있게 말찌니라<span>출애굽기 20:3</span></p>
+    </div>
+    <div class="rays" aria-hidden="true"></div>
+    <img class="layer" src="assets/col_front.webp" alt="" id="colFront">
+    <i class="t-torch l"></i><i class="t-torch r"></i>
+    <div class="darkness" id="hallDark"></div>
+    <p class="caption c-bottom" id="hallText">횃불을 들어 벽을 비춰 보라.</p>
+    <img class="bg" src="assets/sanctum.webp" alt="지성소" id="sanctum">
+    <p class="caption c-center big" id="sanctumText">그러나 라는<br>한 번도 그녀에게 대답한 적이 없다.</p>
+  </div>
+</section>
+
+<!-- ═══ S5 셉세트라의 이집트 ═══ -->
+<section class="scene" id="s-reign">
+  <div class="stage">
+    <img class="bg" src="assets/nile.webp" alt="범람하는 나일" id="nile">
+    <div class="flood" id="flood"></div>
+    <img class="bg" src="assets/banquet.webp" alt="왕궁 연회" id="banquet">
+    <div class="rays" aria-hidden="true"></div>
+    <div class="shade"></div>
+    <div class="caption c-right" id="reignText">
+      <p class="reign-head">파라오 셉세트라의 치세</p>
+      <p>이집트는 역대 어느 때보다 흥하다.<br>곳간이 차고, 공물이 끊이지 않는다.</p>
+    </div>
+    <div class="stats" id="stats">
+      <div><span class="num" data-to="16">0</span><em>큐빗 — 은총의 범람</em></div>
+      <div><span class="num" data-to="1240">0</span><em>척 — 공물을 실은 배</em></div>
+      <div><span class="num" data-to="0">0</span><em>번 — 라가 대답한 날</em></div>
+    </div>
+    <div class="portrait" id="portrait">
+      <img id="sepImg" src="assets/sepsetra_main.webp" alt="파라오 셉세트라">
+      <div class="glint" id="glint"></div>
+    </div>
+    <div class="nameplate" id="nameplate">
+      <div class="cartouche" title="셉세트라"><span class="glyph">𓇳𓀻𓏏𓁐</span></div>
+      <p class="translit">Šps.t-Rꜥ · 셉세트-라</p>
+      <p class="pharaoh">파라오</p>
+      <h2>셉세트라</h2>
+      <p class="epithet">라의 딸 · 상하 이집트의 주인</p>
+      <p class="quote">"축제는 내가 정한다."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S6 금과 진흙 ═══ -->
+<section class="scene" id="s-mud">
+  <div class="stage">
+    <img class="bg" src="assets/corridor_night.webp" alt="밤의 왕궁 회랑" id="palaceNight">
+    <div class="caption c-left" id="palaceText"><p class="lead">궁의 밤은 꺼지지 않는다.</p><p class="sub">금과 청금석 위로<br>횃불이 밤새 탄다.</p></div>
+    <div class="mudwrap" id="hutswrap"><img class="bg" src="assets/huts_night.webp" alt="밤의 노예 움막"></div>
+    <div class="caption c-right" id="hutsNightText"><p class="lead">같은 밤.</p><p class="sub">움막을 밝히는 건<br>꺼져가는 화덕 하나다.</p></div>
+    <img class="bg" src="assets/bricks.webp" alt="국고성 건설 현장" id="bricksImg">
+    <div class="quota" id="quota"><em>오늘의 할당량</em><span id="bricks">0</span><small>장 · 짚 없음</small></div>
+    <div class="caption c-right" id="mudVerse">
+      <p class="verse-sm">그러나 학대를 받을수록<br>더욱 번식하고 창성하니</p>
+      <p class="ref">출애굽기 1:12</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S7 꺾이지 않는 여인 ═══ -->
+<section class="scene" id="s-stand">
+  <div class="stage">
+    <img class="bg" src="assets/banquet.webp" alt="옥좌에 앉은 셉세트라" id="throneHall">
+    <div class="shade heavy"></div>
+    <div class="crowd2" id="crowd" aria-hidden="true" data-bounds="0.0,5.525,10.543,15.93,21.317,25.921,31.262,36.878,41.713,46.915,52.486,58.471,62.937,67.956,72.744,77.256,81.676,88.996,93.324,100.0"></div>
+    <div class="hw-shaft" id="hwShaft"></div>
+    <img class="hebrew-w" id="hebrewW" src="assets/hebrew.webp" alt="엎드리지 않은 히브리 여인의 뒷모습">
+    <p class="caption c-top" id="standA">파라오가 일어서면, 모두가 이마를 땅에 댄다.</p>
+    <p class="caption c-top" id="standB">단 한 사람만 빼고.</p>
+    <p class="prayer-line" id="standPrayer">"주여,<br>이 자리에서 제가 무릎 꿇지 않게 하소서."</p>
+    <img class="bg" src="assets/sepsetra_down.webp" alt="내려다보는 셉세트라" id="lookDown">
+    <p class="caption c-left big" id="standC">꺾으려는 자와<br>꺾이지 않는 자.</p>
+  </div>
+</section>
+
+<!-- ═══ S8 인물 ═══ -->
+<section class="scene" id="s-people">
+  <div class="stage">
+    <img class="bg wide" src="assets/corridor_day.webp" alt="왕궁 회랑" id="corridor">
+    <div class="rays" aria-hidden="true"></div>
+    <div class="shade"></div>
+    <div class="track" id="track">
+      <article class="card">
+        <div class="card-img" style="background-image:url(assets/sepsetra_main.webp);background-position:50% 4%;background-size:150% auto"></div>
+        <h3>셉세트라</h3>
+        <div class="hiero"><div class="cartouche"><span class="glyph">𓇳𓀻𓏏𓁐</span></div><p class="translit">Šps.t-Rꜥ</p></div>
+        <p class="role">이집트의 파라오 · 라의 딸</p>
+        <dl class="spec">
+          <div><dt>키</dt><dd>170cm <small>· 왕실 큐빗으로 3과 4분의 1</small></dd></div>
+          <div><dt>나이</dt><dd>라의 딸은 햇수를 세지 않는다 <small>· 치세 7년</small></dd></div>
+        </dl>
+        <p>오만하고 우아하고 잔혹하고 진득한 파라오. 갖고 싶은 건 전부 갖는다. 낮고 느린 하대로, 질문을 명령처럼 던진다.</p>
+        <p class="quote">"가까이 오라. 이방 신을 믿는다는 여자의 심장이 정말 순전한지, 내 눈으로 보겠다."</p>
+      </article>
+      <article class="card">
+        <div class="card-img sil" aria-hidden="true"><span class="glyph">𓁹</span></div>
+        <h3>메렌세트</h3><p class="role">라 대신관 · '위대한 견자'</p>
+        <p>이우누 출신의 50대. 털 한 올 없이 민 머리와 눈썹, 흰 아마포 위의 표범 가죽. 이방의 여자를 오염으로 여기고, 지금 당장 심장을 바치자고 진언한다.</p>
+      </article>
+      <article class="card">
+        <div class="card-img sil" aria-hidden="true"><span class="glyph">𓌒</span></div>
+        <h3>이세트</h3><p class="role">파라오의 호위대장</p>
+        <p>누비아 궁수 출신. 짧은 가죽 갑옷과 청동 단검. 파라오에게만 충성하며 당신의 감시를 맡는다. 말수가 적고, 관찰이 날카롭다.</p>
+      </article>
+      <article class="card">
+        <div class="card-img" style="background-image:url(assets/bricks.webp)"></div>
+        <h3>히브리 노예 공동체</h3><p class="role">국고성의 동족들</p>
+        <p>진흙과 짚으로 벽돌을 찍는 사람들. 당신의 소식을 몰래 전하고, 돕는다.</p>
+      </article>
+      <article class="card you">
+        <div class="card-img sil blank" aria-hidden="true"></div>
+        <h3>당신</h3><p class="role">히브리 여인 · 아브라함의 자손</p>
+        <p>유일하신 하나님만 믿으며 라를 신으로 인정하지 않는다. 라가 아닌 신을 믿는 그 심장이 '가장 순전한 심장'으로 지목되어 축제 제물이 되었다.</p>
+        <p class="quote">이름도, 얼굴도, 마음도. 당신이 정한다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S9 기도의 벽 ═══ -->
+<section class="scene" id="s-prayer">
+  <div class="stage">
+    <img class="bg" src="assets/prayer_night.webp" alt="히브리인 움막 마당의 밤">
+    <div class="shade heavy"></div>
+    <img class="incense pray" src="assets/smoke.webp" alt="" aria-hidden="true">
+    <div class="smoke" id="smoke" aria-live="off"></div>
+    <div class="altar-ui">
+      <h2 class="sec-title">기도의 벽</h2>
+      <p class="sec-sub">올린 기도는 연기가 되어 오른다. 누구의 것인지, 응답될지는 아무도 모른다.</p>
+      <form id="prayForm" autocomplete="off">
+        <label class="prefix" for="prayInput">주여,</label>
+        <input id="prayInput" maxlength="60" placeholder="당신의 기도를 남겨 주세요" required>
+        <button type="submit">올린다</button>
+      </form>
+      <p class="fineprint">개인정보·욕설은 올리지 마세요. 60자 이내. 이 기도는 이 브라우저에만 저장됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S10 플레이 안내 ═══ -->
+<section class="scene" id="s-rules">
+  <div class="stage papyrus-stage">
+    <div class="papyrus" id="papyrus">
+      <h2 class="sec-title">기도의 규칙</h2>
+      <ol class="rules">
+        <li>대사를 <b>"주여"</b>로 시작할 때만 기도가 된다. 혼잣말, 소원, 속마음은 기도가 아니다.</li>
+        <li>올린 기도는 짧게 줄여 제단에 새겨지고, 알 수 없는 기호가 하나 붙는다. <span class="burn" aria-label="그을린 빈칸"></span></li>
+        <li>기도는 세 갈래로 응답된다. <b>이뤄지거나, 기다리게 하거나, 침묵하거나.</b></li>
+        <li>무엇이 어느 쪽인지는 알려 주지 않는다. 다만 하나님의 뜻을 거스르는 기도는 이뤄지지 않으며, 그 무게는 기도한 자에게 돌아올 수 있다.</li>
+        <li>응답은 언제나 우연의 모습으로 온다. 기적처럼 보이지 않는다.</li>
+        <li>기도 한 번으로 이집트는 무너지지 않는다.</li>
+      </ol>
+      <div class="infobox">
+<pre>[ #1｜📅오페트 대축제 D-30｜🕐아침｜📍테베 왕궁 알현실｜☀️맑음｜🌊나일 상승 ]
+──────── ☥ ────────
+👑 셉세트라｜감정: 무관심
+   당신을 보는 시선: 값을 매기는 눈. 사람이 아니라 제물을 본다.
+🔒 집착 ▱▱▱▱▱ · 의심 ▱▱▱▱▱
+🔥 제단
+· 올려진 기도 없음
+📖 "여호와께서 너희를 위하여 싸우시리니 너희는 가만히 있을지니라" (출애굽기 14:14)
+────────────────────</pre>
+      </div>
+      <ul class="notes">
+        <li><b>엔딩</b> — "이 이야기는 여기까지다"라고 말하면, 그 응답이 엔딩이 된다.</li>
+        <li><b>수위</b> — 19+. 장면 밖(/OOC)에서 중단·수위 조정을 요청하면 즉시 따른다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S11 탈리다 쿰 ═══ -->
+<section class="scene" id="s-end">
+  <div class="stage">
+    <img class="bg" src="assets/opet.webp" alt="오페트 대축제 행렬" id="opet">
+    <div class="shade"></div>
+    <div class="opet-day" id="opetDay">
+      <p class="od-eyebrow">D-DAY · 오페트 대축제 당일</p>
+      <p class="od-title" id="odA">축제의 날이 밝았다.</p>
+      <p class="od-sub" id="odB">태양이 정오에 닿으면,<br>제물이 바쳐진다.</p>
+    </div>
+    <div class="whiteout" id="whiteout"></div>
+    <div class="fin" id="void">
+      <div class="fin-cam" id="finCam">
+        <div class="fin-glow" id="finGlow"></div>
+        <p class="fin-giant" aria-hidden="true"><span class="o">KOUM</span><span class="f" id="giantFill">KOUM</span></p>
+        <div class="fin-beam" id="finBeam"></div>
+        <div class="fin-cross" id="endCross" aria-hidden="true"><i class="v g"></i><i class="h g"></i><i class="v"></i><i class="h"></i><b class="core"></b></div>
+        <div class="fin-rings" id="finRings"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="fin-floor" id="finFloor"></div>
+        <div class="riser" id="riser" aria-hidden="true"><img src="assets/rise0.webp" alt="" class="rf" style="opacity:1"><img src="assets/rise1.webp" alt="" class="rf"><img src="assets/rise2.webp" alt="" class="rf"><img src="assets/rise3.webp" alt="" class="rf"><img src="assets/rise4.webp" alt="" class="rf"></div>
+      </div>
+      <div class="fin-ui" id="finUi">
+        <p class="fin-eyebrow">TALITHA KOUM</p>
+        <button id="holdBtn" class="fin-hold"><span class="t">일어서기</span><span class="bar"><i id="holdRing"></i></span><span class="h">길게 눌러 주세요</span></button>
+      </div>
+      <div class="fin-text" id="endAfter">
+        <h2 class="end-title" aria-label="Talitha Koum">Talitha Koum</h2>
+        <p class="end-sub" aria-label="소녀여, 일어나라."><span class="w">소녀여,</span> <span class="w">일어나라.</span></p>
+        <a class="cta" href="https://share.crack.wrtn.ai/0vizcuc" target="_blank" rel="noopener">크랙에서 시작하기</a>
+        <p class="sign">created by <b>Scroll</b></p>
+      </div>
+      <div class="flash" id="flash"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<audio id="ost" src="assets/ost.mp3" preload="auto" loop></audio>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="beat.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

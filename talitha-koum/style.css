@@ -1130,3 +1130,6 @@ body{font-family:var(--serif)!important;font-weight:300;letter-spacing:-.005em}
 @media (max-aspect-ratio:3/4){.pv-sky{top:-12%!important;bottom:12%!important;background-position:50% 100%!important}}
 .pro-cross .pro-rings i,.pro-cross .pro-rings i:not(.g){background:none!important;-webkit-mask:none!important;mask:none!important}
 @media (max-aspect-ratio:3/4){.pv-sky{top:-20%!important;bottom:20%!important}}
+.pro-shock{position:absolute;left:50%;top:calc(17vh + 3px);width:120vmin;height:120vmin;margin:-60vmin 0 0 -60vmin;border-radius:50%;pointer-events:none;
+ border:3px solid rgba(255,238,196,.95);box-shadow:0 0 50px rgba(255,210,130,.7),inset 0 0 50px rgba(255,210,130,.45);opacity:0;transform:scale(.04)}
+@media (hover:none),(pointer:coarse){.pro-shock{box-shadow:none;border-width:2px}}

@@ -504,6 +504,7 @@ addEventListener('load', () => { document.querySelectorAll('img').forEach(i => {
       .fromTo('#proCross .h', { scaleX: 0 }, { scaleX: 1, duration: .45, ease: 'power3.inOut' }, 6.75)
       .fromTo('#proCross .core', { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .4 }, 7.1)
       .fromTo('#proFlash', { opacity: .35 }, { opacity: 0, duration: .5, immediateRender: false }, 7.15)
+      .call(() => { if (tl.scrollTrigger && tl.scrollTrigger.direction < 0) return; window.crossSlam && window.crossSlam(); }, null, 7.12)
       .to('#proVerse', { opacity: 1, duration: .01 }, 7.3)
       .fromTo('#pvT .c', { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .08, stagger: .028 }, 7.35)
       .fromTo('#pvR', { opacity: 0 }, { opacity: 1, duration: .3 }, 8.55)
@@ -558,3 +559,17 @@ addEventListener('load', () => { document.querySelectorAll('img').forEach(i => {
   const mk = n => { const p = document.createElement('p'); p.className = 'glyph-row'; p.setAttribute('aria-hidden', 'true'); const cs = [...G]; let out = []; for (let i = 0; i < n; i++) out.push(cs[(Math.random() * cs.length) | 0]); p.textContent = out.join(' '); return p; };
   ['#s-prayer .sec-title', '#reignText .reign-head', '#palaceText .reign-head', '#hutsNightText .reign-head', '.od-eyebrow', '.pro-info', '.fin .end-title', '#s-word .hebrew'].forEach(sel => document.querySelectorAll(sel).forEach(el => el.parentNode.insertBefore(mk(5), el)));
 })();
+
+/* ── 십자가 완성: 한 번 더 쾅 ── */
+let __slamT = 0;
+window.crossSlam = () => {
+  if (performance.now() - __slamT < 1500) return; __slamT = performance.now();
+  const TOUCH = matchMedia('(hover:none),(pointer:coarse)').matches;
+  gsap.fromTo('#proFlash', { opacity: TOUCH ? .45 : .7 }, { opacity: 0, duration: .8, ease: 'power2.out', overwrite: true });
+  gsap.fromTo('#proShock', { scale: .04, opacity: 1 }, { scale: 1.5, opacity: 0, duration: 1.5, ease: 'expo.out', overwrite: true });
+  const R = [...document.querySelectorAll('#proRings i')];
+  R.slice(0, 3).forEach((r, i) => gsap.fromTo(r, { scale: .06, opacity: 1 }, { scale: 1.1 + i * .35, opacity: 0, duration: 1.7, delay: .08 + i * .14, ease: 'expo.out', overwrite: true }));
+  gsap.fromTo(['#proVoid', '#proCross'], { x: 0, y: 0 }, { keyframes: [{ x: -9, y: 4, duration: .05 }, { x: 8, y: -3, duration: .05 }, { x: -5, y: 2, duration: .06 }, { x: 3, y: -1, duration: .07 }, { x: 0, y: 0, duration: .1 }], overwrite: 'auto' });
+  const c = document.querySelector('#proCross .h').getBoundingClientRect();
+  window.dustBurst && window.dustBurst(innerWidth / 2, c.top + c.height / 2, TOUCH ? 40 : 90);
+};

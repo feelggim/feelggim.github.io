@@ -55,7 +55,6 @@ $('#sound').addEventListener('click', () => setSound(!soundOn));
     .to('.gate-pron, #gate .pron', { opacity: 1, duration: .9 }, '-=.3')
     .to('.gate-sub', { opacity: 1, letterSpacing: '.3em', duration: 1.2 }, '-=.4')
     .to('.gate-eyebrow', { opacity: 1, duration: .8 }, '<')
-    .to('.gate-tag', { opacity: 1, duration: 1.2 }, '+=.2')
     .to('.gate-entry', { opacity: 1, duration: 1, onStart: () => $('.gate-entry').classList.add('on') }, '+=.5');
 })();
 
@@ -80,7 +79,12 @@ ScrollTrigger.create({
     const w = $('.hud-sky').offsetWidth, h = 56;
     const x = p * (w / 2), y = h - Math.sin(p * Math.PI / 2) * h;
     gsap.set('.hud-sun', { left: x, top: y });
-    $('#dday b').textContent = 'D-' + Math.max(0, Math.round(30 - p * 30));
+    const eS = $('#s-end').parentElement, pS = $('#s-prologue').parentElement;
+    const endTop = eS.getBoundingClientRect().top + scrollY + innerHeight * 1.2, proTop = pS.getBoundingClientRect().top + scrollY - innerHeight * .5;
+    const y0 = scrollY, dd = $('#dday');
+    if (y0 >= proTop) { dd.querySelector('b').textContent = 'D-30'; dd.style.opacity = 1; }
+    else if (y0 > endTop + innerHeight * 2) { dd.style.opacity = 0; }
+    else { dd.style.opacity = 1; dd.querySelector('b').textContent = 'D-' + Math.max(0, Math.round(30 - Math.min(1, y0 / endTop) * 30)); }
   }
 });
 
@@ -88,8 +92,9 @@ ScrollTrigger.create({
 function scene(id, len, build, opts = {}) {
   const tl = gsap.timeline({ defaults: { ease: 'none' } });
   build(tl);
+  const idx = [...document.querySelectorAll('.scene')].indexOf(document.querySelector(id));
   ScrollTrigger.create({
-    trigger: id, start: 'top top', end: '+=' + len, pin: true, scrub: opts.scrub ?? 1, animation: tl,
+    trigger: id, start: 'top top', end: '+=' + len, pin: true, scrub: opts.scrub ?? 1, animation: tl, refreshPriority: 100 - idx,
     onEnter: opts.onEnter, onEnterBack: opts.onEnterBack || opts.onEnter, onLeave: opts.onLeave, onLeaveBack: opts.onLeaveBack
   });
   return tl;
@@ -221,7 +226,7 @@ ScrollTrigger.create({ trigger: '#s-hall', start: 'top+=2400 top', onEnter: () =
   const tl = gsap.timeline({ defaults: { ease: 'none' } })
     .to(track, { x: () => -dist(), duration: 1 }, 0)
     .to('#corridor', { xPercent: -22, duration: 1 }, 0);
-  ScrollTrigger.create({ trigger: '#s-people', start: 'top top', end: () => '+=' + (dist() + innerHeight), pin: true, scrub: 1, animation: tl, invalidateOnRefresh: true });
+  ScrollTrigger.create({ trigger: '#s-people', start: 'top top', end: () => '+=' + (dist() + innerHeight), pin: true, scrub: 1, animation: tl, invalidateOnRefresh: true, refreshPriority: 100 - [...document.querySelectorAll('.scene')].indexOf(document.querySelector('#s-people')) });
   gsap.utils.toArray('.card').forEach(c => gsap.from(c, { opacity: 0, y: 40, duration: .8, scrollTrigger: { trigger: c, containerAnimation: tl, start: 'left 85%' } }));
 })();
 
@@ -240,7 +245,8 @@ ScrollTrigger.create({ trigger: '#s-hall', start: 'top+=2400 top', onEnter: () =
   let mine = [];
   try { mine = JSON.parse(localStorage.getItem('tk_prayers') || '[]'); } catch (e) {}
   const pool = () => SEED.concat(mine.map(m => m.t));
-  function release(text, isMine = false) {
+  const MAX = matchMedia('(hover:none),(pointer:coarse)').matches ? 9 : 13;
+  function release(text, isMine = false, start = 0) {
     const el = document.createElement('div');
     el.className = 'slip' + (isMine ? ' mine' : '');
     el.dataset.seal = SEALS[(Math.random() * SEALS.length) | 0];
@@ -248,17 +254,25 @@ ScrollTrigger.create({ trigger: '#s-hall', start: 'top+=2400 top', onEnter: () =
     const w = stage.clientWidth;
     el.style.left = (isMine ? w / 2 - 140 : Math.random() * (w - 300)) + 'px';
     stage.appendChild(el);
-    const dur = isMine ? 14 : 16 + Math.random() * 10;
-    gsap.fromTo(el, { y: isMine ? -innerHeight * .25 : 0, rotate: (Math.random() - .5) * 8, opacity: 0 },
-      { y: -innerHeight - 160, x: (Math.random() - .5) * 140, rotate: (Math.random() - .5) * 14, opacity: 1, duration: dur, ease: 'sine.in', force3D: true, onComplete: () => el.remove() });
-    gsap.to(el, { opacity: 0, duration: dur * .25, delay: dur * .75, ease: 'none' });
+    const dur = isMine ? 14 : 15 + Math.random() * 8;
+    const tl = gsap.timeline({ onComplete: () => el.remove() });
+    tl.fromTo(el, { y: isMine ? -innerHeight * .25 : 0, x: 0, rotate: (Math.random() - .5) * 8 },
+      { y: -innerHeight - 160, x: (Math.random() - .5) * 140, rotate: (Math.random() - .5) * 14, duration: dur, ease: 'sine.in', force3D: true }, 0)
+      .fromTo(el, { opacity: 0 }, { opacity: 1, duration: dur * .12, ease: 'none' }, 0)
+      .to(el, { opacity: 0, duration: dur * .25, ease: 'none' }, dur * .75);
+    if (start) tl.progress(start);
   }
+  const pick = () => { const p = pool(); return p[(Math.random() * p.length) | 0]; };
   let timer = null;
   ScrollTrigger.create({
-    trigger: '#s-prayer', start: 'top 80%', end: 'bottom 20%',
+    trigger: '#s-prayer', start: 'top 95%', end: 'bottom 5%',
     onToggle(self) {
       clearInterval(timer);
-      if (self.isActive) { const p = pool(); for (let i = 0; i < 3; i++) setTimeout(() => release(p[(Math.random() * p.length) | 0]), i * 900); timer = setInterval(() => { if (stage.childElementCount > 8) return; const p = pool(); release(p[(Math.random() * p.length) | 0]); }, 2600); }
+      if (self.isActive) {
+        // 들어오는 순간 이미 기도가 흐르고 있게: 화면 곳곳에 미리 띄워 둔다
+        if (stage.childElementCount < 4) for (let i = 0; i < MAX - 3; i++) release(pick(), false, .08 + Math.random() * .72);
+        timer = setInterval(() => { if (stage.childElementCount >= MAX) return; release(pick()); }, 1300);
+      }
     }
   });
   $('#prayForm').addEventListener('submit', e => {
@@ -282,11 +296,12 @@ gsap.set('#s-rules', { height: 'auto', minHeight: '100vh' });
     tl.fromTo('#opet', { scale: 1.05 }, { scale: 1.22, duration: 3 }, 0)
       .fromTo('#opetDay .od-eyebrow', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .4 }, .1)
       .fromTo('#odA', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .5 }, .25)
-      .fromTo('#odB', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .5 }, 1.0)
-      .to('#opetDay', { opacity: 0, scale: 1.04, duration: .4 }, 2.0)
-      .to('#whiteout', { opacity: 1, duration: .6, ease: 'power2.in' }, 2.3)
-      .to('#void', { opacity: 1, duration: .1 }, 2.9)
-      .to('#whiteout', { opacity: 0, duration: .1 }, 3.0);
+      .fromTo('#odB', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .4 }, .7)
+      .to('#opetDay', { opacity: 0, scale: 1.04, duration: .3 }, 1.4)
+      .to('#whiteout', { opacity: 1, duration: .4, ease: 'power2.in' }, 1.6)
+      .to('#void', { opacity: 1, duration: .1 }, 2.0)
+      .to('#whiteout', { opacity: 0, duration: .15 }, 2.1)
+      .to({}, { duration: .75 }, 2.25);
   });
 
   const btn = $('#holdBtn'), V = $('#void'), bar = $('#holdRing');
@@ -311,10 +326,11 @@ gsap.set('#s-rules', { height: 'auto', minHeight: '100vh' });
   // 노래 박동 → 십자가·빛·글자 (미리 뽑은 저음 엔벨로프 사용, file://에서도 동작)
   const B = window.OST_BEAT, rings = [...document.querySelectorAll('#finRings i')]; let ri = 0, beatOn = false;
   const val = (s, i) => s && i >= 0 && i < s.length ? (s.charCodeAt(i) - 48) / 63 : 0;
+  const TOUCH = matchMedia('(hover:none),(pointer:coarse)').matches;
   function pulse(k) {
     const r = rings[ri++ % rings.length];
     gsap.fromTo(r, { scale: .25, opacity: .9 * k }, { scale: 2.6 + k * 1.4, opacity: 0, duration: 1.4, ease: 'expo.out', overwrite: true });
-    if (k > .75) {
+    if (k > .75 && !TOUCH) {
       gsap.fromTo('#flash', { opacity: .12 * k }, { opacity: 0, duration: .5, overwrite: true });
       gsap.fromTo('#riser', { scale: 1.035 }, { scale: 1, duration: .45, ease: 'power2.out', overwrite: 'auto' });
       const c = $('#endCross .core').getBoundingClientRect();
@@ -325,12 +341,13 @@ gsap.set('#s-rules', { height: 'auto', minHeight: '100vh' });
     if (beatOn || !B) return; beatOn = true;
     let last = -1, sm = 0, lastHit = -99, grid = -1; const t0 = performance.now() - 31600, dur = B.lo.length / B.fps, P = B.fps * 60 / 128.57, G0 = 948;
     (function loop() {
+      if (!V.parentElement.classList.contains('live')) { requestAnimationFrame(loop); return; }
       const live = soundOn && !ost.paused;
       const t = live ? ost.currentTime : ((performance.now() - t0) / 1000) % dur;
       const i = Math.floor(t * B.fps);
       const v = Math.max(val(B.lo, i), val(B.all, i) * .6);
       sm += (v - sm) * (v > sm ? .6 : .2);
-      V.style.setProperty('--b', sm.toFixed(3));
+      if (!TOUCH || (i & 1)) V.style.setProperty('--b', (TOUCH ? sm * .55 : sm).toFixed(2));
       if (last >= 0 && i > last && i - last < 10) {
         for (const o of B.on) if (o > last && o <= i) { pulse(Math.min(1, .45 + val(B.lo, o))); lastHit = i; break; }
         const g = Math.floor((i - G0) / P);
@@ -363,11 +380,10 @@ gsap.set('#s-rules', { height: 'auto', minHeight: '100vh' });
       .to('.fin .end-title .c', { y: '0%', duration: 1, stagger: .045, ease: 'power3.out' }, 1.7)
       .to('.fin .end-sub .w:nth-child(1) .c', { y: '0%', duration: .9, stagger: .09, ease: 'power3.out' }, 2.6)
       .to('.fin .end-sub .w:nth-child(2) .c', { y: '0%', duration: .7, stagger: .1, ease: 'power4.out' }, 3.6)
-      .fromTo('#flash', { opacity: .28 }, { opacity: 0, duration: 1.2, ease: 'power2.out' }, 3.6)
+      .fromTo('#flash', { opacity: .28 }, { opacity: 0, duration: 1.2, ease: 'power2.out', immediateRender: false }, 3.6)
       .fromTo('#finGlow', { scale: 1.6 }, { scale: 1.35, duration: 1.6, ease: 'power2.out' }, 3.6)
       .add(() => V.classList.add('done-text'), 4.7)
-      .to('.fin .cta', { opacity: 1, duration: 1 }, 4.9)
-      .to('.fin .sign', { opacity: 1, duration: 1 }, 5.3)
+      .to('.fin-next', { opacity: 1, y: 0, duration: 1.2 }, 4.9)
       .add(() => startBeat(), 1.9);
   }
   function start(e) {
@@ -397,13 +413,17 @@ addEventListener('load', () => ScrollTrigger.refresh());
   const cv = $('#dust'), ctx = cv.getContext('2d');
   let W, H, dpr = Math.min(devicePixelRatio || 1, 1.5), P = [];
   const N = innerWidth < 700 ? 40 : 80;
+  const sprite2 = document.createElement('canvas'); sprite2.width = sprite2.height = 64;
+  (() => { const s = sprite2.getContext('2d'), g = s.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, 'rgba(230,238,255,1)'); g.addColorStop(.3, 'rgba(110,150,240,.55)'); g.addColorStop(1, 'rgba(60,90,200,0)');
+    s.fillStyle = g; s.fillRect(0, 0, 64, 64); })();
   const sprite = document.createElement('canvas'); sprite.width = sprite.height = 64;
   (() => { const s = sprite.getContext('2d'), g = s.createRadialGradient(32, 32, 0, 32, 32, 32);
     g.addColorStop(0, 'rgba(255,248,220,1)'); g.addColorStop(.3, 'rgba(255,205,120,.55)'); g.addColorStop(1, 'rgba(255,170,60,0)');
     s.fillStyle = g; s.fillRect(0, 0, 64, 64); })();
   function size() { W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr; cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px'; }
   size(); addEventListener('resize', size);
-  const spawn = (y) => ({ x: Math.random() * W, y: y ?? Math.random() * H, r: (Math.random() * 1.6 + .4) * dpr, vy: -(Math.random() * .35 + .08) * dpr, vx: (Math.random() - .5) * .15 * dpr, t: Math.random() * 6.28, s: Math.random() * .03 + .01 });
+  const spawn = (y) => ({ x: Math.random() * W, y: y ?? Math.random() * H, r: (Math.random() * 1.6 + .4) * dpr, vy: -(Math.random() * .35 + .08) * dpr, vx: (Math.random() - .5) * .15 * dpr, t: Math.random() * 6.28, s: Math.random() * .03 + .01, blue: Math.random() < .5 });
   for (let i = 0; i < N; i++) P.push(spawn());
   let boost = 0; const B = [];
   window.dustBurst = (x, y, n = 140) => { for (let i = 0; i < n; i++) { const a = Math.random() * 6.283, sp = (Math.random() * 9 + 2) * dpr; B.push({ x: x * dpr, y: y * dpr, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1.5 * dpr, r: (Math.random() * 2 + .6) * dpr, life: 1 }); } };
@@ -413,8 +433,9 @@ addEventListener('load', () => ScrollTrigger.refresh());
     for (const p of P) {
       p.t += p.s; p.x += p.vx + Math.sin(p.t) * .2 * dpr; p.y += p.vy * (1 + boost * 6);
       if (p.y < -10) Object.assign(p, spawn(H + 10));
-      ctx.globalAlpha = (.35 + .65 * Math.abs(Math.sin(p.t * 1.7))) * .8;
-      const d = p.r * 8; ctx.drawImage(sprite, p.x - d / 2, p.y - d / 2, d, d);
+      const bt = window.BEAT || 0;
+      ctx.globalAlpha = Math.min(1, (.35 + .65 * Math.abs(Math.sin(p.t * 1.7))) * .8 * (1 + bt * .9));
+      const d = p.r * 8 * (1 + bt * .35); ctx.drawImage(p.blue ? sprite2 : sprite, p.x - d / 2, p.y - d / 2, d, d);
     }
     for (let i = B.length - 1; i >= 0; i--) {
       const q = B[i]; q.x += q.vx; q.y += q.vy; q.vx *= .965; q.vy = q.vy * .965 + .04 * dpr; q.life -= .011;
@@ -454,3 +475,86 @@ addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDe
 document.querySelectorAll('img').forEach(i => { i.setAttribute('draggable', 'false'); });
 /* ── 모바일: 이미지 미리 디코딩해서 장면 진입 때 빈 화면 깜빡임 방지 ── */
 addEventListener('load', () => { document.querySelectorAll('img').forEach(i => { i.decode && i.decode().catch(() => {}); }); });
+
+/* ── S12 프롤로그: 이야기의 첫 장면 → 셉세트라의 첫 명령이 훅으로 꽂힌다 ── */
+(() => {
+  const L = [...document.querySelectorAll('#pro > p')];
+  { const t = document.getElementById('pvT'); t.innerHTML = t.innerHTML.split('<br>').map(s => [...s].map(c => c === ' ' ? ' ' : `<span class="c">${c}</span>`).join('')).join('<br>'); }
+  scene('#s-prologue', 8400, tl => {
+    tl.fromTo('#proBg', { scale: 1.12 }, { scale: 1, duration: 3.2 }, 0);
+    L.forEach((el, i) => tl.fromTo(el, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: .32 }, .15 + i * .36));
+    tl.to('#pro', { opacity: 0, y: -24, duration: .35 }, 2.75)
+      .to('#proVeil', { opacity: 1, duration: .4 }, 2.8)
+      // 셉세트라 얼굴이 어둠 속에서 다가온다
+      .fromTo('#proSep', { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1.05, duration: 1.1, ease: 'power2.out' }, 3.0)
+      .to('#proFinal', { opacity: 1, duration: .01 }, 3.6)
+      .fromTo('#proFinal .glyph-row', { opacity: 0, letterSpacing: '1.4em' }, { opacity: .85, letterSpacing: '.7em', duration: .4 }, 3.6)
+      // "가까이 오라." — 쾅
+      .fromTo('#pc1', { opacity: 0, scale: 1.9, filter: 'blur(14px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: .28, ease: 'power4.in' }, 4.0)
+      .fromTo('#proFlash', { opacity: .55 }, { opacity: 0, duration: .5, ease: 'power2.out', immediateRender: false }, 4.28)
+      .fromTo('#proSep', { scale: 1.05 }, { scale: 1.0, duration: .3, ease: 'power3.out', immediateRender: false }, 4.28)
+      .call(() => { const r = document.getElementById('pc1').getBoundingClientRect(); window.dustBurst && window.dustBurst(r.left + r.width / 2, r.top + r.height / 2, 60); }, null, 4.3)
+      .fromTo('#pc2', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .35 }, 4.75)
+      .fromTo('#pc3', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .35 }, 5.1)
+      // 모든 게 어둠으로 물러나고, 십자가가 그어진다
+      .to(['#proSep', '#proFinal'], { opacity: 0, duration: .5 }, 5.8)
+      .to('#proBg', { opacity: 0, duration: .5 }, 5.8)
+      .fromTo('#proVoid', { opacity: 0 }, { opacity: 1, duration: .9, immediateRender: false }, 5.9)
+      .fromTo('#proCross .v', { scaleY: 0 }, { scaleY: 1, duration: .55, ease: 'power3.inOut' }, 6.25)
+      .fromTo('#proCross .h', { scaleX: 0 }, { scaleX: 1, duration: .45, ease: 'power3.inOut' }, 6.75)
+      .fromTo('#proCross .core', { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .4 }, 7.1)
+      .fromTo('#proFlash', { opacity: .35 }, { opacity: 0, duration: .5, immediateRender: false }, 7.15)
+      .to('#proVerse', { opacity: 1, duration: .01 }, 7.3)
+      .fromTo('#pvT .c', { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .08, stagger: .028 }, 7.35)
+      .fromTo('#pvR', { opacity: 0 }, { opacity: 1, duration: .3 }, 8.55)
+      .fromTo('#proCta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .4 }, 8.9)
+      .to({}, { duration: .6 }, 9.3);
+  });
+  ScrollTrigger.refresh();
+})();
+
+/* ── 전 구간 비트: 양옆 각인 기둥 띠·금가루가 노래 박자에 맞춰 뛴다 (소리 켰을 때) ── */
+(() => {
+  const B = window.OST_BEAT; if (!B) return;
+  const L = [...document.querySelectorAll('.inscr')];
+  const GR = () => document.querySelectorAll('.glyph-row');
+  const TOUCH = matchMedia('(hover:none),(pointer:coarse)').matches;
+  const val = (s, i) => (i >= 0 && i < s.length) ? (s.charCodeAt(i) - 48) / 63 : 0;
+  const P = B.fps * 60 / 128.57, G0 = 948;
+  let sm = 0, last = -1, lastHit = -99, grid = -1, f = 0;
+  const PR = [...document.querySelectorAll('#proRings i')]; let pri = 0; const PC = document.getElementById('proCross');
+  const PV = document.getElementById('proVoid'), SYN0 = performance.now() - 31600;
+  const PS = document.getElementById('s-prologue');
+  const crossOn = () => { if (!PC || gsap.getProperty('#proCross .h', 'scaleX') < .95) return false; const r = PS.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; };
+  const hit = k => {
+    L.forEach(el => { el.style.setProperty('--k', k.toFixed(2)); el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit'); });
+    if (crossOn()) { const r = PR[pri++ % PR.length]; gsap.fromTo(r, { scale: .25, opacity: .9 * k }, { scale: 2.6 + k * 1.4, opacity: 0, duration: 1.4, ease: 'expo.out', overwrite: true }); }
+  };
+  (function loop() {
+    f++;
+    let v = 0;
+    const liveS = soundOn && !ost.paused, syn = !liveS && crossOn();
+    if (liveS || syn) {
+      const i = liveS ? Math.floor(ost.currentTime * B.fps) : Math.floor((((performance.now() - SYN0) / 1000) % (B.lo.length / B.fps)) * B.fps);
+      v = Math.max(val(B.lo, i), val(B.all, i) * .6);
+      if (last >= 0 && i > last && i - last < 10) {
+        for (const o of B.on) if (o > last && o <= i) { hit(Math.min(1, .5 + val(B.lo, o))); lastHit = i; break; }
+        const g = Math.floor((i - G0) / P);
+        if (g !== grid) { grid = g; if (i - lastHit > 6 && i > G0) hit(.45); }
+      }
+      last = i;
+    } else last = -1;
+    sm += (v - sm) * (v > sm ? .6 : .14);
+    window.BEAT = sm;
+    if (!TOUCH || f % 2 === 0) { L.forEach(el => el.style.setProperty('--beat', sm.toFixed(2))); if (f % 3 === 0) { GR().forEach(el => el.style.setProperty('--beat', sm.toFixed(2))); } if (PC && f % 2 === 0) { PC.style.setProperty('--beat', sm.toFixed(2)); PV && PV.style.setProperty('--beat', sm.toFixed(2)); } }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ── 상형문자 줄: 장 제목마다 새겨 넣기 ── */
+(() => {
+  const G = '𓇳𓊽𓂀𓆣𓊹𓁐𓋴𓅓𓈖𓇋𓏏𓄿𓂋𓆑𓃭𓊪𓎛𓇯𓉐𓅱';
+  const row = n => { let s = []; for (let i = 0; i < n; i++) s.push(G[Math.floor(Math.random() * G.length / 2) * 2] + G[Math.floor(Math.random() * G.length / 2) * 2 + 1]); return [...s.join('')].filter((c, i, a) => true); };
+  const mk = n => { const p = document.createElement('p'); p.className = 'glyph-row'; p.setAttribute('aria-hidden', 'true'); const cs = [...G]; let out = []; for (let i = 0; i < n; i++) out.push(cs[(Math.random() * cs.length) | 0]); p.textContent = out.join(' '); return p; };
+  ['#s-prayer .sec-title', '#reignText .reign-head', '.od-eyebrow', '.pro-info', '.fin .end-title', '#s-word .hebrew'].forEach(sel => document.querySelectorAll(sel).forEach(el => el.parentNode.insertBefore(mk(5), el)));
+})();

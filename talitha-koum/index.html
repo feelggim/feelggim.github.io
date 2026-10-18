@@ -10,7 +10,8 @@
 <meta property="og:image" content="assets/og_cover.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;500;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Serif+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+Egyptian+Hieroglyphs&family=Noto+Serif+Hebrew:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="locked">
@@ -27,18 +28,16 @@
   </div>
   <div class="gate-inner">
     <div class="gate-flame" aria-hidden="true"></div>
+    <p class="glyph-row gate-glyphs" aria-hidden="true">𓇳 𓊽 𓂀 𓆣 𓊹 𓁐</p>
     <p class="gate-eyebrow">CRACK · UNSAFE · BY SCROLL</p>
     <h1 class="gate-title" aria-label="Talitha Koum">Talitha Koum</h1>
     <p class="pron">[ 탈리타 쿰 ]</p>
     <p class="gate-sub">소녀여 일어나라</p>
-    <p class="gate-tag">태양에 바쳐질 히브리 여인과,<br>응답 없는 신의 딸을 자처하는 파라오.<br>축제까지 30일.</p>
     <div class="gate-entry">
-      <p class="gate-age">이 이야기에는 19세 이상 이용가 내용이 포함되어 있습니다.<br>만 19세 이상이십니까?</p>
       <div class="gate-btns">
         <button class="gate-btn" data-sound="on">들어간다 · 소리와 함께</button>
         <button class="gate-btn ghost" data-sound="off">들어간다 · 소리 없이</button>
       </div>
-      <a class="gate-leave" href="https://www.google.com">아니오, 돌아갑니다</a>
     </div>
   </div>
 </div>
@@ -49,7 +48,7 @@
     <a href="#s-world" title="세계"><span class="glyph">𓏺</span><em>세계</em></a>
     <a href="#s-people" title="인물"><span class="glyph">𓏻</span><em>인물</em></a>
     <a href="#s-prayer" title="기도"><span class="glyph">𓏼</span><em>기도</em></a>
-    <a href="#s-end" title="시작"><span class="glyph">𓏽</span><em>시작</em></a>
+    <a href="#s-prologue" title="시작"><span class="glyph">𓏽</span><em>시작</em></a>
   </nav>
   <div class="hud-sky" aria-hidden="true"><div class="hud-arc"></div><div class="hud-sun"></div><span class="hud-noon">정오</span></div>
   <button id="sound" class="hud-sound" aria-label="소리">음 <b>有</b></button>
@@ -190,6 +189,41 @@
   </div>
 </section>
 
+<!-- ═══ S11 탈리다 쿰 ═══ -->
+<section class="scene" id="s-end">
+  <div class="stage">
+    <img class="bg" src="assets/opet.webp" alt="오페트 대축제 행렬" id="opet">
+    <div class="shade"></div>
+    <div class="opet-day" id="opetDay">
+      <p class="od-eyebrow">D-DAY · 오페트 대축제 당일</p>
+      <p class="od-title" id="odA">축제의 날이 밝았다.</p>
+      <p class="od-sub" id="odB">태양이 정오에 닿으면,<br>제물이 바쳐진다.</p>
+    </div>
+    <div class="whiteout" id="whiteout"></div>
+    <div class="fin" id="void">
+      <div class="fin-cam" id="finCam">
+        <div class="fin-glow" id="finGlow"></div>
+        <p class="fin-giant" aria-hidden="true"><span class="o">KOUM</span><span class="f" id="giantFill">KOUM</span></p>
+        <div class="fin-beam" id="finBeam"></div>
+        <div class="fin-cross" id="endCross" aria-hidden="true"><i class="v g"></i><i class="h g"></i><i class="v"></i><i class="h"></i><b class="core"></b></div>
+        <div class="fin-rings" id="finRings"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="fin-floor" id="finFloor"></div>
+        <div class="riser" id="riser" aria-hidden="true"><img src="assets/rise0.webp" alt="" class="rf" style="opacity:1"><img src="assets/rise1.webp" alt="" class="rf"><img src="assets/rise2.webp" alt="" class="rf"><img src="assets/rise3.webp" alt="" class="rf"><img src="assets/rise4.webp" alt="" class="rf"></div>
+      </div>
+      <div class="fin-ui" id="finUi">
+        <p class="fin-eyebrow">TALITHA KOUM</p>
+        <button id="holdBtn" class="fin-hold"><span class="t">일어서기</span><span class="bar"><i id="holdRing"></i></span><span class="h">길게 눌러 주세요</span></button>
+      </div>
+      <div class="fin-text" id="endAfter">
+        <h2 class="end-title" aria-label="Talitha Koum">Talitha Koum</h2>
+        <p class="end-sub" aria-label="소녀여, 일어나라."><span class="w">소녀여,</span> <span class="w">일어나라.</span></p>
+        <p class="fin-next"><em class="fn-log">태양에 바쳐질 히브리 여인과,<br>응답 없는 신의 딸을 자처하는 파라오.</em>그리고 이야기는, 축제 30일 전에서 시작된다.<span>스크롤</span></p>
+      </div>
+      <div class="flash" id="flash"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ S8 인물 ═══ -->
 <section class="scene" id="s-people">
   <div class="stage">
@@ -264,11 +298,11 @@
         <li>올린 기도는 짧게 줄여 제단에 새겨지고, 알 수 없는 기호가 하나 붙는다. <span class="burn" aria-label="그을린 빈칸"></span></li>
         <li>기도는 세 갈래로 응답된다. <b>이뤄지거나, 기다리게 하거나, 침묵하거나.</b></li>
         <li>무엇이 어느 쪽인지는 알려 주지 않는다. 다만 하나님의 뜻을 거스르는 기도는 이뤄지지 않으며, 그 무게는 기도한 자에게 돌아올 수 있다.</li>
-        <li>응답은 언제나 우연의 모습으로 온다. 기적처럼 보이지 않는다.</li>
+        <li>응답은 당신이 살아가고 있는 형태로 온다. 이것은 <b>당신만이 발견할 수 있다.</b></li>
         <li>기도 한 번으로 이집트는 무너지지 않는다.</li>
       </ol>
       <div class="infobox">
-<pre>[ #1｜📅오페트 대축제 D-30｜🕐아침｜📍테베 왕궁 알현실｜☀️맑음｜🌊나일 상승 ]
+<pre>[ #1｜📅아케트 1월 15일 · 축제 D-30｜🕐아침｜📍테베 왕궁 알현실｜☀️맑음｜🌊나일 상승 ]
 ──────── ☥ ────────
 👑 셉세트라｜감정: 무관심
    당신을 보는 시선: 값을 매기는 눈. 사람이 아니라 제물을 본다.
@@ -279,46 +313,48 @@
 ────────────────────</pre>
       </div>
       <ul class="notes">
-        <li><b>엔딩</b> — "이 이야기는 여기까지다"라고 말하면, 그 응답이 엔딩이 된다.</li>
+        <li><b>엔딩</b> — 셉세트라와의 이야기를 끝내고 싶다면, 서술에 아래 말 중 하나를 쓴다. 그 응답이 엔딩이 된다.<br><span class="keys"><strong class="key">이야기는 여기까지</strong><strong class="key">엔딩</strong><strong class="key">결말</strong><strong class="key">이야기 끝</strong><strong class="key">마무리</strong></span><small class="key-ex">예) *그렇게, 이 이야기는 여기까지다.*</small></li>
         <li><b>수위</b> — 19+. 장면 밖(/OOC)에서 중단·수위 조정을 요청하면 즉시 따른다.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ═══ S11 탈리다 쿰 ═══ -->
-<section class="scene" id="s-end">
+
+
+<!-- ═══ S12 프롤로그 · 시작하기 ═══ -->
+<section class="scene" id="s-prologue">
   <div class="stage">
-    <img class="bg" src="assets/opet.webp" alt="오페트 대축제 행렬" id="opet">
-    <div class="shade"></div>
-    <div class="opet-day" id="opetDay">
-      <p class="od-eyebrow">D-DAY · 오페트 대축제 당일</p>
-      <p class="od-title" id="odA">축제의 날이 밝았다.</p>
-      <p class="od-sub" id="odB">태양이 정오에 닿으면,<br>제물이 바쳐진다.</p>
+    <img class="bg" src="assets/throne_hall.webp" alt="테베 왕궁 알현실" id="proBg">
+    <img class="bg" src="assets/sepsetra_down.webp" alt="옥좌에서 내려다보는 셉세트라" id="proSep">
+    <div class="pro-shade"></div>
+    <div class="pro" id="pro">
+      <p class="pro-info">[ #1｜📅아케트 1월 15일 · 축제 D-30｜🕐아침｜📍테베 왕궁 알현실 ]</p>
+      <p class="pro-n">나일의 물이 오르기 시작한 계절. 테베의 왕궁은 오페트 대축제를 한 달 앞두고 몰약과 향유 냄새로 무거웠다.</p>
+      <p class="pro-n">쇠사슬이 회칠한 바닥을 긁는다. 청동 단검의 손잡이가 당신의 등을 민다.</p>
+      <p class="pro-n">옥좌는 높았다. 청색 케프레시 관 아래, 콜로 길게 뺀 눈매 속 호박색 눈이 당신을 내려다본다. 금 팔찌가 한 번, 부딪쳤다.</p>
+      <p class="pro-d"><b>메렌세트</b>"라의 딸이시여. 이방 신을 섬기는 입입니다. 오늘 심장을 꺼내 라께 올리면 그만입니다."</p>
+      <p class="pro-n">파라오는 그를 보지 않았다.</p>
+      <p class="pro-d sep"><b>셉세트라</b>"축제는 내가 정한다."</p>
     </div>
-    <div class="whiteout" id="whiteout"></div>
-    <div class="fin" id="void">
-      <div class="fin-cam" id="finCam">
-        <div class="fin-glow" id="finGlow"></div>
-        <p class="fin-giant" aria-hidden="true"><span class="o">KOUM</span><span class="f" id="giantFill">KOUM</span></p>
-        <div class="fin-beam" id="finBeam"></div>
-        <div class="fin-cross" id="endCross" aria-hidden="true"><i class="v g"></i><i class="h g"></i><i class="v"></i><i class="h"></i><b class="core"></b></div>
-        <div class="fin-rings" id="finRings"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="fin-floor" id="finFloor"></div>
-        <div class="riser" id="riser" aria-hidden="true"><img src="assets/rise0.webp" alt="" class="rf" style="opacity:1"><img src="assets/rise1.webp" alt="" class="rf"><img src="assets/rise2.webp" alt="" class="rf"><img src="assets/rise3.webp" alt="" class="rf"><img src="assets/rise4.webp" alt="" class="rf"></div>
-      </div>
-      <div class="fin-ui" id="finUi">
-        <p class="fin-eyebrow">TALITHA KOUM</p>
-        <button id="holdBtn" class="fin-hold"><span class="t">일어서기</span><span class="bar"><i id="holdRing"></i></span><span class="h">길게 눌러 주세요</span></button>
-      </div>
-      <div class="fin-text" id="endAfter">
-        <h2 class="end-title" aria-label="Talitha Koum">Talitha Koum</h2>
-        <p class="end-sub" aria-label="소녀여, 일어나라."><span class="w">소녀여,</span> <span class="w">일어나라.</span></p>
-        <a class="cta" href="https://share.crack.wrtn.ai/0vizcuc" target="_blank" rel="noopener">크랙에서 시작하기</a>
+    <div class="pro-veil" id="proVeil"></div>
+    <div class="pro-final" id="proFinal">
+      <p class="glyph-row" aria-hidden="true">𓇳 𓀻 𓏏 𓁐</p>
+      <p class="pc1" id="pc1">"가까이 오라."</p>
+      <p class="pc2" id="pc2">이방 신을 믿는다는 여자의 심장이 정말 순전한지,</p>
+      <p class="pc3" id="pc3">내 눈으로 보겠다."</p>
+
+    </div>
+    <div class="pro-void" id="proVoid" aria-hidden="true"><div class="pv-glow"></div><p class="pro-giant">TALITHA</p><div class="pv-floor"></div></div>
+    <div class="pro-cross" id="proCross" aria-hidden="true"><i class="v g"></i><i class="h g"></i><i class="v"></i><i class="h"></i><b class="core"></b><div class="pro-rings" id="proRings"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="pro-verse" id="proVerse"><p class="pv-t" id="pvT">일어나라 빛을 발하라 이는 네 빛이 이르렀고<br>여호와의 영광이 네 위에 임하였음이니라</p><p class="pv-r" id="pvR">이사야 60:1</p></div>
+    <div class="pro-cta" id="proCta">
+        <p class="cta-pre">크랙에서 이어집니다</p>
+        <a class="cta" href="https://share.crack.wrtn.ai/0vizcuc" target="_blank" rel="noopener">그녀와 맞서러 걸어나선다</a>
+        <p class="grace">신의 은총으로.</p>
         <p class="sign">created by <b>Scroll</b></p>
       </div>
-      <div class="flash" id="flash"></div>
-    </div>
+    <div class="pro-flash" id="proFlash"></div>
   </div>
 </section>
 

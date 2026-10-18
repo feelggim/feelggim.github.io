@@ -377,7 +377,7 @@ body.entered .frieze.bottom{bottom:calc(var(--bar) - 12px)}
 
 /* 탑문 두 장은 따로 흐르면 어긋나 보이므로, 묶어서 함께 흐르게 */
 #s-gate .bg{animation:none!important}
-#gateZoom{animation:drift 26s ease-in-out infinite alternate;animation-play-state:paused}
+#gateZoom{animation:none}
 #s-gate .stage.live #gateZoom{animation-play-state:running}
 
 .cartouche .glyph{font-size:40px;line-height:1.1}
@@ -628,3 +628,450 @@ input,textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:d
   .zoom,.track,.temple img,.inscr span,.fin-cam,.crowd2 .fig img,.void,.void .riser{will-change:auto}
   .t-torch::before{animation-duration:3.6s}
 }
+/* ── 모바일 깜빡임 2차: 혼합 레이어·빛살·번쩍임 제거 ── */
+html,body{background:#050302}
+@media (hover:none),(pointer:coarse){
+  .rays,.leak,.grade{display:none!important}
+  .t-torch::before,.fin-cross .core,.fin-glow,#burstRays,.sandlight{mix-blend-mode:normal!important}
+  .t-torch::before{animation:none!important;opacity:.85}
+  .fin-cross .h{width:min(50vh,78vw);margin-left:calc(min(50vh,78vw) / -2)}
+  .fin-rings i{box-shadow:none}
+  .cut{transition:none}
+}
+@media (hover:none),(pointer:coarse){
+  .whiteout{background:#2a1c0c}
+  .relief-tex{filter:none!important}
+  .darkness{background:radial-gradient(circle 260px at 50% 55%,rgba(0,0,0,0) 0,rgba(0,0,0,.15) 45%,rgba(0,0,0,.55) 100%)!important}
+}
+@media (hover:none),(pointer:coarse){
+  .whiteout{background:#2a1c0c}
+  .relief-tex{filter:none!important}
+  .darkness{background:radial-gradient(circle 260px at 50% 55%,rgba(0,0,0,0) 0,rgba(0,0,0,.15) 45%,rgba(0,0,0,.55) 100%)!important}
+}
+
+/* ═══ 타이포 정리: 함렛(한글) · 코모란트(제목) · 신젤(라벨) ═══ */
+:root{--serif:"Hahmlet","Noto Serif KR","Noto Serif CJK KR",serif;--latin:"Cormorant Garamond","Hahmlet",serif;--cap:"Cinzel","Cormorant Garamond",serif}
+body{font-family:var(--serif);font-weight:300;letter-spacing:.01em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* 라벨·눈썹 글씨는 신젤 대문자로 */
+.gate-eyebrow,.ref,.fin-eyebrow,.od-eyebrow,.translit,.hud-sky .hud-noon,.sign,.eyebrow,.hint{font-family:var(--cap)!important;font-weight:400!important}
+.gate-eyebrow{font-size:11px;letter-spacing:.55em}
+.ref{font-size:12px;letter-spacing:.42em}
+/* 굵기 한 단계씩 낮추기 — 함렛은 600이면 충분히 선다 */
+.caption.big,.verse-sm,.caption .lead,.sec-title,.nameplate h2,.pharaoh,.reign-head,.od-title,.fin .end-sub,.end-sub,.card h3{font-weight:600!important}
+.caption .sub,.od-sub,.verse,.gate-tag,.gate-age,.card p,.rules li,.notes li{font-weight:300!important}
+.gate-btn,#prayForm button,.cta{font-family:var(--serif);font-weight:500;letter-spacing:.18em}
+.infobox pre{font-family:"Hahmlet","Noto Serif KR",monospace!important;font-weight:400}
+/* PC: 크기 덜 투박하게 (약 12~18% 축소, 자간·행간 정돈) */
+@media (min-width:901px){
+  .caption{font-size:clamp(16px,1.55vw,21px);line-height:1.95;letter-spacing:.05em}
+  .caption.big{font-size:clamp(22px,2.7vw,36px);line-height:1.6;letter-spacing:.04em}
+  .caption .lead{font-size:clamp(22px,2.3vw,31px);letter-spacing:.06em;line-height:1.45}
+  .caption .sub{font-size:clamp(15px,1.25vw,18px);line-height:1.95}
+  .verse{font-size:clamp(18px,1.9vw,26px);line-height:2.1;letter-spacing:.02em}
+  .verse-sm{font-size:clamp(18px,2vw,27px)}
+  .hebrew{font-size:clamp(20px,2.6vw,34px)}
+  .gate-title{font-size:clamp(44px,7.2vw,84px);font-weight:500;letter-spacing:.06em}
+  .gate-sub{font-size:clamp(15px,1.5vw,19px);letter-spacing:.42em}
+  .gate-tag{font-size:13.5px;line-height:2}
+  .gate-btn{font-size:14px;padding:13px 30px}
+  .sec-title{font-size:clamp(24px,2.7vw,36px);letter-spacing:.24em}
+  .nameplate h2{font-size:clamp(34px,4vw,54px);letter-spacing:.16em}
+  .pharaoh{font-size:clamp(17px,1.7vw,23px)}
+  .reign-head{font-size:clamp(20px,2.1vw,28px);letter-spacing:.14em}
+  .stats .num{font-size:clamp(38px,4.6vw,62px);font-weight:500}
+  .quota span{font-size:clamp(44px,5.4vw,74px);font-weight:500}
+  .prayer-line{font-size:clamp(15px,1.45vw,19px)}
+  .od-title{font-size:clamp(32px,3.8vw,56px);letter-spacing:.04em}
+  .od-sub{font-size:clamp(16px,1.5vw,21px)}
+  .fin .end-title{font-size:clamp(34px,3.8vw,56px);font-weight:500}
+  .fin .end-sub{font-size:clamp(32px,4vw,60px);letter-spacing:.06em}
+  .card h3{font-size:clamp(20px,1.8vw,26px)}
+  .card p,.rules li{font-size:14.5px;line-height:1.9}
+}
+
+/* ═══ 프롤로그 (마지막 장) ═══ */
+#proBg{opacity:.55}
+#proSep{opacity:0}
+.pro-shade{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(6,4,2,.88),rgba(6,4,2,.55) 70%,rgba(6,4,2,.25))}
+.pro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;width:min(640px,86vw);text-align:left}
+.pro p{opacity:0;margin:0 0 18px;word-break:keep-all}
+.pro-info{font:400 12px var(--serif);letter-spacing:.06em;color:#d9b25a;padding:10px 14px;border:1px solid rgba(217,178,90,.3);background:rgba(10,7,4,.6);display:inline-block;margin-bottom:28px!important}
+.pro-n{font:300 clamp(15px,1.25vw,18px)/1.95 var(--serif);font-style:italic;color:#e6d8b6}
+.pro-d{font:400 clamp(16px,1.35vw,19px)/1.8 var(--serif);color:#fff0cc}
+.pro-d b{display:block;font:500 12px var(--cap);letter-spacing:.32em;color:#d9b25a;margin-bottom:2px}
+.pro-d.sep{font-weight:500;font-size:clamp(19px,1.7vw,24px);color:#ffe6a3;text-shadow:0 0 20px rgba(255,200,110,.3)}
+.pro-final{position:absolute;left:0;right:0;bottom:12vh;z-index:5;text-align:center;opacity:0}
+.pro-call{font:500 clamp(19px,2vw,28px)/1.75 var(--serif);color:#fff2d2;text-shadow:0 2px 14px #000,0 0 30px rgba(255,190,90,.3);margin-bottom:34px}
+#s-prologue .cta{display:inline-block;font-size:15px;letter-spacing:.24em;padding:15px 40px;background:linear-gradient(180deg,#f0d384,#b58c39);color:#1c140c;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.6);opacity:1}
+#s-prologue .sign{opacity:1;margin-top:26px;font-size:14px;color:#d9b25a}
+#s-prologue .sign b{font-family:var(--latin);font-size:20px;font-style:italic;color:#f3d48a}
+.fin-next{opacity:0;transform:translateY(12px);margin-top:28px;font:300 15px/1.8 var(--serif);color:#e9d8b1;letter-spacing:.08em}
+.fin-next span{display:block;margin-top:10px;font:400 10px var(--cap);letter-spacing:.5em;color:#a8915f;animation:bob 2.4s ease-in-out infinite}
+@media (max-width:700px){.pro{top:46%}.pro p{margin-bottom:12px}.pro-final{bottom:8vh}}
+
+/* ── 비트에 맞춰 뛰는 양옆 기둥 띠 ── */
+.inscr{--beat:0;--k:.5;transition:none;border-color:rgba(217,178,90,calc(.22 + var(--beat) * .55));
+ box-shadow:inset 0 0 calc(var(--beat) * 26px) rgba(255,190,90,.3),0 0 calc(var(--beat) * 22px) rgba(255,190,90,.22)}
+.inscr span{opacity:calc(.42 + var(--beat) * .58)!important;text-shadow:0 0 calc(var(--beat) * 12px) rgba(255,205,120,.95)}
+.inscr::after{content:"";position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;opacity:0;
+ background:linear-gradient(180deg,transparent,rgba(255,226,160,.55) 50%,transparent);background-size:100% 40%;background-repeat:no-repeat;background-position:50% 50%}
+.inscr.hit::after{animation:inscrHit .55s ease-out}
+@keyframes inscrHit{0%{opacity:var(--k);background-size:100% 18%}100%{opacity:0;background-size:100% 120%}}
+@media (max-width:900px){
+  .inscr{display:block!important;width:7px;top:90px;bottom:90px;border:0;background:linear-gradient(180deg,transparent,rgba(217,178,90,calc(.12 + var(--beat) * .7)),transparent);box-shadow:0 0 calc(var(--beat) * 16px) rgba(255,190,90,.35)}
+  .inscr.l{left:3px}.inscr.r{right:3px}
+  .inscr span{display:none}
+}
+.notes .key{font-weight:700;color:#8a2410;letter-spacing:.02em;border-bottom:1px solid rgba(138,36,16,.45);padding:0 2px}
+.notes .keys{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 6px}
+.notes .key{display:inline-block;border:1.5px solid #8a2410;border-bottom-width:1.5px;border-radius:999px;padding:3px 12px;font-size:.95em;background:rgba(138,36,16,.07)}
+.notes .key-ex{display:block;font-size:.85em;opacity:.75;font-style:italic}
+
+/* ═══ 타이포 2차: 덜 볼드하게, 영문 제목은 신젤 ═══ */
+.gate-title,.end-title,.fin .end-title{font-family:var(--cap)!important;font-weight:400!important;letter-spacing:.14em!important;text-transform:none}
+.gate-title{font-size:clamp(40px,6.4vw,78px)!important}
+.fin-giant{font-family:var(--cap)!important;font-weight:400!important;letter-spacing:.04em}
+.stats .num,.quota span{font-family:var(--cap)!important;font-weight:400!important}
+b,strong{font-weight:500}
+.caption.big,.verse-sm,.caption .lead,.sec-title,.nameplate h2,.pharaoh,.reign-head,.od-title,.fin .end-sub,.end-sub,.card h3,.pro-d.sep,.big{font-weight:500!important}
+.caption,.gate-sub,.pron,.od-sub,.pro-d,.prayer-line{font-weight:400!important}
+.verse,.gate-tag,.gate-age,.card p,.rules li,.notes li,.pro-n,.caption .sub{font-weight:300!important}
+.rules b,.notes b,.notes .key{font-weight:600}
+
+/* ── 상형문자 줄 · 아람어 ── */
+.glyph-row{font-family:var(--glyph);color:#d9b25a;letter-spacing:.7em;margin-right:-.7em;font-size:clamp(18px,1.6vw,24px);line-height:1;margin-bottom:14px;--beat:0;
+ opacity:calc(.62 + var(--beat) * .38);text-shadow:0 0 calc(4px + var(--beat) * 14px) rgba(255,200,110,.75)}
+.gate-glyphs{opacity:0;animation:fadeGlyph 1.6s ease 2.4s forwards;font-size:clamp(20px,1.8vw,26px);margin-bottom:18px}
+@keyframes fadeGlyph{to{opacity:.85}}
+.aram{font-family:"Noto Serif Hebrew",serif;font-weight:400;font-size:clamp(18px,1.7vw,24px);color:#e9c876;letter-spacing:.12em;margin:4px 0 8px;opacity:0;animation:fadeGlyph 1.4s ease 1.9s forwards;text-shadow:0 0 18px rgba(255,190,90,.35)}
+#s-word .glyph-row{position:relative;z-index:2}
+.sec-title + *,.reign-head{position:relative}
+
+/* ── 프롤로그 마지막 훅 ── */
+.pro-veil{position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse 70% 80% at 50% 40%,rgba(5,3,2,.15),rgba(5,3,2,.85) 75%),linear-gradient(180deg,transparent 45%,rgba(5,3,2,.92) 82%);opacity:0;pointer-events:none}
+#proSep{z-index:2}
+.pro-final{position:absolute;left:0;right:0;bottom:8vh;top:auto;z-index:5;text-align:center;opacity:0}
+.pc1{font:500 clamp(48px,6.4vw,104px)/1.1 var(--serif);color:#fff3d6;letter-spacing:.04em;margin:0 0 22px;
+ text-shadow:0 4px 18px #000,0 0 46px rgba(255,190,90,.55);will-change:transform,opacity}
+.pc2,.pc3{font:400 clamp(17px,1.6vw,23px)/1.8 var(--serif);color:#f1e2bd;margin:0;text-shadow:0 2px 12px #000}
+.pc3{color:#ffe6a3;font-weight:500;margin-bottom:30px}
+.pro-cta .cta-pre{font:400 11px var(--cap);letter-spacing:.42em;color:#c9a659;margin-bottom:12px}
+.pro-cta .cta{font-weight:500;letter-spacing:.3em;padding:16px 46px}
+.pro-flash{position:absolute;inset:0;z-index:6;background:radial-gradient(circle at 50% 70%,rgba(255,236,190,.9),rgba(255,200,120,.2) 60%,transparent);opacity:0;pointer-events:none}
+@media (hover:none),(pointer:coarse){.pro-flash{background:rgba(255,220,160,.25)}}
+@media (max-width:700px){.pc1{font-size:46px}.pc2,.pc3{font-size:15px;padding:0 18px}}
+/* 프롤로그 끝: 십자가 */
+.pro-cross{position:absolute;inset:0;z-index:4;pointer-events:none}
+.pro-cross i{position:absolute;display:block;background:linear-gradient(var(--d),rgba(255,240,200,0),#fff6dc 16%,#fff6dc 84%,rgba(255,240,200,0));box-shadow:0 0 16px 3px rgba(255,214,140,.8),0 0 60px 14px rgba(255,180,80,.35)}
+.pro-cross .v{--d:180deg;left:50%;top:9vh;height:60vh;width:6px;margin-left:-3px;transform:scaleY(0);transform-origin:50% 0}
+.pro-cross .h{--d:90deg;left:50%;top:23vh;width:34vh;margin-left:-17vh;height:6px;transform:scaleX(0)}
+.pro-cross .core{position:absolute;left:50%;top:calc(23vh + 3px);width:30vmin;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;opacity:0;
+ background:radial-gradient(circle,rgba(255,250,230,.85),rgba(255,214,140,.35) 20%,rgba(255,180,80,0) 62%)}
+.pro-cta{position:absolute;left:0;right:0;bottom:9vh;z-index:6;text-align:center;opacity:0}
+@media (hover:none),(pointer:coarse){.pro-cross i{box-shadow:0 0 10px 2px rgba(255,214,140,.7)}}
+.pro-cross .v{top:8vh;height:50vh}
+.pro-cross .h{top:20vh}
+.pro-cross .core{top:calc(20vh + 3px)}
+.pro-verse{position:absolute;left:0;right:0;top:61vh;z-index:6;text-align:center;opacity:0;padding:0 20px}
+.pv-t{font:400 clamp(17px,1.65vw,23px)/1.9 var(--serif);color:#fff2d2;letter-spacing:.05em;word-break:keep-all;text-shadow:0 0 18px rgba(255,190,90,.3)}
+.pv-t .c{display:inline-block;opacity:0}
+.pv-r{font:400 12px var(--cap);letter-spacing:.42em;color:#d9b25a;margin-top:12px;opacity:0}
+.pro-cta{bottom:5vh}
+@media (max-width:700px){.pro-verse{top:60vh}.pv-t{font-size:15px}}
+#proSep{z-index:3}
+.pro-veil{z-index:3;background:linear-gradient(180deg,rgba(5,3,2,0) 0,rgba(5,3,2,0) 48%,rgba(5,3,2,.75) 70%,rgba(5,3,2,.95) 88%)}
+.pro-final{z-index:5}
+.t-pass{position:absolute;left:50%;top:0;height:100%;width:auto;min-width:118%;object-fit:cover;will-change:transform,opacity;pointer-events:none}
+@media (max-width:900px){.t-pass{min-width:190%}}
+
+/* ═══ 청금석(라피스 라줄리) 포인트 ═══ */
+:root{--lapis:#2a4fa8;--lapis-hi:#4f78d6;--lapis-deep:#13286a}
+/* 상형문자는 청금석 안료처럼 */
+.glyph-row{color:var(--lapis-hi);text-shadow:0 0 calc(4px + var(--beat) * 14px) rgba(79,120,214,.85),0 0 1px #c9d6ff}
+.inscr span{color:#6d8fe0;text-shadow:0 0 calc(var(--beat) * 12px) rgba(110,150,240,.95)}
+.inscr{border-color:rgba(79,120,214,calc(.25 + var(--beat) * .55));background:linear-gradient(90deg,rgba(10,14,34,.6),rgba(10,10,20,.25),rgba(10,14,34,.6))}
+.inscr::after{background:linear-gradient(180deg,transparent,rgba(140,175,255,.5) 50%,transparent);background-size:100% 40%;background-repeat:no-repeat;background-position:50% 50%}
+/* 버튼·장식선: 금 + 청금석 이중 테 */
+.gate-btn.ghost{border-color:rgba(79,120,214,.7);color:#cfdcff;background:linear-gradient(180deg,rgba(19,40,106,.55),rgba(10,20,60,.55))}
+.gate-btn.ghost:hover{background:linear-gradient(180deg,rgba(42,79,168,.7),rgba(19,40,106,.7))}
+.hud-sound{border-color:rgba(79,120,214,.6)}
+.cta,.gate-btn:not(.ghost),#prayForm button{box-shadow:0 0 0 1px rgba(19,40,106,.9),0 0 0 3px rgba(42,79,168,.45),0 8px 24px rgba(0,0,0,.5)}
+.sec-title::after,.reign-head::after{content:"";display:block;width:64px;height:3px;margin:12px auto 0;background:linear-gradient(90deg,var(--gold),var(--lapis-hi),var(--gold))}
+.reign-head::after{margin-left:auto;margin-right:0}
+.pro-info{border-color:rgba(79,120,214,.55);background:rgba(10,16,40,.65)}
+.card{border-color:rgba(79,120,214,.35)!important}
+.card .role{color:#8fb0f5}
+.od-eyebrow{border-color:rgba(79,120,214,.6)!important}
+.pv-r,.ref{color:#8fb0f5!important}
+.aram{color:#a9c1ff;text-shadow:0 0 18px rgba(79,120,214,.55)}
+.fin-giant .o{-webkit-text-stroke-color:rgba(79,120,214,.28)}
+
+/* ═══ 청금석 밤: 검정 대신 짙은 남청을 바탕에 섞는다 ═══ */
+:root{--night:#05081a}
+html,body{background:#05081a}
+.stage{background:#05081a}
+.shade{background:linear-gradient(180deg,rgba(6,10,32,.6),rgba(6,10,32,.08) 35%,rgba(5,8,26,.72))}
+.shade.heavy{background:radial-gradient(ellipse at 50% 40%,rgba(8,14,44,.3),rgba(5,8,26,.88))}
+#s-prayer .shade.heavy{background:linear-gradient(180deg,rgba(8,14,44,.1) 0%,rgba(8,14,44,.06) 50%,rgba(5,8,26,.86) 88%)}
+.caption::before,.stats::before,.quota::before,.nameplate::before{background:radial-gradient(ellipse at center,rgba(7,12,38,.88) 0%,rgba(7,12,38,.66) 45%,rgba(7,12,38,0) 75%)}
+.caption.big::before,#mudVerse::before{background:radial-gradient(ellipse at center,rgba(6,10,32,.93) 0%,rgba(6,10,32,.78) 50%,rgba(6,10,32,0) 78%)}
+.t-shade{background:radial-gradient(ellipse 42% 55% at 50% 50%,rgba(6,9,28,.88),rgba(6,9,28,.5) 60%,rgba(6,9,28,0) 100%),linear-gradient(180deg,rgba(6,9,28,.7),rgba(6,9,28,0) 22%,rgba(6,9,28,0) 70%,rgba(5,8,26,.85))!important}
+#s-word .t-shade{background:radial-gradient(ellipse 48% 60% at 50% 50%,rgba(6,9,28,.93),rgba(6,9,28,.6) 70%,rgba(6,9,28,.15)),linear-gradient(180deg,rgba(6,9,28,.6),rgba(6,9,28,0) 25%,rgba(6,9,28,0) 75%,rgba(5,8,26,.7))!important}
+#gate{background:#05081a}
+.fin{background:radial-gradient(ellipse 80% 70% at 50% 35%,#0b1640,#04061a 70%)!important}
+.pro-shade{background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(6,10,32,.88),rgba(6,10,32,.55) 70%,rgba(6,10,32,.25))}
+.pro-veil{background:linear-gradient(180deg,rgba(5,8,26,0) 0,rgba(5,8,26,0) 48%,rgba(5,8,26,.75) 70%,rgba(5,8,26,.95) 88%)!important}
+.void,.whiteout{}
+/* 글자 위계: 금(제목) · 크림(본문) · 청백(보조) */
+.gate-sub,.pron,.fin-hold .h,.cta-pre,.fin-next{color:#cdd9ff!important}
+.caption .sub,.od-sub,.pc2{color:#e4e9fb!important}
+.verse{color:#eef1ff}
+.hebrew{color:#9fb8ff!important;text-shadow:0 0 22px rgba(79,120,214,.5)}
+.gate-tag{color:#c9d3ef}
+.infobox{background:#0a1030!important;border:1px solid rgba(79,120,214,.35)}
+.card{background:linear-gradient(180deg,rgba(14,22,58,.88),rgba(6,9,26,.92))!important}
+.dday,#dday{color:#9fb8ff}
+#dday b{color:var(--gold-hi)}
+.slip.mine{outline-color:#6d8fe0;box-shadow:0 0 22px rgba(79,120,214,.6)}
+
+/* ═══ 커서 빛: 황금빛이 푸르게 번지는 성령의 빛 ═══ */
+#torch{width:120px;height:120px;margin:-60px 0 0 -60px;opacity:1;animation:spirit 3.2s ease-in-out infinite;
+ background:radial-gradient(circle,rgba(255,255,250,1) 0,rgba(255,240,190,.95) 4%,rgba(255,214,130,.55) 12%,rgba(150,185,255,.28) 30%,rgba(79,120,214,.12) 48%,transparent 68%);
+ box-shadow:none;filter:none}
+#torch::before,#torch::after{content:"";position:absolute;left:50%;top:50%;pointer-events:none;border-radius:50%}
+#torch::before{width:2px;height:120px;margin:-60px 0 0 -1px;background:linear-gradient(180deg,transparent,rgba(220,232,255,.75) 35%,rgba(255,246,214,.95) 50%,rgba(220,232,255,.75) 65%,transparent)}
+#torch::after{width:76px;height:2px;margin:-14px 0 0 -38px;background:linear-gradient(90deg,transparent,rgba(220,232,255,.7) 35%,rgba(255,246,214,.95) 50%,rgba(220,232,255,.7) 65%,transparent)}
+@keyframes spirit{
+ 0%,100%{transform:translate3d(var(--mx),var(--my),0) scale(.94);opacity:.9}
+ 50%{transform:translate3d(var(--mx),var(--my),0) scale(1.06);opacity:1}}
+
+/* ═══ 셉세트라 이름판: 금 + 청금석 ═══ */
+.portrait{background:radial-gradient(ellipse 70% 90% at 30% 60%,#0d1a4a 0,#060a22 55%,#03040e 100%)!important}
+.nameplate h2{background:linear-gradient(180deg,#fff4d0 0%,#f0cf82 42%,#9db6f5 78%,#5d82db 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;
+ text-shadow:none!important;filter:drop-shadow(0 2px 2px rgba(0,0,0,.9)) drop-shadow(0 0 22px rgba(79,120,214,.45))}
+.nameplate .pharaoh{color:#cfdcff!important;text-shadow:0 0 14px rgba(79,120,214,.6)!important}
+.nameplate .epithet{color:#a9bff2!important}
+.nameplate .translit{color:#8fb0f5!important}
+.nameplate .quote{color:#f3e6c4}
+.cartouche .glyph{color:#5f86e6!important;text-shadow:0 1px 0 #0b1a4a,0 0 10px rgba(79,120,214,.7)!important}
+.card .hiero .glyph{color:#5f86e6!important}
+
+/* ═══ 청금석 진하게 (허연 하늘색 → 깊은 울트라마린) ═══ */
+:root{--lapis:#1e44c8;--lapis-hi:#3d6bff;--lapis-deep:#0f2580;--lapis-glow:rgba(45,95,255,.75)}
+.glyph-row{color:#3d6bff!important;text-shadow:0 0 calc(5px + var(--beat) * 14px) var(--lapis-glow),0 0 1px #9fb6ff!important}
+.inscr span{color:#3d6bff!important;text-shadow:0 0 calc(3px + var(--beat) * 12px) var(--lapis-glow)!important}
+.inscr{border-color:rgba(45,95,255,calc(.35 + var(--beat) * .55))!important}
+.cartouche .glyph,.card .hiero .glyph{color:#2f5ff0!important;text-shadow:0 1px 0 #06123d,0 0 12px rgba(45,95,255,.8)!important}
+.nameplate h2{background:linear-gradient(180deg,#fff2c8 0%,#efc96f 40%,#5b86ff 74%,#2a55e6 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;filter:drop-shadow(0 2px 2px rgba(0,0,0,.9)) drop-shadow(0 0 20px rgba(45,95,255,.55))}
+.nameplate .pharaoh{color:#5b86ff!important;text-shadow:0 0 16px rgba(45,95,255,.7)!important}
+.nameplate .epithet,.nameplate .translit{color:#6f95ff!important}
+.aram,.hebrew{color:#5b86ff!important;text-shadow:0 0 20px rgba(45,95,255,.6)!important}
+.gate-sub,.fin-next{color:#f1e6cc!important}
+.pron,.cta-pre,.fin-hold .h{color:#6f95ff!important}
+.caption .sub,.od-sub,.pc2{color:#f1e6cc!important}
+.verse{color:#f6eedc}
+.pv-r,.ref,.card .role{color:#6f95ff!important}
+.gate-btn.ghost{border-color:#2f5ff0!important;color:#e6ecff!important;background:linear-gradient(180deg,#1b3aa8,#0f2580)!important}
+.gate-btn.ghost:hover{background:linear-gradient(180deg,#2650c8,#16339e)!important}
+.cta,.gate-btn:not(.ghost),#prayForm button{box-shadow:0 0 0 1px #0f2580,0 0 0 3px rgba(45,95,255,.6),0 8px 24px rgba(0,0,0,.5)!important}
+.sec-title::after,.reign-head::after{background:linear-gradient(90deg,var(--gold),#2f5ff0,var(--gold))!important}
+.pro-info,.infobox{border-color:rgba(45,95,255,.6)!important}
+#torch{background:radial-gradient(circle,rgba(255,255,250,1) 0,rgba(255,240,190,.95) 4%,rgba(255,214,130,.55) 12%,rgba(70,120,255,.38) 28%,rgba(30,68,200,.16) 46%,transparent 68%)!important}
+#torch::before{background:linear-gradient(180deg,transparent,rgba(110,150,255,.85) 35%,rgba(255,246,214,.95) 50%,rgba(110,150,255,.85) 65%,transparent)!important}
+#torch::after{background:linear-gradient(90deg,transparent,rgba(110,150,255,.8) 35%,rgba(255,246,214,.95) 50%,rgba(110,150,255,.8) 65%,transparent)!important}
+.fin{background:radial-gradient(ellipse 80% 70% at 50% 35%,#0d1f66,#030616 72%)!important}
+.portrait{background:radial-gradient(ellipse 70% 90% at 30% 60%,#0f2580 0,#06103a 50%,#02040e 100%)!important}
+.t-half{position:absolute;left:50%;top:0;height:100%;width:auto;min-width:118%;object-fit:cover;will-change:transform,opacity;pointer-events:none}
+.t-half.mid{top:auto;bottom:-2%;height:96%;min-width:0}
+@media (max-width:900px){.t-half{min-width:190%}.t-half.mid{min-width:0}}
+
+/* 글자 받침은 다시 검정으로 (가독성·대비) */
+.caption::before,.stats::before,.quota::before,.nameplate::before{background:radial-gradient(ellipse at center,rgba(4,3,2,.88) 0%,rgba(4,3,2,.66) 45%,rgba(4,3,2,0) 75%)!important}
+.caption.big::before,#mudVerse::before{background:radial-gradient(ellipse at center,rgba(4,3,2,.93) 0%,rgba(4,3,2,.78) 50%,rgba(4,3,2,0) 78%)!important}
+.caption,.pc1,.pc2,.pc3,.od-title,.od-sub{text-shadow:0 2px 3px #000,0 0 18px rgba(0,0,0,.95)!important}
+/* 양옆 띠: 진한 금 */
+.inscr span{color:#e8b53e!important;text-shadow:0 0 calc(3px + var(--beat) * 14px) rgba(255,190,60,.95)!important;opacity:calc(.55 + var(--beat) * .45)!important}
+.inscr{border-color:rgba(232,181,62,calc(.4 + var(--beat) * .6))!important;background:linear-gradient(90deg,rgba(20,12,2,.7),rgba(10,6,0,.35),rgba(20,12,2,.7))!important;
+ box-shadow:inset 0 0 calc(var(--beat) * 26px) rgba(255,180,50,.35),0 0 calc(var(--beat) * 24px) rgba(255,180,50,.3)!important}
+.inscr::after{background:linear-gradient(180deg,transparent,rgba(255,214,120,.75) 50%,transparent)!important;background-size:100% 40%!important;background-repeat:no-repeat!important;background-position:50% 50%!important}
+@media (max-width:900px){.inscr{background:linear-gradient(180deg,transparent,rgba(232,181,62,calc(.25 + var(--beat) * .75)),transparent)!important}}
+.grace{font:400 italic clamp(15px,1.3vw,18px) var(--serif);color:#e8c27a;letter-spacing:.2em;margin-top:16px;text-shadow:0 0 16px rgba(255,190,90,.35)}
+/* 기도의 규칙: 스크롤 없이 한 화면에 */
+.papyrus{max-height:none!important;overflow:visible!important;padding:clamp(20px,2.6vw,34px) clamp(24px,3.4vw,46px)!important;width:min(860px,92vw)!important}
+.papyrus .sec-title{margin-bottom:6px}
+.papyrus .sec-title::after{margin-top:8px}
+.rules li{line-height:1.7!important;margin-bottom:4px!important;font-size:clamp(13px,1vw,15px)!important}
+.infobox{margin:12px 0 10px!important;padding:10px 14px!important}
+.infobox pre{font-size:12px!important;line-height:1.6!important}
+.notes li{font-size:13.5px;line-height:1.65;margin-bottom:2px}
+.notes .keys{margin:6px 0 4px}
+.notes .key{padding:2px 10px;font-size:.9em}
+@media (max-height:800px){.rules li{line-height:1.55!important}.infobox pre{font-size:11px!important}}
+/* 십자가: 끝까지 금색 (남청으로 빠지지 않게) + 비트 고리 */
+.pro-cross i,.fin-cross i:not(.g){background:linear-gradient(var(--d),#c9962e 0%,#f3d48a 10%,#fff3cf 50%,#f3d48a 90%,#c9962e 100%)!important;-webkit-mask:none!important;mask:none!important}
+.pro-cross{--beat:0}
+.pro-cross .core{transform:translate(-50%,-50%) scale(calc(.85 + var(--beat) * .5))!important}
+.pro-rings{position:absolute;left:50%;top:calc(20vh + 3px);width:0;height:0;pointer-events:none}
+.pro-rings i{position:absolute;left:0;top:0;width:34vmin;height:34vmin;margin:-17vmin 0 0 -17vmin;border-radius:50%;border:2px solid rgba(255,214,130,.85);
+ box-shadow:0 0 22px rgba(255,190,90,.5),inset 0 0 22px rgba(255,190,90,.35);opacity:0;transform:scale(0)}
+
+/* 이름판 톤다운: 금 위주, 청금석은 카르투슈 글자에만 */
+.portrait{background:radial-gradient(ellipse 70% 90% at 30% 60%,#0a0f26 0,#05060e 55%,#000 100%)!important}
+.nameplate h2{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:#ffe6a3!important;-webkit-text-fill-color:#ffe6a3!important;
+ filter:none!important;text-shadow:0 2px 3px #000,0 0 26px rgba(255,200,110,.4)!important}
+.nameplate .pharaoh{color:#e8c27a!important;text-shadow:0 1px 2px #000!important}
+.nameplate .epithet{color:#f1e6cc!important}
+.nameplate .translit{color:#c9a659!important}
+.cartouche .glyph{color:#2f5ff0!important;text-shadow:0 1px 0 #06123d!important}
+.cartouche .glyph,.card .hiero .glyph{color:#f3d48a!important;text-shadow:0 1px 0 #4a3008,0 0 10px rgba(255,200,100,.45)!important}
+.portrait{background:#000!important}
+/* 상형문자 줄·제목 밑줄 톤다운 */
+.glyph-row{color:#c9a659!important;font-size:clamp(14px,1.1vw,17px)!important;letter-spacing:1em!important;margin-right:-1em!important;
+ opacity:calc(.42 + var(--beat) * .25)!important;text-shadow:0 0 calc(var(--beat) * 8px) rgba(255,200,110,.5)!important;margin-bottom:10px}
+.gate-glyphs{animation:fadeGlyph2 1.6s ease 2.4s forwards!important}
+@keyframes fadeGlyph2{to{opacity:.55}}
+.sec-title::after,.reign-head::after{width:40px!important;height:1px!important;background:linear-gradient(90deg,transparent,#d9b25a,transparent)!important;margin-top:10px!important}
+/* 버튼 테두리 청색 링 제거 */
+.cta,.gate-btn:not(.ghost),#prayForm button{box-shadow:0 8px 22px rgba(0,0,0,.5)!important}
+.gate-btn.ghost{border:1px solid rgba(217,178,90,.55)!important;background:linear-gradient(180deg,rgba(19,38,110,.75),rgba(10,22,70,.75))!important;color:#f1e6cc!important}
+.gate-btn.ghost:hover{background:linear-gradient(180deg,rgba(30,56,150,.85),rgba(15,32,95,.85))!important}
+.hud-sound{border-color:rgba(217,178,90,.45)!important}
+/* 남은 청색 테두리 정리: 금 실선으로 */
+.pro-info,.infobox{border-color:rgba(217,178,90,.35)!important}
+.od-eyebrow{border-color:rgba(217,178,90,.5)!important}
+.card{border-color:rgba(217,178,90,.3)!important}
+#prayForm button{border-radius:2px;padding:0 22px;letter-spacing:.3em;background:linear-gradient(180deg,#e9c878,#b8893a)!important;box-shadow:none!important}
+#prayForm{border-color:rgba(217,178,90,.45)!important}
+/* 프롤로그 배경: 허연 막 제거, 진한 어둠 위에 그림 */
+#proBg{opacity:.6}
+.pro-shade{background:radial-gradient(ellipse 55% 65% at 45% 50%,rgba(0,0,0,.82),rgba(0,0,0,.62) 60%,rgba(0,0,0,.4) 100%),linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(0,0,0,.6))!important}
+.pro-n{color:#efe4c8!important}
+.pro-d{color:#fff3d6!important}
+/* 프롤로그 배경 더 어둡게 */
+#proBg{opacity:.6}
+.pro-shade{background:radial-gradient(ellipse 55% 65% at 45% 50%,rgba(0,0,0,.9),rgba(0,0,0,.72) 60%,rgba(0,0,0,.5) 100%),linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,rgba(0,0,0,.7))!important}
+/* 마지막 십자가도 엔딩처럼: 십자 모양 빛 번짐이 박자 따라 */
+.pro-cross .g{background:linear-gradient(var(--d),rgba(255,200,110,0),rgba(255,200,110,.55) 25%,rgba(255,200,110,.55) 75%,rgba(255,200,110,0))!important;box-shadow:none!important;opacity:calc(.3 + var(--beat) * .7)}
+.pro-cross .v.g{width:90px;margin-left:-45px;-webkit-mask:linear-gradient(90deg,transparent,#000 50%,transparent)!important;mask:linear-gradient(90deg,transparent,#000 50%,transparent)!important}
+.pro-cross .h.g{height:90px;margin-top:-42px;-webkit-mask:linear-gradient(180deg,transparent,#000 50%,transparent)!important;mask:linear-gradient(180deg,transparent,#000 50%,transparent)!important}
+.pro-cross .core{mix-blend-mode:screen}
+/* 마지막 버튼: 묵직한 금덩이 대신 가는 금 테 */
+#s-prologue .cta{background:transparent!important;color:#f3d48a!important;border:1px solid rgba(243,212,138,.7)!important;box-shadow:none!important;
+ font-weight:400!important;letter-spacing:.34em!important;padding:15px 44px!important;transition:background .4s,color .4s}
+#s-prologue .cta:hover{background:rgba(243,212,138,.12)!important;color:#fff3d6!important}
+.pro-cta .cta-pre{color:#b8975a!important}
+#proBg{filter:brightness(.72) saturate(1.05)}
+/* 마지막 화면 간격 */
+.pro-cross .v{top:6vh!important;height:44vh!important}
+.pro-cross .h{top:17vh!important}
+.pro-cross .core,.pro-rings{top:calc(17vh + 3px)!important}
+.pro-verse{top:53vh!important}
+.pro-cta{bottom:4vh!important}
+.pro-cta .grace{margin-top:12px}
+.pro-cta .sign{margin-top:14px!important}
+
+/* 십자가: 단색 금 + 주변이 뿌옇게 번지는 빛 (심플) */
+.pro-cross i:not(.g),.fin-cross i:not(.g){background:#f1d08a!important;-webkit-mask:none!important;mask:none!important;
+ box-shadow:0 0 14px 3px rgba(241,208,138,.6),0 0 48px 14px rgba(241,208,138,.26),0 0 120px 40px rgba(241,208,138,.1)!important}
+.fin.risen .fin-cross .g{opacity:calc(.12 + var(--b,0) * .4)!important}
+.pro-cross .g{opacity:calc(.12 + var(--beat,0) * .4)}
+.pro-cross .core,.fin-cross .core{background:radial-gradient(circle,rgba(255,240,200,.55),rgba(241,208,138,.18) 30%,transparent 62%)!important}
+.fin.risen .fin-cross .core{opacity:calc(.25 + var(--b,0) * .4)!important}
+/* 차갑게: 프롤로그 배경 채도·온도 낮추기 */
+#proBg{filter:brightness(.62) saturate(.55) contrast(1.05)!important}
+.pro-shade{background:radial-gradient(ellipse 55% 65% at 45% 50%,rgba(2,4,14,.9),rgba(2,4,14,.7) 60%,rgba(2,4,14,.5) 100%),linear-gradient(180deg,rgba(2,4,14,.5),rgba(2,4,14,0) 30%,rgba(2,4,14,0) 70%,rgba(2,4,14,.7))!important}
+/* 커서 빛: 십자 빛줄기 제거, 금빛 중심 + 푸른 번짐만 */
+#torch::before,#torch::after{display:none!important}
+
+
+/* ═══ 타이포 3차: 현대적 + 서늘함 — 프리텐다드(본문·UI) · 나눔명조(말씀·대사) · 보도니(영문 제목) ═══ */
+:root{--serif:"Pretendard Variable","Pretendard",-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+ --myeong:"Nanum Myeongjo","Noto Serif KR",serif;--latin:"Bodoni Moda","Cormorant Garamond",serif;--cap:"Pretendard Variable","Pretendard",sans-serif}
+body{font-family:var(--serif)!important;font-weight:300;letter-spacing:-.005em}
+/* 영문 제목: 보도니 */
+.gate-title,.end-title,.fin .end-title{font-family:var(--latin)!important;font-weight:400!important;letter-spacing:.06em!important}
+.gate-title{font-size:clamp(46px,7vw,92px)!important}
+.fin-giant,.stats .num,.quota span{font-family:var(--latin)!important;font-weight:400!important}
+.sign b{font-family:var(--latin)!important;font-style:italic}
+/* 라벨: 산세리프 대문자, 넓은 자간 */
+.gate-eyebrow,.ref,.fin-eyebrow,.od-eyebrow,.translit,.pv-r,.cta-pre,.pro-d b,.hint,.fin-next span{font-family:var(--cap)!important;font-weight:500!important;text-transform:uppercase;letter-spacing:.42em!important;font-size:10.5px!important}
+.translit{text-transform:none;letter-spacing:.12em!important;font-size:12px!important}
+/* 말씀·대사·서사: 나눔명조 */
+.verse,.verse-sm,.pro-n,.pro-d,.pc1,.pc2,.pc3,.pv-t,.fin .end-sub,.od-title,.caption.big,.hidden-verse,.quote,.prayer-line,.gate-sub,.grace,#mudVerse{font-family:var(--myeong)!important}
+.pc1,.fin .end-sub,.od-title,.caption.big{font-weight:700!important}
+.verse,.pro-n,.pc2,.pv-t,.quote,.gate-sub{font-weight:400!important}
+.pro-n{font-style:normal!important}
+/* 산세리프 쪽 굵기 */
+.caption{font-weight:400!important}
+.caption .lead,.sec-title,.nameplate h2,.reign-head,.card h3,.pharaoh{font-family:var(--serif)!important;font-weight:600!important;letter-spacing:.08em}
+.nameplate h2{letter-spacing:.14em!important}
+.caption .sub,.od-sub,.gate-tag,.gate-age,.card p,.rules li,.notes li,.epithet{font-weight:300!important}
+.gate-btn,.cta,#prayForm button,.fin-hold .t{font-family:var(--serif)!important;font-weight:500!important}
+.infobox pre{font-family:"Pretendard Variable",monospace!important;font-weight:400!important}
+
+/* ═══ 서늘함·날카로움: 번지는 따뜻한 광채 걷어내고, 선명한 상아색 + 차가운 샴페인 금 ═══ */
+:root{--gold:#cdb06a;--gold-hi:#e9d49b}
+.gate-title,.gate-title .ch{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:#e9d49b!important;-webkit-text-fill-color:#e9d49b!important;filter:none!important;
+ text-shadow:0 1px 0 rgba(0,0,0,.6)!important}
+.gate-sub{color:#f3efe6!important;letter-spacing:.5em!important}
+.caption,.caption .lead,.verse,.pro-d,.pc2,.pc3,.pv-t,.od-title,.reign-head,.sec-title{text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 10px rgba(0,0,0,.8)!important}
+.caption .lead,.verse,.od-title,.pv-t{color:#f4f0e6!important}
+.pc1,.fin .end-sub{color:#f6f3ec!important;text-shadow:0 2px 3px #000,0 0 12px rgba(0,0,0,.9)!important;letter-spacing:.02em!important}
+.pc3,.pro-d.sep{color:#e9d49b!important;text-shadow:0 1px 2px #000!important}
+.nameplate h2{color:#e9d49b!important;-webkit-text-fill-color:#e9d49b!important;text-shadow:0 2px 3px #000!important}
+.fin .end-title{color:#e9d49b!important;text-shadow:none!important}
+.sec-title,.reign-head{color:#e9d49b!important}
+.stats .num,.quota span{color:#e9d49b!important;text-shadow:0 2px 3px #000!important}
+.fin-giant .f{opacity:.22!important}
+
+/* 영문 제목: 신젤 데코러티브 볼드 + 버튼 같은 진한 금 */
+:root{--deco:"Cinzel Decorative","Cinzel",serif}
+.gate-title,.end-title,.fin .end-title{font-family:var(--deco)!important;font-weight:700!important;letter-spacing:.05em!important}
+.gate-title{font-size:clamp(40px,6.2vw,84px)!important}
+.gate-title,.gate-title .ch,.fin .end-title,.end-title{background:linear-gradient(180deg,#f3d88e 0%,#ddb056 50%,#a8822f 100%)!important;-webkit-background-clip:text!important;background-clip:text!important;
+ color:transparent!important;-webkit-text-fill-color:transparent!important;filter:drop-shadow(0 2px 2px rgba(0,0,0,.85))!important;text-shadow:none!important}
+.fin-giant{font-family:var(--deco)!important;font-weight:700!important}
+/* 제목 굵기: 날카로운 레귤러 */
+.gate-title,.end-title,.fin .end-title,.fin-giant{font-weight:400!important}
+.gate-entry{margin-top:34px}
+.pro-log{font-family:var(--myeong);font-weight:400;font-size:clamp(13px,1.3vw,15px);line-height:2;color:#cfc2a3;letter-spacing:.04em;margin:0 0 22px;text-shadow:0 1px 3px #000}
+
+/* ═══ 통일 톤: 신젤 데코러티브 + 버튼 금 그라데이션 + 검은 그림자 ═══ */
+:root{--latin:"Cinzel Decorative","Cinzel",serif;--cap:"Cinzel","Cinzel Decorative",serif;
+ --goldgrad:linear-gradient(180deg,#f3d88e 0%,#ddb056 50%,#a8822f 100%)}
+/* 영문 라벨류 — 신젤(날카로운 대문자) */
+.gate-eyebrow,.ref,.fin-eyebrow,.od-eyebrow,.translit,.pv-r,.cta-pre,.pro-d b,.hint,.fin-next span,.hud-sky .hud-noon,.eyebrow{
+ font-family:var(--cap)!important;font-weight:500!important;color:#d9ab4c!important;text-shadow:0 1px 2px rgba(0,0,0,.9)!important}
+/* 숫자·서명·큰 영문 */
+.stats .num,.quota span,#dday b,.sign b,.fin-giant,.hidden-verse span{font-family:var(--latin)!important;font-weight:400!important;font-style:normal!important}
+.stats .num,.quota span,#dday b,.sign b,
+/* 한글 제목류 — 같은 금 그라데이션 */
+.sec-title,.card h3,.reign-head,.nameplate h2,.od-title,.pharaoh{
+ background:var(--goldgrad)!important;-webkit-background-clip:text!important;background-clip:text!important;
+ color:transparent!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important;filter:drop-shadow(0 2px 2px rgba(0,0,0,.85))!important}
+.papyrus .sec-title{background:none!important;color:#5a2a0c!important;-webkit-text-fill-color:#5a2a0c!important;filter:none!important}
+.sec-title::after,.reign-head::after{background:linear-gradient(90deg,transparent,#d9ab4c,transparent)!important}
+/* 얇게 — 서늘하고 현대적 */
+.sec-title,.card h3,.reign-head,.nameplate h2,.od-title,.pharaoh{font-family:var(--myeong)!important;font-weight:400!important}
+.gate-eyebrow,.ref,.fin-eyebrow,.od-eyebrow,.translit,.pv-r,.cta-pre,.pro-d b,.hint,.fin-next span,.hud-sky .hud-noon,.eyebrow{font-weight:400!important}
+/* 파라오 라벨 — 선이 글자에 붙지 않게 */
+.pharaoh{letter-spacing:.5em!important}
+.pharaoh::before{margin:0 16px 0 0!important}
+.pharaoh::after{margin:0 0 0 calc(16px - .5em)!important}
+
+/* ═══ 마지막: 소녀가 일어난 그 공간 그대로 — 청금석 공허 + 거대 외곽 글자 + 울려 퍼지는 파동 ═══ */
+.pro-void{position:absolute;inset:0;z-index:3;opacity:0;pointer-events:none;overflow:hidden;--beat:0;
+ background:radial-gradient(ellipse 80% 70% at 50% 30%,#0d1f66,#030616 72%)}
+.pv-glow{position:absolute;left:50%;top:calc(17vh + 3px);width:100vmin;aspect-ratio:1;border-radius:50%;
+ transform:translate(-50%,-50%) scale(calc(1.1 + var(--beat) * .3));
+ background:radial-gradient(circle,rgba(255,214,140,.28),rgba(255,170,70,.08) 40%,rgba(255,150,50,0) 68%)}
+.pro-giant{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);margin:0;white-space:nowrap;user-select:none;
+ font:400 21vw/.8 "Cinzel Decorative","Cinzel",serif;letter-spacing:.02em;color:transparent;
+ -webkit-text-stroke:1px rgba(240,200,120,calc(.12 + var(--beat) * .5))}
+.pv-floor{position:absolute;left:50%;top:52%;width:80vw;height:1px;margin-left:-40vw;
+ background:linear-gradient(90deg,rgba(217,178,90,0),rgba(240,205,130,calc(.3 + var(--beat) * .5)),rgba(217,178,90,0))}
+.pro-rings i{width:40vmin!important;height:40vmin!important;margin:-20vmin 0 0 -20vmin!important;border:2px solid rgba(255,220,150,.8)!important;
+ box-shadow:0 0 22px rgba(255,200,110,.5),inset 0 0 22px rgba(255,200,110,.35)!important}
+@media (max-width:700px){.pro-giant{font-size:30vw}}
+@media (hover:none),(pointer:coarse){.pro-rings i{box-shadow:none!important}}
+.fn-log{display:block;font-style:normal;font-family:var(--myeong);font-size:14px;line-height:2;color:#cfc2a3;opacity:.85;margin-bottom:14px}

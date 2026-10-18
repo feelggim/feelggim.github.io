@@ -556,5 +556,5 @@ addEventListener('load', () => { document.querySelectorAll('img').forEach(i => {
   const G = '𓇳𓊽𓂀𓆣𓊹𓁐𓋴𓅓𓈖𓇋𓏏𓄿𓂋𓆑𓃭𓊪𓎛𓇯𓉐𓅱';
   const row = n => { let s = []; for (let i = 0; i < n; i++) s.push(G[Math.floor(Math.random() * G.length / 2) * 2] + G[Math.floor(Math.random() * G.length / 2) * 2 + 1]); return [...s.join('')].filter((c, i, a) => true); };
   const mk = n => { const p = document.createElement('p'); p.className = 'glyph-row'; p.setAttribute('aria-hidden', 'true'); const cs = [...G]; let out = []; for (let i = 0; i < n; i++) out.push(cs[(Math.random() * cs.length) | 0]); p.textContent = out.join(' '); return p; };
-  ['#s-prayer .sec-title', '#reignText .reign-head', '.od-eyebrow', '.pro-info', '.fin .end-title', '#s-word .hebrew'].forEach(sel => document.querySelectorAll(sel).forEach(el => el.parentNode.insertBefore(mk(5), el)));
+  ['#s-prayer .sec-title', '#reignText .reign-head', '#palaceText .reign-head', '#hutsNightText .reign-head', '.od-eyebrow', '.pro-info', '.fin .end-title', '#s-word .hebrew'].forEach(sel => document.querySelectorAll(sel).forEach(el => el.parentNode.insertBefore(mk(5), el)));
 })();

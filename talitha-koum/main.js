@@ -329,7 +329,7 @@ gsap.set('#s-rules', { height: 'auto', minHeight: '100vh' });
   const TOUCH = matchMedia('(hover:none),(pointer:coarse)').matches;
   function pulse(k) {
     const r = rings[ri++ % rings.length];
-    gsap.fromTo(r, { scale: .25, opacity: .9 * k }, { scale: 2.6 + k * 1.4, opacity: 0, duration: 1.4, ease: 'expo.out', overwrite: true });
+    gsap.fromTo(r, { scale: .09, opacity: .9 * k }, { scale: .95 + k * .5, opacity: 0, duration: 1.4, ease: 'expo.out', overwrite: true });
     if (k > .75 && !TOUCH) {
       gsap.fromTo('#flash', { opacity: .12 * k }, { opacity: 0, duration: .5, overwrite: true });
       gsap.fromTo('#riser', { scale: 1.035 }, { scale: 1, duration: .45, ease: 'power2.out', overwrite: 'auto' });

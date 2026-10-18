@@ -1107,3 +1107,26 @@ body{font-family:var(--serif)!important;font-weight:300;letter-spacing:-.005em}
 @media (max-width:700px){.pv-sky{background-position:50% 30%}}
 @media (hover:none),(pointer:coarse){.pv-sky{animation:none;filter:none}}
 @media (hover:none),(pointer:coarse),(max-width:700px){.pv-glow{display:none}}
+@media (max-aspect-ratio:3/4){.pv-sky{background-image:url(assets/galaxy_m.webp);background-position:50% 20%}}
+/* 파동 링: 크게 그려놓고 작게→원래 크기로 (확대 번짐 방지) */
+.pro-rings i{width:110vmin!important;height:110vmin!important;margin:-55vmin 0 0 -55vmin!important;background:none!important;border-width:1.5px!important}
+@media (hover:none),(pointer:coarse){.pro-cross .core{width:20vmin!important;background:radial-gradient(circle,rgba(255,240,200,.4),rgba(241,208,138,.1) 35%,transparent 62%)!important}}
+/* 하늘 더 뚜렷하고 진하게 */
+.pv-sky{filter:contrast(1.18) saturate(1.25) brightness(calc(1 + var(--beat) * .2))!important}
+.pv-dim{background:radial-gradient(ellipse 55% 40% at 50% 62%,rgba(3,6,22,.45),rgba(3,6,22,0) 70%),
+ linear-gradient(180deg,rgba(3,6,22,0) 0,rgba(3,6,22,0) 55%,rgba(3,6,22,.7) 100%)!important}
+@media (hover:none),(pointer:coarse){.pv-sky{filter:contrast(1.18) saturate(1.25)!important}}
+@media (hover:none),(pointer:coarse){.pro-cross .core{display:none!important}}
+.pro-cross .core{background:radial-gradient(circle,rgba(255,244,214,.5) 0,rgba(241,208,138,.14) 22%,rgba(241,208,138,0) 48%)!important}
+/* 원본을 직접 진하게 손봤으니 보정은 살짝만 */
+.pv-sky{filter:contrast(1.06) saturate(1.1) brightness(calc(1 + var(--beat) * .2))!important}
+@media (hover:none),(pointer:coarse){.pv-sky{filter:contrast(1.06) saturate(1.1)!important}}
+/* 애굽 땅(지평선)이 보이게 하늘 전체를 위로 끌어올림 */
+.pv-sky{inset:auto!important;left:-2%!important;right:-2%!important;top:-16%!important;bottom:16%!important;
+ background-size:cover!important;background-position:50% 100%!important;transform-origin:50% 100%;
+ -webkit-mask:linear-gradient(180deg,#000 0,#000 90%,transparent 100%);mask:linear-gradient(180deg,#000 0,#000 90%,transparent 100%)}
+.pv-dim{background:radial-gradient(ellipse 55% 34% at 50% 58%,rgba(3,6,22,.45),rgba(3,6,22,0) 70%),
+ linear-gradient(180deg,rgba(3,6,22,0) 0,rgba(3,6,22,0) 70%,rgba(3,6,22,.5) 100%)!important}
+@media (max-aspect-ratio:3/4){.pv-sky{top:-12%!important;bottom:12%!important;background-position:50% 100%!important}}
+.pro-cross .pro-rings i,.pro-cross .pro-rings i:not(.g){background:none!important;-webkit-mask:none!important;mask:none!important}
+@media (max-aspect-ratio:3/4){.pv-sky{top:-20%!important;bottom:20%!important}}

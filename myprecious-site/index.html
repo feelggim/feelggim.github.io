@@ -17,6 +17,7 @@ body{
   color:var(--ink);
   font-family:"MP Hangul","Apple SD Gothic Neo",serif; font-weight:300;
   line-height:1.95; letter-spacing:.01em;
+  word-break:keep-all; overflow-wrap:break-word;
 }
 #dust{position:fixed; inset:0; z-index:60; pointer-events:none}
 
@@ -320,7 +321,7 @@ jQuery(function($){
     ]
   };
 
-  var CRACK = '';   // 크랙 작품 주소를 넣으면 버튼이 생깁니다
+  var CRACK = 'https://share.crack.wrtn.ai/biqts2x';   // 크랙 작품 주소
   var PROFILE = [
     '--- 아이 ---',
     '이름:',
@@ -347,7 +348,7 @@ jQuery(function($){
     {t:'p', h:'없는 것', a:'이 이야기엔, 이별도, 무지개다리도, 남은 시간을 세는 문장도 없습니다.<br>수의사는 예후를 말하지 않고, 아무도 마음의 준비를 권하지 않습니다.'},
     {t:'p', a:'마지막 단계에서 흐름은 멈춥니다.<br>새겨진 날짜만 흐르고, 멈춘 자리에서 일상이 계속됩니다.<br>잠이 길어진 아이가 밤에 한 번 일어나 방을 돌고, 이름을 부르면 느리게 돌아오는 날들이.'},
     {t:'key', a:'끝나지 않은 날들을 기억하기 위해 만든 이야기입니다.'},
-    {t:'p', h:'이름의 뜻', a:'마이 프레셔스. 가진 것 중에 가장 귀한 것.<br>발치에 앉아, 혹은 소파에 함께 기대어, 혹은 당신의 무릎에서, 당신의 눈높이에 맞추어<br><br>가장 소중한 보물을 담기 위해.'},
+    {t:'p', h:'이름의 뜻', a:'마이 프레셔스. 가진 것 중에 가장 귀한 것.<br>발치에 앉아, 혹은 소파에 함께 기대어,<br>혹은 당신의 무릎에서, 당신의 눈높이에 맞추어<br><br>가장 소중한 보물을 담기 위해.'},
     {t:'key', a:'기억 속의 아이를 영원한 보물로 간직하기 위한 이야기입니다.'},
     {t:'end', a:'문을 열면, 아이는 항상, 거기 앉아 있었다.'},
     {t:'join', h:'함께하기'}

@@ -8,4 +8,4 @@
 3. 몇 분 뒤 `https://<아이디>.github.io/<저장소이름>/` 에서 열린다
 
 ## 크랙 링크 걸기
-index.html 에서 `var CRACK_URL='';` 를 찾아 따옴표 안에 크랙 작품 주소를 넣으면 마지막 장 버튼에 걸린다.
+크랙 링크(https://share.crack.wrtn.ai/j6y2f3r)는 마지막 장 버튼에 이미 걸려 있다. 바꾸려면 index.html 에서 `var CRACK_URL=` 을 찾아 주소만 바꾸면 된다.

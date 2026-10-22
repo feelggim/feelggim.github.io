@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>이윤 : 홍연</title>
+<meta name="description" content="끊어지지 않는 붉은 실이 있다. 오백 년을 건너, 텅 빈 상영관 옆자리까지. 크랙 GL 「이윤 : 홍연」">
+<meta property="og:type" content="website">
+<meta property="og:title" content="이윤 : 홍연 · 紅緣">
+<meta property="og:description" content="끊어지지 않는 붉은 실이 있다. 오백 년을 건너, 텅 빈 상영관 옆자리까지.">
+<meta property="og:image" content="img/og.jpg">
+<meta name="theme-color" content="#E7E4DE">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23A3161B'/%3E%3C/svg%3E">
+<style>[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;500&family=LXGW+WenKai+TC:wght@300;400;700&family=Noto+Sans+TC:wght@100;200;300;500;700&family=IBM+Plex+Sans+KR:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Layout: 여덟 장의 무대. 스크롤 한 번에 한 장씩 장면이 덮인다. 오프화이트 지면, 붉은 달 하나, 君·序·夢만 밤으로 뒤집힌다 */
+:root{
+  --paper:#E7E4DE; --paper-2:#DCD8D1; --ink:#151314; --ink-soft:#5A5652; --hair:#C9C4BC;
+  --red:#A3161B; --red-hi:#D2353A; --red-deep:#6E0E12;
+  --night:#0B0A0A; --night-ink:#E9E6E2; --night-soft:#8D8783; --night-hair:#2A2626;
+  --f-display:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo","Batang",serif;
+  --f-han:"LXGW WenKai TC","Noto Sans TC","Noto Sans KR","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --gl:max(16px, env(safe-area-inset-left, 0px)); --gr:max(16px, env(safe-area-inset-right, 0px));
+  --ease:cubic-bezier(.7,0,.2,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+/* 한글 줄바꿈: 단어 단위로 끊고, 마지막 줄에 한두 글자만 떨어지지 않게 */
+body{word-break:keep-all;overflow-wrap:break-word}
+p,li,dd,td,figcaption,blockquote,.hcap p{text-wrap:pretty}
+h1,h2,h3,h4,.rec,.htitle,.dream-p,.fq,.src-note,.hnote{text-wrap:balance}
+#gunQ,#pQuote,#reply,#dQ{text-wrap:wrap}
+.nb{white-space:nowrap}
+.plist button,.hgrp button{box-sizing:border-box!important}
+.dream .in{gap:clamp(14px,3.4vh,30px)}
+.dream h2{font-size:clamp(34px,min(7vw,10.5vh),96px)!important}
+.dmoon{width:clamp(54px,min(11vw,13vh),130px)!important}
+.dream .reply:empty{display:none}
+@media (max-width:899px) and (max-height:760px){.dream .in{gap:12px}.dream h2{font-size:30px!important}.dmoon{width:44px!important}.crack-cta .t{font-size:26px}.crack-cta .orb{width:52px}.dream-p{font-size:14px;line-height:1.75}.credit{gap:2px 14px}.credit span:not(:nth-child(3)){display:none}.crack-cta .t{white-space:nowrap}}
+@media (max-width:899px){.crack-cta .t{white-space:nowrap;font-size:clamp(24px,7.4vw,30px)}}
+@media (min-width:900px) and (max-height:820px){.dream .in{gap:16px}.dream h2{font-size:clamp(30px,9vh,80px)!important}.dmoon{width:clamp(46px,10vh,100px)!important}.crack-cta .t{font-size:clamp(26px,5.6vh,48px)}.crack-cta .orb{width:clamp(50px,8vh,72px)}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-weight:300;font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;overflow:hidden;transition:background .9s var(--ease)}
+body.dark{background:var(--night)}
+img{display:block;max-width:100%;height:auto}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit}
+::selection{background:transparent;color:var(--red)}
+.lines,.gun-wrap,.view,.card,.plist,.ans,.idx,.arrow,.go,.moon,.minimoon{-webkit-user-select:none;user-select:none}
+.label{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;line-height:1.6}
+@media (hover:hover) and (pointer:fine){body.cur,body.cur button,body.cur a{cursor:none}}
+
+/* 커서 */
+.cursor{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--red);z-index:90;pointer-events:none;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background .35s;mix-blend-mode:normal}
+.cursor.big{width:54px;height:54px;margin:-27px 0 0 -27px;background:rgba(163,22,27,.18);border:1px solid var(--red)}
+.cursor span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-mono);font-size:8.5px;letter-spacing:.12em;color:var(--red);opacity:0;transition:opacity .2s}
+.cursor.big span{opacity:1}
+@media (hover:none),(pointer:coarse){.cursor{display:none}}
+
+/* 상단·하단 */
+.top,.bottom{position:fixed;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding-left:calc(var(--gl) + 8px);padding-right:calc(var(--gr) + 8px);color:var(--ink);transition:color .9s var(--ease)}
+.top{top:0;padding-top:calc(env(safe-area-inset-top,0px) + 16px);padding-bottom:12px}
+.bottom{bottom:0;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 14px);padding-top:10px;gap:16px}
+body.dark .top,body.dark .bottom{color:var(--night-ink)}
+.brand{all:unset;cursor:pointer;font-family:var(--f-display);font-size:15px;letter-spacing:.08em}
+.brand small{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;margin-left:10px;opacity:.7}
+.tbtn{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;gap:8px;align-items:center}
+.tbtn:focus-visible,.idx button:focus-visible,.brand:focus-visible{outline:1px solid currentColor;outline-offset:4px}
+.eq{display:inline-flex;gap:2px;align-items:flex-end;height:10px}
+.eq s{display:block;width:2px;height:3px;background:var(--red)}
+.playing .eq s{animation:eq 1s ease-in-out infinite}
+.playing .eq s:nth-child(2){animation-delay:-.35s}.playing .eq s:nth-child(3){animation-delay:-.7s}
+@keyframes eq{50%{height:10px}}
+.idx{display:flex;gap:2px;align-items:center;flex-wrap:wrap}
+.idx button{all:unset;cursor:pointer;font-family:var(--f-display);font-size:14px;width:30px;height:30px;display:grid;place-items:center;opacity:.4;transition:opacity .3s,color .3s;position:relative}
+.idx button:hover{opacity:.9}
+.idx button[aria-current="true"]{opacity:1;color:var(--red)}
+.idx button[aria-current="true"]::after{content:"";position:absolute;bottom:2px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--red)}
+.nav{display:flex;gap:14px;align-items:center}
+.nav .ct{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;font-variant-numeric:tabular-nums}
+.arrow{all:unset;cursor:pointer;width:38px;height:38px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center;transition:background .3s,color .3s,border-color .3s}
+.arrow:hover,.arrow:focus-visible{background:var(--red);border-color:var(--red);color:#fff}
+.arrow svg{width:14px;height:14px}
+.arrow[disabled]{opacity:.25;pointer-events:none}
+.thread{position:fixed;left:0;right:0;bottom:0;height:2px;z-index:41;background:transparent}
+.thread i{display:block;height:100%;background:var(--red);transform-origin:left;transform:scaleX(var(--p,.14));transition:transform 1.1s var(--ease)}
+
+/* 무대 */
+.stage{position:fixed;inset:0}
+.scene{position:absolute;inset:0;display:grid;padding:calc(env(safe-area-inset-top,0px) + 76px) calc(var(--gr) + 24px) calc(env(safe-area-inset-bottom,0px) + 84px) calc(var(--gl) + 24px);visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path 1.1s var(--ease),visibility 0s 1.1s;overflow:hidden}
+.scene.on{visibility:visible;clip-path:inset(0 0 0 0);transition:clip-path 1.1s var(--ease),visibility 0s 0s;z-index:2}
+.scene.off-up{clip-path:inset(0 0 0 0);visibility:visible;z-index:1}
+.scene.paper{background:var(--paper);color:var(--ink)}
+.scene.night{background:var(--night);color:var(--night-ink)}
+@media (min-width:900px){.scene{padding-left:calc(var(--gl) + 72px);padding-right:calc(var(--gr) + 72px)}}
+.scene .in{min-height:0;min-width:0;height:100%;display:grid}
+.scene.on .rise{animation:rise 1.2s var(--ease) both}
+.scene.on .rise.d1{animation-delay:.15s}.scene.on .rise.d2{animation-delay:.3s}.scene.on .rise.d3{animation-delay:.45s}.scene.on .rise.d4{animation-delay:.6s}
+@keyframes rise{from{transform:translateY(28px);opacity:.0}to{transform:none;opacity:1}}
+.chap{display:flex;gap:14px;align-items:baseline}
+.chap .no{font-family:var(--f-display);color:var(--red);font-size:13px}
+.chap .label{opacity:.6}
+.scroll-in{overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none;-ms-overflow-style:none}
+.scroll-in::-webkit-scrollbar{display:none;width:0;height:0}
+
+/* 0 HERO */
+.hero .in{align-content:end;position:relative}
+.moon{position:absolute;width:min(70vmin,600px);aspect-ratio:1;right:4%;top:2%;border-radius:50%;max-width:100%;
+  background:radial-gradient(circle at 38% 34%,#C72A2E 0%,var(--red) 38%,var(--red-deep) 78%,#3E070A 100%);
+  box-shadow:0 0 120px 10px rgba(163,22,27,.2);transform:translate(var(--mx,0px),var(--my,0px));transition:transform 1.4s cubic-bezier(.2,.7,.2,1),box-shadow .6s}
+.moon::after{content:"";position:absolute;inset:0;border-radius:50%;opacity:.55;mix-blend-mode:multiply;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .3  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.moon::before{content:"";position:absolute;inset:-1px;border-radius:50%;background:radial-gradient(circle at 70% 72%,rgba(0,0,0,.35),transparent 55%)}
+.moon:hover{box-shadow:0 0 180px 30px rgba(163,22,27,.32)}
+.ripple{position:absolute;border:1px solid var(--red);border-radius:50%;pointer-events:none;animation:rip 1.6s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rip{from{transform:scale(1);opacity:.8}to{transform:scale(1.9);opacity:0}}
+.vert{position:absolute;left:0;top:0;writing-mode:vertical-rl;font-family:var(--f-display);font-weight:200;font-size:clamp(44px,8vw,96px);letter-spacing:.2em;line-height:1}
+.vert span{display:block;transition:color .4s,transform .6s var(--ease)}
+.vert span:hover{color:var(--red);transform:translateX(-6px)}
+.hero-copy{position:relative;display:grid;gap:20px;max-width:760px}
+.hero h1{margin:0;font-family:var(--f-display);font-weight:300;font-size:clamp(46px,9vw,124px);line-height:1;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero .tag{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--ink-soft)}
+.hero .lede{font-family:var(--f-display);font-size:clamp(16px,2vw,20px);line-height:1.7;margin:0}
+.go{all:unset;cursor:pointer;display:inline-flex;gap:12px;align-items:center;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;justify-self:start}
+.go::before{content:"";width:40px;height:1px;background:var(--red);transition:width .5s var(--ease)}
+.go:hover::before,.go:focus-visible::before{width:80px}
+
+/* 1 前生 */
+.pro .in{grid-template-rows:auto 1fr;gap:28px}
+.pro-grid{display:grid;gap:24px;min-height:0}
+@media (min-width:900px){.pro-grid{grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:72px}}
+.yr{font-family:var(--f-display);font-weight:200;font-size:clamp(48px,9vw,128px);line-height:.95;letter-spacing:-.03em}
+.yr span{display:block;color:var(--red);transition:opacity .6s}
+.yr .label{display:block;margin-top:14px;color:var(--ink-soft);font-size:10px}
+.lines{position:relative;min-height:0;display:block;cursor:pointer;overflow:hidden;overflow:clip;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 86%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 86%,transparent 100%)}
+.lines .track{display:grid;gap:18px;padding-block:18vh 30vh;transition:transform 1.6s var(--ease)}
+.lines p{margin:0;font-family:var(--f-display);font-weight:300;font-size:clamp(16px,1.9vw,21px);line-height:1.9;max-width:30em;opacity:0;filter:blur(12px);transform:translateY(22px);letter-spacing:.05em;transition:opacity 2s ease,filter 2s ease,transform 1.8s var(--ease),letter-spacing 2.4s var(--ease),color .8s}
+.lines p.shown{opacity:1;filter:none;transform:none;letter-spacing:0}
+.lines p.mark.shown{color:var(--red)}
+.lines p.rec{border-left:1px solid var(--red);padding-left:18px}
+/* 前生: 벗겨진 곤룡포 */
+.robe{position:absolute;left:0;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);width:min(36vw,540px);z-index:0;pointer-events:none;transform:translate(var(--rx,0px),var(--ry,0px));transition:transform 1.8s cubic-bezier(.2,.7,.2,1),opacity 2.6s ease,filter 2.6s ease}
+.robe-in{transform-origin:30% 40%}
+.robe img{width:100%;height:auto}
+.scene.on .robe-in{animation:robeIn 2.4s cubic-bezier(.2,.7,.2,1) both,robeFloat 13s ease-in-out 2.4s infinite}
+@keyframes robeIn{from{transform:translate(-14%,-6%) rotate(-9deg);opacity:0;filter:blur(8px)}to{transform:none;opacity:1;filter:none}}
+@keyframes robeFloat{0%,100%{transform:translate(0,0) rotate(0)}35%{transform:translate(10px,-16px) rotate(1.6deg)}70%{transform:translate(-6px,8px) rotate(-1.2deg)}}
+.pro.finale .robe{transform:translate(-8vw,34vh) rotate(-16deg);opacity:0;filter:blur(6px);transition:transform 3.4s cubic-bezier(.55,0,.4,1),opacity 3s ease .4s,filter 3s ease .4s}
+@media (max-width:899px){.robe{width:68vw;opacity:.22;bottom:120px}}
+/* 前生 재구성: 글은 왼쪽에 조용히, 곤룡포는 오른쪽에서 크게 흘러든다 */
+@media (min-width:900px){
+  .pro .pro-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:26px;width:min(32em,40vw);justify-self:center;margin-right:0}
+  .pro .robe{left:-3vw;right:auto;bottom:auto;top:52%;width:min(42vw,80vh,900px);transform:translate(var(--rx,0px),calc(-50% + var(--ry,0px)))}
+  .pro .robe img{transform:none;filter:none}
+  .pro.finale .robe{transform:translate(-6vw,calc(-50% + 36vh)) rotate(-14deg)}
+  .pro .hint{justify-self:center;width:min(32em,40vw)}
+}
+.pro .yr{display:flex;align-items:baseline;gap:.35em;flex-wrap:wrap;font-size:clamp(26px,2.8vw,40px);line-height:1;letter-spacing:-.01em}
+.pro .yr span{display:inline}
+.pro .yr #yr2::before{content:"—";color:var(--hair);margin-right:.35em}
+.pro .yr .label{margin:0 0 0 .8em;font-size:10px}
+.pro .lines{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 84%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 24%,#000 84%,transparent 100%)}
+
+/* 前生 피날레: 오백이십삼 년 */
+.pro-grid{transition:opacity 1.6s ease,filter 1.6s ease}
+.pro.finale .pro-grid{opacity:.05;filter:blur(4px)}
+.fin{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:3;opacity:0;transition:opacity 1.4s ease}
+.pro.finale .fin{opacity:1}
+.fin > div{display:grid;gap:20px;justify-items:center;text-align:center}
+.fin .big{font-family:var(--f-display);font-weight:200;font-size:clamp(60px,12.5vw,190px);line-height:1;color:var(--red);letter-spacing:.42em;padding-left:.42em;transform:scale(1.12);filter:blur(16px);transition:filter 2.4s ease,transform 3.2s var(--ease),letter-spacing 3.2s var(--ease),padding 3.2s var(--ease)}
+.pro.finale .fin .big{filter:none;transform:none;letter-spacing:.06em;padding-left:.06em}
+.fin .sub{font-family:var(--f-display);font-weight:300;font-size:clamp(18px,2.4vw,28px);color:var(--ink);opacity:0;transition:opacity 1.6s ease 1.4s}
+.pro.finale .fin .sub{opacity:1}
+.fin .count{font-family:var(--f-mono);font-size:11px;letter-spacing:.32em;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.fin .count b{font-weight:400;color:var(--red)}
+.lines p.rec small{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;color:var(--ink-soft)}
+.hint{display:flex;gap:16px;align-items:center;color:var(--ink-soft)}
+.hint button{all:unset;cursor:pointer;border-bottom:1px solid currentColor}
+
+/* 2 君 */
+.gun .in{grid-template-rows:auto 1fr auto;gap:22px}
+.gun-wrap{position:relative;min-height:0;display:grid;place-items:center;cursor:crosshair;overflow:hidden}
+.gun-wrap img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;object-position:50% 50%;transform:translateY(-3%)}
+.spot{position:absolute;inset:0;background:radial-gradient(circle at var(--x,50%) var(--y,45%),rgba(11,10,10,0) 0,rgba(11,10,10,0) 120px,rgba(11,10,10,.96) 260px);transition:opacity 1.2s}
+.gun-wrap.lit .spot{opacity:0}
+.gun-wrap .tip{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);color:var(--night-soft);white-space:nowrap}
+.gun-wrap.lit .tip{opacity:0}
+.gun-say{display:grid;gap:10px;min-height:5.2em}
+.gun-say .def{font-family:var(--f-display);font-weight:300;font-size:clamp(15px,1.8vw,20px);margin:0;color:var(--night-ink)}
+.gun-say .def b{font-weight:500;color:var(--red-hi)}
+.gun-say .q{font-family:var(--f-display);font-size:clamp(18px,2.4vw,26px);margin:0;color:#fff;min-height:1.6em}
+.gun-say .q.r{color:var(--red-hi)}
+.gun-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--night-soft)}
+.gun-row button{all:unset;cursor:pointer;border-bottom:1px solid currentColor}
+
+/* 3 現生 */
+.now .in{align-content:center;gap:40px}
+.now-grid{display:grid;gap:40px}
+@media (min-width:900px){.now-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px;align-items:end}}
+.pitch{font-family:var(--f-display);font-weight:300;font-size:clamp(19px,2.6vw,30px);line-height:1.7;margin:0}
+.pitch .w{transition:color .3s}
+.pitch .w:hover{color:var(--red)}
+.pitch .q{color:var(--red)}
+.facts{margin:0;border-top:1px solid var(--hair)}
+.facts div{border-bottom:1px solid var(--hair)}
+.facts button{all:unset;cursor:pointer;display:grid;grid-template-columns:7.5em 1fr auto;gap:12px;width:100%;padding-block:14px;align-items:baseline}
+.facts dt{color:var(--ink-soft)}
+.facts .pm{font-family:var(--f-mono);color:var(--red);transition:transform .4s var(--ease)}
+.facts .open .pm{transform:rotate(45deg)}
+.facts dd{margin:0;display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}
+.facts dd > span{overflow:hidden;padding-left:calc(7.5em + 12px)}
+.facts .open dd{grid-template-rows:1fr}
+.facts .open dd > span{padding-bottom:14px}
+@media (max-width:600px){.facts button{grid-template-columns:1fr auto}.facts dd>span{padding-left:0}}
+
+/* 4 人物 */
+.ppl .in{grid-template-rows:auto 1fr;gap:24px}
+.ppl-grid{display:grid;gap:24px;min-height:0}
+@media (min-width:900px){.ppl-grid{grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:56px}}
+.card{position:relative;min-height:220px;overflow:hidden;background:var(--paper-2)}
+.card .face{position:absolute;inset:0;opacity:0;transition:opacity .9s,transform 1.6s var(--ease);transform:scale(1.04)}
+.card .face.on{opacity:1;transform:none}
+.card img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.82)}
+.card .typo{display:grid;place-items:center;height:100%;font-family:var(--f-display);font-weight:200;font-size:clamp(70px,12vw,170px);color:var(--ink);letter-spacing:-.02em}
+.card .typo i{position:absolute;width:30%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 34%,#C72A2E,var(--red) 45%,var(--red-deep));right:8%;top:10%;opacity:.9}
+.card .typo i.small{width:9%;opacity:1}
+.card .meta{position:absolute;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;gap:10px;color:var(--ink-soft);z-index:2}
+.card .face.photo + .meta{color:#fff}
+.who{display:grid;align-content:start;gap:18px;min-height:0}
+.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.plist button{all:unset;cursor:pointer;display:grid;grid-template-columns:2.6em 1fr auto;gap:12px;width:100%;padding-block:12px;border-bottom:1px solid var(--hair);align-items:baseline;transition:padding .5s var(--ease),color .3s}
+.plist button:hover,.plist button:focus-visible{padding-left:10px}
+.plist button[aria-pressed="true"]{color:var(--red)}
+.plist .n{font-family:var(--f-display);font-size:12px;color:var(--red)}
+.plist .nm{font-family:var(--f-display);font-size:clamp(20px,2.4vw,28px);line-height:1.2}
+.plist .ag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;color:var(--ink-soft)}
+.pd{display:grid;gap:14px;min-height:7em;padding-top:4px}
+.pd.in .pfacts,.pd.in .plook,.pd.in .pbody{animation:pdIn .9s var(--ease) both}
+.pd.in .plook{animation-delay:.08s}.pd.in .pbody{animation-delay:.16s}
+@keyframes pdIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pfacts{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px;border-top:1px solid var(--hair)}
+.pfacts div{display:grid;grid-template-columns:4.2em 1fr;gap:8px;padding-block:7px;border-bottom:1px solid var(--hair);align-items:baseline}
+.pfacts dt{color:var(--ink-soft);font-size:9.5px}
+.pfacts dd{margin:0;font-size:13px;line-height:1.5}
+.plook{margin:0;font-family:var(--f-display);font-size:14.5px;line-height:1.8;color:var(--ink)}
+.pbody{display:grid;gap:8px}
+.pbody p{margin:0;font-size:13.5px;line-height:1.85;color:var(--ink-soft);max-width:36em}
+@media (max-width:600px){.pfacts{grid-template-columns:1fr}}
+.card .face.lite{background:#fff}
+.card .face.lite img{object-fit:cover;object-position:center top;transform-origin:50% 0;transform:scale(var(--fs,1.08)) translateY(var(--fy,6%))}
+.card .face.hide{background:transparent;transition:opacity .9s,transform 1.6s var(--ease),background 2.4s ease}
+.card .face.hide .typo{position:absolute;inset:0;transition:opacity 2.2s ease}
+.card .face.hide img.hid{position:absolute;inset:0;width:100%;height:100%;opacity:0;filter:grayscale(1) blur(16px) contrast(.9);transition:opacity 3.2s ease,filter 4.2s ease}
+.card .face.hide.shown{background:#fff}
+.card .face.hide.shown img.hid{opacity:1;filter:grayscale(0) blur(0) contrast(1)}
+.card .face.hide.shown .typo{opacity:0}
+.plist button{padding-block:9px!important}
+.plist .nm{font-size:clamp(18px,2vw,24px)!important}
+.pd .rl{margin:0;color:var(--ink-soft);font-size:14px;max-width:32em}
+.pd .qt{margin:0;font-family:var(--f-display);font-size:clamp(17px,2vw,21px);color:var(--red);min-height:1.6em}
+.pd .qt::after{content:"";display:inline-block;width:1px;height:1em;background:var(--red);margin-left:3px;vertical-align:-.1em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* 5 璿源 */
+.src .in{grid-template-rows:auto 1fr auto;gap:20px}
+.view{position:relative;min-height:0;overflow:hidden;background:var(--paper-2)}
+.view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.1s,transform 2.4s cubic-bezier(.2,.7,.2,1)}
+.view img.on{opacity:1;transform:scale(1)}
+.view .vcap{position:absolute;left:16px;bottom:14px;right:16px;color:#fff;display:flex;justify-content:space-between;gap:12px;z-index:2;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.view .vcap b{font-family:var(--f-display);font-weight:300;font-size:clamp(18px,2.2vw,26px);letter-spacing:.02em;text-transform:none}
+.src-row{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.seal{display:inline-grid;place-items:center;width:42px;height:42px;background:var(--red);color:#fff;font-family:var(--f-han);font-weight:300;font-size:24px;line-height:1}
+.sname{display:flex;gap:14px;align-items:center}
+.sname b{font-weight:300;letter-spacing:.3em}
+.pick{display:flex;gap:4px;flex-wrap:wrap}
+.pick button{all:unset;cursor:pointer;width:44px;height:44px;display:grid;place-items:center;font-family:var(--f-display);font-size:19px;border:1px solid var(--hair);transition:background .3s,color .3s,border-color .3s}
+.pick button:hover{border-color:var(--ink)}
+.pick button[aria-pressed="true"]{background:var(--red);color:#fff;border-color:var(--red)}
+.src-note{margin:0;max-width:40em;color:var(--ink-soft);font-size:13.5px}
+
+/* 6 夢 */
+.dream .in{align-content:center;justify-items:start;gap:30px;position:relative}
+.dream svg.th{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.dmoon{width:clamp(70px,11vw,130px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 34%,#C72A2E,var(--red) 45%,var(--red-deep));box-shadow:0 0 90px rgba(163,22,27,.4);position:relative;z-index:1}
+.dream h2{margin:0;font-family:var(--f-display);font-weight:200;font-size:clamp(38px,7vw,96px);line-height:1.15;letter-spacing:-.02em;position:relative;z-index:1}
+.dream h2 em{font-style:normal;color:var(--red-hi)}
+.ans{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+.ans button{all:unset;cursor:pointer;border:1px solid var(--night-ink);padding:12px 22px;font-family:var(--f-display);font-size:16px;transition:background .3s,color .3s,border-color .3s}
+.ans button:hover,.ans button:focus-visible{background:var(--red);border-color:var(--red);color:#fff}
+.dream-p{margin:0;font-family:var(--f-display);font-weight:300;font-size:clamp(16px,1.8vw,20px);line-height:1.9;color:var(--night-ink);max-width:32em;position:relative;z-index:1}
+.reply{margin:0;font-family:var(--f-display);font-size:clamp(17px,2.2vw,24px);color:var(--red-hi);min-height:1.6em;position:relative;z-index:1}
+.credit{display:flex;gap:8px 26px;flex-wrap:wrap;color:var(--night-soft);position:relative;z-index:1}
+
+
+/* 處 거처 */
+.home .in{grid-template-columns:minmax(260px,.82fr) 2fr;gap:clamp(24px,4vw,64px);align-items:stretch}
+.hside{display:grid;grid-template-rows:auto auto 1fr auto;gap:22px;min-height:0;position:relative;z-index:1}
+.htitle{margin:0;font-family:var(--f-display);font-weight:200;font-size:clamp(28px,3.4vw,46px);line-height:1.25;letter-spacing:-.01em}
+.htitle em{font-style:normal;color:var(--red)}
+.hlist{display:grid;align-content:start;gap:18px}
+.hgrp{display:grid;gap:2px}
+.hgrp .label{color:var(--ink-soft);padding-bottom:8px;border-bottom:1px solid var(--hair);display:flex;justify-content:space-between}
+.hgrp button{all:unset;cursor:pointer;display:grid;grid-template-columns:34px 1fr auto;align-items:baseline;gap:10px;padding:11px 0;border-bottom:1px solid var(--hair);position:relative;transition:color .4s}
+.hgrp button::before{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--red);transition:width .7s var(--ease)}
+.hgrp button .h{font-family:var(--f-han);font-size:22px;line-height:1;color:var(--ink-soft);transition:color .4s}
+.hgrp button .n{font-family:var(--f-display);font-size:16px}
+.hgrp button .e{font-size:10px;letter-spacing:.2em;color:var(--ink-soft);text-transform:uppercase}
+.hgrp button:hover .h{color:var(--ink)}
+.hgrp button[aria-pressed="true"]::before{width:100%}
+.hgrp button[aria-pressed="true"] .h{color:var(--red)}
+.hnote{margin:0;font-family:var(--f-display);font-weight:300;font-size:14px;line-height:1.85;color:var(--ink-soft);border-left:1px solid var(--red);padding-left:14px}
+.hstage{position:relative;min-height:0;overflow:hidden;background:var(--night);display:grid}
+.hstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 0 100%);transform:scale(1.08);transition:clip-path 1.25s cubic-bezier(.7,0,.2,1),transform 3.2s cubic-bezier(.2,.7,.2,1)}
+.hstage img.on{clip-path:inset(0 0 0 0);transform:scale(1);z-index:1}
+.hstage img.was{clip-path:inset(0 0 0 0);z-index:0}
+.hstage::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(11,10,10,0) 55%,rgba(11,10,10,.62))}
+.hcap{position:absolute;left:clamp(16px,2.4vw,30px);right:clamp(16px,2.4vw,30px);bottom:clamp(14px,2.2vw,26px);z-index:3;color:#F1EEE9;display:grid;gap:8px}
+.hcap .label{opacity:.75;display:flex;justify-content:space-between;gap:12px}
+.hcap p{margin:0;font-family:var(--f-display);font-weight:300;font-size:clamp(15px,1.6vw,19px);line-height:1.7;max-width:34em;text-shadow:0 1px 14px rgba(0,0,0,.45)}
+.hcap p.swap{animation:hcapIn .9s var(--ease) both}
+@keyframes hcapIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hnum{position:absolute;top:clamp(14px,2vw,22px);right:clamp(16px,2.4vw,26px);z-index:3;color:#F1EEE9;font-family:var(--f-han);font-size:clamp(40px,5vw,70px);line-height:1;opacity:.9}
+.home .wm{right:auto;left:-6vw;bottom:-10vh}
+@media (max-width:899px){.home .in{grid-template-columns:1fr;grid-template-rows:auto minmax(220px,42vh) auto}.hside{display:contents}.hside>.chap{order:0}.htitle{display:none}.hstage{order:1}.hlist{order:2}.hnote{display:none}.hgrp button{padding:8px 0}#hEn{display:none}.hcap p{font-size:14px}}
+@media (prefers-reduced-motion:reduce){.hstage img{transition:none}}
+
+
+/* 集團 선원그룹 */
+.grp .in{grid-template-columns:1.05fr 1fr;gap:clamp(28px,4.5vw,72px);align-items:stretch}
+.gstage{position:relative;margin:0;overflow:hidden;min-height:0;background:#000}
+.gstage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% center;filter:grayscale(.35) brightness(.85);transform:scale(1.12);transition:transform 9s cubic-bezier(.2,.7,.2,1),filter 1.2s}
+.grp.on .gstage img{transform:scale(1)}
+.gstage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,10,.1),rgba(11,10,10,.15) 55%,rgba(11,10,10,.75))}
+.gbig{position:absolute;z-index:2;right:clamp(14px,2vw,26px);top:clamp(6px,1.4vw,18px);font-family:var(--f-han);font-size:clamp(70px,9vw,140px);line-height:1;color:#F1EEE9;opacity:.92;transition:opacity .5s}
+.gbig.sw{animation:gIn .7s var(--ease) both}
+@keyframes gIn{from{opacity:0;transform:translateY(14px)}to{opacity:.92;transform:none}}
+.gstage figcaption{position:absolute;z-index:2;left:clamp(14px,2vw,24px);right:clamp(14px,2vw,24px);bottom:clamp(12px,1.8vw,20px);display:flex;justify-content:space-between;color:rgba(241,238,233,.8)}
+.gside{display:grid;align-content:center;gap:clamp(12px,2.2vh,22px);min-height:0;position:relative;z-index:1}
+.gh{margin:0;font-family:var(--f-display);font-weight:200;font-size:clamp(24px,min(2.9vw,4.6vh),42px);line-height:1.35;letter-spacing:-.01em}
+.gh em,.gend em{font-style:normal;color:var(--red-hi)}
+.gl{margin:0;color:var(--night-soft);font-size:clamp(13px,1.1vw,15px);line-height:1.8;max-width:34em}
+.biz{border-top:1px solid var(--night-ink)}
+.biz button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:clamp(110px,10vw,150px) 1fr;gap:14px;align-items:baseline;padding:clamp(9px,1.5vh,14px) 0;border-bottom:1px solid var(--night-hair);position:relative}
+.biz button::before{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--red-hi);transition:width .7s var(--ease)}
+.biz button[aria-pressed="true"]::before{width:100%}
+.biz .k{display:flex;align-items:baseline;gap:10px;font-family:var(--f-display);font-size:clamp(14px,1.2vw,16px);white-space:nowrap}
+.biz .k b{font-family:var(--f-han);font-weight:400;font-size:clamp(24px,2.2vw,32px);line-height:1;color:var(--night-soft);transition:color .4s}
+.biz button[aria-pressed="true"] .k b,.biz button:hover .k b{color:var(--red-hi)}
+.biz .v{font-size:clamp(13px,1.05vw,14.5px);line-height:1.7;color:var(--night-soft);transition:color .4s}
+.biz .v i{display:block;font-style:normal;font-family:var(--f-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--night-soft);opacity:.75;margin-bottom:2px}
+.biz button[aria-pressed="true"] .v{color:var(--night-ink)}
+.gend{margin:0;font-family:var(--f-display);font-weight:300;font-size:clamp(14px,1.25vw,17px);line-height:1.85;max-width:32em}
+
+.gtabs{display:flex;gap:4px}
+.gtabs button{all:unset;cursor:pointer;display:flex;align-items:baseline;gap:8px;padding:8px 16px;border:1px solid var(--night-hair);font-family:var(--f-display);font-size:13px;color:var(--night-soft);transition:background .3s,color .3s,border-color .3s}
+.gtabs button b{font-family:var(--f-han);font-weight:300;font-size:18px}
+.gtabs button:hover{border-color:var(--night-ink);color:var(--night-ink)}
+.gtabs button[aria-selected="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.gpanes{display:grid;min-height:0}
+.gpane{grid-area:1/1;display:grid;align-content:start;gap:clamp(12px,2vh,20px);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .6s ease,transform .8s var(--ease),visibility 0s .6s}
+.gpane.on{opacity:1;visibility:visible;transform:none;transition:opacity .8s ease .1s,transform 1s var(--ease) .1s,visibility 0s}
+.gp{margin:0;color:var(--night-soft);font-size:clamp(13px,1.05vw,14.5px);line-height:1.8;max-width:34em}
+.gfacts{margin:0;border-top:1px solid var(--night-ink)}
+.gfacts div{display:grid;grid-template-columns:clamp(70px,7vw,96px) 1fr;gap:14px;padding:clamp(8px,1.3vh,12px) 0;border-bottom:1px solid var(--night-hair);align-items:baseline}
+.gfacts dt{font-family:var(--f-display);font-size:14px;color:var(--night-ink)}
+.gfacts dd{margin:0;font-size:clamp(13px,1.05vw,14.5px);line-height:1.65;color:var(--night-soft)}
+.grp .wm{right:auto;left:-6vw}
+.gside{align-content:safe center}
+@media (min-width:900px){.biz .v i{display:none}.biz .v{font-size:13px;line-height:1.6}.biz button{padding:9px 0}.gh{font-size:clamp(22px,min(2.5vw,4.2vh),38px)}}
+@media (min-width:900px) and (max-height:820px){.gp{display:none}.gend{font-size:14px;line-height:1.7}.gside{gap:12px}}
+@media (max-width:899px){.idx button{width:auto;flex:1 1 0;min-width:0;font-size:13px}}
+@media (max-width:899px){.gtabs button{flex:1 1 0;min-width:0;justify-content:center;padding:7px 4px;gap:5px;font-size:12px;box-sizing:border-box}.gtabs button b{font-size:16px}.gside{overflow-x:clip}}
+@media (max-width:899px){.grp .in{grid-template-columns:1fr;grid-template-rows:minmax(150px,24vh) auto;align-content:start;gap:16px}.gl{display:none}.gbig{font-size:56px}.gside{align-content:start;gap:12px}.gh{font-size:22px}.biz .v{font-size:12.5px;line-height:1.6}.biz .v i{display:none}.gend{font-size:13.5px}.gstage figcaption{display:none}.grp .in{grid-template-rows:minmax(120px,19vh) minmax(0,1fr)}}
+
+/* 夢 — 궁궐 한 컷 */
+.dbg{position:absolute;inset:0;z-index:0;pointer-events:none;background:url(img/palace.jpg) center 60%/cover no-repeat;opacity:0;transform:scale(1.08);filter:saturate(.75) brightness(.8);transition:opacity 3.4s ease,transform 14s cubic-bezier(.2,.7,.2,1)}
+.dbg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 8%,rgba(11,10,10,.78) 45%,rgba(11,10,10,.45)),linear-gradient(0deg,var(--night),rgba(11,10,10,0) 40%)}
+.dream.on .dbg{opacity:.55;transform:scale(1)}
+
+/* 붉은 실자락 */
+.silk{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0;transition:opacity 1.6s ease}
+.silk.on{opacity:1}
+.scene:not(.hero) > .in{position:relative;z-index:1}
+
+/* 크랙 이어가기 */
+.crack-cta{position:relative;z-index:1;display:inline-grid;grid-template-columns:auto auto;align-items:center;column-gap:clamp(22px,3vw,40px);row-gap:10px;text-decoration:none;color:var(--night-ink);padding-block:6px}
+.crack-cta .k{grid-column:1 / -1;display:flex;align-items:center;gap:12px;font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--night-soft)}
+.crack-cta .k::before{content:"";width:22px;height:1px;background:var(--red-hi)}
+.crack-cta .t{position:relative;font-family:var(--f-display);font-weight:200;font-size:clamp(30px,4.2vw,58px);line-height:1.1;letter-spacing:-.01em;padding-bottom:10px;transition:color .6s var(--ease)}
+.crack-cta .t::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--night-hair)}
+.crack-cta .t i{position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--red-hi);transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--ease);z-index:1}
+.crack-cta .orb{position:relative;width:clamp(60px,6vw,84px);aspect-ratio:1;border-radius:50%;border:1px solid var(--red-hi);display:grid;place-items:center;transition:background .6s var(--ease),transform .8s var(--ease),border-color .6s}
+.crack-cta .orb::before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--red-hi);transition:opacity .4s}
+.crack-cta .orb svg{width:22px;height:22px;opacity:0;transform:translateX(-8px);transition:opacity .5s,transform .7s var(--ease)}
+.crack-cta:hover .t,.crack-cta:focus-visible .t{color:#fff}
+.crack-cta:hover .t i,.crack-cta:focus-visible .t i{transform:scaleX(1)}
+.crack-cta:hover .orb,.crack-cta:focus-visible .orb{background:var(--red);border-color:var(--red);transform:scale(1.12)}
+.crack-cta:hover .orb::before,.crack-cta:focus-visible .orb::before{opacity:0}
+.crack-cta:hover .orb svg,.crack-cta:focus-visible .orb svg{opacity:1;transform:none}
+.crack-cta:focus-visible{outline:none}
+@media (prefers-reduced-motion:no-preference){.crack-cta .orb{animation:orbPulse 3.6s ease-in-out infinite}}
+@keyframes orbPulse{50%{box-shadow:0 0 0 10px rgba(210,53,58,0),0 0 0 0 rgba(210,53,58,.0)}0%,100%{box-shadow:0 0 0 0 rgba(210,53,58,.35)}}
+@keyframes sheen{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.crack-mini{display:inline-flex;gap:10px;align-items:center;text-decoration:none;color:var(--red);font-family:var(--f-display);font-size:15px;border-bottom:1px solid var(--red);padding-bottom:3px}
+.crack-mini small{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;color:var(--ink-soft)}
+.crack-mini:hover,.crack-mini:focus-visible{color:var(--red-deep);outline:none}
+
+/* 감각: 그레인 */
+body::after{content:"";position:fixed;inset:-50%;z-index:70;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* HERO 메인 이미지 */
+.scene.hero{padding:0}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg img{position:absolute;inset:-3%;width:106%;height:106%;max-width:none;object-fit:cover;object-position:62% 50%;transform:translate(var(--mx,0px),var(--my,0px)) scale(var(--sc,1.08));transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+.scene.on .hero-bg img{--sc:1}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(231,228,222,.92) 0%,rgba(231,228,222,.55) 34%,rgba(231,228,222,0) 60%),linear-gradient(0deg,rgba(231,228,222,.75) 0%,rgba(231,228,222,0) 38%)}
+.glint{position:absolute;height:2px;pointer-events:none;overflow:hidden}
+.glint::after{content:"";position:absolute;top:-2px;bottom:-2px;width:18%;left:-20%;background:linear-gradient(90deg,transparent,rgba(255,220,220,.95),transparent);filter:blur(1px);animation:glint 5.5s ease-in-out 2s infinite}
+@keyframes glint{0%{left:-20%}45%,100%{left:110%}}
+.hero .in{padding:calc(env(safe-area-inset-top,0px) + 76px) calc(var(--gr) + 24px) calc(env(safe-area-inset-bottom,0px) + 84px) calc(var(--gl) + 24px);position:relative;align-content:end}
+@media (min-width:900px){.hero .in{padding-left:calc(var(--gl) + 72px);padding-right:calc(var(--gr) + 72px)}}
+.hero .vert{left:calc(var(--gl) + 24px);top:calc(env(safe-area-inset-top,0px) + 80px)}
+@media (min-width:900px){.hero .vert{left:calc(var(--gl) + 72px)}}
+.hero .minimoon{position:absolute;right:calc(var(--gr) + 28px);top:calc(env(safe-area-inset-top,0px) + 80px);width:clamp(38px,5vw,64px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 34%,#C72A2E,var(--red) 45%,var(--red-deep));box-shadow:0 0 50px rgba(163,22,27,.35);cursor:pointer}
+
+/* 前生 이미지 */
+.yr-img{margin-top:28px;overflow:hidden;max-width:420px}
+.yr-img img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:grayscale(.2) contrast(1.05)}
+@media (max-width:899px){.yr-img{display:none}}
+
+/* 그날 */
+.day{color:var(--night-ink)}
+.day .bgs{position:absolute;inset:0}
+.day .bgs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 2s,transform 6s cubic-bezier(.2,.7,.2,1)}
+.day .bgs img.on{opacity:.42;transform:scale(1)}
+.day .bgs::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 75% at 50% 50%,rgba(11,10,10,.86) 0%,rgba(11,10,10,.62) 55%,rgba(11,10,10,.4) 100%)}
+.day .portrait-unused{position:absolute;z-index:2;margin:0;right:calc(var(--gr) + 3vw);top:50%;width:min(24vw,420px);aspect-ratio:4/5;overflow:hidden;opacity:0;transform:translateY(-46%);filter:blur(10px) grayscale(.4);transition:opacity 2.2s ease,transform 2.6s var(--ease),filter 2.6s ease;pointer-events:none}
+.day .portrait.on{opacity:1;transform:translateY(-50%);filter:none}
+.day .portrait img{width:100%;height:100%;object-fit:cover;object-position:48% 28%;max-width:none}
+@media (max-width:1199px){.day .portrait{right:0;left:0;top:0;bottom:0;width:auto;aspect-ratio:auto;transform:none;z-index:0}.day .portrait.on{opacity:.38;transform:none}}
+.day .in{position:relative;grid-template-rows:auto 1fr auto;gap:22px}
+.day .lines p{color:var(--night-ink)}
+.day .lines p.say{font-size:clamp(18px,2.3vw,24px);color:#fff}
+.day .lines p.say.r.shown{color:var(--red-hi)}
+.day .lines p.cut{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;color:var(--night-soft)}
+.day .hint{color:var(--night-soft)}
+.day .lines{justify-self:center;width:min(34em,100%)}
+.day .lines p.pic{margin:6px 0 4px;line-height:0}
+.day .lines p.pic img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:50% 30%;filter:grayscale(.5);transition:filter 3s ease}
+.day .lines p.pic.shown img{filter:none}
+.day .lines p{max-width:none;text-align:left}
+.day .hint{justify-self:center;width:min(34em,100%)}
+
+/* 現生 이미지 */
+.now-img{margin:0;overflow:hidden;position:relative}
+.now-img img{width:100%;height:min(56vh,560px);aspect-ratio:auto;object-fit:cover;transition:transform 2s cubic-bezier(.2,.7,.2,1)}
+.now-grid{min-width:0}
+.now-grid > *{min-width:0}
+.now-img:hover img{transform:scale(1.04)}
+.now-img figcaption{position:absolute;left:14px;bottom:12px;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.now-side{display:grid;gap:24px}
+@media (min-width:900px){.now-grid{grid-template-columns:minmax(0,5.4fr) minmax(0,3.4fr) minmax(250px,3.6fr);gap:44px;align-items:end}}
+.facts button{grid-template-columns:6.4em 1fr auto}
+.facts button>span:nth-child(2){text-wrap:balance}
+.hint>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hint button{white-space:nowrap;flex:none}
+@media (max-width:899px){.hint{gap:10px;font-size:9.5px}}
+@media (max-width:899px){.now-img img{height:auto;aspect-ratio:16/10}}
+
+
+/* ===== 고도화 ===== */
+.top{gap:20px}
+.hmeta{display:none;align-items:center;gap:12px;opacity:.6}
+.hmeta i{display:block;width:16px;height:1px;background:currentColor;opacity:.5}
+@media (min-width:1100px){.hmeta{display:flex;position:absolute;left:50%;transform:translateX(-50%)}}
+.brand{font-family:var(--f-han);font-weight:300;letter-spacing:.12em}
+.idx button{font-family:var(--f-han);font-weight:200;font-size:15px}
+.idx button[aria-current="true"]{font-weight:500}
+.seal,.pick button,.card .typo,.fin .big,.wm,.hanji{font-family:var(--f-han)}
+.pick button{font-weight:200}
+.pick button[aria-pressed="true"]{font-weight:500}
+.card .typo span{font-weight:100;color:var(--ink);letter-spacing:0}
+.fin .big{font-weight:100}
+ruby{ruby-position:over}
+rt{font-family:var(--f-han);font-size:.42em;letter-spacing:.3em;color:var(--red);opacity:.85;font-weight:400}
+.night rt{color:var(--red-hi)}
+
+/* 히어로 */
+.hero .minimoon{top:calc(env(safe-area-inset-top,0px) + 76px)}
+.hanji{position:absolute;left:calc(var(--gl) + 24px);top:calc(env(safe-area-inset-top,0px) + 64px);display:flex;flex-direction:column;line-height:.86;pointer-events:none;z-index:0}
+@media (min-width:900px){.hanji{left:calc(var(--gl) + 72px)}}
+.hanji span{display:block;font-size:clamp(110px,20vh,240px);letter-spacing:0}
+.hanji .h1{font-weight:200;color:var(--red)}
+.hanji .h2{font-weight:100;color:var(--ink);margin-left:.5em}
+.scene.on .hanji .h1{animation:hanIn 1.8s var(--ease) both}
+.scene.on .hanji .h2{animation:hanIn 1.8s var(--ease) .25s both}
+@keyframes hanIn{from{opacity:0;transform:translateY(30px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+.hero-copy{z-index:1}
+.hero h1{font-weight:200;letter-spacing:-.03em}
+.roman{margin:-6px 0 0;color:var(--ink-soft)}
+.hinfo{position:absolute;right:calc(var(--gr) + 24px);bottom:calc(env(safe-area-inset-bottom,0px) + 128px);margin:0;display:grid;grid-template-columns:repeat(3,auto);gap:0;border-top:1px solid rgba(21,19,20,.25);z-index:1}
+@media (min-width:900px){.hinfo{right:calc(var(--gr) + 72px)}}
+.hinfo div{padding:12px 22px 0 0;margin-right:22px;border-right:1px solid rgba(21,19,20,.18);display:grid;gap:6px}
+.hinfo div:last-child{border-right:0;margin-right:0}
+.hinfo dt{color:var(--red);font-family:var(--f-han);letter-spacing:.2em}
+.hinfo dd{margin:0;display:grid;gap:2px}
+.hinfo dd b{font-family:var(--f-han);font-weight:200;font-size:22px;line-height:1.1;letter-spacing:.06em}
+.hinfo dd span{font-size:11.5px;color:var(--ink-soft)}
+@media (max-width:899px){.hinfo{display:none}}
+.cue{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);transform:translateX(-50%);display:grid;justify-items:center;gap:8px;color:var(--ink-soft);z-index:1}
+.cue i{display:block;width:1px;height:34px;background:linear-gradient(var(--red),transparent);animation:cue 2.2s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+@media (max-width:899px){.cue{display:none}}
+.marquee{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 64px);overflow:hidden;z-index:1;border-top:1px solid rgba(21,19,20,.12);border-bottom:1px solid rgba(21,19,20,.12);padding-block:6px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq{display:flex;width:max-content;animation:mq 60s linear infinite}
+.mq span{font-family:var(--f-han);font-size:11px;letter-spacing:.42em;color:var(--ink-soft);white-space:nowrap;padding-right:.42em}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (max-width:899px){.marquee{bottom:calc(env(safe-area-inset-bottom,0px) + 110px)}}
+.hero .hero-copy{margin-bottom:56px}
+
+/* 장마다 큰 한자 워터마크 */
+.wm{position:absolute;z-index:0;pointer-events:none;font-weight:100;line-height:.8;right:-4vw;bottom:-6vh;font-size:min(86vh,60vw);color:rgba(21,19,20,.045);user-select:none}
+.night .wm{color:rgba(233,230,226,.04)}
+.scene.on .wm{animation:wmIn 3s var(--ease) both}
+@keyframes wmIn{from{opacity:0;transform:translate(40px,30px)}to{opacity:1;transform:none}}
+.pro .wm,.dream .wm{right:auto;left:-5vw}
+.ppl .wm,.src .wm{bottom:auto;top:-8vh}
+
+/* 측면 세로 메타 */
+.side{position:absolute;z-index:2;right:calc(var(--gr) + 26px);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-family:var(--f-han);font-size:10.5px;letter-spacing:.38em;opacity:.55;white-space:nowrap}
+.side::before{content:"";display:inline-block;width:1px;height:46px;background:var(--red);margin-bottom:14px;vertical-align:top}
+@media (max-width:1199px){.side{display:none}}
+
+/* 장 제목 */
+.chap .label{font-family:var(--f-han),var(--f-mono)}
+.chap .no{font-family:var(--f-han);font-weight:300;font-size:14px}
+
+
+/* 序 — 그날, 왜 */
+.dfocus{position:absolute;inset:0;z-index:3;display:grid;place-items:center;pointer-events:none;opacity:0;visibility:hidden;transition:opacity 1.8s ease,visibility 0s 1.8s;padding:calc(env(safe-area-inset-top,0px) + 70px) var(--gr) calc(env(safe-area-inset-bottom,0px) + 90px) var(--gl)}
+.day.focus .dfocus{opacity:1;visibility:visible;transition:opacity 1.8s ease,visibility 0s}
+.dfocus .fbg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(11,10,10,.78),rgba(4,3,3,.96) 70%)}
+.fwrap{position:relative;display:grid;justify-items:center;gap:14px;width:min(70vw,1120px)}
+.dfocus figure{position:relative;margin:0;width:100%;aspect-ratio:16/8.4;overflow:hidden;clip-path:inset(50% 0 50% 0);transition:clip-path 2.4s cubic-bezier(.7,0,.2,1) .2s}
+.day.focus .dfocus figure{clip-path:inset(0 0 0 0)}
+.dfocus figure img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 26%;transform-origin:50% 30%;transform:scale(1.02);filter:grayscale(1) brightness(.55) contrast(1.1);transition:transform 12s cubic-bezier(.2,.7,.2,1),filter 3.6s ease .6s}
+.day.focus .dfocus figure img{transform:scale(1.16);filter:grayscale(0) brightness(1) contrast(1)}
+.day.quote .dfocus figure img{filter:grayscale(0) brightness(.92) contrast(1.05)}
+.fline{position:absolute;left:0;right:0;top:50%;height:1px;background:var(--red-hi);transform:scaleX(0);transition:transform 1.6s var(--ease)}
+.day.focus .fline{transform:scaleX(1);opacity:0;transition:transform 1.4s var(--ease),opacity .8s ease 1.6s}
+.fcap{display:flex;justify-content:space-between;width:100%;color:var(--night-soft);font-family:var(--f-han);letter-spacing:.3em;opacity:0;transition:opacity 1.4s ease 1.6s}
+.day.focus .fcap{opacity:1}
+.fq{margin:clamp(14px,3vh,34px) 0 0;font-family:var(--f-display);font-weight:200;font-size:clamp(26px,3.6vw,54px);line-height:1.3;letter-spacing:-.01em;color:#fff;text-align:center;min-height:1.4em}
+.fq::after{content:"";display:inline-block;width:1px;height:.9em;background:var(--red-hi);margin-left:6px;vertical-align:-.08em;animation:blink 1s steps(1) infinite}
+.day.quote .fq{text-shadow:0 0 40px rgba(210,53,58,.0)}
+.day .lines,.day .hint,.day .chap{transition:opacity 1.4s ease,filter 1.4s ease}
+.day.focus .lines,.day.focus .hint,.day.focus .chap{opacity:0;filter:blur(6px)}
+@media (max-width:899px){.fwrap{width:100%}.dfocus figure{aspect-ratio:4/5}}
+
+/* 한자체: 14 해서 (LXGW WenKai TC) */
+.brand,.idx button,.seal,.pick button,.card .typo,.fin .big,.wm,.hanji,.hinfo dt,.hinfo dd b,.mq span,.side,.chap .no,rt,.intro h2,.fcap{font-synthesis:none}
+
+/* 연도 글씨: 14 해서 */
+.pro .yr,.pro .yr span,.fin .big,.fin .count,.fin .count b{font-family:"LXGW WenKai TC","Noto Sans TC",serif;font-weight:400;font-synthesis:none}
+.pro .yr{letter-spacing:.02em}
+.fin .count{font-size:14px;letter-spacing:.18em}
+
+/* 七 世界 정리 */
+.world .in{align-content:center;gap:26px}
+.wlay{display:grid;gap:28px;max-width:1240px}
+@media (min-width:1000px){.wlay{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:start}}
+.wtab{width:100%;border-collapse:collapse;border-top:1px solid var(--ink)}
+.wtab caption{text-align:left;color:var(--ink-soft);padding-bottom:10px}
+.wtab th{width:7.2em;text-align:left;vertical-align:baseline;padding:11px 14px 11px 0;border-bottom:1px solid var(--hair);font-family:var(--f-display);font-weight:300;font-size:12.5px;color:var(--ink-soft);white-space:nowrap}
+.wtab th span{display:inline-block;min-width:2.4em;font-family:var(--f-han);font-size:18px;color:var(--red);margin-right:8px}
+.wtab td{padding:11px 0;border-bottom:1px solid var(--hair);font-size:13.5px;line-height:1.75}
+.wtab b{font-weight:500}.wtab em{font-style:normal;color:var(--red)}
+.wprof{background:var(--paper-2);border:1px solid var(--hair);padding:20px 22px;display:grid;gap:16px;min-width:0}
+.wph{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.wph .label{color:var(--red)}
+.copy{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--ink);padding:9px 14px;transition:background .3s,color .3s}
+.copy:hover,.copy:focus-visible{background:var(--ink);color:var(--paper)}
+.wpcols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px}
+.wpcols h4{margin:0 0 8px;color:var(--ink-soft);font-weight:400}
+.wpcols ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:13px;line-height:1.6}
+.wpcols li{padding-left:14px;position:relative}
+.wpcols li::before{content:"";position:absolute;left:0;top:.75em;width:6px;height:1px;background:var(--red)}
+.wpcols .free li{color:var(--ink-soft)}
+.wpcols .free li::before{background:var(--ink-soft)}
+.copied{margin:0;color:var(--red);min-height:1.2em}
+@media (max-width:640px){.wpcols{grid-template-columns:1fr}.wtab th{width:5.6em}}
+
+/* 햇빛 속 먼지 */
+.dust{position:fixed;inset:0;width:100%;height:100%;z-index:35;pointer-events:none}
+
+/* 인트로 붉은 실 */
+.ithread{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.ithread path{fill:none;stroke:#96101A;stroke-width:1.3;stroke-linecap:round;transition:stroke-width .6s ease,stroke .6s ease}
+.ithread #ipB{stroke-width:.8;opacity:.7}
+.ithread.pull path{stroke:#D2353A;stroke-width:2}
+
+/* 인트로 */
+.intro{position:fixed;inset:0;z-index:80;background:var(--night);color:var(--night-ink);display:grid;place-items:center;padding:24px var(--gr) 24px var(--gl);transition:opacity 1.4s ease,visibility 1.4s}
+.intro.gone{opacity:0;visibility:hidden}
+.intro-in{position:relative;display:grid;justify-items:center;gap:30px;text-align:center}
+.intro-moon{width:clamp(110px,22vw,190px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 34%,#C72A2E 0%,var(--red) 40%,var(--red-deep) 80%,#3E070A 100%);box-shadow:0 0 90px 6px rgba(163,22,27,.35);animation:mrise 3.2s cubic-bezier(.2,.7,.2,1) both,breathe 7s ease-in-out 3.2s infinite}
+@keyframes mrise{from{transform:translateY(40px);filter:brightness(.4)}to{transform:none;filter:none}}
+@keyframes breathe{50%{box-shadow:0 0 140px 18px rgba(163,22,27,.45)}}
+.intro-txt{display:grid;justify-items:center;gap:22px;animation:rise 2.2s ease 1s both}
+.intro h2{margin:0;font-family:var(--f-han);font-weight:100;font-size:clamp(40px,7vw,80px);letter-spacing:.3em;padding-left:.3em;line-height:1}
+.intro .sub{font-family:var(--f-display);font-size:15px;color:var(--night-soft);margin:0}
+.enter{all:unset;cursor:pointer;display:inline-flex;gap:12px;align-items:center;border:1px solid var(--night-ink);padding:14px 26px;font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s}
+.enter:hover,.enter:focus-visible{background:var(--red);border-color:var(--red);color:#fff}
+.enter .rd{width:7px;height:7px;border-radius:50%;background:var(--red)}
+.enter:hover .rd,.enter:focus-visible .rd{background:#fff}
+.mute{all:unset;cursor:pointer;font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--night-soft)}
+.mute:hover,.mute:focus-visible{color:var(--night-ink)}
+.intro .hp{font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;color:var(--night-soft);text-transform:uppercase}
+
+@media (max-width:899px){
+  .scene{padding-top:calc(env(safe-area-inset-top,0px) + 64px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 112px)}
+  .bottom{flex-direction:column-reverse;align-items:stretch;gap:6px}
+  .bottom .nav{justify-content:space-between}
+  .idx{justify-content:space-between}
+  .moon{width:78vw;right:-12vw;top:0}
+  .card{min-height:38vh}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+
+<canvas class="dust" id="dust" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"><span id="curTxt"></span></div>
+
+<div class="intro" id="intro" role="dialog" aria-label="이윤 : 홍연 들어가기">
+  <img src="img/whitecube.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;filter:grayscale(1)">
+  <svg class="ithread" id="ithread" aria-hidden="true"><path id="ipA"/><path id="ipB"/></svg>
+  <div class="intro-in">
+    <div class="intro-moon" aria-hidden="true"></div>
+    <div class="intro-txt">
+      <h2>紅緣</h2>
+      <p class="sub">오백 년을 건너온 붉은 실</p>
+      <button type="button" class="enter" id="enterSound" data-cur="ENTER"><span class="rd" aria-hidden="true"></span>소리와 함께 들어가기</button>
+      <button type="button" class="mute" id="enterMute">소리 없이 보기</button>
+      <span class="hp">이어폰을 권한다</span>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <button type="button" class="brand" data-go="0">李潤 : 紅緣<small>YI YUN</small></button>
+  <div class="hmeta label" aria-hidden="true"><span>2029 · 秋</span><i></i><span>城北洞</span><i></i><span>37°35′N 126°59′E</span></div>
+  <button type="button" class="tbtn" id="soundBtn" aria-pressed="false"><span class="eq" aria-hidden="true"><s></s><s></s><s></s></span><span id="soundLabel">Sound off</span></button>
+</header>
+
+<main class="stage" id="stage">
+
+<section class="scene paper hero on" data-theme="paper" aria-label="이윤 : 홍연">
+  <div class="hero-bg" id="heroBg"><img src="img/whitecube.jpg" alt="천창 빛이 드는 흰 전시실, 붉은 선 하나가 그어진 대형 작품" width="1672" height="941" id="heroImg"><span class="glint" id="glint" aria-hidden="true"></span></div>
+  <div class="in">
+    <div class="minimoon" id="moon" data-cur="CLICK" aria-hidden="true"></div>
+    <div class="hanji" aria-hidden="true"><span class="h1">紅</span><span class="h2">緣</span></div>
+    <div class="hero-copy">
+      <div class="tag label rise"><span>Crack original</span><span>GL</span><span>轉生</span><span>Seoul, 2029</span></div>
+      <h1 class="rise d1">이윤 <em>:</em> 홍연</h1>
+      <p class="roman label rise d1">YI YUN — HONGYEON · The Red Thread</p>
+      <p class="lede rise d2">끊어지지 않는 붉은 실이 있다.<br>오백 년을 건너, 텅 빈 상영관 옆자리까지.</p>
+      <div class="rise d3" style="display:flex;gap:28px;align-items:center;flex-wrap:wrap"><button type="button" class="go" data-next data-cur="NEXT">앞선 이야기</button></div>
+    </div>
+    <dl class="hinfo rise d3" aria-label="작품 정보">
+      <div><dt class="label">前生</dt><dd><b>燕山君</b><span>張綠水</span></dd></div>
+      <div><dt class="label">本編</dt><dd><b>2029</b><span>서울 · 성북동</span></dd></div>
+      <div><dt class="label">作</dt><dd><b>紅緣</b><span>캔버스에 안료</span></dd></div>
+    </dl>
+    <div class="cue label" aria-hidden="true"><span>Scroll</span><i></i></div>
+  </div>
+  <div class="marquee" aria-hidden="true"><div class="mq"><span>李潤 · 紅緣 · 燕山君 · 張綠水 · 一五〇六 — 二〇二九 · 璿源 · SEONWON MUSEUM OF ART · 君 · </span><span>李潤 · 紅緣 · 燕山君 · 張綠水 · 一五〇六 — 二〇二九 · 璿源 · SEONWON MUSEUM OF ART · 君 · </span></div></div>
+</section>
+
+<section class="scene paper pro" data-theme="paper" aria-label="前生">
+  <div class="wm" aria-hidden="true">前</div>
+  <div class="side label" aria-hidden="true">朝鮮 · 一四九四 — 一五〇六 · 燕山君日記</div>
+  <div class="robe" id="robe" aria-hidden="true"><div class="robe-in"><img src="img/robe.webp" alt="" width="917" height="902"></div></div>
+  <div class="in">
+    <div class="chap rise"><span class="no">(一)</span><span class="label">前生 · Prologue · 앞선 이야기</span></div>
+    <div class="pro-grid">
+      <div class="rise d1"><div class="yr">1494<span id="yr2">1506</span><span class="label">朝鮮 · 燕山君日記</span></div></div>
+      <div class="lines" id="lines" data-cur="NEXT LINE" tabindex="0" aria-live="polite">
+        <p>어머니를 잃은 아이가 왕이 되었다.</p>
+        <p>피 묻은 저고리 한 장이 그 아이를 왕으로 만들었고, 같은 저고리가 왕을 무너뜨렸다.</p>
+        <p>궁 밖에서 노래하던 여자가 있었다. 사람들은 그 여자를 <ruby>숙용<rt>淑容</rt></ruby>이라 불렀다. 왕만이 이름으로 불렀다.</p>
+        <p class="mark"><ruby>녹수<rt>綠水</rt></ruby>야.</p>
+        <p>그 여자 앞에서만 왕은 아이가 되었다. 치마폭에 얼굴을 묻고서야 겨우 숨을 쉬었다.</p>
+        <p>1506년 가을, 반정. 왕은 군(君)으로 끌려 내려가 교동으로 갔고, 여자는 저잣거리에서 돌을 맞았다.</p>
+        <p class="rec">「다른 말은 없었고, <span class="nb">다만 신씨를 보고 싶다 하였다.」</span><small>중종실록, 1506 · 교동에서 올라온 보고 (의역)</small></p>
+        <p>기록에 녹수의 이름은 없었다.</p>
+        <p class="mark">그리고 오백이십삼 년.</p>
+      </div>
+    </div>
+    <div class="fin" aria-live="polite"><div><span class="count"><span>1506</span> — <b id="finYear">1506</b></span><span class="big">五百二十三年</span><span class="sub">그리고, 오백이십삼 년.</span></div></div>
+    <div class="hint label"><span id="lineHint">스크롤하거나 눌러서 다음 줄 · 1 / 9</span><button type="button" id="allLines">전부 보기</button></div>
+  </div>
+</section>
+
+<section class="scene night gun" data-theme="night" aria-label="君">
+  <div class="side label" aria-hidden="true">CINEMA · 22:00 · SEAT F7 — F8</div>
+  <div class="in">
+    <div class="chap rise"><span class="no">(二)</span><span class="label">君 · The film · 그 영화</span></div>
+    <div class="gun-wrap" id="gunWrap" data-cur="LOOK">
+      <img src="img/gun.jpg" alt="검은 화면 위 붉은 붓글씨 君" width="1672" height="941">
+      <div class="spot" aria-hidden="true"></div>
+      <span class="tip label">빛을 움직여 보고, 눌러 본다</span>
+    </div>
+    <div>
+      <div class="gun-say">
+        <p class="def">왕이 아니라 <b>군</b>. 끌려 내려와 묘호조차 받지 못한 임금에게, 기록이 남겨준 단 한 글자.</p>
+        <p class="q" id="gunQ" aria-live="polite"></p>
+      </div>
+      <div class="gun-row label"><span>「君」 · 2029 · 『연산군일기』 원작 · 평일 밤 10:00 회차</span><button type="button" id="lightOn">불 켜기</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="scene night day" data-theme="night" aria-label="그날">
+  <div class="wm" aria-hidden="true">序</div>
+  <div class="side label" aria-hidden="true">城北洞 · 三日後 · 窓邊</div>
+  <div class="bgs"><img src="img/gun.jpg" alt="" id="dayA"><img src="img/cafe.jpg" alt="" id="dayB"><img src="img/cafe_bag.jpg" alt="" id="dayC"></div>
+  <div class="dfocus" id="dFocus" aria-live="polite"><div class="fbg"></div><div class="fwrap"><figure><img src="img/cafe_yiyun.jpg?v=2" alt="카페 창가에서 흰 셔츠 차림으로 무표정하게 바라보는 이윤" width="1280" height="720"><span class="fline" aria-hidden="true"></span></figure><div class="fcap label"><span>城北洞 · 三日後 · 窓邊</span><span>李潤</span></div><p class="fq" id="dQ"></p></div></div>
+  <div class="in">
+    <div class="chap rise"><span class="no">(三)</span><span class="label">序幕 · That night · 그날</span></div>
+    <div class="lines" id="dlines" data-cur="NEXT LINE" tabindex="0" aria-live="polite">
+      <p>평일 밤 열 시, 텅 빈 상영관. 옆자리에만 사람이 있었다.</p>
+      <p>흰 셔츠, 어깨를 덮은 검은 머리. 스크린 빛이 스칠 때마다 서늘한 옆선이 떠올랐다 가라앉았다.</p>
+      <p>여자는 두 시간 내내 팔걸이에 턱을 괸 채 미간을 구겼다. 저런 적 없다고, 개같이도 그렸다고.</p>
+      <p>그리고 단 한 번, 극 중 누구도 입에 올리지 않은 이름이 흘러나왔다.</p>
+      <p class="say r">"<ruby>녹수<rt>綠水</rt></ruby>가 저렇게 웃었겠냐."</p>
+      <p>그 목소리의 결을 당신은 알았다. 수없이 깨어난 새벽마다 들었던 결이었다.</p>
+      <p>피 묻은 저고리가 스크린을 채운 순간, 여자의 숨이 끊기듯 멎었다. 음료가 쓰러져 당신 코트 자락을 천천히 적셨다. 여자는 코트가 아니라 당신 얼굴을 봤다.</p>
+      <p class="say">"……미안해요."</p>
+      <p class="cut" data-bg="B">사흘 뒤 · 성북동 골목 끝 카페의 창가</p>
+      <p data-bg="C">쇼핑백이 테이블 위로 밀려왔다. 그날과 같은 코트, 태그도 떼지 않은 채.</p>
+      <p data-bg="D">빛 아래서 본 얼굴은 어둠 속보다 더 창백했고, 색이라곤 붉은 입술 하나뿐이었다. 반쯤 내리깐 눈이 느리게 올라와 당신에게서 멈췄다.</p>
+      <p class="pic"><img src="img/cafe_yiyun.jpg?v=2" alt="카페 창가에서 흰 셔츠 차림으로 무표정하게 바라보는 이윤" width="1280" height="720"></p>
+      <p class="say r">"그날, 왜 그 영화 보러 오셨어요?"</p>
+    </div>
+    <div class="hint label"><span id="dHint">스크롤하거나 눌러서 다음 줄</span><button type="button" id="dAll">전부 보기</button></div>
+  </div>
+</section>
+
+<section class="scene paper now" data-theme="paper" aria-label="現生">
+  <div class="wm" aria-hidden="true">現</div>
+  <div class="side label" aria-hidden="true">SEOUL · AUTUMN 2029 · 37°35′N</div>
+  <div class="in scroll-in">
+    <div class="chap rise"><span class="no">(四)</span><span class="label">現生 · About · 이번 생</span></div>
+    <div class="now-grid">
+      <p class="pitch rise d1" id="pitch">평일 밤 열 시, 텅 빈 상영관. 하필 옆자리에 앉은 여자가 내 코트에 음료를 쏟았다. 무엇 하나 원해본 적 없는 여자가, 그날 이후 자꾸 나를 찾아온다. <span class="q"><span class="nb">처음 만났는데,</span> <span class="nb">왜 이렇게 익숙할까.</span></span></p>
+      <figure class="now-img rise d2"><img src="img/corridor.jpg" alt="붉은 단풍이 비치는 유리 회랑을 걸어가는 흰 셔츠의 여자" width="1672" height="941"><figcaption class="label">유리 회랑 · 이윤의 출근길</figcaption></figure>
+      <dl class="facts rise d3" id="facts">
+        <div><dt><button type="button" aria-expanded="false"><span class="label">Where</span><span>서울 성북동, 2029년 가을</span><span class="pm">+</span></button></dt><dd><span>선원미술관이 있는 언덕. 영화관은 대학로, 카페는 미술관 아래 골목 끝.</span></dd></div>
+        <div><dt><button type="button" aria-expanded="false"><span class="label">Genre</span><span>현대 · GL · 환생 · 집착</span><span class="pm">+</span></button></dt><dd><span>사극이 아니다. 2029년을 사는 두 여자의 설명 안 되는 끌림.</span></dd></div>
+        <div><dt><button type="button" aria-expanded="false"><span class="label">The dream</span><span>같은 꿈을 꾸는 두 사람</span><span class="pm">+</span></button></dt><dd><span>둘 다 어릴 때부터 같은 꿈을 꿔왔다. 이윤은 알고 있다. 자기가 누구였는지. 그리고 옆자리 여자가 누구였는지도 결국 알게 된다.</span></dd></div>
+        <div><dt><button type="button" aria-expanded="false"><span class="label">The thread</span><span>홍연 紅緣</span><span class="pm">+</span></button></dt><dd><span>서로가 누구였는지 확실해질수록, 두 사람은 서로에게 끌린다. 알아가는 이야기가 아니라, 끌려가는 이야기다.</span></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="scene paper ppl" data-theme="paper" aria-label="人物">
+  <div class="wm" aria-hidden="true">人</div>
+  <div class="side label" aria-hidden="true">六人 · 二人轉生</div>
+  <div class="in">
+    <div class="chap rise"><span class="no">(五)</span><span class="label">人物 · People · 사람들</span></div>
+    <div class="ppl-grid">
+      <div class="card rise d1" id="card"></div>
+      <div class="who scroll-in rise d2">
+        <ul class="plist" id="plist"></ul>
+        <div class="pd" id="pDetail"><p class="qt" id="pQuote" aria-live="polite"></p><dl class="pfacts" id="pFacts"></dl><p class="plook" id="pLook"></p><div class="pbody" id="pBody"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene paper src" data-theme="paper" aria-label="璿源">
+  <div class="wm" aria-hidden="true">璿</div>
+  <div class="side label" aria-hidden="true">璿源 · SEONWON MUSEUM OF ART</div>
+  <div class="in">
+    <div class="src-row rise"><div class="chap"><span class="no">(六)</span><span class="label">璿源 · Seonwon · 선원</span></div><div class="sname"><span class="seal" aria-hidden="true">璿</span><b>SEONWON</b></div></div>
+    <div class="view rise d1" id="view" data-cur="NEXT">
+      <div class="vcap label"><b id="vName"></b><span id="vSub"></span></div>
+    </div>
+    <div class="src-row rise d2"><div class="pick" id="pick" role="group" aria-label="공간 고르기"></div><p class="src-note">선원(璿源)은 조선 왕실의 족보를 부르던 말이다. 검은 고미술관과 흰 현대관을 유리 회랑이 잇는다. 이윤은 매일 그 사이를 걷는다.</p></div>
+  </div>
+</section>
+
+<section class="scene night grp" data-theme="night" aria-label="선원그룹">
+  <div class="wm" aria-hidden="true">團</div>
+  <div class="side label" aria-hidden="true">璿源集團 · SEONWON GROUP · 金融 · 流通 · 建設</div>
+  <div class="in">
+    <figure class="gstage rise d1" aria-hidden="true">
+      <img src="img/hq.jpg" alt="" width="1672" height="941">
+      <span class="gbig" id="gBig">璿</span>
+      <figcaption class="label"><span>Seonwon Group HQ</span><span id="gTag">璿源集團</span></figcaption>
+    </figure>
+    <div class="gside scroll-in">
+      <div class="chap rise"><span class="no">(七)</span><span class="label">集團 · Seonwon Group · 선원그룹</span></div>
+      <div class="gtabs rise d1" role="tablist" aria-label="선원그룹">
+        <button type="button" role="tab" aria-selected="true" data-t="0"><b>概要</b>개요</button>
+        <button type="button" role="tab" aria-selected="false" data-t="1"><b>事業</b>사업</button>
+        <button type="button" role="tab" aria-selected="false" data-t="2"><b>承繼</b>승계</button>
+      </div>
+      <div class="gpanes rise d2">
+        <div class="gpane on" role="tabpanel">
+          <h3 class="gh">백화점으로 알려졌고,<br>땅으로 컸고,<br><em>금융으로 버티는 집안.</em></h3>
+          <p class="gp">선원(璿源)은 조선 왕실의 족보, 선원록에서 온 이름이다. 아는 사람만 소름 돋는 이름.</p>
+          <dl class="gfacts">
+            <div><dt>재계</dt><dd>다섯 손가락 안. 위에 아직 누가 있다</dd></div>
+            <div><dt>주력</dt><dd>유통 · 건설 · 금융</dd></div>
+            <div><dt>본사</dt><dd>도심 한복판, 검은 유리 타워와 붉은 철 조각</dd></div>
+            <div><dt>회장</dt><dd>이성혁, 63. 병상에 누워 있다</dd></div>
+          </dl>
+        </div>
+        <div class="gpane" role="tabpanel">
+          <div class="biz" id="biz" role="list"></div>
+        </div>
+        <div class="gpane" role="tabpanel">
+          <h3 class="gh">회장이 쓰러졌다.<br><em>승계는 끝나지 않았다.</em></h3>
+          <dl class="gfacts">
+            <div><dt>이성혁</dt><dd>회장. 이윤을 후계자로 점찍었지만 지분은 아직 넘기지 못했다</dd></div>
+            <div><dt>한정원</dt><dd>선원문화재단 이사장. 다정한 얼굴로 이사회를 쥐고 있다</dd></div>
+            <div><dt>이건우</dt><dd>전략기획실 상무. 욕심은 없는데, 자리는 그쪽으로 간다</dd></div>
+            <div><dt>이윤</dt><dd>미술관 관장. 그룹 본류에서 떼어져 미술관에 앉혀졌다</dd></div>
+            <div><dt>김처연</dt><dd>회장 비서실장. 오직 회장 편. 회장의 뜻을 아는 단 한 사람일지도</dd></div>
+          </dl>
+          <p class="gend">금융 계열사 지분이 판의 전부다. 왕을 끌어내리던 일이, 이번엔 이사회실에서 조용히 일어난다. <em>현대판 반정.</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene paper home" data-theme="paper" aria-label="處所">
+  <div class="wm" aria-hidden="true">處</div>
+  <div class="side label" aria-hidden="true">處所 · 苑西洞 — 城北洞 · 37°34′N 126°59′E</div>
+  <div class="in">
+    <div class="hside">
+      <div class="chap rise"><span class="no">(八)</span><span class="label">處所 · Where she lives · 거처</span></div>
+      <h3 class="htitle rise d1">궁 담장 옆에<br>혼자 <em>산다</em>.</h3>
+      <div class="hlist rise d2" id="hlist" role="group" aria-label="공간 고르기"></div>
+      <p class="hnote rise d3">왜 하필 거기를 골랐는지 이윤은 설명하지 못한다. 집을 보러 갔다가, 그냥 거기서 나가고 싶지 않았다.</p>
+    </div>
+    <div class="hstage rise d1" id="hstage" data-cur="NEXT">
+      <span class="hnum" id="hnum" aria-hidden="true"></span>
+      <div class="hcap"><span class="label"><span id="hWhere"></span><span id="hEn"></span></span><p id="hText" aria-live="polite"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="scene paper world" data-theme="paper" aria-label="世界">
+  <div class="wm" aria-hidden="true">世</div>
+  <div class="side label" aria-hidden="true">世界 · 一五〇六 — 二〇二九 · BEFORE YOU GO</div>
+  <div class="in scroll-in">
+    <div class="chap rise"><span class="no">(九)</span><span class="label">世界 · The world · 들어가기 전에</span></div>
+    <div class="wlay">
+      <table class="wtab rise d1">
+        <caption class="label">한눈에 보기</caption>
+        <tbody>
+          <tr><th scope="row"><span>前生</span>전생</th><td>조선 1494—1506. 왕 <b>연산군</b>과 노래하던 여자 <b>장녹수</b>. 반정으로 왕은 교동에서 죽고 녹수는 돌을 맞았다.</td></tr>
+          <tr><th scope="row"><span>現生</span>시점</th><td><b>2029년 가을, 서울.</b> 반정으로부터 523년.</td></tr>
+          <tr><th scope="row"><span>李潤</span>이윤</th><td>31 · 172cm · 선원미술관 관장 · 선원그룹 후계자 · <em>연산군의 환생</em> · 자기가 누구였는지 안다</td></tr>
+          <tr><th scope="row"><span>綠水</span>당신</th><td>20대 · 보컬 개인 레슨 트레이너 · <em>장녹수의 환생</em> · 같은 꿈을 꿔왔고, 그날 확신했다</td></tr>
+          <tr><th scope="row"><span>智</span>서지혜</th><td>32 · 고미술 큐레이터 · 이윤과 2년째 연애 중 · 꿈 얘기를 들어준 유일한 사람</td></tr>
+          <tr><th scope="row"><span>家</span>가족</th><td><b>한정원</b> 새어머니 · <b>이건우</b> 배다른 남동생 · <b>이성혁</b> 아버지, 회장, 병상 · <b>김처연</b> 회장 비서실장, 오직 회장 편</td></tr>
+          <tr><th scope="row"><span>璿</span>선원그룹</th><td>재계 다섯 손가락 안 · 유통 · 건설 · 금융 · <b>"백화점 집안"</b> · 회장 와병, 승계 공백</td></tr>
+          <tr><th scope="row"><span>處</span>공간</th><td>원서동 창덕궁 담장 옆 <b>이윤의 집</b> · 성북동 <b>본가</b> · 성북동 <b>선원미술관</b> · 평일 밤 열 시의 <b>상영관</b></td></tr>
+          <tr><th scope="row"><span>鍵</span>호칭</th><td>평소엔 당신의 이름 · 헷갈리면 <b>"녹수야"</b> · 화나면 <b>"장녹수!!"</b></td></tr>
+        </tbody>
+      </table>
+      <aside class="wprof rise d2" aria-label="유저 프로필">
+        <div class="wph"><span class="label">User profile · 당신</span><button type="button" class="copy" id="copyProf" data-cur="COPY">프로필 복사</button></div>
+        <div class="wpcols">
+          <div><h4 class="label">고정</h4><ul>
+            <li>장녹수의 환생 · 여자</li>
+            <li>20대 중후반</li>
+            <li>보컬과 졸업, 보컬 개인 레슨 트레이너</li>
+            <li>집안이 어렵다. 혼자 버텨왔다</li>
+            <li>예쁘다. 이윤이 한 번 힐끗 볼 정도로</li>
+            <li>어릴 때부터 이윤과 같은 꿈을 꿔왔다</li>
+            <li>군중 속에 묻히면 몸이 굳는다</li>
+          </ul></div>
+          <div><h4 class="label">자유 설정</h4><ul class="free">
+            <li>이름</li><li>정확한 나이</li><li>성격</li><li>말투</li><li>외모 세부</li><li>사는 곳</li><li>이윤을 처음 봤을 때의 감정</li>
+          </ul></div>
+        </div>
+        <p class="copied label" id="copied" aria-live="polite"></p>
+      </aside>
+    </div>
+    <button type="button" class="go rise d3" data-next data-cur="NEXT">마지막 장으로</button>
+  </div>
+</section>
+
+<section class="scene night dream" data-theme="night" aria-label="夢">
+  <div class="wm" aria-hidden="true">夢</div>
+  <div class="side label" aria-hidden="true">紅緣 · TO BE CONTINUED</div>
+  <div class="dbg" aria-hidden="true"></div>
+  <svg class="th" id="th" aria-hidden="true"><path id="thPath" fill="none" stroke="#A3161B" stroke-width="1.2"/></svg>
+  <div class="in">
+    <div class="dmoon" id="dmoon" aria-hidden="true"></div>
+    <span class="label" style="color:var(--night-soft)">(十) 夢</span>
+    <h2 class="rise">붉은 실은<br>다시 <em>이어졌다</em>.</h2>
+    <p class="dream-p rise d2"><span class="nb">오백이십삼 년 만에,</span> <span class="nb">텅 빈 상영관 옆자리에서.</span><br><span class="nb">그 여자가 녹수라고 부른 순간,</span> <span class="nb">당신은 확신했다.</span></p>
+    <p class="reply" id="reply" aria-live="polite"></p>
+    <a class="crack-cta" id="crackCta" href="#" target="_blank" rel="noopener" data-cur="CRACK"><span class="k">Crack · 크랙에서 이어하기</span><span class="t">붉은 실을 따라가기<i aria-hidden="true"></i></span><span class="orb" aria-hidden="true"><svg viewBox="0 0 22 22" fill="none" stroke="#fff" stroke-width="1.2"><path d="M3 11h15M12 5l6 6-6 6"/></svg></span></a>
+    <div class="credit label"><span>Crack · Scroll</span><span>이윤 : 홍연</span><span>이 이야기는 픽션이다. 실존 인물·기록을 모티브로 삼았다</span><span>© 2026</span></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="bottom">
+  <nav class="idx" id="idx" aria-label="장 이동"></nav>
+  <div class="nav">
+    <span class="ct" id="ct">01 / 08</span>
+    <button type="button" class="arrow" id="prev" aria-label="이전 장"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 2 4 7l5 5"/></svg></button>
+    <button type="button" class="arrow" id="next" aria-label="다음 장" data-cur="NEXT"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2"><path d="m5 2 5 5-5 5"/></svg></button>
+  </div>
+</footer>
+<div class="thread" aria-hidden="true"><i id="threadBar"></i></div>
+
+<audio id="ost" src="audio/hongyeon-inst.mp3" loop preload="auto"></audio>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scenes=$$('.scene'), N=scenes.length, cur=0, busy=false;
+  var names=['紅緣','前生','君','序','現生','人物','璿源','集團','處所','世界','夢'];
+
+  /* 장 인덱스 */
+  var idx=$('#idx');
+  names.forEach(function(n,i){var b=document.createElement('button');b.type='button';b.textContent=n.length>1?n.charAt(0):n;b.title=n;b.setAttribute('aria-label',(i+1)+'장 '+n);b.dataset.go=i;idx.appendChild(b)});
+  function go(i){
+    if(i<0||i>=N||i===cur||busy) return;
+    busy=true; var old=scenes[cur]; var nw=scenes[i];
+    old.classList.add('off-up'); old.classList.remove('on');
+    nw.classList.add('on');
+    setTimeout(function(){old.classList.remove('off-up');busy=false},reduce?20:1100);
+    cur=i; sync(); enter(i); silkTo(i);
+  }
+  function sync(){
+    $$('button',idx).forEach(function(b,i){b.setAttribute('aria-current',i===cur)});
+    $('#ct').textContent=String(cur+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
+    $('#prev').disabled=cur===0; $('#next').disabled=cur===N-1;
+    document.body.classList.toggle('dark',scenes[cur].dataset.theme==='night');
+    $('#threadBar').style.setProperty('--p',((cur+1)/N).toFixed(3));
+  }
+  document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){go(+g.dataset.go)} if(e.target.closest('[data-next]'))go(cur+1)});
+  $('#prev').addEventListener('click',function(){go(cur-1)});
+  $('#next').addEventListener('click',function(){go(cur+1)});
+  addEventListener('keydown',function(e){
+    if(!$('#intro').hidden&&!$('#intro').classList.contains('gone'))return;
+    if(['ArrowDown','PageDown'].indexOf(e.key)>-1){e.preventDefault();step(1)}
+    if(['ArrowUp','PageUp'].indexOf(e.key)>-1){e.preventDefault();step(-1)}
+    if(e.key==='ArrowRight'){e.preventDefault();go(cur+1)}
+    if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}
+    if(e.key===' '&&cur===1&&document.activeElement===$('#lines')){e.preventDefault();nextLine()}
+    if(e.key===' '&&cur===3&&document.activeElement===$('#dlines')){e.preventDefault();nextD()}
+  });
+  /* 휠 · 스와이프: 한 번 내리면 한 장씩 */
+  function introOpen(){var it=$('#intro');return !it.hidden&&!it.classList.contains('gone')}
+  function innerScroll(t,dir){var el=t&&t.closest?t.closest('.scroll-in'):null;if(!el||el.scrollHeight<=el.clientHeight+2)return false;
+    return dir>0?el.scrollTop+el.clientHeight<el.scrollHeight-2:el.scrollTop>2}
+  var acc=0,lastFire=0,idleT,lastKind='scene';
+  // 글 장(前生·序)에서는 스크롤 한 번에 한 줄씩 떠오른다
+  function step(dir){
+    if(cur===1){ if(dir>0&&li===lines.length&&Date.now()<holdUntil)return 'line'; if(dir>0&&li<lines.length){li++;showLine();return 'line'} if(dir<0&&li>1){li--;showLine();return 'line'} }
+    if(cur===3){ if(Date.now()<dHold)return 'line'; if(dir>0&&di<dl.length){di++;showD();return 'line'} if(dir<0&&di>1){di--;showD();return 'line'} }
+    go(cur+dir); return 'scene';
+  }
+  addEventListener('wheel',function(e){
+    if(introOpen())return; var d=e.deltaY||e.deltaX; if(!d)return;
+    if(cur!==1&&cur!==3&&innerScroll(e.target,d))return;
+    e.preventDefault();
+    clearTimeout(idleT);idleT=setTimeout(function(){acc=0},220);
+    var now=Date.now(); if(now-lastFire<(lastKind==='line'?520:1200)||busy){acc=0;return}
+    acc+=d; if(Math.abs(acc)>40){lastKind=step(acc>0?1:-1);lastFire=now;acc=0}
+  },{passive:false});
+  var sx=0,sy=0,st=0,stT=null;
+  addEventListener('touchstart',function(e){var t=e.touches[0];sx=t.clientX;sy=t.clientY;st=Date.now();stT=e.target},{passive:true});
+  addEventListener('touchend',function(e){if(introOpen())return;var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Date.now()-st>800)return;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.3){go(cur+(dx<0?1:-1));return}
+    if(Math.abs(dy)>50&&Math.abs(dy)>Math.abs(dx)*1.3&&(cur===1||cur===3||!innerScroll(stT,-dy))){step(dy<0?1:-1)}},{passive:true});
+
+  /* 커서 */
+  var c=$('#cursor'), ct=$('#curTxt'), cx=innerWidth/2, cy=innerHeight/2, tx=cx, ty=cy;
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.body.classList.add('cur');
+    addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY});
+    (function loop(){cx+=(tx-cx)*.22;cy+=(ty-cy)*.22;c.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop)})();
+    document.addEventListener('mouseover',function(e){var h=e.target.closest('button,a,[data-cur]');c.classList.toggle('big',!!h);ct.textContent=h&&h.dataset.cur?h.dataset.cur:''});
+  }
+
+  /* 곤룡포: 마우스 따라 천천히 떠밀린다 */
+  scenes[1].addEventListener('mousemove',function(e){if(reduce)return;var r=scenes[1].getBoundingClientRect(),rb=$('#robe');
+    rb.style.setProperty('--rx',((e.clientX/r.width-.5)*-22).toFixed(1)+'px');rb.style.setProperty('--ry',((e.clientY/r.height-.5)*-16).toFixed(1)+'px')});
+
+  /* 0 메인 이미지 */
+  var moon=$('#moon'), hero=scenes[0], himg=$('#heroImg'), glint=$('#glint');
+  hero.addEventListener('mousemove',function(e){if(reduce)return;var r=hero.getBoundingClientRect();
+    himg.style.setProperty('--mx',((e.clientX-r.width/2)/r.width*-28).toFixed(1)+'px');himg.style.setProperty('--my',((e.clientY-r.height/2)/r.height*-18).toFixed(1)+'px')});
+  function placeGlint(){ // 캔버스 위 붉은 선 위치 (원본 1672x941 기준 x 680~1415, y 508)
+    var W=hero.clientWidth*1.06,H=hero.clientHeight*1.06,iw=1672,ih=941,s=Math.max(W/iw,H/ih),dw=iw*s,dh=ih*s,ox=(W-dw)*.62-hero.clientWidth*.03,oy=(H-dh)*.5-hero.clientHeight*.03;
+    glint.style.left=(ox+680*s)+'px';glint.style.width=(735*s)+'px';glint.style.top=(oy+506*s)+'px'}
+  addEventListener('resize',placeGlint);placeGlint();
+  moon.addEventListener('click',function(){var r=moon.getBoundingClientRect(),p=moon.parentNode.getBoundingClientRect(),d=document.createElement('span');
+    d.className='ripple';d.style.cssText='left:'+(r.left-p.left)+'px;top:'+(r.top-p.top)+'px;width:'+r.width+'px;height:'+r.height+'px';moon.parentNode.appendChild(d);setTimeout(function(){d.remove()},1700)});
+
+  /* 1 前生 */
+  var lines=$$('#lines p'), li=0, hint=$('#lineHint');
+  /* 글줄: 트랙으로 감싸고, 새 줄이 항상 가운데 오도록 미끄러지게 올린다 */
+  ['#lines','#dlines'].forEach(function(sel){var box=$(sel),tr=document.createElement('div');tr.className='track';while(box.firstChild)tr.appendChild(box.firstChild);box.appendChild(tr)});
+  function glide(box,last){var tr=box.firstElementChild;box.scrollTop=0;if(!last){tr.style.transform='';return}
+    var y=last.getBoundingClientRect().top-tr.getBoundingClientRect().top+last.offsetHeight/2, target=box.clientHeight*.55; tr.style.transform='translateY('+(-Math.max(0,y-target)).toFixed(0)+'px)'}
+  addEventListener('resize',function(){glide($('#lines'),lines[li-1]);glide($('#dlines'),dl[di-1])});
+  function showLine(){lines.forEach(function(p,i){p.classList.toggle('shown',i<li)});hint.textContent=li<lines.length?'스크롤하거나 눌러서 다음 줄 · '+li+' / '+lines.length:'다음 장으로 넘어간다 →';
+    glide($('#lines'),lines[li-1]); finale(li===lines.length)}
+  var holdUntil=0, finOn=false, finRaf;
+  function finale(on){
+    var sc=scenes[1], y2=$('#yr2'), fy=$('#finYear');
+    if(on===finOn)return; finOn=on; sc.classList.toggle('finale',on); cancelAnimationFrame(finRaf);
+    if(!on){y2.textContent='1506';fy.textContent='1506';return}
+    holdUntil=Date.now()+(reduce?400:3200);
+    var t0=performance.now(), D=reduce?1:2600;
+    (function tick(now){var k=Math.min(1,(now-t0)/D), e=1-Math.pow(1-k,3), v=Math.round(1506+(2029-1506)*e);
+      y2.textContent=v; fy.textContent=v; if(k<1)finRaf=requestAnimationFrame(tick)})(t0);
+  }
+  function nextLine(){if(li<lines.length){li++;showLine()}else if(Date.now()>=holdUntil)go(cur+1)}
+  $('#lines').addEventListener('click',nextLine);
+  $('#lines').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();nextLine()}});
+  $('#allLines').addEventListener('click',function(){li=lines.length;showLine()});
+
+  /* 3 그날 */
+  var dl=$$('#dlines p'), di=0, dB=$('#dayB'), dA=$('#dayA');
+  function showD(){dl.forEach(function(p,i){p.classList.toggle('shown',i<di)});var bk='A',face=false;dl.forEach(function(p,i){if(i<di&&p.dataset.bg){if(p.dataset.bg==='D')face=true;else bk=p.dataset.bg}});dA.classList.toggle('on',bk==='A');dB.classList.toggle('on',bk==='B');$('#dayC').classList.toggle('on',bk==='C');
+    $('#dHint').textContent=di<dl.length?'스크롤하거나 눌러서 다음 줄 · '+di+' / '+dl.length:'다음 장으로 넘어간다 →';glide($('#dlines'),dl[di-1]);dayFocus()}
+  /* 그날, 왜 — 이윤이 당신을 보는 순간만 화면 전체를 쥔다 */
+  var picIdx=dl.findIndex(function(p){return p.classList.contains('pic')}), dHold=0, fOn=false, qOn=false;
+  function dayFocus(){
+    var sc=scenes[3], f=di>picIdx, q=di>picIdx+1, fq=$('#dQ');
+    if(f!==fOn){fOn=f;sc.classList.toggle('focus',f);if(f)dHold=Date.now()+(reduce?300:2600)}
+    if(q!==qOn){qOn=q;sc.classList.toggle('quote',q);if(q){dHold=Date.now()+(reduce?300:2400);setTimeout(function(){if(qOn)type(fq,'"그날, 왜 그 영화 보러 오셨어요?"','fq')},reduce?0:500)}else{fq.textContent=''}}
+  }
+  function nextD(){if(Date.now()<dHold)return;if(di<dl.length){di++;showD()}else go(cur+1)}
+  $('#dlines').addEventListener('click',nextD);
+  $('#dlines').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();nextD()}});
+  $('#dAll').addEventListener('click',function(){di=dl.length;showD()});
+
+  /* 2 君 */
+  var gw=$('#gunWrap'), gq=$('#gunQ'), gl=[["……제목부터 시비네.",0],["……저런 적 없는데.",0],["와. 개같이도 그렸네.",0],["녹수가 저렇게 웃었겠냐.",1]], gi=0, typer;
+  function type(el,txt,cls){clearInterval(typer);el.className=cls||el.className.replace(/ ?r\b/,'');el.textContent='';var k=0;typer=setInterval(function(){el.textContent=txt.slice(0,++k);if(k>=txt.length)clearInterval(typer)},reduce?1:55)}
+  gw.addEventListener('mousemove',function(e){var r=gw.getBoundingClientRect();gw.style.setProperty('--x',(e.clientX-r.left)+'px');gw.style.setProperty('--y',(e.clientY-r.top)+'px')});
+  gw.addEventListener('click',function(e){var r=gw.getBoundingClientRect();gw.style.setProperty('--x',(e.clientX-r.left)+'px');gw.style.setProperty('--y',(e.clientY-r.top)+'px');
+    var l=gl[gi%gl.length];type(gq,'"'+l[0]+'"',l[1]?'q r':'q');gi++});
+  $('#lightOn').addEventListener('click',function(){var on=gw.classList.toggle('lit');this.textContent=on?'불 끄기':'불 켜기'});
+
+  /* 3 現生 */
+  $$('#facts button').forEach(function(b){b.addEventListener('click',function(){var d=b.closest('div');var o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)})});
+
+  /* 4 人物 */
+  var P=[
+    {n:'李潤',ko:'이윤',ag:'31',img:'img/yiyun_base.jpg',light:1,fs:'1.12',fy:'-8.3%',meta:'연산군의 환생',
+     f:[['나이','31'],['키','172cm'],['직업','선원미술관 관장 · 선원그룹 후계자'],['전생','연산군']],
+     look:'검은 생머리, 속쌍꺼풀, 반쯤 내리깐 회갈색 눈. 얼굴에서 색이 있는 건 붉은 입술 하나뿐이다. 흰 셔츠를 단추 몇 개 풀어 입는다.',
+     body:['사람을 작품 고르듯 보고 쳐낸다. 애초에 여자만 만나왔고, 늘 이윤이 고르고 이윤이 끝냈다. 무엇 하나 원해본 적이 없다.','일곱 살부터 누구보다 뚜렷한 꿈을 꿨다. 배운 적 없는 궁의 걸음 수를 알고, 상자를 열기도 전에 붉은 저고리의 얼룩 자리를 맞혔다. 자기가 누구였는지 안다.','남들 앞에선 건조하고 정갈한 관장. 유저 앞에서만 가면이 벗겨진다.'],
+     q:'……제목부터 시비네.'},
+    {n:'당신',ko:'당신',ag:'20s',moon:1,meta:'장녹수의 환생',
+     f:[['나이','20대 중후반'],['직업','보컬 개인 레슨 트레이너'],['전생','장녹수'],['꿈','이윤과 같은 꿈']],
+     look:'예쁘다. 이윤이 한 번 힐끗 쳐다볼 정도로. 처음 보는 얼굴인데 이윤의 눈이 먼저 붙잡힌다.',
+     body:['집안이 어렵다. 기댈 데 없이 혼자 버텨왔다. 보컬과를 나왔고 노래도 춤도 잘하지만 무대엔 서지 않는다.','군중 속에 묻히면 몸이 먼저 굳는다. 돌을 맞던 기억 때문이다. 그래서 그날도 평일 밤 늦은 회차, 텅 빈 상영관을 골랐다.','그 옆자리에서 그 이름을 들었다. 그리고 확신했다.'],
+     q:'그쪽은요?'},
+    {n:'智',ko:'서지혜',ag:'32',img:'img/jihye.jpg',light:1,fs:'1.12',fy:'0%',meta:'Curator · 이윤의 연인',
+     f:[['나이','32 · 이윤보다 한 살 위'],['키','163cm'],['직업','선원미술관 학예실 큐레이터 · 고미술'],['관계','이윤과 2년째 연애 중']],
+     look:'어깨에 닿는 갈색 단발을 한쪽만 귀 뒤로 넘긴다. 얇은 금테 안경, 니트 가디건, 목에 걸린 사원증. 늘 살짝 웃는 입매.',
+     body:['연산군을 누구보다 좋아한다. 실록도 야사도 다 꿰고 있다. 이윤이 꿈 얘기를 털어놓은 유일한 사람이고, 한 번도 미친 소리 취급하지 않고 들어줬다.','다만 기록으로만 답할 수 있었다. 그다음 장면을 말해줄 수는 없었다.','이윤이 평범해서, 편해서 옆에 둔 사람. 그걸 지혜만 모른다.'],
+     q:'실록에 그런 기록 있어.'},
+    {n:'韓',ko:'한정원',ag:'58',img:'img/jeongwon.jpg',light:1,hidden:1,fs:'1.14',fy:'-4.6%',meta:'새어머니',
+     f:[['나이','58'],['키','165cm'],['직업','선원문화재단 이사장 · 선원미술관 전임 관장'],['관계','이윤의 새어머니']],
+     look:'나이를 가늠하기 어려울 만큼 관리된 얼굴. 낮게 틀어 올린 쪽머리, 진주 귀걸이, 아이보리 정장. 웃을 때 입꼬리만 올라가고 눈은 그대로다.',
+     body:['이윤의 친모가 쫓겨난 자리에 들어와 이윤을 키웠다. 그 일에 어디까지 손을 댔는지는 아무도 모른다.','한 번도 언성을 높인 적이 없다. 통제는 늘 다정함으로 한다. 이윤에게 미술관을 선물처럼 넘겼지만, 그건 그룹 본류에서 떼어낸 것이었다.','이윤은 정원을 미워하지 못한다. 키워준 사람이라서.'],
+     q:'윤아, 엄마는 네가 행복했으면 좋겠어.'},
+    {n:'建',ko:'이건우',ag:'27',meta:'배다른 남동생',
+     f:[['나이','27'],['키','181cm'],['직업','선원그룹 전략기획실 상무'],['관계','정원의 친아들 · 이윤의 배다른 남동생']],
+     look:'엄마를 닮은 순한 미남. 어깨는 넓은데 늘 조금 움츠리고 있다. 처진 눈으로 사람 눈을 오래 못 본다. 넥타이는 매번 조금 느슨하다.',
+     body:['어릴 때부터 이윤을 무서워하면서 동경했다. 지금도 누나라고 부르며 따른다.','후계 욕심이 없다. 밀어붙이는 건 정원과 이사회다. 거절할 줄 몰라서 그 판에 서 있을 뿐이다.','칼을 든 건 건우가 아닌데, 자리를 가져가는 건 건우다.'],
+     q:'미안해, 누나.'},
+    {n:'成',ko:'이성혁',ag:'63',meta:'아버지 · 회장',
+     f:[['나이','63'],['직업','선원그룹 회장'],['관계','이윤의 아버지'],['지금','병상에 누워 있다']],
+     look:'반백의 짧은 머리, 깊은 눈매. 이윤의 곧은 콧날과 얇은 입술이 아버지에게서 왔다. 병상에서 많이 말랐다.',
+     body:['이윤을 신뢰한다. 똑똑하고 바르고 정갈하고 정직한 아이로 본다. 후계자로 점찍은 것도 아버지다.','이윤이 여자만 만나는 걸 안다. 개의치 않는다. 워낙 자기 할 일을 바르게 하는 아이라서.','이윤이 미워하지 않는 유일한 가족. 아버지가 쓰러진 순간, 이윤의 방패도 사라졌다.'],
+     q:'윤이 네가 알아서 하겠지.'},
+    {n:'秘',ko:'김처연',ag:'52',meta:'회장 비서실장',
+     f:[['나이','52'],['키','168cm'],['직업','선원그룹 회장 비서실장'],['편','오직 회장 편']],
+     look:'반백을 염색하지 않은 짧은 단발, 무테안경. 표정이 거의 없고 눈만 빠르게 움직인다. 검은 정장, 장신구 없음, 손에는 늘 얇은 서류철.',
+     body:['스물두 살에 들어와 30년 가까이 이 집에 있었다. 회장이 쓰러진 뒤로 살림도, 스케줄도, 뒷수습도 전부 이 사람 손을 거친다.','이윤 편도 정원 편도 아니다. 회장님 뜻이 무엇이냐, 그게 유일한 기준이다. 그래서 승계 판의 캐스팅보트다.','이 집에서 이윤에게 직언하는 유일한 사람. 친모가 어떻게 쫓겨났는지도 안다. 입은 열지 않는다.'],
+     q:'관장님, 그건 아닙니다.'}
+  ];
+  var card=$('#card'), pl=$('#plist'), faces=[];
+  P.forEach(function(p,i){
+    var f=document.createElement('div');f.className='face'+(p.hidden?' lite hide':(p.img?' photo':'')+(p.light?' lite':''));
+    var typo='<div class="typo">'+(p.moon?'<i></i>':'<i class="small"></i>')+'<span>'+p.n+'</span></div>';
+    var im=p.img?'<img'+(p.hidden?' class="hid"':'')+' src="'+p.img+'" alt="'+p.ko+'" width="1280" height="720"'+(p.fy||p.fs?' style="'+(p.fy?'--fy:'+p.fy+';':'')+(p.fs?'--fs:'+p.fs+';':'')+'"':'')+'>':'';
+    f.innerHTML=p.hidden?typo+im:(p.img?im:typo);
+    card.appendChild(f);faces.push(f);
+    var li=document.createElement('li');li.innerHTML='<button type="button" aria-pressed="false"><span class="n">('+'一二三四五六七'[i]+')</span><span class="nm">'+p.ko+'</span><span class="ag">'+p.ag+'</span></button>';
+    li.firstChild.addEventListener('click',function(){pick(i)});li.firstChild.addEventListener('mouseenter',function(){pick(i)});pl.appendChild(li);
+  });
+  var meta=document.createElement('div');meta.className='meta label';card.appendChild(meta);
+  var pcur=-1;
+  function esc(t){return String(t).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+  var revealT;
+  function reveal(i){var f=faces[i];if(f&&P[i].hidden)f.classList.add('shown')}
+  card.addEventListener('click',function(){if(pcur>=0&&P[pcur].hidden){clearTimeout(revealT);reveal(pcur)}});
+  function pick(i){if(i===pcur)return;pcur=i;var p=P[i];faces.forEach(function(f,k){f.classList.toggle('on',k===i);if(k!==i)f.classList.remove('shown')});
+    clearTimeout(revealT); if(p.hidden){revealT=setTimeout(function(){reveal(i)},1800)}
+    $$('button',pl).forEach(function(b,k){b.setAttribute('aria-pressed',k===i)});
+    meta.innerHTML='<span>'+esc(p.meta)+'</span><span>'+esc(p.ag)+'</span>';meta.style.color=p.img&&!p.light?'#fff':'';
+    var pd=$('#pDetail'); pd.classList.remove('in'); void pd.offsetWidth;
+    $('#pFacts').innerHTML=p.f.map(function(r){return '<div><dt class="label">'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('');
+    $('#pLook').textContent=p.look;
+    $('#pBody').innerHTML=p.body.map(function(t){return '<p>'+esc(t)+'</p>'}).join('');
+    pd.classList.add('in'); pd.scrollTop=0;
+    type($('#pQuote'),'"'+p.q+'"','qt')}
+  pick(0);
+
+  /* 5 璿源 */
+  var V=[['外','외관','Seongbuk-dong hillside','img/exterior.jpg','붉은 단풍나무와 물의 정원을 사이에 둔 검은 석조관과 흰 콘크리트관'],['廊','유리 회랑','Between two wings','img/corridor.jpg','붉은 단풍이 비치는 유리 회랑을 걸어가는 흰 셔츠의 여자'],['古','고미술관','Gallery III · Joseon','img/jeogori.jpg','어두운 전시실, 유리 진열장 안의 붉은 저고리'],['現','현대미술관','White cube · Gallery 1','img/whitecube.jpg','천창 빛이 드는 흰 전시실, 붉은 선 하나의 대형 작품'],['藏','수장고','B3 · Climate-controlled','img/storage.jpg','지하 수장고, 열린 서랍 밖으로 흘러나온 붉은 비단'],['門','로비','Entrance hall','img/lobby.jpg','SEONWON MUSEUM OF ART 각인과 붉은 낙관이 있는 로비']];
+  var view=$('#view'), pk=$('#pick'), vimgs=[], vcur=-1;
+  V.forEach(function(v,i){var im=new Image();im.src=v[3];im.alt=v[4];im.width=1672;im.height=941;im.decoding='async';view.insertBefore(im,view.firstChild);vimgs.push(im);
+    var b=document.createElement('button');b.type='button';b.textContent=v[0];b.title=v[1];b.setAttribute('aria-label',v[1]);b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){show(i)});b.addEventListener('mouseenter',function(){show(i)});pk.appendChild(b)});
+  function show(i){if(i===vcur)return;vcur=i;vimgs.forEach(function(m,k){m.classList.toggle('on',k===i)});$$('button',pk).forEach(function(b,k){b.setAttribute('aria-pressed',k===i)});$('#vName').textContent=V[i][1];$('#vSub').textContent=V[i][2]}
+  view.addEventListener('click',function(){show((vcur+1)%V.length)});
+  show(0);
+
+
+
+  /* 集團 선원그룹 */
+  var GB=[['流','유통','Face','선원백화점 · 면세점 · 명품 수입. 사람들은 이 집을 "백화점 집안"으로 안다.'],['地','건설 · 부동산','Root','강북 도심 재개발과 땅으로 컸다. 서울 땅을 제일 많이 가진 집안.'],['金','금융','Lifeline','선원생명 · 선원증권. 지분 승계가 여기 걸려 있다.'],['館','문화재단','Facade','선원미술관. 수익은 없다. 이사회는 "후계자를 미술관에 박아뒀다"고 읽는다.']];
+  var bz=$('#biz'), gcur=-1;
+  GB.forEach(function(g,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','listitem');b.setAttribute('aria-pressed','false');b.setAttribute('data-cur','VIEW');
+    b.innerHTML='<span class="k"><b aria-hidden="true">'+g[0]+'</b>'+esc(g[1])+'</span><span class="v"><i>'+g[2]+'</i>'+esc(g[3])+'</span>';
+    b.addEventListener('mouseenter',function(){gpick(i)});b.addEventListener('click',function(){gpick(i)});bz.appendChild(b)});
+  function gpick(i){if(i===gcur)return;gcur=i;$$('button',bz).forEach(function(b,k){b.setAttribute('aria-pressed',k===i)});var gb=$('#gBig');gb.classList.remove('sw');void gb.offsetWidth;gb.textContent=GB[i][0];gb.classList.add('sw');$('#gTag').textContent=GB[i][1]+' · '+GB[i][2]}
+  gpick(0);
+  var gtb=$$('.gtabs button'), gpn=$$('.gpane'), GT=['璿','業','繼'];
+  gtb.forEach(function(b,i){b.addEventListener('click',function(){gtb.forEach(function(x,k){x.setAttribute('aria-selected',k===i)});gpn.forEach(function(x,k){x.classList.toggle('on',k===i)});
+    var gb=$('#gBig'); if(i===1){gcur=-1;gpick(0)}else{gb.classList.remove('sw');void gb.offsetWidth;gb.textContent=GT[i];gb.classList.add('sw');$('#gTag').textContent=['璿源集團','',"承繼 · Succession"][i]}
+    var sd=$('.gside'); if(sd)sd.scrollTop=0})});
+  (function(){var gb=$('#gBig');gb.textContent='璿';$('#gTag').textContent='璿源集團'})();
+
+  /* 處 거처 */
+  var H=[
+    ['苑西洞 · 이윤의 집','外','외관','Gate · along the palace wall','img/house_ext.jpg','궁 담장을 따라 걷다 보면 검은 철문 하나가 나온다. 문패는 없다.','창덕궁 서쪽 담장을 따라 난 돌길, 붉은 단풍 아래 한옥 지붕과 노출 콘크리트 담장의 검은 문'],
+    ['苑西洞 · 이윤의 집','堂','거실','Living room · concrete & timber','img/house_living.jpg','한옥 뼈대만 남기고 안은 전부 콘크리트로 다시 부었다. 마당엔 단풍나무 한 그루.','노출 콘크리트 벽과 한옥 서까래, 통유리 너머 마당의 붉은 단풍나무, 백자 항아리 하나'],
+    ['苑西洞 · 이윤의 집','寢','침실','Bedroom · facing the wall','img/house_bed.jpg','창 너머로 궁 담장과 후원 숲이 보인다. 잠 못 드는 밤이면 이윤은 창가에 서서 담장을 본다.','달밤, 통유리 창 너머로 보이는 궁 담장과 숲, 흐트러진 흰 침구와 작은 스탠드'],
+    ['城北洞 · 본가','本','본가','Seongbuk-dong · family estate','img/mansion.jpg','아버지의 병상과 새어머니, 동생이 있는 집. 이윤은 식사 자리와 병문안으로만 불려 들어간다.','비에 젖은 성북동 언덕 위 석축과 소나무, 계단 끝의 저택, 굳게 닫힌 검은 대문']
+  ];
+  var hl=$('#hlist'), hs=$('#hstage'), himgs=[], hcur=-1, grp={};
+  H.forEach(function(h,i){
+    var g=grp[h[0]]; if(!g){g=document.createElement('div');g.className='hgrp';g.innerHTML='<span class="label"><span>'+esc(h[0])+'</span><span>'+(h[0].indexOf('苑')===0?'美術館까지 10分':'城北洞 언덕')+'</span></span>';hl.appendChild(g);grp[h[0]]=g}
+    var b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed','false');b.setAttribute('data-cur','VIEW');
+    b.innerHTML='<span class="h" aria-hidden="true">'+h[1]+'</span><span class="n">'+esc(h[2])+'</span><span class="e">'+esc(h[3].split(' · ')[0])+'</span>';
+    b.addEventListener('click',function(){hshow(i)}); b.addEventListener('mouseenter',function(){hshow(i)}); g.appendChild(b);
+    var im=new Image(); im.src=h[4]; im.alt=h[6]; im.width=1672; im.height=941; im.decoding='async'; hs.insertBefore(im,hs.firstChild); himgs.push(im);
+  });
+  function hshow(i){ if(i===hcur)return; var prev=hcur; hcur=i;
+    himgs.forEach(function(m,k){ m.classList.remove('was'); if(k===prev)m.classList.add('was'); m.classList.toggle('on',k===i) });
+    $$('button',hl).forEach(function(b,k){b.setAttribute('aria-pressed',k===i)});
+    $('#hnum').textContent=H[i][1]; $('#hWhere').textContent=H[i][0]+' · '+H[i][2]; $('#hEn').textContent=H[i][3];
+    var t=$('#hText'); t.classList.remove('swap'); void t.offsetWidth; t.textContent=H[i][5]; t.classList.add('swap') }
+  hs.addEventListener('click',function(){hshow((hcur+1)%H.length)});
+  hshow(0);
+
+  /* 6 夢 — 달에서 커서로 이어지는 붉은 실 */
+  var DI=scenes.length-1, dream=scenes[DI], path=$('#thPath'), dm=$('#dmoon'), px=innerWidth*.7, py=innerHeight*.6, qx=px, qy=py;
+  dream.addEventListener('mousemove',function(e){px=e.clientX;py=e.clientY});
+  dream.addEventListener('touchmove',function(e){var t=e.touches[0];px=t.clientX;py=t.clientY},{passive:true});
+  (function draw(){
+    if(cur===DI){qx+=(px-qx)*.12;qy+=(py-qy)*.12;var r=dm.getBoundingClientRect(),s=dream.getBoundingClientRect();
+      var ax=r.left+r.width/2-s.left, ay=r.top+r.height/2-s.top, bx=qx-s.left, by=qy-s.top, mx=(ax+bx)/2, my=Math.max(ay,by)+Math.abs(bx-ax)*.22+40;
+      path.setAttribute('d','M'+ax.toFixed(1)+' '+ay.toFixed(1)+' Q'+mx.toFixed(1)+' '+my.toFixed(1)+' '+bx.toFixed(1)+' '+by.toFixed(1));}
+    requestAnimationFrame(draw)})();
+  /* 크랙 링크: 주소를 여기 한 곳에만 넣으면 모든 버튼에 걸린다 */
+  var CRACK_URL='';
+  $$('#crackCta,.crack-link').forEach(function(a){ if(CRACK_URL){a.href=CRACK_URL}else{a.addEventListener('click',function(e){e.preventDefault()})} });
+  /* 버튼에 올리면 붉은 실이 버튼으로 이어진다 */
+  var cta=$('#crackCta'), ctaHover=false;
+  cta.addEventListener('mouseenter',function(){ctaHover=true}); cta.addEventListener('mouseleave',function(){ctaHover=false});
+  setInterval(function(){ if(cur!==DI)return; var r=cta.getBoundingClientRect(); var o=cta.querySelector('.orb').getBoundingClientRect(); if(ctaHover||!matchMedia('(hover:hover)').matches){px=o.left+o.width/2;py=o.top+o.height/2} },60);
+  var dreamTyped=false;
+  function dreamIn(){ if(dreamTyped)return; dreamTyped=true; setTimeout(function(){ if(cur===DI) type($('#reply'),'이번 생에서 이 실을 어디까지 따라갈지는, 당신이 정한다.','reply'); else dreamTyped=false; }, reduce?0:2000); }
+
+  function enter(i){ if(i===1&&li===0){li=1;showLine()} if(i===3&&di===0){di=1;showD()} if(i===2&&!gq.textContent){setTimeout(function(){type(gq,'"'+gl[0][0]+'"','q');gi=1},900)} }
+
+  /* 사운드 */
+  var a=$('#ost'), sb=$('#soundBtn'), sl=$('#soundLabel'), fade;
+  a.volume=0;
+  function ui(on){sb.classList.toggle('playing',on);sb.setAttribute('aria-pressed',on);sl.textContent=on?'Sound on':'Sound off'}
+  function ramp(to,done){clearInterval(fade);fade=setInterval(function(){var up=to>a.volume,v=a.volume+(up?.03:-.06);if((up&&v>=to)||(!up&&v<=to)){v=to;clearInterval(fade);done&&done()}a.volume=Math.max(0,Math.min(1,v))},60)}
+  function play(){var pr=a.play();ui(true);ramp(.7);if(pr&&pr.catch)pr.catch(function(){ui(false)})}
+  function toggle(){if(a.paused)play();else{ramp(0,function(){a.pause()});ui(false)}}
+  sb.addEventListener('click',toggle);
+
+  /* 인트로 */
+  var intro=$('#intro');
+  /* 인트로: 화면 끝에서 붉은 실이 흘러와 달을 지나 버튼에 묶인다 */
+  var ipA=$('#ipA'), ipB=$('#ipB'), iSvg=$('#ithread'), iT0=performance.now(), iAmp=1, iPull=0, iRun=true;
+  function iPath(t,ph){
+    var W=innerWidth,H=innerHeight, m=$('.intro-moon').getBoundingClientRect(), b=$('#enterSound').getBoundingClientRect();
+    var mx=m.left+m.width/2, my=m.top+m.height/2, bx=b.left-14, by=b.top+b.height/2;
+    var w1=Math.sin(t*0.0007+ph)*H*0.05*iAmp, w2=Math.cos(t*0.0006+ph)*H*0.04*iAmp, w3=Math.sin(t*0.0005+ph*2)*H*0.05*iAmp;
+    var ax=-40, ay=H*0.78+w1, dx=W+40, dy=H*0.22-w3;
+    // 왼쪽 아래 → 달 → 버튼 → 오른쪽 위
+    return 'M'+ax+' '+ay+
+      ' C'+(W*0.18)+' '+(ay-H*0.02+w2)+' '+(mx-m.width*1.6)+' '+(my+H*0.12+w1)+' '+mx+' '+(my+m.height*0.62)+
+      ' S'+(bx-W*0.12)+' '+(by+H*0.10+w3)+' '+bx+' '+by+
+      ' S'+(W*0.82)+' '+(dy+H*0.18+w2)+' '+dx+' '+dy;
+  }
+  function iDraw(now){
+    if(!iRun)return;
+    var t=reduce?0:now-iT0, p=reduce?1:Math.min(1,Math.max(0,(t-1100)/3400)), e=1-Math.pow(1-p,3);
+    [[ipA,0],[ipB,1.9]].forEach(function(o,k){
+      o[0].setAttribute('d',iPath(t,o[1]));
+      var L=o[0].getTotalLength(), pe=k?Math.max(0,Math.min(1,(t-1700)/3600)):e; pe=k?1-Math.pow(1-pe,3):pe;
+      o[0].style.strokeDasharray=L; o[0].style.strokeDashoffset=(L*(1-pe)).toFixed(1);
+    });
+    requestAnimationFrame(iDraw);
+  }
+  requestAnimationFrame(iDraw);
+  function ithreadPull(){ iSvg.classList.add('pull'); var a0=iAmp, t0=performance.now(); (function k(n){var q=Math.min(1,(n-t0)/700);iAmp=a0*(1-q);if(q<1)requestAnimationFrame(k)})(t0); setTimeout(function(){iRun=false},1600) }
+  function leave(snd){ithreadPull();if(snd)play();intro.classList.add('gone');setTimeout(function(){intro.hidden=true},1500);setTimeout(function(){$('.go').focus({preventScroll:true})},300)}
+  $('#enterSound').addEventListener('click',function(){leave(true)});
+  $('#enterMute').addEventListener('click',function(){leave(false)});
+  setTimeout(function(){try{$('#enterSound').focus({preventScroll:true})}catch(_){}} ,60);
+
+  /* 붉은 실자락: 메인 빼고 모든 장 뒤에서 흐른다 */
+  var silk=document.createElement('canvas'); silk.className='silk'; silk.setAttribute('aria-hidden','true');
+  var sg=silk.getContext('2d'), SW=0, SH=0, DPR=Math.min(2,window.devicePixelRatio||1), smx=-1, smy=-1, T0=performance.now();
+  // 두 가닥이 같은 자리에서 엇갈려 일렁이며 서로를 가로지른다
+  var strands=[{y:.52,a:.13,f:.75,s:.00006,w:1.6,al:1,ph:0},{y:.52,a:.13,f:.75,s:.00006,w:1.2,al:1,ph:Math.PI}];
+  function silkSize(){var r=silk.getBoundingClientRect();SW=r.width;SH=r.height;silk.width=Math.round(SW*DPR);silk.height=Math.round(SH*DPR);sg.setTransform(DPR,0,0,DPR,0,0)}
+  function silkTo(i){
+    if(i===0){silk.classList.remove('on');return}
+    var sc=scenes[i]; silk.classList.remove('on');
+    setTimeout(function(){if(cur!==i)return; sc.insertBefore(silk,sc.querySelector('.in')); silkSize(); silk.classList.add('on')}, reduce?0:120);
+  }
+  addEventListener('resize',function(){if(silk.parentNode)silkSize()});
+  addEventListener('mousemove',function(e){if(!silk.parentNode)return;var r=silk.getBoundingClientRect();smx=e.clientX-r.left;smy=e.clientY-r.top});
+  function drawSilk(now){
+    if(silk.parentNode&&cur!==0&&SW){
+      var t=reduce?0:(now-T0), night=scenes[cur].dataset.theme==='night';
+      sg.clearRect(0,0,SW,SH);
+      var rgb=night?'196,22,30':'150,14,20', steps=140;
+      var fade=sg.createLinearGradient(0,0,SW,0);
+      strands.forEach(function(s,k){
+        // 비단 리본: 가는 실 여러 가닥이 꼬이며 펼쳐졌다 모인다
+        var fib=1, spread=0;
+        var g=sg.createLinearGradient(0,0,SW,0), al=s.al*(night?1.15:1);
+        g.addColorStop(0,'rgba('+rgb+','+al+')'); g.addColorStop(1,'rgba('+rgb+','+al+')');
+        sg.strokeStyle=g; sg.lineCap='round';
+        sg.shadowColor='transparent'; sg.shadowBlur=0;
+        for(var f=0;f<fib;f++){
+          var off=(f/(fib-1||1)-.5)*2;
+          sg.beginPath();
+          for(var j=0;j<=steps;j++){
+            var u=j/steps, x=-40+u*(SW+80);
+            var base=SH*s.y + SH*s.a*Math.sin(u*Math.PI*2*s.f + t*s.s*6 + s.ph) + SH*s.a*.45*Math.sin(u*Math.PI*5.3*s.f - t*s.s*9 + s.ph*1.7);
+            var twist=Math.sin(u*Math.PI*3.2 + t*s.s*14 + s.ph);
+            var y=base + off*spread*twist;
+            if(smx>=0){var dx=x-smx, dy=base-smy, d2=dx*dx+dy*dy, inf=Math.exp(-d2/(2*150*150)); y+=(smy-base)*inf*.4 + off*inf*22;}
+            j?sg.lineTo(x,y):sg.moveTo(x,y);
+          }
+          sg.globalAlpha=f===Math.floor(fib/2)?1:.55;
+          sg.lineWidth=f===Math.floor(fib/2)?s.w:s.w*.45;
+          sg.stroke();
+        }
+        sg.globalAlpha=1; sg.shadowBlur=0;
+      });
+    }
+    requestAnimationFrame(drawSilk);
+  }
+  requestAnimationFrame(drawSilk);
+
+  /* 유저 프로필 복사 */
+  var PROF=['[유저 프로필 · 이윤 : 홍연]','이름: ','나이: 20대 중후반 ( )','성별: 여자','전생: 장녹수 (연산군의 후궁, 숙용)','직업: 보컬과 졸업, 보컬 개인 레슨 트레이너','배경: 집안이 어렵다. 기댈 데 없이 혼자 버텨왔다.','외모: 예쁘다. 이윤이 한 번 힐끗 볼 정도로. ( )','꿈: 어릴 때부터 이윤과 같은 꿈을 꿔왔다. 전생의 기억이다.','트라우마: 군중 속에 묻히면 몸이 먼저 굳는다. 돌을 맞던 기억.','성격: ','말투: ','사는 곳: ','이윤을 처음 봤을 때: '].join('\n');
+  $('#copyProf').addEventListener('click',function(){
+    var msg=$('#copied');
+    function ok(){msg.textContent='복사했다. 크랙 페르소나에 붙여 넣고 빈칸만 채우면 된다.'}
+    function fail(){var ta=document.createElement('textarea');ta.value=PROF;ta.style.cssText='position:fixed;left:-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok()}catch(_){msg.textContent='복사가 막혀 있다. 아래 칸에서 직접 드래그해서 복사해줘.'}ta.remove()}
+    try{navigator.clipboard.writeText(PROF).then(ok,fail)}catch(_){fail()}
+  });
+
+  /* 햇빛 아래 먼지: 천천히 떠다니다 빛을 지날 때 반짝인다 */
+  (function(){
+    var cv=$('#dust'), g=cv.getContext('2d'), W=0,H=0,D=Math.min(2,devicePixelRatio||1), P=[], mx=-999,my=-999;
+    function size(){W=innerWidth;H=innerHeight;cv.width=W*D;cv.height=H*D;g.setTransform(D,0,0,D,0,0)}
+    size(); addEventListener('resize',size);
+    var N=matchMedia('(max-width:899px)').matches?46:120;
+    function mk(init){var big=Math.random()<.12;return {x:Math.random()*W,y:init?Math.random()*H:H+10,r:big?2.6+Math.random()*3:.7+Math.random()*1.6,big:big,
+      vx:(Math.random()-.5)*.08,vy:-(.03+Math.random()*.12),ph:Math.random()*6.28,sp:.4+Math.random()*1.2,a:.25+Math.random()*.6}}
+    for(var i=0;i<N;i++)P.push(mk(true));
+    addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+    var last=performance.now();
+    function frame(now){
+      var dt=Math.min(50,now-last); last=now;
+      g.clearRect(0,0,W,H);
+      var night=document.body.classList.contains('dark'), t=now*.001;
+      // 빛줄기: 화면 왼쪽 위에서 비스듬히 내려오는 띠 안에서 더 밝게
+      for(var i=0;i<P.length;i++){
+        var p=P[i];
+        if(!reduce){
+          p.ph+=dt*.0006*p.sp;
+          p.x+=p.vx*dt*.06+Math.sin(p.ph)*.12; p.y+=p.vy*dt*.06+Math.cos(p.ph*.7)*.06;
+          var dx=p.x-mx, dy=p.y-my, d2=dx*dx+dy*dy;
+          if(d2<9000){var f=(9000-d2)/9000*.6; p.x+=dx/Math.sqrt(d2+1)*f; p.y+=dy/Math.sqrt(d2+1)*f}
+          if(p.y<-12||p.x<-20||p.x>W+20){P[i]=mk(false);continue}
+        }
+        var beam=Math.max(0,1-Math.abs((p.x*.55+p.y)-(W*.55+H)*.42)/(H*.45));
+        var tw=.55+.45*Math.sin(t*1.6*p.sp+p.ph*3);
+        var al=Math.min(1,p.a*(.35+.85*beam)*tw*(p.big?.45:1)*(night?1.3:1));
+        var col=night?'255,236,214':'255,250,240';
+        var grd=g.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*(p.big?2.2:2.6));
+        grd.addColorStop(0,'rgba('+col+','+al.toFixed(3)+')'); grd.addColorStop(1,'rgba('+col+',0)');
+        g.fillStyle=grd; g.beginPath(); g.arc(p.x,p.y,p.r*(p.big?2.2:2.6),0,6.283); g.fill();
+        if(!night){g.fillStyle='rgba(176,140,92,'+(al*(p.big?.18:.5)).toFixed(3)+')';g.beginPath();g.arc(p.x,p.y,p.r*(p.big?.9:.6),0,6.283);g.fill()}
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+
+  sync();
+})();
+</script>
+
+</body>
+</html>

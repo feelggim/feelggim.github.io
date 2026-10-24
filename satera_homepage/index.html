@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>사테라 : 발푸르기스의 밤</title>
 <meta name="description" content="사탕을 건넨 밤, 얼굴 없는 마녀의 부인이 되었다. 크랙 할로윈 이벤트 스토리 · GL · 코즈믹 호러">
 <meta property="og:title" content="사테라 : 발푸르기스의 밤">
@@ -599,6 +601,14 @@ h2,.line,.sfx{animation:ink 7s infinite}
   #eyes{bottom:80%}
   .eye{--w:34px!important}
 }
+@media (max-width:700px){
+  .scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .inner{padding-inline:26px}
+  .card{aspect-ratio:2/2.7}
+  .cover .q{white-space:normal;line-height:1.7}
+  .cover .q::before,.cover .q::after{display:none}
+  .room[data-name="부인"] .inner{padding-top:64px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
 </style>
 
@@ -1045,16 +1055,16 @@ async function go(i,e){if(i<0||i>=rooms.length||i===curI||lock)return;lock=true;
   flap(380);const lp=labyrinth();await sleep(200);
   rooms[curI].classList.remove('on');curI=i;rooms[curI].classList.add('on');fitRoom(rooms[curI]);markNav();onEnter();parallax();petals(7);
   curtainOpen(250);finale();await lp;lock=false}
-function atEdge(d){return true}
+function atEdge(d){if(innerWidth>=700)return true;const s=rooms[curI]&&rooms[curI].querySelector('.scroll');if(!s||s.scrollHeight<=s.clientHeight+2)return true;return d>0?s.scrollTop+s.clientHeight>=s.scrollHeight-2:s.scrollTop<=2}
 /* fit content to viewport instead of scrolling */
-function fitRoom(r){const s=r&&r.querySelector('.scroll');if(!s)return;s.style.zoom=1;s.style.alignSelf='';const H=r.clientHeight;const need=s.scrollHeight;if(need>H){const z=Math.max(innerWidth<700?.6:.72,H/need);s.style.zoom=z.toFixed(3);if(need*z>H+2)s.style.alignSelf='flex-start'}}
+function fitRoom(r){const s=r&&r.querySelector('.scroll');if(!s)return;s.style.zoom=1;s.style.alignSelf='';if(innerWidth<700){s.scrollTop=0;if(s.scrollHeight>r.clientHeight+2)s.style.alignSelf='flex-start';return}const H=r.clientHeight;const need=s.scrollHeight;if(need>H){const z=Math.max(innerWidth<700?.6:.72,H/need);s.style.zoom=z.toFixed(3);if(need*z>H+2)s.style.alignSelf='flex-start'}}
 function fitAll(){rooms.forEach(r=>{const v=r.style.visibility;r.style.visibility='visible';fitRoom(r);r.style.visibility=v})}
 addEventListener('resize',()=>{clearTimeout(window._ft);window._ft=setTimeout(fitAll,150)});setTimeout(fitAll,300);document.fonts&&document.fonts.ready.then(fitAll);
 let acc=0,accT=0;
 addEventListener('wheel',e=>{if(!entered)return;const d=Math.sign(e.deltaY);if(lock){e.preventDefault();return}if(!atEdge(d))return;e.preventDefault();
   const now=performance.now();if(now-accT>300)acc=0;accT=now;acc+=e.deltaY;if(Math.abs(acc)>50){go(curI+(acc>0?1:-1));acc=0}},{passive:false});
-let ty=null;addEventListener('touchstart',e=>ty=e.touches[0].clientY,{passive:true});
-addEventListener('touchend',e=>{if(!entered||ty==null)return;const dy=ty-e.changedTouches[0].clientY;ty=null;if(Math.abs(dy)<70)return;const d=Math.sign(dy);if(atEdge(d))go(curI+d)});
+let ty=null,tEdge=[true,true];addEventListener('touchstart',e=>{ty=e.touches[0].clientY;tEdge=[atEdge(-1),atEdge(1)]},{passive:true});
+addEventListener('touchend',e=>{if(!entered||ty==null)return;const dy=ty-e.changedTouches[0].clientY;ty=null;if(Math.abs(dy)<70)return;const d=Math.sign(dy);if(tEdge[d>0?1:0]&&atEdge(d))go(curI+d)});
 addEventListener('keydown',e=>{if(!entered||e.target.closest('input,textarea'))return;if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();go(curI+1)}if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(curI-1)}});
 
 /* ── intro ── */
@@ -1114,10 +1124,10 @@ function spawnFams(){const C=$('#fams');if(!C||C.childElementCount)return;const 
   if(!famRun){famRun=true;famTick()}}
 let famMode='사테라';
 function famLayout(rn){famMode=rn;famList.forEach(o=>{if(!o.orig)o.orig={edge:o.edge,by:o.by,hx:o.hx,vx:o.vx};
-  if(rn==='부인'){const m=innerWidth<900;o.edge='w';o.lane=Math.random()<.5?[54,63]:[83,97];o.x=m?rnd(5,95):rnd(o.lane[0],o.lane[1]);o.by=m?rnd(55,95):rnd(14,92);o.y=o.by;o.vx=(Math.random()<.5?-1:1)*rnd(.08,.3);o.vy=rnd(-.15,.15);o.flip=o.vx<0?-1:1}
+  if(rn==='부인'){const m=innerWidth<900;o.edge='w';o.lane=Math.random()<.5?[54,63]:[83,97];o.x=m?rnd(5,95):rnd(o.lane[0],o.lane[1]);o.by=m?rnd(91,97):rnd(14,92);o.y=o.by;o.vx=(Math.random()<.5?-1:1)*rnd(.08,.3);o.vy=rnd(-.15,.15);o.flip=o.vx<0?-1:1}
   else{Object.assign(o,o.orig);o.x=o.edge==='b'?Math.random()*100:o.hx;o.y=o.by;o.flip=o.vx<0?-1:1}})}
 async function famTick(){while(true){await sleep(110);const room=rooms[curI];const rn=room&&room.dataset.name;const on=(rn==='사테라'||rn==='부인')&&entered;if(on&&famMode!==rn)famLayout(rn);$('#fams').classList.toggle('on',!!on);$('#fams').classList.toggle('w',rn==='부인');if(!on||document.hidden)continue;
-  famList.forEach(o=>{o.f++;o.ph+=.11;if(o.edge==='w'){const m=innerWidth<900,lo=m?3:o.lane[0],hi=m?97:o.lane[1];o.x+=o.vx+(Math.random()-.5)*.25;o.by+=o.vy;if(o.x<lo||o.x>hi){o.vx=-o.vx;o.flip=-o.flip;o.x=Math.max(lo,Math.min(hi,o.x))}if(o.by<(m?50:12)||o.by>94)o.vy=-o.vy;if(Math.random()<.02)o.vy=rnd(-.2,.2);o.y=o.by+(o.f%2?-.4:.4)}else if(o.edge==='b'){o.x+=o.vx;if(o.x>104)o.x=-4;if(o.x<-4)o.x=104;o.y+=(o.by-o.y)*.3+(o.f%2?-.5:.5)*Math.random()}else{o.x=o.hx+Math.sin(o.ph*1.3)*1.2;o.y=o.by+Math.cos(o.ph)*2}if(Math.random()<.004&&o.edge==='b'){o.vx=-o.vx;o.flip=-o.flip}
+  famList.forEach(o=>{o.f++;o.ph+=.11;if(o.edge==='w'){const m=innerWidth<900,lo=m?3:o.lane[0],hi=m?97:o.lane[1];o.x+=o.vx+(Math.random()-.5)*.25;o.by+=o.vy;if(o.x<lo||o.x>hi){o.vx=-o.vx;o.flip=-o.flip;o.x=Math.max(lo,Math.min(hi,o.x))}if(o.by<(m?89:12)||o.by>(m?97:94))o.vy=-o.vy;if(Math.random()<.02)o.vy=rnd(-.2,.2);o.y=o.by+(o.f%2?-.4:.4)}else if(o.edge==='b'){o.x+=o.vx;if(o.x>104)o.x=-4;if(o.x<-4)o.x=104;o.y+=(o.by-o.y)*.3+(o.f%2?-.5:.5)*Math.random()}else{o.x=o.hx+Math.sin(o.ph*1.3)*1.2;o.y=o.by+Math.cos(o.ph)*2}if(Math.random()<.004&&o.edge==='b'){o.vx=-o.vx;o.flip=-o.flip}
     const x=o.cv.getContext('2d');x.clearRect(0,0,o.cv.width,o.cv.height);o.K.draw(x,o.f,o.cv.width,o.cv.height);
     const sc=o.edge==='w'?o.s*.8:o.s;o.el.style.transform=`translate(${o.x*innerWidth/100-o.cv.width/2}px,${o.y*innerHeight/100-o.cv.height/2}px) scale(${sc*o.flip},${sc}) rotate(${Math.sin(o.ph*2)*6|0}deg)`})}}
 
@@ -1388,7 +1398,7 @@ function makeVine(pts,w){// pts: control polyline along edge; returns sampled pa
   for(let i=10;i<P.length-6;i+=Math.floor(rnd(18,30))){const [x0,y0]=P[i-1],[x1,y1]=P[i+1];const dx=x1-x0,dy=y1-y0,l=Math.hypot(dx,dy)||1;const side=Math.random()<.5?1:-1;tend.push({i,ang:Math.atan2(dx/l*side,-dy/l*side),r:rnd(10,22),turns:rnd(1.2,2.2),dir:side})}
   return {P,thorns,tend,w}}
 function layoutVines(){const W=innerWidth,H=innerHeight;vc.width=W*devicePixelRatio;vc.height=H*devicePixelRatio;vc.style.width=W+'px';vc.style.height=H+'px';vx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
-  const m=W<700?.6:1.35,e=30*m;
+  const m=W<700?.42:1.35,e=30*m;
   VINES=[makeVine([[-20,H*.2],[e,H*.12],[e*1.3,-20]],7*m),makeVine([[-20,H*.85],[e*1.1,H*.6],[e*.8,H*.35],[e*1.4,H*.1]],6*m),
          makeVine([[W+20,H*.9],[W-e,H*.7],[W-e*1.2,H*.45]],6*m),makeVine([[W+20,H*.12],[W-e*1.4,H*.06],[W*.82,-20]],5*m),
          makeVine([[-20,H+20],[W*.12,H-e],[W*.3,H-e*.6]],6*m),makeVine([[W+20,H+20],[W*.86,H-e*1.1],[W*.66,H-e*.5]],5*m),
@@ -1404,8 +1414,8 @@ function drawVines(f){vx.clearRect(0,0,innerWidth,innerHeight);
 function growVines(){if(RM){grow=1;drawVines(1);return}cancelAnimationFrame(growT);grow=0;const t0=performance.now();(function g(t){grow=Math.min((t-t0)/2600,1);drawVines(1-Math.pow(1-grow,3));if(grow<1)growT=requestAnimationFrame(g);else $$('.rose').forEach((r,i)=>setTimeout(()=>r.classList.add('on'),i*140))})(t0)}
 const ROSEPLAN=[// [vineIndex, along 0..1, roseIndex, size, rotation]
  [0,.55,0,128,-14],[0,.92,4,62,10],[1,.35,3,96,8],[1,.78,2,84,-20],[2,.5,1,112,12],[2,.95,6,70,-8],[3,.45,5,92,18],[4,.6,4,58,-30],[5,.55,0,100,-6],[6,.7,6,66,22]];
-function placeRoses(){const L=$('#roses');L.innerHTML='';const m=innerWidth<700?.6:Math.min(1.6,innerWidth/1100);
-  ROSEPLAN.forEach(([vi,al,ri,s,r])=>{const v=VINES[vi];if(!v)return;const p=v.P[Math.floor((v.P.length-1)*al)];const im=document.createElement('img');im.className='rose'+(grow>=1?' on':'');im.src=IMG.roses[ri%IMG.roses.length];im.alt='';
+function placeRoses(){const L=$('#roses');L.innerHTML='';const ph=innerWidth<700,m=ph?.42:Math.min(1.6,innerWidth/1100);
+  ROSEPLAN.forEach(([vi,al,ri,s,r],k)=>{const v=VINES[vi];if(!v)return;if(ph&&[2,3,4].includes(k))return;const p=v.P[Math.floor((v.P.length-1)*al)];const im=document.createElement('img');im.className='rose'+(grow>=1?' on':'');im.src=IMG.roses[ri%IMG.roses.length];im.alt='';
     im.style.left=p[0]+'px';im.style.top=p[1]+'px';im.style.setProperty('--s',(s*m)+'px');im.style.setProperty('--r',r+'deg');
     im.addEventListener('pointerenter',()=>{im.style.setProperty('--tilt',(Math.random()<.5?-1:1)*8+'deg');if(Math.random()<.6)roseVoice(p[0],p[1])});L.appendChild(im)})}
 function roseVoice(x,y){const V=['……아름, 다우신……','……우리의……주인, 께서……','……부인을……데려, 오셨……다……','……찬미, 하라……','……사테라……님……'];const d=document.createElement('div');d.className='rosevoice';d.textContent=V[Math.floor(Math.random()*V.length)];

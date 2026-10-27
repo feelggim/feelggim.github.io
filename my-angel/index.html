@@ -16,6 +16,7 @@
 
 
 
+
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=Black+Han+Sans&family=Bodoni+Moda:ital,wght@1,600&family=DM+Mono&family=Dela+Gothic+One&family=Potta+One&family=Gaegu:wght@700&family=Hachi+Maru+Pop&family=IBM+Plex+Sans+KR:wght@400;600&family=Jua&family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700&family=Zen+Kaku+Gothic+Antique:wght@500;700&family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Zen+Old+Mincho&display=swap">
 <style>
@@ -330,6 +331,7 @@ body.l-ja .narr{border-radius:2px!important}
 .zoom .b{opacity:1;scale:1;font-size:clamp(14px,2.6vh,22px)}
 .zoom .sfx{font-size:clamp(40px,10vh,96px)}
 .zoom .tag{display:none}
+@media (max-width:999px){body .sync:not(.r){display:flex!important}body .sync.r{display:none!important}}
 .pf-info.tight{gap:6px!important;padding:14px 20px!important}.pf-info.tight .pf-quote{font-size:15px!important;line-height:1.5!important}.pf-info.tight .pf-intro{font-size:14px!important;line-height:1.55!important}.pf-info.tight .pf-facts{gap:4px 14px!important;padding-top:8px!important;margin-top:2px!important}.pf-info.tight .pf-facts dd{font-size:12.5px!important}.pf-info.tight .pf-name{font-size:clamp(24px,4.2vh,40px)!important}.pf-info.tight .pf-meta span{font-size:11.5px!important;padding:2px 8px!important}
 @media (min-width:761px){.pf-info{overflow:hidden!important}}
 .pf-info,.win-body,.win-tabs,.prof,.ed .grid{scrollbar-width:none;-ms-overflow-style:none}
@@ -778,7 +780,7 @@ const LYS=[[16.88, 19.6, "何も持たない私を", "나니모 모타나이 와
   btn.onclick=e=>{e.stopPropagation();if(window.__actx)window.__actx.resume();if(!started){start();return}if(a.paused){a.play();document.body.classList.add('playing')}else{a.pause()}setBtn()};
   ['wheel','keydown','touchend','click'].forEach(ev=>addEventListener(ev,()=>start(),{once:false,passive:true}));
   a.addEventListener('pause',setBtn);a.addEventListener('play',setBtn);
-  function spawn(i){const [s,e,j,p,k]=LYS[i];const side=document.body.classList.contains('pf')?1:i%2;const box=side?R:L;
+  function spawn(i){const [s,e,j,p,k]=LYS[i];const B=document.body.classList,nar=B.contains('narrow')||innerWidth<1000;const side=nar?0:(B.contains('pf')?1:i%2);const box=side?R:L;
     const d=document.createElement('div');d.className='sl now enter';d.innerHTML=`<span class="j" lang="ja">${esc(j)}</span><span class="p">${esc(p)}</span><span class="k">${esc(k)}</span>`;
     box.appendChild(d);requestAnimationFrame(()=>requestAnimationFrame(()=>d.classList.remove('enter')));
     for(const q of [L,R])for(const o of q.querySelectorAll('.sl.now'))if(o!==d){o.classList.remove('now');o.classList.add('old')}

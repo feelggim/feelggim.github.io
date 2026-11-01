@@ -567,7 +567,7 @@ body.entering #s-title .bg{animation:flyin 3s cubic-bezier(.12,.86,.22,1) both}
 .roll{position:absolute;left:0;right:0;top:calc(var(--band) + 40px);bottom:calc(var(--band) + 110px);overflow:hidden;cursor:ns-resize;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-mask-image:linear-gradient(180deg,transparent,#000 14%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 14%,#000 82%,transparent)}
 .rin{position:absolute;left:50%;top:100%;width:min(640px,calc(100vw - 2 * var(--safe-x) - 40px));translate:-50% 0;text-align:center}
 #s-cont.on .rin{animation:roll 95s linear forwards}
-.roll::after{content:'누르고 있으면 빨리 · 올려두면 멈춤';position:absolute;right:calc(var(--safe-x) + 14px);bottom:6px;font-size:11.5px;letter-spacing:.1em;color:var(--ash);opacity:0;transition:opacity .4s}
+.roll::after{content:'누르고 있으면 빨리 · 글자에 올려두면 멈춤';position:absolute;right:calc(var(--safe-x) + 14px);bottom:6px;font-size:11.5px;letter-spacing:.1em;color:var(--ash);opacity:0;transition:opacity .4s}
 .roll.hov::after,.roll.held::after{opacity:.75}
 .roll.held::after{content:'빨리 감는 중'}
 @keyframes roll{to{transform:translateY(var(--end,calc(-100% - 70vh)))}}
@@ -592,6 +592,7 @@ body.entering #s-title .bg{animation:flyin 3s cubic-bezier(.12,.86,.22,1) both}
 .go2.lock em{position:absolute;right:4%;top:50%;translate:0 -50%;rotate:-12deg;font-style:normal;font-family:var(--han);font-size:clamp(15px,1.5vw,20px);line-height:1;color:#ffd9d9;padding:.45em .4em;border:2px solid #c8243b;background:rgba(150,16,32,.82);letter-spacing:.1em;writing-mode:vertical-rl;box-shadow:0 0 0 2px rgba(150,16,32,.4),0 4px 12px rgba(0,0,0,.6)}
 .hgo{display:inline-flex;align-items:center;gap:12px;padding:9px 18px;border:1px solid rgba(220,176,98,.45);background:rgba(10,4,4,.75);font-family:var(--display);font-size:14px;letter-spacing:.06em;color:#e6d6bd;cursor:default;text-decoration:none}.hgo small{font-size:11px;letter-spacing:.2em;color:var(--gold)}.hgo i{white-space:nowrap;font-style:normal;font-family:var(--han);font-size:11px;letter-spacing:.2em;color:#ffd9d9;background:rgba(150,16,32,.82);border:1px solid #c8243b;padding:2px 6px}
 @media (max-width:720px){.hgo .hs{display:none}.seal .sm{font-size:12px;padding:0 calc(var(--pw) + 6px)}.seal .sm br{display:none}.hgo{font-size:12px;gap:8px;padding:8px 12px;max-width:calc(100vw - 2*var(--pw) - 30px);text-align:left}}
+.hgo.open{cursor:pointer;border-color:rgba(220,176,98,.75);transition:background .3s,box-shadow .3s}.hgo.open:hover{background:rgba(120,10,24,.45);box-shadow:0 0 22px rgba(200,36,59,.45)}.hgo.open i{background:rgba(200,36,59,.9)}
 .seal{text-align:center;margin-bottom:2px}.seal .sk{margin:0;font-family:var(--display);font-size:clamp(18px,1.7vw,24px);letter-spacing:.3em;color:var(--gold-hi);text-shadow:0 2px 10px #000}.seal .sm{margin:8px 0 0;font-size:14px;line-height:1.8;color:#e6d6bd;text-shadow:0 1px 8px #000}
 .go2:hover{filter:brightness(1.2) drop-shadow(0 0 30px rgba(200,36,59,.7));transform:scale(1.03)}
 .go2 span{font-family:var(--display);font-size:clamp(20px,2.1vw,28px);letter-spacing:.12em;line-height:1;transform:translateY(-4%);background:linear-gradient(180deg,#fff7dc 0%,#f6dc96 28%,#c99440 50%,#f9e6b0 66%,#b07b2c 86%,#e8c477 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(42,18,8,.95))}
@@ -730,6 +731,77 @@ body.entering #s-title .bg{animation:flyin 3s cubic-bezier(.12,.86,.22,1) both}
   .exw{grid-template-columns:1fr;left:16px;right:16px;top:calc(var(--band) + 150px);bottom:calc(var(--band) + 12px);overflow:auto}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}}
+
+
+/* martial tree */
+.mgb{align-self:flex-start;margin-top:4px;background:rgba(10,4,4,.7);border:1px solid rgba(var(--fc),.6);color:rgb(var(--fc));font-family:var(--display);font-size:14px;letter-spacing:.2em;padding:8px 18px;cursor:pointer;transition:background .3s,box-shadow .3s}
+.mgb:hover{background:rgba(var(--fc),.12);box-shadow:0 0 18px rgba(var(--fc),.35)}
+#mgm{position:fixed;inset:0;z-index:57;display:grid;place-items:center;background:rgba(4,2,2,.8);backdrop-filter:blur(6px);opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s .45s}
+#mgm.on{opacity:1;visibility:visible;transition:opacity .45s}
+.mgw{position:relative;width:min(1040px,calc(100vw - 2 * var(--safe-x)));max-height:calc(100vh - 2 * var(--band) - 120px);overflow:auto;border:1px solid rgba(220,176,98,.75);box-shadow:inset 0 0 0 4px rgba(8,3,3,.95),0 40px 100px rgba(0,0,0,.85);background:radial-gradient(90% 60% at 50% 0%,rgba(var(--fc),.12),transparent 60%),#0b0405;padding:34px 40px 30px;transform:scale(.95);transition:transform .6s cubic-bezier(.2,.8,.2,1);-webkit-user-select:none;user-select:none;scrollbar-width:thin;scrollbar-color:var(--gold-dim) transparent}
+#mgm.on .mgw{transform:none}
+.mgw .npx{position:sticky;float:right;top:0;right:0;margin:-14px -20px 0 0}
+.mgh{text-align:center;margin-bottom:22px}
+.mgh .k{margin:0;font-family:var(--han);font-size:14px;letter-spacing:.6em;color:rgb(var(--fc))}
+.mgh h4{margin:6px 0 0;font-family:var(--display);font-weight:400;font-size:clamp(30px,3vw,44px);color:var(--gold-hi);letter-spacing:.08em}
+.mgh p{margin:6px 0 0;font-size:14px;color:var(--ash);letter-spacing:.06em}
+.tree{position:relative;display:flex;flex-direction:column;align-items:center}
+.root{position:relative;text-align:center;padding:14px 30px;border:1px solid rgba(var(--fc),.7);background:rgba(var(--fc),.08);box-shadow:0 0 30px rgba(var(--fc),.18)}
+.root b{display:block;font-family:var(--display);font-weight:400;font-size:24px;color:var(--gold-hi);letter-spacing:.1em}
+.root span{font-family:var(--han);font-size:13px;letter-spacing:.4em;color:rgb(var(--fc))}
+.root em{display:block;font-style:normal;font-size:13px;color:var(--ash);margin-top:2px}
+.brs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%;margin-top:44px}
+.brs::before{content:"";position:absolute;top:-22px;left:16.66%;right:16.66%;height:1px;background:rgba(var(--fc),.6)}
+.brs::after{content:"";position:absolute;top:-44px;left:50%;width:1px;height:22px;background:rgba(var(--fc),.6)}
+.nd{position:relative;padding:16px 16px 14px;border:1px solid rgba(220,176,98,.35);background:rgba(10,4,4,.75)}
+.nd::before{content:"";position:absolute;top:-23px;left:50%;width:1px;height:22px;background:rgba(var(--fc),.6)}
+.nd::after{content:"";position:absolute;top:-4px;left:50%;width:7px;height:7px;margin-left:-3.5px;background:rgb(var(--fc));transform:rotate(45deg)}
+.nd b{display:block;font-family:var(--display);font-weight:400;font-size:19px;color:var(--gold-hi);letter-spacing:.08em}
+.nd small{display:block;font-size:12.5px;color:rgb(var(--fc));letter-spacing:.08em;margin:2px 0 8px}
+.nd p{margin:0;font-size:14px;line-height:1.75;color:#e9dcc6}
+.nd.ex{border-color:rgba(var(--fc),.8);box-shadow:inset 0 0 0 1px rgba(var(--fc),.2)}
+.nd.ex b::after{content:"전용";margin-left:8px;font-size:11px;padding:1px 6px;border:1px solid rgba(var(--fc),.7);color:rgb(var(--fc));letter-spacing:.1em;vertical-align:3px}
+.mgf{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.mgf div{border-top:1px solid rgba(220,176,98,.3);padding-top:10px}
+.mgf h5{margin:0 0 4px;font-family:var(--display);font-weight:400;font-size:14px;letter-spacing:.24em;color:var(--gold)}
+.mgf p{margin:0;font-size:14px;color:#e9dcc6;line-height:1.7}
+.sub{margin-top:30px;padding-top:24px;border-top:1px solid rgba(220,176,98,.25)}
+.sub .mgh{margin-bottom:16px}.sub .mgh h4{font-size:clamp(24px,2.3vw,32px)}
+.chain{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:c}
+.chain .nd{text-align:center;padding:14px 10px}
+.chain .nd::before{display:none}
+.chain .nd:not(:last-child) i{position:absolute;right:-9px;top:50%;width:8px;height:1px;background:rgba(var(--fc),.6)}
+.chain .nd b{font-size:17px}.chain .nd p{font-size:13px}
+.chain .nd .lv{display:block;font-family:var(--han);font-size:12px;color:rgb(var(--fc));letter-spacing:.2em;margin-bottom:4px}
+.chain .nd.kin{border-color:rgba(200,36,59,.8);background:rgba(120,10,24,.25)}
+@media (max-width:720px){.mgw{padding:26px 16px 20px;width:calc(100vw - 24px);max-height:calc(100vh - 2 * var(--band) - 90px)}.brs{grid-template-columns:1fr;gap:12px;margin-top:22px}.brs::before,.brs::after,.nd::before{display:none}.nd::after{top:-4px}.mgf{grid-template-columns:1fr}.chain{grid-template-columns:1fr}.chain .nd i{display:none}.finfo .mgb{font-size:12.5px;padding:7px 14px}}
+/* supporting cast */
+.sup{display:flex;justify-content:center;gap:28px;margin-top:3vh;flex-wrap:wrap}
+.sup .g{display:flex;flex-direction:column;align-items:center;gap:8px}
+.sup .gk{font-family:var(--han);font-size:12px;letter-spacing:.5em;padding-left:.5em;color:#d9b878}
+.sup .gr{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.sb{position:relative;min-width:92px;padding:7px 12px 6px;border:1px solid rgba(220,176,98,.35);background:rgba(10,4,4,.72);text-align:center;cursor:default}
+.sb b{display:block;font-family:var(--display);font-weight:400;font-size:16px;color:var(--gold-hi);letter-spacing:.08em}
+.sb small{display:block;font-size:11px;color:var(--ash);letter-spacing:.04em;white-space:nowrap}
+.sb .tip{position:absolute;left:50%;bottom:calc(100% + 10px);width:240px;translate:-50% 6px;padding:10px 12px;background:#0b0405;border:1px solid rgba(220,176,98,.6);font-size:13px;line-height:1.65;color:#e9dcc6;text-align:left;opacity:0;visibility:hidden;transition:all .3s;z-index:5;box-shadow:0 12px 30px rgba(0,0,0,.7)}
+.sb:hover .tip,.sb.on .tip{opacity:1;visibility:visible;translate:-50% 0}
+@media (max-width:720px){.sup{gap:12px;margin-top:10px}.sb{min-width:74px;padding:5px 8px}.sb b{font-size:14px}.sb small{font-size:10px}.sb .tip{width:200px}}
+
+.who .pf{margin:8px 0 0;font-size:14px;letter-spacing:.2em;color:var(--ash);text-shadow:0 1px 6px #000}
+.crow{display:flex!important;gap:clamp(18px,2.4vw,40px)!important;justify-content:center;align-items:flex-end}
+.cgp{display:flex;flex-direction:column;align-items:center;gap:10px}
+.cgk{margin:0;display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:15px;letter-spacing:.3em;color:var(--gold)}
+.cgk span{font-family:var(--han);font-size:12px;letter-spacing:.4em;color:#d9b878}
+.cgk::before,.cgk::after{content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}.cgk::after{transform:scaleX(-1)}
+.cgr{display:flex;gap:clamp(8px,1vw,14px)}
+.cgr .cc{width:clamp(96px,9.4vw,150px);flex:none}
+@media (max-width:720px){.crow{flex-direction:column;align-items:center;gap:12px!important}.cgr{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.cgp:nth-child(2) .cgr{grid-template-columns:repeat(3,1fr)}.cgr .cc{width:21vw}.cgk{font-size:13px}.who .pf{font-size:12px;margin-top:4px}}
+@media (max-width:720px){.sup{flex-direction:column;align-items:center;gap:6px;margin-top:8px}.sup .g{flex-direction:row;gap:6px}.sup .gk{font-size:10px;letter-spacing:.2em;padding:0;writing-mode:horizontal-tb;white-space:nowrap}.sup .gr{flex-wrap:nowrap;gap:4px}.sb{min-width:0;padding:3px 7px}.sb small{display:none}.sb b{font-size:12.5px}.cgr .cc{width:19vw}.who .hj{display:inline-flex}.who .pf{display:inline-block;margin:0 0 0 10px;vertical-align:middle}}
+#s-cont #rin>*{transition:opacity 1.2s}#s-cont.ctaon #rin>*:not(.crl){opacity:0!important}#s-cont.ctaon .roll{pointer-events:none;cursor:default}#s-cont.ctaon .roll::after{display:none}
+/* protect */
+html,body,*{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none}
+img,video{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
+input,textarea{-webkit-user-select:text!important;user-select:text!important}
 </style>
 
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -805,9 +877,9 @@ body.entering #s-title .bg{animation:flyin 3s cubic-bezier(.12,.86,.22,1) both}
     <div class="bg b1"></div><div class="bg b2"></div>
     <div class="cgf" id="cgf"><video id="cgv" muted loop playsinline preload="none"></video><div class="im" id="cgi" style="display:none"></div></div>
     <div class="shade"></div>
-    <div class="who" id="who"><span class="wm" id="cwm"></span><p class="role" id="crole"></p><div class="vn" id="cvn"></div><p class="hj" id="chj"></p><div class="orn"></div><ul id="cul"></ul></div>
+    <div class="who" id="who"><span class="wm" id="cwm"></span><p class="role" id="crole"></p><div class="vn" id="cvn"></div><p class="hj" id="chj"></p><p class="pf" id="cpf"></p><div class="orn"></div><ul id="cul"></ul></div>
     <div class="roster" id="roster"></div>
-    <div class="cov2" id="cov2"><p class="fk">人 物</p><h3 class="gt">인물</h3><div class="crow" id="crow"></div></div>
+    <div class="cov2" id="cov2"><p class="fk">人 物</p><h3 class="gt">인물</h3><div class="crow" id="crow"></div><div class="sup" id="sup"></div></div>
     <h2 class="st">인물<small>人物</small></h2>
     <div class="box"><span class="nm"></span><p class="tx"></p><i class="go"></i></div>
   </section>
@@ -899,7 +971,7 @@ body.entering #s-title .bg{animation:flyin 3s cubic-bezier(.12,.86,.22,1) both}
 <div class="cr"><p class="k">이야기는 이곳에서 시작됩니다</p></div>
 <div class="cr crd"><dl><dt>크리에이터</dt><dd>Scroll</dd><dt>세계관</dt><dd>홍화국 紅花國</dd><dt>등장</dt><dd>요효 · 진세음 · 최림경 · 박주은<br>화진 · 황후 · 화연</dd><dt>OP</dt><dd>여인강호 女人江湖</dd></dl></div>
 <div class="cr crl"><img src="title.webp" alt="홍화국 紅花國"><p class="k2">홍화국 시리즈</p><p class="by">created by <b>Scroll</b></p></div></div></div>
-    <div class="cta" id="cta"><div class="seal"><p class="sk">開門前夜 · 개문 전야</p><p class="sm">강호의 문에도, 홍화궁의 궁문에도 아직 빗장이 걸려 있습니다. <br>붉은 달이 다시 차오르는 밤, 두 문이 함께 열립니다.</p></div><a class="go2 lock" id="crackgo" aria-disabled="true" data-href="https://crack.wrtn.ai"><span>크랙에서 계속하기</span><em>未開</em></a><a class="hgo lock" aria-disabled="true" data-href="https://crack.wrtn.ai"><small>1부</small>홍화국<span class="hs"> 「꽃도 아닌 것이 어찌그리 고왔던가」</span><i>入宮 前</i></a><div class="row2"><button type="button" class="again pcopy">유저 프로필 양식 복사</button><button type="button" class="again" id="again">다시 보기</button></div></div>
+    <div class="cta" id="cta"><div class="seal"><p class="sk">開門前夜 · 개문 전야</p><p class="sm">강호의 문에는 아직 빗장이 걸려 있습니다. <br>홍화궁의 궁문만이 먼저 열려, 붉은 동백 아래 당신을 기다립니다.</p></div><a class="go2 lock" id="crackgo" aria-disabled="true" data-href="https://crack.wrtn.ai"><span>크랙에서 계속하기</span><em>未開</em></a><a class="hgo open" href="https://share.crack.wrtn.ai/jzjo8em" target="_blank" rel="noopener"><small>1부</small>홍화국<span class="hs"> 「꽃도 아닌 것이 어찌그리 고왔던가」</span><i>入宮 ▸</i></a><div class="row2"><button type="button" class="again pcopy">유저 프로필 양식 복사</button><button type="button" class="again" id="again">다시 보기</button></div></div>
   </section>
 </main>
 <textarea id="proftxt" hidden>[유저 프로필 — 요효강호]
@@ -914,6 +986,7 @@ body.entering #s-title .bg{animation:flyin 3s cubic-bezier(.12,.86,.22,1) both}
 <div id="toast"></div>
 <div id="chap" aria-hidden="true"><span class="cl"></span><p class="ch" id="chh"></p><p class="cn" id="chn"></p><span class="cl"></span></div>
 <div id="stepc" aria-hidden="true"></div>
+<div id="mgm" role="dialog" aria-label="무공서"><div class="mgw" id="mgw"></div></div>
 <div id="plm" role="dialog" aria-label="장소 보기"><div class="plw"><button class="npx" id="plx" type="button">닫기</button><div class="plimg" id="plimg"></div><div class="plt"><b class="gt" id="plh"></b><span id="pll"></span><p id="pld"></p></div></div></div>
 
 <div id="npm" role="dialog" aria-label="인물 소개"><div class="npw"><button class="npx" id="npx" type="button">닫기</button><video id="npv" muted loop playsinline></video><div class="npi"><p class="r" id="npr"></p><p class="n gt" id="npn"></p><p class="h" id="nph"></p><ul id="npl"></ul><q id="npq"></q></div></div></div>
@@ -978,23 +1051,46 @@ var SN=['무력','재력','정보','정통성'];
   b.innerHTML='<span class="ei"><img src="img/em_'+f.em+'.webp" alt=""></span><b>'+f.n+'</b><small>'+f.tg+'</small><em>'+f.lead+'</em>';
   b.addEventListener('click',function(e){e.stopPropagation();go(3,i+1)});fr.appendChild(b)})})();
 var ftabs=$('#ftabs');F.forEach(function(f,i){var b=document.createElement('button');b.type='button';b.innerHTML='<img src="img/em_'+f.em+'.webp" alt=""><span>'+f.n+'</span>';b.addEventListener('click',function(e){e.stopPropagation();go(3,i+1)});ftabs.appendChild(b)});
+
+var MG=[
+ {k:'天魔滅陽功',n:'천마멸양공',p:'얼음 안개 무공',d:'숨만 쉬어도 내공이 차는 음공. 음천 이후 세상에서 가장 강해진 무공이다.',sk:[['흑무','검은 안개','시야와 체온을 함께 빼앗는 검은 안개. 안에 갇히면 제 손끝도 보이지 않는다.'],['빙맥수','얼음손','닿은 자리를 얼려 혈맥을 묶는다. 스치기만 해도 팔 하나가 멈춘다.'],['천마강림','교주 전용 · 일대를 한겨울로','천마만이 펼친다. 반경 안의 모든 것이 한순간에 한겨울이 된다.',1]],vis:'서리, 검은 안개, 하얀 입김',wk:'양기 앞에서 녹아내린다. 당신이 천적이다.',
+  sub:{k:'白氏 家傳',n:'백씨 가전 · 야명효공',p:'야명주를 다루고 잠그던 관리자의 무공. 백씨 혈통에게만 열리며, 요효 대에서 끊긴다. 낮에는 시야가 흐려져 밤에만 움직인다.',ch:[['一','야안','밤눈 — 눈이 금빛으로 변하고 체온과 기의 흐름이 색으로 보인다.'],['二','무성비','무음 이동 — 정면에 있는 줄 알았는데 이미 등 뒤에 있다.'],['三','쇄양지','기 잠그기 — 당신의 단전을 봉인한 손가락. 푸는 것도 백씨뿐.'],['四','효우표','깃털 암기 — 깃털 하나로 목을 끊는다. 효문의 서명.'],['五','야명귀','금기 — 몸을 그릇 삼아 극음을 삼킨다. 백씨 전멸의 원인.',1]]}},
+ {k:'觀音慈悲手',n:'관음자비수',p:'자비로운 손',d:'원래는 양공이었다. 음천 이후 반쯤 말라, 야명주 조각에 기대어 겨우 버틴다.',sk:[['자비인','흡수손','아프지 않게, 다정하게 상대의 기를 빨아들인다.'],['천수염','염주 혈점','흩어지는 염주 알 하나하나로 혈을 찍는다.'],['연화좌','연꽃 방어막','흰 기막으로 피워 올리는 연꽃. 안에 든 사람은 상처 입지 않는다.']],vis:'흰 옷자락, 흩어지는 염주, 연꽃',wk:'손끝부터 푸르게 얼어간다. 쓸수록 맹주의 몸이 닳는다.',
+  sub:{k:'日出劍',n:'일출검 · 자모가 단 한 사람에게만',p:'진세음이 오직 당신에게만 가르친 검법. 베는 자리마다 빛이 번진다. (정파 루트 · 마교 루트의 당신은 이 검을 모른다)',one:1}},
+ {k:'千金算盤功',n:'천금산반공',p:'주판 무공',d:'세상 모든 것에 값을 매기는 무공. 싸움도 셈이고, 셈은 언제나 사파맹이 이긴다.',sk:[['주판탄','주판 알 튕기기','딸깍. 그 소리가 들렸다면 이미 늦었다.'],['정가안','값 보는 눈','내공, 약점, 상처가 값표처럼 보인다. 단, 당신에게만은 먹히지 않는다.'],['환전보','자리 맞바꾸기','상대와 내 위치를 맞바꾼다. 칼끝은 언제나 엉뚱한 곳을 찌른다.']],vis:'주판 알, 금화, 안경에 비친 빛',wk:'정면 승부에 약하다. 셈이 끝나기 전에 붙으면 이긴다.'},
+ {k:'冬柏劍',n:'동백검',p:'동백 검법',d:'홍화국 황실의 검. 음천 이후에도 무너지지 않은 유일한 무공이다.',sk:[['낙화','꽃잎 베기','동백이 통째로 지듯, 한 번에 떨어뜨린다.'],['설중홍','눈 속의 동백','추울수록 강해진다. 음천의 세상에서 가장 무서운 검.'],['옥잠','옥비녀','옥비녀 하나로 급소를 꿰뚫는다.',1]],vis:'눈 위의 붉은 꽃잎, 옥비녀',wk:'여제는 이 검을 단 한 번만 꺼낸다.'}];
+function openMg(k){var m=MG[k],f=F[k],w=$('#mgw');w.style.setProperty('--fc',f.fc);
+ var h='<button class="npx" id="mgx" type="button">닫기</button><div class="mgh"><p class="k">'+f.tg+' · 家傳武功</p><h4>'+f.n+'의 무공서</h4><p>'+m.d+'</p></div>';
+ h+='<div class="tree"><div class="root"><span>'+m.k+'</span><b>'+m.n+'</b><em>'+m.p+'</em></div><div class="brs">'+m.sk.map(function(x){return'<div class="nd'+(x[3]?' ex':'')+'"><b>'+x[0]+'</b><small>'+x[1]+'</small><p>'+x[2]+'</p></div>'}).join('')+'</div></div>';
+ h+='<div class="mgf"><div><h5>그림</h5><p>'+m.vis+'</p></div><div><h5>약점</h5><p>'+m.wk+'</p></div></div>';
+ if(m.sub){var u=m.sub;h+='<div class="sub"><div class="mgh"><p class="k">'+u.k+'</p><h4>'+u.n+'</h4><p>'+u.p+'</p></div>';
+  if(u.ch)h+='<div class="chain">'+u.ch.map(function(x){return'<div class="nd'+(x[3]?' kin':'')+'"><span class="lv">'+x[0]+' 段</span><b>'+x[1]+'</b><p>'+x[2]+'</p><i></i></div>'}).join('')+'</div>';
+  h+='</div>'}
+ w.innerHTML=h;w.scrollTop=0;$('#mgx').addEventListener('click',function(e){e.stopPropagation();closeMg()});$('#mgm').classList.add('on')}
+function closeMg(){$('#mgm').classList.remove('on')}
+$('#mgm').addEventListener('click',function(e){e.stopPropagation();if(e.target.id==='mgm')closeMg()});
+addEventListener('keydown',function(e){if(e.key==='Escape'&&$('#mgm').classList.contains('on'))closeMg()});
+var SUP=[{k:'金 羽',t:'요효 직속 효문 정예',m:[['월동','금우'],['소탄','금우'],['비우','금우 · 쌍둥이 언니'],['잔우','금우 · 쌍둥이 동생']],tip:['효야대전에서 부모를 잃고 효문에서 자란 살수. 요효의 가장 가까운 칼.','효야대전에서 부모를 잃고 효문에서 자란 살수. 요효의 가장 가까운 칼.','잔우의 쌍둥이 언니. 천마에게 충성하는 금우의 칼.','비우의 쌍둥이 동생. 세상에서 언니 하나만 본다.']},
+ {k:'正 派',t:'무림맹 · 진세음의 제자',m:[['서은결','대사저'],['송아란','막내 사매']],tip:['진세음의 첫 제자, 맹의 칼. 사부가 그 검을 당신에게만 가르친 게 평생 목에 걸려 있다.','효야대전 고아. 시끄럽고 눈물 많은 직진형. 당신을 사저라 부르며 따라다닌다.']}];
+(function(){var el=$('#sup');SUP.forEach(function(g){var d=document.createElement('div');d.className='g';d.innerHTML='<span class="gk">'+g.k+'</span><div class="gr">'+g.m.map(function(x,i){return'<span class="sb" tabindex="0"><b>'+x[0]+'</b><small>'+x[1]+'</small><span class="tip">'+g.tip[i]+'</span></span>'}).join('')+'</div>';el.appendChild(d)});
+ el.addEventListener('click',function(e){e.stopPropagation();var b=e.target.closest('.sb');[].forEach.call(el.querySelectorAll('.sb.on'),function(x){if(x!==b)x.classList.remove('on')});if(b)b.classList.toggle('on')})})();
 var fflip=false;
 function showFac(k){var f=F[k],sc=$('#s-fac');sc.style.setProperty('--fc',f.fc);
   var n=fflip?$('#fbg1'):$('#fbg2'),o=fflip?$('#fbg2'):$('#fbg1');fflip=!fflip;n.style.backgroundImage='url('+f.bg+')';o.classList.remove('on');void n.offsetWidth;n.classList.add('on');
   var sw=$('#sweep');sw.classList.remove('go');void sw.offsetWidth;sw.classList.add('go');
   var im=$('#femi');im.classList.remove('in');im.src='img/em_'+f.em+'.webp';void im.offsetWidth;im.classList.add('in');
   var fi=$('#finfo');fi.classList.remove('in');
-  fi.innerHTML='<p class="tg">'+f.tg+'</p><h3>'+f.n+'</h3><p class="ld"><span>수장<b>'+f.lead+'</b></span><span>본산<b>'+f.seat+'</b></span></p><div class="orn"></div><p class="d">'+f.d+'</p><p class="art"><small>가전무공</small>'+f.art[0]+' <span style="color:var(--ash);font-family:var(--body);font-size:13px;letter-spacing:.06em">'+f.art[1].split(' — ')[1]+'</span></p><div class="stats">'+SN.map(function(nm,j){return'<span>'+nm+'</span><span class="bar"><i data-v="'+f.st[j]+'"></i></span><em>'+f.st[j]+'</em>'}).join('')+'</div>';
+  fi.innerHTML='<p class="tg">'+f.tg+'</p><h3>'+f.n+'</h3><p class="ld"><span>수장<b>'+f.lead+'</b></span><span>본산<b>'+f.seat+'</b></span></p><div class="orn"></div><p class="d">'+f.d+'</p><p class="art"><small>가전무공</small>'+f.art[0]+' <span style="color:var(--ash);font-family:var(--body);font-size:13px;letter-spacing:.06em">'+f.art[1].split(' — ')[1]+'</span></p><div class="stats">'+SN.map(function(nm,j){return'<span>'+nm+'</span><span class="bar"><i data-v="'+f.st[j]+'"></i></span><em>'+f.st[j]+'</em>'}).join('')+'</div><button type="button" class="mgb" id="mgb">무공서 펼치기 ▸</button>';$('#mgb').addEventListener('click',function(e){e.stopPropagation();openMg(k)});
   void fi.offsetWidth;fi.classList.add('in');setTimeout(function(){[].forEach.call(fi.querySelectorAll('.bar i'),function(i){i.style.width=i.dataset.v+'%'})},60);
   [].forEach.call(ftabs.children,function(b,j){b.setAttribute('aria-current',j===k)})}
 var C=[
- {id:'yohyo',n:'요효',hj:'妖梟',r:'천마신교 교주 · 천마',bg:'bg/throne.webp',l:['검은 생머리, 어둠 속에서 빛나는 금빛 눈','얼굴 반쪽을 가린 검은 깃털 가면','손이 얼음처럼 차갑다','세상은 그녀를 마녀의 딸이라 부른다'],q:'늦어. 그렇게 느려서야 어떻게 나를 베겠다는 거야.'},
- {id:'jin',n:'진세음',hj:'秦世音',r:'무림맹주 · 자모',bg:'bg/hall.webp',l:['늘 흰 옷, 손에는 흰 옥 염주','낮고 부드러운 목소리','전쟁 고아를 거둬 키운 성녀','염주를 쥔 손끝이 유난히 푸르다'],q:'숨이 가쁠 땐 숫자를 헤아리렴, 아가.'},
- {id:'choi',n:'최림경',hj:'崔林鏡',r:'사파맹주',bg:'bg/sapa.webp',l:['중성적인 얼굴, 짧고 구불거리는 머리','서방국에서 건너온 둥근 안경','허리엔 장신구 대신 주판','보자마자 값부터 매긴다'],q:'나는 편 안 들어. 편은 비싸거든.'},
- {id:'jueun',n:'박주은',hj:'朴珠恩',r:'사파맹 금고지기 · 최림경의 연인',bg:'bg/market.webp',l:['작은 키, 진보라 양갈래 만두머리','손가락 사이에 끼운 은침','까탈스럽고 말이 빠르다','사파맹주가 꼼짝 못 하는 단 한 사람'],q:'또 그 소리야? 금 백 냥? 그거 내 돈이거든.'},
- {id:'hwajin',n:'화진',hj:'花眞',r:'홍화국 여제 · 紅花國 女帝',bg:'bg/palace_day.webp',l:['즉위 33년, 쉰일곱의 여제','생각할 땐 찻잔을 매만진다','세월이 흘러도 그대로인 붉은 눈','황후 곁에서만 웃는다는 소문'],q:'……앉거라.'},
- {id:'hwayeon',n:'화연',hj:'花緣',r:'홍화국 황태녀',bg:'bg/garden.webp',l:['황계의 표식, 붉은 눈과 검은 머리','겁이 없고 말이 많다','여제가 유일하게 이기지 못하는 상대','낯선 언니가 오면 제일 먼저 달려간다'],q:'언니는 누구 좋아해?'},
- {id:'',n:'황후',hj:'柳 皇后',r:'홍화국 황후',bg:'bg/garden.webp',full:'img/empress.webp',full2:'img/empress_side.webp',l:['언제나 흰 옷','여제의 곁을 지키는 단 한 사람','얼굴과 이름은 비워 두었다','홍화국에서 불러온 그대의 그 이름으로'],q:'폐하, 또 찻잔만 만지고 계십니다.'}
+ {id:'yohyo',ag:'34세 · 173cm',n:'요효',hj:'妖梟',r:'천마신교 교주 · 천마',bg:'bg/throne.webp',l:['검은 생머리, 어둠 속에서 빛나는 금빛 눈','얼굴 반쪽을 가린 검은 깃털 가면','손이 얼음처럼 차갑다','세상은 그녀를 마녀의 딸이라 부른다'],q:'늦어. 그렇게 느려서야 어떻게 나를 베겠다는 거야.'},
+ {id:'jin',ag:'43세 · 170cm',n:'진세음',hj:'秦世音',r:'무림맹주 · 자모',bg:'bg/hall.webp',l:['늘 흰 옷, 손에는 흰 옥 염주','낮고 부드러운 목소리','전쟁 고아를 거둬 키운 성녀','염주를 쥔 손끝이 유난히 푸르다'],q:'숨이 가쁠 땐 숫자를 헤아리렴, 아가.'},
+ {id:'choi',ag:'38세 · 168cm',n:'최림경',hj:'崔林鏡',r:'사파맹주',bg:'bg/sapa.webp',l:['중성적인 얼굴, 짧고 구불거리는 머리','서방국에서 건너온 둥근 안경','허리엔 장신구 대신 주판','보자마자 값부터 매긴다'],q:'나는 편 안 들어. 편은 비싸거든.'},
+ {id:'jueun',ag:'37세 · 155cm',n:'박주은',hj:'朴珠恩',r:'사파맹 금고지기 · 최림경의 연인',bg:'bg/market.webp',l:['작은 키, 진보라 양갈래 만두머리','손가락 사이에 끼운 은침','까탈스럽고 말이 빠르다','사파맹주가 꼼짝 못 하는 단 한 사람'],q:'또 그 소리야? 금 백 냥? 그거 내 돈이거든.'},
+ {id:'hwajin',ag:'57세 · 177cm',n:'화진',hj:'花眞',r:'홍화국 여제 · 紅花國 女帝',bg:'bg/palace_day.webp',l:['즉위 33년, 쉰일곱의 여제','생각할 땐 찻잔을 매만진다','세월이 흘러도 그대로인 붉은 눈','황후 곁에서만 웃는다는 소문'],q:'……앉거라.'},
+ {id:'hwayeon',ag:'10세 · 138cm',n:'화연',hj:'花緣',r:'홍화국 황태녀',bg:'bg/garden.webp',l:['황계의 표식, 붉은 눈과 검은 머리','겁이 없고 말이 많다','여제가 유일하게 이기지 못하는 상대','낯선 언니가 오면 제일 먼저 달려간다'],q:'언니는 누구 좋아해?'},
+ {id:'empress',n:'황후',hj:'柳 皇后',r:'홍화국 황후',bg:'bg/garden.webp',full:'img/empress.webp',full2:'img/empress_side.webp',l:['언제나 흰 옷','여제의 곁을 지키는 단 한 사람','얼굴과 이름은 비워 두었다','홍화국에서 불러온 그대의 그 이름으로'],q:'폐하, 또 찻잔만 만지고 계십니다.'}
 ];
 var SEED=[
  {n:'',bg:'img/seeds.webp',t:'그날 밤 사내들이 쓰러진 자리마다, 미처 날아가지 못한 뜨거운 기운이 땅에 눌어붙어 굳었습니다. 사람들은 그것을 해의 씨앗, 해씨라 부릅니다.\n세상에서 그것을 깨울 수 있는 몸은 단 하나, 당신뿐입니다.'},
@@ -1036,9 +1132,9 @@ STOPS.forEach(function(s,i){if(!s.h||s.h==='해씨')return;var d=document.create
 
 var roster=$('#roster');
 C.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.textContent=c.n;b.addEventListener('click',function(e){e.stopPropagation();go(4,i+1)});roster.appendChild(b)});
-(function(){var cr=document.getElementById('crow');C.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.className='cc';b.style.animationDelay=(i*.08)+'s';
+(function(){var cr=document.getElementById('crow'),GP=[['江 湖','강호',[0,1,2,3]],['皇 室','황실',[4,5,6]]],gs=GP.map(function(g){var d=document.createElement('div');d.className='cgp';d.innerHTML='<p class="cgk"><span>'+g[0]+'</span>'+g[1]+'</p><div class="cgr"></div>';cr.appendChild(d);return d.querySelector('.cgr')});C.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.className='cc';b.style.animationDelay=(i*.08)+'s';
   b.innerHTML=(c.id?'<video src="v/'+c.id+'.mp4" muted loop playsinline preload="metadata"></video>':'<div class="im" style="background-image:url('+c.full+')"></div>')+'<span>'+c.n+'<small>'+c.hj+'</small></span>';
-  b.addEventListener('click',function(e){e.stopPropagation();go(4,i+1)});cr.appendChild(b)})})();
+  b.addEventListener('click',function(e){e.stopPropagation();go(4,i+1)});gs[i<4?0:1].appendChild(b)})})();
 (function(){var m=document.querySelector('#smap .smi');[['은파포',82,42,'銀波浦'],['설령관',63,18,'雪嶺關'],['운무사',51,39.5,'雲霧寺'],['효애',33,27,'梟崖',1],['종친부',60,44,'宗親府']].forEach(function(t,i){var d=document.createElement('span');d.className='sm'+(t[4]?' yin':'');d.style.left=t[1]+'%';d.style.top=t[2]+'%';d.style.animationDelay=(.6+i*.55)+'s';d.innerHTML='<i></i><b>'+t[0]+'</b><small>'+t[3]+'</small>';m.appendChild(d)})})();
 var b1=$('#s-cast .b1'),b2=$('#s-cast .b2'),flipBg=false,empT=null;
 
@@ -1077,7 +1173,7 @@ var SC=[
       else{cv.pause();cv.style.display='none';ci.style.display='';ci.style.backgroundImage='url('+c.full+')';var alt=false;empT=setInterval(function(){alt=!alt;ci.style.backgroundImage='url('+(alt?c.full2:c.full)+')'},5000)}
       cg.classList.add('on')},350);
     var who=$('#who');who.classList.remove('on');
-    setTimeout(function(){$('#cvn').textContent=c.n;$('#cvn').style.fontSize=c.n.length>=3?'clamp(52px,5.2vw,86px)':'';$('#crole').textContent=c.r;$('#chj').textContent=c.hj;$('#cwm').textContent=c.hj;$('#cul').innerHTML=c.l.map(function(x){return'<li>'+x+'</li>'}).join('');who.classList.add('on')},350);
+    setTimeout(function(){$('#cvn').textContent=c.n;$('#cvn').style.fontSize=c.n.length>=3?'clamp(52px,5.2vw,86px)':'';$('#crole').textContent=c.r;$('#chj').textContent=c.hj;$('#cpf').textContent=c.ag||'';$('#cwm').textContent=c.hj;$('#cul').innerHTML=c.l.map(function(x){return'<li>'+x+'</li>'}).join('');who.classList.add('on')},350);
     boxes[4].say(c.n,c.q)}},
  {steps:SEED.length,show:function(k){var s=SEED[k];$('#s-seed').classList.toggle('mp',k===0);var sn=$('#sname');sn.classList.remove('on');if(k>0){setTimeout(function(){$('#snk').textContent='日種 '+'①②③④⑤'[k-1];$('#snb').textContent=s.n;$('#snh').textContent=s.hj||'';sn.classList.add('on')},500)}var nb=sflip?$('#sbg1'):$('#sbg2'),ob=sflip?$('#sbg2'):$('#sbg1');sflip=!sflip;nb.style.backgroundImage='url('+s.bg+')';ob.classList.remove('on');void nb.offsetWidth;nb.classList.add('on');$('#crys').classList.toggle('yin',!!s.yin);
     [].forEach.call($('#sdots').children,function(d,j){d.classList.toggle('on',j<k)});boxes[5].say(s.n,s.t)}},
@@ -1104,11 +1200,11 @@ function go(i,k){$('#lyric').classList.toggle('mid',i===11);
   step=Math.max(0,Math.min(k,SC[i].steps-1));SC[i].show(step);
   var sc=$('#stepc'),n=SC[i].steps;sc.textContent=n>1?(String(step+1).padStart(2,'0')+' / '+String(n).padStart(2,'0')):'';sc.classList.toggle('on',n>1);
 }
-function next(){if($('#npm').classList.contains('on')||$('#plm').classList.contains('on'))return;var b=boxes[cur];if(b&&b.busy()){b.finish();return}if(step<SC[cur].steps-1)go(cur,step+1);else if(cur<SC.length-1)go(cur+1,0)}
-function prev(){if($('#npm').classList.contains('on')||$('#plm').classList.contains('on'))return;var b=boxes[cur];if(b&&b.busy()){b.finish();return}if(step>0)go(cur,step-1);else if(cur>0)go(cur-1,SC[cur-1].steps-1)}
+function next(){if($('#mgm').classList.contains('on')||$('#npm').classList.contains('on')||$('#plm').classList.contains('on'))return;var b=boxes[cur];if(b&&b.busy()){b.finish();return}if(step<SC[cur].steps-1)go(cur,step+1);else if(cur<SC.length-1)go(cur+1,0)}
+function prev(){if($('#mgm').classList.contains('on')||$('#npm').classList.contains('on')||$('#plm').classList.contains('on'))return;var b=boxes[cur];if(b&&b.busy()){b.finish();return}if(step>0)go(cur,step-1);else if(cur>0)go(cur-1,SC[cur-1].steps-1)}
 $('#next').addEventListener('click',next);$('#prev').addEventListener('click',prev);
 document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();go(+b.dataset.go,0)})});
-$('#stage').addEventListener('click',function(e){if(!entered)return;if(e.target.closest('button,a,summary,details,.scroll,.rt,.ftabs,.frow,.crow,.cov,.pbar,.npc,.wtab,.roll,.cta,.gt2,.gmap'))return;next()});
+$('#stage').addEventListener('click',function(e){if(!entered)return;if(e.target.closest('button,a,summary,details,.scroll,.rt,.ftabs,.frow,.crow,.cov,.pbar,.npc,.wtab,.roll,.cta,.gt2,.gmap,.sup,.mgb,#mgm'))return;next()});
 var wl=0;addEventListener('wheel',function(e){if(!entered||$('#toc').classList.contains('on'))return;if(e.target.closest('.scroll'))return;var n=Date.now();if(n-wl<900)return;if(Math.abs(e.deltaY)<8)return;wl=n;e.deltaY>0?next():prev()},{passive:true});
 addEventListener('keydown',function(e){if(!entered)return;if(syncOn){if(e.code==='Space'){e.preventDefault();syncTap()}return}
   if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '||e.key==='Enter'||e.key==='PageDown'){if(e.target.closest&&e.target.closest('button,summary'))if(e.key==='Enter'||e.key===' ')return;e.preventDefault();next()}
@@ -1117,7 +1213,7 @@ addEventListener('keydown',function(e){if(!entered)return;if(syncOn){if(e.code==
 var ty0=null,tx0=null;addEventListener('touchstart',function(e){ty0=e.touches[0].clientY;tx0=e.touches[0].clientX},{passive:true});
 addEventListener('touchend',function(e){if(ty0===null||!entered)return;if(e.target.closest('.scroll'))return;var dy=e.changedTouches[0].clientY-ty0,dx=e.changedTouches[0].clientX-tx0;if(Math.max(Math.abs(dx),Math.abs(dy))>50){(Math.abs(dx)>Math.abs(dy)?dx<0:dy<0)?next():prev()}ty0=null},{passive:true});
 addEventListener('resize',function(){if(cur===2)mapLayout(step)});
-function openNpc(i){var c=C[i];$('#npr').textContent=c.r;$('#npn').textContent=c.n;$('#nph').textContent=c.hj;$('#npl').innerHTML=c.l.map(function(x){return'<li>'+x+'</li>'}).join('');$('#npq').textContent='“'+c.q+'”';var v=$('#npv');v.src='v/'+c.id+'.mp4';var q=v.play();if(q&&q.catch)q.catch(function(){});$('#npm').classList.add('on')}
+function openNpc(i){var c=C[i];$('#npr').textContent=c.r;$('#npn').textContent=c.n;$('#nph').textContent=c.hj+(c.ag?'　·　'+c.ag:'');$('#npl').innerHTML=c.l.map(function(x){return'<li>'+x+'</li>'}).join('');$('#npq').textContent='“'+c.q+'”';var v=$('#npv');v.src='v/'+c.id+'.mp4';var q=v.play();if(q&&q.catch)q.catch(function(){});$('#npm').classList.add('on')}
 function closeNpc(){$('#npm').classList.remove('on');$('#npv').pause()}
 $('#npx').addEventListener('click',function(e){e.stopPropagation();closeNpc()});
 $('#npm').addEventListener('click',function(e){if(e.target.id==='npm')closeNpc()});
@@ -1150,7 +1246,7 @@ $('#again').addEventListener('click',function(e){e.stopPropagation();go(11,0)});
 (function(){var roll=$('#roll'),hov=false,down=false;
   function an(){var r=$('#rin');var l=r.getAnimations?r.getAnimations():[];return l[0]}
   function upd(){var x=an();if(!x)return;if(down){x.playbackRate=7;x.play()}else{x.playbackRate=1;if(hov)x.pause();else x.play()}roll.classList.toggle('held',down);roll.classList.toggle('hov',hov&&!down)}
-  roll.addEventListener('mouseenter',function(){hov=true;upd()});
+  roll.addEventListener('mousemove',function(e){var h=!!(e.target.closest&&e.target.closest('#rin p,#rin dl,#rin img'));if(h!==hov){hov=h;upd()}});
   roll.addEventListener('mouseleave',function(){hov=false;down=false;upd()});
   roll.addEventListener('pointerdown',function(e){e.stopPropagation();down=true;upd()});
   addEventListener('pointerup',function(){if(down){down=false;upd()}});
@@ -1200,4 +1296,4 @@ function syncTap(){taps.push(+a.currentTime.toFixed(1));var n=taps.length;
   if(n<LINES.length){$('#synct').value=n+'/'+LINES.length+'  다음 줄: '+LINES[n]}
   else{syncOn=false;LT=taps.slice();try{localStorage.setItem('yh_lt',JSON.stringify(LT))}catch(e){}$('#synct').value=JSON.stringify(LT);setTimeout(function(){$('#sync').classList.remove('on')},15000)}}
 })();
-</script>
+</script><script>(function(){function no(e){var t=e.target;if(t&&t.closest&&t.closest("input,textarea"))return;e.preventDefault();return false}["contextmenu","dragstart","selectstart","copy","cut"].forEach(function(n){document.addEventListener(n,no,{capture:true})});document.addEventListener("keydown",function(e){var k=(e.key||"").toLowerCase();if(e.key==="F12"||((e.ctrlKey||e.metaKey)&&(k==="s"||k==="u"||k==="p"))||((e.ctrlKey||e.metaKey)&&e.shiftKey&&(k==="i"||k==="j"||k==="c"))){e.preventDefault()}},{capture:true})})();</script>

@@ -2401,8 +2401,8 @@ function endCredits(replay){const c=$('#credits');c.hidden=false;busy=true;c.cla
   at(31000,post);
   c.querySelector('#crSkip').addEventListener('click',()=>{if(c.classList.contains('post')){crTimers.forEach(clearTimeout);c.classList.add('tbc')}else post()});
   c.querySelector('#crGuide').addEventListener('click',()=>{crTimers.forEach(clearTimeout);c.hidden=true;try{bgm.volume=.2}catch(e){}openUnsealed('eps')});
-  c.querySelector('#crEnd').addEventListener('click',()=>{crTimers.forEach(clearTimeout);c.classList.add('fin');let v=.3;const fd=setInterval(()=>{v=Math.max(0,v-.02);try{bgm.volume=v}catch(e){}if(!v){clearInterval(fd);try{bgm.pause()}catch(e){}}},120);
-    setTimeout(()=>{c.hidden=true;c.className='';busy=false},4200)})}
+  c.querySelector('#crEnd').addEventListener('click',()=>{crTimers.forEach(clearTimeout);c.classList.add('fin');try{bgm.loop=true;bgm.volume=.32;if(bgm.paused)bgm.play()}catch(e){}
+    setTimeout(()=>{c.hidden=true;c.className='';openUnsealed('cast')},2600)})}
 function openClear(){endCredits(false)}
 /* ===== v52 · 기밀 해제 시퀀스 ===== */
 function unsealReveal(){return new Promise(res=>{let r=$('#reveal');if(!r){r=document.createElement('div');r.id='reveal';document.body.appendChild(r)}

@@ -1,16 +1,5 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>MAD LOVE — Hollow Ward REC</title>
-<meta name="description" content="SCP-1388-KO MAD LOVE · Scroll Original. 삭제된 영상의 0.4초, 폐병원으로 카메라를 들고 다시 들어간다.">
-<meta name="theme-color" content="#060405">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MAD LOVE — 당신의 심장을 가지러 왔어.">
-<meta property="og:description" content="SCP-1388-KO · Scroll Original · S01 E01 Hollow Ward">
-<meta property="og:image" content="heart.webp">
-<link rel="icon" href="logo_cut.webp">
+<title>Hollow Ward REC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <style>
 [hidden]{display:none!important}
 
@@ -1167,8 +1156,6 @@ canvas.mz{position:absolute;pointer-events:none;image-rendering:pixelated;z-inde
 #xlock .xboot b{font:400 clamp(26px,7vw,36px)/1 "Black Han Sans",sans-serif;letter-spacing:.06em;color:#efe8eb}
 #xlock.on .xboot{opacity:0;pointer-events:none}
 </style>
-</head>
-<body>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Archivo:wght@800&family=IBM+Plex+Sans+KR:wght@400;600&family=Black+Han+Sans&family=Nanum+Myeongjo:wght@700&family=Bodoni+Moda:ital,wght@0,900;1,500&family=DM+Mono:wght@400;500&display=swap">
 
 <div id="stage"></div>
@@ -2469,5 +2456,3 @@ if(location.hostname==='localhost')window.__ml={handoff,state,save,WAIT,HANDOFF,
 $('#lvEnter').addEventListener('click',()=>{const b=$('#lvEnter');if(!b.classList.contains('ready')){b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');const sm=b.querySelector('small');if(sm)sm.textContent='아직 방송 중이야. 채팅이랑 화면 끝까지 보고 들어가.';tone(120,.2,'square',.04);return}beginGame(false)});$('#lvSkip').addEventListener('click',()=>beginGame(true));
 })();
 </script>
-</body>
-</html>

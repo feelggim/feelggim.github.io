@@ -1124,6 +1124,48 @@ canvas.mz{position:absolute;pointer-events:none;image-rendering:pixelated;z-inde
 #phNoti .cal-ic small{font:600 10px "IBM Plex Sans KR",sans-serif;color:#e0102e}#phNoti .cal-ic b{font:700 22px/1 "IBM Plex Sans KR",sans-serif;color:#121012}
 
 #hint{max-width:min(78vw,520px);white-space:normal!important;text-align:center;line-height:1.45}
+
+#lvEnter:not(.ready){opacity:.45;cursor:not-allowed;filter:grayscale(.6)}#lvEnter:not(.ready) em{visibility:hidden}#lvEnter.ready{opacity:1}
+#lvEnter.nope{animation:buzz .08s linear 5}
+
+/* ===== v46 · 크랙 전송 잠금 ===== */
+#xlock{position:fixed;inset:0;z-index:2147483000;background:#030203;color:#efe8eb;display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top)) 18px max(20px,env(safe-area-inset-bottom));overflow:auto;font-family:"IBM Plex Sans KR",sans-serif;touch-action:manipulation}
+#xlock canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5;mix-blend-mode:screen}
+#xlock::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 4px),radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,.85))}
+#xlock .xl{position:relative;z-index:1;width:min(460px,100%);opacity:0;transform:translateY(8px);transition:opacity .6s,transform .6s}
+#xlock.on .xl{opacity:1;transform:none}
+#xlock .xh{display:flex;justify-content:space-between;font:500 10px/1 "DM Mono",monospace;letter-spacing:.2em;color:#ff2e93;border-bottom:1px solid rgba(255,46,147,.2);padding-bottom:12px}
+#xlock .xh i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#e0102e;margin-right:8px;animation:protob 1s steps(1) infinite}
+#xlock .xt{font:400 clamp(30px,8.4vw,42px)/1.15 "Black Han Sans",sans-serif;margin:26px 0 6px;letter-spacing:-.01em}
+#xlock .xt em{font-style:normal;color:#ff2e93}
+#xlock .xs{font:500 11px/1.4 "DM Mono",monospace;letter-spacing:.16em;color:#6d6468;margin-bottom:20px}
+#xlock .xp{font-size:15px;line-height:1.75;color:#bdb3b7}
+#xlock .xp b{color:#f4eef1}
+#xlock .xc{margin:20px 0 6px;border:1px solid rgba(255,46,147,.55);background:#0a0607;padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font:700 22px/1 "DM Mono",monospace;letter-spacing:.14em;color:#f4eef1}
+#xlock .xc small{font:500 10px/1 "IBM Plex Sans KR",sans-serif;letter-spacing:.04em;color:#ff2e93}
+#xlock ol{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:8px;counter-reset:x}
+#xlock li{counter-increment:x;display:flex;gap:12px;align-items:baseline;font-size:13.5px;color:#8d8387;line-height:1.5}
+#xlock li::before{content:counter(x,decimal-leading-zero);font:500 11px "DM Mono",monospace;color:rgba(255,46,147,.55);min-width:20px}
+#xlock li.now{color:#f4eef1}#xlock li.now::before{color:#e0102e}
+#xlock li.ok{color:#5b5357;text-decoration:line-through}
+#xlock .xgo{display:block;text-align:center;margin-top:22px;padding:16px;border:1px solid #ff2e93;color:#f4eef1;text-decoration:none;font:400 19px "Black Han Sans",sans-serif;letter-spacing:.04em;background:linear-gradient(90deg,rgba(255,46,147,.18),rgba(255,46,147,.04))}
+#xlock .xgo.off{border-color:rgba(255,46,147,.2);color:#6d6468;background:none;font:500 13px "IBM Plex Sans KR",sans-serif;padding:14px}
+#xlock .xr{margin-top:26px;border-top:1px dashed rgba(255,46,147,.2);padding-top:20px;display:none}
+#xlock .xr.on{display:block;animation:hoin .5s ease-out}
+#xlock .xr label{display:block;font:500 10px/1 "DM Mono",monospace;letter-spacing:.2em;color:#ff2e93;margin-bottom:10px}
+#xlock form{display:flex;gap:8px}
+#xlock input{flex:1;min-width:0;background:#0a0607;border:1px solid rgba(255,46,147,.32);color:#f4eef1;font:500 17px "IBM Plex Sans KR",sans-serif;padding:14px;outline:none;border-radius:0}
+#xlock input:focus{border-color:#ff2e93}
+#xlock form button{background:#ff2e93;color:#fff;border:0;padding:0 18px;font:400 17px "Black Han Sans",sans-serif;letter-spacing:.04em;cursor:pointer}
+#xlock .xm{min-height:20px;margin-top:10px;font:500 12.5px/1.5 "IBM Plex Sans KR",sans-serif;color:#8d8387;white-space:pre-line}
+#xlock .xm.no{color:#e0102e}#xlock .xm.ok{color:#f4eef1}
+#xlock.shake .xl{animation:xshake .4s}
+@keyframes xshake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+#xlock.out{animation:xout .9s steps(6) forwards}
+@keyframes xout{0%{opacity:1;filter:none}40%{filter:hue-rotate(40deg) contrast(2)}100%{opacity:0;filter:blur(6px)}}
+#xlock .xboot{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font:500 12px/1 "DM Mono",monospace;letter-spacing:.3em;color:#ff2e93;transition:opacity .4s}
+#xlock .xboot b{font:400 clamp(26px,7vw,36px)/1 "Black Han Sans",sans-serif;letter-spacing:.06em;color:#efe8eb}
+#xlock.on .xboot{opacity:0;pointer-events:none}
 </style>
 </head>
 <body>
@@ -1151,7 +1193,7 @@ canvas.mz{position:absolute;pointer-events:none;image-rendering:pixelated;z-inde
 </div>
   </div>
   <img id="camimg" src="cam.webp" alt="">
-  <div id="proto"><i></i>PROTOTYPE<span>아직 개발 중</span><b>Scroll</b></div>
+  
 </div>
 <div id="fade"></div>
 
@@ -1249,7 +1291,7 @@ canvas.mz{position:absolute;pointer-events:none;image-rendering:pixelated;z-inde
         <button class="st-sub" type="button" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0"/></svg>구독중</button>
         <div class="st-acts"><span class="st-pill st-like"><button type="button"><svg viewBox="0 0 24 24"><path d="M7 21H4V10h3zM7 10l5-7c1.5 0 2.5 1 2.2 2.6L13.5 9H19a2 2 0 0 1 2 2.3l-1.3 7.5a2.5 2.5 0 0 1-2.5 2.2H7"/></svg>2.4천</button><button type="button" aria-label="싫어요"><svg viewBox="0 0 24 24"><path d="M17 3h3v11h-3zM17 14l-5 7c-1.5 0-2.5-1-2.2-2.6L10.5 15H5a2 2 0 0 1-2-2.3l1.3-7.5A2.5 2.5 0 0 1 6.8 3H17"/></svg></button></span><button class="st-pill" type="button"><svg viewBox="0 0 24 24"><path d="M14 5l7 7-7 7M21 12H9a6 6 0 0 0-6 6"/></svg>공유</button><button class="st-pill st-hide-m" type="button"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>오프라인 저장</button><button class="st-pill st-dot" type="button" aria-label="더보기">⋯</button></div>
       </div>
-      <button class="lv-enter" id="lvEnter" type="button"><span class="dot"></span><span class="t"><b>캠코더 켜고 들어가기</b><small>방송이 끝나면 스트리머 시점으로 직접 들어갑니다</small></span><em>ENTER ▶</em></button>
+      <button class="lv-enter" id="lvEnter" type="button"><span class="dot"></span><span class="t"><b>캠코더 켜고 들어가기</b><small>방송을 끝까지 봐야 들어갈 수 있어</small></span><em>ENTER ▶</em></button>
       <div class="st-desc"><b>1,208명 시청 중 · 54분 전부터 실시간 스트리밍 중</b> <span class="st-tags">#SCP #폐병원 #심장없는생존자</span>
         <p>3편이 업로드 6시간 만에 삭제됐습니다. 사유 안내는 없었고, 원본은 제 컴퓨터에만 남아 있습니다.<br>오늘은 그 0.4초가 녹음된 장소, 홀로우 병동에 다시 들어갑니다.<br>※ 위치 공개 금지 · 무단 침입 따라 하지 마세요</p>
         <p class="st-more-t" hidden>장비: 구형 캠코더(나이트샷) · 휴대폰 1대<br>편집: 도윤<br>제보 메일은 커뮤니티 탭 고정 글 참고. 발신자 없는 메일은 열지 않습니다.<br><br>정정: 2편에 나온 ‘장기 기록이 없는 시신’ 숫자는 31구가 맞습니다.</p>
@@ -1281,6 +1323,7 @@ canvas.mz{position:absolute;pointer-events:none;image-rendering:pixelated;z-inde
 <svg id="capRing" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="26" stroke="rgba(255,255,255,.35)"/><circle id="capArc" cx="30" cy="30" r="26" stroke="#e0102e" stroke-dasharray="163.4" stroke-dashoffset="163.4" transform="rotate(-90 30 30)"/></svg>
 <div id="capFlash"></div>
 <div id="chap" hidden aria-live="assertive"></div>
+<div id="xlock" hidden role="alertdialog" aria-modal="true" aria-label="크랙 전송 대기"></div>
 <div id="handoff" hidden role="alertdialog" aria-modal="true" aria-labelledby="hoTitle"></div>
 <div id="drive" hidden><p class="d1">02:47 AM</p><p class="d2">폐병원으로 이동 중</p><p class="d4">폐병원 · Hollow Ward</p><p class="d3">● REC STANDBY</p></div>
 <div id="climax" hidden><div class="cl-bg"></div><div class="cl-figs"><img class="cl-f h" src="full_harmony.webp" alt=""><img class="cl-f m" src="full_madlove.webp" alt=""><img class="cl-f e" src="full_euphoria.webp" alt=""></div><div class="cl-noise"></div><div class="cl-rec">REC 02:47</div><div class="cl-sub" id="clSub"></div><div class="cl-lost">SIGNAL LOST</div><button class="cl-skip" type="button" id="clSkip">건너뛰기 ›</button></div>
@@ -1563,7 +1606,7 @@ function chapter(n,hold=2600){return new Promise(res=>{const c=$('#chap'),d=CHAP
 /* ---------- 핸드오프 알림 ---------- */
 const CRACK_URL='';/* 크랙 작품 링크를 넣으면 '크랙으로 가기' 버튼이 생김 */
 let pendingHandoff=null;
-function handoff(o){const h=$('#handoff');busy=true;
+function handoff(o){if(o.dir==='crack'&&o.wait){crackLock(o);return}const h=$('#handoff');busy=true;
   const toCrack=o.dir==='crack';
   h.innerHTML=`<div class="ho"><header><span><i class="dot"></i>${toCrack?'TRANSMISSION':'SIGNAL RECEIVED'}</span><span class="dir">${toCrack?'HOMEPAGE → CRACK':'CRACK → HOMEPAGE'}</span></header>
    <div class="hb"><div class="flow"><b>${toCrack?'홈페이지':'크랙'}</b><i></i><b>${toCrack?'크랙':'홈페이지'}</b></div>
@@ -1574,9 +1617,39 @@ function handoff(o){const h=$('#handoff');busy=true;
   if(o.code)$('#hoCode').addEventListener('click',e=>copy(o.code,e.currentTarget));
   const done=()=>{h.hidden=true;busy=false;if(o.then)o.then()};
   $('#hoOk').addEventListener('click',done);$('#hoOk').focus()}
+
+/* ===== v46 · 크랙 전송 잠금: 접속어를 받아올 때까지 화면 전체 잠금 ===== */
+const WAIT={HOLLOW0312:'트리니티',BLIND07:'꿈에서봐',A29:'B2'};
+function crackLock(o){const P=PASS.find(p=>p.k===o.wait);if(!P||state.pass[o.wait]||!$('#xlock').hidden)return;
+  state.lockWait={wait:o.wait,code:o.code||null,text:o.text||''};save();busy=true;
+  try{vstop&&vstop()}catch(e){}
+  const x=$('#xlock');x.className='';x.hidden=false;let fails=0,left=false;
+  x.innerHTML=`<canvas id="xlN"></canvas><div class="xboot"><span>TRANSMITTING</span><b>HOMEPAGE → CRACK</b><span id="xlPct">000%</span></div>
+  <div class="xl"><div class="xh"><span><i></i>SIGNAL HELD · 화면 잠김</span><span>${o.code&&CODE_NO[o.code]?'CODE 0'+CODE_NO[o.code]+'/05':'LOCK'}</span></div>
+   <div class="xt">이 뒤로는<br><em>크랙에서.</em></div><div class="xs">${P.from.replace('크랙 · ','CRACK · ')}</div>
+   <p class="xp">${o.text}</p>
+   ${o.code?`<div class="xc" id="xlCode" tabindex="0">${o.code}<small>탭해서 복사</small></div>`:''}
+   <ol><li class="now">${o.code?'위 코드를 크랙 채팅에 입력':'크랙에서 이야기를 이어가기'}</li><li>크랙 대화 끝의 ▷ 줄에서 접속어 받기</li><li>여기 입력하고 <b>이어하기</b></li></ol>
+   ${CRACK_URL?`<a class="xgo" id="xlGo" href="${CRACK_URL}" target="_blank" rel="noopener">크랙으로 가기 ↗</a>`:`<div class="xgo off">크랙 작품 페이지에서 이어서 진행해.</div>`}
+   <div class="xr" id="xlR"><label>RESUME · 크랙에서 받은 접속어</label><form id="xlF" autocomplete="off"><input id="xlIn" type="text" placeholder="접속어" maxlength="20" enterkeyhint="go" aria-label="크랙에서 받은 접속어"><button type="submit">이어하기</button></form><div class="xm" id="xlM">이 화면은 접속어를 넣기 전까지 열리지 않는다.</div></div>
+  </div>`;
+  const cv=$('#xlN'),c=cv.getContext('2d');let raf;const noise=()=>{cv.width=160;cv.height=284;const d=c.createImageData(160,284);for(let i=0;i<d.data.length;i+=4){const v=Math.random()*255|0;d.data[i]=v;d.data[i+1]=v*.5;d.data[i+2]=v*.6;d.data[i+3]=Math.random()<.5?40:0}c.putImageData(d,0,0);if(Math.random()<.08){c.fillStyle='rgba(255,46,147,.5)';c.fillRect(0,Math.random()*284,160,2+Math.random()*6)}raf=requestAnimationFrame(noise)};noise();
+  let pc=0;const pi=setInterval(()=>{pc=Math.min(100,pc+7+Math.random()*13|0);const e=$('#xlPct');if(e)e.textContent=String(pc).padStart(3,'0')+'%';if(pc%3==0)tone(700+Math.random()*900,.02,'square',.015);if(pc>=100){clearInterval(pi);x.classList.add('on');tone(140,.5,'sawtooth',.04);try{navigator.vibrate&&navigator.vibrate([60,40,120])}catch(e){}}},90);
+  if(o.code)$('#xlCode').addEventListener('click',e=>copy(o.code,e.currentTarget));
+  const R=$('#xlR'),showR=()=>{if(R.classList.contains('on'))return;R.classList.add('on');const li=x.querySelectorAll('li');li[0].className='ok';li[1].className='ok';li[2].className='now';setTimeout(()=>{try{$('#xlIn').focus({preventScroll:true})}catch(e){}},300)};
+  const go=$('#xlGo');if(go)go.addEventListener('click',()=>{left=true;const li=x.querySelectorAll('li');li[0].className='ok';li[1].className='now';setTimeout(showR,2500)});
+  const back=()=>{if(document.visibilityState==='visible'&&left)showR()};document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')left=true;back()});addEventListener('focus',back);
+  setTimeout(showR,CRACK_URL?9000:3500);
+  $('#xlF').addEventListener('submit',e=>{e.preventDefault();const v=norm($('#xlIn').value),m=$('#xlM');if(!v)return;
+    if(norm(P.k)===v||P.alt.some(a=>norm(a)===v)){m.className='xm ok';m.textContent='ACCESS GRANTED · '+P.k+'\n신호가 이어졌다.';tone(660,.12,'sine',.05);setTimeout(()=>tone(990,.2,'sine',.05),120);
+      state.pass[P.k]=1;state.lockWait=null;save();setTimeout(()=>{x.classList.add('out');setTimeout(()=>{cancelAnimationFrame(raf);x.hidden=true;x.className='';x.innerHTML='';busy=false;try{questUpdate()}catch(e){}P.run()},900)},700);return}
+    fails++;const asCode=Object.keys(CODE_NO).find(k=>norm(k)===v);const other=PASS.find(p=>norm(p.k)===v||p.alt.some(a=>norm(a)===v));
+    m.className='xm no';m.textContent=asCode?`${asCode} 는 코드야. 이건 크랙 채팅창에 넣어.`:other?'다른 신호다. 지금 받아와야 하는 말이 아니야.':'신호 불일치'+(fails>=2?`\n띄어쓰기는 상관없어. ${P.from.replace('크랙 · ','')} 들은 말. 크랙 대화 맨 끝 ▷ 줄을 다시 봐.`:'');
+    x.classList.remove('shake');void x.offsetWidth;x.classList.add('shake');tone(120,.4,'square',.06);try{navigator.vibrate&&navigator.vibrate(120)}catch(e){};$('#xlIn').select()})}
+function lockResume(){const L=state.lockWait;if(L&&!state.pass[L.wait])setTimeout(()=>crackLock(L),1600);else if(L){state.lockWait=null;save()}}
 const CODE_NO={HOLLOW0312:1,EMPTY88:2,BLIND07:3,A29:4,THREE0247:5};
 const HANDOFF={HOLLOW0312:'조각이 다 맞물렸다. 크랙 채팅에 이 코드를 입력하면 3층 복도 이야기가 이어진다. 바닥에 뭔가 있을 거다.',EMPTY88:'빈 이사장석. 크랙에 이 코드를 입력하고, 정장 여자에게 이 자리 얘기를 꺼내 봐.',BLIND07:'7번 장학생. 크랙에 이 코드를 입력해. 그리고 오늘 밤엔 잠들어야 한다.'};
-function close(){$('#panel').hidden=true;busy=false;setTimeout(()=>{try{b2Check()}catch(e){}},400);if(pendingHandoff){const c=pendingHandoff;pendingHandoff=null;state.handed=state.handed||{};if(!state.handed[c]){state.handed[c]=1;save();setTimeout(()=>handoff({dir:'crack',code:c,text:HANDOFF[c]||'크랙 채팅에 이 코드를 입력해.'}),250);return}}
+function close(){$('#panel').hidden=true;busy=false;setTimeout(()=>{try{b2Check()}catch(e){}},400);if(pendingHandoff){const c=pendingHandoff;pendingHandoff=null;state.handed=state.handed||{};if(!state.handed[c]){state.handed[c]=1;save();setTimeout(()=>handoff({dir:'crack',code:c,wait:WAIT[c],text:HANDOFF[c]||'크랙 채팅에 이 코드를 입력해.'}),250);return}}
   if(pendingFig2&&current==='f3end'){pendingFig2=false;const h=hotspots.find(x=>x.userData.id==='backHall');if(h){const w=new THREE.Vector3();h.getWorldPosition(w);w.y=0;w.setLength(7);
     figure=makeFigure();figure.position.set(w.x,0,w.z);figure.lookAt(0,0,0);figure.userData={flag:'sawFigure2',look:.6,msg:'…복도 끝에 누가',until:performance.now()+9000};figureLook=0;world.add(figure);
     setTimeout(()=>tone(48,2,'sine',.05),400)}}}
@@ -1708,7 +1781,7 @@ window.__duck=(ms)=>{if(!bgmOn)return;bgm.volume=0;setTimeout(()=>{let v=0;const
 addEventListener('contextmenu',e=>e.preventDefault());addEventListener('dragstart',e=>{if(e.target.tagName==='IMG')e.preventDefault()});
 $('#toFiles').addEventListener('click',()=>{audio();tone(1200,.04,'square',.05);setTimeout(()=>tone(500,.08,'square',.04),50);const st=$('#start');st.classList.add('files');st.scrollTop=0;const fl=$('#flash');fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on')});
 $('#toHero').addEventListener('click',()=>{const st=$('#start');st.classList.remove('files');st.scrollTop=0});
-$('#go').addEventListener('click',async()=>{audio();tone(1700,.05,'square',.06);setTimeout(()=>tone(700,.09,'square',.05),60);const fl=$('#flash');fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');
+$('#go').addEventListener('click',async()=>{audio();lockResume();tone(1700,.05,'square',.06);setTimeout(()=>tone(700,.09,'square',.05),60);const fl=$('#flash');fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');
   const dc=document.createElement('canvas');dc.width=docC.width;dc.height=docC.height;const dx=dc.getContext('2d');dx.fillStyle='#fbf9f8';dx.fillRect(0,0,dc.width,dc.height);dx.drawImage(docC,0,0);
   clips.push({title:'재단 기밀 문서',shot:dc.toDataURL('image/jpeg',.82),text:'출발 전에 찍어둔 문서. 발신자 불명의 제보 메일에 첨부돼 있었다. 일련번호 SCP-1388-KO. 대부분 지워져 있다.',note:'세 건 중 이 문서만 사진 칸이 비어 있다.'});$('#clipsBtn').textContent='클립 '+clips.length;bgm.play().catch(()=>{});bgm.volume=.18;$('#start').hidden=true;startLive();});
 const COL=['#2b6cff','#13a35b','#8a3ffc','#d9730d','#0f8b8d','#6d6468','#c2185b'];
@@ -1728,7 +1801,7 @@ function chatMsg(e){const box=$('#lvMsgs'),d=document.createElement('div');const
   box.appendChild(d);while(box.children.length>40)box.firstChild.remove()}
 function startLive(){const L=$('#live');L.hidden=false;stRecs();L.scrollTop=0;lvT0=performance.now();let i=0;
   const tick=()=>{if(L.hidden)return;chatMsg(CHAT[i++]);lvView+=Math.floor(Math.random()*9)+1;$('#lvView').textContent='👁 '+lvView.toLocaleString();
-    if(i<CHAT.length)lvTimer=setTimeout(tick,700+Math.random()*900);else{$('#lvEnter').classList.add('ready');$('#lvEnter').focus()}};
+    if(i<CHAT.length)lvTimer=setTimeout(tick,700+Math.random()*900);else{$('#lvEnter').classList.add('ready');{const sm=$('#lvEnter').querySelector('small');if(sm)sm.textContent='방송이 끝났다. 이제 스트리머 시점으로 직접 들어갑니다'};$('#lvEnter').focus()}};
   lvTimer=setTimeout(tick,600);
   const clock=()=>{if(L.hidden)return;const s=Math.floor((performance.now()-lvT0)/1000)+3412;$('#lvTime').textContent=[s/3600|0,(s/60|0)%60,s%60].map(n=>String(n).padStart(2,'0')).join(':');requestAnimationFrame(clock)};clock()}
 function engineSeq(){if(!ac)return 0;try{const td=ac.currentTime+.05,t=td+.85,out=ac.createGain();out.gain.value=.9;out.connect(ac.destination);
@@ -2009,7 +2082,7 @@ async function beginGame(skipDrive,resume){const touch=matchMedia('(pointer:coar
     const ms=engineSeq()||1600;await new Promise(r=>setTimeout(r,ms));await chapter(1);dv.classList.add('out');setTimeout(()=>{dv.hidden=true;dv.classList.remove('on','out')},950);
     window.__duck&&window.__duck(300)}
   else{if(!(resume>=2))await chapter(resume||1,1800);bgm.volume=.38;const fl=$('#flash');fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');tone(220,.15,'square',.06)}
-  started=true;t0=performance.now();document.body.classList.add('ingame');questUpdate();if(resume>=4){enterB2();return}if(resume>=3){openArchiveSite();return}if(resume>=2){enterPC();return}$('#phone').hidden=false;gameChat('박쥐','도착했다 ㄷㄷ');chatLoop();smsLoop(true);
+  started=true;t0=performance.now();document.body.classList.add('ingame');questUpdate();lockResume();if(resume>=4){enterB2();return}if(resume>=3){openArchiveSite();return}if(resume>=2){enterPC();return}$('#phone').hidden=false;gameChat('박쥐','도착했다 ㄷㄷ');chatLoop();smsLoop(true);
   if(gyroP){const ok=await gyroP;if(ok){setMode(true);toast('폰을 돌려서 둘러보기')}else toast('드래그로 둘러보기 · 길게 눌러 녹화')}else toast('드래그로 둘러보기 · 길게 누르거나 R키로 녹화')}
 
 /* ===== v41 · S튜브 추천 영상 ===== */
@@ -2045,7 +2118,7 @@ document.querySelector('.st-like button')&&document.querySelector('.st-like butt
 /* ===== v41 · 접속어 · 진행도 · 메뉴 ===== */
 state.pass=state.pass||{};
 function lockedStairs(){tone(140,.25,'square',.06);setTimeout(()=>tone(120,.25,'square',.05),160);
-  if(!state.sawLock){state.sawLock=1;save();handoff({dir:'crack',text:'3층으로 올라가는 계단에 철문이 새로 달려 있다. 네 자리 번호 자물쇠. 돌려 봐도 꿈쩍 않는다.<br>뒤에서 누군가 보고 있는 것 같다. <b>크랙에서 이어서.</b> 번호를 받으면 아래 <b>접속어</b>에 입력.',ok:'알겠어'})}
+  if(!state.sawLock){state.sawLock=1;save();handoff({dir:'crack',wait:'0204',text:'3층으로 올라가는 계단에 철문이 새로 달려 있다. 네 자리 번호 자물쇠. 돌려 봐도 꿈쩍 않는다.<br>뒤에서 누군가 보고 있는 것 같다. <b>번호는 크랙에서 받아 와.</b>'})}
   else toast('잠겨 있다 · 네 자리 번호 자물쇠')}
 const norm=s=>String(s||'').normalize('NFC').toLowerCase().replace(/[\s"'“”‘’`.,!?~·\-_:;()\[\]{}<>▷▶|/\\]/g,'');
 const PASS=[
@@ -2125,7 +2198,7 @@ function openMenu(){
    ${CRACK_URL?`<a href="${CRACK_URL}" target="_blank" rel="noopener">크랙에서 이어하기<small>CRACK ↗</small></a>`:''}
    ${state.cleared?'<button type="button" id="mnUns">시즌 가이드<small>SEASON 1</small></button>':''}<button type="button" id="mnTitle">타이틀 화면으로<small>자동 저장됨</small></button>
    <button type="button" id="mnReset" class="dang">처음부터 다시<small>기록 삭제</small></button>
-  </div><p class="mn-cred">MAD LOVE · HOLLOW WARD REC · PROTOTYPE · SCROLL</p></div>`);
+  </div><p class="mn-cred">MAD LOVE · HOLLOW WARD REC · SCROLL</p></div>`);
   $('#mnQuest').addEventListener('click',openQuest);$('#mnSc').addEventListener('click',openScenes);$('#mnDec').addEventListener('click',openDecoder);$('#mnArc').addEventListener('click',()=>{sheetClose();openArchive()});
   $('#mnTitle').addEventListener('click',()=>{save();location.reload()});if($('#mnUns'))$('#mnUns').addEventListener('click',()=>{sheetClose();openUnsealed()});
   $('#mnReset').addEventListener('click',e=>{const b=e.currentTarget;if(!resetArm){resetArm=1;b.classList.add('arm');b.firstChild.textContent='한 번 더 누르면 전부 지워져 ';setTimeout(()=>{resetArm=0;b.classList.remove('arm');b.firstChild.textContent='처음부터 다시'},3500);return}
@@ -2391,9 +2464,9 @@ function jump(id){sheetClose();if(id==='pc'){if(!pcOn)pcOpen();pcRender('home');
 function openScenes(){sheet('scenes',H('SCENE SELECT','장면 다시 보기')+`<div class="sh-b"><p class="dc-how">한 번 열어본 장면은 여기서 바로 갈 수 있어.</p><div class="mn-list">${SCENES.map(([id,l,ok])=>ok()?`<button type="button" data-sc="${id}">${l}<small>${id.toUpperCase()}</small></button>`:`<button type="button" disabled style="opacity:.35">${l}<small>LOCKED</small></button>`).join('')}</div></div>`);
   $('#shCard').querySelectorAll('[data-sc]').forEach(b=>b.addEventListener('click',()=>jump(b.dataset.sc)))}
 $('#clSkip').addEventListener('click',climaxEnd);
-if(location.hostname==='localhost')window.__ml={openKeypad,climax,openUnsealed,openKeepBeating,go,enterB2,b2Check,endCredits,unsealReveal,spike:()=>spikeLive(),fig:()=>{const f=makeFigure();const v=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);v.y=0;v.setLength(5);f.position.set(v.x,0,v.z);f.lookAt(0,0,0);world.add(f)}};
+if(location.hostname==='localhost')window.__ml={handoff,state,save,WAIT,HANDOFF,openKeypad,climax,openUnsealed,openKeepBeating,go,enterB2,b2Check,endCredits,unsealReveal,spike:()=>spikeLive(),fig:()=>{const f=makeFigure();const v=new THREE.Vector3(0,0,-1).applyQuaternion(camera.quaternion);v.y=0;v.setLength(5);f.position.set(v.x,0,v.z);f.lookAt(0,0,0);world.add(f)}};
 (()=>{const u=$('#unsealBtn');if(u&&state.cleared){u.hidden=false;u.addEventListener('click',()=>{openUnsealed()})}})();
-$('#lvEnter').addEventListener('click',()=>beginGame(false));$('#lvSkip').addEventListener('click',()=>beginGame(true));
+$('#lvEnter').addEventListener('click',()=>{const b=$('#lvEnter');if(!b.classList.contains('ready')){b.classList.remove('nope');void b.offsetWidth;b.classList.add('nope');const sm=b.querySelector('small');if(sm)sm.textContent='아직 방송 중이야. 채팅이랑 화면 끝까지 보고 들어가.';tone(120,.2,'square',.04);return}beginGame(false)});$('#lvSkip').addEventListener('click',()=>beginGame(true));
 })();
 </script>
 </body>

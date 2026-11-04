@@ -1787,7 +1787,7 @@ function gameEvent(type,x){if(!started)return;
 /* ===== v53 · 생방 끊김 · 폰 기믹 ===== */
 
 /* ===== v54 · 매드러브 보이스 ===== */
-const VO={};['breath','call1','call2','call3','end1','end2','line'].forEach(k=>{try{const a=new Audio('v_'+k+'.mp3');a.preload='auto';VO[k]=a}catch(e){}});
+const VO={};['breath','call1','call2','call3','end1','end2','line','dy1','dy2','dy3'].forEach(k=>{try{const a=new Audio('v_'+k+'.mp3');a.preload='auto';VO[k]=a}catch(e){}});
 function vplay(k,vol=1,fb=1500){return new Promise(res=>{const a=VO[k];let done=false;const fin=()=>{if(!done){done=true;res()}};
   if(!a){setTimeout(fin,fb);return}try{a.currentTime=0;a.volume=Math.min(1,vol*.55);a.onended=fin;const pr=a.play();if(pr&&pr.catch)pr.catch(()=>setTimeout(fin,fb));setTimeout(fin,(isFinite(a.duration)&&a.duration?a.duration*1000:fb)+400)}catch(e){setTimeout(fin,fb)}})}
 function vstop(k,ms=400){const a=VO[k];if(!a)return;const v0=a.volume,t0=performance.now();const f=t=>{const e=Math.min(1,(t-t0)/ms);try{a.volume=v0*(1-e)}catch(x){}if(e<1)requestAnimationFrame(f);else{try{a.pause()}catch(x){}}};requestAnimationFrame(f)}
@@ -1823,11 +1823,11 @@ function restoreLive(){if(!liveLost)return;liveLost=false;const ph=$('#phone');p
   [['괴담덕후','야 왜 끊겼었음??'],['ㅎㅅㅎ','3층에서 아무것도 안 보였어'],['mint','화면 까맸다가 지금 돌아옴'],['ㅇㅇ','근데 끊긴 동안 채팅 친 사람 누구임']].forEach((m,i)=>setTimeout(()=>gameChat(m[0],m[1]),900+i*800));setTimeout(()=>bars(4),2000)}
 function incomingCall(n){n=n||1;if(n===1){if(phFx.call)return;phFx.call=1}if(current!=='f3'&&current!=='f3end')return;const c=$('#call');let ring=null,done=false;
   const SUB=['발신자 정보 없음','부재중 전화 1통','부재중 전화 2통 · 다시 거는 중'];
-  c.innerHTML=`<div class="cl-card"><small>수신 전화 · 휴대전화</small><b>010-****-1388</b><span class="cl-sub" id="clSub">${SUB[Math.min(n,3)-1]}</span><div class="cl-bt"><button type="button" class="no" id="clNo">거절</button><button type="button" class="yes" id="clYes">받기</button></div></div>`;
+  c.innerHTML=`<div class="cl-card"><small>수신 전화 · 휴대전화</small><b>심안나</b><span class="cl-sub" id="clSub">${SUB[Math.min(n,3)-1]}</span><div class="cl-bt"><button type="button" class="no" id="clNo">거절</button><button type="button" class="yes" id="clYes">받기</button></div></div>`;
   c.hidden=false;c.className='';void c.offsetWidth;c.classList.add('on');
   const r=()=>{smsSound();try{navigator.vibrate&&navigator.vibrate([400,200,400])}catch(e){}};r();ring=setInterval(r,2200);
   const close=ms=>{clearInterval(ring);setTimeout(()=>{c.classList.remove('on');setTimeout(()=>{c.hidden=true},400)},ms)};
-  const again=(msg)=>{close(0);setTimeout(()=>forceSms('010-****-1388',msg),900);setTimeout(()=>incomingCall(n+1),n===1?5200:3800)};
+  const again=(msg)=>{close(0);setTimeout(()=>forceSms('심안나',msg),900);setTimeout(()=>incomingCall(n+1),n===1?5200:3800)};
   const timeout=setTimeout(()=>{if(done)return;done=true;again(n===1?'왜 안 받아요. 바로 뒤인데.':'받을 때까지 걸 거예요.')},n>=3?99999:13000);
   if(n>=3){setTimeout(()=>{if(done)return;const sb=$('#clSub');sb.textContent='자동으로 연결됩니다';tone(660,.1,'sine',.05);setTimeout(()=>{if(!done){const y=$('#clYes');y&&y.click()}},1400)},3600)}
   $('#clNo').addEventListener('click',()=>{if(done)return;done=true;clearTimeout(timeout);again(n===1?'끊지 마요.':'또 끊네.')});
@@ -1871,8 +1871,13 @@ function doyunCall(){if(phFx.doyun)return;phFx.doyun=1;const c=$('#call');let ri
   $('#clYes').addEventListener('click',()=>{if(done)return;done=true;clearTimeout(to);clearInterval(ring);c.classList.add('talk');const sub=$('#clSub');let sec=0;const tm=setInterval(()=>{sec++;sub.dataset.t='00:'+String(sec).padStart(2,'0')},1000);
     $('#clYes').remove();$('#clNo').textContent='종료';let alive=true;const line=VO.line;if(line){try{line.loop=true;line.volume=.3;line.currentTime=0;line.play().catch(()=>{})}catch(e){}}
     const end=()=>{if(!alive)return;alive=false;if(line)vstop('line',300);clearInterval(tm);sub.textContent='통화 종료 '+(sub.dataset.t||'00:00');close(1600)};$('#clNo').onclick=end;
-    const L=['(잡음)','누나… 거기 내려가지 마.','…아니다.','내려와. 다들 기다려.','(수화기 너머로 심장 소리가 들리지 않는다)'];
-    L.forEach((t,i)=>setTimeout(()=>{if(!alive)return;sub.textContent=t;if(i===2){const ph=$('#phone');ph.classList.add('glx');setTimeout(()=>ph.classList.remove('glx'),900)}},600+i*2300));setTimeout(end,600+L.length*2300+800)})}
+    let bg0=.18;try{bg0=bgm.volume;bgm.volume=.03}catch(e){}const end0=end;const endX=()=>{['dy1','dy2','dy3'].forEach(k=>vstop(k,200));try{bgm.volume=bg0}catch(e){}end0()};$('#clNo').onclick=endX;
+    const say=t=>{if(alive)sub.textContent=t};const wait=ms=>new Promise(r=>setTimeout(r,ms));
+    (async()=>{say('(잡음)');await wait(1400);if(!alive)return;
+      say('누나… 거기 내려가지 마.');await vplay('dy1',1,3300);if(!alive)return;await wait(500);
+      say('…아니다.');const ph=$('#phone');ph.classList.add('glx');setTimeout(()=>ph.classList.remove('glx'),900);await vplay('dy2',1,3500);if(!alive)return;await wait(700);
+      say('내려와. 다들 기다려.');await vplay('dy3',1,4100);if(!alive)return;await wait(900);
+      say('(수화기 너머로 심장 소리가 들리지 않는다)');await wait(2600);endX()})()})}
 function calNoti(){if(phFx.cal)return;phFx.cal=1;const n=$('#phNoti');
   n.innerHTML=`<div class="cal-ic"><small>11월</small><b>7</b></div><div><small>캘린더 · 지금</small><b>02:47 저녁 식사</b><span>지하 B2 · 참석자 4명 · 수락됨</span></div>`;n.hidden=false;n.className='';void n.offsetWidth;n.classList.add('on');tone(1320,.08,'sine',.04);
   n.onclick=()=>{n.classList.remove('on');setTimeout(()=>{n.hidden=true},300);toast('수락한 적 없다. 참석자 목록 마지막 줄에 내 이름이 있다.')};
@@ -2208,13 +2213,15 @@ function climax(){if(state.climax)return;state.climax=1;save();busy=true;try{bgm
   const sub=(who,t)=>{const s=$('#clSub');s.innerHTML=(who?`<b>${who}</b>`:'')+`<span></span>`;s.querySelector('span').textContent=t;s.classList.remove('on');void s.offsetWidth;s.classList.add('on')};
   const T=[[0,()=>{c.classList.add('s1');tone(55,1.2,'sawtooth',.05);$('#glitch').classList.remove('on');void $('#glitch').offsetWidth;$('#glitch').classList.add('on')}],
    [900,()=>{c.classList.add('s2');tone(48,2,'sine',.08);sub('','수술등이 한 번 꺼졌다 켜졌다.')}],
-   [2600,()=>{c.classList.add('s3');sub('매드러브','“오셨네요, 아가씨.”')}],
+   [2600,()=>{c.classList.add('s3');sub('','안나가 곁을 떠나, 둘 사이로 걸어간다.')}],
    [4800,()=>{c.classList.add('s4');tone(990,.04,'square',.03);sub('하모니','(입을 다문 채, 웃는다)')}],
-   [6800,()=>{sub('유포리아','“…늦었네.”')}],
-   [8800,()=>{c.classList.add('s5');sub('매드러브','“자리는 하나예요. 앉으세요.”')}],
-   [11200,()=>{c.classList.add('s6');tone(60,.25,'sine',.12);setTimeout(()=>tone(60,.25,'sine',.12),330);sub('','')}],
-   [12600,()=>{c.classList.add('s7');tone(1760,.3,'square',.04)}],
-   [14200,climaxEnd]];
+   [6800,()=>{sub('유포리아','“…제일 중요한 손님 앞인데. 왜 맨날 풀고 다녀.”')}],
+   [9200,()=>{sub('','유포리아가 안나의 목에 핫핑크 넥타이를 매어 준다.')}],
+   [11400,()=>{tone(55,.3,'sine',.1);sub('매드러브','“어서 오세요, 아가씨. 기다렸어요.”')}],
+   [14000,()=>{c.classList.add('s5');sub('매드러브','“자리는 하나예요. 앉으세요.”')}],
+   [16400,()=>{c.classList.add('s6');tone(60,.25,'sine',.12);setTimeout(()=>tone(60,.25,'sine',.12),330);sub('','')}],
+   [17800,()=>{c.classList.add('s7');tone(1760,.3,'square',.04)}],
+   [19400,climaxEnd]];
   T.forEach(([t,f])=>climaxTimers.push(setTimeout(f,t)))}
 let climaxTimers=[];
 function climaxEnd(){climaxTimers.forEach(clearTimeout);climaxTimers=[];$('#climax').hidden=true;state.codes=state.codes||{};state.codes.THREE0247=1;state.cleared=1;save();busy=false;

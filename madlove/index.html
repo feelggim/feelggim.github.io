@@ -1166,6 +1166,21 @@ canvas.mz{position:absolute;pointer-events:none;image-rendering:pixelated;z-inde
 #xlock .xboot{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font:500 12px/1 "DM Mono",monospace;letter-spacing:.3em;color:#ff2e93;transition:opacity .4s}
 #xlock .xboot b{font:400 clamp(26px,7vw,36px)/1 "Black Han Sans",sans-serif;letter-spacing:.06em;color:#efe8eb}
 #xlock.on .xboot{opacity:0;pointer-events:none}
+
+/* ===== v47 · 첫 녹화 안내 ===== */
+#tut{position:fixed;z-index:46;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translateX(-50%);width:min(420px,calc(100vw - 24px));background:rgba(8,5,6,.94);border:1px solid rgba(255,46,147,.55);box-shadow:0 0 40px rgba(255,46,147,.18),0 20px 50px rgba(0,0,0,.7);color:#efe8eb;font-family:"IBM Plex Sans KR",sans-serif;padding:16px 18px 14px;animation:hoin .4s ease-out}
+#tut[hidden]{display:none!important}
+#tut .th{display:flex;justify-content:space-between;align-items:center;font:500 10px "DM Mono",monospace;letter-spacing:.22em;color:#ff2e93;margin-bottom:10px}
+#tut .th i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#e0102e;margin-right:7px;animation:protob 1s steps(1) infinite}
+#tut ol{list-style:none;margin:0;padding:0;display:grid;gap:7px;counter-reset:t}
+#tut li{counter-increment:t;display:flex;gap:10px;font-size:13.5px;line-height:1.5;color:#cfc6ca}
+#tut li::before{content:counter(t);flex:none;width:18px;height:18px;border:1px solid #ff2e93;color:#ff2e93;font:500 10px/16px "DM Mono",monospace;text-align:center;margin-top:1px}
+#tut li b{color:#fff}
+#tut .tf{margin-top:11px;padding-top:10px;border-top:1px dashed rgba(255,46,147,.25);font-size:13px;color:#ff8fc4}
+#tut button{display:block;margin:12px 0 0 auto;background:#ff2e93;color:#0a0708;border:0;padding:7px 16px;font:400 14px "Black Han Sans",sans-serif;letter-spacing:.04em;cursor:pointer}
+@media (max-width:900px),(orientation:portrait){#tut{top:auto;bottom:calc(150px + env(safe-area-inset-bottom,0px))}}
+#tutNow{position:fixed;z-index:6;left:50%;transform:translateX(-50%);font:400 15px "Black Han Sans",sans-serif;letter-spacing:.06em;color:#0a0708;background:#ff2e93;padding:4px 12px;pointer-events:none;box-shadow:0 0 18px rgba(255,46,147,.6);animation:protob 1s steps(1) infinite}
+#tutNow[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -1216,6 +1231,13 @@ canvas.mz{position:absolute;pointer-events:none;image-rendering:pixelated;z-inde
   <path d="M42 30v6M42 48v6M30 42h6M48 42h6" stroke="#f2efe6" stroke-width="2"/>
 </svg></div>
 <div id="hint"></div>
+<div id="tut" hidden role="dialog" aria-label="녹화 방법"><div class="th"><span><i></i>HOW TO REC · 녹화 방법</span><span>01</span></div>
+ <ol><li><span>화면을 끌어서 둘러봐. <b>폰은 기울이면</b> 시야가 따라와.</span></li>
+ <li><span>가운데 <b>커서</b>를 수상한 곳에 맞춰. 커서가 <b>지지직 떨리면</b> 단서야.</span></li>
+ <li><span>그대로 <b>길게 눌러</b> 녹화. PC는 <b>클릭 유지</b> 또는 <b>R키</b>. 링이 다 차면 찍힌다.</span></li></ol>
+ <div class="tf">첫 단서 → 정문 철문 위, 녹슨 현판을 찍어봐.</div>
+ <button type="button" id="tutOk">알겠어</button></div>
+<div id="tutNow" hidden>지금! 길게 눌러 녹화</div>
 <aside id="phone" hidden aria-label="방송 채팅">
   <div class="ph-scr">
     <div class="ph-top"><span class="ph-live" id="phLive">● LIVE</span><span class="ph-bars" id="phBars" data-l="4"><i></i><i></i><i></i><i></i></span><span id="phView">👁 1,388</span></div><div class="ph-static" aria-hidden="true"></div>
@@ -1548,6 +1570,8 @@ function cancelHold(){if(!holding)return;holding=false;$('#ring').style.strokeDa
 /* ---------- 조준 ---------- */
 const ray=new THREE.Raycaster(),center=new THREE.Vector2(0,0);let aimed=null,figureLook=0;
 const lcdEl=document.getElementById('lcd'),retEl=document.getElementById('reticle'),hintEl=document.getElementById('hint');
+function tutOn(){return state.tut===1}
+function showTut(){if(state.tut)return;state.tut=1;save();const t=$('#tut');t.hidden=false;$('#tutOk').onclick=()=>{t.hidden=true}}
 function aim(){const lr=lcdEl.getBoundingClientRect(),lx=lr.left+lr.width/2,ly=lr.top+lr.height/2;center.set(lx/innerWidth*2-1,-(ly/innerHeight*2-1));
   retEl.style.left=lx+'px';retEl.style.top=ly+'px';hintEl.style.left=lx+'px';hintEl.style.top=(ly+Math.min(56,Math.max(30,lr.height*.17)))+'px';ray.setFromCamera(center,camera);const h=ray.intersectObjects(hotspots,false);aimed=h.length&&(h[0].distance<9||h[0].object.userData.kind==='door')?h[0].object:null;
   const r=$('#reticle'),hint=$('#hint');
@@ -1555,6 +1579,7 @@ function aim(){const lr=lcdEl.getBoundingClientRect(),lx=lr.left+lr.width/2,ly=l
     else if(d.kind==='empty'){r.classList.remove('jit');hint.textContent=d.label}
     else{r.classList.add('jit');hint.textContent=''}}
   else{r.classList.remove('jit');hint.textContent=''}
+  {const tn=$('#tutNow');if(tn){const on=tutOn()&&aimed&&aimed.userData.kind==='clue'&&!holding;tn.hidden=!on;if(on){tn.style.top=(parseFloat(retEl.style.top)-Math.max(60,parseFloat(getComputedStyle(retEl).width)))+'px'}}}
   if(figure){const p=figure.position.clone().add(new THREE.Vector3(0,1.4,0)).project(camera);const vis=p.z<1&&Math.abs(p.x-center.x)<.3&&Math.abs(p.y-center.y)<.45;const ud=figure.userData;
     if(vis){figureLook+=1/60;if(figureLook>(ud.look||.9)){tone(70,1.2,'sawtooth',.06);world.remove(figure);figure=null;state[ud.flag||'sawFigure']=true;save();const m=ud.msg||'…방금 계단 문 앞에';setTimeout(()=>toast(m),300)}}
     else if(ud.until&&performance.now()>ud.until){world.remove(figure);figure=null;state[ud.flag]=true;save()}}}
@@ -1568,7 +1593,7 @@ function complete(){
   setTimeout(()=>{const shot=shotLCD();
     if(d.kind==='trap'){if(current==='f3end'&&!state.sawFigure2)pendingFig2=true;$('#tear').classList.remove('on');void $('#tear').offsetWidth;$('#tear').classList.add('on');burst();window.__duck&&window.__duck(2500);
       setTimeout(()=>{addClip({title:'녹음기',shot,text:'재생 버튼을 누르기도 전에 녹음기가 스스로 돌아갔다. 비명. 그 아래로 여러 겹이 긁히는 소리. 녹화가 강제로 끊겼다. 코 밑이 뜨겁다.',note:'[REC 중단 · 음성 신호 과부하] 이건 찍는 게 아니었다.',danger:true});},900);return}
-    if(d.kind==='clue'){const dup=clips.some(c=>c.id===d.id);if(d.frag)state.frag[d.frag]=true;save();
+    if(d.kind==='clue'){const dup=clips.some(c=>c.id===d.id);if(tutOn()){state.tut=2;save();$('#tut').hidden=true;$('#tutNow').hidden=true;setTimeout(()=>toast('녹화 완료. 찍은 단서는 클립에 모여'),1400)}if(d.frag)state.frag[d.frag]=true;save();
       addClip({id:d.id,title:d.title,shot,text:d.text,note:d.note,frag:d.frag,dup,tone:d.tone});return}
     const n=['노이즈만 찍혔다.','아무것도 없다. 아마도.','초점이 맞지 않는다.'];
     addClip({title:'빈 클립',shot,text:n[Math.floor(Math.random()*n.length)],empty:true});
@@ -2082,7 +2107,7 @@ async function beginGame(skipDrive,resume){const touch=matchMedia('(pointer:coar
     const ms=engineSeq()||1600;await new Promise(r=>setTimeout(r,ms));await chapter(1);dv.classList.add('out');setTimeout(()=>{dv.hidden=true;dv.classList.remove('on','out')},950);
     window.__duck&&window.__duck(300)}
   else{if(!(resume>=2))await chapter(resume||1,1800);bgm.volume=.38;const fl=$('#flash');fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');tone(220,.15,'square',.06)}
-  started=true;t0=performance.now();document.body.classList.add('ingame');questUpdate();lockResume();if(resume>=4){enterB2();return}if(resume>=3){openArchiveSite();return}if(resume>=2){enterPC();return}$('#phone').hidden=false;gameChat('박쥐','도착했다 ㄷㄷ');chatLoop();smsLoop(true);
+  started=true;t0=performance.now();document.body.classList.add('ingame');questUpdate();lockResume();if(resume>=4){enterB2();return}if(resume>=3){openArchiveSite();return}if(resume>=2){enterPC();return}$('#phone').hidden=false;setTimeout(showTut,1800);gameChat('박쥐','도착했다 ㄷㄷ');chatLoop();smsLoop(true);
   if(gyroP){const ok=await gyroP;if(ok){setMode(true);toast('폰을 돌려서 둘러보기')}else toast('드래그로 둘러보기 · 길게 눌러 녹화')}else toast('드래그로 둘러보기 · 길게 누르거나 R키로 녹화')}
 
 /* ===== v41 · S튜브 추천 영상 ===== */
@@ -2130,7 +2155,7 @@ const PASS=[
 ];
 const QCODES=[['HOLLOW0312','폐병원 · 코드 조각 두 개','폐병원'],['EMPTY88','트리니티 장학재단 · 이사회','장학재단'],['BLIND07','트리니티 장학재단 · 역대 장학생','장학재단'],['A29','재단 기록 보관소','보관소'],['THREE0247','???','???']];
 function hasCode(c){return c==='HOLLOW0312'?!!code():!!(state.codes&&state.codes[c])}
-function questInfo(){const P=state.pass,n=QCODES.filter(q=>hasCode(q[0])).length;let next,why;
+function questInfo(){const P=state.pass,n=QCODES.filter(q=>hasCode(q[0])).length;let next,why;const fr=(state.frag&&state.frag.HOLLOW?1:0)+(state.frag&&state.frag['0312']?1:0);
   if(state.cleared){next='크랙에 THREE0247 입력 · 본편 시작';why='홈페이지는 여기까지. 메뉴에서 기밀 해제 아카이브를 볼 수 있다.'}
   else if(P['B2']){next=state.b2open?'B2 식탁 · 수상한 것 셋을 녹화하기':'지하 B2 철문 · 키패드 비밀번호 풀기';why=state.b2open?'접시, 병, 도구. 찍을 때마다 누군가 가까워진다.':'네 자리. 그 여자를 처음 만난 시각.'}
   else if(hasCode('A29')){next='크랙에 A29 입력 → 접속어 받아오기';why='도윤에게 확인해. 그리고 그가 남긴 말을 홈페이지에.'}
@@ -2139,9 +2164,9 @@ function questInfo(){const P=state.pass,n=QCODES.filter(q=>hasCode(q[0])).length
   else if(hasCode('EMPTY88')){next='크랙에 EMPTY88 입력 · 사이트 조사 계속';why='역대 장학생 명단도 다시 봐. 한 사람만 이상하게 찍혀 있다.'}
   else if(P['트리니티']){next='트리니티 장학재단 사이트를 뒤져 수상한 곳 녹화하기';why='메뉴를 하나씩 열어봐. 비어 있어야 할 게 아닌데 비어 있는 곳이 있다.'}
   else if(code()){next='크랙에 HOLLOW0312 입력 → 접속어 받아오기';why='크랙 대화 마지막 줄에 ‘▷ 홈페이지 입력창: ○○’이 뜨면, 아래 접속어 버튼으로 입력.'}
-  else if(P['0204']){next='3층 복도 끝까지 · 코드 조각을 모아 코드 1 완성하기';why='조각은 1층과 3층에 하나씩. 조준점을 수상한 곳에 대고 길게 눌러 녹화.'}
-  else if(state.sawLock){next='크랙에서 그 여자를 만나 3층 비밀번호 받아오기';why='크랙을 시작하면 잠긴 계단 앞에서 이야기가 이어진다. 받은 번호는 아래 접속어에 입력.'}
-  else{next='폐병원 안으로 · 1층 로비를 둘러보고 3층 계단까지';why='조준점을 수상한 곳에 대고 길게 누르면 녹화된다. 문은 조준점을 대고 길게 눌러 지나간다.'}
+  else if(P['0204']){next=`코드 조각 ${fr}/2 · 3층 복도 끝까지 둘러보기`;why='조각은 1층과 3층에 하나씩. 조준점을 수상한 곳에 대고 길게 눌러 녹화.'}
+  else if(state.sawLock){next=`코드 조각 ${fr}/2 · 크랙에서 3층 비밀번호 받아오기`;why='크랙을 시작하면 잠긴 계단 앞에서 이야기가 이어진다. 받은 번호는 아래 접속어에 입력.'}
+  else{next=`코드 조각 ${fr}/2 · 1층 로비를 둘러보고 3층 계단까지`;why='조준점을 수상한 곳에 대고 길게 누르면 녹화된다. 문은 조준점을 대고 길게 눌러 지나간다.'}
   return {n,next,why}}
 let qLast=-1;
 function questUpdate(){const q=questInfo();const no=$('#qNo');if(!no)return;no.textContent=`CLUE ${q.n}/5`;$('#qBar').style.width=(q.n/5*100)+'%';$('#qNext').textContent=q.next;

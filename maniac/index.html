@@ -53,6 +53,17 @@ a{color:inherit}
 .handle{font-family:var(--f-word);font-weight:400;font-size:17px;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
 .seal{width:14px;height:14px;border-radius:50%;background:var(--accent);display:inline-grid;place-items:center}
 .seal::after{content:"";width:6px;height:3px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.right{display:flex;align-items:center;gap:18px;min-width:0}
+.music{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--sub);min-width:0;padding:6px 10px;border:1px solid var(--line);border-radius:99px}
+.music .mt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.music[aria-pressed="true"]{color:var(--ink);border-color:var(--accent)}
+.eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;width:14px}
+.eq i{display:block;width:3px;height:3px;background:var(--accent);border-radius:1px}
+.music[aria-pressed="true"] .eq i{animation:eq 1s ease-in-out infinite}
+.music[aria-pressed="true"] .eq i:nth-child(2){animation-delay:-.4s}
+.music[aria-pressed="true"] .eq i:nth-child(3){animation-delay:-.7s}
+@keyframes eq{0%,100%{height:3px}50%{height:12px}}
+@media (max-width:640px){.music .mt{display:none}.right{gap:10px}}
 .face{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
 .switch{width:46px;height:24px;border-radius:99px;background:var(--chip);border:1px solid var(--line);position:relative;transition:background .4s}
 .switch::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--ink);transition:transform .45s cubic-bezier(.7,0,.2,1),background .4s}
@@ -182,11 +193,18 @@ a{color:inherit}
 <div class="wrap">
   <div class="bar">
     <div class="handle">parkjueun <span class="seal" aria-label="인증된 계정"></span></div>
+    <div class="right">
+    <button class="music" id="musicBtn" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="mt">Diamonds on a Broken Stage</span>
+    </button>
     <button class="face" id="faceBtn" aria-pressed="false" aria-label="뒷면 보기 전환">
       <span class="frontonly"><b>앞면</b></span><span class="backonly"><b>04:12</b></span>
       <span class="switch" aria-hidden="true"></span>
     </button>
+    </div>
   </div>
+  <audio id="bgm" src="audio/diamonds.mp3" loop preload="none"></audio>
 
   <section class="profile">
     <div class="avatar"><img src="img/avatar.webp" alt="박주은 프로필 사진"></div>
@@ -368,7 +386,34 @@ function setFace(f){
   $("#faceBtn").setAttribute("aria-pressed",f==="back");
   if(f!=="back"&&tab==="drafts"){tab="posts";render()}
   try{localStorage.setItem("jueun-face",f)}catch(e){}
+  muffle(f==="back");
 }
+/* music: clear on the front, under water on the back */
+const bgm=$("#bgm"); let ac=null, lp=null, gn=null;
+function initAudio(){
+  if(ac) return;
+  try{
+    ac=new (window.AudioContext||window.webkitAudioContext)();
+    const src=ac.createMediaElementSource(bgm);
+    lp=ac.createBiquadFilter(); lp.type="lowpass"; lp.Q.value=0.7;
+    gn=ac.createGain();
+    src.connect(lp).connect(gn).connect(ac.destination);
+    muffle(document.documentElement.dataset.face==="back",true);
+  }catch(e){ac=null}
+}
+function muffle(on,now){
+  bgm.playbackRate=on?0.94:1; try{bgm.preservesPitch=false}catch(e){}
+  if(!ac) return; const t=ac.currentTime, d=now?0.01:1.2;
+  lp.frequency.cancelScheduledValues(t); gn.gain.cancelScheduledValues(t);
+  lp.frequency.setTargetAtTime(on?700:18000,t,d/3);
+  gn.gain.setTargetAtTime(on?0.75:1,t,d/3);
+}
+$("#musicBtn").addEventListener("click",async e=>{
+  const b=e.currentTarget;
+  if(bgm.paused){
+    initAudio(); try{ if(ac&&ac.state==="suspended") await ac.resume(); await bgm.play(); b.setAttribute("aria-pressed","true"); b.setAttribute("aria-label","배경음악 일시정지"); }catch(err){}
+  }else{ bgm.pause(); b.setAttribute("aria-pressed","false"); b.setAttribute("aria-label","배경음악 재생"); }
+});
 $("#faceBtn").addEventListener("click",()=>setFace(document.documentElement.dataset.face==="back"?"front":"back"));
 $("#followBtn").addEventListener("click",e=>{const b=e.currentTarget;const on=b.classList.toggle("primary");b.textContent=on?"팔로우":"팔로잉"});
 document.querySelectorAll("[data-story]").forEach(b=>b.addEventListener("click",()=>{

@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="RAINBOW：MANIAC · 박주은">
+<meta property="og:description" content="다섯 개의 브랜드를 가진 여자, 박주은. 숨긴 건 하나도 없다.">
+<meta property="og:image" content="https://feelggim.github.io/maniac/img/post_cover.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/avatar.webp" type="image/webp">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>RAINBOW：MANIAC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,500&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700;800;900&family=Unbounded:wght@300;400&family=Nanum+Pen+Script&family=Italiana&display=swap">
+<style>
+/* Layout: a magazine you page through. Desktop shows a two-page spread with real page turns;
+   phones show one page at a time with swipe. Every page is a fixed 3:4 sheet whose type scales with the sheet. */
+:root{
+  --desk:#1A1520; --desk2:#241D2B; --paper:#F7F2EE; --paper2:#EEE6E2; --ink:#15111C; --sub:#6F6474; --rule:rgba(21,17,28,.16);
+  --pop:#E0247E; --wine:#8E1238; --pearl:#F3ECF1; --mute:#A79BB2;
+  --f-mast:"Unbounded","Noto Sans KR",system-ui,sans-serif;
+  --f-head:"Bodoni Moda","Noto Sans KR",Georgia,serif;
+  --f-kr:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"DM Mono","Noto Sans KR",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--desk)}
+body{color:var(--pearl);font-family:var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:radial-gradient(120% 90% at 50% 40%,var(--desk2),var(--desk) 70%)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--pop);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1240px;margin:0 auto;padding-block:16px 28px;display:grid;gap:14px}
+
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.bar b{font-family:var(--f-mast);font-weight:300;letter-spacing:.42em;color:var(--pearl);font-size:13px}
+.bar .r{display:flex;gap:10px;align-items:center}
+.pill{display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid rgba(243,236,241,.16);border-radius:99px;text-transform:none;letter-spacing:.04em;text-decoration:none}
+.pill[aria-pressed="true"]{color:var(--pearl);border-color:var(--pop)}
+.eq{display:inline-flex;align-items:flex-end;gap:2px;height:11px;width:13px}
+.eq i{display:block;width:3px;height:3px;background:var(--pop);border-radius:1px}
+.pill[aria-pressed="true"] .eq i{animation:eq 1s ease-in-out infinite}
+.pill[aria-pressed="true"] .eq i:nth-child(2){animation-delay:-.4s}
+.pill[aria-pressed="true"] .eq i:nth-child(3){animation-delay:-.7s}
+@keyframes eq{0%,100%{height:3px}50%{height:11px}}
+
+/* stage */
+.stage{position:relative;display:grid;place-items:center;padding-block:6px}
+.book{position:relative;width:min(1180px,100%,calc((100vh - 140px) * 1.5));aspect-ratio:3/2;perspective:2600px;transition:transform .9s cubic-bezier(.6,.05,.3,1)}
+.book.closed-front{transform:translateX(-25%)}
+.book.closed-back{transform:translateX(25%)}
+.leaf{position:absolute;top:0;left:50%;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.6,.05,.3,1)}
+.leaf.flipped{transform:rotateY(-180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;background:var(--paper)}
+.face.back{transform:rotateY(180deg)}
+.face::after{content:"";position:absolute;inset:0;pointer-events:none}
+.face.front::after{background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(0,0,0,0) 7%)}
+.face.back::after{background:linear-gradient(270deg,rgba(0,0,0,.18),rgba(0,0,0,0) 7%)}
+.book .shadow{position:absolute;inset:2% 0 -3%;border-radius:4px;box-shadow:0 40px 90px rgba(0,0,0,.6);pointer-events:none}
+
+.single{position:relative;width:min(100%,calc((100vh - 150px) * .75));aspect-ratio:3/4;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55);touch-action:none}
+.single .track{display:flex;height:100%;transition:transform .5s cubic-bezier(.6,.05,.3,1)}
+.single .sheet{flex:0 0 100%;height:100%;position:relative;overflow:hidden;background:var(--paper)}
+
+.nav{display:flex;justify-content:center;align-items:center;gap:18px;font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:var(--mute)}
+.nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,236,241,.18);display:grid;place-items:center;font-size:18px;color:var(--pearl)}
+.nav button:disabled{opacity:.25;cursor:default}
+.hint{text-align:center;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--mute);opacity:.7}
+
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+/* ---------- page system (sized by the sheet: 100cqw = page width) ---------- */
+.pg{position:absolute;inset:0;container-type:inline-size;color:var(--ink);font-family:var(--f-kr);background:var(--paper);overflow:hidden}
+.pg .in{position:absolute;inset:8.4cqw 6.6cqw 8.2cqw;display:flex;flex-direction:column;gap:2.6cqw}
+/* running head + folio */
+.pg .rh{position:absolute;top:3.4cqw;left:6.6cqw;right:6.6cqw;display:flex;justify-content:space-between;align-items:baseline;padding-bottom:1.1cqw;border-bottom:1px solid var(--rule);font-family:var(--f-mono);font-size:1.35cqw;letter-spacing:.2em;text-transform:uppercase;color:var(--sub);z-index:3}
+.pg .rh b{font-family:var(--f-mast);font-weight:400;letter-spacing:.42em;color:var(--ink)}
+.pg .fo{position:absolute;bottom:3.2cqw;left:6.6cqw;right:6.6cqw;display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-mono);font-size:1.35cqw;letter-spacing:.2em;text-transform:uppercase;color:var(--sub);z-index:3}
+.pg .fo i{font-family:var(--f-head);font-style:normal;font-size:2.4cqw;letter-spacing:0;color:var(--ink)}
+.pg.r .fo{flex-direction:row-reverse}
+.pg.dark .rh,.pg.dark .fo,.pg.on-img .rh,.pg.on-img .fo{color:rgba(255,255,255,.72);border-color:rgba(255,255,255,.25)}
+.pg.dark .rh b,.pg.dark .fo i,.pg.on-img .rh b,.pg.on-img .fo i{color:#fff}
+/* type */
+.pg .mono{font-family:var(--f-mono);font-size:1.5cqw;letter-spacing:.22em;text-transform:uppercase;color:var(--sub)}
+.pg .kick{font-family:var(--f-mono);font-size:1.5cqw;letter-spacing:.28em;text-transform:uppercase;color:var(--pop);display:flex;align-items:center;gap:1.4cqw}
+.pg .kick::before{content:"";width:5cqw;height:1px;background:currentColor}
+.pg h2{margin:0;font-family:var(--f-head);font-weight:400;font-size:12cqw;line-height:.9;letter-spacing:-.025em}
+.pg h2 em{font-style:italic;color:var(--wine)}
+.pg .hk{margin:0;font-family:var(--f-kr);font-weight:800;font-size:4.6cqw;line-height:1.32;letter-spacing:-.02em;word-break:keep-all}
+.pg .deck{margin:0;font-family:var(--f-kr);font-size:2.45cqw;line-height:1.75;color:#3A3240;word-break:keep-all}
+.pg p{margin:0}
+.pg .body{font-size:2.2cqw;line-height:1.82;text-align:justify;word-break:normal;line-break:strict;color:#231C29}
+.pg .body p+p{text-indent:1em}
+.pg .cols{column-count:2;column-gap:4.2cqw;column-rule:1px solid var(--rule)}
+.pg .cols > *{break-inside:avoid-column}
+.pg .cols .q,.pg .cols .a{break-inside:auto}
+.pg .drop::first-letter{float:left;font-family:var(--f-head);font-size:3.6em;line-height:.82;padding:.08em .1em 0 0;color:var(--wine)}
+.pg .q{display:block;margin:1.1em 0 .35em;font-family:var(--f-body);font-weight:600;font-size:2.15cqw;text-align:left;line-height:1.55;color:var(--ink);text-indent:0!important;word-break:keep-all}
+.pg .q::before{content:"Q.";margin-right:.45em;font-family:var(--f-head);font-style:italic;font-weight:600;color:var(--pop)}
+.pg .q:first-child{margin-top:0}
+.pg .a{text-indent:0!important}
+.pg .a::before{content:"A.";margin-right:.45em;font-family:var(--f-head);font-style:italic;color:var(--sub)}
+.pg .note{font-style:italic;color:#7A6E80}
+.pg .pq{margin:1.2em 0;padding:1.6cqw 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);font-family:var(--f-head);font-style:italic;font-size:3.6cqw;line-height:1.15;color:var(--wine);text-align:left;text-indent:0!important;column-span:all;word-break:keep-all}
+.pg .pq small{display:block;margin-top:1cqw;font-family:var(--f-kr);font-style:normal;font-size:1.9cqw;color:var(--sub)}
+/* images */
+.pg .bleed{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pg .fig{display:block;width:100%;object-fit:cover}
+.pg .cap{font-family:var(--f-mono);font-size:1.3cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);line-height:1.5;margin-top:.9cqw}
+.pg .cap b{color:var(--pop);font-weight:500}
+.pg .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,16,.55),rgba(12,8,16,0) 22%,rgba(12,8,16,0) 45%,rgba(12,8,16,.92) 88%)}
+.pg .vcred{position:absolute;right:2.4cqw;top:50%;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-family:var(--f-mono);font-size:1.2cqw;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.7);z-index:3}
+.pg.dark{background:#0E0A14;color:var(--pearl)}
+.pg.dark .body{color:rgba(243,236,241,.82)}
+.pg.wine{background:#5E0C27;color:#FBEFF4}
+/* contents */
+.pg .toc{display:grid;gap:0;margin-top:1cqw}
+.pg .toc div{display:grid;grid-template-columns:8.5cqw 1fr auto;align-items:baseline;gap:2cqw;padding:.85cqw 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.pg .toc b{font-family:var(--f-head);font-weight:400;font-size:4.6cqw;line-height:1;color:#FF5C9E}
+.pg .toc span{font-family:var(--f-head);font-size:2.9cqw;line-height:1.1;color:#fff}
+.pg .toc small{display:block;margin-top:.5cqw;font-family:var(--f-body);font-size:1.75cqw;color:rgba(243,236,241,.6);letter-spacing:0}
+.pg .toc em{font-family:var(--f-mono);font-style:normal;font-size:1.3cqw;letter-spacing:.2em;color:rgba(243,236,241,.45);text-transform:uppercase}
+/* masthead box */
+.pg .mast{margin-top:auto;border-top:2px solid var(--ink);padding-top:1.6cqw;display:grid;grid-template-columns:1fr 1fr;gap:.9cqw 3cqw;font-family:var(--f-mono);font-size:1.3cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
+.pg .mast b{display:block;font-family:var(--f-body);font-weight:500;font-size:1.75cqw;letter-spacing:0;text-transform:none;color:var(--ink)}
+.pg .sig{font-family:var(--f-head);font-style:italic;font-size:4.4cqw;line-height:1;color:var(--ink)}
+.pg .sig small{display:block;margin-top:.8cqw;font-family:var(--f-mono);font-style:normal;font-size:1.3cqw;letter-spacing:.2em;text-transform:uppercase;color:var(--sub)}
+/* fact box */
+.pg .facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink);border-bottom:1px solid var(--ink)}
+.pg .facts div{padding:1.6cqw 1.4cqw;border-left:1px solid var(--rule)}
+.pg .facts div:first-child{border-left:0;padding-left:0}
+.pg .facts b{display:block;font-family:var(--f-head);font-weight:400;font-size:7cqw;line-height:.95;color:var(--wine)}
+.pg .facts span{font-family:var(--f-body);font-size:1.6cqw;line-height:1.4;color:var(--sub)}
+/* society grid */
+.pg .soc{display:grid;grid-template-columns:1fr 1fr;gap:2.6cqw 2.6cqw;flex:1;min-height:0}
+.pg .soc figure{margin:0;display:flex;flex-direction:column;min-height:0}
+.pg .soc img{flex:1;min-height:0;width:100%;object-fit:cover}
+.pg .soc figcaption{font-family:var(--f-body);font-size:1.6cqw;line-height:1.5;color:#3A3240;margin-top:1cqw;word-break:keep-all}
+.pg .soc figcaption b{font-family:var(--f-head);font-style:italic;font-weight:400;font-size:2.4cqw;color:var(--pop);margin-right:.5cqw}
+/* her five */
+.pg .five{display:grid;gap:2.4cqw;flex:1;min-height:0}
+.pg .brand{display:grid;grid-template-columns:auto 1fr;gap:1.2cqw 2.4cqw;align-items:start;padding-top:1.6cqw;border-top:1px solid var(--ink)}
+.pg .brand .no{grid-row:span 3;font-family:var(--f-head);font-style:italic;font-size:6.4cqw;line-height:.8;color:var(--pop)}
+.pg .bn{font-family:var(--f-mast);font-weight:400;font-size:3.2cqw;letter-spacing:.14em;line-height:1}
+.pg .brand .mono{font-size:1.3cqw}
+.pg .brand p{font-size:1.95cqw;line-height:1.65;word-break:keep-all;color:#2C2531}
+.pg .ph{position:relative;overflow:hidden;background:var(--sw,#2A2033)}
+.pg .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pg .ph .swl{position:absolute;left:2cqw;bottom:1.6cqw;font-family:var(--f-mast);font-weight:300;font-size:2.4cqw;letter-spacing:.3em;color:rgba(255,255,255,.85)}
+/* making of */
+.pg .time{list-style:none;margin:0;padding:0;display:grid}
+.pg .time li{display:grid;grid-template-columns:9cqw 1fr;gap:2cqw;align-items:baseline;padding:1.05cqw 0;border-bottom:1px solid var(--rule)}
+.pg .time b{font-family:var(--f-head);font-weight:400;font-size:5.4cqw;line-height:.9;color:var(--wine)}
+.pg .time span{font-family:var(--f-kr);font-weight:700;font-size:2.5cqw;line-height:1.3}
+.pg .time small{display:block;font-family:var(--f-body);font-weight:400;font-size:1.7cqw;color:var(--sub);margin-top:.4cqw}
+/* bag */
+.pg .bagl{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:b}
+.pg .bagl li{counter-increment:b;display:grid;grid-template-columns:4.4cqw 1fr;padding:1.15cqw 0;border-bottom:1px solid var(--rule);font-family:var(--f-body);font-size:1.85cqw;line-height:1.45}
+.pg .bagl li::before{content:counter(b,decimal-leading-zero);font-family:var(--f-mono);font-size:1.4cqw;color:var(--pop);padding-top:.25cqw}
+.pg .box{border:1px solid var(--ink);padding:2.4cqw 2.6cqw;display:grid;gap:1cqw}
+/* meet her */
+.pg .start{border-top:1px solid rgba(255,255,255,.22);padding:2.2cqw 0;display:grid;grid-template-columns:7cqw 1fr;gap:.6cqw 2cqw}
+.pg .start i{grid-row:span 2;font-family:var(--f-head);font-size:5.6cqw;line-height:.85;color:#FF5C9E}
+.pg .start b{font-family:var(--f-kr);font-weight:800;font-size:3cqw;color:#fff}
+.pg .start span{font-family:var(--f-body);font-size:1.9cqw;color:rgba(243,236,241,.7);line-height:1.6}
+.pg .btns{display:grid;gap:1.8cqw;margin-top:auto}
+.pg .btn{display:flex;justify-content:space-between;align-items:center;padding:2.6cqw 3.4cqw;text-decoration:none;font-family:var(--f-body);font-weight:600;font-size:2.3cqw;border:1px solid rgba(255,255,255,.5);color:#fff}
+.pg .btn.main{background:#FF2E93;border-color:#FF2E93}
+.pg .ad{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:8cqw 7cqw;color:#fff;background:linear-gradient(180deg,rgba(14,10,20,.55),rgba(14,10,20,0) 35%,rgba(14,10,20,.8))}
+.pg .ad .brand2{font-family:var(--f-mast);font-weight:300;font-size:7cqw;letter-spacing:.3em}
+.pg .ad p{font-family:var(--f-head);font-style:italic;font-size:4.4cqw;line-height:1.3;color:#fff}
+.pg.blank{background:var(--paper2)}
+.pg.blank .mono{position:absolute;inset:auto 0 45%;text-align:center}
+.pill{white-space:nowrap}
+@media (max-width:820px){#musicBtn span:last-child{display:none}.bar{font-size:10.5px}.bar b{letter-spacing:.28em}.bar .r{gap:6px}}
+.pg .h{letter-spacing:.02em;text-transform:none;font-family:var(--f-body);font-weight:500}
+/* Korean has no italic: keep it upright instead of a faked slant */
+.pg{font-synthesis:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.pg .body{font-weight:400;letter-spacing:-.01em}
+.pg .hk{font-weight:800;letter-spacing:-.035em}
+.pg .deck{letter-spacing:-.01em}
+/* Bodoni: pin optical size so hairlines never vanish on low-DPI screens */
+.pg,.pg *{font-optical-sizing:none;font-variation-settings:"opsz" 22}
+.pg .q::before,.pg .a::before,.pg .fo i,.pg .toc b,.pg .time b,.pg .brand .no,.pg .facts b,.pg .sig small,.pg .cap b,.pg .soc figcaption b,.pg .start i,.pg .toc span,.pg .drop::first-letter{font-variation-settings:"opsz" 11}
+.pg .q::before,.pg .a::before{font-weight:600}
+.pg .a::before{color:#8A7C90}
+/* her ink layer */
+.ink{position:absolute;inset:0;width:100%;height:100%;z-index:7;pointer-events:none;opacity:0;transition:opacity .5s ease;overflow:visible}
+:root[data-pen="on"] .ink{opacity:1}
+.pg.has-ink .scr{visibility:hidden}
+:root[data-draw="on"] .ink{pointer-events:auto;touch-action:none;cursor:crosshair;opacity:1}
+:root[data-draw="on"][data-tool="erase"] .ink{cursor:cell}
+:root[data-draw="on"] .pg .scr{visibility:visible;opacity:.28!important;outline:1px dashed rgba(211,22,95,.5);outline-offset:.6cqw}
+:root[data-draw="on"][data-guide="off"] .pg .scr{opacity:0!important;outline:0}
+:root[data-draw="on"] .book .leaf{cursor:default}
+.inkbar{position:sticky;bottom:12px;z-index:20;justify-self:center;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;max-width:100%;padding:8px 10px;border-radius:18px;background:rgba(20,14,26,.92);border:1px solid rgba(243,236,241,.16);box-shadow:0 12px 40px rgba(0,0,0,.5);font-family:var(--f-body);font-size:12px;color:var(--pearl)}
+.inkbar[hidden]{display:none}
+.inkbar .grp{display:flex;gap:2px;padding:2px;border-radius:12px;background:rgba(255,255,255,.06)}
+.inkbar button{padding:7px 10px;border-radius:10px;color:var(--mute);white-space:nowrap}
+.inkbar button[aria-pressed="true"]{background:rgba(224,36,126,.22);color:#fff}
+.inkbar button i{display:block;width:14px;height:14px;border-radius:50%}
+.inkbar #inkStatus{font-family:var(--f-mono);font-size:11px;color:var(--mute);padding:0 6px}
+/* draw mode: one big page, zoomable */
+:root[data-draw="on"] .stage{overflow:auto;max-height:calc(100vh - 120px);place-items:start center;padding:0}
+:root[data-draw="on"] .single{width:calc((100vh - 140px) * .75 * var(--z,1));max-width:none;flex:none}
+:root[data-draw="on"] .hint{display:none}
+.pg .scr.gone,:root[data-draw="on"] .pg .scr.gone{display:none}
+.pg .scr{-webkit-text-stroke:.012em currentColor;paint-order:stroke fill;letter-spacing:-.01em}
+.pg .scr.w{text-shadow:0 1px 8px rgba(0,0,0,.75),0 0 2px rgba(0,0,0,.4)}
+/* world spread */
+.pg .gloss{display:grid;grid-template-columns:1fr 1fr;gap:0 3cqw;border-top:2px solid var(--ink)}
+.pg .gloss div{padding:1.3cqw 0;border-bottom:1px solid var(--rule)}
+.pg .gloss b{display:flex;align-items:baseline;gap:1.2cqw;font-family:var(--f-kr);font-weight:800;font-size:2.3cqw}
+.pg .gloss b small{font-family:var(--f-mono);font-weight:400;font-size:1.25cqw;letter-spacing:.2em;color:var(--pop)}
+.pg .gloss p{font-size:1.75cqw;line-height:1.55;color:#3A3240;margin-top:.4cqw;word-break:keep-all}
+.pg table.breed{width:100%;border-collapse:collapse;font-family:var(--f-body);font-size:1.75cqw;text-align:center}
+.pg table.breed th{font-weight:700;font-size:1.9cqw;padding:1cqw .6cqw;border-bottom:2px solid var(--ink)}
+.pg table.breed tbody th{border-bottom:1px solid var(--rule);text-align:left}
+.pg table.breed th small{display:block;font-family:var(--f-mono);font-weight:400;font-size:1.1cqw;letter-spacing:.18em;color:var(--sub)}
+.pg table.breed td{padding:1.2cqw .6cqw;border-bottom:1px solid var(--rule);color:#3A3240}
+.pg table.breed td b{display:block;font-family:var(--f-head);font-size:3.4cqw;line-height:1;font-weight:400;margin-bottom:.4cqw}
+.pg table.breed td.ok b{color:var(--pop)} .pg table.breed td.rare b{color:var(--sub)} .pg table.breed td.no b{color:var(--ink)}
+.pg table.breed td.ok{background:rgba(224,36,126,.06)}
+.pg .bnotes{list-style:none;margin:0;padding:0;display:grid;gap:.9cqw;font-family:var(--f-body);font-size:1.75cqw;line-height:1.5;color:#3A3240}
+.pg .bnotes b{color:var(--ink)}
+
+.pg .start.cp{grid-template-columns:7cqw 1fr auto}
+.pg .start.cp .copyp{grid-row:1/span 2;grid-column:3;align-self:center;font-family:var(--f-kr);font-weight:700;font-size:1.95cqw;letter-spacing:.04em;color:#fff;padding:1.2cqw 1.9cqw;border:1px solid rgba(255,92,158,.7);border-radius:99px;background:rgba(255,46,147,.12);cursor:pointer;white-space:nowrap;transition:background .2s}
+.pg .start.cp .copyp:hover{background:rgba(255,46,147,.3)}
+.pg .start.cp .copyp.done{background:#FF2E93;border-color:#FF2E93}
+.pg .copy-note{margin:1.4cqw 0 0;font-family:var(--f-body);font-size:1.75cqw;line-height:1.6;color:rgba(243,236,241,.55)}
+
+.pg .facts:has(>div:nth-child(6)){grid-template-columns:repeat(3,1fr)}
+.pg .facts:has(>div:nth-child(6)) div:nth-child(4){border-left:0;padding-left:0}
+.pg .facts:has(>div:nth-child(6)) div:nth-child(n+4){border-top:1px solid var(--rule)}
+.pg .facts b small{font-size:.38em;margin-left:.15em;letter-spacing:.02em}
+
+@media (max-width:820px){.stage::before{opacity:.35}}
+
+/* her pen: hidden until the switch is on */
+.scr{position:absolute;z-index:5;font-family:"Juen Hand","Nanum Pen Script","Noto Sans KR",cursive;color:#D3165F;line-height:1.05;pointer-events:none;
+  opacity:0;transform:rotate(var(--r,-4deg)) scale(.96);transform-origin:left top;transition:opacity .5s ease,transform .5s ease;white-space:pre;text-shadow:0 0 1px rgba(211,22,95,.4)}
+.scr.w{color:#FFF0F6;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.scr.circ{border:.5cqw solid #D3165F;border-radius:50%;}
+:root[data-pen="on"] .scr{opacity:.94;transform:rotate(var(--r,-4deg)) scale(1)}
+.x{background:linear-gradient(transparent 52%,#D3165F 52%,#D3165F 62%,transparent 62%) no-repeat 0 0/0% 100%;transition:background-size .6s ease}
+:root[data-pen="on"] .x{background-size:100% 100%}
+:root[data-pen="on"] .pg:not(.dark):not(.wine):not(.on-img){background:#F1E9E4}
+:root[data-pen="on"] body{background:radial-gradient(120% 90% at 50% 40%,#2A1520,#120A10 70%)}
+@media (prefers-reduced-motion:reduce){.leaf,.book,.single .track{transition:none}*{animation:none!important}}
+
+/* entrance: one glass, then the music */
+.gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;background:#0B0710;color:#F3ECF1;text-align:center;padding:24px;transition:opacity .9s ease 1.3s,visibility 0s linear 2.2s}
+.gate-bg{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;filter:brightness(.42) saturate(.95) contrast(1.05);animation:gateKb 22s ease-out forwards}
+.gate::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(60% 55% at 50% 50%,rgba(11,7,16,.2),rgba(11,7,16,.85) 100%)}
+@keyframes gateKb{from{transform:scale(1.08) translateY(1%)}to{transform:scale(1) translateY(0)}}
+.gate-in{position:relative;z-index:2;display:grid;justify-items:center;gap:18px;transition:opacity .5s ease,transform .8s ease}
+.gate-k{font-family:var(--f-mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(243,236,241,.6)}
+.gate-t{margin:0;font-family:var(--f-mast);font-weight:300;font-size:clamp(46px,11vw,150px);letter-spacing:.32em;margin-right:-.32em;line-height:1;color:#fff;text-shadow:0 0 40px rgba(224,36,126,.35)}
+.gate-s{margin:0;font-family:var(--f-body);font-weight:300;font-size:clamp(15px,1.8vw,20px);letter-spacing:.04em;color:rgba(243,236,241,.82)}
+.gate-b{margin-top:14px;display:flex;align-items:center;gap:12px;padding:14px 26px 14px 20px;border:1px solid rgba(243,236,241,.35);border-radius:99px;font-family:var(--f-body);font-size:14px;letter-spacing:.06em;color:#fff;background:rgba(14,10,20,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:border-color .3s,background .3s,transform .3s}
+.gate-b:hover{border-color:#FF2E93;background:rgba(176,18,74,.25);transform:translateY(-1px)}
+.gate-b .wine{transform-origin:12px 13px;animation:slosh 3.2s ease-in-out infinite}
+@keyframes slosh{0%,100%{transform:rotate(0)}30%{transform:rotate(-4deg)}65%{transform:rotate(3deg)}}
+.gate-n{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;color:rgba(243,236,241,.45)}
+.gate-pour{position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,#5E0C27,#2A0614);transform:translateY(101%);transition:transform .9s cubic-bezier(.7,0,.3,1)}
+.gate.open .gate-in{opacity:0;transform:translateY(-12px)}
+.gate.open .gate-pour{transform:translateY(0)}
+.gate.open{opacity:0;visibility:hidden}
+.gate.open .gate-b .wine{animation:none}
+@media (prefers-reduced-motion:reduce){.gate-bg{animation:none}.gate,.gate-pour,.gate-in{transition-duration:.01s}}
+
+/* full-screen reading: the spread takes the whole window, chrome floats over it */
+body{padding:0!important;overflow:hidden}
+.wrap{max-width:none;margin:0;padding:0;height:100vh;height:100svh;display:block;position:relative}
+.bar{position:fixed;top:0;left:0;right:0;z-index:30;padding:12px 18px 26px;background:linear-gradient(180deg,rgba(10,6,14,.88),rgba(10,6,14,0));transition:opacity .45s ease}
+.bar.idle{opacity:0;pointer-events:none}
+.stage{height:100vh;height:100svh;padding:12px 0;display:grid;place-items:center}
+.book{width:min(calc(100vw - 132px),calc((100vh - 24px) * 1.5));width:min(calc(100vw - 132px),calc((100svh - 24px) * 1.5))}
+.nav{position:fixed;inset:0;z-index:25;pointer-events:none;display:block}
+.nav button{position:absolute;top:50%;transform:translateY(-50%);pointer-events:auto;background:rgba(14,10,20,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:opacity .45s ease}
+#prev{left:14px} #next{right:14px}
+#count{position:absolute;bottom:12px;right:18px;font-size:11px;opacity:.7}
+.hint{display:none}
+.wrap.idle .nav button{opacity:.25}
+@media (max-width:820px){
+  .single{width:min(100vw,calc(100vh * .75));width:min(100vw,calc(100svh * .75));box-shadow:none}
+  .stage{padding:0}
+  .nav button{width:40px;height:40px;font-size:15px;top:auto;bottom:10px;transform:none}
+  #prev{left:12px} #next{right:12px}
+  #count{bottom:22px;right:auto;left:50%;transform:translateX(-50%)}
+}
+
+/* her feed opens on a phone laid over the magazine */
+.phone-wrap{position:fixed;inset:0;z-index:60;display:grid;place-items:center}
+.phone-wrap[hidden]{display:none}
+.phone-back{position:absolute;inset:0;background:rgba(8,5,12,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:phFade .35s ease}
+.phone{position:relative;height:min(85vh,840px);height:min(85svh,840px);aspect-ratio:9/17.8;margin-bottom:34px;border-radius:44px;padding:6px;background:#0E0B12;box-shadow:0 0 0 2px #2A2430,0 40px 90px rgba(0,0,0,.65);animation:phUp .5s cubic-bezier(.2,.8,.2,1)}
+.phone iframe{width:100%;height:100%;border:0;border-radius:38px;background:#fff;display:block}
+.phone-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:28%;height:24px;border-radius:14px;background:#0E0B12;z-index:2;pointer-events:none}
+.phone-x{position:absolute;top:18px;right:20px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,236,241,.3);color:#fff;font-size:16px;background:rgba(14,10,20,.5)}
+@keyframes phFade{from{opacity:0}}
+@keyframes phUp{from{opacity:0;transform:translateY(40px) scale(.96)}}
+@media (max-width:520px){.phone{height:100svh;width:100vw;aspect-ratio:auto;border-radius:0;padding:0;box-shadow:none}.phone iframe{border-radius:0}.phone-notch{display:none}.phone-x{top:auto;bottom:18px;right:50%;transform:translateX(50%);background:rgba(14,10,20,.8)}}
+
+/* site navigation */
+.bar .logo{text-decoration:none}
+.menu{display:flex;gap:clamp(14px,2.2vw,30px);font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.menu a{text-decoration:none;color:rgba(243,236,241,.7);padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.menu a:hover,.menu a[aria-current="true"]{color:#fff;border-color:#FF2E93}
+.menu a.hot{color:#FF5C9E}
+.phone-tools{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:10px}
+.phone-tools a{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:rgba(243,236,241,.75);text-decoration:none;padding:8px 14px;border:1px solid rgba(243,236,241,.25);border-radius:99px;background:rgba(14,10,20,.5)}
+.ig-m{display:none}
+@media (max-width:1100px){.menu{display:none}.ig-m{display:flex}}
+
+/* header is a real site bar, the spread fills what's below it */
+.bar{position:relative!important;height:56px;padding:0 22px!important;background:#0D0912!important;border-bottom:1px solid rgba(243,236,241,.08);opacity:1!important;pointer-events:auto!important}
+.stage{height:calc(100vh - 56px);height:calc(100svh - 56px)}
+.book{width:min(calc(100vw - 132px),calc((100vh - 80px) * 1.5));width:min(calc(100vw - 132px),calc((100svh - 80px) * 1.5))}
+@media (max-width:820px){.single{width:min(100vw,calc((100vh - 56px) * .75));width:min(100vw,calc((100svh - 56px) * .75))}.bar{padding:0 12px!important}}
+
+/* gate, RAINBOW format */
+.gate-in{gap:14px!important}
+.gate-rb{font-family:"Italiana","Cormorant Garamond",Georgia,serif;font-size:clamp(26px,4.4vw,52px);letter-spacing:.42em;padding-left:.42em;line-height:1;background:linear-gradient(115deg,#F9D3E3 0%,#DCD3FF 24%,#C9EEF0 48%,#FFF1CC 70%,#F6C7DC 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holo 6s linear infinite}
+@keyframes holo{to{background-position:300% 0}}
+.gate-t{font-size:clamp(40px,9vw,120px)!important}
+.gate-sub{display:flex;align-items:center;gap:14px;letter-spacing:.5em;padding-left:.5em;font-family:var(--f-body);font-weight:300;font-size:13px;color:rgba(243,236,241,.8)}
+.gate-sub::before,.gate-sub::after{content:"";width:34px;height:1px;background:rgba(243,236,241,.6)}
+.glass{margin-top:10px;width:min(140px,30vw);aspect-ratio:120/200;border:0;background:none;padding:0;cursor:pointer;animation:bob 3.4s ease-in-out infinite;filter:drop-shadow(0 18px 30px rgba(194,24,91,.35))}
+.glass svg{width:100%;height:100%;overflow:visible}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.glass .wine-surf{animation:wave 3.4s linear infinite}
+@keyframes wave{to{transform:translateX(-120px)}}
+.glass .wine-body{transition:transform 1.1s cubic-bezier(.6,0,.3,1)}
+.glass:hover{animation-play-state:paused}
+.glass:hover svg{transform:rotate(-6deg);transition:transform .5s}
+.gate.open .glass{animation:none}
+.gate.open .glass svg{transform:rotate(-38deg) translateY(-6px);transition:transform .9s cubic-bezier(.6,0,.3,1)}
+.gate.open .glass .wine-body{transform:translateY(60px)}
+.gate-label{margin:4px 0 0;font-family:var(--f-body);font-size:13px;letter-spacing:.06em;color:rgba(243,236,241,.65)}
+.gate-label b{color:#fff;font-weight:700}
+.gate-quiet{font-family:var(--f-body);font-size:12.5px;color:rgba(243,236,241,.55);text-decoration:underline;text-underline-offset:4px}
+.gate.open .gate-in{opacity:0;transform:translateY(-12px);transition-delay:.55s}
+.gate.open .gate-pour{transition-delay:.45s}
+@media (prefers-reduced-motion:reduce){.glass,.glass .wine-surf,.gate-rb{animation:none}}
+
+.stage{position:relative;isolation:isolate}
+.stage::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,7,16,.55),rgba(11,7,16,.25) 50%,rgba(11,7,16,.6)),url(img/lily_still.webp) 70% 50%/cover;filter:brightness(.7) saturate(1.1)}
+
+/* her phone, docked on the right on wide screens: the song plays on it, her feed opens on it */
+.dock{display:none}
+@media (min-width:1180px) and (min-height:620px){
+  :root{--dkh:min(calc(100vh - 150px),640px);--dkw:calc(var(--dkh) * 9 / 17.8 + 56px)}
+  .dock{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;position:fixed;top:56px;right:0;bottom:0;width:var(--dkw);z-index:26;padding-right:22px}
+  .stage{padding-right:var(--dkw)!important}
+  .book{width:min(calc(100vw - 132px - var(--dkw)),calc((100vh - 80px) * 1.5))!important}
+  #next{right:calc(var(--dkw) + 4px)!important}
+  #count{right:calc(var(--dkw) + 8px)!important}
+}
+.dk-phone{position:relative;height:var(--dkh);aspect-ratio:9/17.8;border-radius:40px;padding:6px;background:#0E0B12;box-shadow:0 0 0 1.5px #2C2532,0 0 0 4px #141018,0 30px 70px rgba(0,0,0,.6),0 0 90px rgba(255,46,147,.08)}
+.dk-screen{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:#0B0710;isolation:isolate}
+.dk-island{position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:5;height:26px;min-width:84px;padding:0 10px;border-radius:16px;background:#000;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;transition:min-width .5s cubic-bezier(.2,.8,.2,1);color:#fff;font:600 10px/1 var(--f-mono);letter-spacing:.12em;border:0}
+.dk-island .dk-nm{opacity:0;width:0;overflow:hidden;white-space:nowrap;transition:opacity .3s}
+.dock[data-scr="ig"] .dk-island{min-width:150px}
+.dock[data-scr="ig"] .dk-island .dk-nm{opacity:1;width:auto}
+.dk-art-s{width:16px;height:16px;border-radius:4px;object-fit:cover;object-position:50% 10%}
+.dk-eq{display:flex;align-items:flex-end;gap:2px;height:11px}
+.dk-eq i{width:2px;height:30%;background:#FF2E93;border-radius:1px}
+.dock.playing .dk-eq i{animation:dkeq .9s ease-in-out infinite}
+.dock.playing .dk-eq i:nth-child(2){animation-delay:-.3s}.dock.playing .dk-eq i:nth-child(3){animation-delay:-.6s}
+@keyframes dkeq{0%,100%{height:25%}50%{height:100%}}
+.dk-status{position:absolute;top:0;left:0;right:0;z-index:4;height:46px;display:flex;justify-content:space-between;align-items:center;padding:0 24px 0 28px;font:600 12px/1 "Noto Sans KR",system-ui,sans-serif;color:#fff;pointer-events:none}
+.dock[data-scr="ig"] .dk-status{color:#111;background:#fff}
+.dk-status svg{height:10px}
+.dk-music{position:absolute;inset:0;display:flex;flex-direction:column;padding:58px 22px 22px;color:#F3ECF1;overflow:hidden}
+.dk-music::before{content:"";position:absolute;inset:-40px;z-index:-1;background:url(img/cover_glitch.webp) 50% 12%/cover;filter:blur(34px) saturate(1.4) brightness(.45);transform:scale(1.1)}
+.dk-music::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,7,16,.1),rgba(11,7,16,.75))}
+.dk-kick{font:500 9.5px/1 var(--f-mono);letter-spacing:.24em;text-transform:uppercase;color:rgba(243,236,241,.6);text-align:center;margin-bottom:14px}
+.dk-art{width:100%;aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.55);transform:scale(.9);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.dock.playing .dk-art{transform:scale(1)}
+.dk-art img{width:100%;height:100%;object-fit:cover;object-position:50% 8%;display:block}
+.dk-meta{margin-top:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.dk-meta b{display:block;font:500 20px/1.1 Unbounded,"Noto Sans KR",sans-serif;letter-spacing:.06em}
+.dk-meta span{display:block;margin-top:5px;font-size:12px;color:rgba(243,236,241,.65)}
+.dk-heart{color:#FF2E93;font-size:18px;line-height:1}
+.dk-prog{margin-top:16px;height:4px;border-radius:2px;background:rgba(243,236,241,.2);cursor:pointer;position:relative}
+.dk-prog i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;background:#F3ECF1}
+.dk-time{display:flex;justify-content:space-between;margin-top:7px;font:500 10px/1 var(--f-mono);color:rgba(243,236,241,.55)}
+.dk-ctl{margin-top:auto;margin-bottom:auto;display:flex;justify-content:space-around;align-items:center;padding-top:6px}
+.dk-ctl button{color:#F3ECF1;display:grid;place-items:center;width:44px;height:44px;border-radius:50%}
+.dk-ctl svg{width:22px;height:22px;fill:currentColor}
+.dk-ctl .dk-pp svg{width:34px;height:34px}
+.dk-ctl .dk-pp{width:60px;height:60px}
+.dk-line{font-size:12px;line-height:1.55;text-align:center;color:rgba(243,236,241,.7);font-style:normal}
+.dk-ig{position:absolute;inset:0;padding-top:46px;background:#fff}
+.dk-ig iframe{width:100%;height:100%;border:0;display:block}
+.dock .dk-ig,.dock[data-scr="ig"] .dk-music{visibility:hidden}
+.dock[data-scr="ig"] .dk-ig{visibility:visible}
+.dk-tabs{display:flex;gap:8px}
+.dk-tabs button,.dk-tabs a{font:500 10.5px/1 var(--f-mono);letter-spacing:.16em;color:rgba(243,236,241,.7);text-decoration:none;padding:8px 13px;border:1px solid rgba(243,236,241,.2);border-radius:99px}
+.dk-tabs [aria-pressed="true"]{color:#fff;border-color:#FF2E93;background:rgba(255,46,147,.14)}
+.gate-glow{position:absolute;inset:0;z-index:1;background:radial-gradient(46% 30% at 50% 32%,rgba(128,6,36,.34),rgba(80,4,26,.12) 60%,transparent 100%);animation:glow 6s ease-in-out infinite alternate}
+@keyframes glow{from{opacity:.75}to{opacity:1}}
+.gate-t{color:transparent;background:linear-gradient(180deg,#FFF3F7 10%,#F2B8CC 95%);-webkit-background-clip:text;background-clip:text;text-shadow:none;filter:drop-shadow(0 0 12px rgba(170,14,52,.22))}
+@media (prefers-reduced-motion:reduce){.gate-glow{animation:none}}
+
+/* gate, baekhwa-style: soft colour fields, one violet lily to take */
+.gate{background:radial-gradient(55% 48% at 28% 28%,rgba(132,18,72,.55),transparent 70%),radial-gradient(50% 45% at 76% 72%,rgba(76,26,120,.55),transparent 70%),radial-gradient(42% 38% at 72% 18%,rgba(150,40,120,.32),transparent 70%),radial-gradient(40% 36% at 22% 82%,rgba(60,10,48,.6),transparent 70%),#0B0710!important}
+.gate::before{display:none!important}
+.glass{width:min(210px,44vw)!important;aspect-ratio:auto!important;position:relative;filter:none!important;margin-top:6px!important;animation:bob 3.6s ease-in-out infinite}
+.glass .lily{display:block;width:100%;height:auto;filter:drop-shadow(0 14px 26px rgba(120,20,90,.45));transition:transform .9s cubic-bezier(.6,0,.3,1),opacity .9s,filter .9s}
+.glass .lily-shadow{position:absolute;left:18%;right:18%;bottom:-18px;height:14px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);animation:bobsh 3.6s ease-in-out infinite}
+@keyframes bobsh{50%{transform:scale(.82);opacity:.6}}
+.glass:hover .lily{transform:rotate(-5deg) scale(1.04)}
+.gate.open .glass .lily{transform:scale(1.5) rotate(-10deg);opacity:0;filter:blur(6px) drop-shadow(0 14px 26px rgba(120,20,90,.45))}
+.gate-pour{background:linear-gradient(180deg,#3E0A3A,#1A0618)!important}
+@media (prefers-reduced-motion:reduce){.glass .lily-shadow{animation:none}}
+
+/* gate object: a small seal with the lily inside, not a pasted cut-out */
+.glass{width:min(150px,38vw)!important;aspect-ratio:1!important;animation:none!important;margin-top:14px!important;position:relative}
+.glass .lily-shadow{display:none}
+.seal-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible;animation:sealspin 40s linear infinite}
+.seal-ring text{font-family:var(--f-mono);font-size:9.6px;letter-spacing:.18em;fill:rgba(243,222,232,.8)}
+@keyframes sealspin{to{transform:rotate(360deg)}}
+.seal-in{position:absolute;inset:16%;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 45%,#2a0d22,#0b0710 75%);box-shadow:0 0 0 1px rgba(242,184,204,.25),0 10px 40px rgba(120,10,60,.45);transition:box-shadow .5s}
+.seal-in .lily{position:absolute;left:50%;top:52%;width:150%;max-width:none;transform:translate(-48%,-50%);filter:brightness(.9) saturate(1.05)!important;transition:transform .9s cubic-bezier(.6,0,.3,1),filter .6s}
+.glass:hover .lily{transform:translate(-48%,-50%) scale(1.08)!important}
+.glass:hover .seal-in{box-shadow:0 0 0 1px rgba(242,184,204,.5),0 10px 50px rgba(170,20,80,.6)}
+.glass:hover .seal-ring{animation-duration:12s}
+.gate.open .glass .lily{transform:translate(-48%,-50%) scale(1.6)!important;opacity:1!important;filter:brightness(1.1)!important}
+.gate.open .seal-ring{opacity:0;transition:opacity .6s}
+@media (prefers-reduced-motion:reduce){.seal-ring{animation:none}}
+
+/* polish: glass header, reading progress, lyrics */
+.bar{background:rgba(13,9,18,.72)!important;backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px)}
+.bar::after{content:"";position:absolute;left:0;bottom:-1px;height:1.5px;width:var(--prog,0%);background:linear-gradient(90deg,#7A1F5C,#FF2E93);transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.dk-lyr{height:92px;overflow:hidden;position:relative;-webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
+.dk-lyr .dk-line{position:absolute;inset:0;display:grid;place-items:center;margin:0}
+.dk-lyr ol{list-style:none;margin:0;padding:0;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.dk-lyr li{height:30px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12.5px;line-height:1.3;color:rgba(243,236,241,.38);transition:color .4s,transform .4s;padding:0 4px}
+.dk-lyr li.on{color:#fff;font-weight:600;transform:scale(1.06)}
+.cap{position:fixed;left:50%;bottom:68px;transform:translate(-50%,10px);z-index:27;max-width:calc(100vw - 32px);padding:9px 16px;border-radius:99px;background:rgba(14,10,20,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,92,158,.25);color:#fff;font-size:13px;line-height:1.35;text-align:center;opacity:0;pointer-events:none;transition:opacity .35s,transform .35s}
+.cap.show{opacity:1;transform:translate(-50%,0)}
+.cap::before{content:"♪";color:#FF5C9E;margin-right:8px}
+@media (min-width:1180px) and (min-height:620px){.cap{display:none}}
+</style>
+</head>
+<body>
+<div class="gate" id="gate" role="dialog" aria-label="RAINBOW：MANIAC 입장">
+    <div class="gate-in">
+    <div class="gate-rb">RAINBOW</div>
+    <h1 class="gate-t">MANIAC</h1>
+    <div class="gate-sub">박주은</div>
+    <button class="glass" id="gateBtn" type="button" aria-label="백합을 받고 소리와 함께 입장하기">
+      <svg class="seal-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="sealPath" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><circle cx="100" cy="100" r="98" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><circle cx="100" cy="100" r="70" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><text><textPath href="#sealPath" textLength="527">ONE LINE · 오늘의 꽃 · RAINBOW：MANIAC · 박주은 · </textPath></text></svg><span class="seal-in"><img class="lily" src="img/lily_violet.webp" alt="" width="560" height="512"></span>
+    </button>
+    <p class="gate-label"><b>ONE LINE 오늘의 꽃</b> · 1인 1송이 · 백합을 눌러 받으세요</p>
+    <button class="gate-quiet" id="gateQuiet" type="button">소리 없이 입장</button>
+  </div>
+  <div class="gate-pour" aria-hidden="true"></div>
+</div>
+</div>
+<div class="cap" id="cap" aria-hidden="true"></div>
+<aside class="dock" id="dock" data-scr="music" aria-label="박주은의 폰">
+  <div class="dk-phone">
+    <div class="dk-screen">
+      <div class="dk-status"><span id="dkClock">1:15</span><svg viewBox="0 0 60 12" aria-hidden="true"><g fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/><rect x="34" y="1" width="21" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="36" y="3" width="12" height="6" rx="1.5"/><rect x="56.5" y="4" width="1.8" height="4" rx=".9"/></g></svg></div>
+      <button class="dk-island" id="dkIsland" aria-label="음악 화면으로"><img class="dk-art-s" src="img/cover_glitch.webp" alt=""><span class="dk-nm">MANIAC</span><span class="dk-eq" aria-hidden="true"><i></i><i></i><i></i></span></button>
+      <section class="dk-music">
+        <div class="dk-kick">Now Playing · RAINBOW：MANIAC</div>
+        <div class="dk-art"><img src="img/cover_glitch.webp" alt="MANIAC 앨범 커버"></div>
+        <div class="dk-meta"><div><b>MANIAC</b><span>박주은</span></div><span class="dk-heart" aria-hidden="true">♥</span></div>
+        <div class="dk-prog" id="dkProg" role="slider" aria-label="재생 위치" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="dkBar"></i></div>
+        <div class="dk-time"><span id="dkCur">0:00</span><span id="dkDur">-3:16</span></div>
+        <div class="dk-ctl">
+          <button id="dkBack" aria-label="10초 뒤로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg></button>
+          <button id="dkPlay" class="dk-pp" aria-label="재생"><span class="i-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span class="i-pause" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></span></button>
+          <button id="dkFwd" aria-label="10초 앞으로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg></button>
+        </div>
+        <div class="dk-lyr" id="dkLyr" aria-live="off"><p class="dk-line">“자기야… 나 버리지 마. 응?”</p></div>
+      </section>
+      <section class="dk-ig"><iframe id="dkFrame" title="@parkjueun 인스타그램"></iframe></section>
+    </div>
+  </div>
+  <div class="dk-tabs"><button data-to="music" aria-pressed="true">♪ 음악</button><button data-to="ig" aria-pressed="false">인스타</button><a href="feed.html" target="_blank" rel="noopener" data-newtab>새 창 ↗</a></div>
+</aside>
+<div class="phone-wrap" id="phoneWrap" hidden>
+  <div class="phone-back" data-close></div>
+  <div class="phone" role="dialog" aria-label="박주은 인스타그램">
+    <div class="phone-notch" aria-hidden="true"></div>
+    <iframe id="phoneFrame" title="@parkjueun" loading="lazy"></iframe>
+  </div>
+  <button class="phone-x" data-close aria-label="닫기">✕</button>
+  <div class="phone-tools"><a href="feed.html" target="_blank" rel="noopener" data-newtab>새 창으로 열기 ↗</a></div>
+</div>
+<div class="wrap">
+  <div class="bar">
+    <a class="logo" href="#" data-goto="0"><b>MANIAC</b></a>
+    <nav class="menu" aria-label="메뉴">
+      <a href="#" data-goto="1">Contents</a>
+      <a href="#" data-goto="3">Cover Story</a>
+      <a href="#" data-goto="5">Interview</a>
+      <a href="#" data-goto="13">Her Five</a>
+      <a href="feed.html" class="ig">Instagram</a>
+      <a href="#" data-goto="17">World</a>
+      <a href="#" data-goto="20" class="hot">Meet Her</a>
+    </nav>
+    <div class="r">
+      <a class="pill ig-m" href="feed.html">인스타</a>
+      <button class="pill" id="penBtn" aria-pressed="false" aria-label="주은의 낙서 보기"><span style="color:#E0247E">✎</span><span id="penLbl">주은의 펜</span></button>
+      <button class="pill" id="drawBtn" aria-pressed="false" hidden><span style="color:#E0247E">✍</span><span>직접 쓰기</span></button>
+      <button class="pill" id="musicBtn" aria-pressed="false" aria-label="배경음악 재생"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span>MANIAC</span></button>
+    </div>
+  </div>
+  <div class="stage" id="stage" aria-live="polite"></div>
+  <div class="nav">
+    <button id="prev" aria-label="이전 페이지">←</button>
+    <span id="count">COVER</span>
+    <button id="next" aria-label="다음 페이지">→</button>
+  </div>
+  <div class="inkbar" id="inkBar" hidden>
+    <div class="grp"><button data-tool="pen" aria-pressed="true">펜</button><button data-tool="erase" aria-pressed="false">지우개</button></div>
+    <div class="grp"><button data-color="#D3165F" aria-pressed="true" aria-label="핑크"><i style="background:#D3165F"></i></button><button data-color="#FFF0F6" aria-pressed="false" aria-label="흰색"><i style="background:#FFF0F6"></i></button><button data-color="#15111C" aria-pressed="false" aria-label="검정"><i style="background:#15111C;box-shadow:0 0 0 1px #6F6474"></i></button></div>
+    <div class="grp"><button data-size="4" aria-pressed="false">가늘게</button><button data-size="6" aria-pressed="true">보통</button><button data-size="10" aria-pressed="false">굵게</button></div>
+    <div class="grp"><button data-zoom="1" aria-pressed="true">화면 맞춤</button><button data-zoom="1.5" aria-pressed="false">1.5배</button><button data-zoom="2" aria-pressed="false">2배</button></div>
+    <div class="grp"><button id="inkUndo">되돌리기</button><button id="inkClear">이 페이지 지우기</button><button id="inkGuide" aria-pressed="true">예시 보기</button><button id="inkSave">ink.json 받기</button></div>
+    <span id="inkStatus"></span>
+  </div>
+  <div class="hint">페이지를 클릭하거나 ← → 키, 밀어서 넘기기</div>
+</div>
+
+<script>
+const IMG="img/";
+/* scribble: text, top%, left%, size(cqw), rotate(deg), extra class */
+const S=(t,top,left,size=4.4,r=-4,cls="")=>`<span class="scr ${cls}" style="top:${top}%;left:${left}%;font-size:${(size*1.32).toFixed(2)}cqw;--r:${r}deg">${t}</span>`;
+const RH=(r,l="<b>MANIAC</b>")=>`<div class="rh">${l}<span>${r}</span></div>`;
+const FO=(n,t)=>`<div class="fo"><i>${String(n).padStart(2,"0")}</i><span>${t}</span></div>`;
+/* photo slot that falls back to a colour field until the image file exists */
+const PH=(src,alt,sw,label,style="")=>`<div class="ph" style="--sw:${sw};${style}"><span class="swl">${label}</span><img src="${IMG}${src}" alt="${alt}" onerror="this.remove()"></div>`;
+const PAGES=[
+/* 0 cover */
+`<div class="pg dark"><img class="bleed" src="${IMG}cover_glitch.webp" alt="MANIAC 표지. 고개를 젖힌 박주은 위로 와인이 쏟아진다" style="object-position:50% 0">${S("예쁘지?",62,58,7,-8,"w")}${S("이날 와인 진짜였음\n머리 3번 감음",76,52,4.2,-5,"w")}</div>`,
+
+/* 1 contents (dark, left) */
+`<div class="pg dark">${RH("No.01 · November 2026")}<div class="in" style="gap:0">
+  <img class="fig" src="${IMG}clip_01.webp" alt="손가락을 입술에 대고 웃는 박주은" style="aspect-ratio:16/6.6;object-position:50% 24%">
+  <h2 style="font-size:15cqw;font-style:italic;margin:-5.4cqw 0 0 -.6cqw;color:#fff;position:relative">Contents</h2>
+  <div class="toc">
+    <div><b>03</b><span>Cover Story<small>다섯 개의 브랜드를 가진 여자</small></span><em>Feature</em></div>
+    <div><b>05</b><span><span class="x">Interview</span><small>“숨긴 거 없어요. 찾아보세요.”</small></span><em>Talk</em></div>
+    <div><b>09</b><span>Under the Lights<small>조명이 켜진 곳마다 그녀가 있다</small></span><em>Society</em></div>
+    <div><b>11</b><span>On Partnership<small>서류가 사랑을 증명하진 않는다</small></span><em>Essay</em></div>
+    <div><b>13</b><span>Her Five<small>NULLPINK부터 GUIDE까지</small></span><em>Business</em></div>
+    <div><b>15</b><span>The Making of · In Her Bag<small>연표, 그리고 작은 약통</small></span><em>Life</em></div>
+    <div><b>17</b><span>The World of Rainbow<small>형질의 세계, 여성 알파의 몸</small></span><em>World</em></div>
+    <div><b>20</b><span>Meet Her<small>RAINBOW：MANIAC에서 그녀를 만나는 법</small></span><em>Story</em></div>
+  </div>
+</div>${S("← 여기만 봐",55,62,4.4,-4,"w")}${S("인터뷰는 대충 읽어\n어차피 다 거짓말은 아님",9,44,3.8,-5,"w")}${FO(1,"Contents")}</div>`,
+
+/* 2 editor's letter (right) */
+`<div class="pg r">${RH("Editor’s Letter","<span>From the Editor</span>")}<div class="in">
+  <span class="kick">Editor’s Letter</span>
+  <p class="hk" style="font-size:5.2cqw">그녀는 모든 질문에<br>질문으로 답했다</p>
+  <div class="body cols">
+    <p class="drop">11월호를 준비하면서 우리는 한 사람만 생각했다. 사업체 다섯 개, 보라색 머리, 열 손가락의 반지. 이름을 검색하면 사진은 수백 장이 나오는데, 정작 그녀가 어떤 사람인지 말해 주는 문장은 하나도 없었다.</p>
+    <p>촬영 날, 그녀는 스태프 열두 명의 이름을 모두 외워 왔다. 조명 감독이 각도를 바꿀 때마다 먼저 웃어 보였고, 와인을 쏟는 컷은 단 한 번에 끝냈다.</p>
+    <p>인터뷰는 네 시간 동안 이어졌다. 그녀는 어떤 질문도 피하지 않았다. 대신 모든 질문에 질문으로 답했다. “그게 왜 궁금하세요?” “어디가 문제인데요?”</p>
+    <p>녹취를 다시 들으며 알았다. 그녀가 숨긴 건 하나도 없었다. <span class="x">우리가 찾지 못했을 뿐이다.</span> 이번 호는 그 네 시간의 기록이다. 행간은 독자의 몫으로 남긴다.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:3cqw;align-items:end">
+    <div class="sig">Seoyun Han<small>편집장 한서윤</small></div>
+    <div><img class="fig" src="${IMG}clip_02.webp" alt="팔짱을 끼고 선 박주은" style="aspect-ratio:16/11;object-position:50% 20%"><p class="cap"><b>On set</b> · 청담, 오후 4시. 첫 컷.</p></div>
+  </div>
+  <div class="mast">
+    <span>Editor-in-Chief<b>한서윤</b></span><span>Photography<b>연서진</b></span>
+    <span>Styling<b>OFFLINE Hannam</b></span><span>Location<b>ONE LINE, Cheongdam</b></span>
+    <span>Music<b>MANIAC</b></span><span>Published by<b>Scroll</b></span>
+  </div>
+</div>${S("찾을 생각도 없었으면서",50,36,4,-5)}${S("연서진 사진 잘 찍더라\n근데 너무 오래 봄",58,4,3.6,-3)}${FO(2,"Editor’s Letter")}</div>`,
+
+/* 3 opener photo (left) */
+`<div class="pg on-img"><img class="bleed" src="${IMG}clip_05.webp" alt="손가락을 입가에 대고 웃는 박주은" style="object-position:47% 30%"><div class="shade"></div>${RH("Cover Story")}
+  <span class="vcred">Photographed by 연서진 · Styling OFFLINE Hannam</span>
+  <div style="position:absolute;left:6.6cqw;right:6.6cqw;bottom:9cqw;color:#fff;z-index:2">
+    <span class="kick" style="color:#FF5C9E">Cover Story — Self-made</span>
+    <h2 style="font-size:17cqw;color:#fff;margin-top:1.6cqw">Park<br><em style="color:#FF5C9E">Ju-eun</em></h2>
+  </div>${S("이날 약 안 먹음",14,8,5.4,-7,"w")}${S("웃는 거 연습한 각도",36,58,4,4,"w")}${FO(3,"Cover Story")}</div>`,
+
+/* 4 opener type (right) */
+`<div class="pg r">${RH("Cover Story","<span>Feature</span>")}<div class="in">
+  <h2 style="font-size:14.4cqw;margin-top:2cqw">Five<br>brands,<br><em><span class="x">nothing<br>hidden.</span></em></h2>
+  ${S("숨긴 건 없어.\n안 보이게 안 했을 뿐이지",18,50,4.2,-6)}
+  <p class="hk">다섯 개의 브랜드를 가진 여자, 박주은</p>
+  <p class="deck">일러스트레이터로 시작해 IT 회사 이사가 되기까지, 그녀는 손대는 것마다 사업으로 만들었다. 보라색 머리, 열 손가락의 반지, 하얀 포르쉐. 그리고 <span class="x">무엇을 물어도 웃으면서 되묻는 버릇.</span></p>
+  <div class="facts" style="margin-top:auto">
+    <div><b>35</b><span>나이</span></div><div><b>162<small>cm</small></b><span>키</span></div><div><b>0.5<small>%</small></b><span>우성 알파 · 여성 중</span></div><div><b>05</b><span>사업체</span></div><div><b>10</b><span>반지, 손가락마다</span></div><div><b>02</b><span>강아지</span></div>
+  </div>
+  <span class="mono">Words 한서윤 · Photographs 연서진</span>
+</div>${FO(4,"Cover Story")}</div>`,
+
+/* 5 interview start (left) */
+`<div class="pg">${RH("Interview")}<div class="in">
+  <span class="kick">Interview</span>
+  <p class="hk" style="font-size:5.6cqw">“계획한 적은 없어요.<br>하다 보니까 다<br>돈이 되더라고요.”</p>
+  <div class="body cols">
+    <p class="drop">약속 시간보다 4분 일찍, 하얀 SUV가 청담동 와인바 앞에 섰다. 운전석 문이 열리자 붉은 가죽 시트가 먼저 보였다. 그녀는 스태프 한 명 한 명에게 먼저 고개를 숙였고, 조명 감독의 이름을 한 번에 외웠다. 촬영이 끝날 무렵, 현장의 모두가 그녀를 “주은 씨”라고 부르고 있었다.</p>
+    <p>서른다섯. 사업체 다섯 개. IT 응용소프트웨어 회사 NULLPINK의 이사이자 디자인 에이전시, 편집숍, 와인바, 녹음 스튜디오의 주인. 시작은 그림이었다.</p>
+    <span class="q">일러스트레이터에서 IT 회사 이사까지. 자수성가라는 말, 어때요?</span>
+    <p class="a">좋아요. 제가 한 건 제가 했다고 말하는 편이라. 그림 그리다가 애들 수학 가르치고, 디자인 회사 차리고, 개발 배워서 CTO 하고. <span class="x">계획한 적은 없어요.</span> 하다 보니까 다 돈이 되더라고요.</p>
+    <span class="q">집안 얘기를 묻는 사람도 많을 텐데요.</span>
+    <p class="a">그건 방송용이 아니라서요. <span class="note">그녀는 웃으면서 다음 질문을 기다렸다.</span></p>
+    <span class="q">처음 번 큰돈으로 뭘 했어요?</span>
+    <p class="a">반지 하나 샀어요. 지금 엄지에 있는 거. <span class="note">그녀는 반지를 한 바퀴 돌려 보였다.</span> 제가 저한테 준 첫 선물이에요. 그다음부턴 다 남한테 썼고요.</p>
+    <p class="pq">“제가 한 건 제가 했다고<br>말하는 편이라.”</p>
+  </div>
+</div>${S("엄마 병원비.\n반지는 그다음 달",76,58,3.8,-4)}${S("다 계획했어.\n엄마 아플 때 뭐라도 해야 했거든",10,56,3,-5)}${S("아빠 얘기 꺼내면 끝이야",88,6,4,-3)}${FO(5,"Interview")}</div>`,
+
+/* 6 interview cont. (right) */
+`<div class="pg r">${RH("Interview","<span>Park Ju-eun</span>")}<div class="in">
+  <div style="display:grid;grid-template-columns:1.15fr 1fr;gap:3cqw;align-items:end">
+    <div><img class="fig" src="${IMG}post_desk.webp" alt="와인잔과 치즈, 빼놓은 반지가 놓인 책상" style="aspect-ratio:4/5"><p class="cap"><b>Desk</b> · 와인 한 잔, 치즈, 빼놓은 반지. 그녀의 야근 세팅</p></div>
+    <p class="pq" style="margin:0">“예쁜 건 사람들이 사거든요.”<small>다섯 개를 굴리는 비결을 묻자</small></p>
+  </div>
+  <div class="body cols">
+    <span class="q">다섯 개를 굴리는 비결이 있다면.</span>
+    <p class="a">예쁜 걸 좋아해요. 그게 다예요. 예쁜 건 사람들이 사거든요. 저는 제가 보기 좋은 것만 만들어요. 안 예쁘면 안 팔리고, 안 팔리면 접어요. 그건 빨리 해요.</p>
+    <span class="q">일은 주로 어디서 해요?</span>
+    <p class="a">집에서요. 하얀 모니터 두 대, 분홍 키보드, 와인 한 잔, 치즈. 그리고 유니콘 인형. 웃지 마세요. <span class="note">편집부는 웃었다.</span> 일할 땐 아무도 안 건드렸으면 좋겠어요.</p>
+    <span class="q">새벽까지 일한다고 들었어요.</span>
+    <p class="a">네 시쯤 자요. 수영은 그 전에 하고요. 사람들이 잘 때가 제일 조용하잖아요. 오후 한 시에 일어나서 강아지들 밥 주고, 메일 보고, 미팅 가고, 저녁엔 매장 한 바퀴. 매일 똑같아요.</p>
+    <span class="q">포르쉐는 왜 하얀색이에요?</span>
+    <p class="a">분홍은 너무 쉽잖아요. 하얀 건 더러워지면 바로 보여요. 그게 좋아요. 숨길 데가 없으니까.</p>
+  </div>
+</div>${S("3잔째. 치즈는 안 먹었음",9,6,4.2,-6)}${S("유니콘 건들면 죽어\n그 사람만 예외 ♡",87,46,4,-4)}${FO(6,"Interview")}</div>`,
+
+/* 7 pull photo (left) */
+`<div class="pg on-img"><img class="bleed" src="${IMG}clip_06.webp" alt="정면을 바라보는 박주은" style="object-position:55% 30%"><div class="shade"></div>${RH("Interview")}
+  <div style="position:absolute;left:6.6cqw;right:8cqw;bottom:10cqw;color:#fff;z-index:2">
+    <span class="kick" style="color:#FF5C9E">In her words</span>
+    <p style="font-family:var(--f-head);font-style:italic;font-size:9.6cqw;line-height:1.02;margin-top:2cqw">“Nothing hidden.<br>Find it, if<br>you can.”</p>
+    <p style="font-family:var(--f-kr);font-size:2.4cqw;margin-top:2.4cqw;color:rgba(255,255,255,.8)">숨긴 거 없어요. 찾아보세요.</p>
+  </div>${S("찾아도 없을걸 ♡",16,44,6.4,-8,"w")}${FO(7,"Interview")}</div>`,
+
+/* 8 interview end (right) */
+`<div class="pg r">${RH("Interview","<span>Park Ju-eun</span>")}<div class="in">
+  <div class="body cols" style="flex:1">
+    <span class="q">SNS에 의미심장한 댓글이 많던데요.</span>
+    <p class="a">다 보이게 해놨잖아요. 지운 것도 없고요. 어디가 문제인지 한 줄만 짚어 주시면 설명드릴게요. <span class="note">아무도 짚지 못했다.</span></p>
+    <span class="q">연애는요?</span>
+    <p class="a"><span class="x">다음 질문이요.</span> <span class="note">인터뷰 중 처음으로, 그녀는 대답 대신 와인잔을 들었다.</span></p>
+    <p class="pq">“이유는 안 말할래요.”<small>인생곡을 묻자</small></p>
+    <span class="q">요즘 가장 좋아하는 건?</span>
+    <p class="a">경매요. 사는 것보다 보는 게 좋아요. 누가 얼마까지 버티는지 보이거든요. 그리고 라나 델 레이. 「Young and Beautiful」은 제 인생곡이에요. 이유는 안 말할래요.</p>
+    <span class="q">강아지 둘을 키운다고 들었어요.</span>
+    <p class="a">가디랑 홍조요. 근데 그건… 얘기가 좀 달라요. <span class="note">그녀는 이 질문에서만 말을 골랐다.</span></p>
+    <span class="q">사람을 볼 때 제일 먼저 보는 건?</span>
+    <p class="a">손이요. 반지를 끼는지, 손톱을 어떻게 하는지. 손은 거짓말을 잘 못 하거든요.</p>
+    <span class="q">마지막으로, 독자들에게.</span>
+    <p class="a">궁금한 거 있으면 물어보세요. 대신 제가 되물어도 화내지 마시고요. <span class="note">그녀는 마지막까지 웃었다.</span></p>
+  </div>
+  <div class="box" style="border-color:var(--rule)"><span class="mono">Next</span><span style="font-family:var(--f-head);font-style:italic;font-size:3cqw">Under the Lights →</span></div>
+</div>${S("있어. 너네가 알 필요 없을 뿐",23,48,3.6,-4)}${S("늙으면 아무도 안 봐줄까 봐",63,4,3.8,3)}${S("산책은 다 그 사람이 감",74,6,4,-4)}${FO(8,"Interview")}</div>`,
+
+/* 9 under the lights photo (left) */
+`<div class="pg on-img"><img class="bleed" src="${IMG}post_violet.webp" alt="보라색 머리의 박주은 화보 컷" style="object-position:50% 25%"><div class="shade"></div>${RH("Society")}
+  <div style="position:absolute;left:6.6cqw;right:6.6cqw;bottom:9.6cqw;color:#fff;z-index:2">
+    <span class="kick" style="color:#FF5C9E">Under the Lights</span>
+    <h2 style="font-size:13cqw;color:#fff;margin-top:1.6cqw">Every room<br><em style="color:#FF5C9E">turns to her.</em></h2>
+  </div>${S("조명 꺼지면\n22시 알람",12,58,5.6,-7,"w")}${FO(9,"Under the Lights")}</div>`,
+
+/* 10 society grid (right) */
+`<div class="pg r">${RH("Society","<span>Her November</span>")}<div class="in">
+  <p class="deck" style="font-size:2.2cqw">런칭 파티, 소더비 프리뷰, 와인바 3주년. 조명이 켜진 곳마다 그녀가 있다. 사람들은 그녀 쪽으로 몸을 돌리고, 그녀는 한 사람도 빠짐없이 이름을 불러 준다. 그 밤들의 사진은 하나도 지워지지 않은 채 그녀의 피드에 남아 있다.</p>
+  <div class="soc">
+    <figure><img src="${IMG}post_carnew.webp" alt="리본을 단 하얀 카이엔"><figcaption><b>01</b>하얀 카이엔 출고 날. 리본은 직접 골랐다.</figcaption></figure>
+    <figure><img src="${IMG}post_car.webp" alt="꽃다발이 놓인 붉은 가죽 조수석" style="object-position:50% 60%"><figcaption><b>02</b>조수석엔 늘 꽃이 있다. 누구 건지는 말해 주지 않았다.</figcaption></figure>
+    <figure><img src="${IMG}post_pool.webp" alt="새벽의 빈 수영장"><figcaption><b>03</b>새벽 수영. 레인은 늘 같은 자리.</figcaption></figure>
+    <figure><img src="${IMG}post_dogs.webp" alt="차 안의 하얀 강아지 두 마리"><figcaption><b>04</b>가디와 홍조. 그녀가 유일하게 말을 고르는 주제.</figcaption></figure>
+  </div>
+</div>${S("꽃 내 거 아님 ♡",30,62,4.4,-6,"w")}${S("그 사람이 데려옴",71,60,4,-3)}${FO(10,"Under the Lights")}</div>`,
+
+/* 11 partnership type page (left, wine) */
+`<div class="pg wine on-img">${RH("Essay")}<div class="in">
+  <span class="kick" style="color:#FFB3D1">On Partnership</span>
+  <p style="margin-top:auto;font-family:var(--f-kr);font-weight:800;font-size:8.4cqw;line-height:1.22;letter-spacing:-.03em;word-break:keep-all">서류가<br>사랑을<br>증명하진<br>않죠.</p>
+  <p style="font-family:var(--f-head);font-style:italic;font-size:3.4cqw;line-height:1.3;color:#FFB3D1">“A paper doesn’t prove love.<br>Ending it is just one paper, too.”</p>
+  <p class="mono" style="color:rgba(255,255,255,.6)">공개 레즈비언 사업가 박주은이 말하는 파트너십</p>
+</div>${S("해지도 서류 한 장.\n그래서 무서워",16,46,4.6,-6,"w")}${FO(11,"On Partnership")}</div>`,
+
+/* 12 partnership Q&A (right) */
+`<div class="pg r">${RH("Essay","<span>On Partnership</span>")}<div class="in">
+  <div class="body cols" style="flex:1">
+    <span class="q">공개 레즈비언 사업가로 산다는 건 어때요?</span>
+    <p class="a">숨길 이유가 없었어요. 숨기는 순간 그게 약점이 되거든요. 저는 약점 만드는 거 싫어해요. 다 보여 주면 아무도 그걸로 절 못 잡아요.</p>
+    <span class="q">파트너십 제도에 대해선요?</span>
+    <p class="a">좋은 제도예요. 서류 한 장으로 병원 보호자 칸에 이름을 쓸 수 있으니까. 그게 없어서 복도에서 기다려야 했던 적이 있어요. <span class="x">다만 서류가 사랑을 증명하진 않죠. 해지도 서류 한 장이고.</span> <span class="note">그녀는 이 대답 끝에서만 웃지 않았다.</span></p>
+    <p class="pq">“한 명이면 돼요.<br>많으면 피곤해요.”</p>
+    <span class="q">이상적인 파트너는?</span>
+    <p class="a">한 명이면 돼요. 많으면 피곤해요. <span class="note">그녀 주변엔 늘 사람이 많다.</span></p>
+    <span class="q">사람들이 왜 당신한테 빠진다고 생각해요?</span>
+    <p class="a">제가 예쁜 걸 좋아해서요. 예쁜 사람들은 그걸 알아요. <span class="x">그 이상은 없어요.</span></p>
+    <span class="q">질투는 해요?</span>
+    <p class="a">안 해요. <span class="note">0.5초 만의 대답이었다.</span> 제 거는 제 거니까요.</p>
+    <span class="q">싸우면 어떻게 해요?</span>
+    <p class="a">안 놔요. 상대가 문 쪽으로 가면 제가 먼저 가서 서 있어요. 그게 제 방식이에요. <span class="note">농담인지 묻자 그녀는 대답하지 않았다.</span></p>
+  </div>
+  <div style="display:grid;grid-template-columns:30cqw 1fr;gap:2.6cqw;align-items:end">
+    <img class="fig" src="${IMG}clip_04.webp" alt="고개를 숙이고 정면을 보는 박주은" style="aspect-ratio:1;object-position:50% 25%">
+    <p class="cap"><b>Portrait</b> · 이 컷에서만 그녀는 웃지 않았다. 셔터 소리가 멈출 때까지.</p>
+  </div>
+</div>${S("한 명. 진짜야.\n아무도 안 믿지만",26,58,3.8,-4)}${S("거짓말. 미칠 것 같음",80,37,4.2,-3)}${FO(12,"On Partnership")}</div>`,
+
+/* 13 her five 1 (left) */
+`<div class="pg">${RH("Business")}<div class="in">
+  <div style="display:flex;justify-content:space-between;align-items:end"><h2 style="font-size:13cqw">Her <em>Five</em></h2><span class="mono" style="text-align:right"><span class="x">다섯 개의 브랜드</span><br>하나의 기준</span></div>${S("여섯 개야.\n하나는 비밀 ♡",4.5,50,3.6,-6)}
+  <div class="five">
+    <div class="brand"><span class="no">01</span><b class="bn">NULLPINK</b><span class="mono">IT 응용소프트웨어 · 성수 · 이사</span><p>다섯 개 중 가장 큰 회사. 연 매출 수십억. “코드는 거짓말을 안 해요. 틀리면 그냥 안 돌아가요.”</p></div>
+    <img class="fig" src="${IMG}post_office.webp" alt="핑크 네온 간판이 켜진 NULLPINK 사무실" style="flex:1;min-height:0;height:100%">
+    <div class="brand"><span class="no">02</span><b class="bn">STUDIO VIOLET</b><span class="mono">디자인 에이전시 · 성수</span><p>그녀의 첫 회사. 붉은 벽돌 창고를 고친 작업실. “예쁜 건 다 여기서 시작했어요.”</p></div>
+  </div>
+</div>${S("2.0 파티에서 제일 먼저 나옴",34,40,3.8,-5,"w")}${FO(13,"Her Five")}</div>`,
+
+/* 14 her five 2 (right) */
+`<div class="pg r">${RH("Business","<span>Her Five</span>")}<div class="in">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.6cqw;flex:1;min-height:0">
+    ${PH("studio_violet.webp","붉은 벽돌 창고를 고친 STUDIO VIOLET 작업실","linear-gradient(160deg,#5B2FA8,#A99BFF)","STUDIO VIOLET","height:100%")}
+    ${PH("guide.webp","핑크 조명 아래 마이크가 선 녹음 부스","linear-gradient(160deg,#15111C,#4A2A55)","GUIDE","height:100%")}
+  </div>
+  <div class="brand"><span class="no">03</span><b class="bn">OFFLINE</b><span class="mono">편집숍 · 한남</span><p>그녀의 옷장을 옮겨 놓은 편집숍. 진열은 직접 한다. “예쁜 순서대로 놔요. 기준은 저예요.”</p></div>
+  <div class="brand"><span class="no">04</span><b class="bn">ONE LINE</b><span class="mono">와인바 · 청담 · 18:00–04:00</span><p>천장을 가로지르는 핑크 네온 한 줄. “한 줄이면 충분하잖아요.”</p></div>
+  <div class="brand"><span class="no">05</span><b class="bn">GUIDE</b><span class="mono">녹음 스튜디오 · 망원</span><p>가이드 보컬 시절 인연으로 차린 녹음실. 마감 후 혼자 부스에 들어가 노래한다는 소문이 있다. “소문이에요.”</p></div>
+</div>${S("새벽 2시에 진열 세 번 바꿈",61,56,3.4,-5)}${S("소문 아님",86,70,4.8,-8)}${FO(14,"Her Five")}</div>`,
+
+/* 15 making of (left) */
+`<div class="pg">${RH("Life")}<div class="in">
+  <span class="kick">The Making of</span>
+  <p class="hk">연표를 펼쳐 놓으면,<br>단 한 칸도 비어 있지 않다</p>
+  <img class="fig" src="${IMG}clip_07.webp" alt="머리를 귀 뒤로 넘기는 박주은" style="aspect-ratio:16/5.4;object-position:50% 28%">
+  <ol class="time">
+    <li><b>01</b><span>일러스트레이터<small>그림으로 시작</small></span></li>
+    <li><b>02</b><span>수학 강사<small>“계산이 제일 정직해서요”</small></span></li>
+    <li><b>03</b><span>STUDIO VIOLET 창업<small>디자이너 13년 차</small></span></li>
+    <li><b>04</b><span>스타트업 CTO<small>개발 4년 차, 프론트와 백 둘 다</small></span></li>
+    <li><b>05</b><span>NULLPINK 이사<small>연 매출 수십억</small></span></li>
+    <li><b>06</b><span>OFFLINE · ONE LINE · GUIDE<small>보기 좋은 건 다 사업이 됐다</small></span></li>
+  </ol>
+  <p class="body" style="margin-top:auto">“하나도 계획한 적 없어요.” 그녀는 그렇게 말했지만, 우리는 믿지 않기로 했다.</p>
+</div>${S("사람은 계산이 안 되더라",24,50,3.8,-4,"w")}${S("새벽 4시까지 일함 매일",62,52,3.8,-6)}${FO(15,"The Making of")}</div>`,
+
+/* 16 bag (right) */
+`<div class="pg r">${RH("Life","<span>In Her Bag</span>")}<div class="in">
+  <span class="kick">What’s in Her Bag</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3cqw;align-items:start;flex:1;min-height:0">
+    <div><img class="fig" src="${IMG}post_auction.webp" alt="창가에 놓인 그녀의 가방" style="aspect-ratio:3/4.4"><p class="cap"><b>Bag</b> · 그날그날 바뀐다. 한쪽 어깨에만.</p></div>
+    <div style="display:grid;gap:2.4cqw">
+      <ul class="bagl"><li>그날의 가방</li><li>열 손가락용 반지들</li><li>잠금 없는 폰</li><li>작은 약통</li><li>가디와 홍조 간식</li><li>유니콘 키링</li><li>립 하나, 늘 같은 색</li></ul>
+      <p class="body drop">열 손가락의 반지는 7년 동안 하나씩 늘었다. 같은 디자인은 하나도 없다. 가장 오래된 건 왼손 약지에 있다. 언제 산 거냐고 묻자, 그녀는 반지를 한 바퀴 돌리고 말했다. “기억 안 나요.” 폰은 잠금이 없다. “보면 되죠. 근데 안 보잖아요, 다들.”</p>
+    </div>
+  </div>
+  <div class="box">
+    <span class="q" style="margin:0">서른다섯 박주은에게 무서운 게 있다면.</span>
+    <p class="body a">…예쁘지 않게 되는 거요. <span class="note">잠깐의 침묵.</span> <span class="x">농담이에요.</span> 다음.</p>
+  </div>
+</div>${S("7년째 ↓",7,66,4.4,-6)}${S("4년 반 전. 다 기억함",58,52,4.2,-5)}${S("농담 아니야",86,60,5,-7)}${FO(16,"In Her Bag")}</div>`,
+
+/* 17 world: traits (left) */
+`<div class="pg"><img src="${IMG}lily_cut.webp" alt="" aria-hidden="true" style="position:absolute;top:1cqw;right:-3cqw;width:27cqw;transform:rotate(-14deg);z-index:0;pointer-events:none">${RH("The World of Rainbow")}<div class="in" style="z-index:1">
+  <span class="kick">The World of Rainbow · I</span>
+  <h2 style="font-size:10.5cqw">형질의 <em>세계</em></h2>
+  <p class="deck" style="font-size:2.2cqw">모든 사람은 태어날 때 형질을 갖는다.</p>
+  <div class="body cols">
+    <p class="drop">이 세계의 사람은 베타, 알파, 오메가로 나뉜다. 열에 아홉은 베타다. 알파와 오메가는 나머지를 나눠 가지고, 그 안에서도 형질이 강하게 발현되는 우성은 극히 드물다. 우성 알파 여성은 0.5%도 되지 않는다.</p>
+    <p>우성은 모든 것이 압도적이다. 페로몬이 닿는 범위도, 주기가 몰아치는 세기도, 각인이 남기는 결속도. 우성 오메가의 향은 형질이 없는 베타조차 고개를 돌리게 만든다. 약으로 눌러도, 목에 차단제를 감아도, 아주 조금씩 샌다. 밀폐된 방에 꽂아 둔 백합처럼.</p>
+  </div>
+  <div class="gloss">
+    <div><b>히트<small>HEAT</small></b><p>오메가의 주기. 억제제로 늦출 수 있지만 우성은 완전히 막을 수 없다.</p></div>
+    <div><b>러트<small>RUT</small></b><p>알파의 주기. 우성 알파일수록 세고, 참을수록 크게 무너진다.</p></div>
+    <div><b>러트 동조<small>SYNC</small></b><p>우성 알파 하나가 러트에 들면 근처 우성 알파도 끌려 들어간다.</p></div>
+    <div><b>각인<small>BOND</small></b><p>목덜미에 남기는 결속. 법적으로 혼인에 준하는 효력을 갖는다.</p></div>
+    <div><b>다중 각인<small>MULTI</small></b><p>우성 오메가만 가능하다. 각인자끼리는 서로의 감정이 어렴풋이 전해진다.</p></div>
+    <div><b>억제제 · 차단제<small>RX</small></b><p>억제제는 주기를, 차단제(초커·패치)는 향을 막는다.</p></div>
+  </div>
+</div>${S("러트 주간엔\n집 밖에 안 나가",76,6,3.8,-5)}${S("목덜미는\n4년 반 전에",76,56,3.8,4)}${FO(17,"The World of Rainbow")}</div>`,
+
+/* 18 world: the body (right) */
+`<div class="pg r">${RH("The World of Rainbow","<span>Rainbow · Melting Down</span>")}<div class="in">
+  <span class="kick">The World of Rainbow · II</span>
+  <p class="hk" style="font-size:5cqw">여성 알파의 몸.</p>
+  <div class="body cols" style="column-count:1">
+    <p>이 세계의 여성 알파에게는 난소가 없다. 그 자리를 다른 것이 대신하고 있어서, 여성 알파는 아이를 품지 않는다. 품게 하는 쪽이다. 평소에는 겉으로 드러나지 않지만, 우성 여성 알파의 몸은 오메가를 안을 수 있도록 온전히 자라 있고, 주기나 열기 속에서는 그 차이가 숨길 수 없이 분명해진다. 결속의 순간 쉽게 떨어지지 않는 매듭이 생기는 것도 우성뿐이다. 열성은 그 흔적이 희미하다.</p>
+  </div>
+  <p class="pq" style="margin:0">“우성 알파의 아이를 볼 수 있는 몸은,<br>우성 오메가뿐이다.”</p>
+  <table class="breed">
+    <thead><tr><th></th><th>알파<small>ALPHA</small></th><th>베타<small>BETA</small></th><th>오메가<small>OMEGA</small></th></tr></thead>
+    <tbody>
+      <tr><th>알파<small>ALPHA</small></th><td class="no"><b>×</b>불가</td><td class="rare"><b>△</b>거의 불가</td><td class="ok"><b>○</b>오메가가 품음</td></tr>
+      <tr><th>베타<small>BETA</small></th><td class="rare"><b>△</b>거의 불가</td><td class="ok"><b>○</b>보통 사람과 같음</td><td class="rare"><b>△</b>거의 불가</td></tr>
+      <tr><th>오메가<small>OMEGA</small></th><td class="ok"><b>○</b>오메가가 품음</td><td class="rare"><b>△</b>거의 불가</td><td class="no"><b>×</b>불가</td></tr>
+    </tbody>
+  </table>
+  <ul class="bnotes">
+    <li><b>품는 쪽은 언제나 오메가.</b> 여성 알파는 아이를 품지 않는다.</li>
+    <li><b>알파끼리는 불가.</b> 우성 알파 사이에서는 아이가 생기지 않는다.</li>
+    <li><b>우성 2세.</b> 우성 오메가뿐. 그래서 우성 오메가는 귀하고, 위험하다.</li>
+  </ul>
+</div>${S("그래서 다들\n나한테 줄 서",84,56,3.6,-5)}${FO(18,"The World of Rainbow")}</div>`,
+
+/* 17 closing photo (left) */
+`<div class="pg on-img"><img class="bleed" src="${IMG}clip_10.webp" alt="반지 낀 손으로 머리를 넘기는 박주은" style="object-position:50% 30%"><div class="shade"></div>${RH("Cover Story")}
+  <div style="position:absolute;left:6.6cqw;right:6.6cqw;bottom:9.6cqw;color:#fff;z-index:2;display:grid;gap:2cqw">
+    <span class="kick" style="color:#FF5C9E">After the Shoot</span>
+    <p style="font-family:var(--f-kr);font-size:2.5cqw;line-height:1.85;word-break:keep-all">촬영이 끝나고 다들 짐을 정리할 때, 그녀는 바 끝에 앉아 반지를 하나씩 빼 줄 세웠다. 밤 10시, 폰에서 작은 알람이 울렸다. 그녀는 그걸 끄고, 아무 일 없다는 듯 웃었다. “다들 조심히 들어가요.”</p>
+  </div>${S("알람은 끈 게 아니라 미룬 거",18,10,4.6,-4,"w")}${FO(19,"Cover Story")}</div>`,
+
+/* 18 meet her (right, dark) */
+`<div class="pg dark r"><img class="bleed" src="${IMG}lily_macro.webp" alt="" aria-hidden="true" style="opacity:.55;object-position:50% 40%"><div class="shade" style="background:linear-gradient(180deg,rgba(14,10,20,.75),rgba(14,10,20,.55) 40%,rgba(14,10,20,.92))"></div>${RH("Story","<span>Meet Her</span>")}<div class="in" style="z-index:2">
+  <span class="kick" style="color:#FF5C9E">Meet Her</span>
+  <h2 style="font-family:var(--f-mast);font-weight:300;font-size:10cqw;letter-spacing:.12em;color:#fff;margin-top:2cqw">MANIAC</h2>
+  <p class="deck" style="color:rgba(243,236,241,.78)">숨긴 건 하나도 없다. 그래서 따질 데가 없다. 크랙 스토리 「MANIAC」에서 박주은을 직접 만날 수 있다.</p>
+  <div style="margin-top:2cqw">
+    <div class="start cp"><i>I</i><b>4년 반, MANIAC</b><span>놓지도 못하고 견디지도 못하는, 미친 사랑의 한가운데</span><button type="button" class="copyp" data-copy="maniac">프로필 복사</button></div>
+    <div class="start cp" style="border-bottom:1px solid rgba(255,255,255,.22)"><i>II</i><b>자유 스타팅</b><span>당신이 그녀에게 누구인지는, 당신이 정한다</span><button type="button" class="copyp" data-copy="free">프로필 복사</button></div>
+    <p class="copy-note">프로필 양식을 복사해 크랙 페르소나 칸에 붙여 넣으세요. 2차 성별은 꼭 적어주세요. 박주은은 35세, 연하면 "애기야" 연상이면 "언니"라고 불러요.</p>
+  </div>
+  <p style="margin-top:auto;font-family:var(--f-head);font-style:italic;font-size:4.6cqw;line-height:1.2;color:#fff">“자기야… 나 버리지 마. 응?”<small style="display:block;margin-top:1.2cqw;font-family:var(--f-mono);font-style:normal;font-size:1.3cqw;letter-spacing:.2em;color:#FF5C9E">— 박주은, 「MANIAC」 중에서</small></p>
+  <div class="btns" style="margin-top:3cqw"><a class="btn main" href="feed.html">그녀의 인스타 보러 가기 <span>→</span></a><a class="btn" href="#" data-crack>크랙에서 만나기 <span>↗</span></a></div>
+</div>${S("날 찾으러 와",54,44,6,-8,"w")}${FO(20,"Meet Her")}</div>`,
+
+/* 19 back cover ad */
+`<div class="pg dark"><img class="bleed" src="${IMG}post_bar.webp" alt="핑크 네온이 켜진 와인바 ONE LINE"><div class="ad"><span class="brand2">ONE LINE</span><div><p>Last glass,<br>first secret.</p><span class="mono" style="display:block;margin-top:2cqw;color:rgba(255,255,255,.75)">Cheongdam · 18:00 — 04:00</span><a class="btn main" href="feed.html" style="margin-top:5cqw;border-radius:99px">@parkjueun 인스타 보러 가기 <span>→</span></a></div></div>${S("마지막 잔은 늘 혼자 마셔",44,34,5.4,-6,"w")}</div>`
+];
+const N=PAGES.length;
+/* desktop leaves: cover sits alone on the right; back cover alone on the left */
+const leaves=[]; for(let i=0;i<N;i+=2) leaves.push([PAGES[i], PAGES[i+1]||`<div class="pg blank"><span class="mono">Scroll</span></div>`]);
+const stage=document.getElementById("stage"), prevB=document.getElementById("prev"), nextB=document.getElementById("next"), countEl=document.getElementById("count");
+let mode=null, flipped=0, single=0;
+const mq=matchMedia("(max-width:820px)");
+function build(){
+  mode=(mq.matches||DRAW)?"single":"book"; stage.innerHTML="";
+  if(mode==="book"){
+    const book=document.createElement("div"); book.className="book"; book.innerHTML='<div class="shadow"></div>';
+    leaves.forEach((pair,i)=>{const l=document.createElement("div"); l.className="leaf"; l.dataset.i=i;
+      l.innerHTML=`<div class="face front">${pair[0]}</div><div class="face back">${pair[1]}</div>`;
+      l.addEventListener("click",e=>{if(DRAW||e.target.closest("a"))return; i<flipped?go(-1):go(1)}); book.appendChild(l)});
+    stage.appendChild(book); flipped=Math.min(flipped,leaves.length);
+  }else{
+    const s=document.createElement("div"); s.className="single"; s.innerHTML=`<div class="track">${PAGES.map(p=>`<div class="sheet">${p}</div>`).join("")}</div>`;
+    s.addEventListener("click",e=>{if(DRAW||e.target.closest("a"))return; const r=s.getBoundingClientRect(); go(e.clientX-r.left<r.width/3?-1:1)});
+    stage.appendChild(s);
+  }
+  fixHangul(); wireCrack(); mountInk(); update(true);
+}
+function fixHangul(){
+  stage.querySelectorAll(".mono,.cap,.kick,.rh,.fo,.mast,.toc em,.sig small").forEach(el=>{
+    const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT); const ns=[]; while(w.nextNode()) ns.push(w.currentNode);
+    ns.forEach(n=>{ if(!/[\uAC00-\uD7A3]/.test(n.nodeValue)||n.parentElement.classList.contains("h")) return;
+      const f=document.createDocumentFragment();
+      n.nodeValue.split(/([\uAC00-\uD7A3][\uAC00-\uD7A3\s]*[\uAC00-\uD7A3]|[\uAC00-\uD7A3])/).forEach((p,i)=>{ if(!p) return;
+        if(i%2){const sp=document.createElement("span"); sp.className="h"; sp.textContent=p; f.appendChild(sp)} else f.appendChild(document.createTextNode(p)) });
+      n.replaceWith(f) }) })
+}
+function update(instant){
+  if(mode==="book"){
+    const book=stage.querySelector(".book"), ls=[...stage.querySelectorAll(".leaf")];
+    ls.forEach((l,i)=>{ if(instant) l.style.transition="none";
+      l.classList.toggle("flipped",i<flipped);
+      l.style.zIndex = i<flipped ? (i+1) : (ls.length-i);
+      if(instant) requestAnimationFrame(()=>l.style.transition="");});
+    book.classList.toggle("closed-front",flipped===0); book.classList.toggle("closed-back",flipped===ls.length);
+    prevB.disabled=flipped===0; nextB.disabled=flipped===ls.length;
+    const L=flipped*2-1, R=flipped*2;
+    countEl.textContent= flipped===0?"COVER": flipped===ls.length?"BACK COVER": `${String(L).padStart(2,"0")} — ${String(R).padStart(2,"0")} / ${N-2}`;
+  }else{
+    const t=stage.querySelector(".track"); if(instant) t.style.transition="none"; t.style.transform=`translateX(${-single*100}%)`; if(instant) requestAnimationFrame(()=>t.style.transition="");
+    prevB.disabled=single===0; nextB.disabled=single===N-1;
+    countEl.textContent= single===0?"COVER": single===N-1?"BACK COVER": `${String(single).padStart(2,"0")} / ${N-2}`;
+  }
+}
+function go(d){
+  if(mode==="book"){
+    const max=leaves.length, nf=Math.max(0,Math.min(max,flipped+d)); if(nf===flipped) return;
+    const ls=[...stage.querySelectorAll(".leaf")]; const turning= d>0? ls[flipped] : ls[nf];
+    turning.style.zIndex=ls.length+5; flipped=nf; turning.classList.toggle("flipped",d>0);
+    setTimeout(()=>update(false),900);
+    const book=stage.querySelector(".book"); book.classList.toggle("closed-front",flipped===0); book.classList.toggle("closed-back",flipped===max);
+    prevB.disabled=flipped===0; nextB.disabled=flipped===max;
+    const L=flipped*2-1,R=flipped*2; countEl.textContent= flipped===0?"COVER": flipped===max?"BACK COVER": `${String(L).padStart(2,"0")} — ${String(R).padStart(2,"0")} / ${N-2}`;
+  }else{ single=Math.max(0,Math.min(N-1,single+d)); update(false); }
+}
+prevB.addEventListener("click",()=>go(-1)); nextB.addEventListener("click",()=>go(1));
+document.addEventListener("keydown",e=>{if(window.__phoneOpen&&__phoneOpen())return; if(e.key==="ArrowRight")go(1); if(e.key==="ArrowLeft")go(-1)});
+mq.addEventListener("change",()=>{ if(mq.matches){single=Math.max(0,flipped*2-1)} else {flipped=Math.ceil(single/2)} build(); });
+/* 크랙 작품 주소가 생기면 아래 따옴표 안에 넣기 */
+const CRACK_URL="";
+function wireCrack(){stage.querySelectorAll("[data-crack]").forEach(a=>{ if(CRACK_URL){a.href=CRACK_URL;a.target="_blank";a.rel="noopener"} else a.addEventListener("click",e=>e.preventDefault()) })}
+const bgm=new Audio("audio/maniac.mp3"); bgm.loop=true; bgm.preload="none"; bgm.crossOrigin="anonymous";
+let ac=null,lp=null,gn=null;
+function initAudio(){ if(ac) return; try{ ac=new (window.AudioContext||window.webkitAudioContext)(); const src=ac.createMediaElementSource(bgm);
+  lp=ac.createBiquadFilter(); lp.type="lowpass"; lp.Q.value=1.1; gn=ac.createGain(); src.connect(lp).connect(gn).connect(ac.destination); muffle(pen,true);}catch(e){ac=null} }
+function muffle(on,now){ bgm.playbackRate=on?0.9:1; try{bgm.preservesPitch=false}catch(e){}
+  if(!ac) return; const t=ac.currentTime,k=now?0.01:0.4; lp.frequency.cancelScheduledValues(t); gn.gain.cancelScheduledValues(t);
+  lp.frequency.setTargetAtTime(on?520:18000,t,k); gn.gain.setTargetAtTime(on?0.85:1,t,k); }
+const mb=document.getElementById("musicBtn");
+mb.addEventListener("click",async()=>{ if(bgm.paused){ initAudio(); try{ if(ac&&ac.state==="suspended") await ac.resume(); await bgm.play();mb.setAttribute("aria-pressed","true");mb.setAttribute("aria-label","배경음악 일시정지")}catch(e){}} else {bgm.pause();mb.setAttribute("aria-pressed","false");mb.setAttribute("aria-label","배경음악 재생")} });
+let pen=false; const pb=document.getElementById("penBtn");
+function setPen(on){ pen=on; document.documentElement.dataset.pen=on?"on":"off"; pb.setAttribute("aria-pressed",on); document.getElementById("penLbl").textContent=on?"인쇄본으로":"주은의 펜"; muffle(on); try{localStorage.setItem("mag-pen",on?"1":"0")}catch(e){} }
+pb.addEventListener("click",()=>setPen(!pen));
+try{ if(localStorage.getItem("mag-pen")==="1") setPen(true) }catch(e){}
+/* ---------- her own ink: write on the pages with a pen tablet ---------- */
+const NS="http://www.w3.org/2000/svg", VB_W=1000, VB_H=1333;
+const INK={}; const HIDE={}; const hist=[]; const dirty=new Set();
+let DRAW=false, tool="pen", inkColor="#D3165F", inkSize=6, inkCol=null, flushing=false, flushT=null;
+const pad=i=>String(i).padStart(2,"0");
+const enc=pts=>pts.map(p=>`${Math.round(p[0])},${Math.round(p[1])},${p[2].toFixed(1)}`).join(" ");
+const dec=s=>s.split(" ").map(t=>t.split(",").map(Number));
+function strokeD(raw){
+  const pts=[]; raw.forEach(p=>{const q=pts[pts.length-1]; if(!q||Math.hypot(p[0]-q[0],p[1]-q[1])>1.2) pts.push(p)});
+  const n=pts.length; if(!n) return "";
+  const P=pts.map((p,i)=>{const a=pts[Math.max(0,i-1)],c=pts[Math.min(n-1,i+1)];
+    const taper=Math.min(1,(i+1)/3,(n-i)/3); return [(a[0]+2*p[0]+c[0])/4,(a[1]+2*p[1]+c[1])/4,p[2]*(.55+.45*taper)]});
+  if(n<3){const [x,y,w]=P[0],r=Math.max(w/2,1); return `M${x-r} ${y}a${r} ${r} 0 1 0 ${2*r} 0a${r} ${r} 0 1 0 ${-2*r} 0Z`}
+  const L=[],R=[];
+  P.forEach((p,i)=>{const a=P[Math.max(0,i-1)],c=P[Math.min(n-1,i+1)]; let dx=c[0]-a[0],dy=c[1]-a[1]; const d=Math.hypot(dx,dy)||1; dx/=d;dy/=d;
+    const r=p[2]/2; L.push([p[0]-dy*r,p[1]+dx*r]); R.push([p[0]+dy*r,p[1]-dx*r])});
+  const f=q=>`${q[0].toFixed(1)} ${q[1].toFixed(1)}`, re=P[n-1][2]/2, rs=P[0][2]/2;
+  return `M${f(L[0])}L${L.map(f).join("L")}A${re} ${re} 0 0 1 ${f(R[n-1])}L${R.slice().reverse().map(f).join("L")}A${rs} ${rs} 0 0 1 ${f(L[0])}Z`;
+}
+function renderPage(i){
+  document.querySelectorAll(`.ink[data-p="${i}"]`).forEach(svg=>{
+    svg.innerHTML=(INK[i]||[]).map((s,k)=>`<path data-k="${k}" fill="${s.c}" d="${strokeD(dec(s.s))}"/>`).join("");
+    const pg=svg.parentElement; pg.classList.toggle("has-ink",(INK[i]||[]).length>0);
+    pg.querySelectorAll(".scr").forEach((el,k)=>el.classList.toggle("gone",(HIDE[i]||[]).includes(k)))});
+}
+function mountInk(){
+  if(mode==="book") stage.querySelectorAll(".leaf").forEach((l,k)=>{addInk(l.querySelector(".face.front .pg"),2*k); addInk(l.querySelector(".face.back .pg"),2*k+1)});
+  else stage.querySelectorAll(".sheet").forEach((s,j)=>addInk(s.querySelector(".pg"),j));
+  Object.keys({...INK,...HIDE}).forEach(renderPage);
+}
+function addInk(pg,i){
+  if(!pg) return; const svg=document.createElementNS(NS,"svg"); svg.setAttribute("class","ink"); svg.dataset.p=i;
+  svg.setAttribute("viewBox",`0 0 ${VB_W} ${VB_H}`); svg.setAttribute("preserveAspectRatio","none"); svg.setAttribute("aria-hidden","true");
+  pg.appendChild(svg); bindDraw(svg,i);
+}
+function bindDraw(svg,i){
+  let cur=null,path=null,pts=null;
+  const pt=e=>{const r=svg.getBoundingClientRect(); const pr=e.pointerType==="mouse"||!e.pressure?.5:e.pressure;
+    return [(e.clientX-r.left)/r.width*VB_W,(e.clientY-r.top)/r.height*VB_H,inkSize*(.35+1.1*pr)]};
+  const draw=()=>path&&path.setAttribute("d",strokeD(pts));
+  svg.addEventListener("pointerdown",e=>{ if(!DRAW) return; e.preventDefault(); e.stopPropagation(); if(cur) end();
+    try{svg.setPointerCapture(e.pointerId)}catch(_){}
+    if(tool==="erase"){cur="erase"; erase(e,svg,i); return}
+    cur="pen"; pts=[pt(e)]; path=document.createElementNS(NS,"path"); path.setAttribute("fill",inkColor); svg.appendChild(path); draw() });
+  svg.addEventListener("pointermove",e=>{ if(!DRAW||!cur) return; e.preventDefault();
+    if(e.buttons===0&&e.pointerType!=="touch"){ end(); return }
+    if(cur==="erase"){erase(e,svg,i); return}
+    (e.getCoalescedEvents?e.getCoalescedEvents():[e]).forEach(ev=>pts.push(pt(ev))); draw() });
+  function end(){ if(cur==="pen"&&pts&&pts.length){ (INK[i]=INK[i]||[]).push({c:inkColor,s:enc(pts)}); hist.push(i); renderPage(i); changed(i) }
+    cur=null; path=null; pts=null }
+  ["pointerup","pointercancel","lostpointercapture"].forEach(t=>svg.addEventListener(t,end));
+  window.addEventListener("pointerup",()=>{ if(cur) end() });
+  svg.addEventListener("click",e=>{ if(DRAW) e.stopPropagation() });
+}
+function erase(e,svg,i){
+  const hit=new Set();
+  for(const [dx,dy] of [[0,0],[5,0],[-5,0],[0,5],[0,-5]])
+    document.elementsFromPoint(e.clientX+dx,e.clientY+dy).forEach(el=>{ if(el.parentNode===svg&&el.dataset.k!=null) hit.add(+el.dataset.k) });
+  let guide=false;
+  svg.parentElement.querySelectorAll(".scr").forEach((el,k)=>{ if(el.classList.contains("gone")) return; const r=el.getBoundingClientRect();
+    if(e.clientX>=r.left-4&&e.clientX<=r.right+4&&e.clientY>=r.top-4&&e.clientY<=r.bottom+4){ (HIDE[i]=HIDE[i]||[]).push(k); guide=true } });
+  if(!hit.size&&!guide) return;
+  INK[i]=(INK[i]||[]).filter((_,k)=>!hit.has(k)); renderPage(i); changed(i);
+}
+function changed(i){
+  dirty.add(i); try{localStorage.setItem("mag-ink",JSON.stringify({pages:INK,hide:HIDE}))}catch(_){}
+  setInkStatus(inkCol?"저장 중…":"이 브라우저에 임시 저장됨");
+  if(inkCol){ clearTimeout(flushT); flushT=setTimeout(flush,1200) }
+}
+async function flush(){
+  if(flushing||!inkCol){return} flushing=true;
+  try{ while(dirty.size){ const i=[...dirty][0]; dirty.delete(i); await inkCol.doc("p"+pad(i)).set({strokes:INK[i]||[],hide:HIDE[i]||[]}) } setInkStatus("저장됨") }
+  catch(e){ setInkStatus("저장 실패: 다시 그으면 재시도"); }
+  flushing=false;
+}
+function setInkStatus(t){ const el=document.getElementById("inkStatus"); if(el) el.textContent=t }
+function undo(){ const i=hist.pop(); if(i==null||!INK[i]||!INK[i].length) return; INK[i].pop(); renderPage(i); changed(i) }
+function visiblePages(){ return mode==="book"?[flipped*2-1,flipped*2].filter(i=>i>=0&&i<N):[single] }
+function clearVisible(){ if(!confirm("이 페이지 손글씨 다 지울까?")) return; visiblePages().forEach(i=>{INK[i]=[]; HIDE[i]=[]; renderPage(i); changed(i)}) }
+function downloadInk(){
+  const blob=new Blob([JSON.stringify({v:1,pages:INK,hide:HIDE})],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="ink.json"; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+function setDraw(on){
+  DRAW=on; document.documentElement.dataset.draw=on?"on":"off"; document.getElementById("inkBar").hidden=!on;
+  const b=document.getElementById("drawBtn"); b.setAttribute("aria-pressed",on); b.querySelector("span:last-child").textContent=on?"쓰기 끝":"직접 쓰기";
+  if(on&&!pen) setPen(true);
+  if(!mq.matches){ if(on) single=Math.max(0,flipped*2-1); else flipped=Math.min(Math.ceil(single/2),leaves.length); build() }
+}
+function initInkUI(){
+  document.getElementById("drawBtn").addEventListener("click",()=>setDraw(!DRAW));
+  document.querySelectorAll("#inkBar [data-tool]").forEach(b=>b.addEventListener("click",()=>{tool=b.dataset.tool; document.querySelectorAll("#inkBar [data-tool]").forEach(x=>x.setAttribute("aria-pressed",x===b)); document.documentElement.dataset.tool=tool}));
+  document.querySelectorAll("#inkBar [data-color]").forEach(b=>b.addEventListener("click",()=>{inkColor=b.dataset.color; tool="pen"; document.documentElement.dataset.tool="pen";
+    document.querySelectorAll("#inkBar [data-color]").forEach(x=>x.setAttribute("aria-pressed",x===b)); document.querySelectorAll("#inkBar [data-tool]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.tool==="pen"))}));
+  document.querySelectorAll("#inkBar [data-size]").forEach(b=>b.addEventListener("click",()=>{inkSize=+b.dataset.size; document.querySelectorAll("#inkBar [data-size]").forEach(x=>x.setAttribute("aria-pressed",x===b))}));
+  document.querySelectorAll("#inkBar [data-zoom]").forEach(b=>b.addEventListener("click",()=>{document.documentElement.style.setProperty("--z",b.dataset.zoom); document.querySelectorAll("#inkBar [data-zoom]").forEach(x=>x.setAttribute("aria-pressed",x===b))}));
+  document.getElementById("inkUndo").addEventListener("click",undo);
+  document.getElementById("inkClear").addEventListener("click",clearVisible);
+  document.getElementById("inkSave").addEventListener("click",downloadInk);
+  const g=document.getElementById("inkGuide"); g.addEventListener("click",()=>{const on=document.documentElement.dataset.guide!=="off"; document.documentElement.dataset.guide=on?"off":"on"; g.setAttribute("aria-pressed",!on)});
+  document.addEventListener("keydown",e=>{ if(DRAW&&(e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"){e.preventDefault();undo()} });
+}
+async function loadInk(){
+  const wantDraw=/[?&]draw\b/.test(location.search);
+  try{ const r=await fetch("ink.json",{cache:"no-store"}); if(r.ok){ const j=await r.json(); Object.assign(INK,j.pages||{}); Object.assign(HIDE,j.hide||{}); Object.keys({...INK,...HIDE}).forEach(renderPage) } }catch(_){}
+  if(wantDraw){ try{ const d=JSON.parse(localStorage.getItem("mag-ink")||"null"); if(d&&d.pages){ Object.keys(INK).forEach(k=>delete INK[k]); Object.assign(INK,d.pages); Object.assign(HIDE,d.hide||{}); Object.keys({...INK,...HIDE}).forEach(renderPage) } }catch(_){}
+    document.getElementById("drawBtn").hidden=false; setInkStatus("다 쓰고 ink.json 받아서 maniac 폴더에 올려") }
+  if(!window.claude||!claude.use) return;
+  const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+  if(db){ const col=db.collection("ink");
+    col.onSnapshot(snap=>{ snap.docs.forEach(d=>{ const i=+d.id.slice(1); if(dirty.has(i)) return; const b=d.data()||{}; INK[i]=(b.strokes||[]).map(x=>({c:x.c,s:x.s})); HIDE[i]=(b.hide||[]).slice(); renderPage(i) }) },()=>{});
+    if(user&&await user.canEdit()){ inkCol=col; document.getElementById("drawBtn").hidden=false; document.getElementById("inkSave").hidden=true; setInkStatus("쓰는 대로 자동 저장돼") } }
+}
+/* entrance gate: the click is also the gesture that lets the music start */
+(function(){
+  const gate=document.getElementById("gate"), btn=document.getElementById("gateBtn");
+  document.documentElement.style.overflow="hidden";
+  let done=false;
+  function enter(quiet){ if(done) return; done=true;
+    if(!quiet&&bgm.paused) mb.click();
+    gate.classList.add("open"); document.documentElement.style.overflow="";
+    setTimeout(()=>gate.remove(),2300); }
+  btn.addEventListener("click",e=>{e.stopPropagation();enter()});
+  document.getElementById("gateQuiet").addEventListener("click",e=>{e.stopPropagation();enter(true)});
+  document.addEventListener("keydown",e=>{ if(!done&&(e.key==="Enter"||e.key===" ")){e.preventDefault();enter()} });
+})();
+
+/* wheel / trackpad turns pages; chrome fades when idle */
+(function(){
+  let lock=0;
+  document.addEventListener("wheel",e=>{ if(document.getElementById("gate")||(window.__phoneOpen&&__phoneOpen())||e.target.closest(".dock")) return;
+    const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX; if(Math.abs(d)<12) return;
+    e.preventDefault(); const now=Date.now(); if(now<lock) return; lock=now+950; go(d>0?1:-1) },{passive:false});
+  const bar=document.querySelector(".bar"), wrap=document.querySelector(".wrap"); let t=null;
+  function wake(){ bar.classList.remove("idle"); wrap.classList.remove("idle"); clearTimeout(t); t=setTimeout(()=>{ bar.classList.add("idle"); wrap.classList.add("idle") },2600) }
+  ["mousemove","touchstart","keydown"].forEach(ev=>document.addEventListener(ev,wake,{passive:true})); wake();
+  /* touch: swipe like scrolling (up or left = next page, down or right = previous) */
+  let t0=null;
+  document.addEventListener("touchstart",e=>{ if(document.getElementById("gate")||(window.__phoneOpen&&__phoneOpen())||e.touches.length>1){t0=null;return} t0=[e.touches[0].clientX,e.touches[0].clientY] },{passive:true});
+  document.addEventListener("touchmove",e=>{ if(t0&&!document.getElementById("gate")) e.preventDefault() },{passive:false});
+  document.addEventListener("touchend",e=>{ if(!t0) return; const dx=e.changedTouches[0].clientX-t0[0], dy=e.changedTouches[0].clientY-t0[1]; t0=null;
+    const d=Math.abs(dy)>Math.abs(dx)?dy:dx; if(Math.abs(d)<40) return; const now=Date.now(); if(now<lock) return; lock=now+500; go(d<0?1:-1) },{passive:true});
+})();
+
+/* open her feed in a phone overlay instead of leaving the magazine */
+(function(){
+  const wrap=document.getElementById("phoneWrap"), fr=document.getElementById("phoneFrame");
+  function open(){ if(!fr.src) fr.src="feed.html"; wrap.hidden=false; document.documentElement.dataset.phone="on"; if(!bgm.paused){ bgm.pause(); wrap.dataset.resume="1" } }
+  function close(){ wrap.hidden=true; delete document.documentElement.dataset.phone; if(wrap.dataset.resume){ delete wrap.dataset.resume; bgm.play().catch(()=>{}) } }
+  document.addEventListener("click",e=>{ const a=e.target.closest('a[href="feed.html"]'); if(!a||a.hasAttribute("data-newtab")) return; e.preventDefault(); e.stopPropagation(); if(window.__dockOn&&__dockOn()){ __dockShow("ig"); return } open() },true);
+  wrap.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",close));
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!wrap.hidden) close() });
+  window.__phoneOpen=()=>!wrap.hidden;
+})();
+
+/* menu: jump to a page */
+function goTo(pg){
+  if(mode==="book"){ const nf=Math.max(0,Math.min(leaves.length,Math.ceil(pg/2))); if(nf===flipped) return; flipped=nf; update(false) }
+  else { single=Math.max(0,Math.min(N-1,pg)); update(false) }
+}
+document.querySelectorAll("[data-goto]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault(); goTo(+a.dataset.goto)}));
+
+initInkUI();
+build();
+</script>
+<script>
+(()=>{
+  const dock=document.getElementById("dock"); if(!dock) return;
+  const fr=document.getElementById("dkFrame"), mb=document.getElementById("musicBtn");
+  const on=matchMedia("(min-width:1180px) and (min-height:620px)");
+  window.__dockOn=()=>on.matches;
+  function show(scr){ dock.dataset.scr=scr; if(scr==="ig"&&!fr.src) fr.src="feed.html";
+    dock.querySelectorAll(".dk-tabs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.to===scr))) }
+  window.__dockShow=show;
+  dock.querySelectorAll(".dk-tabs button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.to)));
+  document.getElementById("dkIsland").addEventListener("click",()=>show("music"));
+  const fmt=t=>{t=Math.max(0,t|0);return (t/60|0)+":"+String(t%60).padStart(2,"0")};
+  const bar=document.getElementById("dkBar"), cur=document.getElementById("dkCur"), dur=document.getElementById("dkDur"), prog=document.getElementById("dkProg");
+  function tick(){ const d=bgm.duration||196; bar.style.width=(bgm.currentTime/d*100)+"%"; cur.textContent=fmt(bgm.currentTime); dur.textContent="-"+fmt(d-bgm.currentTime); prog.setAttribute("aria-valuenow",Math.round(bgm.currentTime/d*100)) }
+  function state(){ const p=!bgm.paused; dock.classList.toggle("playing",p);
+    dock.querySelector(".i-play").hidden=p; dock.querySelector(".i-pause").hidden=!p;
+    document.getElementById("dkPlay").setAttribute("aria-label",p?"일시정지":"재생");
+    mb.setAttribute("aria-pressed",String(p)) }
+  ["play","pause","ended"].forEach(ev=>bgm.addEventListener(ev,state));
+  bgm.addEventListener("timeupdate",tick); bgm.addEventListener("loadedmetadata",tick);
+  document.getElementById("dkPlay").addEventListener("click",()=>mb.click());
+  document.getElementById("dkBack").addEventListener("click",()=>{bgm.currentTime=Math.max(0,bgm.currentTime-10);tick()});
+  document.getElementById("dkFwd").addEventListener("click",()=>{if(bgm.duration)bgm.currentTime=Math.min(bgm.duration-1,bgm.currentTime+10);tick()});
+  function seek(x){ const r=prog.getBoundingClientRect(); if(bgm.duration){bgm.currentTime=Math.min(.999,Math.max(0,(x-r.left)/r.width))*bgm.duration;tick()} }
+  prog.addEventListener("click",e=>seek(e.clientX));
+  prog.addEventListener("keydown",e=>{ if(e.key==="ArrowRight"){bgm.currentTime+=5;e.preventDefault()} if(e.key==="ArrowLeft"){bgm.currentTime-=5;e.preventDefault()} });
+  const ck=document.getElementById("dkClock"); const clk=()=>{const d=new Date();ck.textContent=d.getHours()+":"+String(d.getMinutes()).padStart(2,"0")}; clk(); setInterval(clk,30000);
+  state();
+})();
+</script>
+<script>
+(()=>{
+  const T={
+maniac:`이름: 
+나이: 
+성별: 여 (고정)
+2차 성별: 알파 / 베타 / 오메가 중 택1
+키/외형: 
+직업: 
+성격: 
+박주은을 부르는 호칭: 
+박주은과의 관계: 연애 2년 + 파트너십 2년 반. 같은 집에서 가디·홍조와 함께 산다.
+특이사항: 서랍 속에 아직 아무에게도 보여주지 않은 해지 신청서 한 장`,
+free:`이름: 
+나이: 
+성별: 여 (고정)
+2차 성별: 알파 / 베타 / 오메가 중 택1
+키/외형: 
+직업: 
+성격: 
+박주은을 부르는 호칭: 
+박주은과의 관계: 
+처음 만난 곳·계기: 
+특이사항: `};
+  async function copy(t){ try{ await navigator.clipboard.writeText(t); return true }catch(e){
+    const ta=document.createElement("textarea"); ta.value=t; ta.style.cssText="position:fixed;opacity:0"; document.body.appendChild(ta); ta.select();
+    let ok=false; try{ ok=document.execCommand("copy") }catch(_){} ta.remove(); return ok } }
+  document.addEventListener("click",async e=>{ const b=e.target.closest(".copyp"); if(!b) return; e.preventDefault(); e.stopPropagation();
+    const ok=await copy(T[b.dataset.copy]||""); const o=b.textContent; b.textContent=ok?"복사됐어요 ✓":"복사 실패"; b.classList.toggle("done",ok);
+    setTimeout(()=>{b.textContent=o;b.classList.remove("done")},1800) },true);
+})();
+</script>
+<script src="lyrics.js"></script>
+<script>
+(()=>{
+  /* lyrics: phone player shows three lines, small screens get a caption pill */
+  const L=(window.LYRICS||[]).filter(x=>Array.isArray(x)&&x[1]!==undefined).sort((a,b)=>a[0]-b[0]);
+  const box=document.getElementById("dkLyr"), cap=document.getElementById("cap");
+  if(!L.length||typeof bgm==="undefined") return;
+  box.innerHTML="<ol>"+L.map(x=>"<li>"+String(x[1]).replace(/[<&]/g,c=>c=="<"?"&lt;":"&amp;")+"</li>").join("")+"</ol>";
+  const ol=box.querySelector("ol"), lis=[...ol.children]; let cur=-2;
+  function upd(){ const t=bgm.currentTime; let i=-1; for(let k=0;k<L.length;k++){ if(L[k][0]<=t) i=k; else break }
+    if(i===cur) return; cur=i; lis.forEach((li,k)=>li.classList.toggle("on",k===i));
+    ol.style.transform="translateY("+(31-Math.max(i,0)*30)+"px)";
+    const line=i>=0?String(L[i][1]).trim():""; cap.textContent=line; cap.classList.toggle("show",!!line&&!bgm.paused) }
+  bgm.addEventListener("timeupdate",upd); bgm.addEventListener("seeked",upd);
+  bgm.addEventListener("pause",()=>cap.classList.remove("show")); bgm.addEventListener("play",()=>{cur=-2;upd()});
+  upd();
+})();
+(()=>{
+  /* reading progress under the header */
+  const c=document.getElementById("count"), bar=document.querySelector(".bar"); if(!c||!bar) return;
+  const f=()=>{ const m=c.textContent.match(/(\d+)\s*\/\s*(\d+)/); const v=m?(+m[1]/+m[2]*100):0; bar.style.setProperty("--prog",v+"%") };
+  new MutationObserver(f).observe(c,{childList:true,characterData:true,subtree:true}); f();
+})();
+</script>
+</body>
+</html>

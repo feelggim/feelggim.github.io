@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MANIAC 가사 싱크</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0710;--card:#140E1A;--line:rgba(243,236,241,.12);--txt:#F3ECF1;--mute:rgba(243,236,241,.55);--pink:#FF2E93}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.6 "Noto Sans KR",system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+h1{font:600 13px/1 "JetBrains Mono",monospace;letter-spacing:.3em;color:var(--pink);margin:0 0 6px}
+h2{margin:0 0 18px;font-size:26px;font-weight:800}
+.how{color:var(--mute);font-size:13.5px;margin:0 0 20px}.how kbd{font:600 11px "JetBrains Mono",monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;color:var(--txt)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.card h3{margin:0 0 10px;font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.2em;color:var(--mute);text-transform:uppercase}
+textarea{width:100%;min-height:340px;background:#0E0913;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:12px;font:14px/1.7 "Noto Sans KR",sans-serif;resize:vertical}
+#out{min-height:160px;font:12px/1.6 "JetBrains Mono",monospace}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+button{font:600 13px "Noto Sans KR",sans-serif;color:var(--txt);background:transparent;border:1px solid var(--line);border-radius:99px;padding:9px 16px;cursor:pointer}
+button.main{background:var(--pink);border-color:var(--pink);color:#fff}
+button:disabled{opacity:.35;cursor:default}
+.player{display:flex;align-items:center;gap:12px;margin:0 0 16px}
+.player input{flex:1;accent-color:var(--pink)}
+.time{font:600 13px "JetBrains Mono",monospace;min-width:92px;text-align:right}
+ol{list-style:none;margin:0;padding:0;max-height:430px;overflow:auto}
+li{display:grid;grid-template-columns:70px 1fr;gap:10px;padding:7px 8px;border-radius:8px;color:var(--mute);font-size:14px}
+li b{font:600 12px "JetBrains Mono",monospace;color:rgba(243,236,241,.35)}
+li.done{color:var(--txt)}li.done b{color:var(--pink)}
+li.next{background:rgba(255,46,147,.12);color:#fff;outline:1px solid rgba(255,46,147,.45)}
+li.play{background:rgba(255,255,255,.07);color:#fff}
+.big{font-size:22px;font-weight:800;text-align:center;min-height:36px;margin:6px 0 14px}
+.msg{font-size:12.5px;color:var(--pink);min-height:18px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>RAINBOW：MANIAC</h1>
+  <h2>가사 싱크 맞추기</h2>
+  <p class="how">① 왼쪽에 가사를 한 줄에 한 소절씩 붙여 넣고 <b>가사 불러오기</b>. ② <b>녹음 시작</b>을 누르면 노래가 처음부터 나와. ③ 각 줄을 부르기 <b>시작하는 순간</b>마다 <kbd>Space</kbd>. 틀리면 <kbd>Backspace</kbd>로 한 줄 되돌리고, <kbd>←</kbd><kbd>→</kbd>로 3초씩 이동. 간주처럼 가사를 비워야 할 곳은 빈 줄 대신 <b>·</b> 한 글자만 넣어둬. ④ 끝나면 <b>미리보기</b>로 확인하고 결과를 복사해서 <b>lyrics.js</b>에 통째로 붙여 넣으면 끝.</p>
+  <div class="player"><button id="pp" class="main">녹음 시작</button><input id="seek" type="range" min="0" max="196" step="0.1" value="0"><span class="time" id="tm">0:00.0</span></div>
+  <div class="big" id="big">　</div>
+  <div class="grid">
+    <div class="card"><h3>가사 붙여 넣기</h3><textarea id="src" placeholder="한 줄에 한 소절씩"></textarea><div class="btns"><button id="load">가사 불러오기</button></div></div>
+    <div class="card"><h3>타이밍</h3><ol id="list"></ol><div class="btns"><button id="prev" disabled>미리보기</button><button id="reset" disabled>타이밍 지우기</button></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>결과 · lyrics.js</h3><textarea id="out" readonly></textarea><div class="btns"><button id="copy" class="main" disabled>결과 복사</button><button id="dl" disabled>lyrics.js 저장</button></div><div class="msg" id="msg"></div></div>
+</div>
+<audio id="a" src="audio/maniac.mp3" preload="auto"></audio>
+<script>
+const $=s=>document.querySelector(s), a=$("#a");
+let lines=[], times=[], mode="idle"; // idle | rec | prev
+try{ const d=JSON.parse(localStorage.getItem("maniacTap")||"null"); if(d){ $("#src").value=d.src||""; } }catch(e){}
+const fmt=t=>t==null?"--:--.-":(Math.floor(t/60)+":"+(t%60).toFixed(1).padStart(4,"0"));
+function save(){ try{ localStorage.setItem("maniacTap",JSON.stringify({src:$("#src").value,times})) }catch(e){} }
+function render(){
+  const next=times.length, pl=mode==="prev"?curIdx():-1;
+  $("#list").innerHTML=lines.map((l,i)=>`<li class="${i<times.length?"done":""} ${mode==="rec"&&i===next?"next":""} ${i===pl?"play":""}"><b>${fmt(times[i])}</b><span>${l.replace(/[<&]/g,c=>c=="<"?"&lt;":"&amp;")}</span></li>`).join("");
+  const on=$("#list").querySelector(".next,.play"); if(on) on.scrollIntoView({block:"center",behavior:"smooth"});
+  const done=lines.length&&times.length===lines.length;
+  $("#prev").disabled=!times.length; $("#reset").disabled=!times.length; $("#copy").disabled=!done; $("#dl").disabled=!done;
+  $("#out").value=done?out():(lines.length?`// 아직 ${lines.length-times.length}줄 남았어`:"");
+}
+function curIdx(){ let i=-1; for(let k=0;k<times.length;k++){ if(times[k]<=a.currentTime) i=k; else break } return i }
+function out(){ return "/* MANIAC 가사 타이밍. tap.html에서 만든 내용으로 이 파일을 통째로 바꾸면 홈페이지에 바로 반영돼. */\nwindow.LYRICS = [\n"+lines.map((l,i)=>`  [${times[i].toFixed(2)}, ${JSON.stringify(l==="·"?"":l)}]`).join(",\n")+"\n];\n" }
+$("#load").onclick=()=>{ lines=$("#src").value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean); 
+  try{ const d=JSON.parse(localStorage.getItem("maniacTap")||"null"); times=(d&&d.times&&d.src===$("#src").value)?d.times.slice(0,lines.length):[] }catch(e){ times=[] }
+  save(); render(); $("#msg").textContent=lines.length+"줄 불러왔어." };
+$("#pp").onclick=e=>{ e.currentTarget.blur(); if(!lines.length){ $("#msg").textContent="가사부터 불러와."; return }
+  if(mode==="rec"&&!a.paused){ a.pause(); return }
+  if(mode!=="rec"){ mode="rec"; if(!times.length) a.currentTime=0; else a.currentTime=Math.max(0,times[times.length-1]-2) }
+  a.play(); };
+$("#prev").onclick=()=>{ mode="prev"; a.currentTime=Math.max(0,(times[0]||0)-2); a.play(); };
+$("#reset").onclick=()=>{ if(confirm("타이밍을 전부 지울까?")){ times=[]; mode="idle"; a.pause(); a.currentTime=0; save(); render() } };
+a.addEventListener("play",()=>$("#pp").textContent=mode==="rec"?"일시정지":"녹음 시작");
+a.addEventListener("pause",()=>$("#pp").textContent=mode==="rec"?"이어서 녹음":"녹음 시작");
+a.addEventListener("loadedmetadata",()=>$("#seek").max=a.duration);
+a.addEventListener("timeupdate",()=>{ $("#tm").textContent=fmt(a.currentTime); $("#seek").value=a.currentTime;
+  const i=curIdx(); $("#big").textContent=i>=0&&lines[i]!=="·"?lines[i]:"　"; if(mode==="prev") render() });
+a.addEventListener("ended",()=>{ mode="idle"; render() });
+$("#seek").oninput=e=>{ a.currentTime=+e.target.value };
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="TEXTAREA") return;
+  if(e.code==="Space"){ e.preventDefault(); if(mode!=="rec"||a.paused) return; if(times.length<lines.length){ times.push(+a.currentTime.toFixed(2)); save(); render(); if(times.length===lines.length){ $("#msg").textContent="다 찍었어. 미리보기로 확인해봐." } } }
+  if(e.code==="Backspace"){ e.preventDefault(); if(times.length){ times.pop(); save(); render() } }
+  if(e.code==="ArrowLeft"){ e.preventDefault(); a.currentTime=Math.max(0,a.currentTime-3) }
+  if(e.code==="ArrowRight"){ e.preventDefault(); a.currentTime=Math.min(a.duration||196,a.currentTime+3) }
+});
+$("#copy").onclick=async()=>{ try{ await navigator.clipboard.writeText(out()); $("#msg").textContent="복사했어. 이대로 나한테 붙여 보내거나 lyrics.js에 통째로 붙여 넣어." }catch(e){ $("#out").select(); document.execCommand("copy"); $("#msg").textContent="복사했어." } };
+$("#dl").onclick=()=>{ const u=URL.createObjectURL(new Blob([out()],{type:"text/javascript"})); const l=document.createElement("a"); l.href=u; l.download="lyrics.js"; l.click(); setTimeout(()=>URL.revokeObjectURL(u),1000) };
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="NULLPINK 이사 · 예쁜 것만 봅니다.">
+<meta property="og:title" content="parkjueun · 박주은">
+<meta property="og:description" content="NULLPINK 이사 · 예쁜 것만 봅니다.">
+<meta property="og:image" content="https://feelggim.github.io/maniac/img/post_cover.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/avatar.webp" type="image/webp">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>parkjueun</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400;1,6..96,500&family=DM+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=Nanum+Myeongjo:wght@400;700&family=Unbounded:wght@300;400&display=swap">
+<style>
+/* Layout: a single-column personal feed. Front face = pearl gallery, the life she posts.
+   Back face = the same grid at 4 a.m.: ink, wine, grain, real timestamps and the drafts she never posts. */
+:root{
+  --bg:#FBF7F8; --surface:#FFFFFF; --ink:#16121F; --sub:#6E6478; --line:rgba(22,18,31,.10);
+  --accent:#E0247E; --wine:#8E1238; --chip:#F3ECF0; --veil:rgba(251,247,248,0);
+  --f-display:"Bodoni Moda","Nanum Myeongjo",Georgia,serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --f-word:"Unbounded","IBM Plex Sans KR",system-ui,sans-serif;
+  --f-note:"Nanum Myeongjo",Georgia,serif;
+  color-scheme:light;
+}
+:root[data-face="back"]{
+  --bg:#0C0A14; --surface:#141020; --ink:#ECE4EC; --sub:#8C7F96; --line:rgba(236,228,236,.10);
+  --accent:#C21A4E; --wine:#C21A4E; --chip:#1D1729; --veil:rgba(12,10,20,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  transition:background-color .6s ease,color .6s ease}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:0;transition:opacity .6s;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");mix-blend-mode:overlay}
+:root[data-face="back"] body::after{opacity:.16}
+.wrap{max-width:935px;margin:0 auto;padding-block:20px 72px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+a{color:inherit}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding-block:12px;border-bottom:1px solid var(--line);transition:background-color .6s}
+.handle{font-family:var(--f-word);font-weight:400;font-size:17px;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.seal{width:14px;height:14px;border-radius:50%;background:var(--accent);display:inline-grid;place-items:center}
+.seal::after{content:"";width:6px;height:3px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.right{display:flex;align-items:center;gap:18px;min-width:0}
+.music{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--sub);min-width:0;padding:6px 10px;border:1px solid var(--line);border-radius:99px}
+.music .mt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.music[aria-pressed="true"]{color:var(--ink);border-color:var(--accent)}
+.eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;width:14px}
+.eq i{display:block;width:3px;height:3px;background:var(--accent);border-radius:1px}
+.music[aria-pressed="true"] .eq i{animation:eq 1s ease-in-out infinite}
+.music[aria-pressed="true"] .eq i:nth-child(2){animation-delay:-.4s}
+.music[aria-pressed="true"] .eq i:nth-child(3){animation-delay:-.7s}
+@keyframes eq{0%,100%{height:3px}50%{height:12px}}
+@media (max-width:640px){.music .mt{display:none}.right{gap:10px}}
+.face{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
+.switch{width:46px;height:24px;border-radius:99px;background:var(--chip);border:1px solid var(--line);position:relative;transition:background .4s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--ink);transition:transform .45s cubic-bezier(.7,0,.2,1),background .4s}
+:root[data-face="back"] .switch{background:var(--wine)}
+:root[data-face="back"] .switch::after{transform:translateX(22px);background:#fff}
+.face b{font-weight:500;color:var(--ink)}
+
+/* profile */
+.profile{display:grid;grid-template-columns:auto 1fr;gap:28px 48px;align-items:center;padding-block:36px 28px}
+.avatar{width:150px;height:150px;border-radius:50%;padding:4px;background:conic-gradient(from 200deg,#E0247E,#7B3FD1,#E0247E);position:relative}
+.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--bg);display:block;transition:filter .6s}
+:root[data-face="back"] .avatar{background:conic-gradient(from 200deg,#3a2a44,#1d1729,#3a2a44)}
+:root[data-face="back"] .avatar img{filter:grayscale(.75) contrast(1.05) brightness(.85)}
+.meta{min-width:0;display:grid;gap:14px}
+.nameRow{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.name{font-family:var(--f-display);font-size:30px;font-weight:400;line-height:1.1;margin:0}
+.name i{font-style:italic;color:var(--sub);font-size:18px;margin-left:6px}
+.btns{display:flex;gap:8px}
+.btn{padding:7px 16px;border-radius:8px;background:var(--chip);font-size:13px;font-weight:600}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.stats{display:flex;gap:28px;font-size:15px}
+.stats b{font-weight:600;font-variant-numeric:tabular-nums}
+.bio{font-size:14px;line-height:1.65;max-width:52ch}
+.bio .role{font-weight:600}
+.bio .lk{color:var(--accent);text-decoration:none;font-weight:500}
+.bio s{color:var(--sub)}
+.backonly{display:none} :root[data-face="back"] .backonly{display:revert}
+:root[data-face="back"] .frontonly{display:none}
+.backline{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;color:var(--wine)}
+
+/* highlights */
+.hl{display:flex;gap:22px;overflow-x:auto;padding-block:6px 26px;scrollbar-width:none}
+.hl::-webkit-scrollbar{display:none}
+.hl button{display:grid;justify-items:center;gap:8px;flex:0 0 auto;font-size:12px;font-weight:500}
+.ring{width:72px;height:72px;border-radius:50%;border:1px solid var(--line);padding:3px;display:grid;place-items:center}
+.ring span{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-style:italic;font-size:22px;color:#fff}
+
+/* tabs */
+.tabs{display:flex;justify-content:center;gap:48px;border-top:1px solid var(--line)}
+.tab{padding-block:14px;font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub);border-top:1px solid transparent;margin-top:-1px}
+.tab[aria-selected="true"]{color:var(--ink);border-top-color:var(--ink)}
+.tab.draft{color:var(--wine)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.cell{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--chip);max-width:100%}
+.cell img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .7s ease,transform .5s ease}
+.cell:hover img{transform:scale(1.03)}
+:root[data-face="back"] .cell img{filter:grayscale(.85) contrast(1.1) brightness(.62) sepia(.25) hue-rotate(-20deg)}
+.cell .pin{position:absolute;top:10px;right:10px;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.35);padding:3px 7px;border-radius:99px}
+.cell .hover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:18px;background:rgba(10,8,16,.38);color:#fff;font-weight:600;font-size:15px;opacity:0;transition:opacity .25s}
+.cell:hover .hover,.cell:focus-visible .hover{opacity:1}
+.cell .back{position:absolute;inset:auto 0 0 0;padding:14px 12px 12px;background:linear-gradient(transparent,rgba(8,6,12,.9));color:#EADFE8;display:none;gap:4px}
+:root[data-face="back"] .cell .back{display:grid}
+:root[data-face="back"] .cell .hover{display:none}
+.back .t{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:#FF5C8E}
+.back .n{font-family:var(--f-note);font-size:13px;line-height:1.5}
+/* text tile when a photo isn't there yet */
+.tile{position:absolute;inset:0;display:grid;align-content:space-between;padding:18px;background:linear-gradient(160deg,#1A1433,#2A1238 60%,#5A0E2E);color:#F6EEF3}
+.tile .q{font-family:var(--f-display);font-style:italic;font-size:clamp(15px,2.4vw,24px);line-height:1.25;text-wrap:balance}
+.tile .f{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;opacity:.55;text-transform:uppercase;word-break:break-all}
+:root[data-face="back"] .tile .f{display:none}
+.clip .cell{aspect-ratio:16/9}
+.clip .grid{grid-template-columns:repeat(2,1fr)}
+.cliptag{position:absolute;left:10px;bottom:10px;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;background:#E0247E;color:#fff;padding:3px 7px}
+.clipq{position:absolute;left:10px;right:10px;top:10px;color:#fff;font-size:13px;font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+
+/* press + drafts */
+.list{display:grid;gap:0;max-width:640px;margin:0 auto}
+.press{display:grid;gap:6px;padding-block:22px;border-bottom:1px solid var(--line)}
+.press .o{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--sub);text-transform:uppercase}
+.press h3{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.3;margin:0;text-wrap:balance}
+.press p{margin:0;color:var(--sub);font-size:14px}
+.draftItem{padding-block:22px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.draftItem .d{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--wine)}
+.draftItem p{margin:0;font-family:var(--f-note);font-size:17px;line-height:1.75}
+.draftItem .s{font-family:var(--f-mono);font-size:11px;color:var(--sub)}
+.empty{text-align:center;padding-block:48px;color:var(--sub);display:grid;gap:6px}
+.empty b{color:var(--ink);font-family:var(--f-display);font-weight:400;font-size:22px;font-style:italic}
+
+/* modal */
+.modal[hidden]{display:none!important}
+.modal{position:fixed;inset:0;z-index:40;background:rgba(8,6,12,.72);display:grid;place-items:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--surface);color:var(--ink);width:min(980px,100%);max-height:100%;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);overflow:hidden;border-radius:4px}
+.sheet .media{background:#000;position:relative;min-height:280px}
+.sheet .media img{width:100%;height:100%;object-fit:contain;display:block;max-height:86vh}
+.sheet .media .tile{position:absolute}
+:root[data-face="back"] .sheet .media img{filter:grayscale(.85) contrast(1.1) brightness(.62) sepia(.25) hue-rotate(-20deg)}
+.side{display:grid;grid-template-rows:auto 1fr auto;min-width:0;max-height:86vh}
+.side header{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.side header img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+.side header b{font-size:14px}
+.side header .x{margin-left:auto;font-size:22px;line-height:1;color:var(--sub);padding:4px 8px}
+.thread{overflow-y:auto;padding:16px;display:grid;gap:14px;align-content:start;font-size:14px;min-width:0}
+.thread .c{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.thread .av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;color:#fff}
+.thread .u{font-weight:600;margin-right:6px}
+.thread .reply{margin-left:38px}
+.thread .when{display:block;font-size:11.5px;color:var(--sub);margin-top:2px}
+.side footer{border-top:1px solid var(--line);padding:12px 16px;display:grid;gap:4px;font-size:13px}
+.side footer b{font-variant-numeric:tabular-nums}
+.side footer .date{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--sub);text-transform:uppercase}
+.truth{display:none;margin-top:6px;padding:12px 14px;background:var(--chip);border-left:2px solid var(--wine)}
+:root[data-face="back"] .truth{display:grid;gap:4px}
+.truth .t{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--wine)}
+.truth .n{font-family:var(--f-note);font-size:14.5px;line-height:1.6}
+
+.foot{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;color:var(--sub);text-transform:uppercase}
+.foot a{text-decoration:none;color:var(--accent)}
+
+@media (max-width:640px){
+  .profile{grid-template-columns:auto 1fr;gap:18px 18px;padding-block:22px}
+  .avatar{width:86px;height:86px}
+  .name{font-size:22px}
+  .stats{gap:16px;font-size:13px;grid-column:1/-1}
+  .bio{grid-column:1/-1}
+  .tabs{gap:26px}
+  .sheet{grid-template-columns:1fr;overflow-y:auto}
+  .sheet .media img{max-height:52vh}
+  .side{max-height:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<script>if(window.self!==window.top)document.documentElement.dataset.embed="on"</script><style>[data-embed="on"] #musicBtn{display:none!important}</style></head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <div class="handle">parkjueun <span class="seal" aria-label="인증된 계정"></span></div>
+    <div class="right">
+    <button class="music" id="musicBtn" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="mt">Diamonds on a Broken Stage</span>
+    </button>
+    <button class="face" id="faceBtn" aria-pressed="false" aria-label="뒷면 보기 전환">
+      <span class="frontonly"><b>앞면</b></span><span class="backonly"><b>04:12</b></span>
+      <span class="switch" aria-hidden="true"></span>
+    </button>
+    </div>
+  </div>
+  <audio id="bgm" src="audio/maniac.mp3" loop preload="none"></audio>
+
+  <section class="profile">
+    <div class="avatar"><img src="img/avatar.webp" alt="박주은 프로필 사진"></div>
+    <div class="meta">
+      <div class="nameRow">
+        <h1 class="name">박주은<i>Park Jueun</i></h1>
+        <div class="btns"><button class="btn primary" id="followBtn">팔로우</button><button class="btn">메시지</button></div>
+      </div>
+      <div class="stats">
+        <span>게시물 <b>214</b></span><span>팔로워 <b>38.2만</b></span><span>팔로잉 <b>31</b></span>
+      </div>
+      <div class="bio">
+        <span class="role">NULLPINK 이사</span> · STUDIO VIOLET · OFFLINE · ONE LINE · GUIDE<br>
+        <span class="frontonly">예쁜 것만 봅니다.<br>가디 · 홍조의 보호자</span>
+        <span class="backonly"><s>예쁜 것만 봅니다.</s><br><s>가디 · 홍조의 보호자</s> 산책은 거의 그 사람이 감</span><br>
+        <a class="lk" href="#" onclick="return false">nullpink.kr</a>
+        <div class="backonly backline">새벽 수영 0일째 · 22:00 약 알람(7년째) · 염색 주기 3주 → 9일</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hl" aria-label="하이라이트">
+    <button data-story="np"><span class="ring"><span style="background:#E0247E">N</span></span>NULLPINK</button>
+    <button data-story="ol"><span class="ring"><span style="background:#5A0E2E">1</span></span>ONE LINE</button>
+    <button data-story="dg"><span class="ring"><span style="background:#C9B9C8;color:#16121F">g</span></span>가디 · 홍조</button>
+    <button data-story="au"><span class="ring"><span style="background:#2A1238">lot</span></span>경매</button>
+    <button data-story="un"><span class="ring"><span style="background:linear-gradient(135deg,#FFC3E3,#E0247E)">d</span></span>드레스룸</button>
+    <button data-story="cp"><span class="ring"><span style="background:#16121F">M</span></span>화보</button>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="posts">게시물</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="clips">인터뷰</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="press">태그됨</button>
+    <button class="tab draft backonly" role="tab" aria-selected="false" data-tab="drafts">임시저장</button>
+  </div>
+
+  <section id="view"></section>
+
+  <div class="foot"><span><a href="./">MANIAC</a> · 박주은</span><span>by <a href="#" onclick="return false">Scroll</a> · 이 페이지는 크랙 스토리 속 가상의 계정입니다</span></div>
+</div>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="게시물">
+  <div class="sheet">
+    <div class="media" id="mMedia"></div>
+    <div class="side">
+      <header><img src="img/avatar.webp" alt=""><b>parkjueun</b><span class="seal"></span><button class="x" id="mClose" aria-label="닫기">×</button></header>
+      <div class="thread" id="mThread"></div>
+      <footer id="mFoot"></footer>
+    </div>
+  </div>
+</div>
+
+<script>
+const COLORS={"seo.yeonn":"#B0466E","hana__lee":"#6B4FA0","ceo_minjae":"#2D5B6B","onelinebar":"#5A0E2E","nullpink.official":"#E0247E","guide.studio":"#3A3550","park.woojin":"#41505E","kang.dahee":"#9A6A3A","yuna.film":"#7A3F64","offline.hannam":"#222"};
+const POSTS=[
+ {id:"cover",img:"img/post_cover.webp",pin:true,likes:"5.8만",date:"11월 3일",
+  cap:"숨긴 거 없어요. 찾아보세요.",
+  com:[["hana__lee","❤️"],["kang.dahee","대표님 화보 미쳤어요"],["seo.yeonn","찾아봐도 돼요? 진짜로?"],["parkjueun","찾으면 알려줘"],["ceo_minjae","와인 협찬 문의 드려도 될까요"]],
+  back:["03:58","올리고 나서 폰을 엎어놨다. 알림은 안 껐다. 약은 오늘도 건너뛰었다."]},
+ {id:"desk",img:"img/post_desk.webp",likes:"1.4만",date:"10월 29일",
+  cap:"야근엔 이 조합.",
+  com:[["seo.yeonn","그 와인 저번에 그거죠?"],["parkjueun","다음에 만나서 얘기해 :)"],["hana__lee","❤️"],["guide.studio","대표님 녹음 내일 10시입니다"]],
+  back:["04:12","와인 세 잔째. 치즈는 손 안 댔다. 반지는 다 빼놓고 코드는 한 줄도 안 늘었다."]},
+ {id:"dogs",img:"img/post_dogs.webp",likes:"3.6만",date:"10월 24일",
+  cap:"가디, 홍조. 우리 집 실세.",
+  com:[["kang.dahee","가디 언제 이렇게 컸어요"],["hana__lee","❤️"],["park.woojin","둘 다 대표님 차가 제일 편한가 보네"]],
+  back:["23:20","병원 데려간 건 그 사람이다. 나는 사진만 찍었다. 둘 다 나보다 그 사람한테 먼저 뛰어간다."]},
+ {id:"auction",img:"img/post_auction.webp",likes:"1.2만",date:"10월 19일",
+  cap:"오늘은 이겼다.",
+  com:[["ceo_minjae","얼마 부르셨는데요"],["parkjueun","비밀"],["seo.yeonn","저 이거 들고 다니는 거 보고 싶어요"],["hana__lee","❤️"]],
+  back:["02:40","낙찰 알림 받고 1분쯤 좋았다. 그다음엔 다시 조용해지지 않았다."]},
+ {id:"car",img:"img/post_car.webp",likes:"1.7만",date:"10월 11일",
+  cap:"흰 차, 빨간 시트.",
+  com:[["seo.yeonn","꽃 누가 줬어요?"],["parkjueun","거래처"],["hana__lee","❤️"]],
+  back:["01:15","시동 걸고 주차장에서 40분. 꽃은 차에 두고 올라갔다. 설명하기 귀찮아서."]},
+ {id:"bar",img:"img/post_bar.webp",likes:"2.4만",date:"10월 4일",
+  cap:"ONE LINE 3주년. 와주신 분들 감사해요.",
+  com:[["onelinebar","대표님 없었으면 없었을 3년"],["seo.yeonn","어제 진짜 좋았어요. 마지막 잔까지."],["parkjueun","조심히 들어갔지?"],["hana__lee","❤️"],["yuna.film","대표님 노래 한 곡 한 거 영상 있나요"]],
+  back:["03:30","마감하고 혼자 남아서 불 끄는 데 한참 걸렸다. 다 예뻤는데 아무것도 안 남았다."]},
+ {id:"hands",img:"img/post_hands.webp",likes:"4.2만",date:"9월 28일",
+  cap:"4.5",
+  com:[["kang.dahee","4년 반 ㅠㅠ"],["hana__lee","❤️"],["park.woojin","손 누구 손이에요?"]],
+  back:["00:02","태그 안 했다. 하면 다들 그 사람을 보니까."]},
+ {id:"carnew",img:"img/post_carnew.webp",likes:"2.9만",date:"9월 15일",
+  cap:"출고.",
+  com:[["kang.dahee","대표님 차 또 바꾸셨어요?"],["parkjueun","흰색은 처음"],["ceo_minjae","리본 귀엽네요"],["hana__lee","❤️"]],
+  back:["00:40","리본을 아직 못 뗐다. 새 걸 사면 며칠은 괜찮다. 며칠만."]},
+ {id:"pool",img:"img/post_pool.webp",likes:"8,104",date:"9월 3일",
+  cap:"05:00.",
+  com:[["guide.studio","이 시간에 수영을…"],["hana__lee","❤️"]],
+  back:["05:00","마지막으로 간 날. 사물함은 아직 안 뺐다."]},
+ {id:"np",img:"img/post_office.webp",likes:"1.1만",date:"8월 21일",
+  cap:"NULLPINK 2.0. 다들 고생 많았어요.",
+  com:[["nullpink.official","이사님 덕분입니다"],["ceo_minjae","투자 얘기 다음 주에 하시죠"],["parkjueun","월요일"],["hana__lee","❤️"]],
+  back:["22:00","런칭 파티에서 제일 먼저 나왔다. 약 알람이 울려서."]},
+ {id:"violet",img:"img/post_violet.webp",likes:"6.3만",date:"8월 2일",
+  cap:"보라. 이번엔 오래 갈 것 같아.",
+  com:[["yuna.film","이 색 미쳤다"],["seo.yeonn","제가 골라드린 색이죠?"],["parkjueun","네가 고른 건 다른 색"],["hana__lee","❤️"]],
+  back:["14:10","염색한 지 9일. 원래는 3주는 버텼다."]},
+ {id:"closet",img:"img/post_closet.webp",likes:"2.2만",date:"7월 15일",
+  cap:"드레스룸 재배치.",
+  com:[["kang.dahee","대표님 진열장 이제 꽉 찼던데"],["yuna.film","핑크 벽 미쳤어요"],["hana__lee","❤️"]],
+  back:["02:10","가방 순서를 세 번 바꿨다. 예쁜 걸 보고 있으면 아무 생각이 안 난다. 그래서 자꾸 산다."]}
+];
+const CLIPS=[
+ ["clip_01","어디가 문제인데? 한 줄만 짚어봐.","스타일매거진 인터뷰"],
+ ["clip_02","…그걸 지금 저한테 물어요?","스타일매거진 인터뷰"],
+ ["clip_03","보세요. 다 보여드렸잖아요.","NULLPINK 2.0 런칭 인터뷰"],
+ ["clip_04","말도 안 되는 소리 하지 마세요.","테크인사이드 대담"],
+ ["clip_05","걔요? 그냥 재밌는 애.","비하인드"],
+ ["clip_06","믿고 싶은 대로 믿으세요.","스타일매거진 인터뷰"],
+ ["clip_07","강아지는… 그건 얘기가 다르죠.","비하인드"],
+ ["clip_08","그게 제가 사랑을 안 한다는 증거예요?","스타일매거진 인터뷰"],
+ ["clip_09","지금 아니에요.","촬영 쉬는 시간"],
+ ["clip_10","…","미공개 컷"]
+];
+const PRESS=[
+ ["스타일매거진 · 11월호","\"숨긴 거 없어요. 한 줄만 짚어보세요\" 보라색 사업가 박주은","인터뷰 영상 공개 직후 조회수 300만. 댓글창은 정확히 반으로 갈렸다."],
+ ["테크인사이드 · 10월 30일","NULLPINK 2.0 런칭, 박주은 이사 \"사적인 질문은 받지 않습니다\"","간담회 질의응답은 예정보다 20분 일찍 끝났다."],
+ ["스타일매거진 · 9월호","보라색으로 물든 사업가, 다섯 개의 브랜드를 키우는 법","\"예쁜 걸 좋아해요. 그게 다예요.\" 그녀는 인터뷰 내내 웃었다."]
+];
+const DRAFTS=[
+ ["11월 2일 03:47","젊고 예쁠 때만 좋아하는 거면, 지금 말해줘. 그래야 내가 덜 비참하지.","게시 안 함"],
+ ["10월 13일 00:31","엄마 기일. 아무한테도 말 안 했다. 말하면 다들 그 얼굴을 한다.","게시 안 함"],
+ ["9월 3일 05:41","수영장 갔다가 물에 못 들어가고 나왔다. 약 바꾸고 나서 아침이 너무 무겁다.","게시 안 함"],
+ ["8월 30일 02:18","아빠한테 전화 왔다. 다정하게 받았다. 끊고 나서 한참 손이 떨렸다.","게시 안 함"],
+ ["8월 9일 01:50","알고 있다. 약도 먹고 병원도 꼬박꼬박 간다. 문제는 그게 아니다. 무너진 나를 내가 봐줄 수가 없다.","게시 안 함"],
+ ["7월 22일 04:04","너 말고 누가 있는데.","보내지 않음"]
+];
+const STORIES={np:"NULLPINK 2.0 런칭",ol:"ONE LINE 3주년",dg:"가디 · 홍조",au:"경매 결과",un:"유니콘 컬렉션",cp:"MANIAC 화보"};
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function media(p,cls){
+  const fn=p.img.split("/").pop();
+  return `<img src="${p.img}" alt="${esc(p.cap)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'tile',innerHTML:'<span class=q>${esc(p.cap).replace(/'/g,"&#39;")}</span><span class=f>${fn}</span>'}))">`;
+}
+function renderPosts(){
+  return `<div class="grid">`+POSTS.map((p,i)=>`<button class="cell" data-i="${i}" aria-label="${esc(p.cap)} 게시물 열기">
+    ${media(p)}${p.pin?'<span class="pin">고정됨</span>':''}
+    <span class="hover">♥ ${p.likes} &nbsp; 💬 ${p.com.length}</span>
+    <span class="back"><span class="t">실제 업로드 ${p.back[0]}</span><span class="n">${esc(p.back[1])}</span></span>
+  </button>`).join("")+`</div>`;
+}
+function renderClips(){
+  return `<div class="clip"><div class="grid">`+CLIPS.map(c=>`<div class="cell"><img src="img/${c[0]}.webp" alt="${esc(c[1])}" loading="lazy">
+    <span class="clipq">“${esc(c[1])}”</span><span class="cliptag">${esc(c[2])}</span>
+    <span class="back"><span class="t">원본 녹화분</span><span class="n">편집 전엔 이 대답 앞에 4초의 침묵이 있었다.</span></span></div>`).join("")+`</div></div>`;
+}
+function renderPress(){return `<div class="list">`+PRESS.map(p=>`<article class="press"><span class="o">${p[0]}</span><h3>${esc(p[1])}</h3><p>${esc(p[2])}</p></article>`).join("")+`</div>`}
+function renderDrafts(){return `<div class="list">`+DRAFTS.map(d=>`<div class="draftItem"><span class="d">${d[0]}</span><p>${esc(d[1])}</p><span class="s">${d[2]}</span></div>`).join("")+`<div class="empty"><b>보관함 0</b><span>숨긴 게시물은 없습니다. 지운 것도 없습니다.</span></div></div>`}
+let tab="posts";
+function render(){
+  const v=$("#view");
+  v.innerHTML=tab==="posts"?renderPosts():tab==="clips"?renderClips():tab==="press"?renderPress():renderDrafts();
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
+  v.querySelectorAll(".cell[data-i]").forEach(b=>b.addEventListener("click",()=>openPost(+b.dataset.i)));
+}
+function av(u){const c=COLORS[u]||"#6E6478";return u==="parkjueun"?`<img class="av" src="img/avatar.webp" alt="" style="object-fit:cover">`:`<span class="av" style="background:${c}">${u[0].toUpperCase()}</span>`}
+let lastFocus=null;
+function openPost(i){
+  const p=POSTS[i]; lastFocus=document.activeElement;
+  $("#mMedia").innerHTML=media(p);
+  let html=`<div class="c">${av("parkjueun")}<div><span class="u">parkjueun</span>${esc(p.cap)}<span class="when">${p.date}</span></div></div>`;
+  p.com.forEach(([u,t])=>{html+=`<div class="c ${u==="parkjueun"?"reply":""}">${av(u)}<div><span class="u">${u}</span>${esc(t)}</div></div>`});
+  html+=`<div class="truth"><span class="t">실제 업로드 ${p.back[0]}</span><span class="n">${esc(p.back[1])}</span></div>`;
+  $("#mThread").innerHTML=html;
+  $("#mFoot").innerHTML=`<span>좋아요 <b>${p.likes}</b>개</span><span class="date">${p.date}</span>`;
+  $("#modal").hidden=false; $("#mClose").focus();
+}
+function closeModal(){$("#modal").hidden=true; if(lastFocus) lastFocus.focus()}
+$("#mClose").addEventListener("click",closeModal);
+$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#modal").hidden)closeModal()});
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{tab=b.dataset.tab;render()}));
+function setFace(f){
+  document.documentElement.dataset.face=f;
+  $("#faceBtn").setAttribute("aria-pressed",f==="back");
+  if(f!=="back"&&tab==="drafts"){tab="posts";render()}
+  try{localStorage.setItem("jueun-face",f)}catch(e){}
+  muffle(f==="back");
+}
+/* music: clear on the front, under water on the back */
+const bgm=$("#bgm"); let ac=null, lp=null, gn=null;
+function initAudio(){
+  if(ac) return;
+  try{
+    ac=new (window.AudioContext||window.webkitAudioContext)();
+    const src=ac.createMediaElementSource(bgm);
+    lp=ac.createBiquadFilter(); lp.type="lowpass"; lp.Q.value=0.7;
+    gn=ac.createGain();
+    src.connect(lp).connect(gn).connect(ac.destination);
+    muffle(document.documentElement.dataset.face==="back",true);
+  }catch(e){ac=null}
+}
+function muffle(on,now){
+  bgm.playbackRate=on?0.94:1; try{bgm.preservesPitch=false}catch(e){}
+  if(!ac) return; const t=ac.currentTime, d=now?0.01:1.2;
+  lp.frequency.cancelScheduledValues(t); gn.gain.cancelScheduledValues(t);
+  lp.frequency.setTargetAtTime(on?700:18000,t,d/3);
+  gn.gain.setTargetAtTime(on?0.75:1,t,d/3);
+}
+$("#musicBtn").addEventListener("click",async e=>{
+  const b=e.currentTarget;
+  if(bgm.paused){
+    initAudio(); try{ if(ac&&ac.state==="suspended") await ac.resume(); await bgm.play(); b.setAttribute("aria-pressed","true"); b.setAttribute("aria-label","배경음악 일시정지"); }catch(err){}
+  }else{ bgm.pause(); b.setAttribute("aria-pressed","false"); b.setAttribute("aria-label","배경음악 재생"); }
+});
+$("#faceBtn").addEventListener("click",()=>setFace(document.documentElement.dataset.face==="back"?"front":"back"));
+$("#followBtn").addEventListener("click",e=>{const b=e.currentTarget;const on=b.classList.toggle("primary");b.textContent=on?"팔로우":"팔로잉"});
+document.querySelectorAll("[data-story]").forEach(b=>b.addEventListener("click",()=>{
+  const k=b.dataset.story; const idx={np:9,ol:5,dg:2,au:3,un:11,cp:0}[k]; openPost(idx);
+}));
+let saved="front"; try{saved=localStorage.getItem("jueun-face")||"front"}catch(e){}
+setFace(saved); render();
+</script>
+</body>
+</html>

@@ -113,6 +113,20 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--pop);outline-offset
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 /* ---------- page system (sized by the sheet: 100cqw = page width) ---------- */
 .pg{position:absolute;inset:0;container-type:inline-size;color:var(--ink);font-family:var(--f-kr);background:var(--paper);overflow:hidden}
 .pg .in{position:absolute;inset:8.4cqw 6.6cqw 8.2cqw;display:flex;flex-direction:column;gap:2.6cqw}
@@ -488,6 +502,45 @@ body{padding:0!important;overflow:hidden}
 .cap.show{opacity:1;transform:translate(-50%,0)}
 .cap::before{content:"♪";color:#FF5C9E;margin-right:8px}
 @media (min-width:1180px) and (min-height:620px){.cap{display:none}}
+
+.seal-in{inset:22%!important;background:radial-gradient(circle at 35% 30%,rgba(255,92,158,.35),rgba(122,20,70,.55) 55%,rgba(40,8,30,.9))!important;display:grid;place-items:center;backdrop-filter:blur(6px)}
+.seal-play{width:34%;height:34%;fill:#FFE9F2;transform:translateX(6%);filter:drop-shadow(0 0 10px rgba(255,46,147,.6));transition:transform .5s}
+.glass:hover .seal-play{transform:translateX(6%) scale(1.12)}
+.seal-in::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid rgba(255,140,190,.45);animation:sealpulse 2.4s ease-out infinite}
+@keyframes sealpulse{from{transform:scale(1);opacity:.9}to{transform:scale(1.55);opacity:0}}
+.gate.open .seal-in{transform:scale(1.25);opacity:0;transition:transform .8s,opacity .8s}
+@media (prefers-reduced-motion:reduce){.seal-in::after{animation:none}}
+
+/* entering: deep red wine floods the screen on a diagonal, sloshing, then clears */
+.gate{transition:opacity .7s ease 1.95s,visibility 0s linear 2.7s!important}
+.gate-stream{display:none}
+.gate-pour{inset:-70%!important;background:none!important;transform:rotate(-24deg) translateY(62%)!important;transition:transform 1.75s cubic-bezier(.5,.02,.25,1) .15s!important;overflow:visible}
+.gate.open .gate-pour{transform:rotate(-24deg) translateY(-2%)!important}
+.gate-pour .wine{position:absolute;left:-10%;right:-10%;top:50%;bottom:-20%;background:linear-gradient(180deg,#6E0B1E 0%,#4E0716 6%,#320410 22%,#1C0208 60%,#120105 100%);transform-origin:50% 0}
+.gate.open .gate-pour .wine{animation:slosh 2.2s cubic-bezier(.36,.05,.3,1) .15s both}
+@keyframes slosh{0%{transform:rotate(-4deg)}25%{transform:rotate(3.2deg)}48%{transform:rotate(-2deg)}68%{transform:rotate(1.1deg)}86%{transform:rotate(-.4deg)}100%{transform:rotate(0)}}
+.gate-pour .wine::before{content:"";position:absolute;left:0;right:0;top:0;height:22%;background:linear-gradient(180deg,rgba(255,150,170,.10),transparent);pointer-events:none}
+.gate-pour .wine::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(100deg,transparent 0 120px,rgba(255,255,255,.012) 120px 122px);mix-blend-mode:screen;pointer-events:none}
+.gate-pour i{position:absolute;left:0;right:0;height:110px;background-repeat:repeat-x;background-size:820px 110px;pointer-events:none}
+.gate-pour .w2{top:-96px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 18 C40 34 60 34 100 18 S160 2 200 18 V40 H0Z' fill='%238C1428'/%3E%3C/svg%3E");opacity:.75;animation:wv 2.4s linear infinite reverse}
+.gate-pour .w1{top:-80px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 22 C35 6 65 6 100 22 S165 38 200 22 V40 H0Z' fill='%236E0B1E'/%3E%3Cpath d='M0 22 C35 6 65 6 100 22 S165 38 200 22' fill='none' stroke='%23E8798F' stroke-opacity='.45' stroke-width='.8' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");animation:wv 1.7s linear infinite,bob2 .9s ease-in-out infinite alternate}
+@keyframes wv{to{background-position:820px 0}}
+@keyframes bob2{to{transform:translateY(14px) scaleY(.8)}}
+.gate.open .gate-in{transition:opacity .4s ease,transform .6s ease!important;transition-delay:0s!important}
+@media (prefers-reduced-motion:reduce){.gate-pour i,.gate-pour .wine{animation:none!important}}
+.gate-pour{display:none!important}
+.gate-wine{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.gate-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;pointer-events:none;opacity:0;transition:opacity .35s ease;transform:scale(1.04)}
+.gate.vid .gate-vid{opacity:0}
+.gate-mask{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;display:none}
+.gate.vid .gate-mask{display:block}
+.gate.vid{background:none!important}
+.gate.vid .gate-wine{display:none}
+.gate.vid{transition:opacity 1s ease 4.4s,visibility 0s linear 5.5s!important}
+/* entering: vector wine fills the screen; under the surface the magazine shows through */
+.gate.open{background:none!important;transition:opacity .7s ease 2.15s,visibility 0s linear 2.9s!important}
+.gate-wine{z-index:1!important}
+.gate.open .gate-in{transition:opacity .35s ease,transform .6s ease!important;transform:translateY(-8px) scale(.98)!important}
 </style>
 </head>
 <body>
@@ -496,13 +549,13 @@ body{padding:0!important;overflow:hidden}
     <div class="gate-rb">RAINBOW</div>
     <h1 class="gate-t">MANIAC</h1>
     <div class="gate-sub">박주은</div>
-    <button class="glass" id="gateBtn" type="button" aria-label="백합을 받고 소리와 함께 입장하기">
-      <svg class="seal-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="sealPath" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><circle cx="100" cy="100" r="98" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><circle cx="100" cy="100" r="70" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><text><textPath href="#sealPath" textLength="527">ONE LINE · 오늘의 꽃 · RAINBOW：MANIAC · 박주은 · </textPath></text></svg><span class="seal-in"><img class="lily" src="img/lily_violet.webp" alt="" width="560" height="512"></span>
+    <button class="glass" id="gateBtn" type="button" aria-label="노래와 함께 입장하기">
+      <svg class="seal-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="sealPath" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><circle cx="100" cy="100" r="98" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><circle cx="100" cy="100" r="70" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><text><textPath href="#sealPath" textLength="527">NOW PLAYING · MANIAC · 박주은 · RAINBOW：MANIAC · </textPath></text></svg><span class="seal-in"><svg class="seal-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.2v11.6L18 12z"/></svg></span>
     </button>
-    <p class="gate-label"><b>ONE LINE 오늘의 꽃</b> · 1인 1송이 · 백합을 눌러 받으세요</p>
+    <p class="gate-label"><b>MANIAC</b> · 박주은 · 눌러서 노래와 함께 입장</p>
     <button class="gate-quiet" id="gateQuiet" type="button">소리 없이 입장</button>
   </div>
-  <div class="gate-pour" aria-hidden="true"></div>
+  <canvas class="gate-wine" id="gateWine" aria-hidden="true"></canvas><div class="gate-pour" aria-hidden="true"><div class="wine"><i class="w2"></i><i class="w1"></i></div></div>
 </div>
 </div>
 <div class="cap" id="cap" aria-hidden="true"></div>
@@ -516,7 +569,7 @@ body{padding:0!important;overflow:hidden}
         <div class="dk-art"><img src="img/cover_glitch.webp" alt="MANIAC 앨범 커버"></div>
         <div class="dk-meta"><div><b>MANIAC</b><span>박주은</span></div><span class="dk-heart" aria-hidden="true">♥</span></div>
         <div class="dk-prog" id="dkProg" role="slider" aria-label="재생 위치" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="dkBar"></i></div>
-        <div class="dk-time"><span id="dkCur">0:00</span><span id="dkDur">-3:16</span></div>
+        <div class="dk-time"><span id="dkCur">0:00</span><span id="dkDur">-3:09</span></div>
         <div class="dk-ctl">
           <button id="dkBack" aria-label="10초 뒤로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg></button>
           <button id="dkPlay" class="dk-pp" aria-label="재생"><span class="i-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span class="i-pause" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></span></button>
@@ -1072,7 +1125,7 @@ async function loadInk(){
   function enter(quiet){ if(done) return; done=true;
     if(!quiet&&bgm.paused) mb.click();
     gate.classList.add("open"); document.documentElement.style.overflow="";
-    setTimeout(()=>gate.remove(),2300); }
+    setTimeout(()=>gate.remove(),3000); }
   btn.addEventListener("click",e=>{e.stopPropagation();enter()});
   document.getElementById("gateQuiet").addEventListener("click",e=>{e.stopPropagation();enter(true)});
   document.addEventListener("keydown",e=>{ if(!done&&(e.key==="Enter"||e.key===" ")){e.preventDefault();enter()} });
@@ -1129,7 +1182,7 @@ build();
   document.getElementById("dkIsland").addEventListener("click",()=>show("music"));
   const fmt=t=>{t=Math.max(0,t|0);return (t/60|0)+":"+String(t%60).padStart(2,"0")};
   const bar=document.getElementById("dkBar"), cur=document.getElementById("dkCur"), dur=document.getElementById("dkDur"), prog=document.getElementById("dkProg");
-  function tick(){ const d=bgm.duration||196; bar.style.width=(bgm.currentTime/d*100)+"%"; cur.textContent=fmt(bgm.currentTime); dur.textContent="-"+fmt(d-bgm.currentTime); prog.setAttribute("aria-valuenow",Math.round(bgm.currentTime/d*100)) }
+  function tick(){ const d=bgm.duration||189; bar.style.width=(bgm.currentTime/d*100)+"%"; cur.textContent=fmt(bgm.currentTime); dur.textContent="-"+fmt(d-bgm.currentTime); prog.setAttribute("aria-valuenow",Math.round(bgm.currentTime/d*100)) }
   function state(){ const p=!bgm.paused; dock.classList.toggle("playing",p);
     dock.querySelector(".i-play").hidden=p; dock.querySelector(".i-pause").hidden=!p;
     document.getElementById("dkPlay").setAttribute("aria-label",p?"일시정지":"재생");
@@ -1200,6 +1253,102 @@ free:`이름:
   const c=document.getElementById("count"), bar=document.querySelector(".bar"); if(!c||!bar) return;
   const f=()=>{ const m=c.textContent.match(/(\d+)\s*\/\s*(\d+)/); const v=m?(+m[1]/+m[2]*100):0; bar.style.setProperty("--prog",v+"%") };
   new MutationObserver(f).observe(c,{childList:true,characterData:true,subtree:true}); f();
+})();
+</script>
+<script>
+(()=>{
+  /* wine flood: a translucent, glowing, sloshing surface rises across the screen on a diagonal */
+  const gate=document.getElementById("gate"), cv=document.getElementById("gateWine"); if(!gate||!cv) return;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let started=false;
+  const vid=document.getElementById("gateVid");
+  new MutationObserver(()=>{ if(!started&&gate.classList.contains("open")){ started=true;
+    if(vid&&vid.readyState>=2&&!reduce){ gate.classList.add("vid"); vid.currentTime=0; vid.playbackRate=.95; const p=vid.play(); if(p&&p.catch) p.catch(()=>{ gate.classList.remove("vid"); run() }); reveal(vid) }
+    else run() } }).observe(gate,{attributes:true,attributeFilter:["class"]});
+  
+  /* the wine is a window: wherever it washes over, the magazine underneath shows through and stays */
+  function reveal(vid){
+    const cv=document.getElementById("gateMask"), c=cv.getContext("2d");
+    const dpr=Math.min(devicePixelRatio||1,2), W=innerWidth, H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; c.scale(dpr,dpr);
+    const sw=640, sh=360, sc=document.createElement("canvas"); sc.width=sw; sc.height=sh; const sx=sc.getContext("2d",{willReadFrequently:true});
+    const mk=document.createElement("canvas"); mk.width=sw; mk.height=sh; const mx=mk.getContext("2d");
+    const ov=document.createElement("canvas"); ov.width=sw; ov.height=sh; const ox=ov.getContext("2d");
+    const acc=new Float32Array(sw*sh), mImg=mx.createImageData(sw,sh), oImg=ox.createImageData(sw,sh);
+    // cover-fit the video into the viewport (scaled a touch, like the css)
+    const k=Math.max(W/16,H/9)*1.04, vw=16*k, vh=9*k, vx=(W-vw)/2, vy=(H-vh)/2;
+    function bg(){ c.globalCompositeOperation="source-over"; c.fillStyle="#0B0710"; c.fillRect(0,0,W,H);
+      [[.28,.28,.55,"132,18,72",.55],[.76,.72,.5,"76,26,120",.55],[.72,.18,.42,"150,40,120",.32]].forEach(([x,y,r,col,a])=>{
+        const g=c.createRadialGradient(W*x,H*y,0,W*x,H*y,Math.max(W,H)*r); g.addColorStop(0,"rgba("+col+","+a+")"); g.addColorStop(1,"rgba("+col+",0)"); c.fillStyle=g; c.fillRect(0,0,W,H) }) }
+    function frame(){
+      if(!document.body.contains(cv)) return;
+      sx.drawImage(vid,0,0,sw,sh); const d=sx.getImageData(0,0,sw,sh).data, m=mImg.data, o=oImg.data;
+      for(let i=0,p=0;i<acc.length;i++,p+=4){
+        const r=d[p], g=d[p+1], b=d[p+2];
+        let a=(r-34)/70; a=a<0?0:a>1?1:a; if(r<g*1.25) a*=.35;          // wine-ish pixels only
+        if(a>acc[i]) acc[i]=a;
+        m[p+3]=acc[i]*255;                                               // revealed so far
+        o[p]=Math.min(255,r*1.15); o[p+1]=g*.9; o[p+2]=b*.95; o[p+3]=a*a*170; // the wine itself, glassy
+      }
+      mx.putImageData(mImg,0,0); ox.putImageData(oImg,0,0);
+      bg(); c.globalCompositeOperation="destination-out"; c.filter="blur(10px)"; c.drawImage(mk,vx,vy,vw,vh); c.filter="none";
+      c.globalCompositeOperation="source-over"; c.imageSmoothingQuality="high"; c.filter="blur(1.6px)"; c.drawImage(ov,vx,vy,vw,vh); c.filter="none";
+      if(!vid.ended) requestAnimationFrame(frame);
+    }
+    bg(); requestAnimationFrame(frame);
+  }
+  function run(){
+    const dpr=Math.min(devicePixelRatio||1,2), W=innerWidth, H=innerHeight;
+    cv.width=W*dpr; cv.height=H*dpr; const c=cv.getContext("2d"); c.scale(dpr,dpr);
+    const D=Math.hypot(W,H), N=140, span=D*1.5, dx=span/(N-1);
+    const h=new Float32Array(N), v=new Float32Array(N);
+    for(let k=0;k<6;k++){ const i=(Math.random()*N)|0; v[i]-=10+Math.random()*8 }
+    const bubbles=Array.from({length:46},()=>({x:(Math.random()-.5)*span,d:Math.random()*D*.9+20,r:Math.random()*2.4+.6,s:Math.random()*.6+.4,ph:Math.random()*6}));
+    const T=reduce?600:2050, t0=performance.now();
+    const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+    function bg(){ c.fillStyle="#0B0710"; c.fillRect(0,0,W,H);
+      [[.28,.28,.55,"132,18,72",.55],[.76,.72,.5,"76,26,120",.55],[.72,.18,.42,"150,40,120",.32],[.22,.82,.4,"60,10,48",.6]].forEach(([x,y,r,col,a])=>{
+        const g=c.createRadialGradient(W*x,H*y,0,W*x,H*y,Math.max(W,H)*r); g.addColorStop(0,"rgba("+col+","+a+")"); g.addColorStop(1,"rgba("+col+",0)"); c.fillStyle=g; c.fillRect(0,0,W,H) }) }
+    function frame(now){
+      const t=Math.min(1,(now-t0)/T), sec=(now-t0)/1000;
+      // springs
+      for(let i=0;i<N;i++){ v[i]+=-0.022*h[i]; v[i]*=0.986; }
+      for(let p=0;p<3;p++) for(let i=1;i<N-1;i++){ const l=0.24*(h[i]-h[i-1]), r=0.24*(h[i]-h[i+1]); v[i-1]+=l; v[i+1]+=r }
+      for(let i=0;i<N;i++) h[i]+=v[i];
+      for(let i=1;i<N-1;i++) h[i]=h[i]*.6+(h[i-1]+h[i+1])*.2;
+      if(Math.random()<.2){ const i=1+((Math.random()*(N-2))|0); v[i]-=1.2; v[i-1]-=.8; v[i+1]-=.8 }
+      const level=D*.62-ease(t)*D*1.32;                      // surface position, along the tilted axis
+      const ang=-0.36+Math.sin(sec*5.2)*0.07*Math.exp(-sec*1.4); // diagonal + decaying slosh
+      const amp=46*Math.exp(-sec*.75)+12;
+      c.globalCompositeOperation="source-over"; c.clearRect(0,0,W,H); bg();
+      c.save(); c.translate(W/2,H/2); c.rotate(ang);
+      const Y=i=>level+h[i]+Math.sin(i*.16+sec*3.6)*amp*.35+Math.sin(i*.075-sec*2.6)*amp*.8+Math.sin(i*.031+sec*1.4)*amp*.5;
+      const X=i=>-span/2+i*dx;
+      const path=(off)=>{ c.moveTo(X(0),Y(0)+off); for(let i=1;i<N-1;i++){ const mx=(X(i)+X(i+1))/2, my=(Y(i)+Y(i+1))/2+off; c.quadraticCurveTo(X(i),Y(i)+off,mx,my) } c.lineTo(X(N-1),Y(N-1)+off) };
+      // body
+      c.beginPath(); path(0); c.lineTo(span/2,D); c.lineTo(-span/2,D); c.closePath();
+      c.globalCompositeOperation="destination-out"; c.fillStyle="#000"; c.fill(); c.globalCompositeOperation="source-over";
+      const g=c.createLinearGradient(0,level-30,0,level+D*.9);
+      g.addColorStop(0,"rgba(150,8,36,.62)"); g.addColorStop(.05,"rgba(110,4,26,.46)"); g.addColorStop(.22,"rgba(80,0,20,.30)"); g.addColorStop(1,"rgba(40,0,10,.16)");
+      c.fillStyle=g; c.fill();
+      // light passing through the wine, just under the surface
+      c.save(); c.clip(); c.globalCompositeOperation="lighter";
+      const lg=c.createRadialGradient(Math.sin(sec*.8)*W*.2,level+60,10,0,level+60,D*.45);
+      lg.addColorStop(0,"rgba(255,40,80,.18)"); lg.addColorStop(.5,"rgba(160,10,40,.07)"); lg.addColorStop(1,"rgba(0,0,0,0)");
+      c.fillStyle=lg; c.fillRect(-span/2,level-80,span,D*.7);
+      // bubbles
+      for(const b of bubbles){ const yy=level+b.d-((sec*40*b.s)%b.d); const xx=b.x+Math.sin(sec*2+b.ph)*4;
+        c.beginPath(); c.arc(xx,yy,b.r,0,7); c.fillStyle="rgba(255,150,170,"+(.12+.18*(1-(yy-level)/D))+")"; c.fill() }
+      c.restore();
+      // glowing surface + specular line
+      c.beginPath(); path(0);
+      c.shadowColor="rgba(255,40,90,.9)"; c.shadowBlur=26; c.strokeStyle="rgba(214,30,70,.85)"; c.lineWidth=3; c.stroke();
+      c.shadowBlur=8; c.shadowColor="rgba(255,190,205,.8)"; c.strokeStyle="rgba(255,205,215,.75)"; c.lineWidth=1.1;
+      c.beginPath(); path(3); c.stroke();
+      c.restore();
+      if(t<1||now-t0<T+900) requestAnimationFrame(frame);
+    }
+    frame(performance.now());
+  }
 })();
 </script>
 </body>

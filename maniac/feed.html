@@ -1,15 +1,4 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="NULLPINK 이사 · 예쁜 것만 봅니다.">
-<meta property="og:title" content="parkjueun · 박주은">
-<meta property="og:description" content="NULLPINK 이사 · 예쁜 것만 봅니다.">
-<meta property="og:image" content="https://feelggim.github.io/maniac/img/post_cover.webp">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="img/avatar.webp" type="image/webp">
-<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<script>if(window.self!==window.top)document.documentElement.dataset.embed="on"</script><style>[data-embed="on"] #musicBtn{display:none!important}</style>
 <title>parkjueun</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -187,8 +176,7 @@ a{color:inherit}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-<script>if(window.self!==window.top)document.documentElement.dataset.embed="on"</script><style>[data-embed="on"] #musicBtn{display:none!important}</style></head>
-<body>
+
 <div class="wrap">
   <div class="bar">
     <div class="handle">parkjueun <span class="seal" aria-label="인증된 계정"></span></div>
@@ -206,7 +194,7 @@ a{color:inherit}
   <audio id="bgm" src="audio/maniac.mp3" loop preload="none"></audio>
 
   <section class="profile">
-    <div class="avatar"><img src="img/avatar.webp" alt="박주은 프로필 사진"></div>
+    <div class="avatar"><img src="img/jy_avatar.webp" alt="박주은 프로필 사진"></div>
     <div class="meta">
       <div class="nameRow">
         <h1 class="name">박주은<i>Park Jueun</i></h1>
@@ -250,7 +238,7 @@ a{color:inherit}
   <div class="sheet">
     <div class="media" id="mMedia"></div>
     <div class="side">
-      <header><img src="img/avatar.webp" alt=""><b>parkjueun</b><span class="seal"></span><button class="x" id="mClose" aria-label="닫기">×</button></header>
+      <header><img src="img/jy_avatar.webp" alt=""><b>parkjueun</b><span class="seal"></span><button class="x" id="mClose" aria-label="닫기">×</button></header>
       <div class="thread" id="mThread"></div>
       <footer id="mFoot"></footer>
     </div>
@@ -300,7 +288,7 @@ const POSTS=[
   cap:"NULLPINK 2.0. 다들 고생 많았어요.",
   com:[["nullpink.official","이사님 덕분입니다"],["ceo_minjae","투자 얘기 다음 주에 하시죠"],["parkjueun","월요일"],["hana__lee","❤️"]],
   back:["22:00","런칭 파티에서 제일 먼저 나왔다. 약 알람이 울려서."]},
- {id:"violet",img:"img/post_violet.webp",likes:"6.3만",date:"8월 2일",
+ {id:"violet",img:"img/jy_violet.webp",likes:"6.3만",date:"8월 2일",
   cap:"보라. 이번엔 오래 갈 것 같아.",
   com:[["yuna.film","이 색 미쳤다"],["seo.yeonn","제가 골라드린 색이죠?"],["parkjueun","네가 고른 건 다른 색"],["hana__lee","❤️"]],
   back:["14:10","염색한 지 9일. 원래는 3주는 버텼다."]},
@@ -310,16 +298,16 @@ const POSTS=[
   back:["02:10","가방 순서를 세 번 바꿨다. 예쁜 걸 보고 있으면 아무 생각이 안 난다. 그래서 자꾸 산다."]}
 ];
 const CLIPS=[
- ["clip_01","어디가 문제인데? 한 줄만 짚어봐.","스타일매거진 인터뷰"],
- ["clip_02","…그걸 지금 저한테 물어요?","스타일매거진 인터뷰"],
- ["clip_03","보세요. 다 보여드렸잖아요.","NULLPINK 2.0 런칭 인터뷰"],
- ["clip_04","말도 안 되는 소리 하지 마세요.","테크인사이드 대담"],
- ["clip_05","걔요? 그냥 재밌는 애.","비하인드"],
- ["clip_06","믿고 싶은 대로 믿으세요.","스타일매거진 인터뷰"],
- ["clip_07","강아지는… 그건 얘기가 다르죠.","비하인드"],
- ["clip_08","그게 제가 사랑을 안 한다는 증거예요?","스타일매거진 인터뷰"],
- ["clip_09","지금 아니에요.","촬영 쉬는 시간"],
- ["clip_10","…","미공개 컷"]
+ ["jy_c01","어디가 문제인데? 한 줄만 짚어봐.","스타일매거진 인터뷰"],
+ ["jy_c02","…그걸 지금 저한테 물어요?","스타일매거진 인터뷰"],
+ ["jy_c03","보세요. 다 보여드렸잖아요.","NULLPINK 2.0 런칭 인터뷰"],
+ ["jy_c04","말도 안 되는 소리 하지 마세요.","테크인사이드 대담"],
+ ["jy_c05","걔요? 그냥 재밌는 애.","비하인드"],
+ ["jy_c06","믿고 싶은 대로 믿으세요.","스타일매거진 인터뷰"],
+ ["jy_c07","강아지는… 그건 얘기가 다르죠.","비하인드"],
+ ["jy_c08","그게 제가 사랑을 안 한다는 증거예요?","스타일매거진 인터뷰"],
+ ["jy_c09","지금 아니에요.","촬영 쉬는 시간"],
+ ["jy_c10","…","미공개 컷"]
 ];
 const PRESS=[
  ["스타일매거진 · 11월호","\"숨긴 거 없어요. 한 줄만 짚어보세요\" 보라색 사업가 박주은","인터뷰 영상 공개 직후 조회수 300만. 댓글창은 정확히 반으로 갈렸다."],
@@ -363,7 +351,7 @@ function render(){
   document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.tab===tab));
   v.querySelectorAll(".cell[data-i]").forEach(b=>b.addEventListener("click",()=>openPost(+b.dataset.i)));
 }
-function av(u){const c=COLORS[u]||"#6E6478";return u==="parkjueun"?`<img class="av" src="img/avatar.webp" alt="" style="object-fit:cover">`:`<span class="av" style="background:${c}">${u[0].toUpperCase()}</span>`}
+function av(u){const c=COLORS[u]||"#6E6478";return u==="parkjueun"?`<img class="av" src="img/jy_avatar.webp" alt="" style="object-fit:cover">`:`<span class="av" style="background:${c}">${u[0].toUpperCase()}</span>`}
 let lastFocus=null;
 function openPost(i){
   const p=POSTS[i]; lastFocus=document.activeElement;
@@ -421,5 +409,3 @@ document.querySelectorAll("[data-story]").forEach(b=>b.addEventListener("click",
 let saved="front"; try{saved=localStorage.getItem("jueun-face")||"front"}catch(e){}
 setFace(saved); render();
 </script>
-</body>
-</html>

@@ -127,6 +127,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--pop);outline-offset
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 /* ---------- page system (sized by the sheet: 100cqw = page width) ---------- */
 .pg{position:absolute;inset:0;container-type:inline-size;color:var(--ink);font-family:var(--f-kr);background:var(--paper);overflow:hidden}
 .pg .in{position:absolute;inset:8.4cqw 6.6cqw 8.2cqw;display:flex;flex-direction:column;gap:2.6cqw}
@@ -641,7 +643,7 @@ const PAGES=[
 
 /* 1 contents (dark, left) */
 `<div class="pg dark">${RH("No.01 · November 2026")}<div class="in" style="gap:0">
-  <img class="fig" src="${IMG}clip_01.webp" alt="손가락을 입술에 대고 웃는 박주은" style="aspect-ratio:16/6.6;object-position:50% 24%">
+  <img class="fig" src="${IMG}jy_c01.webp" alt="능글맞게 웃는 박주은" style="aspect-ratio:16/6.6;object-position:50% 24%">
   <h2 style="font-size:15cqw;font-style:italic;margin:-5.4cqw 0 0 -.6cqw;color:#fff;position:relative">Contents</h2>
   <div class="toc">
     <div><b>03</b><span>Cover Story<small>다섯 개의 브랜드를 가진 여자</small></span><em>Feature</em></div>
@@ -667,7 +669,7 @@ const PAGES=[
   </div>
   <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:3cqw;align-items:end">
     <div class="sig">Seoyun Han<small>편집장 한서윤</small></div>
-    <div><img class="fig" src="${IMG}clip_02.webp" alt="팔짱을 끼고 선 박주은" style="aspect-ratio:16/11;object-position:50% 20%"><p class="cap"><b>On set</b> · 청담, 오후 4시. 첫 컷.</p></div>
+    <div><img class="fig" src="${IMG}jy_c06.webp" alt="내려다보는 박주은" style="aspect-ratio:16/11;object-position:50% 20%"><p class="cap"><b>On set</b> · 청담, 오후 4시. 첫 컷.</p></div>
   </div>
   <div class="mast">
     <span>Editor-in-Chief<b>한서윤</b></span><span>Photography<b>연서진</b></span>
@@ -677,7 +679,7 @@ const PAGES=[
 </div>${S("찾을 생각도 없었으면서",50,36,4,-5)}${S("연서진 사진 잘 찍더라\n근데 너무 오래 봄",58,4,3.6,-3)}${FO(2,"Editor’s Letter")}</div>`,
 
 /* 3 opener photo (left) */
-`<div class="pg on-img"><img class="bleed" src="${IMG}clip_05.webp" alt="손가락을 입가에 대고 웃는 박주은" style="object-position:47% 30%"><div class="shade"></div>${RH("Cover Story")}
+`<div class="pg on-img"><img class="bleed" src="${IMG}jy_c03.webp" alt="턱을 괴고 웃는 박주은" style="object-position:47% 30%"><div class="shade"></div>${RH("Cover Story")}
   <span class="vcred">Photographed by 연서진 · Styling OFFLINE Hannam</span>
   <div style="position:absolute;left:6.6cqw;right:6.6cqw;bottom:9cqw;color:#fff;z-index:2">
     <span class="kick" style="color:#FF5C9E">Cover Story — Self-made</span>
@@ -732,7 +734,7 @@ const PAGES=[
 </div>${S("3잔째. 치즈는 안 먹었음",9,6,4.2,-6)}${S("유니콘 건들면 죽어\n그 사람만 예외 ♡",87,46,4,-4)}${FO(6,"Interview")}</div>`,
 
 /* 7 pull photo (left) */
-`<div class="pg on-img"><img class="bleed" src="${IMG}clip_06.webp" alt="정면을 바라보는 박주은" style="object-position:55% 30%"><div class="shade"></div>${RH("Interview")}
+`<div class="pg on-img"><img class="bleed" src="${IMG}jy_c08.webp" alt="평정을 유지하는 박주은" style="object-position:55% 30%"><div class="shade"></div>${RH("Interview")}
   <div style="position:absolute;left:6.6cqw;right:8cqw;bottom:10cqw;color:#fff;z-index:2">
     <span class="kick" style="color:#FF5C9E">In her words</span>
     <p style="font-family:var(--f-head);font-style:italic;font-size:9.6cqw;line-height:1.02;margin-top:2cqw">“Nothing hidden.<br>Find it, if<br>you can.”</p>
@@ -760,7 +762,7 @@ const PAGES=[
 </div>${S("있어. 너네가 알 필요 없을 뿐",23,48,3.6,-4)}${S("늙으면 아무도 안 봐줄까 봐",63,4,3.8,3)}${S("산책은 다 그 사람이 감",74,6,4,-4)}${FO(8,"Interview")}</div>`,
 
 /* 9 under the lights photo (left) */
-`<div class="pg on-img"><img class="bleed" src="${IMG}post_violet.webp" alt="보라색 머리의 박주은 화보 컷" style="object-position:50% 25%"><div class="shade"></div>${RH("Society")}
+`<div class="pg on-img"><img class="bleed" src="${IMG}jy_violet.webp" alt="보라색 머리의 박주은 화보 컷" style="object-position:50% 25%"><div class="shade"></div>${RH("Society")}
   <div style="position:absolute;left:6.6cqw;right:6.6cqw;bottom:9.6cqw;color:#fff;z-index:2">
     <span class="kick" style="color:#FF5C9E">Under the Lights</span>
     <h2 style="font-size:13cqw;color:#fff;margin-top:1.6cqw">Every room<br><em style="color:#FF5C9E">turns to her.</em></h2>
@@ -803,7 +805,7 @@ const PAGES=[
     <p class="a">안 놔요. 상대가 문 쪽으로 가면 제가 먼저 가서 서 있어요. 그게 제 방식이에요. <span class="note">농담인지 묻자 그녀는 대답하지 않았다.</span></p>
   </div>
   <div style="display:grid;grid-template-columns:30cqw 1fr;gap:2.6cqw;align-items:end">
-    <img class="fig" src="${IMG}clip_04.webp" alt="고개를 숙이고 정면을 보는 박주은" style="aspect-ratio:1;object-position:50% 25%">
+    <img class="fig" src="${IMG}jy_c02.webp" alt="어이없다는 얼굴의 박주은" style="aspect-ratio:1;object-position:50% 25%">
     <p class="cap"><b>Portrait</b> · 이 컷에서만 그녀는 웃지 않았다. 셔터 소리가 멈출 때까지.</p>
   </div>
 </div>${S("한 명. 진짜야.\n아무도 안 믿지만",26,58,3.8,-4)}${S("거짓말. 미칠 것 같음",80,37,4.2,-3)}${FO(12,"On Partnership")}</div>`,

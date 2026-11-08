@@ -129,6 +129,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--pop);outline-offset
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 @font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Juen Hand";src:url("fonts/juen.woff2") format("woff2");font-display:swap}
 /* ---------- page system (sized by the sheet: 100cqw = page width) ---------- */
 .pg{position:absolute;inset:0;container-type:inline-size;color:var(--ink);font-family:var(--f-kr);background:var(--paper);overflow:hidden}
 .pg .in{position:absolute;inset:8.4cqw 6.6cqw 8.2cqw;display:flex;flex-direction:column;gap:2.6cqw}
@@ -543,14 +545,27 @@ body{padding:0!important;overflow:hidden}
 .gate.open{background:none!important;transition:opacity .7s ease 2.15s,visibility 0s linear 2.9s!important}
 .gate-wine{z-index:1!important}
 .gate.open .gate-in{transition:opacity .35s ease,transform .6s ease!important;transform:translateY(-8px) scale(.98)!important}
+
+/* gate, cover match: pure black, RAINBOW — 매니악 — */
+.gate{background:#000!important}
+.gate-glow{display:none!important}
+.gate-rb{background:none!important;-webkit-text-fill-color:#F4EEF1!important;color:#F4EEF1!important;animation:none!important;font-family:"Italiana",serif!important;font-size:clamp(44px,9.5vw,124px)!important;letter-spacing:.24em!important;padding-left:.24em!important;filter:none!important;text-shadow:none!important}
+.gate-t{display:none!important}
+.gate-sub{font-family:"Noto Sans KR",sans-serif!important;font-weight:300!important;font-size:clamp(14px,1.6vw,19px)!important;letter-spacing:.55em!important;padding-left:.55em!important;color:#EADCE3!important;margin-bottom:10px}
+.gate-sub::before,.gate-sub::after{width:42px!important;background:rgba(234,220,227,.75)!important}
+.glass,.gate-label,.gate-quiet{display:none!important}
+.gate{cursor:pointer}
+.gate-sub{animation:gbreathe 3.2s ease-in-out infinite}
+@keyframes gbreathe{0%,100%{opacity:.55}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.gate-sub{animation:none}}
 </style>
 </head>
 <body>
-<div class="gate" id="gate" role="dialog" aria-label="RAINBOW：MANIAC 입장">
+<div class="gate" id="gate" role="dialog" aria-label="RAINBOW：MANIAC 입장, 화면을 누르면 노래와 함께 들어갑니다">
     <div class="gate-in">
     <div class="gate-rb">RAINBOW</div>
     <h1 class="gate-t">MANIAC</h1>
-    <div class="gate-sub">박주은</div>
+    <div class="gate-sub">매니악</div>
     <button class="glass" id="gateBtn" type="button" aria-label="노래와 함께 입장하기">
       <svg class="seal-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="sealPath" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs><circle cx="100" cy="100" r="98" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><circle cx="100" cy="100" r="70" fill="none" stroke="rgba(242,184,204,.35)" stroke-width=".8"/><text><textPath href="#sealPath" textLength="527">NOW PLAYING · MANIAC · 박주은 · RAINBOW：MANIAC · </textPath></text></svg><span class="seal-in"><svg class="seal-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.2v11.6L18 12z"/></svg></span>
     </button>
@@ -1129,6 +1144,7 @@ async function loadInk(){
     gate.classList.add("open"); document.documentElement.style.overflow="";
     setTimeout(()=>gate.remove(),3000); }
   btn.addEventListener("click",e=>{e.stopPropagation();enter()});
+  gate.addEventListener("click",()=>enter());
   document.getElementById("gateQuiet").addEventListener("click",e=>{e.stopPropagation();enter(true)});
   document.addEventListener("keydown",e=>{ if(!done&&(e.key==="Enter"||e.key===" ")){e.preventDefault();enter()} });
 })();
@@ -1278,8 +1294,8 @@ free:`이름:
     const acc=new Float32Array(sw*sh), mImg=mx.createImageData(sw,sh), oImg=ox.createImageData(sw,sh);
     // cover-fit the video into the viewport (scaled a touch, like the css)
     const k=Math.max(W/16,H/9)*1.04, vw=16*k, vh=9*k, vx=(W-vw)/2, vy=(H-vh)/2;
-    function bg(){ c.globalCompositeOperation="source-over"; c.fillStyle="#0B0710"; c.fillRect(0,0,W,H);
-      [[.28,.28,.55,"132,18,72",.55],[.76,.72,.5,"76,26,120",.55],[.72,.18,.42,"150,40,120",.32]].forEach(([x,y,r,col,a])=>{
+    function bg(){ c.globalCompositeOperation="source-over"; c.fillStyle="#000"; c.fillRect(0,0,W,H);
+       [].forEach(([x,y,r,col,a])=>{
         const g=c.createRadialGradient(W*x,H*y,0,W*x,H*y,Math.max(W,H)*r); g.addColorStop(0,"rgba("+col+","+a+")"); g.addColorStop(1,"rgba("+col+",0)"); c.fillStyle=g; c.fillRect(0,0,W,H) }) }
     function frame(){
       if(!document.body.contains(cv)) return;
@@ -1307,8 +1323,8 @@ free:`이름:
     const bubbles=Array.from({length:46},()=>({x:(Math.random()-.5)*span,d:Math.random()*D*.9+20,r:Math.random()*2.4+.6,s:Math.random()*.6+.4,ph:Math.random()*6}));
     const T=reduce?600:2050, t0=performance.now();
     const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
-    function bg(){ c.fillStyle="#0B0710"; c.fillRect(0,0,W,H);
-      [[.28,.28,.55,"132,18,72",.55],[.76,.72,.5,"76,26,120",.55],[.72,.18,.42,"150,40,120",.32],[.22,.82,.4,"60,10,48",.6]].forEach(([x,y,r,col,a])=>{
+    function bg(){ c.fillStyle="#000"; c.fillRect(0,0,W,H);
+       [].forEach(([x,y,r,col,a])=>{
         const g=c.createRadialGradient(W*x,H*y,0,W*x,H*y,Math.max(W,H)*r); g.addColorStop(0,"rgba("+col+","+a+")"); g.addColorStop(1,"rgba("+col+",0)"); c.fillStyle=g; c.fillRect(0,0,W,H) }) }
     function frame(now){
       const t=Math.min(1,(now-t0)/T), sec=(now-t0)/1000;

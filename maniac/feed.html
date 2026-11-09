@@ -43,6 +43,7 @@ a{color:inherit}
 .seal::after{content:"";width:6px;height:3px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
 .right{display:flex;align-items:center;gap:18px;min-width:0}
 .music{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--sub);min-width:0;padding:6px 10px;border:1px solid var(--line);border-radius:99px}
+.music.nx{padding:6px 8px}.music.nx svg{width:12px;height:12px;fill:currentColor;display:block}
 .music .mt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
 .music[aria-pressed="true"]{color:var(--ink);border-color:var(--accent)}
 .eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px;width:14px}
@@ -185,13 +186,14 @@ a{color:inherit}
       <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="mt">Diamonds on a Broken Stage</span>
     </button>
+    <button class="music nx" id="nextBtn" aria-label="다음 곡"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
     <button class="face" id="faceBtn" aria-pressed="false" aria-label="뒷면 보기 전환">
       <span class="frontonly"><b>앞면</b></span><span class="backonly"><b>04:12</b></span>
       <span class="switch" aria-hidden="true"></span>
     </button>
     </div>
   </div>
-  <audio id="bgm" src="audio/maniac.mp3" loop preload="none"></audio>
+  <audio id="bgm" src="audio/diamonds.mp3" preload="none"></audio>
 
   <section class="profile">
     <div class="avatar"><img src="img/jy_avatar.webp" alt="박주은 프로필 사진"></div>
@@ -377,6 +379,12 @@ function setFace(f){
 }
 /* music: clear on the front, under water on the back */
 const bgm=$("#bgm"); let ac=null, lp=null, gn=null;
+const BGM_LIST=[["audio/diamonds.mp3","Diamonds on a Broken Stage"],["audio/maniac.mp3","MANIAC"]]; let bgmI=0;
+const mtEl=document.querySelector(".music .mt"); if(mtEl) mtEl.textContent=BGM_LIST[0][1];
+function bgmGo(d){ bgmI=(bgmI+d+BGM_LIST.length)%BGM_LIST.length; bgm.src=BGM_LIST[bgmI][0]; if(mtEl) mtEl.textContent=BGM_LIST[bgmI][1];
+  bgm.addEventListener("playing",()=>muffle(document.documentElement.dataset.face==="back",true),{once:true}); $("#musicBtn").click() }
+bgm.addEventListener("ended",()=>bgmGo(1));
+const nxB=document.getElementById("nextBtn"); if(nxB) nxB.addEventListener("click",()=>bgmGo(1));
 function initAudio(){
   if(ac) return;
   try{

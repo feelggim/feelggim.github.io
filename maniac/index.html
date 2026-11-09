@@ -234,6 +234,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--pop);outline-offset
 .pg.blank{background:var(--paper2)}
 .pg.blank .mono{position:absolute;inset:auto 0 45%;text-align:center}
 .pill{white-space:nowrap}
+.pill.nx{padding:6px 9px}.pill.nx svg{width:12px;height:12px;fill:currentColor;display:block}
 @media (max-width:820px){#musicBtn span:last-child{display:none}.bar{font-size:10.5px}.bar b{letter-spacing:.28em}.bar .r{gap:6px}}
 .pg .h{letter-spacing:.02em;text-transform:none;font-family:var(--f-body);font-weight:500}
 /* Korean has no italic: keep it upright instead of a faked slant */
@@ -588,9 +589,9 @@ body{padding:0!important;overflow:hidden}
         <div class="dk-prog" id="dkProg" role="slider" aria-label="재생 위치" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="dkBar"></i></div>
         <div class="dk-time"><span id="dkCur">0:00</span><span id="dkDur">-3:09</span></div>
         <div class="dk-ctl">
-          <button id="dkBack" aria-label="10초 뒤로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg></button>
+          <button id="dkBack" aria-label="이전 곡"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
           <button id="dkPlay" class="dk-pp" aria-label="재생"><span class="i-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span class="i-pause" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></span></button>
-          <button id="dkFwd" aria-label="10초 앞으로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/></svg></button>
+          <button id="dkFwd" aria-label="다음 곡"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
         </div>
         <div class="dk-lyr" id="dkLyr" aria-live="off"><p class="dk-line">“자기야… 나 버리지 마. 응?”</p></div>
       </section>
@@ -625,6 +626,7 @@ body{padding:0!important;overflow:hidden}
       <button class="pill" id="penBtn" aria-pressed="false" aria-label="주은의 낙서 보기"><span style="color:#E0247E">✎</span><span id="penLbl">주은의 펜</span></button>
       <button class="pill" id="drawBtn" aria-pressed="false" hidden><span style="color:#E0247E">✍</span><span>직접 쓰기</span></button>
       <button class="pill" id="musicBtn" aria-pressed="false" aria-label="배경음악 재생"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span>MANIAC</span></button>
+      <button class="pill nx" id="nextBtn" aria-label="다음 곡"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
     </div>
   </div>
   <div class="stage" id="stage" aria-live="polite"></div>
@@ -1008,7 +1010,13 @@ mq.addEventListener("change",()=>{ if(mq.matches){single=Math.max(0,flipped*2-1)
 /* 크랙 작품 주소가 생기면 아래 따옴표 안에 넣기 */
 const CRACK_URL="";
 function wireCrack(){stage.querySelectorAll("[data-crack]").forEach(a=>{ if(CRACK_URL){a.href=CRACK_URL;a.target="_blank";a.rel="noopener"} else a.addEventListener("click",e=>e.preventDefault()) })}
-const bgm=new Audio("audio/maniac.mp3"); bgm.loop=true; bgm.preload="none"; bgm.crossOrigin="anonymous";
+const BGM_LIST=[["audio/diamonds.mp3","DIAMONDS"],["audio/maniac.mp3","MANIAC"]]; let bgmI=0;
+const bgm=new Audio(BGM_LIST[0][0]); bgm.preload="none"; bgm.crossOrigin="anonymous";
+function bgmLabel(){ const t=BGM_LIST[bgmI][1]; document.querySelectorAll("#musicBtn span:last-child,.dk-nm").forEach(e=>e.textContent=t) }
+bgmLabel();
+function bgmGo(d){ bgmI=(bgmI+d+BGM_LIST.length)%BGM_LIST.length; bgm.src=BGM_LIST[bgmI][0]; bgmLabel();
+  bgm.addEventListener("playing",()=>muffle(pen,true),{once:true}); document.getElementById("musicBtn").click() }
+bgm.addEventListener("ended",()=>bgmGo(1));
 let ac=null,lp=null,gn=null;
 function initAudio(){ if(ac) return; try{ ac=new (window.AudioContext||window.webkitAudioContext)(); const src=ac.createMediaElementSource(bgm);
   lp=ac.createBiquadFilter(); lp.type="lowpass"; lp.Q.value=1.1; gn=ac.createGain(); src.connect(lp).connect(gn).connect(ac.destination); muffle(pen,true);}catch(e){ac=null} }
@@ -1016,6 +1024,7 @@ function muffle(on,now){ bgm.playbackRate=on?0.9:1; try{bgm.preservesPitch=false
   if(!ac) return; const t=ac.currentTime,k=now?0.01:0.4; lp.frequency.cancelScheduledValues(t); gn.gain.cancelScheduledValues(t);
   lp.frequency.setTargetAtTime(on?520:18000,t,k); gn.gain.setTargetAtTime(on?0.85:1,t,k); }
 const mb=document.getElementById("musicBtn");
+document.getElementById("nextBtn").addEventListener("click",()=>bgmGo(1));
 mb.addEventListener("click",async()=>{ if(bgm.paused){ initAudio(); try{ if(ac&&ac.state==="suspended") await ac.resume(); await bgm.play();mb.setAttribute("aria-pressed","true");mb.setAttribute("aria-label","배경음악 일시정지")}catch(e){}} else {bgm.pause();mb.setAttribute("aria-pressed","false");mb.setAttribute("aria-label","배경음악 재생")} });
 let pen=false; const pb=document.getElementById("penBtn");
 function setPen(on){ pen=on; document.documentElement.dataset.pen=on?"on":"off"; pb.setAttribute("aria-pressed",on); document.getElementById("penLbl").textContent=on?"인쇄본으로":"주은의 펜"; muffle(on); try{localStorage.setItem("mag-pen",on?"1":"0")}catch(e){} }
@@ -1208,8 +1217,8 @@ build();
   ["play","pause","ended"].forEach(ev=>bgm.addEventListener(ev,state));
   bgm.addEventListener("timeupdate",tick); bgm.addEventListener("loadedmetadata",tick);
   document.getElementById("dkPlay").addEventListener("click",()=>mb.click());
-  document.getElementById("dkBack").addEventListener("click",()=>{bgm.currentTime=Math.max(0,bgm.currentTime-10);tick()});
-  document.getElementById("dkFwd").addEventListener("click",()=>{if(bgm.duration)bgm.currentTime=Math.min(bgm.duration-1,bgm.currentTime+10);tick()});
+  document.getElementById("dkBack").addEventListener("click",()=>{ if(bgm.currentTime>3){bgm.currentTime=0;tick()} else bgmGo(-1) });
+  document.getElementById("dkFwd").addEventListener("click",()=>bgmGo(1));
   function seek(x){ const r=prog.getBoundingClientRect(); if(bgm.duration){bgm.currentTime=Math.min(.999,Math.max(0,(x-r.left)/r.width))*bgm.duration;tick()} }
   prog.addEventListener("click",e=>seek(e.clientX));
   prog.addEventListener("keydown",e=>{ if(e.key==="ArrowRight"){bgm.currentTime+=5;e.preventDefault()} if(e.key==="ArrowLeft"){bgm.currentTime-=5;e.preventDefault()} });
@@ -1258,7 +1267,7 @@ free:`이름:
   if(!L.length||typeof bgm==="undefined") return;
   box.innerHTML="<ol>"+L.map(x=>"<li>"+String(x[1]).replace(/[<&]/g,c=>c=="<"?"&lt;":"&amp;")+"</li>").join("")+"</ol>";
   const ol=box.querySelector("ol"), lis=[...ol.children]; let cur=-2;
-  function upd(){ const t=bgm.currentTime; let i=-1; for(let k=0;k<L.length;k++){ if(L[k][0]<=t) i=k; else break }
+  function upd(){ const t=BGM_LIST[bgmI][1]==="MANIAC"?bgm.currentTime:-1; let i=-1; for(let k=0;k<L.length;k++){ if(L[k][0]<=t) i=k; else break }
     if(i===cur) return; cur=i; lis.forEach((li,k)=>li.classList.toggle("on",k===i));
     ol.style.transform="translateY("+(31-Math.max(i,0)*30)+"px)";
     const line=i>=0?String(L[i][1]).trim():""; cap.textContent=line; cap.classList.toggle("show",!!line&&!bgm.paused) }

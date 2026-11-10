@@ -1573,9 +1573,9 @@ addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(paint)},{passiv
 // 문: 선택
 (()=>{const res=document.getElementById('dres');if(!res)return;
 const crack=()=>(document.querySelector('[data-crack]')||{}).href||'#';
-const CTA=()=>'<div class="cta"><a class="btn" href="'+crack()+'" target="_blank" rel="noopener">▶ 크랙에서 이나한테 가기</a><a class="btn alt" href="#scene">그날 새벽 다시 보기</a></div>';
+const CTA=(t='▶ 크랙에서 이나한테 가기')=>'<div class="cta"><a class="btn" href="'+crack()+'" target="_blank" rel="noopener">'+t+'</a><a class="btn alt" href="#scene">그날 새벽 다시 보기</a></div>';
 document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
-  res.innerHTML=b.dataset.c==='fan'?'<p class="fanres">그럼 오늘도 전광판 앞에서 봐.<br>우리 골댕이, 오늘도 랩 찢는다.</p>'+CTA():'<p class="fanres">작업실 문, 안 잠갔다.<br><b style="color:var(--blue)">와라.</b></p>'+CTA()}));
+  res.innerHTML=b.dataset.c==='fan'?'<p class="fanres">그럼 오늘도 전광판 앞에서 봐.<br>우리 골댕이, 오늘도 랩 찢는다.</p>'+CTA('▶ 섹드립퍼 보러 가기'):'<p class="fanres">작업실 문, 안 잠갔다.<br><b style="color:var(--blue)">와라.</b></p>'+CTA()}));
 })();
 // 우클릭·드래그 막기
 document.addEventListener('contextmenu',e=>e.preventDefault());

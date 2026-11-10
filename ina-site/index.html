@@ -658,6 +658,7 @@ body.lyo .player{z-index:125}
 .yah.shake .yah-bub{animation:shake .4s}
 @media (max-width:640px){.yah{bottom:calc(env(safe-area-inset-bottom,0px) + 86px)}.yah-btn{width:56px;height:56px}}
 body.lyo .yah{display:none}
+body.hush .yah{opacity:0;pointer-events:none;transition:opacity .4s}
 
 
 
@@ -736,41 +737,52 @@ body.kick .logo b{letter-spacing:.06em}
 .door-in{position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center}
 .door .door-in .h2{font-size:clamp(32px,5.4vw,68px);word-break:keep-all;margin-bottom:0}
 .door .sec-no{z-index:2}
-.dres .ex{position:relative}
-.dres .ln{display:block;opacity:0;transform:translateY(14px);filter:blur(4px);transition:opacity .55s,transform .55s cubic-bezier(.2,.9,.3,1.2),filter .55s;margin:0 0 .35em}
-.dres .ln.on{opacity:1;transform:none;filter:none}
-.dres .ln.q{font-weight:800;color:var(--blue)}
-.dres .ln.last{font-family:var(--f-pop);font-size:1.6em;color:var(--blue);margin-top:.5em;text-shadow:2px 2px 0 var(--sun)}
-.hk{position:absolute;z-index:3;width:clamp(150px,17vw,220px);border:3px solid var(--navy);border-radius:14px;overflow:hidden;background:var(--blue);box-shadow:6px 6px 0 var(--navy);opacity:0;transform:rotate(var(--r,0deg)) scale(.3);transition:opacity .3s,transform .55s cubic-bezier(.3,1.7,.5,1)}
-.hk.on{opacity:1;transform:rotate(var(--r,0deg)) scale(1)}
-.hk:nth-of-type(even){box-shadow:6px 6px 0 var(--blue)}
-.hk img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
-.hk.l{right:calc(100% + 26px)}.hk.r{left:calc(100% + 26px)}
-.door{overflow:visible}
-.slam{display:block;text-align:center;margin:44px 0 6px;font-family:var(--f-pop);font-size:clamp(56px,11vw,150px);line-height:.98;letter-spacing:-.02em;color:var(--blue);text-shadow:.05em .05em 0 var(--navy);opacity:0;transform:scale(2.4) rotate(-4deg);filter:blur(10px)}
-.slam small{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.3em;color:var(--navy);text-shadow:none;margin-bottom:14px}
-.slam.on{animation:slam .55s cubic-bezier(.2,1.5,.4,1) forwards}
-@keyframes slam{0%{opacity:0;transform:scale(2.4) rotate(-4deg);filter:blur(10px)}60%{opacity:1;filter:none}100%{opacity:1;transform:scale(1) rotate(-2deg);filter:none}}
-.door-in.shake{animation:dshake .38s linear}
-@keyframes dshake{20%{translate:-6px 3px}40%{translate:5px -4px}60%{translate:-4px 2px}80%{translate:3px -1px}}
-.dflash{position:fixed;inset:0;z-index:400;background:#fff;pointer-events:none;animation:dflash .45s ease-out forwards}
-@keyframes dflash{from{opacity:.75}to{opacity:0}}
+
 .choices{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
 .choice{font-family:var(--f-pop);font-size:clamp(16px,2vw,19px);padding:15px 26px;border-radius:999px;border:3px solid var(--navy);background:var(--cream);color:var(--navy);box-shadow:5px 5px 0 var(--navy);transition:transform .15s,box-shadow .15s}
 .choice:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--navy)}
 .choice:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--navy)}
 .choice.pk{background:var(--blue);color:var(--cream)}
 .dres{max-width:640px;margin:40px auto 0;text-align:left;min-height:20px}
-.dres .ex{font-family:var(--f-story);font-size:clamp(16px,1.7vw,19px);line-height:1.95;color:var(--navy);background:var(--cream);border:3px solid var(--navy);border-radius:20px;padding:22px 24px;box-shadow:8px 8px 0 var(--blue);word-break:keep-all}
-.dres .caret{display:inline-block;width:2px;height:1.1em;background:var(--blue);vertical-align:-.15em;margin-left:2px;animation:dblink .8s infinite}
-@keyframes dblink{50%{opacity:0}}
 .dres .fanres{font-family:var(--f-pop);font-size:clamp(20px,3vw,30px);line-height:1.4;text-align:center;color:var(--navy)}
 .dres .cta{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:26px}
-@media (max-width:1180px){.hk,.hk.l,.hk.r{position:relative;display:block;width:62%;margin:6px 0 16px;right:auto;left:auto;top:auto}.hk.r{margin-left:auto}}
 @media (max-width:480px){.choice{width:100%}}
-@media (prefers-reduced-motion:reduce){.dres .ln,.hk{transition:none}}
 /* 이미지 보호 */
 img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
+
+/* 그날 새벽: 스크롤로 한 줄씩 */
+.scene{position:relative;background:var(--sun);color:var(--navy);transition:background-color 1.4s ease,color 1.4s ease;padding:clamp(80px,12vw,140px) var(--gut) clamp(60px,8vw,100px);overflow:hidden;border-top:2px solid var(--navy)}
+.sc-in{max-width:1000px;margin:0 auto}
+.sc-eye{font-family:var(--f-mono);font-size:12px;letter-spacing:.3em;text-align:center;opacity:.7;margin-bottom:8vh}
+.sc-l{position:relative;min-height:52vh;display:flex;align-items:center;justify-content:center}
+.sc-l p{max-width:760px;text-align:center;font-family:var(--f-story);font-weight:700;font-size:clamp(22px,3.1vw,40px);line-height:1.5;letter-spacing:-.02em;word-break:keep-all;opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1),filter .9s ease}
+.sc-l.on p{opacity:1;transform:none;filter:none}
+.sc-l p.q{color:var(--blue);font-weight:800}
+.sc-l.dim p{color:inherit}
+.sc-pic{position:absolute;top:50%;width:clamp(170px,20vw,260px);border:3px solid var(--navy);border-radius:16px;overflow:hidden;box-shadow:7px 7px 0 var(--navy);opacity:0;transform:translateY(-50%) rotate(var(--r)) scale(.4);transition:opacity .35s ease .25s,transform .7s cubic-bezier(.3,1.6,.5,1) .25s}
+.sc-pic img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.sc-pic.l{left:-2%;--r:-7deg}.sc-pic.r{right:-2%;--r:7deg}
+.sc-l.on .sc-pic{opacity:1;transform:translateY(-50%) rotate(var(--r)) scale(1)}
+.sc-end{min-height:95vh;flex-direction:column}
+.sc-l p.sc-big,.sc-big{opacity:1;transform:none;filter:none;max-width:none;font-family:var(--f-story);font-weight:800;font-size:clamp(46px,9vw,124px);line-height:1.12;letter-spacing:-.03em;text-align:center;color:var(--cream);text-shadow:0 0 34px rgba(31,79,255,.6)}
+.sc-big .w{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(10px);transition:opacity 1.2s ease,filter 1.2s ease,transform 1.2s ease}
+.sc-end.on .sc-big .w{opacity:1;filter:none;transform:none}
+.sc-sub{margin-top:28px;font-family:var(--f-mono);font-size:12px;letter-spacing:.32em;color:rgba(255,252,235,.55);opacity:0;transition:opacity 1.4s ease 2.6s}
+.sc-end.on .sc-sub{opacity:1}
+.scene.dark{background:var(--navy);color:var(--cream)}
+.scene.dark .sc-l p.q{color:#8FA8FF}
+.scene.dark .sc-pic{border-color:rgba(255,252,235,.6);box-shadow:7px 7px 0 var(--blue)}
+/* 문도 불 꺼진 채로 */
+.door{background:var(--navy)!important;color:var(--cream);border-top:0}
+.door .eyebrow{color:var(--sun)}
+.door .door-in .h2{color:var(--cream)}
+.door .door-in .h2 i{color:var(--sun)}
+.door .sec-no{color:transparent;-webkit-text-stroke:1px rgba(255,252,235,.12)}
+.door .choice{box-shadow:5px 5px 0 var(--blue)}
+.door .choice.pk{background:var(--sun);color:var(--navy);box-shadow:5px 5px 0 var(--cream)}
+.dres .fanres{color:var(--cream)}
+@media (max-width:900px){.sc-l{flex-direction:column;min-height:auto;padding:16vh 0}.sc-pic,.sc-pic.l,.sc-pic.r{position:relative;top:auto;left:auto;right:auto;width:62%;margin-bottom:22px;transform:rotate(var(--r)) scale(.4)}.sc-l.on .sc-pic{transform:rotate(var(--r)) scale(1)}.sc-pic.r{align-self:flex-end}.sc-pic.l{align-self:flex-start}.sc-end{min-height:90vh;padding:0}}
+@media (prefers-reduced-motion:reduce){.sc-l p,.sc-pic,.sc-big .w,.sc-sub{transition:none!important;opacity:1!important;transform:none!important;filter:none!important}}
 </style>
 </head>
 <body class="locked">
@@ -1226,6 +1238,25 @@ img{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none}
   </div>
 </section>
 
+<!-- 그날 새벽 -->
+<section class="scene" id="scene" aria-label="그날 새벽">
+  <div class="sc-in">
+    <p class="sc-eye">2034.11.12 · 02:40 · SCROLL B2</p>
+    <div class="sc-l"><span class="sc-pic l"><img alt="" loading="lazy" src="img/wall/w04.jpg"></span><p>문이 열리자 붐박스에서 낮게 깔리던 비트가 멈췄다.</p></div>
+    <div class="sc-l"><p>그래피티 벽, 카세트 더미, 바닥을 기는 네온.</p></div>
+    <div class="sc-l"><span class="sc-pic r"><img alt="" loading="lazy" src="img/wall/w16.jpg"></span><p>이나는 소파 팔걸이에 긴 다리를 걸치고 누워 있었다.</p></div>
+    <div class="sc-l"><p>무대 의상 위에 오버핏 저지를 대충 걸쳤고,<br>메이크업은 반쯤 지워져 있었다.</p></div>
+    <div class="sc-l"><span class="sc-pic l"><img alt="" loading="lazy" src="img/wall/w28.jpg"></span><p class="q">"왔냐. 오늘 예쁘다. 벗으면 더 예쁘겠다."</p></div>
+    <div class="sc-l"><p>늘 하던 소리였다.</p></div>
+    <div class="sc-l"><span class="sc-pic r"><img alt="" loading="lazy" src="img/wall/w33.jpg"></span><p>모니터 한가운데 폴더 하나가 떠 있었다.<br>「LSD」.</p></div>
+    <div class="sc-l"><p>그 아래 자물쇠와 빈 비밀번호 칸.</p></div>
+    <div class="sc-l"><span class="sc-pic l"><img alt="" loading="lazy" src="img/wall/w05.jpg"></span><p>헤드폰이 씌워지고, 앵콜에서 불렀던 그 곡이<br>귓속을 한 줄씩 긁고 지나갔다.</p></div>
+    <div class="sc-l"><p>곡이 끝나도 이나는 웃지 않았다.</p></div>
+    <div class="sc-l"><span class="sc-pic r"><img alt="" loading="lazy" src="img/wall/w15.jpg"></span><p>처음으로, 눈을 피하지 않았다.</p></div>
+    <div class="sc-l sc-end"><p class="sc-big"><span class="w" style="transition-delay:0.0s">"딱</span> <span class="w" style="transition-delay:0.5s">한 번만</span> <span class="w" style="transition-delay:1.0s">해보자."</span></p><span class="sc-sub">웃음이 꺼졌다.</span></div>
+  </div>
+</section>
+
 <!-- 문 -->
 <section class="sec door" id="door">
   <span class="sec-no" aria-hidden="true">13 · DOOR</span>
@@ -1519,29 +1550,19 @@ const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){$$('#
 io2.observe($('#phBody'));
 })();
 
-// 문: 선택 → 첫 장면이 한 줄씩, 훅마다 이미지
-(()=>{const $=s=>document.querySelector(s);const res=$('#dres');if(!res)return;
-const L=[["문이 열리자 붐박스에서 낮게 깔리던 비트가 멈췄다.", "w04"], ["그래피티 벽, 카세트 더미, 바닥을 기는 네온.", null], ["이나는 소파 팔걸이에 긴 다리를 걸치고 누워 있었다.", "w16"], ["무대 의상 위에 오버핏 저지를 대충 걸쳤고, 메이크업은 반쯤 지워져 있었다.", null], ["\"왔냐. 오늘 예쁘다. 벗으면 더 예쁘겠다.\"", "w28"], ["늘 하던 소리였다.", null], ["모니터 한가운데 폴더 하나가 떠 있었다. 「LSD」.", "w33"], ["그 아래 자물쇠와 빈 비밀번호 칸.", null], ["헤드폰이 씌워지고, 앵콜에서 불렀던 그 곡이 귓속을 한 줄씩 긁고 지나갔다.", "w05"], ["곡이 끝나도 이나는 웃지 않았다.", null], ["처음으로, 눈을 피하지 않았다.", "w15"]];
-const RMm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// 그날 새벽: 스크롤 따라 한 줄씩 + 불 꺼짐
+(()=>{const sc=document.getElementById('scene');if(!sc)return;const ls=[...sc.querySelectorAll('.sc-l')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.55,rootMargin:'0px 0px -10% 0px'});
+ls.forEach(l=>io.observe(l));
+const cue=ls[ls.length-3];let raf=0;function paint(){raf=0;sc.classList.toggle('dark',cue.getBoundingClientRect().top<innerHeight*.62);const r=sc.getBoundingClientRect();document.body.classList.toggle('hush',r.top<innerHeight*.5&&r.bottom>innerHeight*.5)}
+addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(paint)},{passive:true});addEventListener('resize',paint);paint();
+})();
+// 문: 선택
+(()=>{const res=document.getElementById('dres');if(!res)return;
 const crack=()=>(document.querySelector('[data-crack]')||{}).href||'#';
-const CTA=()=>'<div class="cta"><a class="btn" href="'+crack()+'" target="_blank" rel="noopener">▶ 크랙에서 시작하기</a><a class="btn alt" href="#story">스토리 다시 보기</a></div>';
-let timers=[];const clear=()=>{timers.forEach(clearTimeout);timers=[]};
-document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{clear();
-  if(b.dataset.c==='fan'){res.innerHTML='<p class="fanres">그럼 오늘도 전광판 앞에서 봐.<br>우리 골댕이, 오늘도 랩 찢는다.</p>'+CTA();return}
-  let side=0;res.innerHTML='<div class="ex">'+L.map(([t],i)=>'<span class="ln'+(t.startsWith('"')?' q':'')+'" data-i="'+i+'">'+t+'</span>').join('')+'</div><p class="slam"><small>— 그리고 —</small>딱 한 번만<br>해보자.</p>';
-  const ex=res.querySelector('.ex'),lines=[...ex.querySelectorAll('.ln')],slamEl=res.querySelector('.slam'),din=document.querySelector('#door .door-in');
-  const wide=()=>innerWidth>1180;
-  const hook=(ln,img)=>{const lr=(side++%2)?'r':'l';const k=document.createElement('span');k.className='hk '+lr;k.style.setProperty('--r',(lr==='l'?-6:6)+'deg');k.innerHTML='<img alt="" src="img/wall/'+img+'.jpg">';ln.after(k);if(wide())k.style.top=(ln.offsetTop-20)+'px';requestAnimationFrame(()=>requestAnimationFrame(()=>k.classList.add('on')))};
-  const follow=el=>{if(wide())return;const r=el.getBoundingClientRect();if(r.bottom>innerHeight-130)scrollBy({top:r.bottom-innerHeight+170,behavior:'smooth'})};
-  if(RMm){lines.forEach((x,i)=>{x.classList.add('on');if(L[i][1])hook(x,L[i][1])});slamEl.classList.add('on');res.insertAdjacentHTML('beforeend',CTA());return}
-  let t=200;lines.forEach((x,i)=>{const img=L[i][1];
-    timers.push(setTimeout(()=>{x.classList.add('on');follow(x)},t));
-    if(img)timers.push(setTimeout(()=>{hook(x,img);setTimeout(()=>follow(x.nextElementSibling),60)},t+380));
-    t+=(img?1500:0)+(x.classList.contains('q')?1300:1000)});
-  t+=900;timers.push(setTimeout(()=>{const r=slamEl.getBoundingClientRect();if(r.top>innerHeight*.5)scrollBy({top:r.top-innerHeight*.32,behavior:'smooth'})},t-700));
-  timers.push(setTimeout(()=>{slamEl.classList.add('on');setTimeout(()=>{din.classList.remove('shake');void din.offsetWidth;din.classList.add('shake');const fl=document.createElement('div');fl.className='dflash';document.body.appendChild(fl);setTimeout(()=>fl.remove(),500)},300)},t));
-  timers.push(setTimeout(()=>res.insertAdjacentHTML('beforeend',CTA()),t+1300));
-}));
+const CTA=()=>'<div class="cta"><a class="btn" href="'+crack()+'" target="_blank" rel="noopener">▶ 크랙에서 시작하기</a><a class="btn alt" href="#scene">그날 새벽 다시 보기</a></div>';
+document.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{
+  res.innerHTML=b.dataset.c==='fan'?'<p class="fanres">그럼 오늘도 전광판 앞에서 봐.<br>우리 골댕이, 오늘도 랩 찢는다.</p>'+CTA():'<p class="fanres">작업실 문, 안 잠갔다.<br><b style="color:var(--blue)">와라.</b></p>'+CTA()}));
 })();
 // 우클릭·드래그 막기
 document.addEventListener('contextmenu',e=>e.preventDefault());

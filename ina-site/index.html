@@ -701,7 +701,7 @@ body.hush .yah{opacity:0;pointer-events:none;transition:opacity .4s}
 .mp-lbl:hover{background:transparent}
 .mp-play{width:58px;height:58px;border-radius:50%;background:var(--sun);color:var(--navy);font-size:20px;box-shadow:0 0 0 4px rgba(255,214,10,.22)}
 .ly-bd .ll{display:block;padding:4px 10px;margin:0 -10px;border-radius:10px;cursor:pointer;transition:color .3s,background .3s,opacity .3s,transform .3s}
-.ly-bd .ll:hover{background:rgba(255,252,235,.07)}
+@media (hover:hover){.ly-bd .ll:hover{background:rgba(255,252,235,.07)}}
 .ly.sync .ly-bd .ll{opacity:.42}
 .ly.sync .ly-bd .ll.on{opacity:1;color:var(--sun);font-weight:800;background:rgba(255,214,10,.12)}
 body.lyo .backbtn,body.lyo .player,body.lyo .yah{opacity:0;pointer-events:none;transition:opacity .25s}
@@ -1540,7 +1540,7 @@ function sync(){const d=song.duration;fill.style.width=(isFinite(d)&&d?song.curr
   const t=TRACKS.find(x=>x.no===cur);const can=t&&isOpen(t)&&LYRICS[cur]&&lyNo===cur;
   $('#ly').classList.toggle('sync',!!can);
   const i=can?idxAt(cur,song.currentTime,d):-1;
-  if(i!==lastI){lastI=i;$$('#lyBd .ll').forEach(x=>x.classList.toggle('on',+x.dataset.i===i));const on=$('#lyBd .ll.on');if(on&&lyOpen){const bd=$('#lyBd');bd.scrollTo({top:on.offsetTop-bd.clientHeight*.38,behavior:'smooth'})}}}
+  if(i!==lastI){lastI=i;$$('#lyBd .ll').forEach(x=>x.classList.toggle('on',+x.dataset.i===i));const on=$('#lyBd .ll.on');if(on&&lyOpen){const bd=$('#lyBd');bd.scrollTo({top:bd.scrollTop+on.getBoundingClientRect().top-bd.getBoundingClientRect().top-bd.clientHeight*.38+on.offsetHeight/2,behavior:'smooth'})}}}
 song.addEventListener('timeupdate',sync);
 song.addEventListener('loadedmetadata',()=>{lastI=-2;sync()});
 $('#lyBd').addEventListener('click',e=>{const l=e.target.closest('.ll');if(!l||!lyNo)return;const n=flat(lyNo).length,i=+l.dataset.i;

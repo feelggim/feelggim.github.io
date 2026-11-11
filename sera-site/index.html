@@ -197,6 +197,11 @@ section.sec{padding-block:clamp(72px,10vw,140px);position:relative}
 .mem.face .go{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:#fff;background:var(--blood);padding:5px 8px;align-self:flex-start;margin-top:14px}
 .mem.face:hover{background:var(--blood)}
 .mem.face:hover .go{background:#000}
+.mem.lk{color:inherit;text-decoration:none;cursor:pointer;transition:background .25s}
+.mem.lk .go{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:#fff;background:var(--ink);padding:5px 8px;align-self:flex-start;margin-top:14px}
+.mem.lk:hover{background:var(--blood);color:#fff}
+.mem.lk:hover .no,.mem.lk:hover .pos{color:rgba(255,255,255,.7)}
+.mem.lk:hover .go{background:#000}
 .trainee{margin-top:18px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;border:1px dashed var(--ink);padding:18px 20px}
 .trainee .no{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em}
 .trainee .t{font-size:14px}
@@ -1053,7 +1058,7 @@ footer .disc{font-size:12px;color:var(--gray2);margin-top:26px;max-width:80ch;li
   <div class="wrap">
     <div class="f">
       <span class="logo"><span class="sym"><i></i></span><span class="word"><b>SCROLL</b><small>ENTERTAINMENT</small></span></span>
-      <div class="links"><a class="crack-back" href="https://share.crack.wrtn.ai/q3s7fc" target="_blank" rel="noopener">← 크랙으로 돌아가기</a><a href="https://feelggim.github.io/ulunni-site/" target="_blank" rel="noopener">LOVES · SEA ↗</a><a href="#hero">TOP ↑</a></div>
+      <div class="links"><a class="crack-back" href="https://share.crack.wrtn.ai/q3s7fc" target="_blank" rel="noopener">← 크랙으로 돌아가기</a><a href="https://feelggim.github.io/ulunni-site/" target="_blank" rel="noopener">LOVES · SEA ↗</a><a href="https://feelggim.github.io/ina-site/" target="_blank" rel="noopener">LOVES · INA ↗</a><a href="#hero">TOP ↑</a></div>
     </div>
     <p class="disc">이 페이지는 창작 스토리 「황세라 : 내 인생을 망치러온 나쁜년」의 세계관 소개용 가상 페이지야. 등장하는 인물, 그룹, 소속사, 기업, 계약 조항은 모두 허구이며 실제와 관계가 없습니다. 등장인물 전원이 성인입니다.</p>
   </div>
@@ -1084,9 +1089,9 @@ $$('.crack-back,#crack').forEach(a=>a.href=CRACK_URL);
 /* ---------- data ---------- */
 const LOVES=[
  {n:'SEORIN',k:'서린 · 한서린',p:'리더 · 메인보컬',h:170,a:25},
- {n:'SEA',k:'세아 · 장세아',p:'비주얼 · 센터 · 그룹의 얼굴',h:174,a:24,face:1},
+ {n:'SEA',k:'세아 · 장세아',p:'비주얼 · 센터 · 그룹의 얼굴',h:174,a:24,face:1,url:'https://feelggim.github.io/ulunni-site/'},
  {n:'CHAEI',k:'채이 · 윤채영',p:'메인댄서',h:167,a:24},
- {n:'INA',k:'이나 · 백이나',p:'메인래퍼 · 리드댄서',h:171,a:23},
+ {n:'INA',k:'이나 · 백이나',p:'메인래퍼 · 리드댄서',h:171,a:23,url:'https://feelggim.github.io/ina-site/'},
  {n:'YUL',k:'율 · 도하율',p:'리드보컬',h:168,a:22},
  {n:'RURI',k:'루리 · 강유리',p:'서브보컬 · 막내',h:165,a:20},
 ];
@@ -1125,8 +1130,8 @@ $('#tick').innerHTML=[...tk,...tk].map(t=>`<span>${t}</span>`).join('');
 
 /* ---------- members ---------- */
 $('#members').innerHTML=LOVES.map((m,i)=>{
- const inner=`<span class="no">LOVES · 0${i+1}${m.face?' · CENTER':''}</span><div><p class="nm">${m.n}</p><p class="kr">${m.k}</p><p class="pos">${m.p}</p>${m.face?'<span class="go">ARTIST PAGE ↗</span>':''}<p class="h"><span>${m.a}세</span><span>${m.h}cm</span></p></div><i class="bar" style="--cm:${m.h}"></i>`;
- return m.face?`<a class="mem face" href="https://feelggim.github.io/ulunni-site/" target="_blank" rel="noopener">${inner}</a>`:`<div class="mem">${inner}</div>`;
+ const inner=`<span class="no">LOVES · 0${i+1}${m.face?' · CENTER':''}</span><div><p class="nm">${m.n}</p><p class="kr">${m.k}</p><p class="pos">${m.p}</p>${m.url?'<span class="go">ARTIST PAGE ↗</span>':''}<p class="h"><span>${m.a}세</span><span>${m.h}cm</span></p></div><i class="bar" style="--cm:${m.h}"></i>`;
+ return m.url?`<a class="mem ${m.face?'face':'lk'}" href="${m.url}" target="_blank" rel="noopener">${inner}</a>`:`<div class="mem">${inner}</div>`;
 }).join('');
 
 /* ---------- height chart ---------- */

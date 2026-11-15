@@ -1444,7 +1444,7 @@ body.fin-on #finale .fcontent{padding-bottom:70px}
 .tl li.now{position:relative}
 }
 
-</style>
+.gate .knock.nudge{animation:knud 1.1s ease}@keyframes knud{0%,100%{opacity:1;transform:none}20%{transform:translateX(-6px);color:#9ff2c4}40%{transform:translateX(6px)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}</style>
 </head>
 <body class="clean nobars">
 <div class="aged" aria-hidden="true"></div>
@@ -1731,7 +1731,7 @@ function go(i){
 function decoSync(){const t=shots[cur];const on=!(t.classList.contains('scene')||t.classList.contains('paperwrap')||t.classList.contains('punch')||t.classList.contains('world')||t.classList.contains('worldpage'))&&(cur>0||opened);document.body.classList.toggle('deco-on',on);const y=t.dataset.year||'';const sc=t.classList.contains('scene');document.body.classList.toggle('old',sc);document.body.classList.toggle('older',sc&&/^191/.test(y));}
 const gate=document.querySelector('.gate');let opened=false;
 function openGate(direct){if(opened)return true;opened=true;setTimeout(()=>document.body.classList.remove('clean'),900);gate.classList.add('go');lock=Date.now()+1800;if(direct!==false){gate.classList.add('direct');setTimeout(()=>enter(true),1250);}else setTimeout(decoSync,1400);return false;}
-function step(d){if(!openGate())return;if(cur===0)return;const now=Date.now();if(now-lock<1100)return;lock=now;if(window.lineStep&&lineStep(d))return;go(cur+d);}
+function step(d){if(!opened){const k=document.querySelector('.gate .knock');if(k){k.classList.remove('nudge');void k.offsetWidth;k.classList.add('nudge');}return;}if(cur===0)return;const now=Date.now();if(now-lock<1100)return;lock=now;if(window.lineStep&&lineStep(d))return;go(cur+d);}
 gate.addEventListener('click',e=>{if(!opened){e.stopPropagation();openGate();}});
 
 // 장면 이미지: img/<이름>.webp|jpg|png 가 있으면 그림으로, 없으면 색면 그대로
@@ -1756,7 +1756,7 @@ function crackle(len,vol){if(!actx||bgm.paused)return;const n=actx.sampleRate*le
 function cutFx(){if(calm)return;document.body.classList.remove('cutting');void document.body.offsetWidth;document.body.classList.add('cutting');setTimeout(()=>document.body.classList.remove('cutting'),520);}
 
 // 글씨 이미지: img/logo, img/frame 이 있으면 타이틀과 장 카드 테두리를 그림으로 바꾼다
-function probe(name,cb){const exts=['webp','png','jpg'];let i=0;const t=()=>{if(i>=exts.length)return;const im=new Image();const u='img/'+name+'.'+exts[i++];im.onload=()=>cb(u);im.onerror=t;im.src=u;};t();}
+function probe(name,cb){const exts=['jpg','png','webp'];let i=0;const t=()=>{if(i>=exts.length)return;const im=new Image();const u='img/'+name+'.'+exts[i++];im.onload=()=>cb(u);im.onerror=t;im.src=u;};t();}
 probe('logo',u=>document.querySelectorAll('.gate h1,.final h1').forEach(h=>{h.innerHTML='<img class="logo-img" src="'+u+'" alt="The Great Eve">';h.closest('.shot').classList.add('has-logo');}));
 probe('ornament',u=>document.querySelectorAll('.fan').forEach(f=>{const im=document.createElement('img');im.className='fan-img';im.alt='';im.src=u;f.replaceWith(im);}));
 probe('s00_bay',u=>{const d=document.querySelector('.dock');d.style.background='#05070a url('+u+') center/cover no-repeat';d.classList.add('has-bay');d.closest('.gate').classList.add('bay');});

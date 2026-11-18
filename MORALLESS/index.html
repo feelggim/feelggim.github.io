@@ -491,6 +491,19 @@ body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 img,video,canvas{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none;pointer-events:auto}
 input,textarea,[contenteditable],#pf{-webkit-user-select:text;user-select:text}
 
+.nest{margin-top:40px;padding:26px 28px;border-left:2px solid var(--blue);border-radius:0;background:rgba(0,83,217,.04)}
+.nest .nest-k{font-family:"DM Mono","IBM Plex Sans KR",monospace;font-size:11px;letter-spacing:.16em;color:var(--blue);margin:0 0 10px}
+.nest h3{font-family:"Noto Serif KR",serif;font-weight:400;font-size:22px;margin:0 0 10px}
+.nest p:last-child{margin:0;line-height:1.9;color:var(--ink)}
+
+.sys-tip{grid-column:1/-1;display:flex;gap:28px;align-items:baseline;padding:26px 28px;margin-top:-1px;border-left:2px solid var(--blue);border-radius:0;background:rgba(0,83,217,.04)}
+.sys-tip .tip-k{flex:none;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--blue)}
+.sys-tip p{margin:0;font-size:14.5px;line-height:1.85;color:var(--ink)}
+.sys-tip em{font-style:normal;color:var(--blue)}
+.sys-tip small{font-size:12.5px;color:var(--gray)}
+.nest .nest-tip{margin-top:14px!important;font-size:13.5px;color:var(--blue)!important}
+@media (max-width:900px){.sys-tip{flex-direction:column;gap:10px}}
+
 /* ---------- SNAP (home only) ---------- */
 html.snap{scroll-snap-type:y mandatory}
 html.snap #home>section{min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;padding:96px 0 56px;border-top:0}
@@ -673,7 +686,7 @@ html:not(.snap):not(.fp) .dots{display:none}
         <p class="fm-hook">한 시간이면 충분해.<br><span>아무 일 없던 얼굴로 돌아가기엔.</span></p>
       </div>
       <div class="fm">
-        <div class="fm-info">📅 11.17(월)｜🌧 비<br>📍 남매 집 거실｜🕰 오후 9:12｜<span class="b">⏳ 현우 도착까지 60분</span>｜<span class="y">🔔3</span></div>
+        <div class="fm-info">[ #1｜📅2031.11.17(월)｜🕐21:12｜🌧비｜📍남매 집 거실｜<span class="b">⏳현우 60분</span>｜<span class="y">🔔3</span> ]</div>
         <p class="nar">현관문이 열리자 빗소리가 먼저 들어왔다.</p>
         <p class="nar">재인은 젖은 우산을 접었다. 손끝에 파란 물감이 아직 남아 있었다.</p>
         <p class="say"><b>재인</b>"현우 늦는대. 마감 대타."</p>
@@ -819,9 +832,9 @@ html:not(.snap):not(.fp) .dots{display:none}
         <div class="sys-item"><div class="ico">🔔</div><h3>위기</h3><p>숫자가 1이 되면 다음 턴에 무슨 일이 생깁니다. 도어락, 전화, 초인종. 대부분은 별일 아닙니다. 가끔은 진짜입니다. 비가 그치는 순간도 위기입니다.</p></div>
         <div class="sys-item"><div class="ico">⏳</div><h3>남은 시간</h3><p>오빠가 집에 도착하기까지 남은 시간입니다. 장면이 진행될수록 줄어듭니다.</p></div>
         <div class="sys-item"><div class="ico">◐</div><h3>스탯</h3><p><strong style="color:var(--blue);font-weight:500">시트러스</strong> 언니가 얼마나 무너졌는지 · <strong style="color:var(--ink);font-weight:500">도어락</strong> 오빠가 얼마나 눈치챘는지 · <strong style="color:var(--ink);font-weight:500">넘은 밤</strong></p></div>
+        <div class="sys-tip"><span class="tip-k">TIP · 히트가 오면</span><p>언니 셔츠 한 장을 몰래 가져가서 <em>둥지</em>를 지어 보세요. 그걸 발견한 언니가 어떤 얼굴을 하는지는, 직접 확인하세요.<br><small>단, 오빠 눈에 띄면 도어락이 오릅니다.</small></p></div>
       </div>
-      <div class="info-sample" aria-label="인포 블럭 예시">📅 11.17(월)｜🌧 비
-📍 남매 집 거실｜🕰 오후 9:12｜<span class="b">⏳ 현우 도착까지 60분</span>｜<span class="y">🔔3</span></div>
+      <div class="info-sample" aria-label="인포 블럭 예시">[ #1｜📅2031.11.17(월)｜🕐21:12｜🌧비｜📍남매 집 거실｜<span class="b">⏳현우 60분</span>｜<span class="y">🔔3</span> ]</div>
       <p class="hint">엔딩 2종. 12월 24일, 무슨 일이 있습니다.</p>
     </div>
   </section>
@@ -909,6 +922,12 @@ html:not(.snap):not(.fp) .dots{display:none}
           <li>러트 동조: 우성 알파 하나가 러트에 들면 근처의 우성 알파도 끌려든다.</li>
           <li>우성일수록 주기가 세고, 참을수록 크게 무너진다.</li>
         </ul>
+        <div class="nest">
+          <p class="nest-k">NEST · 우성 오메가만</p>
+          <h3>둥지</h3>
+          <p>히트가 오기 전후, 우성 오메가는 마음에 둔 사람의 냄새가 밴 옷과 이불을 몰래 모아 둥지를 짓는다. 열성과 베타에게는 없는 습성이다. 셔츠 한 장이 사라졌다면, 어디로 갔는지는 대개 짐작이 간다.</p>
+          <p class="nest-tip">히트가 오면 언니 셔츠로 둥지를 지어 보세요. 언니의 반응은 직접.</p>
+        </div>
       </section>
 
       <section class="chapter" id="w-cycle">
@@ -921,6 +940,7 @@ html:not(.snap):not(.fp) .dots{display:none}
             <tr><td>러트</td><td>알파</td><td>알파의 주기. 소유욕과 공격성이 함께 오른다.</td></tr>
             <tr><td>억제제</td><td>공통</td><td>복용하는 약. 주기를 조절하고 늦춘다.</td></tr>
             <tr><td>차단제</td><td>공통</td><td>초커나 패치. 목덜미의 향을 막는다. 우성에게는 완벽하지 않다.</td></tr>
+            <tr><td>둥지</td><td>우성 오메가</td><td>히트 전후, 좋아하는 사람의 냄새가 밴 옷과 이불을 모아 짓는 잠자리.</td></tr>
           </tbody>
         </table></div>
       </section>
@@ -943,6 +963,7 @@ html:not(.snap):not(.fp) .dots{display:none}
         <ul class="rules">
           <li>결속에 필요한 몸은 우성 여성 알파에게만 온전히 발달한다. 열성 여성 알파에게는 흔적만 희미하다.</li>
           <li>임신은 알파와 오메가 사이에서만 가능하다. 품는 쪽은 언제나 오메가다. 남자 오메가도 품을 수 있다.</li>
+          <li>남자 오메가는 체내에 자궁이 있다. 평소엔 닫혀 있다가 히트 때 열린다.</li>
           <li>그 밖의 조합에서는 임신이 일어나지 않는다.</li>
         </ul>
       </section>
@@ -1022,6 +1043,7 @@ html:not(.snap):not(.fp) .dots{display:none}
           <div><dt>러트 동조</dt><dd>우성 알파의 러트가 근처 우성 알파에게 번지는 것.</dd></div>
           <div><dt>억제제</dt><dd>먹는 약. 주기 조절.</dd></div>
           <div><dt>차단제</dt><dd>초커 · 패치. 향 차단.</dd></div>
+          <div><dt>둥지</dt><dd>우성 오메가가 히트 전후 짓는 잠자리. 그 사람의 옷으로.</dd></div>
           <div><dt>각인</dt><dd>목덜미 결속. 혼인에 준한다.</dd></div>
           <div><dt>파트너십</dt><dd>법제화된 동성 결합.</dd></div>
           <div><dt>숙려</dt><dd>해지 신청 후 30일.</dd></div>

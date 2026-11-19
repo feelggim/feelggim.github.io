@@ -565,6 +565,47 @@ html:not(.snap):not(.fp) .dots{display:none}
   *{animation:none!important;transition:none!important}
   .rain{display:none}
 }
+
+/* ---------- PLACES ---------- */
+#places .pl-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+#places .pl-lede{color:var(--gray);font-size:14.5px;max-width:420px;margin-top:14px}
+.pl-nav{display:flex;gap:8px}
+.pl-nav button{width:44px;height:44px;border:1px solid var(--line);font-family:var(--f-mono);font-size:14px;color:var(--ink);transition:border-color .3s,color .3s}
+.pl-nav button:hover{border-color:var(--blue);color:var(--blue)}
+.pl-strip{margin-right:calc(50% - 50vw);padding-right:6vw;display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:34px;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--blue) transparent;-webkit-overflow-scrolling:touch}
+.pl-strip::-webkit-scrollbar{height:3px}.pl-strip::-webkit-scrollbar-thumb{background:var(--blue)}
+.pl-card{flex:0 0 min(560px,78vw);scroll-snap-align:start;position:relative}
+.pl-card .zoom{display:block;width:100%;position:relative;overflow:hidden}
+.pl-card img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform 1.6s cubic-bezier(.2,.6,.2,1)}
+.pl-card:hover img{transform:scale(1.035)}
+.pl-tag{position:absolute;left:16px;top:16px;background:rgba(253,253,255,.94);padding:12px 16px 11px;box-shadow:0 6px 18px rgba(40,45,70,.12);min-width:170px;pointer-events:none}
+.pl-tag .n,.pl-tag .p,.pl-tag .t,.pl-tag .e{display:block}
+.pl-tag .n{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.18em;color:var(--gray)}
+.pl-tag .p{font-family:var(--f-story);font-size:16px;font-weight:500;color:var(--ink);margin-top:3px;line-height:1.35}
+.pl-tag .t{font-family:var(--f-story);font-size:12px;color:#4a4c58;margin-top:2px}
+.pl-tag .e{font-family:var(--f-display);font-style:italic;font-size:11.5px;color:var(--gray)}
+.pl-tag .u{display:flex;align-items:center;gap:6px;margin-top:7px}.pl-tag .u i{width:18px;height:1.5px;background:var(--blue)}.pl-tag .u b{width:5px;height:5px;border-radius:50%;background:var(--yellow)}
+.pl-line{font-family:var(--f-story);font-size:13.5px;color:#4a4c58;margin-top:12px;line-height:1.7;padding-left:14px;border-left:1px solid var(--line)}
+html.fp .pl-card{flex-basis:min(520px,40vw)}
+
+/* ---------- NEW YORK ---------- */
+.ny-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:36px}
+.ny-ph{border:1px solid var(--line);background:var(--white);padding:10px 10px 14px;transition:transform .5s cubic-bezier(.2,.6,.2,1)}
+.ny-ph:nth-child(odd){transform:rotate(-1.2deg)}.ny-ph:nth-child(even){transform:rotate(1deg) translateY(14px)}
+.ny-ph:hover{transform:none}
+.ny-ph img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.ny-ph .bub{margin-top:12px;font-size:13px;line-height:1.55;color:var(--ink)}
+.ny-ph .bub b{display:block;font-family:var(--f-mono);font-weight:400;font-size:9.5px;letter-spacing:.16em;color:var(--gray);margin-bottom:3px}
+.ny-ph .bub span{display:inline-block;background:var(--paper);border-radius:2px 12px 12px 12px;padding:7px 11px}
+.ny-note{font-size:13px;color:var(--gray);margin-top:40px}
+html.fp .ny-grid{max-width:900px}
+@media (max-width:760px){.ny-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- JAEIN : do / don't ---------- */
+.jx-dd{list-style:none;margin-top:22px;border-top:1px solid var(--line)}
+.jx-dd li{display:grid;grid-template-columns:1fr;gap:2px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
+.jx-dd li b{font-family:var(--f-story);font-weight:500;color:var(--ink)}
+.jx-dd li span{color:var(--gray)}
 </style>
 </head>
 <body>
@@ -574,7 +615,7 @@ html:not(.snap):not(.fp) .dots{display:none}
   <div class="rain" aria-hidden="true" id="rain"></div>
   <button type="button" class="snd" id="snd" aria-pressed="false"><span class="w" aria-hidden="true"><i></i><i></i><i></i></span><span id="sndl">빗소리 켜기</span></button>
   <div class="phone">
-    <div class="banner" id="banner" aria-live="polite"><span class="dot"></span><div><b>현우</b> · 자기야 미안ㅠ 마감 대타 잡혔어. 한 시간만!</div></div>
+    <div class="banner" id="banner" aria-live="polite"><span class="dot"></span><div><b>현우</b> · 이따 10시에 영상통화! 언니도 같이 나와줘ㅎㅎ</div></div>
     <div class="ph-top">
       <img src="assets/jaein.webp" alt="재인 프로필 사진">
       <div><div class="ph-name">재인 언니</div><div class="ph-sub">CITRUS · SPICE</div></div>
@@ -647,15 +688,15 @@ html:not(.snap):not(.fp) .dots{display:none}
       <article class="rp" aria-label="형질 판정 결과 통보서">
         <header class="rp-head">
           <div><span class="rp-org">서울형질판정소</span><h3>형질 판정 결과 통보서</h3></div>
-          <span class="rp-no">No. 2031-1110-0417</span>
+          <span class="rp-no">No. 2031-1118-0417</span>
         </header>
         <dl class="rp-rows">
           <div><dt>성명</dt><dd class="blank">　　　　　　</dd></div>
           <div><dt>나이 / 성별</dt><dd>23 / 여</dd></div>
-          <div><dt>판정일</dt><dd>2031. 11. 10 (월)</dd></div>
+          <div><dt>판정일</dt><dd>2031. 11. 18 (화)</dd></div>
           <div><dt>기존 기록</dt><dd>베타 (2021, 정기 검사)</dd></div>
           <div class="res"><dt>판정 결과</dt><dd><mark>우성 오메가</mark></dd></div>
-          <div><dt>비고</dt><dd>성인기 늦은 발현. 향 발산 범위 넓음. 차단제 단독으로 차단 불충분.</dd></div>
+          <div><dt>비고</dt><dd>성인기 늦은 발현(전날 밤 첫 히트로 내원). 향 발산 범위 넓음. 차단제 단독으로 차단 불충분.</dd></div>
           <div><dt>처방</dt><dd>억제제 1일 1회 · 차단 패치 2매 · 첫 히트 주기 불안정 주의</dd></div>
         </dl>
         <footer class="rp-foot">위와 같이 판정되었음을 통보합니다. 형질 변경은 재판정 없이 확정됩니다.</footer>
@@ -669,11 +710,11 @@ html:not(.snap):not(.fp) .dots{display:none}
       <div class="label"><b>02</b> · 시작</div>
       <div class="op-text">
         <p>2031년 11월, 서울. 비가 잦은 늦가을.</p>
-        <p>부모님은 뉴욕에 있고, 서울 집엔 오빠 서현우와 둘뿐. 이 집 도어락 번호를 아는 사람이 하나 더 있다. 오빠의 2년 차 여자친구, 류재인.</p>
-        <p>숏컷에 말수 적고 웃음도 적은 언니. 그런데 나한테만은 이상하게 편했다. 밥 안 먹었다고 잔소리하고, 소파에서 같이 뒹굴고, 아무렇지 않게 팔짱을 꼈다.</p>
-        <p>그런데 늦은 발현이 왔다. 며칠은 아무 일 없었다.</p>
-        <p>그리고 오늘, 첫 히트가 왔다. 억제제를 삼키고 아무렇지 않은 척했다. 오빠는 알바가 늦게 끝난다고 했다.</p>
-        <p class="op-last">도어락 소리가 났다.<br><em>먼저 들어온 건 언니였다.</em></p>
+        <p>스물셋이 될 때까지 베타인 줄 알고 살았다. 부모님은 뉴욕에 있고, 오빠 서현우도 아빠 회사 일을 도우러 떠났다. 크리스마스이브에 돌아온다.</p>
+        <p>떠나던 날 오빠는 자기 여자친구에게 부탁했다. "나 없는 동안 동생 좀 챙겨줘. 우리 집에서 지내도 돼." 그래서 언니가, 류재인이 오빠 방에서 지내기 시작했다.</p>
+        <p>일주일은 아무 일도 없었다. 같이 밥을 먹고, 소파에서 뒹굴고, 밤마다 언니는 거실에서 나를 그렸다. 사람은 안 그린다던 사람이었다.</p>
+        <p>오늘 밤도 그랬다. 그런데 몸이 이상했다. 열이 오르고, 목덜미가 뜨겁고, 숨이 자꾸 짧아졌다. 베타인 줄 알았던 몸이 처음으로 터지고 있었다.</p>
+        <p class="op-last">밤 10시엔 오빠와 영상통화.<br><em>한 시간 남았다.</em></p>
       </div>
     </div>
   </section>
@@ -682,22 +723,22 @@ html:not(.snap):not(.fp) .dots{display:none}
     <div class="wrap fm-grid">
       <div class="fm-side">
         <div class="label"><b>03</b> · 첫 장면</div>
-        <h2 class="h2">오후 9시 12분.<br>현우 도착까지 <em class="bl">60분</em>.</h2>
+        <h2 class="h2">오후 9시.<br>영상통화까지 <em class="bl">60분</em>.</h2>
         <p class="fm-hook">한 시간이면 충분해.<br><span>아무 일 없던 얼굴로 돌아가기엔.</span></p>
       </div>
       <div class="fm">
-        <div class="fm-info">[ #1｜📅2031.11.17(월)｜🕐21:12｜🌧비｜📍남매 집 거실｜<span class="b">⏳현우 60분</span>｜<span class="y">🔔3</span> ]</div>
-        <p class="nar">현관문이 열리자 빗소리가 먼저 들어왔다.</p>
-        <p class="nar">재인은 젖은 우산을 접었다. 손끝에 파란 물감이 아직 남아 있었다.</p>
-        <p class="say"><b>재인</b>"현우 늦는대. 마감 대타."</p>
-        <p class="msg-line">💬 현우 "자기야 미안ㅠ 한 시간만! 먼저 먹고 있어"</p>
-        <p class="nar">공기 속에 무언가가 있었다. 흰 꽃을 손바닥으로 비볐을 때 남는 것 같은, 차고 단 냄새.</p>
-        <p class="say"><b>재인</b>"…너 약 먹었어?"</p>
-        <p class="nar">시트러스 향이 한 번 짙어졌다가, 숨을 삼키는 소리와 함께 가라앉았다.</p>
+        <div class="fm-info">[ #1｜📅2031.11.17(월)｜🕐21:00｜🌧비｜📍남매 집 거실｜<span class="b">⏳영상통화 60분</span>｜<span class="y">🔔3</span> ]</div>
+        <p class="nar">거실 불은 꺼져 있었다. 이젤 옆 스탠드 하나가 소파 쪽에만 빛을 고이게 했다.</p>
+        <p class="nar">재인은 연필을 팔 끝까지 뻗고 한쪽 눈을 감았다. 일주일째 하는 일이었다. 그런데 오늘은 시선이 연필보다 느리게 따라왔다.</p>
+        <p class="msg-line">💬 현우 "이따 10시 영상통화! 언니도 같이 나와줘ㅎㅎ"</p>
+        <p class="nar">마른 붓끝이 종이 위를 한 번 쓸었다. 목덜미에서 어깨로 떨어지는 자리였다. 거기서 붓이 멈췄다.</p>
+        <p class="nar">공기 속에 무언가가 있었다. 2년 동안 한 번도 맡아본 적 없는 냄새였다.</p>
+        <p class="say"><b>재인</b>"…너, 베타 아니야."</p>
+        <p class="nar">이젤 다리가 바닥을 긁었고, 흔들린 스탠드에 빛이 벽을 한 번 쓸고 지나갔다.</p>
         <p class="say"><b>재인</b>"아니. 대답하지 마."</p>
         <p class="nar">재인은 베란다 창을 끝까지 열었다. 냄새는 그대로였다.</p>
         <p class="say"><b>재인</b>"춥지. 미안."</p>
-        <p class="nar end">창틀을 쥔 손등에 핏줄이 섰다. 창밖은 온통 젖어 있었다.</p>
+        <p class="nar end">오빠 방 문은 열려 있었고, 그 너머로 재인의 짐 가방이 보였다.</p>
       </div>
     </div>
   </section>
@@ -708,7 +749,7 @@ html:not(.snap):not(.fp) .dots{display:none}
         <div class="label"><b>04</b> · 유저 프로필</div>
         <h2 class="h2">당신은 오늘,<br><em class="bl">우성 오메가</em>가 됐다.</h2>
         <p class="pf-note">「매니악」, 「멜팅다운」에서 쓰던 프로필을 그대로 가져와도 됩니다.<br>아래 네 가지만 이 작품에 맞춰 주세요.</p>
-        <ul class="pf-fix"><li>23세</li><li>여성</li><li>우성 오메가 · 늦은 발현</li><li>서현우의 친동생</li></ul>
+        <ul class="pf-fix"><li>23세</li><li>여성</li><li>우성 오메가 · 늦은 발현</li><li>서현우의 의붓동생</li></ul>
       </div>
       <div class="pf-box">
         <img class="mk mk-pf" src="assets/marks/print.png" alt="" aria-hidden="true">
@@ -720,8 +761,7 @@ html:not(.snap):not(.fp) .dots{display:none}
 향: (예: 젖은 흰 꽃, 갓 빤 이불)
 외형:
 성격:
-관계: 서현우의 친동생. 재인 언니와는 베타인 줄 알던 시절부터 편하게 지낸 사이
-백화여대: 미재학 / 입학 예정 (택1)</pre>
+관계: 서현우의 의붓동생(10살 때부터 같이 자람). 재인 언니와는 베타인 줄 알던 시절부터 편하게 지낸 사이</pre>
         <p class="pf-done" id="copied" aria-live="polite"></p>
       </div>
     </div>
@@ -731,16 +771,16 @@ html:not(.snap):not(.fp) .dots{display:none}
     <div class="jx-bg" aria-hidden="true">JAEIN</div>
     <div class="wrap jx-grid">
       <figure class="jx-img">
-        <button type="button" class="zoom" data-full="assets/jaein-full.png" aria-label="재인 이미지 크게 보기"><img src="assets/jaein.webp" alt="애쉬그레이 숏컷에 파란 눈의 류재인, 검은 코트를 걸치고 팔에 턱을 괴고 있다" loading="lazy"><span class="zoom-hint">CLICK · 크게 보기</span></button>
+        <button type="button" class="zoom" data-full="assets/jaein-full.png" aria-label="재인 이미지 크게 보기"><img src="assets/jaein.webp" alt="푸른빛 도는 애쉬그레이 숏컷에 파란 눈의 류재인, 검은 코트를 걸치고 팔에 턱을 괴고 있다" loading="lazy"><span class="zoom-hint">CLICK · 크게 보기</span></button>
         <img class="mk mk-jx" src="assets/marks/print.png" alt="" aria-hidden="true">
         <figcaption class="jx-tag"><span class="dot"></span>DOMINANT ALPHA ♀ · 0.5%</figcaption>
         <dl class="jx-spec">
-          <div><dt>AGE</dt><dd>25</dd></div>
+          <div><dt>AGE · BIRTH</dt><dd>25 · 03.17</dd></div>
           <div><dt>HEIGHT</dt><dd>172</dd></div>
           <div><dt>SCHOOL</dt><dd>백화여대 회화과</dd></div>
           <div><dt>STUDIO</dt><dd>성수동</dd></div>
           <div><dt>BLOOD</dt><dd>혼혈 · 3대 화가 집안</dd></div>
-          <div><dt>LOVER</dt><dd>서현우 · 2년</dd></div>
+          <div><dt>LOVER</dt><dd>서현우 · 2년 (뉴욕)</dd></div>
         </dl>
       </figure>
       <div class="jx-text">
@@ -749,8 +789,13 @@ html:not(.snap):not(.fp) .dots{display:none}
         <p class="jx-en">Ryu Jaein</p>
         <div class="jx-scent"><span>CITRUS</span><i></i><span>SPICE</span></div>
         <p class="jx-state">말은 무너지지 않는다.<br><em>무너지는 건 손이다.</em></p>
-        <p class="jx-body">말이 짧고 웃음이 적다. 챙기는 건 늘 행동으로 한다. 상스러운 말은 끝까지 쓰지 않는다. 우성 알파 여성은 남자 오메가와 맺어지는 게 맞다고, 오래 그렇게 믿어 왔다.</p>
-        <blockquote class="jx-quote">"춥지. 미안. 내가 지금 좀 그래서."<cite>11.17 · 21:12 · 거실 창가</cite></blockquote>
+        <p class="jx-body">말이 짧고 웃음이 적다. 눈치가 빠르고 손이 야무지다. 챙기는 건 늘 행동으로 한다. 우성 알파 여성은 남자 오메가와 맺어지는 게 맞다고, 오래 그렇게 믿어 왔다. 그 믿음이 틀렸다는 걸 알게 된 건 첫날밤이었다. 그걸 인정하는 건, 또 다른 문제다.</p>
+        <ul class="jx-dd">
+          <li><b>사랑한다는 말은 하지 않는다.</b><span>대신 네가 먹을 걸 먼저 시켜 둔다.</span></li>
+          <li><b>"향 때문이야."</b><span>그 말이 설명하는 게 날마다 조금씩 줄어든다.</span></li>
+          <li><b>나가려는 너를 붙잡는다.</b><span>놓으라면 놓는다. 그래도 대화는 끝내지 않는다.</span></li>
+        </ul>
+        <blockquote class="jx-quote">"춥지. 미안. 내가 지금 좀 그래서."<cite>11.17 · 21:02 · 거실 창가</cite></blockquote>
       </div>
     </div>
   </section>
@@ -824,24 +869,66 @@ html:not(.snap):not(.fp) .dots{display:none}
     </div>
   </section>
 
+  <section class="block" id="places">
+    <div class="wrap">
+      <div class="pl-head">
+        <div>
+          <div class="label"><b>07</b> · 장소</div>
+          <h2 class="h2">같은 집, 다른 밤.</h2>
+          <p class="pl-lede">오빠가 떠난 집. 언니는 오빠 방에서 자고, 나는 내 방에서 잔다. 처음 일주일은 그랬다.</p>
+        </div>
+        <div class="pl-nav"><button type="button" data-dir="-1" aria-label="이전 장소">←</button><button type="button" data-dir="1" aria-label="다음 장소">→</button></div>
+      </div>
+      <div class="pl-strip" id="plstrip">
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/livingroom.webp" aria-label="남매 집 거실 크게 보기"><img src="assets/places/livingroom.webp" alt="남매 집 거실 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 01 · NIGHT</span><span class="p">남매 집 거실</span><span class="t">「기대어 둔 파랑」</span><span class="e">Blue, Leaning</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">이젤과 스탠드 하나. 첫 장면이 시작되는 곳.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/hallway.webp" aria-label="남매 집 복도 크게 보기"><img src="assets/places/hallway.webp" alt="남매 집 복도 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 02 · NIGHT</span><span class="p">남매 집 복도</span><span class="t">「한 뼘 더 어두운 곳」</span><span class="e">One Shade Darker</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">거실 불빛이 마룻바닥 끝에서 멈춘다.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/hisroom.webp" aria-label="현우의 방 크게 보기"><img src="assets/places/hisroom.webp" alt="현우의 방 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 03 · NIGHT</span><span class="p">현우의 방</span><span class="t">「엎어 둔 액자」</span><span class="e">The Frame Face-Down</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">언니가 지내는 방. 남의 방에 풀어 둔 짐.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/nest.webp" aria-label="나의 방 크게 보기"><img src="assets/places/nest.webp" alt="나의 방 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 04 · NIGHT</span><span class="p">나의 방</span><span class="t">「빌려 온 셔츠」</span><span class="e">The Borrowed Shirt</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">히트가 오는 밤, 몰래 가져온 셔츠 한 장.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/bath.webp" aria-label="욕실 크게 보기"><img src="assets/places/bath.webp" alt="욕실 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 05 · NIGHT</span><span class="p">욕실</span><span class="t">「김 서린 파랑」</span><span class="e">Blue under Steam</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">열을 식히러 들어간다. 잘 식지 않는다.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/kitchen.webp" aria-label="주방 크게 보기"><img src="assets/places/kitchen.webp" alt="주방 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 06 · MORNING</span><span class="p">주방</span><span class="t">「미열의 아침」</span><span class="e">Morning of a Low Fever</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">약통, 체온계, 식은 죽. 누가 챙겼는지는 안다.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/door.webp" aria-label="현관 크게 보기"><img src="assets/places/door.webp" alt="현관 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 07 · DOOR LOCK</span><span class="p">현관</span><span class="t">「비밀번호를 아는 사람」</span><span class="e">Who Knows the Code</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">번호를 아는 사람은 둘뿐이다.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/studio.webp" aria-label="성수동 작업실 크게 보기"><img src="assets/places/studio.webp" alt="성수동 작업실 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 08 · DAY</span><span class="p">성수동 작업실</span><span class="t">「덮어 둔 것」</span><span class="e">The Covered</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">북향 창, 테레빈유. 천을 걷은 적 없는 캔버스.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/car.webp" aria-label="재인의 차 크게 보기"><img src="assets/places/car.webp" alt="재인의 차 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 09 · NIGHT</span><span class="p">재인의 차</span><span class="t">「핸들 위의 한 획」</span><span class="e">A Stroke on the Wheel</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">판정 다음 날, 병원 가는 길.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/store.webp" aria-label="골목 편의점 크게 보기"><img src="assets/places/store.webp" alt="골목 편의점 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 10 · RAIN</span><span class="p">골목 편의점</span><span class="t">「두고 간 우산」</span><span class="e">Left Behind</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">억제제 사러 나간 밤의 우산.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/airport.webp" aria-label="인천공항 입국장 크게 보기"><img src="assets/places/airport.webp" alt="인천공항 입국장 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 11 · 12.24</span><span class="p">인천공항 입국장</span><span class="t">「아직 열리지 않은 문」</span><span class="e">The Door Not Yet Open</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">크리스마스이브. 오빠가 돌아온다.</figcaption></figure>
+        <figure class="pl-card"><button type="button" class="zoom" data-full="assets/places/dinner.webp" aria-label="강변 레스토랑 크게 보기"><img src="assets/places/dinner.webp" alt="강변 레스토랑 배경" loading="lazy"><span class="pl-tag"><span class="n">No. 12 · 12.24</span><span class="p">강변 레스토랑</span><span class="t">「열지 않은 상자」</span><span class="e">The Unopened Box</span><span class="u"><i></i><b></b></span></span></button><figcaption class="pl-line">서류와 반지가 기다리는 자리.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="newyork">
+    <div class="wrap">
+      <div class="label"><b>08</b> · 뉴욕</div>
+      <h2 class="h2">오빠는 매일 아침,<br>사진을 보낸다.</h2>
+      <div class="ny-grid">
+        <div class="ny-ph"><img src="assets/ny/morning.webp" alt="뉴욕 호텔 창가의 파란 슬리브 커피" loading="lazy"><p class="bub"><b>현우 · 08:02</b><span>여긴 이제 아침이야. 거기 비 와?</span></p></div>
+        <div class="ny-ph"><img src="assets/ny/snow.webp" alt="뉴욕 거리의 첫눈" loading="lazy"><p class="bub"><b>현우 · 07:41</b><span>첫눈 왔다! 동생 사진 좀 보내줘ㅎㅎ</span></p></div>
+        <div class="ny-ph"><img src="assets/ny/office.webp" alt="뉴욕 회의실의 파란 폴더와 서류" loading="lazy"><p class="bub"><b>현우 · 23:15</b><span>오늘도 서류 산. 10시 통화 조금 늦을 듯</span></p></div>
+        <div class="ny-ph"><img src="assets/ny/parcel.webp" alt="파란 리본으로 묶은 소포" loading="lazy"><p class="bub"><b>현우 · 09:30</b><span>택배 보냈어. 언니랑 같이 열어봐!</span></p></div>
+      </div>
+      <p class="ny-note">오빠는 이 집에 오지 않는다. 메시지와 화면으로만 온다. 그리고 아무것도 모른다.</p>
+    </div>
+  </section>
+
   <section class="block" id="system">
     <div class="wrap">
-      <div class="label"><b>07</b> · 플레이</div>
+      <div class="label"><b>09</b> · 플레이</div>
       <h2 class="h2">빗소리가 덮어 주는 동안만.</h2>
       <div class="sys-grid">
-        <div class="sys-item"><div class="ico">🔔</div><h3>위기</h3><p>숫자가 1이 되면 다음 턴에 무슨 일이 생깁니다. 도어락, 전화, 초인종. 대부분은 별일 아닙니다. 가끔은 진짜입니다. 비가 그치는 순간도 위기입니다.</p></div>
-        <div class="sys-item"><div class="ico">⏳</div><h3>남은 시간</h3><p>오빠가 집에 도착하기까지 남은 시간입니다. 장면이 진행될수록 줄어듭니다.</p></div>
-        <div class="sys-item"><div class="ico">◐</div><h3>스탯</h3><p><strong style="color:var(--blue);font-weight:500">시트러스</strong> 언니가 얼마나 무너졌는지 · <strong style="color:var(--ink);font-weight:500">도어락</strong> 오빠가 얼마나 눈치챘는지 · <strong style="color:var(--ink);font-weight:500">넘은 밤</strong></p></div>
-        <div class="sys-tip"><span class="tip-k">TIP · 히트가 오면</span><p>언니 셔츠 한 장을 몰래 가져가서 <em>둥지</em>를 지어 보세요. 그걸 발견한 언니가 어떤 얼굴을 하는지는, 직접 확인하세요.<br><small>단, 오빠 눈에 띄면 도어락이 오릅니다.</small></p></div>
+        <div class="sys-item"><div class="ico">🔔</div><h3>위기</h3><p>숫자가 1이 되면 다음 턴에 무슨 일이 생깁니다. 대개는 오빠의 연락입니다. 받을지 말지는 언니가 정합니다. 비가 그치는 순간도 위기입니다.</p></div>
+        <div class="sys-item"><div class="ico">⏳</div><h3>남은 시간</h3><p>뉴욕에 있는 오빠와의 밤 10시 영상통화까지 남은 시간입니다. 장면이 진행될수록 줄어듭니다.</p></div>
+        <div class="sys-item"><div class="ico">✋</div><h3>멈춤</h3><p>분명하게 거절하거나 (OOC: 멈춰)라고 쓰면 언니는 멈춥니다. 애매하면 먼저 묻습니다. 멈춰도 곁을 떠나지는 않습니다.</p></div>
+        <div class="sys-item"><div class="ico">◐</div><h3>스탯</h3><p><strong style="color:var(--blue);font-weight:500">시트러스</strong> 언니가 얼마나 무너졌는지 · <strong style="color:var(--ink);font-weight:500">넘은 밤</strong></p></div>
+        <div class="sys-tip"><span class="tip-k">TIP · 히트가 오면</span><p>언니 셔츠 한 장을 몰래 가져가서 <em>둥지</em>를 지어 보세요. 그걸 발견한 언니가 어떤 얼굴을 하는지는, 직접 확인하세요.<br><small>오빠는 끝까지 모릅니다. 화면 너머에서 웃고 있을 뿐.</small></p></div>
       </div>
-      <div class="info-sample" aria-label="인포 블럭 예시">[ #1｜📅2031.11.17(월)｜🕐21:12｜🌧비｜📍남매 집 거실｜<span class="b">⏳현우 60분</span>｜<span class="y">🔔3</span> ]</div>
+      <div class="info-sample" aria-label="인포 블럭 예시">[ #1｜📅2031.11.17(월)｜🕐21:00｜🌧비｜📍남매 집 거실｜<span class="b">⏳영상통화 60분</span>｜<span class="y">🔔3</span> ]</div>
       <p class="hint">엔딩 2종. 12월 24일, 무슨 일이 있습니다.</p>
     </div>
   </section>
 
   <section class="block" id="series">
     <div class="wrap">
-      <div class="label"><b>08</b> · RAINBOW 시리즈</div>
+      <div class="label"><b>10</b> · RAINBOW 시리즈</div>
       <h2 class="h2">같은 세계, 다른 여자들.</h2>
       <div class="series">
         <div class="s-card"><div class="sw" style="background:#F1EDE4;border:1px solid var(--line)"></div><h3>RAINBOW<span>멜팅다운</span></h3><p>하얀 백합이 녹아내린다. 백화여대, 사계의 이야기.</p></div>
@@ -855,7 +942,7 @@ html:not(.snap):not(.fp) .dots{display:none}
     <div class="wrap world-cta">
       <p class="big">여성도 알파가 되는 세계.<br>우성 알파 여성은 <em>0.5%</em> 미만이다.</p>
       <div>
-        <p class="prose" style="margin-bottom:28px">레인보우 시리즈의 모든 작품은 하나의 오메가버스 세계 위에 있습니다. 형질, 각인, 제도, 백화여대까지 정식 설정을 정리했습니다.</p>
+        <p class="prose" style="margin-bottom:28px">레인보우 시리즈의 모든 작품은 하나의 오메가버스 세계 위에 있습니다. 형질, 각인, 몸, 제도까지 정식 설정을 정리했습니다.</p>
         <a class="btn primary" href="#world" data-view="world">세계관 전체 보기 <span class="arr">→</span></a>
       </div>
   <p class="rights"><span class="r-c">© 2026 SCROLL</span><span class="r-t">본 홈페이지의 이미지·영상·음원·글·디자인은 전부 Scroll이 직접 제작했습니다.<br>무단 복제·도용·2차 배포·AI 학습 이용을 금합니다.</span><span class="r-c">ALL RIGHTS RESERVED</span></p>
@@ -884,9 +971,8 @@ html:not(.snap):not(.fp) .dots{display:none}
       <a href="#w-late"><span class="n">06</span>늦은 발현</a>
       <a href="#w-law"><span class="n">07</span>제도</a>
       <a href="#w-consent"><span class="n">08</span>동의</a>
-      <a href="#w-school"><span class="n">09</span>백화여대</a>
-      <a href="#w-time"><span class="n">10</span>시리즈 연표</a>
-      <a href="#w-gloss"><span class="n">11</span>용어</a>
+      <a href="#w-time"><span class="n">09</span>시리즈 연표</a>
+      <a href="#w-gloss"><span class="n">10</span>용어</a>
       <a class="toc-cta crack-link" href="https://crack.wrtn.ai/" rel="noopener">크랙에서 시작 →</a>
     </nav>
 
@@ -952,7 +1038,6 @@ html:not(.snap):not(.fp) .dots{display:none}
         <ul class="rules">
           <li>각인한 두 사람 사이에는 감정이 어렴풋이 전해진다.</li>
           <li>다중 각인은 우성 오메가만 가능하다.</li>
-          <li>백화여대는 재학 중 각인을 금지한다. 위반하면 양쪽 모두 퇴학이다.</li>
         </ul>
       </section>
 
@@ -1000,29 +1085,8 @@ html:not(.snap):not(.fp) .dots{display:none}
         </div>
       </section>
 
-      <section class="chapter" id="w-school">
-        <div class="label"><b>09</b> · BAEKHWA</div>
-        <h2>백화여대</h2>
-        <p class="intro">백화여자예술대학교. 서울 외곽 산자락의 연예예술 명문 여대. 담이 높고 출입이 통제된다. 교화는 백합. "백 가지 꽃이 피는 학교."</p>
-        <p class="t">학생 대부분은 베타다. 그런데 이상하게 우성이 많다. 업계에서는 이 학교를 "알파 공급처"라고 부른다. 우성 알파가 한 학년에 여럿 겹치면 "그 해는 끝난 거다"라는 말이 돈다.</p>
-        <div class="dept">
-          <div><b>보컬과</b><span>향음관</span><p>성적순 개인 연습실 40개. 밀리면 뺏긴다.</p></div>
-          <div><b>기악과</b><span>향음관</span><p>방음실 안의 일은 밖에서 모른다.</p></div>
-          <div><b>연기과</b><span>화무관</span><p>소문이 가장 빨리 도는 과.</p></div>
-          <div><b>무용과</b><span>화무관</span><p>아침 7시 클래스. 땀에 차단제가 잘 안 먹는다.</p></div>
-          <div><b>모델과</b><span>채화관</span><p>우성은 화보 장악력으로 값을 받는다.</p></div>
-          <div><b>회화과</b><span>채화관</span><p>3층 화실, 밤샘 작업. 류재인, 박주은의 과.</p></div>
-          <div><b>미디어아트과</b><span>채화관</span><p>지하 암실은 완전히 밀폐되어 있다.</p></div>
-        </div>
-        <ul class="rules">
-          <li>캠퍼스: 시계탑의 화심관, 기숙사 백합관(우성 오메가는 꼭대기 단독 층), 백합 온실, 화경호.</li>
-          <li>학사: 3월 입학 · 6~7월 장마 · 9월 백화제 · 12월 Scroll 엔터테인먼트 쇼케이스.</li>
-          <li>장마철에는 약이 잘 안 든다는 소문이 있다.</li>
-        </ul>
-      </section>
-
       <section class="chapter" id="w-time">
-        <div class="label"><b>10</b> · TIMELINE</div>
+        <div class="label"><b>09</b> · TIMELINE</div>
         <h2>시리즈 연표</h2>
         <div class="timeline">
           <div><span class="when">2031</span><b>RAINBOW：매니악</b><p>박주은(35, 우성 알파, 백화여대 회화과). 파트너십 4년 반, 확증 없는 의심.</p></div>
@@ -1033,7 +1097,7 @@ html:not(.snap):not(.fp) .dots{display:none}
       </section>
 
       <section class="chapter" id="w-gloss">
-        <div class="label"><b>11</b> · GLOSSARY</div>
+        <div class="label"><b>10</b> · GLOSSARY</div>
         <h2>용어</h2>
         <dl class="gloss">
           <div><dt>형질</dt><dd>알파 · 베타 · 오메가. 남녀 모두에게 있다.</dd></div>
@@ -1096,29 +1160,27 @@ html:not(.snap):not(.fp) .dots{display:none}
 
   /* ---------- chat script ---------- */
   const script = [
-    ['her','현우 오늘 늦는대','20:58'],
-    ['me','알아. 오빠한테 들었어','20:59'],
-    ['her','나 지금 가는 중','21:01'],
-    ['her','비 와','21:01'],
-    ['me','우산 없어?','21:02'],
-    ['her','있어','21:04'],
-    ['her','그냥 물어봐 줘서','21:04'],
+    ['her','작업실 늦게 끝났어','20:46'],
+    ['her','밥은','20:46'],
+    ['me','아직','20:47'],
+    ['her','시켜 놓을게. 먹고 있어','20:49'],
+    ['me','언니 오면 먹을래','20:50'],
+    ['her','…그래','20:52'],
     ['banner'],
-    ['me','언니 비번 알잖아','21:06'],
-    ['her','알지.','21:06'],
-    ['her','근데 오늘은 네가 열어 줬으면 해서','21:07'],
+    ['me','오빠가 10시에 영상통화하재','20:54'],
+    ['her','알아. 나한테도 왔어','20:54'],
+    ['her','근데 너 목소리 왜 그래','20:55'],
     ['wait'],
-    ['me','왜','21:09'],
-    ['her','그냥.','21:09'],
-    ['her','약은 먹었어?','21:10'],
-    ['me','…응','21:10'],
-    ['her','거짓말','21:10'],
-    ['her','여기까지 나','21:11'],
-    ['me','언니','21:11'],
-    ['her','응','21:11'],
-    ['me','나 참기 힘들어','21:12'],
+    ['me','몰라 열나','20:57'],
+    ['her','약은?','20:57'],
+    ['me','감기약 먹었어','20:58'],
+    ['her','감기 아닌 것 같은데','20:58'],
+    ['her','엘리베이터 탔어. 문 앞에서도 나','20:59'],
+    ['me','언니','20:59'],
+    ['her','응','20:59'],
+    ['me','나 이상해','21:00'],
     ['sys','재인 언니가 메시지를 입력하다 멈췄습니다'],
-    ['her','문 앞이야.','21:12'],
+    ['her','들어갈게.','21:00'],
   ];
   const chat=document.getElementById('chat');
   const clock=document.getElementById('clock');
@@ -1364,7 +1426,7 @@ html:not(.snap):not(.fp) .dots{display:none}
       setTimeout(()=>{ if(acc===0) s.style.transition=''; },900); }
     function clearInline(s){ s.style.transition='';s.style.opacity='';s.style.filter='';s.style.transform=''; }
     const _go=go; go=function(i,instant){ secs.forEach(clearInline); acc=0; _go(i,instant); }; goTo=go;
-    addEventListener('wheel',e=>{ if(!isFp()) return; e.preventDefault(); if(lock) return;
+    addEventListener('wheel',e=>{ if(!isFp()) return; const st=e.target.closest&&e.target.closest('.pl-strip'); if(st&&Math.abs(e.deltaX)>Math.abs(e.deltaY)) return; e.preventDefault(); if(lock) return;
       const d=Math.max(-90,Math.min(90,e.deltaY*(e.deltaMode===1?33:1)));
       if((acc>0&&d<0)||(acc<0&&d>0)) acc=0;
       acc+=d*0.85;
@@ -1487,6 +1549,13 @@ html:not(.snap):not(.fp) .dots{display:none}
   };
   document.querySelectorAll('canvas[data-art]').forEach(c=>{const ctx=c.getContext('2d');arts[c.dataset.art](ctx,c.width,c.height);});
 })();
+</script>
+<script>
+(function(){const st=document.getElementById('plstrip');if(!st)return;
+document.querySelectorAll('.pl-nav button').forEach(b=>b.addEventListener('click',()=>{const c=st.querySelector('.pl-card');const w=c?c.getBoundingClientRect().width+22:400;st.scrollBy({left:w*(+b.dataset.dir),behavior:'smooth'});}));
+let down=false,sx=0,sl=0,moved=false;st.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=st.scrollLeft;});
+addEventListener('pointerup',()=>{down=false;});st.addEventListener('pointermove',e=>{if(!down)return;const d=e.clientX-sx;if(Math.abs(d)>5)moved=true;st.scrollLeft=sl-d;});
+st.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false;}},true);})();
 </script>
 </body>
 </html>

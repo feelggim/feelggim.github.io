@@ -449,9 +449,9 @@ html.fp .jx .jx-img::after{content:"";position:absolute;inset:0;z-index:2;pointe
 html.fp .jx .jx-tag{top:auto;bottom:62px;left:28px;z-index:3;color:#fff;background:rgba(0,83,217,.9);padding:7px 11px}
 html.fp .jx .jx-tag .dot{background:var(--yellow)}
 html.fp .jx .jx-spec{right:-36px;bottom:64px;z-index:4}
-html.fp .jx .mk-jx{top:auto;bottom:150px;right:-58px;width:104px;z-index:4}
+html.fp .jx .mk-jx{top:auto;bottom:150px;right:-58px;width:104px;z-index:2}
 html.fp .jx .zoom-hint{left:auto;right:28px;bottom:auto;top:96px;z-index:3}
-html.fp .jx .jx-text{grid-column:9/13;z-index:3}
+html.fp .jx .jx-text{grid-column:9/13;z-index:3;position:relative}
 html.fp .jx .jx-bg{left:auto;right:-3vw;color:transparent}
 
 .fm-hook{margin-top:34px;padding-left:16px;border-left:1px solid #0053D9;font-family:"Noto Serif KR",serif;font-size:17px;line-height:1.9;color:#7A7C87;word-break:keep-all}
@@ -606,8 +606,9 @@ html.fp .ny-grid{max-width:900px}
 .jx-dd li{display:grid;grid-template-columns:1fr;gap:2px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
 .jx-dd li b{font-family:var(--f-story);font-weight:500;color:var(--ink)}
 .jx-dd li span{color:var(--gray)}
-.jx-ask{font-family:var(--f-story);font-size:clamp(22px,2.2vw,30px);line-height:1.4;color:var(--blue);margin-top:30px;padding-left:18px;border-left:2px solid var(--blue)}
+.jx-ask{position:relative;z-index:6;display:inline-block;white-space:nowrap;font-family:var(--f-story);font-size:clamp(16px,1.45vw,21px);line-height:1.5;color:var(--blue);margin-top:26px;padding:6px 14px 6px 16px;border-left:2px solid var(--blue);background:#fff}
 .q{display:block;font-family:var(--f-story);color:var(--blue);margin-top:14px}
+@media (max-height:820px){html.fp .jx .jx-name{font-size:clamp(40px,4.6vw,64px)}html.fp .jx .jx-state{margin-top:14px}html.fp .jx .jx-body{margin-top:12px}html.fp .jx-dd{margin-top:12px}html.fp .jx-dd li{padding:7px 0}html.fp .jx-ask{margin-top:14px}html.fp .jx .jx-quote{margin-top:14px}}
 </style>
 </head>
 <body>
@@ -621,10 +622,10 @@ html.fp .ny-grid{max-width:900px}
     <div class="ph-top">
       <img src="assets/jaein.webp" alt="재인 프로필 사진">
       <div><div class="ph-name">재인 언니</div><div class="ph-sub">CITRUS · SPICE</div></div>
-      <div class="ph-time" id="clock">20:58</div>
+      <div class="ph-time" id="clock">21:08</div>
     </div>
     <div class="ph-body" id="chat" aria-live="polite">
-      <div class="day">2031. 11. 17 (월) · 비</div>
+      <div class="day">2031. 12. 03 (수) · 비</div>
     </div>
     <div class="ph-foot">
       <button class="enter" id="enter" type="button" aria-label="문 열고 들어가기"><span id="enter-label">메시지 읽는 중…</span><span class="lock">● ● ● ●</span></button>
@@ -672,7 +673,7 @@ html.fp .ny-grid{max-width:900px}
         <p class="tag">Moralless</p>
         <p class="lede">베타인 줄 알았던 내가 우성 오메가로 발현했다.<br>그 향을 처음 맡은 건, 오빠의 여자친구였다.<span class="q">그날 밤, 언니는 왜 창문을 끝까지 열었을까.</span></p>
         <div class="cta">
-          <a class="btn primary crack-link" href="https://crack.wrtn.ai/" rel="noopener">크랙에서 파랗게 물들여지기 <span class="arr">→</span></a>
+          <a class="btn primary crack-link" href="https://share.crack.wrtn.ai/a58xq35" rel="noopener">크랙에서 파랗게 물들여지기 <span class="arr">→</span></a>
           <a class="btn ghost" href="#world" data-view="world">세계관 읽기 <span class="arr">→</span></a>
         </div>
       </div>
@@ -919,7 +920,7 @@ html.fp .ny-grid{max-width:900px}
       <div class="sys-grid">
         <div class="sys-item"><div class="ico">🔔</div><h3>위기</h3><p>숫자가 1이 되면 다음 턴에 무슨 일이 생깁니다. 대개는 오빠의 연락입니다. 받을지 말지는 언니가 정합니다. 비가 그치는 순간도 위기입니다.</p></div>
         <div class="sys-item"><div class="ico">⏳</div><h3>남은 시간</h3><p>뉴욕에 있는 오빠와의 밤 10시 영상통화까지 남은 시간입니다. 장면이 진행될수록 줄어듭니다.</p></div>
-        <div class="sys-item"><div class="ico">✋</div><h3>멈춤</h3><p>분명하게 거절하거나 (OOC: 멈춰)라고 쓰면 언니는 멈춥니다. 애매하면 먼저 묻습니다. 멈춰도 곁을 떠나지는 않습니다.</p></div>
+        <div class="sys-item"><div class="ico">✋</div><h3>멈춤</h3><p>수위 장면은 극 중 대사로는 멈추지 않습니다. 멈추고 싶을 땐 (OOC: 멈춰)라고 쓰세요. 멈춰도 언니는 곁을 떠나지 않습니다.</p></div>
         <div class="sys-item"><div class="ico">◐</div><h3>스탯</h3><p><strong style="color:var(--blue);font-weight:500">시트러스</strong> 언니가 얼마나 무너졌는지 · <strong style="color:var(--ink);font-weight:500">넘은 밤</strong></p></div>
         <div class="sys-tip"><span class="tip-k">TIP · 히트가 오면</span><p>언니 셔츠 한 장을 몰래 가져가서 <em>둥지</em>를 지어 보세요. 그걸 발견한 언니가 어떤 얼굴을 하는지는, 직접 확인하세요.<br><small>오빠는 끝까지 모릅니다. 화면 너머에서 웃고 있을 뿐.</small></p></div>
       </div>
@@ -975,7 +976,7 @@ html.fp .ny-grid{max-width:900px}
       <a href="#w-consent"><span class="n">08</span>동의</a>
       <a href="#w-time"><span class="n">09</span>시리즈 연표</a>
       <a href="#w-gloss"><span class="n">10</span>용어</a>
-      <a class="toc-cta crack-link" href="https://crack.wrtn.ai/" rel="noopener">크랙에서 시작 →</a>
+      <a class="toc-cta crack-link" href="https://share.crack.wrtn.ai/a58xq35" rel="noopener">크랙에서 시작 →</a>
     </nav>
 
     <article>
@@ -1121,7 +1122,7 @@ html.fp .ny-grid{max-width:900px}
         <p class="w-end-k">END OF CANON</p>
         <p class="w-end-big">규칙은 여기까지.<br>이제 <em>비가 오는 밤</em>으로.</p>
         <div class="cta">
-          <a class="btn primary crack-link" href="https://crack.wrtn.ai/" rel="noopener">크랙에서 파랗게 물들여지기 <span class="arr">→</span></a>
+          <a class="btn primary crack-link" href="https://share.crack.wrtn.ai/a58xq35" rel="noopener">크랙에서 파랗게 물들여지기 <span class="arr">→</span></a>
           <a class="btn ghost" href="#home" data-view="home">작품으로 돌아가기 <span class="arr">←</span></a>
         </div>
         <p class="rights"><span class="r-c">© 2026 SCROLL</span><span class="r-t">본 홈페이지의 이미지·영상·음원·글·디자인은 전부 Scroll이 직접 제작했습니다.<br>무단 복제·도용·2차 배포·AI 학습 이용을 금합니다.</span><span class="r-c">ALL RIGHTS RESERVED</span></p>
@@ -1162,27 +1163,30 @@ html.fp .ny-grid{max-width:900px}
 
   /* ---------- chat script ---------- */
   const script = [
-    ['her','작업실 늦게 끝났어','20:46'],
-    ['her','밥은','20:46'],
-    ['me','아직','20:47'],
-    ['her','시켜 놓을게. 먹고 있어','20:49'],
-    ['me','언니 오면 먹을래','20:50'],
-    ['her','…그래','20:52'],
+    ['her','작업실 이제 끝났어','21:08'],
+    ['her','밥은','21:08'],
+    ['me','안 먹었어','21:09'],
+    ['her','또','21:09'],
+    ['her','시켜 놓을게','21:09'],
+    ['me','그거 말고','21:10'],
+    ['her','…','21:11'],
+    ['me','언니 셔츠 또 가져왔어','21:11'],
+    ['her','알아. 아침에 없더라','21:12'],
     ['banner'],
-    ['me','오빠가 10시에 영상통화하재','20:54'],
-    ['her','알아. 나한테도 왔어','20:54'],
-    ['her','근데 너 목소리 왜 그래','20:55'],
+    ['me','오빠가 10시에 영상통화하재','21:13'],
+    ['her','나한테도 왔어','21:13'],
+    ['her','얼굴 빨갛게 나오면 안 된다','21:14'],
     ['wait'],
-    ['me','몰라 열나','20:57'],
-    ['her','약은?','20:57'],
-    ['me','감기약 먹었어','20:58'],
-    ['her','감기 아닌 것 같은데','20:58'],
-    ['her','엘리베이터 탔어. 문 앞에서도 나','20:59'],
-    ['me','언니','20:59'],
-    ['her','응','20:59'],
-    ['me','나 이상해','21:00'],
+    ['me','이미 늦었어','21:15'],
+    ['her','약은','21:15'],
+    ['me','먹었어. 안 들어','21:16'],
+    ['her','나도','21:16'],
+    ['her','엘리베이터 탔어','21:17'],
+    ['me','언니','21:17'],
+    ['her','응','21:17'],
+    ['me','나 못 참겠어','21:18'],
     ['sys','재인 언니가 메시지를 입력하다 멈췄습니다'],
-    ['her','들어갈게.','21:00'],
+    ['her','들어갈게.','21:18'],
   ];
   const chat=document.getElementById('chat');
   const clock=document.getElementById('clock');
